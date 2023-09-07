@@ -1,23 +1,16 @@
 <template>
 
-<PageHeader :breadcrumb-list="breadcrumbList">
-        <template #title><div class="demo-title">Title</div></template>
-        <template #logo><div class="demo-logo"><img src="~@/assets/images/dida_logo.png" alt=""></div></template>
-        <template #content><div class="demo-content">Content</div></template>
-        <template #extra><div class="demo-extra">Extra</div></template>
-        <template #action><div class="demo-action">Action</div></template>
-</PageHeader>
+
 
 
 
   <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+    <!-- <router-link to="/">Home</router-link> |
+    <router-link to="/about">About</router-link> -->
   </nav>
   <router-view/>
 
-  <Button type="success" ghost>Success</Button>
-  <div class="colorcolor">123</div>
+
 </template>
 
 <style lang="scss" scoped>
