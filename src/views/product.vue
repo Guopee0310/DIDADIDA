@@ -1,4 +1,5 @@
 <template>
+  <header1></header1>
   <login></login>
 <div class="product_allCards">
   <Son :msg1="son" v-for="i in 20" ></Son> 
@@ -11,6 +12,7 @@
  import Son from '../components/son.vue'
  import login from '../components/login.vue'
  import footer1 from '../components/footer.vue'
+ import header1 from '../components/header.vue'
  export default {
    name: 'product',
    data() {
@@ -24,7 +26,8 @@
    components:{
     Son,
     footer1,
-    login
+    login,
+    header1
    }
  }
  </script>
