@@ -6,6 +6,7 @@ module.exports = defineConfig({
       scss: {
         additionalData: `
           @import "~@/assets/scss/base/variables.scss";
+          @import "~@/assets/scss/base/reset.scss";
         `
       },
     }
