@@ -1,14 +1,12 @@
 <template>
-  <header1></header1>
-  <wave></wave>
-  <login></login>
+ 
 
   <div class="product_allCards">
     <Son :msg1="son" v-for="i in 20"></Son>
   </div>
   <!-- card -->
 
-  <footer1></footer1>
+  
 </template>
    
  <script>
@@ -98,9 +96,6 @@ flex-wrap: wrap;
 //     src: url('../assets/font/NotoSerifCJKtc-Regular.otf') format('otf'); /* 替换为字体文件的实际路径 */
 
 //   }
-* {
-  font-family: 'YourFontFamily'
-}
 
 .product_allCards {
   width: 1200px;

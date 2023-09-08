@@ -11,7 +11,8 @@
                     <router-link to="/about">關於我們</router-link>
                     <router-link to="/news">最新消息</router-link>
                     <router-link to="/explore">探索海洋生物</router-link>
-                    <router-link to="/product" @click="toFooter()">DIDA商城</router-link>
+                    <!-- @click="toFooter()" -->
+                    <router-link to="/product" >DIDA商城</router-link>
                     <span ><i class="fa-solid fa-user" style="color: #eeeeee;"></i></span>
                     <span ><i class="fa-solid fa-cart-shopping" style="color: #eeeeee;"></i></span>
 
@@ -35,7 +36,7 @@
   
 <script>
 // @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+
 
 export default {
     name: 'HomeView',
@@ -82,10 +83,10 @@ watch:{
     },
 },
 methods:{
-    toFooter(){
-        this.$router.push({ path: '/product', query: { article: 'footer' } });
-        // this.$router.push({path:'/', query:{section : 'footer' }})
-    }
+    // toFooter(){
+    //     this.$router.push({ path: '/product', query: { article: 'footer' } });
+    //     this.$router.push({path:'/', query:{section : 'footer' }})
+    // }
 }
 }
 </script>
