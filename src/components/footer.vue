@@ -1,34 +1,36 @@
 <template>
-    <footer>
+    <footer id="footer">
         <div class="footer_wrap">
             <div class="footer_item">
                 <h3>{{ footerTitle.about }}</h3>
                 <ul v-for="about in footer_aboutArray" :key="footerAbout">
-                    <li><a :href="about.link">{{ about.name }}</a></li>
+                    <li><router-link :to="about.link">{{ about.name }}</router-link></li>
+                    
                 </ul>
             </div>
             <div class="footer_item">
                 <h3>{{ footerTitle.news }}</h3>
                 <ul v-for="news in footer_newsArray" :key="footerNews">
-                    <li><a :href="news.link">{{ news.name }}</a></li>
+                    <!-- <li><a :href="news.link">{{ news.name }}</a></li> -->
+                    <li><router-link :to="news.link">{{ news.name }}</router-link></li>
                 </ul>
             </div>
             <div class="footer_item">
                 <h3>{{ footerTitle.animal }}</h3>
                 <ul v-for="animal in footer_animalArray" :key="footerAnimal">
-                    <li><a :href="animal.link">{{ animal.name }}</a></li>
+                    <li><router-link :to="animal.link">{{ animal.name }}</router-link></li>
                 </ul>
             </div>
             <div class="footer_item">
                 <h3>{{ footerTitle.buy }}</h3>
                 <ul v-for="buy in footer_buyArray" :key="footerBuy">
-                    <li><a :href="buy.link">{{ buy.name }}</a></li>
+                    <li><router-link :to="buy.link">{{ buy.name }}</router-link></li>
                 </ul>
             </div>
             <div class="footer_item">
                 <h3>{{ footerTitle.media }}</h3>
                 <ul v-for="media in footer_mediaArray" :key="footerMedia">
-                    <li><a :href="media.link"><span v-html="media.name"></span></a></li>
+                    <li><router-link :to="media.link"><span v-html="media.name"></span></router-link></li>
                 </ul>
             </div>
         </div>
@@ -105,6 +107,7 @@ footer {
         h3 {
             color: #eee;
             margin: 35px 0 25px;
+            font-size: map-get($fontSizes , 'nav' );
         }
 
         a {
@@ -129,7 +132,7 @@ footer {
         width: 960px;
         color: #eee;
         margin: auto;
-        font-size: 8px;
+        font-size: map-get($fontSizes, 'mini' );
         text-align: justify;
     }
 }

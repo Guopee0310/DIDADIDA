@@ -1,16 +1,18 @@
 <template>
-
+<header1></header1>
+<wave></wave>
+<login></login>
 
 
 
 <!-- 
   <nav>
-    <router-link to="/">Home</router-link> |
+    <router-link to="/?aa=123">Home</router-link> |
     <router-link to="/about">About</router-link>
   </nav> -->
   <router-view/>
 
-
+<footer1></footer1>
 </template>
 
 <style lang="scss" scoped>
@@ -49,6 +51,10 @@ nav {
 </style>
 
 <script>
+import header1 from '@/components/header.vue'
+import footer1 from '@/components/footer.vue'
+import wave from '@/components/wave.vue'
+import login from '@/components/login.vue'
     export default {
         data () {
             return {
@@ -58,6 +64,12 @@ nav {
                     }
                 ]
             }
+        },
+        components:{
+          header1,
+          footer1,
+          wave,
+          login
         }
     }
 </script>

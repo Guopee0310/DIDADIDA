@@ -1,13 +1,12 @@
 <template>
-  <header1></header1>
-  <wave></wave>
-  <login></login>
+  
   
 <div class="product_allCards">
   <Son :msg1="son" v-for="i in 20" ></Son> 
+  <Son id="sonTest" @click="toTop()"></Son>
 </div>
   <!-- card -->
-  <footer1></footer1>
+  
  </template>
    
  <script>
@@ -32,18 +31,47 @@
     login,
     header1,
     wave
+   },
+   watch:{
+    "$route.query"(nVal, oVal) {
+        console.log(nVal.headerSection)
+        const id = this.$route.query.headerSection;
+        console.log(id)
+        if(!id) return;
+        const el = document.getElementById(id)
+        console.log(el)
+        const y = el.getBoundingClientRect().y
+        console.log(y)
+        window.scrollTo({
+          top:y,
+          behavior:'smooth'
+        })
+    },
+   },
+   methods:{
+    toTop(){
+      this.$router.push({ path: '/product', query: { headerSection: 'header' } });
+      
+    }
+   },
+   mounted(){
+    console.log(this.$route.query)
+    const id = this.$route.query.article;
+    if (!id) return;
+    const el = document.getElementById(id)
+    const y =el.getBoundingClientRect().y
+    console.log(y)
+    window.scrollTo({
+      top:y,
+      behavior: 'smooth'
+    })
    }
  }
  </script>
 <style scoped lang="scss">
-@font-face {
-    font-family: 'YourFontFamily'; /* 替换为你的字体名称 */
-    src: url('../assets/font/NotoSerifCJKtc-Regular.otf') format('otf'); /* 替换为字体文件的实际路径 */
-    
-  }
-  *{
-    font-family: 'YourFontFamily' 
-  }
+  // *{
+  //   font-family: 'YourFontFamily' 
+  // }
 .product_allCards{
 display: flex;
 justify-content: space-between;

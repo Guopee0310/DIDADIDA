@@ -1,20 +1,19 @@
 <template>
-  <div class="wrap">
+  <div class="wrap" id="header">
         <div id="app">
             <div class="header">
                 <div class="logo">
-                    <a href="index.html">
-                        <img src="../assets/images/dida_logo.png">
-                    </a>
+                    <router-link to="/"><img src="../assets/images/dida_logo.png"></router-link>
                 </div>
-                <!-- <img src="../assets/images/購物車.png" alt=""> -->
+                
                 <nav class="main-nav">
-
-            
-                    <a :href="page.link" v-for="page in nav" :key="nav.name">{{page.name}}</a>
-                    <a :href="link.link" v-for="link in icon"><span v-html="link.imgSrc"></span></a>
-
-
+                    <a href="../views/product.vue">這是a連結</a>
+                    <router-link to="/about">關於我們</router-link>
+                    <router-link to="/news">最新消息</router-link>
+                    <router-link to="/explore">探索海洋生物</router-link>
+                    <router-link to="/product" @click="toFooter()">DIDA商城</router-link>
+                    <span ><i class="fa-solid fa-user" style="color: #eeeeee;"></i></span>
+                    <span ><i class="fa-solid fa-cart-shopping" style="color: #eeeeee;"></i></span>
 
                     <select v-model="selectName">
                     
@@ -45,23 +44,7 @@ export default {
     },
     data() {
         return {
-            nav: [{
-                            link: "abouts.html",
-                            name: '關於我們'
-                        },
-                        {
-                            link: "news.html",
-                            name: '最新消息'
-                        },
-                        {
-                            link: "team.html",
-                            name: '探索海洋生物'
-                        },
-                        {
-                            link: "dida_shop.html",
-                            name: 'DIDA商城'
-                        },
-                    ],
+
                     icon: [{
                             link: "#",
                             eAlt: '會員登入icon',
@@ -91,6 +74,17 @@ export default {
 
                     ]
 
+    }
+},
+watch:{
+    "$route.query"(nVal, oVal) {
+        console.log(nVal)
+    },
+},
+methods:{
+    toFooter(){
+        this.$router.push({ path: '/product', query: { article: 'footer' } });
+        // this.$router.push({path:'/', query:{section : 'footer' }})
     }
 }
 }
@@ -127,7 +121,7 @@ export default {
             padding: 10px;
             text-decoration: none;
             color: white;
-            font-size: 32px;
+            font-size: map-get($fontSizes, 'nav' );
         }
 
         select {
@@ -135,7 +129,7 @@ export default {
             border: none;
             border-radius: 20px;
             padding: 10px;
-            font-size: 16px;
+            font-size: map-get($fontSizes, 'p' );
             cursor: pointer;
             /* background-image:url(imgs/Vector.png) ;
             background-position: right center; */

@@ -102,6 +102,7 @@
       height: 100vh;
       background-color: rgba(0, 0, 0, 0.5);
       position: fixed;
+      z-index: 5;
       top: 0;
       left: 0;
   }
@@ -185,6 +186,7 @@
         box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
               0 10px 10px rgba(0,0,0,0.22);
       position: fixed;
+      z-index: 10;
       overflow: hidden;
       width: 768px;
       max-width: 100%;
