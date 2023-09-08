@@ -38,7 +38,7 @@ body {
 .banner_pic{
 height:90vh;
 position: relative;
-background-image: url(../assets/images/cenote-280252_1920.jpg);
+background-image: url(../../public/all_images/cenote-280252_1920.jpg);
 background-position: bottom;
 background-size: cover;
 display: flex;
