@@ -1,7 +1,10 @@
 <template>
     
 <div class="banner_pic">  
-
+<div class="bannerTitle">
+  <h1>周邊商品</h1>
+  <h2>SHOP</h2>
+</div>
 <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
 viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
   <defs>
@@ -25,7 +28,7 @@ export default {
  
 }
 </script>
-<style scoped>
+<style scoped lang="scss">
   
 body {
   margin:0;
@@ -38,6 +41,24 @@ position: relative;
 background-image: url(../assets/images/cenote-280252_1920.jpg);
 background-position: bottom;
 background-size: cover;
+display: flex;
+justify-content: center;
+align-items: center;
+.bannerTitle{
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ flex-direction: column;
+ color: map-get($colors, 'light');
+ 
+ h1{
+  border-bottom: 1px solid map-get($colors, 'light');
+ }
+  font-size: map-get($fontSizes, 'h1');
+  h2{
+    font-size: map-get($fontSizes, 'h2');
+  }
+}
 }
 
 

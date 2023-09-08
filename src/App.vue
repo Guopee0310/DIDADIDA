@@ -16,6 +16,7 @@
 <style lang="scss" scoped>
 // @import "~@/assets/scss/base/variables.scss";
 //區域使用範例
+
 .demo-logo{
   width: 50px;
   img{

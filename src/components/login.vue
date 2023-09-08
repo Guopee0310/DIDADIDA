@@ -1,6 +1,6 @@
 <template>
     <div  v-if="showLogin"> 
-        <h2>登入或註冊</h2>
+     
         <div class="backplate" @click="showLogin = !showLogin"></div>
     
         <div class="container" :class="{ 'right-panel-active': isSignUp }" id="container">
@@ -77,8 +77,8 @@
   <style scoped>
   
 
-  @import url("https://fonts.googleapis.com/css2?family=Cardo:ital,wght@0,400;0,700;1,400&family=Inknut+Antiqua:wght@300;400;500;600;700;800;900&display=swap");
-  @import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
+  /* @import url("https://fonts.googleapis.com/css2?family=Cardo:ital,wght@0,400;0,700;1,400&family=Inknut+Antiqua:wght@300;400;500;600;700;800;900&display=swap");
+  @import url('https://fonts.googleapis.com/css?family=Montserrat:400,800'); */
   
 
   

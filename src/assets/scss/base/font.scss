@@ -1,3 +1,16 @@
-*{
-    font-family: 'Noto Sans TC', sans-serif;
-}
+
+//   *{
+//     font-family: 'YourFontFamily' 
+//   }
+
+$fontSizes:(
+    'h1':50px,
+    'h2':40px,
+    'h3':36px,
+    "h4":20px,
+    'span':14px,
+    'div':20px,
+    'p':16px,
+    'a':16px
+);
+

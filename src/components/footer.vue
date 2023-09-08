@@ -93,7 +93,7 @@ export default {
 footer {
     width: 100%;
     padding: 35px 0;
-    background-color: #232D47;
+    background-color: map-get($colors, 'mainColor');
 
     .footer_wrap {
         max-width: 1200px;
