@@ -26,8 +26,8 @@ export default {
   },
   methods: {
     getClient(e) {
-      let x = e.clientX - document.documentElement.clientWidth * 1.5;
-      let y = e.clientY - document.documentElement.clientHeight * 1.5;
+      let x = e.clientX - document.documentElement.clientWidth * 1.8;
+      let y = e.clientY - document.documentElement.clientHeight * 1.6;
 
       this.x = x;
       this.y = y;
@@ -59,7 +59,7 @@ body {
 }
 
 .wrapper {
-  height: 100vh;
+  height: 80vh;
   background-image: url("https://churaumi.okinawa/userfiles/images/area/kuroshio/media-03.jpg");
   background-size: cover;
   position: relative;
@@ -73,12 +73,12 @@ body {
 
 .shadow {
   position: absolute;
-  width: 200vw;
+  width: 250vw;
   height: 200vh;
   left: 50%;
   top: 50%;
   transform: translateX(-50%) translateY(-50%);
-  background-image: radial-gradient(circle at center, transparent, #000 20%);
+  background-image: radial-gradient(circle at center, transparent, #000 10%);
 }
 </style>
 
