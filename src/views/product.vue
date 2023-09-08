@@ -1,5 +1,6 @@
 <template>
   <header1></header1>
+  <wave></wave>
   <login></login>
 <div class="product_allCards">
   <Son :msg1="son" v-for="i in 20" ></Son> 
@@ -13,6 +14,7 @@
  import login from '../components/login.vue'
  import footer1 from '../components/footer.vue'
  import header1 from '../components/header.vue'
+ import wave from '../components/wave.vue'
  export default {
    name: 'product',
    data() {
@@ -27,7 +29,8 @@
     Son,
     footer1,
     login,
-    header1
+    header1,
+    wave
    }
  }
  </script>

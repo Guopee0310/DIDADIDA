@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import product from '../views/product.vue'
+
 const routes = [
   {
     path: '/',
@@ -24,7 +25,8 @@ const routes = [
     path: '/header',
     name: 'header',
     component: () => import(/* webpackChunkName: "header" */ '../components/header.vue')
-  }
+  },
+  
 ]
 
 const router = createRouter({
