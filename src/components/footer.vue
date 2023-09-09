@@ -5,7 +5,7 @@
                 <h3>{{ footerTitle.about }}</h3>
                 <ul v-for="about in footer_aboutArray" :key="footerAbout">
                     <li><router-link :to="about.link">{{ about.name }}</router-link></li>
-                    
+
                 </ul>
             </div>
             <div class="footer_item">
@@ -94,20 +94,20 @@ export default {
 
 footer {
     width: 100%;
-    padding: 35px 0;
+    padding: 190px 0;
     background-color: map-get($colors, 'mainColor');
 
     .footer_wrap {
-        max-width: 1200px;
+        max-width: 960px;
         width: 100%;
-        margin: 0 auto 55px;
+        margin: 0 auto 35px;
         display: flex;
         justify-content: space-between;
 
         h3 {
             color: #eee;
-            margin: 35px 0 25px;
-            font-size: map-get($fontSizes , 'nav' );
+            margin: 55px 0 25px;
+            font-size: map-get($fontSizes , 'nav');
         }
 
         a {
@@ -132,8 +132,9 @@ footer {
         width: 960px;
         color: #eee;
         margin: auto;
-        font-size: map-get($fontSizes, 'mini' );
-        text-align: justify;
+        font-size: map-get($fontSizes, 'mini');
+        text-align: center;
+        padding: 0 0 25px;
     }
 }
 </style>

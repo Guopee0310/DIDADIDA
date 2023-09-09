@@ -1,18 +1,19 @@
 <template>
-  <div class="card">
+  <prodSelect @transferClass="getClass" @transferPrice="getPrice"></prodSelect>
+  <div class="card" v-for="i in chooseItem" :key="i.imageSrc">
     <div class="heart">
       <heart></heart>
     </div>
     <div class="pic">
-      <a href="#"><img src="../assets/images/dolphin_pillow.jpg" alt=""></a>
+      <a href="#"><img :src="i.imageSrc" alt=""></a>
     </div>
 
     <div class="name">
-      <a href=""> 大型乾燥花束【和煦】</a>
+      <a href="">{{ i.titleName }}</a>
     </div>
     <div class="info">
       <div class="cost">
-        <span>NT 750</span>
+        <span>NT {{ i.prodPrice }}</span>
       </div>
       <div class="prod_btn">
         <div class="num">
@@ -33,22 +34,94 @@
 <script>
 import btn2 from './btn2.vue'
 import heart from './heart.vue'
-
+import prodSelect from '../components/select.vue'
 export default {
   name: 'son',
+  data() {
+    return {
+      cardsAll: [
+        {
+          imageSrc: require('../assets/images/dolphin_pillow.jpg'),
+          titleName: '大型乾燥花束【和煦】食品',
+          prodPrice: '900',
+          tag: '食品'
+        },
+        {
+          imageSrc: require('../assets/images/dolphin_pillow.jpg'),
+          titleName: '大型乾燥花束【和煦】玩偶',
+          prodPrice: '750',
+          tag: '玩偶'
+        },
+        {
+          imageSrc: require('../assets/images/dolphin_pillow.jpg'),
+          titleName: '大型乾燥花束【和煦】配飾',
+          prodPrice: '500',
+          tag: '配飾'
+        }
+      ],
+      chooseItem: [
+        {
+          imageSrc: require('../assets/images/dolphin_pillow.jpg'),
+          titleName: '大型乾燥花束【和煦】食品',
+          prodPrice: '900',
+          tag: '食品'
+        },
+        {
+          imageSrc: require('../assets/images/dolphin_pillow.jpg'),
+          titleName: '大型乾燥花束【和煦】玩偶',
+          prodPrice: '750',
+          tag: '玩偶'
+        },
+        {
+          imageSrc: require('../assets/images/dolphin_pillow.jpg'),
+          titleName: '大型乾燥花束【和煦】配飾',
+          prodPrice: '500',
+          tag: '配飾'
+        }
+      ]
+    }
+  },
   props: {
     msg1: [String, Number]
   },
   components: {
     btn2,
-    heart
+    heart,
+    prodSelect
+  },
+  methods: {
+    getClass(data) {
+      // alert(data)
+      this.chooseItem = []
+      for (let i = 0; i < this.cardsAll.length; i++) {
+        if (data == '所有商品') {
+          this.chooseItem = this.cardsAll
+        }
+        else if (this.cardsAll[i].tag === data) {
+          this.chooseItem.push(this.cardsAll[i])
+        }
+      }
+    },
+    getPrice(data) {
+      this.chooseItem = [...this.cardsAll]; // 克隆 cardsAll 数组
+
+      if (data === '由低到高') {
+        this.chooseItem.sort((a, b) => {
+          return parseInt(a.prodPrice) - parseInt(b.prodPrice);
+        });
+      } else if (data === '由高到低') {
+        this.chooseItem.sort((a, b) => {
+          return parseInt(b.prodPrice) - parseInt(a.prodPrice);
+        });
+      }
+    }
   }
 }
 </script>
 <style scoped lang="scss">
 .card {
   width: 270px;
-  margin: 15px 15px 50px;
+  margin: 0 0 50px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -104,9 +177,10 @@ export default {
     justify-content: space-between;
   }
 
-  .prod_btn{
+  .prod_btn {
     display: flex;
   }
+
   .num input {
     width: 30px;
     border: 0;
