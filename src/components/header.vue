@@ -7,7 +7,6 @@
                 </div>
 
                 <nav class="main-nav">
-                    <a href="../views/product.vue">這是a連結</a>
                     <router-link to="/about">關於我們</router-link>
                     <router-link to="/news">最新消息</router-link>
                     <router-link to="/explore">探索海洋生物</router-link>

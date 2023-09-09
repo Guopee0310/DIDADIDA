@@ -53,7 +53,7 @@ export default {
 <style scoped lang="scss">
 select {
     /* Reset Select */
-    @include selectBtn($c: #a70b67)
+    @include selectBtn
 }
 
 /* Remove IE arrow */
@@ -65,23 +65,23 @@ select::-ms-expand {
 .select {
     position: relative;
     display: flex;
-    width: 120px;
+    width: 130px;
     height: 40px;
     overflow: hidden;
 }
 
-// .select::after {
-//     content: '\25BC';
-//     position: absolute;
-//     top: 0;
-//     right: 0;
-//     padding: 5px 10px;
-//     background-color: transparent;
-//     transition: .25s all ease;
-//     pointer-events: none;
-//     border-radius: 50px;
-//     color: #eee;
-// }
+.select::after {
+    content: '\25BC';
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 5px 10px;
+    background-color: transparent;
+    transition: .25s all ease;
+    pointer-events: none;
+    border-radius: 50px;
+    color: #eee;
+}
 
 option {
     background-color: #2c3e50;

@@ -1,5 +1,7 @@
 <template>
-  <prodSelect @transferClass="getClass" @transferPrice="getPrice"></prodSelect>
+  <div class="select_btn">
+    <prodSelect @transferClass="getClass" @transferPrice="getPrice"></prodSelect>
+  </div>
   <div class="card" v-for="i in chooseItem" :key="i.imageSrc">
     <div class="heart">
       <heart></heart>
@@ -57,7 +59,25 @@ export default {
           titleName: '大型乾燥花束【和煦】配飾',
           prodPrice: '500',
           tag: '配飾'
-        }
+        },
+        {
+          imageSrc: require('../assets/images/dolphin_pillow.jpg'),
+          titleName: '大型乾燥花束【和煦】配飾',
+          prodPrice: '500',
+          tag: '配飾'
+        },
+        {
+          imageSrc: require('../assets/images/dolphin_pillow.jpg'),
+          titleName: '大型乾燥花束【和煦】配飾',
+          prodPrice: '500',
+          tag: '配飾'
+        },
+        {
+          imageSrc: require('../assets/images/dolphin_pillow.jpg'),
+          titleName: '大型乾燥花束【和煦】配飾',
+          prodPrice: '500',
+          tag: '配飾'
+        },
       ],
       chooseItem: [
         {
@@ -77,7 +97,25 @@ export default {
           titleName: '大型乾燥花束【和煦】配飾',
           prodPrice: '500',
           tag: '配飾'
-        }
+        },
+        {
+          imageSrc: require('../assets/images/dolphin_pillow.jpg'),
+          titleName: '大型乾燥花束【和煦】配飾',
+          prodPrice: '500',
+          tag: '配飾'
+        },
+        {
+          imageSrc: require('../assets/images/dolphin_pillow.jpg'),
+          titleName: '大型乾燥花束【和煦】配飾',
+          prodPrice: '500',
+          tag: '配飾'
+        },
+        {
+          imageSrc: require('../assets/images/dolphin_pillow.jpg'),
+          titleName: '大型乾燥花束【和煦】配飾',
+          prodPrice: '500',
+          tag: '配飾'
+        },
       ]
     }
   },
@@ -124,8 +162,6 @@ export default {
   margin: 0 0 50px;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
-  box-sizing: border-box;
 
   .heart {
     margin: 0 0 -50px auto;
@@ -166,11 +202,6 @@ export default {
     display: block;
   }
 
-  span {
-    display: block;
-    // font-size: 17px;
-  }
-
   .info {
     width: 100%;
     display: flex;
@@ -182,7 +213,7 @@ export default {
   }
 
   .num input {
-    width: 30px;
+    width: 27px;
     border: 0;
     text-align: center;
     background-color: #9fbdce;
@@ -200,8 +231,6 @@ export default {
   .buy {
     width: 35px;
     height: 35px;
-    // border-radius: 100px;
-    // border: 1.5px solid #d9d9d9;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -213,7 +242,6 @@ export default {
 
   .buy .fa-cart-shopping {
     width: 12px;
-    margin: 4px 9px 0 0;
   }
 
   .buy:hover .fa-plus {
@@ -240,7 +268,12 @@ export default {
     opacity: 0;
   }
 
+}
 
-
+.select_btn {
+  width: 1200px;
+  margin: 50px auto;
+  display: flex;
+  justify-content: end;
 }
 </style>

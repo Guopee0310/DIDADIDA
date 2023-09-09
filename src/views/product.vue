@@ -1,7 +1,4 @@
 <template>
-  <div class="product_button">
-    <!-- <prodSelect @transferClass="handleClass"></prodSelect> -->
-  </div>
   <div class="product_allCards">
     <prod_card></prod_card>
   </div>
@@ -93,18 +90,11 @@ export default {
 // }
 .product_button {
   width: 1200px;
-  margin: 20px auto;
   display: flex;
   justify-content: end;
 }
 
-.product_allCards {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
 
-}
 
 // @font-face {
 //     font-family: 'YourFontFamily'; /* 替换为你的字体名称 */
