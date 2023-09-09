@@ -15,10 +15,12 @@
                     <span><i class="fa-solid fa-user" style="color: #eeeeee;"></i></span>
                     <span><i class="fa-solid fa-cart-shopping" style="color: #eeeeee;"></i></span>
 
-                    <select v-model="selectName">
+                    <div class="select">
+                        <select v-model="selectName">
 
-                        <option v-for="item in language" :value="item.option">{{ item.option }}</option>
-                    </select>
+                            <option v-for="item in language" :value="item.option">{{ item.option }}</option>
+                        </select>
+                    </div>
                 </nav>
 
 
@@ -106,6 +108,17 @@ export default {
     padding: 10px;
     background-color: #232D47;
 
+    .main-nav {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        select {
+
+            @include selectBtn;
+
+        }
+    }
 }
 
 .logo img {
@@ -113,11 +126,9 @@ export default {
     width: 80px;
 }
 
-.main-nav {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+
+
+
 
 .main-nav a {
     line-height: 40px;
@@ -139,6 +150,14 @@ select {
     /* appearance: none; */
     /* -moz-appearance: none; */
     width: 150px;
+}
+
+.select {
+    @include btnWidth;
+}
+
+.select::after {
+    @include arrow;
 }
 
 /* 滑鼠懸停時的樣式 */

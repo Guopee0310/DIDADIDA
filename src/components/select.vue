@@ -53,7 +53,8 @@ export default {
 <style scoped lang="scss">
 select {
     /* Reset Select */
-    @include selectBtn
+    @include selectBtn;
+    margin-right: 10px;
 }
 
 /* Remove IE arrow */
@@ -63,24 +64,11 @@ select::-ms-expand {
 
 /* Custom Select wrapper */
 .select {
-    position: relative;
-    display: flex;
-    width: 130px;
-    height: 40px;
-    overflow: hidden;
+    @include btnWidth;
 }
 
 .select::after {
-    content: '\25BC';
-    position: absolute;
-    top: 0;
-    right: 0;
-    padding: 5px 10px;
-    background-color: transparent;
-    transition: .25s all ease;
-    pointer-events: none;
-    border-radius: 50px;
-    color: #eee;
+    @include arrow;
 }
 
 option {

@@ -158,8 +158,9 @@ export default {
 </script>
 <style scoped lang="scss">
 .card {
-  width: 270px;
-  margin: 0 0 50px;
+  width: calc((100% / 4) - 20px);
+  // margin: 0 0 50px;
+  margin: 0 10px 50px;
   display: flex;
   flex-wrap: wrap;
 

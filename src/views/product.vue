@@ -97,7 +97,7 @@ export default {
 
 
 // @font-face {
-//     font-family: 'YourFontFamily'; /* 替换为你的字体名称 */
+//     font-family: 'YourFontFamily'; /* 替换为你的字体名称 *
 //     src: url('../assets/font/NotoSerifCJKtc-Regular.otf') format('otf'); /* 替换为字体文件的实际路径 */
 
 //   }
@@ -106,7 +106,6 @@ export default {
   width: 1200px;
   margin: 50px auto;
   display: flex;
-  justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
 }
