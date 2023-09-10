@@ -4,7 +4,7 @@
             <div class="footer_item">
                 <h3>{{ footerTitle.about }}</h3>
                 <ul>
-                    <li v-for="about in footer_aboutArray" :key="footerAbout"><router-link :to="about.link">{{ about.name
+                    <li v-for="about in footer_aboutArray" :key="about"><router-link :to="about.link">{{ about.name
                     }}</router-link></li>
 
                 </ul>
@@ -13,29 +13,29 @@
                 <h3>{{ footerTitle.news }}</h3>
                 <ul>
                     <!-- <li><a :href="news.link">{{ news.name }}</a></li> -->
-                    <li v-for="news in footer_newsArray" :key="footerNews"><router-link :to="news.link">{{ news.name
+                    <li v-for="news in footer_newsArray" :key="news"><router-link :to="news.link">{{ news.name
                     }}</router-link></li>
                 </ul>
             </div>
             <div class="footer_item">
                 <h3>{{ footerTitle.animal }}</h3>
                 <ul>
-                    <li v-for="animal in footer_animalArray" :key="footerAnimal"><router-link :to="animal.link">{{
+                    <li v-for="animal in footer_animalArray" :key="animal"><router-link :to="animal.link">{{
                         animal.name }}</router-link></li>
                 </ul>
             </div>
             <div class="footer_item">
                 <h3>{{ footerTitle.buy }}</h3>
                 <ul>
-                    <li v-for="buy in footer_buyArray" :key="footerBuy"><router-link :to="buy.link">{{ buy.name
+                    <li v-for="buy in footer_buyArray" :key="buy"><router-link :to="buy.link">{{ buy.name
                     }}</router-link></li>
                 </ul>
             </div>
             <div class="footer_item">
                 <h3>{{ footerTitle.media }}</h3>
                 <div>
-                    <span v-for="media in footer_mediaArray" :key="footerMedia"><router-link :to="media.link"><span
-                                v-html="media.name"></span></router-link></span>
+                    <span v-for="media in footer_mediaArray" :key="media"><router-link :to="media.link"><i
+                                :class="media.name"></i></router-link></span>
                 </div>
             </div>
             <div class="deco-right">
@@ -91,9 +91,9 @@ export default {
                 { link: '#', name: 'DIDA購票' },
             ],
             footer_mediaArray: [
-                { link: '#', name: '<i class="fa-brands fa-square-facebook" style="color: #eeeeee;"></i>' },
-                { link: '#', name: '<i class="fa-brands fa-instagram" style="color: #eeeeee;"></i>' },
-                { link: '#', name: '<i class="fa-brands fa-youtube" style="color: #eeeeee;"></i>' },
+                { link: '#', name: 'fa-brands fa-square-facebook" style="color: #eeeeee;"' },
+                { link: '#', name: 'fa-brands fa-instagram" style="color: #eeeeee;">' },
+                { link: '#', name: 'fa-brands fa-youtube" style="color: #eeeeee;">' },
             ],
             copyright: '本網站為緯育TibaMe_前端設計工程師班CHD103學員專題成果作品,本平台僅供學習、展示之用。若有抵觸有關著作權, 或有第三人主張侵害智慧財產權等情事, 均由學員負法律上責任, 緯育公司概不負責。若有侵權疑慮, 您可以私訊[緯育TibaMe], 後續會由專人協助處理。'
         }
