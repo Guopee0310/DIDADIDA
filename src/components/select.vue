@@ -54,6 +54,7 @@ export default {
 select {
     /* Reset Select */
     @include selectBtn;
+   
     margin-right: 10px;
 }
 
