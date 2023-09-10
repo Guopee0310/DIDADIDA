@@ -3,8 +3,6 @@
   <wave v-if="showWave"></wave>
   <login></login>
 
-
-
   <!-- 
   <nav>
     <router-link to="/?aa=123">Home</router-link> |
@@ -55,38 +53,38 @@ nav {
 </style>
 
 <script>
-import header1 from '@/components/header.vue'
-import footer1 from '@/components/footer.vue'
-import wave from '@/components/wave.vue'
-import login from '@/components/login.vue'
+import header1 from "@/components/header.vue";
+import footer1 from "@/components/footer.vue";
+import wave from "@/components/wave.vue";
+import login from "@/components/login.vue";
 export default {
   data() {
     return {
       breadcrumbList: [
         {
-          title: '面包屑'
-        }
+          title: "面包屑",
+        },
       ],
-      showWave: true
-    }
+      showWave: true,
+    };
   },
   components: {
     header1,
     footer1,
     wave,
-    login
+    login,
   },
   watch: {
     "$route.query"(nVal, oVal) {
-      console.log('新的值', nVal.section)
-      console.log('舊的值', oVal.section)
+      console.log("新的值", nVal.section);
+      console.log("舊的值", oVal.section);
 
-      if (nVal.section == 'hide') {
-        this.showWave = false
+      if (nVal.section == "hide") {
+        this.showWave = false;
       } else {
-        this.showWave = true
+        this.showWave = true;
       }
     },
-  }
-}
+  },
+};
 </script>

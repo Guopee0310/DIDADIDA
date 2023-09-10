@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import product from '../views/product.vue'
-
+import visual from '../components/visualGame.vue'
 const routes = [
   {
     path: '/',
@@ -28,11 +28,32 @@ const routes = [
   name: 'ticket',
   component: () => import(/* webpackChunkName: "ticket" */ '../views/TicketView.vue') 
 },
+{ path: '/faq',
+name: 'faq',
+component: () => import(/* webpackChunkName: "faq" */ '../views/FaqView.vue') 
+},
+{ path: '/guide',
+name: 'guide',
+component: () => import(/* webpackChunkName: "guide" */ '../views/GuideView.vue') 
+},
+{ path: '/interact',
+name: 'interact',
+component: () => import(/* webpackChunkName: "interact" */ '../views/InteractView.vue') 
+},
+{ path: '/member',
+name: 'member',
+component: () => import(/* webpackChunkName: "member" */ '../views/MemberView.vue') 
+},
   {
     path: '/product',
     name: 'product',
     component: product
   },
+  {
+    path:'/visual',
+    name:'visual',
+    component:visual
+  }
   
 ]
 

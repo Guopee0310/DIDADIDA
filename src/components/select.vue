@@ -1,12 +1,12 @@
 <template>
     <div class="select">
         <select name="" id="itemClass" v-model="selectedItem">
-            <option v-for="prod in prodSelect" :key="prod">{{ prod.option }}</option>
+            <option v-for="(prod, proIndex) in prodSelect" :key="proIndex">{{ prod.option }}</option>
         </select>
     </div>
     <div class="select">
-        <select name="" id="" v-model="selectedPrice">
-            <option v-for="cost in costSelect" :key="costSelect">{{ cost.option }}</option>
+        <select v-model="selectedPrice">
+            <option v-for="(cost, costIndex) in costSelect" :key="costIndex">{{ cost.option }}</option>
         </select>
     </div>
 </template>
@@ -33,6 +33,7 @@ export default {
     methods: {
 
     },
+    emit: ['transferClass', 'transferPrice'],
     watch: {
         selectedItem(newValue, oldValue) {
             // 在这里可以处理选项变化的逻辑
@@ -54,7 +55,6 @@ export default {
 select {
     /* Reset Select */
     @include selectBtn;
-   
     margin-right: 10px;
 }
 
@@ -70,6 +70,7 @@ select::-ms-expand {
 
 .select::after {
     @include arrow;
+    padding: 1px 16px;
 }
 
 option {

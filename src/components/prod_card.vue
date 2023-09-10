@@ -1,13 +1,16 @@
 <template>
   <div class="select_btn">
-    <prodSelect @transferClass="getClass" @transferPrice="getPrice"></prodSelect>
+    <prodSelect
+      @transferClass="getClass"
+      @transferPrice="getPrice"
+    ></prodSelect>
   </div>
   <div class="card" v-for="i in chooseItem" :key="i.imageSrc">
     <div class="heart">
       <heart></heart>
     </div>
     <div class="pic">
-      <a href="#"><img :src="i.imageSrc" alt=""></a>
+      <a href="#"><img :src="i.imageSrc" alt="" /></a>
     </div>
 
     <div class="name">
@@ -19,142 +22,299 @@
       </div>
       <div class="prod_btn">
         <div class="num">
-          <input type="button" value="–">
-          <input type="text" value="1" size="1">
-          <input type="button" value="+">
+          <input type="button" value="–" />
+          <input type="text" value="1" size="1" />
+          <input type="button" value="+" />
         </div>
         <div class="buy">
           <a href="">
-            <i class="fa-solid fa-cart-shopping" style="color: #9fbdce;"></i>
+            <i class="fa-solid fa-cart-shopping" style="color: #9fbdce"></i>
           </a>
         </div>
       </div>
     </div>
   </div>
+  <Page :total="100" @on-change="updatePage" />
 </template>
-  
+
 <script>
-import btn2 from './btn2.vue'
-import heart from './heart.vue'
-import prodSelect from '../components/select.vue'
+import btn2 from "./btn2.vue";
+import heart from "./heart.vue";
+import prodSelect from "../components/select.vue";
 export default {
-  name: 'son',
+  name: "son",
   data() {
     return {
       cardsAll: [
         {
-          imageSrc: require('../assets/images/dolphin_pillow.jpg'),
-          titleName: '大型乾燥花束【和煦】食品',
-          prodPrice: '900',
-          tag: '食品'
+          imageSrc: require("../assets/images/dolphin_pillow.jpg"),
+          titleName: "大型乾燥花束【和煦】食品",
+          prodPrice: "900",
+          tag: "食品",
         },
         {
-          imageSrc: require('../assets/images/dolphin_pillow.jpg'),
-          titleName: '大型乾燥花束【和煦】玩偶',
-          prodPrice: '750',
-          tag: '玩偶'
+          imageSrc: require("../assets/images/dolphin_pillow.jpg"),
+          titleName: "大型乾燥花束【和煦】玩偶",
+          prodPrice: "750",
+          tag: "玩偶",
         },
         {
-          imageSrc: require('../assets/images/dolphin_pillow.jpg'),
-          titleName: '大型乾燥花束【和煦】配飾',
-          prodPrice: '500',
-          tag: '配飾'
+          imageSrc: require("../assets/images/dolphin_pillow.jpg"),
+          titleName: "大型乾燥花束【和煦】配飾",
+          prodPrice: "500",
+          tag: "配飾",
         },
         {
-          imageSrc: require('../assets/images/dolphin_pillow.jpg'),
-          titleName: '大型乾燥花束【和煦】配飾',
-          prodPrice: '500',
-          tag: '配飾'
+          imageSrc: require("../assets/images/dolphin_pillow.jpg"),
+          titleName: "大型乾燥花束【和煦】配飾",
+          prodPrice: "500",
+          tag: "配飾",
         },
         {
-          imageSrc: require('../assets/images/dolphin_pillow.jpg'),
-          titleName: '大型乾燥花束【和煦】配飾',
-          prodPrice: '500',
-          tag: '配飾'
+          imageSrc: require("../assets/images/dolphin_pillow.jpg"),
+          titleName: "大型乾燥花束【和煦】配飾",
+          prodPrice: "500",
+          tag: "配飾",
         },
         {
-          imageSrc: require('../assets/images/dolphin_pillow.jpg'),
-          titleName: '大型乾燥花束【和煦】配飾',
-          prodPrice: '500',
-          tag: '配飾'
+          imageSrc: require("../assets/images/dolphin_pillow.jpg"),
+          titleName: "大型乾燥花束【和煦】配飾",
+          prodPrice: "500",
+          tag: "配飾",
+        },
+        {
+          imageSrc: require("../assets/images/dolphin_pillow.jpg"),
+          titleName: "大型乾燥花束【和煦】食品",
+          prodPrice: "900",
+          tag: "食品",
+        },
+        {
+          imageSrc: require("../assets/images/dolphin_pillow.jpg"),
+          titleName: "大型乾燥花束【和煦】玩偶",
+          prodPrice: "750",
+          tag: "玩偶",
+        },
+        {
+          imageSrc: require("../assets/images/dolphin_pillow.jpg"),
+          titleName: "大型乾燥花束【和煦】配飾",
+          prodPrice: "500",
+          tag: "配飾",
+        },
+        {
+          imageSrc: require("../assets/images/dolphin_pillow.jpg"),
+          titleName: "大型乾燥花束【和煦】配飾",
+          prodPrice: "500",
+          tag: "配飾",
+        },
+        {
+          imageSrc: require("../assets/images/dolphin_pillow.jpg"),
+          titleName: "大型乾燥花束【和煦】配飾",
+          prodPrice: "500",
+          tag: "配飾",
+        },
+        {
+          imageSrc: require("../assets/images/dolphin_pillow.jpg"),
+          titleName: "大型乾燥花束【和煦】配飾",
+          prodPrice: "500",
+          tag: "配飾",
+        },
+        {
+          imageSrc: require("../assets/images/dolphin_pillow.jpg"),
+          titleName: "大型乾燥花束【和煦】食品",
+          prodPrice: "900",
+          tag: "食品",
+        },
+        {
+          imageSrc: require("../assets/images/dolphin_pillow.jpg"),
+          titleName: "大型乾燥花束【和煦】玩偶",
+          prodPrice: "750",
+          tag: "玩偶",
+        },
+        {
+          imageSrc: require("../assets/images/dolphin_pillow.jpg"),
+          titleName: "大型乾燥花束【和煦】配飾",
+          prodPrice: "500",
+          tag: "配飾",
+        },
+        {
+          imageSrc: require("../assets/images/dolphin_pillow.jpg"),
+          titleName: "大型乾燥花束【和煦】配飾",
+          prodPrice: "500",
+          tag: "配飾",
+        },
+        {
+          imageSrc: require("../assets/images/dolphin_pillow.jpg"),
+          titleName: "大型乾燥花束【和煦】配飾",
+          prodPrice: "500",
+          tag: "配飾",
+        },
+        {
+          imageSrc: require("../assets/images/dolphin_pillow.jpg"),
+          titleName: "大型乾燥花束【和煦】配飾",
+          prodPrice: "500",
+          tag: "配飾",
         },
       ],
       chooseItem: [
         {
-          imageSrc: require('../assets/images/dolphin_pillow.jpg'),
-          titleName: '大型乾燥花束【和煦】食品',
-          prodPrice: '900',
-          tag: '食品'
+          imageSrc: require("../assets/images/dolphin_pillow.jpg"),
+          titleName: "大型乾燥花束【和煦】食品",
+          prodPrice: "900",
+          tag: "食品",
         },
         {
-          imageSrc: require('../assets/images/dolphin_pillow.jpg'),
-          titleName: '大型乾燥花束【和煦】玩偶',
-          prodPrice: '750',
-          tag: '玩偶'
+          imageSrc: require("../assets/images/dolphin_pillow.jpg"),
+          titleName: "大型乾燥花束【和煦】玩偶",
+          prodPrice: "750",
+          tag: "玩偶",
         },
         {
-          imageSrc: require('../assets/images/dolphin_pillow.jpg'),
-          titleName: '大型乾燥花束【和煦】配飾',
-          prodPrice: '500',
-          tag: '配飾'
+          imageSrc: require("../assets/images/dolphin_pillow.jpg"),
+          titleName: "大型乾燥花束【和煦】配飾",
+          prodPrice: "500",
+          tag: "配飾",
         },
         {
-          imageSrc: require('../assets/images/dolphin_pillow.jpg'),
-          titleName: '大型乾燥花束【和煦】配飾',
-          prodPrice: '500',
-          tag: '配飾'
+          imageSrc: require("../assets/images/dolphin_pillow.jpg"),
+          titleName: "大型乾燥花束【和煦】配飾",
+          prodPrice: "500",
+          tag: "配飾",
         },
         {
-          imageSrc: require('../assets/images/dolphin_pillow.jpg'),
-          titleName: '大型乾燥花束【和煦】配飾',
-          prodPrice: '500',
-          tag: '配飾'
+          imageSrc: require("../assets/images/dolphin_pillow.jpg"),
+          titleName: "大型乾燥花束【和煦】配飾",
+          prodPrice: "500",
+          tag: "配飾",
         },
         {
-          imageSrc: require('../assets/images/dolphin_pillow.jpg'),
-          titleName: '大型乾燥花束【和煦】配飾',
-          prodPrice: '500',
-          tag: '配飾'
+          imageSrc: require("../assets/images/dolphin_pillow.jpg"),
+          titleName: "大型乾燥花束【和煦】配飾",
+          prodPrice: "500",
+          tag: "配飾",
         },
-      ]
-    }
+        {
+          imageSrc: require("../assets/images/dolphin_pillow.jpg"),
+          titleName: "大型乾燥花束【和煦】食品",
+          prodPrice: "900",
+          tag: "食品",
+        },
+        {
+          imageSrc: require("../assets/images/dolphin_pillow.jpg"),
+          titleName: "大型乾燥花束【和煦】玩偶",
+          prodPrice: "750",
+          tag: "玩偶",
+        },
+        {
+          imageSrc: require("../assets/images/dolphin_pillow.jpg"),
+          titleName: "大型乾燥花束【和煦】配飾",
+          prodPrice: "500",
+          tag: "配飾",
+        },
+        {
+          imageSrc: require("../assets/images/dolphin_pillow.jpg"),
+          titleName: "大型乾燥花束【和煦】配飾",
+          prodPrice: "500",
+          tag: "配飾",
+        },
+        {
+          imageSrc: require("../assets/images/dolphin_pillow.jpg"),
+          titleName: "大型乾燥花束【和煦】配飾",
+          prodPrice: "500",
+          tag: "配飾",
+        },
+        {
+          imageSrc: require("../assets/images/dolphin_pillow.jpg"),
+          titleName: "大型乾燥花束【和煦】配飾",
+          prodPrice: "500",
+          tag: "配飾",
+        },
+        {
+          imageSrc: require("../assets/images/dolphin_pillow.jpg"),
+          titleName: "大型乾燥花束【和煦】食品",
+          prodPrice: "900",
+          tag: "食品",
+        },
+        {
+          imageSrc: require("../assets/images/dolphin_pillow.jpg"),
+          titleName: "大型乾燥花束【和煦】玩偶",
+          prodPrice: "750",
+          tag: "玩偶",
+        },
+        {
+          imageSrc: require("../assets/images/dolphin_pillow.jpg"),
+          titleName: "大型乾燥花束【和煦】配飾",
+          prodPrice: "500",
+          tag: "配飾",
+        },
+        {
+          imageSrc: require("../assets/images/dolphin_pillow.jpg"),
+          titleName: "大型乾燥花束【和煦】配飾",
+          prodPrice: "500",
+          tag: "配飾",
+        },
+        {
+          imageSrc: require("../assets/images/dolphin_pillow.jpg"),
+          titleName: "大型乾燥花束【和煦】配飾",
+          prodPrice: "500",
+          tag: "配飾",
+        },
+        {
+          imageSrc: require("../assets/images/dolphin_pillow.jpg"),
+          titleName: "大型乾燥花束【和煦】配飾",
+          prodPrice: "500",
+          tag: "配飾",
+        },
+      ],
+      pageSize: 8,
+    };
+  },
+  mounted() {
+    // 初始加载时只显示前八个项目
+    this.chooseItem = this.cardsAll.slice(0, this.pageSize);
   },
   props: {
-    msg1: [String, Number]
+    msg1: [String, Number],
   },
   components: {
     btn2,
     heart,
-    prodSelect
+    prodSelect,
   },
+  computed: {},
   methods: {
     getClass(data) {
       // alert(data)
-      this.chooseItem = []
+      this.chooseItem = [];
       for (let i = 0; i < this.cardsAll.length; i++) {
-        if (data == '所有商品') {
-          this.chooseItem = this.cardsAll
-        }
-        else if (this.cardsAll[i].tag === data) {
-          this.chooseItem.push(this.cardsAll[i])
+        if (data == "所有商品") {
+          this.chooseItem = this.cardsAll;
+        } else if (this.cardsAll[i].tag === data) {
+          this.chooseItem.push(this.cardsAll[i]);
         }
       }
     },
     getPrice(data) {
       this.chooseItem = [...this.cardsAll]; // 克隆 cardsAll 数组
 
-      if (data === '由低到高') {
+      if (data === "由低到高") {
         this.chooseItem.sort((a, b) => {
           return parseInt(a.prodPrice) - parseInt(b.prodPrice);
         });
-      } else if (data === '由高到低') {
+      } else if (data === "由高到低") {
         this.chooseItem.sort((a, b) => {
           return parseInt(b.prodPrice) - parseInt(a.prodPrice);
         });
       }
-    }
-  }
-}
+    },
+    updatePage(page) {
+      // console.log(page);
+
+      const startIdx = (page - 1) * this.pageSize;
+      const endIdx = startIdx + this.pageSize;
+      this.chooseItem = this.cardsAll.slice(startIdx, endIdx);
+    },
+  },
+};
 </script>
 <style scoped lang="scss">
 .card {
@@ -179,11 +339,11 @@ export default {
     width: 100%;
     vertical-align: top;
     transform: scale(1);
-    transition: .7s;
+    transition: 0.7s;
   }
 
   .pic img:hover {
-    transition: .7s;
+    transition: 0.7s;
     transform: scale(1.1);
   }
 
@@ -191,15 +351,17 @@ export default {
     font-size: 17px;
     margin-bottom: 15px;
     line-height: 1.5;
-    font-family: Gowun Batang, 'Times New Roman', Times, NotoSerifCJKtc-Regular, serif;
+    font-family: Gowun Batang, "Times New Roman", Times, NotoSerifCJKtc-Regular,
+      serif;
     color: #333;
   }
 
   .name a {
     text-decoration: none;
     color: #333;
-    transition: .3s;
-    font-size: Gowun Batang, 'Times New Roman', Times, NotoSerifCJKtc-Regular, serif;
+    transition: 0.3s;
+    font-size: Gowun Batang, "Times New Roman", Times, NotoSerifCJKtc-Regular,
+      serif;
     display: block;
   }
 
@@ -257,18 +419,15 @@ export default {
     background-color: #eee;
   }
 
-
   .name a:hover {
-    color: #C48710;
-    transition: .2s;
+    color: #c48710;
+    transition: 0.2s;
   }
-
 
   .buy img:nth-child(1):hover {
-    transition: .2s;
+    transition: 0.2s;
     opacity: 0;
   }
-
 }
 
 .select_btn {
