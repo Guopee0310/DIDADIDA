@@ -14,6 +14,15 @@
   <span id="firstPage"></span>
 </template>
 
+<<<<<<< HEAD
+=======
+<!-- <script>
+updataWeColor(){
+  const newColor = this.$store.state.color === 'white' ?
+}
+</script> -->
+
+>>>>>>> 0805733c80fc78ab9330e44c174b3612a1fcde1a
 <style lang="scss" scoped>
 // @import "~@/assets/scss/base/variables.scss";
 //區域使用範例

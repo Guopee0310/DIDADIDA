@@ -28,6 +28,22 @@ const routes = [
   name: 'ticket',
   component: () => import(/* webpackChunkName: "ticket" */ '../views/TicketView.vue') 
 },
+{ path: '/faq',
+name: 'faq',
+component: () => import(/* webpackChunkName: "faq" */ '../views/FaqView.vue') 
+},
+{ path: '/guide',
+name: 'guide',
+component: () => import(/* webpackChunkName: "guide" */ '../views/GuideView.vue') 
+},
+{ path: '/interact',
+name: 'interact',
+component: () => import(/* webpackChunkName: "interact" */ '../views/InteractView.vue') 
+},
+{ path: '/member',
+name: 'member',
+component: () => import(/* webpackChunkName: "member" */ '../views/MemberView.vue') 
+},
   {
     path: '/product',
     name: 'product',

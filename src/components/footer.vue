@@ -70,12 +70,12 @@ export default {
                 media: '社群媒體'
             },
             footer_aboutArray: [
-                { link: '#', name: '常見問答' },
-                { link: '#', name: '園區導覽' },
-                { link: '#', name: '互動遊戲' },
+                { link: '/faq', name: '常見問答' },
+                { link: '/guide', name: '園區導覽' },
+                { link: '/interact', name: '互動遊戲' },
             ],
             footer_newsArray: [
-                { link: '#', name: '最新活動' },
+                { link: '/news', name: '最新活動' },
                 { link: '#', name: '表演資訊' },
                 { link: '#', name: '優惠消息' },
             ],
@@ -87,8 +87,8 @@ export default {
                 { link: '#', name: '超深淵層海洋帶' },
             ],
             footer_buyArray: [
-                { link: '#', name: 'DIDA購物' },
-                { link: '#', name: 'DIDA購票' },
+                { link: '/product', name: 'DIDA購物' },
+                { link: '/ticket', name: 'DIDA購票' },
             ],
             footer_mediaArray: [
                 { link: '#', name: 'fa-brands fa-square-facebook" style="color: #eeeeee;"' },

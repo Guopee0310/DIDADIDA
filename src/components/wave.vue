@@ -56,6 +56,16 @@ export default {
         ? "最新消息"
         : this.$route.path == "/about"
         ? "關於我們"
+        : this.$route.path == "/member"
+        ? "會員中心"
+        : this.$route.path == "/guide"
+        ? "園區導覽"
+        : this.$route.path == "/interact"
+        ? "互動"
+        : this.$route.path == "/faq"
+        ? "常見問答"
+        : this.$route.path == "/ticket"
+        ? "購買票券"
         : "";
     },
     h2Name() {
@@ -67,6 +77,16 @@ export default {
         ? "News"
         : this.$route.path == "/about"
         ? "AboutUs"
+        : this.$route.path == "/member"
+        ? "Member"
+        : this.$route.path == "/guide"
+        ? "Guide"
+        : this.$route.path == "/interact"
+        ? "Interaction"
+        : this.$route.path == "/faq"
+        ? "FAQs"
+        : this.$route.path == "/ticket"
+        ? "Tickets"
         : "";
     },
   },
