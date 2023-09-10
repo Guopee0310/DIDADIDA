@@ -55,7 +55,6 @@ export default {
 select {
     /* Reset Select */
     @include selectBtn;
-
     margin-right: 10px;
 }
 
@@ -71,6 +70,7 @@ select::-ms-expand {
 
 .select::after {
     @include arrow;
+    padding: 1px 16px;
 }
 
 option {
