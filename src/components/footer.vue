@@ -3,35 +3,46 @@
         <div class="footer_wrap">
             <div class="footer_item">
                 <h3>{{ footerTitle.about }}</h3>
-                <ul v-for="about in footer_aboutArray" :key="footerAbout">
-                    <li><router-link :to="about.link">{{ about.name }}</router-link></li>
-                    
+                <ul>
+                    <li v-for="about in footer_aboutArray" :key="about"><router-link :to="about.link">{{ about.name
+                    }}</router-link></li>
+
                 </ul>
             </div>
             <div class="footer_item">
                 <h3>{{ footerTitle.news }}</h3>
-                <ul v-for="news in footer_newsArray" :key="footerNews">
+                <ul>
                     <!-- <li><a :href="news.link">{{ news.name }}</a></li> -->
-                    <li><router-link :to="news.link">{{ news.name }}</router-link></li>
+                    <li v-for="news in footer_newsArray" :key="news"><router-link :to="news.link">{{ news.name
+                    }}</router-link></li>
                 </ul>
             </div>
             <div class="footer_item">
                 <h3>{{ footerTitle.animal }}</h3>
-                <ul v-for="animal in footer_animalArray" :key="footerAnimal">
-                    <li><router-link :to="animal.link">{{ animal.name }}</router-link></li>
+                <ul>
+                    <li v-for="animal in footer_animalArray" :key="animal"><router-link :to="animal.link">{{
+                        animal.name }}</router-link></li>
                 </ul>
             </div>
             <div class="footer_item">
                 <h3>{{ footerTitle.buy }}</h3>
-                <ul v-for="buy in footer_buyArray" :key="footerBuy">
-                    <li><router-link :to="buy.link">{{ buy.name }}</router-link></li>
+                <ul>
+                    <li v-for="buy in footer_buyArray" :key="buy"><router-link :to="buy.link">{{ buy.name
+                    }}</router-link></li>
                 </ul>
             </div>
             <div class="footer_item">
                 <h3>{{ footerTitle.media }}</h3>
-                <ul v-for="media in footer_mediaArray" :key="footerMedia">
-                    <li><router-link :to="media.link"><span v-html="media.name"></span></router-link></li>
-                </ul>
+                <div>
+                    <span v-for="media in footer_mediaArray" :key="media"><router-link :to="media.link"><i
+                                :class="media.name"></i></router-link></span>
+                </div>
+            </div>
+            <div class="deco-right">
+                <img src="../../public/all_images/footer/deco_fish.png" alt="">
+            </div>
+            <div class="deco-left">
+                <img src="../../public/all_images/footer/deco_coral.png" alt="">
             </div>
         </div>
         <div class="copyright">
@@ -73,15 +84,16 @@ export default {
                 { link: '#', name: '中層海洋帶' },
                 { link: '#', name: '深層海洋帶' },
                 { link: '#', name: '深淵層海洋帶' },
+                { link: '#', name: '超深淵層海洋帶' },
             ],
             footer_buyArray: [
                 { link: '#', name: 'DIDA購物' },
                 { link: '#', name: 'DIDA購票' },
             ],
             footer_mediaArray: [
-                { link: '#', name: '<i class="fa-regular fa-heart" style="color: #232d47;"></i>' },
-                { link: '#', name: '' },
-                { link: '#', name: '' },
+                { link: '#', name: 'fa-brands fa-square-facebook" style="color: #eeeeee;"' },
+                { link: '#', name: 'fa-brands fa-instagram" style="color: #eeeeee;">' },
+                { link: '#', name: 'fa-brands fa-youtube" style="color: #eeeeee;">' },
             ],
             copyright: '本網站為緯育TibaMe_前端設計工程師班CHD103學員專題成果作品,本平台僅供學習、展示之用。若有抵觸有關著作權, 或有第三人主張侵害智慧財產權等情事, 均由學員負法律上責任, 緯育公司概不負責。若有侵權疑慮, 您可以私訊[緯育TibaMe], 後續會由專人協助處理。'
         }
@@ -94,31 +106,32 @@ export default {
 
 footer {
     width: 100%;
-    padding: 35px 0;
+    padding: 190px 0;
     background-color: map-get($colors, 'mainColor');
+    position: relative;
 
     .footer_wrap {
-        max-width: 1200px;
+        max-width: 960px;
         width: 100%;
-        margin: 0 auto 55px;
+        margin: 0 auto 35px;
         display: flex;
         justify-content: space-between;
+        overflow: hidden;
 
         h3 {
             color: #eee;
-            margin: 35px 0 25px;
-            font-size: map-get($fontSizes , 'nav' );
+            margin: 55px 0 25px;
+            font-size: map-get($fontSizes , 'nav');
         }
 
         a {
             color: #eee;
-            opacity: 0.7;
             text-decoration: none;
             transition: .3s;
         }
 
         a:hover {
-            opacity: 1;
+            color: map-get($colors, h2Blue);
             transition: .3s;
         }
 
@@ -132,8 +145,39 @@ footer {
         width: 960px;
         color: #eee;
         margin: auto;
-        font-size: map-get($fontSizes, 'mini' );
-        text-align: justify;
+        font-size: map-get($fontSizes, 'mini');
+        text-align: center;
+        padding: 0 0 25px;
+    }
+
+    .footer_item {
+        span {
+            margin-right: 5px;
+            font-size: 17px;
+        }
+
+    }
+
+    .deco-right {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+
+        img {
+            vertical-align: bottom;
+            width: 200px;
+        }
+    }
+
+    .deco-left {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+
+        img {
+            vertical-align: bottom;
+            width: 200px;
+        }
     }
 }
 </style>

@@ -1,33 +1,45 @@
 <template>
-<header1></header1>
-<wave></wave>
-<login></login>
+  <header1></header1>
+  <wave v-if="showWave"></wave>
+  <login></login>
 
 
 
-<!-- 
+  <!-- 
   <nav>
     <router-link to="/?aa=123">Home</router-link> |
     <router-link to="/about">About</router-link>
   </nav> -->
-  <router-view/>
+  <router-view />
 
-<footer1></footer1>
+  <footer1></footer1>
+  <span id="firstPage"></span>
 </template>
+
+<script>
+updataWeColor(){
+  const newColor = this.$store.state.color === 'white' ?
+}
+</script>
 
 <style lang="scss" scoped>
 // @import "~@/assets/scss/base/variables.scss";
 //區域使用範例
 
-.demo-logo{
+
+
+.demo-logo {
   width: 50px;
-  img{
+
+  img {
     width: 100%;
   }
 }
-.colorcolor{
-  color:$privecolor;
+
+.colorcolor {
+  color: $privecolor;
 }
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -55,21 +67,34 @@ import header1 from '@/components/header.vue'
 import footer1 from '@/components/footer.vue'
 import wave from '@/components/wave.vue'
 import login from '@/components/login.vue'
-    export default {
-        data () {
-            return {
-                breadcrumbList: [
-                    {
-                        title: '面包屑'
-                    }
-                ]
-            }
-        },
-        components:{
-          header1,
-          footer1,
-          wave,
-          login
+export default {
+  data() {
+    return {
+      breadcrumbList: [
+        {
+          title: '面包屑'
         }
+      ],
+      showWave: true
     }
+  },
+  components: {
+    header1,
+    footer1,
+    wave,
+    login
+  },
+  watch: {
+    "$route.query"(nVal, oVal) {
+      console.log('新的值', nVal.section)
+      console.log('舊的值', oVal.section)
+
+      if (nVal.section == 'hide') {
+        this.showWave = false
+      } else {
+        this.showWave = true
+      }
+    },
+  }
+}
 </script>
