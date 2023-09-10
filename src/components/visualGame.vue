@@ -78,7 +78,7 @@ body {
   left: 50%;
   top: 50%;
   transform: translateX(-50%) translateY(-50%);
-  background-image: radial-gradient(circle at center, transparent, #000 10%);
+  background-image: radial-gradient(circle at center, transparent, #000000bf 10%);
 }
 </style>
 
