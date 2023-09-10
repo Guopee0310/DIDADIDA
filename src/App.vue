@@ -16,11 +16,11 @@
   <span id="firstPage"></span>
 </template>
 
-<script>
+<!-- <script>
 updataWeColor(){
   const newColor = this.$store.state.color === 'white' ?
 }
-</script>
+</script> -->
 
 <style lang="scss" scoped>
 // @import "~@/assets/scss/base/variables.scss";
