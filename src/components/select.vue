@@ -50,16 +50,9 @@ export default {
 </script>
 <style scoped lang="scss">
 select {
-<<<<<<< HEAD
-    /* Reset Select */
-    @include selectBtn;
-    margin-right: 10px;
-=======
-  /* Reset Select */
   @include selectBtn;
 
   margin-right: 10px;
->>>>>>> host
 }
 
 /* Remove IE arrow */
@@ -73,12 +66,7 @@ select::-ms-expand {
 }
 
 .select::after {
-<<<<<<< HEAD
-    @include arrow;
-    padding: 1px 16px;
-=======
   @include arrow;
->>>>>>> host
 }
 
 option {
