@@ -1,33 +1,16 @@
 <template>
-<<<<<<< HEAD
-    <div class="select">
-        <select name="" id="itemClass" v-model="selectedItem">
-            <option v-for="(prod, proIndex) in prodSelect" :key="proIndex">{{ prod.option }}</option>
-        </select>
-        <span><i class="fa-solid fa-chevron-down" style="color: #eeeeee;"></i></span>
-    </div>
-    <div class="select">
-        <select v-model="selectedPrice">
-            <option v-for="(cost, costIndex) in costSelect" :key="costIndex">{{ cost.option }}</option>
-        </select>
-        <span><i class="fa-solid fa-chevron-down" style="color: #eeeeee;"></i></span>
-    </div>
-=======
   <div class="select">
     <select name="" id="itemClass" v-model="selectedItem">
-      <option v-for="(prod, proIndex) in prodSelect" :key="proIndex">
-        {{ prod.option }}
-      </option>
+      <option v-for="(prod, proIndex) in prodSelect" :key="proIndex">{{ prod.option }}</option>
     </select>
+    <span><i class="fa-solid fa-chevron-down" style="color: #eeeeee;"></i></span>
   </div>
   <div class="select">
     <select v-model="selectedPrice">
-      <option v-for="(cost, costIndex) in costSelect" :key="costIndex">
-        {{ cost.option }}
-      </option>
+      <option v-for="(cost, costIndex) in costSelect" :key="costIndex">{{ cost.option }}</option>
     </select>
+    <span><i class="fa-solid fa-chevron-down" style="color: #eeeeee;"></i></span>
   </div>
->>>>>>> 9dcf95d7beeb326a178188df8d2202e5123b91e4
 </template>
 
 <script>
@@ -77,25 +60,20 @@ select::-ms-expand {
 
 /* Custom Select wrapper */
 .select {
-<<<<<<< HEAD
-    @include btnWidth;
-
-    span {
-        position: absolute;
-        top: 8px;
-        right: 18px;
-        font-size: 15px;
-    }
-}
-
-=======
   @include btnWidth;
+
+  span {
+    position: absolute;
+    top: 8px;
+    right: 18px;
+    font-size: 15px;
+  }
 }
+
 
 .select::after {
   @include arrow;
 }
->>>>>>> 9dcf95d7beeb326a178188df8d2202e5123b91e4
 
 option {
   background-color: #2c3e50;
