@@ -1,10 +1,21 @@
 <template>
   <div class="header" id="header">
     <div id="app">
-      <div class="wrap" @scroll="handleScroll()">
+      <div
+        class="wrap"
+        :style="{
+          'background-color': headerColor,
+          top: 0,
+          left: 0,
+          'z-index': 10,
+          width: '100%',
+        }"
+      >
         <!-- logo -->
         <div class="logo">
-          <router-link to="/" @click="hideBanner()"><img src="../assets/images/dida_logo.png" /></router-link>
+          <router-link to="/" @click="hideBanner()"
+            ><img src="../assets/images/dida_logo.png"
+          /></router-link>
         </div>
 
         <nav class="main-nav">
@@ -52,7 +63,9 @@
           </span>
 
           <!-- 購物車 -->
-          <router-link to="/shoppingcart"><i class="fa-solid fa-cart-shopping" style="color: #eee"></i></router-link>
+          <router-link to="/shoppingcart"
+            ><i class="fa-solid fa-cart-shopping" style="color: #eee"></i
+          ></router-link>
 
           <!-- 語言切換 -->
           <div class="select">
@@ -62,13 +75,12 @@
               </option>
             </select>
           </div>
-
         </nav>
       </div>
 
       <!-- <a href="#" class="Smart">
-                <img src="imgs/問號.png" alt="智能小幫手">
-            </a> -->
+                  <img src="imgs/問號.png" alt="智能小幫手">
+              </a> -->
     </div>
   </div>
 </template>
@@ -81,6 +93,8 @@ export default {
   components: {},
   data() {
     return {
+      headerColor: "rgba(35, 45, 71, 0)",
+      headerPosition: "relative",
       icon: [
         {
           link: "#",
@@ -101,37 +115,41 @@ export default {
           option: "繁體中文",
         },
         {
-          option: "英文",
+          option: "簡體中文",
+        },
+        {
+          option: "韓文",
+        },
+        {
+          option: "日文",
         },
       ],
     };
   },
   watch: {
     "$route.query"(nVal, oVal) {
-      console.log(nVal);
+      //   console.log(nVal);
     },
   },
   mounted() {
     window.addEventListener("scroll", this.handleScroll);
   },
   beforeDestroy() {
-    window.removeEventListener('scroll', this.handleScroll)
+    window.removeEventListener("scroll", this.handleScroll);
   },
   methods: {
     hideBanner() {
       this.$router.push({ path: "/", query: { section: "hide" } });
     },
     handleScroll(event) {
-      //   const
-
-      // 在这里处理滚动事件
-      // console.log("滚动事件触发了");
-      // console.log(event);
-
-      // 如果你想获取滚动位置，可以使用以下方式：
-      // const scrollY = event.target.scrollTop;
+      console.log(event);
+      console.log(window.scrollY);
+      if (window.scrollY == 0) {
+        this.headerColor = "rgba(35, 45, 71, 0)";
+      } else {
+        this.headerColor = "rgba(35, 45, 71, 1)";
+      }
     },
-
     // toFooter(){
     //     this.$router.push({ path: '/product', query: { article: 'footer' } });
     //     this.$router.push({path:'/', query:{section : 'footer' }})
@@ -156,7 +174,7 @@ export default {
   left: 0;
   right: 0;
   z-index: 3;
-
+  transition: 1s;
   // logo 樣式
   .logo img {
     vertical-align: top;
@@ -204,7 +222,6 @@ export default {
     }
   }
 
-
   .main-menu:hover .sub-menu {
     display: block;
   }
@@ -226,7 +243,7 @@ select {
   font-size: map-get($fontSizes, "p");
   cursor: pointer;
   /* background-image:url(imgs/Vector.png) ;
-            background-position: right center; */
+              background-position: right center; */
   /* appearance: none; */
   /* -moz-appearance: none; */
   width: 150px;
@@ -264,13 +281,13 @@ option:checked {
 }
 
 /* .Smart{
-            position: fixed;
-            right:0;
-            bottom:0;
-            width:100px;
-        }
-        .Smart img{
-            width:50%;
-            vertical-align: top;
-        } */
+              position: fixed;
+              right:0;
+              bottom:0;
+              width:100px;
+          }
+          .Smart img{
+              width:50%;
+              vertical-align: top;
+          } */
 </style>

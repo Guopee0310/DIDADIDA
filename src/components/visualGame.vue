@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
   <div
     class="wrapper"
     @mousemove="getClient"
@@ -12,8 +12,23 @@
       ref="shadow"
     ></div>
   </div>
+</template> -->
+<template>
+  <div class="wrapper">
+    <video
+      :src="require('../assets/video/pexels_videos_2556894 (1080p).mp4')"
+      class="videoShark"
+      autoplay
+      loop
+      v-if="autoPlayTrue"
+    ></video>
+    <div
+      class="shadow"
+      :style="{ transform: `translate(${x}px, ${y}px)` }"
+      ref="shadow"
+    ></div>
+  </div>
 </template>
-
 <script>
 export default {
   name: "product",
@@ -22,6 +37,7 @@ export default {
       x: 0,
       y: 0,
       change: false,
+      autoPlayTrue: false,
     };
   },
   methods: {
@@ -31,12 +47,6 @@ export default {
 
       this.x = x;
       this.y = y;
-
-      if (y > -600) {
-        this.change = true;
-      } else {
-        this.change = false;
-      }
 
       //   this.$refs.shadow.style.transform = 'translate(' + x + 'px, ' + y + 'px)';
     },
@@ -48,6 +58,9 @@ export default {
   mounted() {
     document.addEventListener("mousemove", this.getClient);
     document.addEventListener("touchmove", this.getClient);
+    if (this.$route.fullPath === "/?section=hide") {
+      this.autoPlayTrue = true;
+    }
   },
 };
 </script>
@@ -60,8 +73,8 @@ body {
 
 .wrapper {
   height: 80vh;
-  background-image: url("https://churaumi.okinawa/userfiles/images/area/kuroshio/media-03.jpg");
-  background-size: cover;
+  // background-image: url("https://churaumi.okinawa/userfiles/images/area/kuroshio/media-03.jpg");
+  // background-size: cover;
   position: relative;
   overflow: hidden;
   background-position: top;
@@ -78,7 +91,11 @@ body {
   left: 50%;
   top: 50%;
   transform: translateX(-50%) translateY(-50%);
-  background-image: radial-gradient(circle at center, transparent, #000000bf 10%);
+  background-image: radial-gradient(
+    circle at center,
+    transparent,
+    #000000bf 10%
+  );
 }
 </style>
 
