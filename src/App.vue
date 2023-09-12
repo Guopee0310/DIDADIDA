@@ -65,24 +65,28 @@ export default {
           title: "面包屑",
         },
       ],
-      showWave: true,
+      showWave: false,
     };
   },
+
   components: {
     header1,
     footer1,
     wave,
     login,
   },
+  mounted() {
+    this.$router.push("/?section=hide");
+  },
   watch: {
     "$route.query"(nVal, oVal) {
       console.log("新的值", nVal.section);
       console.log("舊的值", oVal.section);
 
-      if (nVal.section == "hide") {
-        this.showWave = false;
-      } else {
+      if (nVal.section !== "hide") {
         this.showWave = true;
+      } else {
+        this.showWave = false;
       }
     },
   },

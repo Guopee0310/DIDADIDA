@@ -97,7 +97,7 @@ export default {
         {
           imageSrc: require("../assets/images/dolphin_pillow.jpg"),
           titleName: "大型乾燥花束【和煦】配飾",
-          prodPrice: "500",
+          prodPrice: "1000",
           tag: "配飾",
         },
         {
@@ -133,7 +133,7 @@ export default {
         {
           imageSrc: require("../assets/images/dolphin_pillow.jpg"),
           titleName: "大型乾燥花束【和煦】配飾",
-          prodPrice: "500",
+          prodPrice: "600",
           tag: "配飾",
         },
         {
@@ -145,7 +145,7 @@ export default {
         {
           imageSrc: require("../assets/images/dolphin_pillow.jpg"),
           titleName: "大型乾燥花束【和煦】配飾",
-          prodPrice: "500",
+          prodPrice: "800",
           tag: "配飾",
         },
         {
@@ -207,7 +207,7 @@ export default {
         {
           imageSrc: require("../assets/images/dolphin_pillow.jpg"),
           titleName: "大型乾燥花束【和煦】配飾",
-          prodPrice: "500",
+          prodPrice: "1000",
           tag: "配飾",
         },
         {
@@ -243,7 +243,7 @@ export default {
         {
           imageSrc: require("../assets/images/dolphin_pillow.jpg"),
           titleName: "大型乾燥花束【和煦】配飾",
-          prodPrice: "500",
+          prodPrice: "600",
           tag: "配飾",
         },
         {
@@ -255,7 +255,7 @@ export default {
         {
           imageSrc: require("../assets/images/dolphin_pillow.jpg"),
           titleName: "大型乾燥花束【和煦】配飾",
-          prodPrice: "500",
+          prodPrice: "800",
           tag: "配飾",
         },
         {
@@ -266,11 +266,20 @@ export default {
         },
       ],
       pageSize: 8,
+      selectFirst: false,
+      priceFirst: false,
+      chooseItem2: [],
+      selectOption: "",
+      getPriceOption: "",
+      getPage: 1,
     };
   },
   mounted() {
-    // 初始加载时只显示前八个项目
-    this.chooseItem = this.cardsAll.slice(0, this.pageSize);
+    this.cardsAll.sort((a, b) => {
+      return parseInt(a.prodPrice) - parseInt(b.prodPrice);
+    });
+    this.chooseItem2 = this.cardsAll;
+    this.chooseItem = this.chooseItem2.slice(0, this.pageSize);
   },
   props: {
     msg1: [String, Number],
@@ -283,36 +292,223 @@ export default {
   computed: {},
   methods: {
     getClass(data) {
-      // alert(data)
-      this.chooseItem = [];
-      for (let i = 0; i < this.cardsAll.length; i++) {
-        if (data == "所有商品") {
-          this.chooseItem = this.cardsAll;
-        } else if (this.cardsAll[i].tag === data) {
-          this.chooseItem.push(this.cardsAll[i]);
+      this.selectOption = data;
+      if (data == "所有商品") {
+        this.chooseItem = this.cardsAll;
+        if (this.getPriceOption == "由高到低") {
+          this.chooseItem.sort((a, b) => {
+            return parseInt(b.prodPrice) - parseInt(a.prodPrice);
+          });
+          this.chooseItem2 = this.chooseItem;
+          this.chooseItem = this.chooseItem2.slice(0, this.pageSize);
+        } else if (this.getPriceOption == "由低到高") {
+          this.chooseItem.sort((a, b) => {
+            return parseInt(a.prodPrice) - parseInt(b.prodPrice);
+          });
+          this.chooseItem2 = this.chooseItem;
+          this.chooseItem = this.chooseItem2.slice(0, this.pageSize);
+        } else if (this.getPriceOption == "") {
+          this.chooseItem.sort((a, b) => {
+            return parseInt(a.prodPrice) - parseInt(b.prodPrice);
+          });
+          this.chooseItem2 = this.chooseItem;
+          this.chooseItem = this.chooseItem2.slice(0, this.pageSize);
+        }
+      } else {
+        this.chooseItem = [];
+        for (let i = 0; i < this.cardsAll.length; i++) {
+          if (this.cardsAll[i].tag === data) {
+            this.chooseItem.push(this.cardsAll[i]);
+            if (this.getPriceOption == "由高到低") {
+              this.chooseItem.sort((a, b) => {
+                return parseInt(b.prodPrice) - parseInt(a.prodPrice);
+              });
+              this.chooseItem2 = this.chooseItem;
+              this.chooseItem = this.chooseItem2.slice(0, this.pageSize);
+            } else if (this.getPriceOption == "由低到高") {
+              this.chooseItem.sort((a, b) => {
+                return parseInt(a.prodPrice) - parseInt(b.prodPrice);
+              });
+              this.chooseItem2 = this.chooseItem;
+              this.chooseItem = this.chooseItem2.slice(0, this.pageSize);
+            } else if (this.getPriceOption == "") {
+              this.chooseItem.sort((a, b) => {
+                return parseInt(a.prodPrice) - parseInt(b.prodPrice);
+              });
+              this.chooseItem2 = this.chooseItem;
+              this.chooseItem = this.chooseItem2.slice(0, this.pageSize);
+            }
+          }
         }
       }
     },
     getPrice(data) {
-      this.chooseItem = [...this.cardsAll]; // 克隆 cardsAll 数组
-
-      if (data === "由低到高") {
-        this.chooseItem.sort((a, b) => {
-          return parseInt(a.prodPrice) - parseInt(b.prodPrice);
-        });
-      } else if (data === "由高到低") {
-        this.chooseItem.sort((a, b) => {
+      this.getPriceOption = data;
+      if (!this.selectOption) {
+        this.chooseItem2 = this.cardsAll;
+        this.chooseItem2.sort((a, b) => {
           return parseInt(b.prodPrice) - parseInt(a.prodPrice);
         });
+        console.log(this.chooseItem2);
+        this.chooseItem = this.chooseItem2.slice(0, this.pageSize);
+      } else if (this.selectOption == "所有商品") {
+        this.chooseItem2 = this.cardsAll;
+        this.chooseItem2.sort((a, b) => {
+          return parseInt(b.prodPrice) - parseInt(a.prodPrice);
+        });
+        console.log(this.chooseItem2);
+        this.chooseItem = this.chooseItem2.slice(0, this.pageSize);
+      } else if (this.selectOption !== "所有商品") {
+        this.chooseItem2 = [];
+        for (let i = 0; i < this.cardsAll.length; i++) {
+          if (this.cardsAll[i].tag === this.selectOption) {
+            this.chooseItem2.push(this.cardsAll[i].tag);
+            this.chooseItem = this.chooseItem2;
+          }
+          if (this.getPriceOption == "由高到低") {
+            this.chooseItem.sort((a, b) => {
+              return parseInt(b.prodPrice) - parseInt(a.prodPrice);
+            });
+            this.chooseItem2 = this.chooseItem;
+            this.chooseItem = this.chooseItem2.slice(0, this.pageSize);
+          } else if (this.getPriceOption == "由低到高") {
+            this.chooseItem.sort((a, b) => {
+              return parseInt(a.prodPrice) - parseInt(b.prodPrice);
+            });
+            this.chooseItem2 = this.chooseItem;
+            this.chooseItem = this.chooseItem2.slice(0, this.pageSize);
+          }
+        }
       }
-    },
-    updatePage(page) {
-      // console.log(page);
 
-      const startIdx = (page - 1) * this.pageSize;
-      const endIdx = startIdx + this.pageSize;
-      this.chooseItem = this.cardsAll.slice(startIdx, endIdx);
+      // if (data == "由高到低") {
+      //   this.chooseItem.sort((a, b) => {
+      //     return parseInt(b.prodPrice) - parseInt(a.prodPrice);
+      //   });
+      // } else if (data == "由低到高") {
+      //   this.chooseItem.sort((a, b) => {
+      //     return parseInt(a.prodPrice) - parseInt(b.prodPrice);
+      //   });
+      // }
     },
+    updatePage(data) {
+      this.getPage = data;
+      const optionStartIdx = (this.getPage - 1) * this.pageSize;
+      const optionEndIdx = optionStartIdx + this.pageSize;
+      console.log(optionStartIdx);
+      console.log(optionEndIdx);
+      console.log(this.chooseItem2);
+      this.chooseItem = this.chooseItem2.slice(optionStartIdx, optionEndIdx);
+    },
+    // getClass(data) {
+    //   this.chooseItem2 = [];
+    //   this.selectOption = data;
+    //   this.selectFirst = true;
+    //   if (this.priceFirst && this.selectFirst) {
+    //     this.priceFirst = false;
+
+    //     for (let i = 0; i < this.cardsAll.length; i++) {
+    //       if (data == "所有商品") {
+    //         this.chooseItem2 = this.cardsAll;
+    //         this.chooseItem = this.chooseItem2;
+    //         console.log("301行成功觸發", this.cardsAll);
+    //         // this.chooseItem = this.chooseItem2.slice(0, this.pageSize);
+    //       } else if (this.cardsAll[i].tag === data) {
+    //         this.chooseItem2.push(this.cardsAll[i]);
+    //         this.chooseItem = this.chooseItem2;
+    //         // this.chooseItem = this.chooseItem2.slice(0, this.pageSize);
+    //       }
+    //     }
+    //   } else {
+    //     for (let i = 0; i < this.cardsAll.length; i++) {
+    //       if (data == "所有商品") {
+    //         this.chooseItem2 = this.cardsAll;
+    //         this.chooseItem = this.chooseItem2;
+    //         // this.chooseItem = this.chooseItem2.slice(0, this.pageSize);
+    //       } else if (this.cardsAll[i].tag === data) {
+    //         this.chooseItem2.push(this.cardsAll[i]);
+    //         this.chooseItem = this.chooseItem2;
+    //         // this.chooseItem = this.chooseItem2.slice(0, this.pageSize);
+    //       }
+    //     }
+    //   }
+    // },
+
+    // getPrice(data) {
+    //   this.priceFirst = true;
+    //   this.getPriceOption = data;
+    //   if (!this.selectFirst) {
+    //     this.chooseItem2 = this.cardsAll;
+    //     console.log("311行 直接篩選價錢的陣列", this.chooseItem2);
+    //   } else {
+    //     this.chooseItem2 = this.chooseItem;
+    //     console.log(this.chooseItem2);
+    //   }
+
+    //   if (data === "由低到高") {
+    //     this.chooseItem2.sort((a, b) => {
+    //       return parseInt(a.prodPrice) - parseInt(b.prodPrice);
+    //     });
+    //   } else if (data === "由高到低") {
+    //     this.chooseItem2.sort((a, b) => {
+    //       return parseInt(b.prodPrice) - parseInt(a.prodPrice);
+    //     });
+    //   } else if (data === "價格") {
+    //     this.chooseItem2 = this.cardsAll;
+    //   }
+    //   this.chooseItem = this.chooseItem2;
+    //   // const optionStartIdx = (this.getPage - 1) * this.pageSize;
+    //   // const optionEndIdx = optionStartIdx + this.pageSize;
+    //   // console.log("起始位置", optionStartIdx);
+    //   // console.log("結束位置", optionEndIdx);
+    //   // this.chooseItem = this.chooseItem2.slice(optionStartIdx, optionEndIdx);
+    // },
+    // updatePage(page) {
+    //   this.getPage = page;
+    //   if (this.selectFirst && this.priceFirst) {
+    //     this.chooseItem2 = [];
+
+    //     for (let i = 0; i < this.cardsAll.length; i++) {
+    //       if (this.selectOption == "所有商品") {
+    //         this.chooseItem2 = this.cardsAll;
+    //       } else if (this.cardsAll[i].tag === this.selectOption) {
+    //         this.chooseItem2.push(this.cardsAll[i]);
+    //       }
+    //     }
+    //     if (this.getPriceOption === "由低到高") {
+    //       this.chooseItem2.sort((a, b) => {
+    //         return parseInt(a.prodPrice) - parseInt(b.prodPrice);
+    //       });
+    //     } else if (this.getPriceOption === "由高到低") {
+    //       this.chooseItem2.sort((a, b) => {
+    //         return parseInt(b.prodPrice) - parseInt(a.prodPrice);
+    //       });
+    //     }
+    //     const optionStartIdx = (page - 1) * this.pageSize;
+    //     const optionEndIdx = optionStartIdx + this.pageSize;
+    //     this.chooseItem = this.chooseItem2.slice(optionStartIdx, optionEndIdx);
+    //   } else if (this.selectFirst) {
+    //     const selectStartIdx = (page - 1) * this.pageSize;
+    //     const selectEndIdx = selectStartIdx + this.pageSize;
+    //     this.chooseItem2 = [];
+    //     for (let i = 0; i < this.cardsAll.length; i++) {
+    //       if (this.selectOption == "所有商品") {
+    //         this.chooseItem2 = this.cardsAll;
+    //       } else if (this.cardsAll[i].tag === this.selectOption) {
+    //         this.chooseItem2.push(this.cardsAll[i]);
+    //       }
+    //     }
+    //     console.log("起始位置", selectStartIdx);
+    //     console.log("結束位置", selectEndIdx);
+    //     console.log("複製的陣列", this.chooseItem2);
+    //     this.chooseItem = this.chooseItem2.slice(selectStartIdx, selectEndIdx);
+    //     console.log(this.chooseItem2);
+    //   } else {
+    //     const startIdx = (page - 1) * this.pageSize;
+    //     const endIdx = startIdx + this.pageSize;
+    //     this.chooseItem = this.cardsAll.slice(startIdx, endIdx);
+    //   }
+    // },
   },
 };
 </script>
