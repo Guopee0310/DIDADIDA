@@ -3,11 +3,13 @@
         <select name="" id="itemClass" v-model="selectedItem">
             <option v-for="(prod, proIndex) in prodSelect" :key="proIndex">{{ prod.option }}</option>
         </select>
+        <span><i class="fa-solid fa-chevron-down" style="color: #eeeeee;"></i></span>
     </div>
     <div class="select">
         <select v-model="selectedPrice">
             <option v-for="(cost, costIndex) in costSelect" :key="costIndex">{{ cost.option }}</option>
         </select>
+        <span><i class="fa-solid fa-chevron-down" style="color: #eeeeee;"></i></span>
     </div>
 </template>
 
@@ -66,12 +68,15 @@ select::-ms-expand {
 /* Custom Select wrapper */
 .select {
     @include btnWidth;
+
+    span {
+        position: absolute;
+        top: 8px;
+        right: 18px;
+        font-size: 15px;
+    }
 }
 
-.select::after {
-    @include arrow;
-    padding: 1px 16px;
-}
 
 option {
     background-color: #2c3e50;

@@ -48,6 +48,7 @@ export default {
                       : this.$route.path == "/ticket"
                         ? "購買票券"
                         : "";
+
     },
     h2Name() {
       return this.$route.path == "/product"
