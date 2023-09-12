@@ -3,38 +3,38 @@
     <LoadingBox />
   </div>
   <div v-else>
-    <visual />
+    <visual v-if="!loading" />
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import visual from '../components/visualGame.vue'
+import visual from "../components/visualGame.vue";
 import LoadingBox from "../components/loading.vue";
 export default {
-  name: 'HomeView',
+  name: "HomeView",
   data() {
     return {
       loading: true,
-      animationDuration: 4200
-    }
+      animationDuration: 4200,
+    };
   },
   methods: {
     fetchProd() {
-      fetch('https://fakestoreapi.com/products')
-        .then(res => res.json())
+      fetch("https://fakestoreapi.com/products")
+        .then((res) => res.json())
         // .then(json => {
         //   this.loading = false
         // })
-        .catch(error => {
+        .catch((error) => {
           console.error(error);
           this.loading = false;
         });
-    }
+    },
   },
   components: {
     visual,
-    LoadingBox: LoadingBox
+    LoadingBox: LoadingBox,
   },
   mounted() {
     this.fetchProd();
@@ -42,5 +42,5 @@ export default {
       this.loading = false;
     }, this.animationDuration);
   },
-}
+};
 </script>
