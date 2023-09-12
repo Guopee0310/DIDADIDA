@@ -20,6 +20,7 @@
       class="videoShark"
       autoplay
       loop
+      v-if="autoPlayTrue"
     ></video>
     <div
       class="shadow"
@@ -57,7 +58,9 @@ export default {
   mounted() {
     document.addEventListener("mousemove", this.getClient);
     document.addEventListener("touchmove", this.getClient);
-    this.autoPlayTrue = true;
+    if (this.$route.fullPath === "/?section=hide") {
+      this.autoPlayTrue = true;
+    }
   },
 };
 </script>
