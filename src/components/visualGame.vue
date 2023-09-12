@@ -15,18 +15,9 @@
 </template> -->
 <template>
   <div class="wrapper">
-    <video
-      :src="require('../assets/video/pexels_videos_2556894 (1080p).mp4')"
-      class="videoShark"
-      autoplay
-      loop
-      v-if="autoPlayTrue"
-    ></video>
-    <div
-      class="shadow"
-      :style="{ transform: `translate(${x}px, ${y}px)` }"
-      ref="shadow"
-    ></div>
+    <video :src="require('../assets/video/pexels_videos_2556894 (1080p).mp4')" class="videoShark" autoplay loop
+      v-if="autoPlayTrue"></video>
+    <div class="shadow" :style="{ transform: `translate(${x}px, ${y}px)` }" ref="shadow"></div>
   </div>
 </template>
 <script>
@@ -71,6 +62,10 @@ body {
   padding: 0;
 }
 
+.videoShark {
+  width: 100%;
+}
+
 .wrapper {
   height: 80vh;
   // background-image: url("https://churaumi.okinawa/userfiles/images/area/kuroshio/media-03.jpg");
@@ -80,6 +75,7 @@ body {
   background-position: top;
   transition: 2s;
 }
+
 .wrapperChangePositionLeft {
   background-position: bottom;
 }
@@ -91,11 +87,9 @@ body {
   left: 50%;
   top: 50%;
   transform: translateX(-50%) translateY(-50%);
-  background-image: radial-gradient(
-    circle at center,
-    transparent,
-    #000000bf 10%
-  );
+  background-image: radial-gradient(circle at center,
+      transparent,
+      #000000bf 10%);
 }
 </style>
 
