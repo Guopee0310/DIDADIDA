@@ -1,6 +1,7 @@
 <template>
   <header1></header1>
   <wave v-if="showWave"></wave>
+  <helper></helper>
   <login></login>
 
   <!-- 
@@ -57,6 +58,7 @@ import header1 from "@/components/header.vue";
 import footer1 from "@/components/footer.vue";
 import wave from "@/components/wave.vue";
 import login from "@/components/login.vue";
+import helper from "@/components/helper.vue";
 export default {
   data() {
     return {
@@ -74,6 +76,7 @@ export default {
     footer1,
     wave,
     login,
+    helper,
   },
   mounted() {
     // this.$router.push("/?section=hide");
