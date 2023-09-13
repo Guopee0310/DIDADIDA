@@ -80,7 +80,7 @@ export default {
           : this.$route.path == "/news"
             ? "/all_images/news_banner.jpg"
             : this.$route.path == "/about"
-              ? "/all_images/cenote-280252_1920.jpg"
+              ? "/all_images/banner/about.jpg"
               : this.$route.path == "/member"
                 ? "/all_images/cenote-280252_1920.jpg"
                 : this.$route.path == "/guide"
