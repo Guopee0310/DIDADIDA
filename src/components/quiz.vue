@@ -64,13 +64,14 @@ export default {
       return index + 1;
     },
     getPoint() {
-      if (this.chooseAns.length < 10) {
+      if (this.chooseAns.length < this.quesAndAns.length) {
         this.notEnough = true;
-      } else if (this.chooseAns.length >= 10) {
+      } else if (this.chooseAns.length >= this.quesAndAns.length) {
         this.showScore = true;
       }
       for (let i = 0; i < this.chooseAns.length; i++) {
         if (this.chooseAns[i][1] == this.chooseAns[i][2]) {
+          // [[1,2,3].[4,5,6],[7,8,9]]
           this.totalScore++;
         }
       }
