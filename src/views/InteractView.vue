@@ -4,14 +4,16 @@
       <span @click="showQuiz">問卷</span>
       <span @click="showLaba">拉霸</span>
     </div>
-    <quiz v-if="isQuiz"></quiz>
+
+    <quiz2 v-if="isQuiz"></quiz2>
     <laba v-if="isLaba"></laba>
     <button @click="this.$route.path('../')"></button>
   </div>
 </template>
 <script>
-import quiz from "../components/quiz.vue";
+import quiz2 from "../components/quiz2.vue";
 import laba from "../components/laba.vue";
+
 export default {
   name: "product",
   data() {
@@ -22,8 +24,8 @@ export default {
   },
   props: {},
   components: {
-    quiz,
     laba,
+    quiz2,
   },
   computed: {},
   watch: {},

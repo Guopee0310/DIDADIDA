@@ -1,21 +1,25 @@
 <template>
   <div class="quizAll">
-    <div
-      v-for="(i, i_index) in quesAndAns"
-      class="singleQuestion"
-      :class="{ alreadyClick: i.clicked }"
-      :key="i_index"
-    >
-      <div>
-        <span>第{{ computedIndex(i.index) }}題</span>{{ i.question }}
+    <div v-if="randomTrue">
+      <div
+        v-for="(i, index) in currentFiveQuesAndAns"
+        :key="i.index"
+        class="singleQuestion"
+        :class="{ alreadyClick: index.clicked }"
+      >
+        <div>
+          <span>第{{ computedIndex(index) }}題</span>{{ i.question }}
+        </div>
+        <div class="theAns">
+          <div @click="test(i.ans, i.index, $event)">是</div>
+          <div @click="test(i.ans, i.index, $event)">否</div>
+        </div>
       </div>
-      <div class="theAns">
-        <div @click="test(i.ans, i.index, $event)">是</div>
-        <div @click="test(i.ans, i.index, $event)">否</div>
-      </div>
+      <div>{{ currentFiveQuesAndAns }}</div>
+      <div class="alreadyBtn" @click="getPoint" v-if="!showScore">完成問卷</div>
     </div>
-    <div class="alreadyBtn" @click="getPoint" v-if="!showScore">完成問卷</div>
-    <div v-if="showScore">獲得{{ totalScore }}點 紅利點數</div>
+
+    <!-- <div v-if="showScore">獲得{{ totalScore }}點 紅利點數</div> -->
     <div v-if="notEnough">
       還沒完成<span @click="notEnough = false">X</span>
     </div>
@@ -26,6 +30,7 @@
 export default {
   data() {
     return {
+      currentFiveQuesAndAns: [],
       quesAndAns: [
         { question: "鯊魚是魚嗎", ans: "是", index: 0 },
         { question: "魚是魚嗎", ans: "是", index: 1 },
@@ -38,13 +43,37 @@ export default {
         { question: "美人魚是魚嗎", ans: "是", index: 8 },
         { question: "綿羊是魚嗎", ans: "否", index: 9 },
       ],
+      fiveQuesAndAns: [],
       totalScore: 0,
       chooseAns: [],
       showScore: false,
       notEnough: false,
+      randomTrue: false,
     };
   },
+  mounted() {
+    this.shuffleArray();
+  },
   methods: {
+    shuffleArray() {
+      // 使用 Fisher-Yates 随机排序算法对数组进行重新排列
+      for (let i = this.quesAndAns.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [this.quesAndAns[i], this.quesAndAns[j]] = [
+          this.quesAndAns[j],
+          this.quesAndAns[i],
+        ];
+      }
+      this.randomTrue = true;
+      this.generateCurrentFiveQues(); // 生成当前显示的五题
+    },
+    generateCurrentFiveQues() {
+      this.currentFiveQuesAndAns = this.quesAndAns.slice(0, 5);
+      // 重置 clicked 属性
+      this.currentFiveQuesAndAns.forEach((item) => {
+        item.clicked = false;
+      });
+    },
     test(ans, index, e) {
       console.log(ans);
       console.log(index);
@@ -57,22 +86,23 @@ export default {
       }
       this.chooseAns.push([index, ans, e.target.innerText]);
       console.log(this.chooseAns);
-      this.quesAndAns[index].clicked = true; // 设置 clicked 为 true
+      this.currentFiveQuesAndAns[index].clicked = true; // 设置 clicked 为 true
     },
     computedIndex(index) {
       // 计算属性，返回索引加一的值
       return index + 1;
     },
     getPoint() {
-      if (this.chooseAns.length < this.quesAndAns.length) {
+      if (this.chooseAns.length < 5) {
         this.notEnough = true;
-      } else if (this.chooseAns.length >= this.quesAndAns.length) {
+      } else if (this.chooseAns.length >= 5) {
         this.showScore = true;
       }
       for (let i = 0; i < this.chooseAns.length; i++) {
         if (this.chooseAns[i][1] == this.chooseAns[i][2]) {
           // [[1,2,3].[4,5,6],[7,8,9]]
           this.totalScore++;
+          this.$store.state.quizScore++;
         }
       }
     },
