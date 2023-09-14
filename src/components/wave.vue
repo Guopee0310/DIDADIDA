@@ -46,6 +46,8 @@ export default {
                     ? "互動遊戲"
                     : this.$route.path == "/faq"
                       ? "常見問答"
+                      : this.$route.path == "/shoppingcart"
+                        ? "購物車"
                       : this.$route.path == "/ticket"
                         ? "購買票券"
                         : "";
@@ -68,6 +70,8 @@ export default {
                     ? "Interaction"
                     : this.$route.path == "/faq"
                       ? "FAQs"
+                      : this.$route.path == "/shoppingcart"
+                        ? "Cart"
                       : this.$route.path == "/ticket"
                         ? "Tickets"
                         : "";
@@ -88,6 +92,8 @@ export default {
                   : this.$route.path == "/interact"
                     ? "/all_images/cenote-280252_1920.jpg"
                     : this.$route.path == "/faq"
+                    ? "/all_images/cenote-280252_1920.jpg"
+                    : this.$route.path == "/shoppingcart"
                       ? "/all_images/cenote-280252_1920.jpg"
                       : this.$route.path == "/ticket"
                         ? "/all_images/cenote-280252_1920.jpg"
