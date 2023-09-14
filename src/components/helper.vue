@@ -1,24 +1,14 @@
 <template>
   <div class="helperAll">
-    <img
-      :src="require('@/assets/images/dr.dolphin.jpg')"
-      alt=""
-      @click="moveShowText"
-    />
+    <img :src="require('../../public/all_images/doctor dida.png')" alt="" @click="moveShowText" />
   </div>
-  <div
-    class="showWindow"
-    :style="{ transform: showText ? 'translateX(0px)' : 'translateX(1000px)' }"
-  >
+  <div class="showWindow" :style="{ transform: showText ? 'translateX(0px)' : 'translateX(1000px)' }">
     <div class="windowBtnAll">
       <div @click="moveAddress">地址</div>
       <div @click="moveWeatherMax">降雨機率</div>
       <div @click="moveMaxT">今日溫度</div>
     </div>
-    <div
-      class="sayHelloTxt"
-      v-if="!(showAddress || showWeatherMax || showMaxT)"
-    >
+    <div class="sayHelloTxt" v-if="!(showAddress || showWeatherMax || showMaxT)">
       {{ sayHelloTxt }}
     </div>
     <div v-if="showAddress">地址 : {{ locationName }}</div>
@@ -114,16 +104,18 @@ export default {
 .helperAll {
   position: fixed;
   right: 30px;
-  top: 70%;
+  top: 80%;
   width: 50px;
   height: 50px;
   z-index: 50;
   cursor: pointer;
+
   img {
     width: 100%;
     border-radius: 50px;
   }
 }
+
 .showWindow {
   width: 400px;
   height: 400px;
@@ -136,6 +128,7 @@ export default {
   z-index: 51;
   transition: 1s;
   transform: translateX(1000px);
+
   .windowBtnAll {
     div {
       @include selectBtn;
@@ -145,6 +138,7 @@ export default {
       margin: 5px 5px;
     }
   }
+
   .sayHelloTxt {
     border-top: 1px black;
     margin: 5px 5px;

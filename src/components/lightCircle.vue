@@ -37,7 +37,7 @@ export default {
     background: linear-gradient(
       0deg,
       rgba(63, 249, 220, 0.1) 33%,
-      rgba(63, 249, 220, 1) 100%
+      rgb(85, 153, 176) 100%
     );
     animation: spin 4s linear 0s infinite;
     .circle-core {
