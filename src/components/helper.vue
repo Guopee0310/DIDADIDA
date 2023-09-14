@@ -1,7 +1,7 @@
 <template>
   <div class="helperAll">
     <img
-      :src="require('../assets/images/dolphin_pillow.jpg')"
+      :src="require('@/assets/images/dr.dolphin.jpg')"
       alt=""
       @click="moveShowText"
     />
@@ -15,8 +15,11 @@
       <div @click="moveWeatherMax">降雨機率</div>
       <div @click="moveMaxT">今日溫度</div>
     </div>
-    <div v-if="!(showAddress || showWeatherMax || showMaxT)">
-      您好,今天想問點什麼
+    <div
+      class="sayHelloTxt"
+      v-if="!(showAddress || showWeatherMax || showMaxT)"
+    >
+      {{ sayHelloTxt }}
     </div>
     <div v-if="showAddress">地址 : {{ locationName }}</div>
     <div v-if="showWeatherMax">
@@ -43,6 +46,7 @@ export default {
       showAddress: false,
       showWeatherMax: false,
       showMaxT: false,
+      sayHelloTxt: "",
     };
   },
   mounted() {
@@ -69,10 +73,24 @@ export default {
   methods: {
     moveShowText() {
       this.showText = !this.showText;
+      if (!this.showText) {
+        this.sayHelloTxt = "";
+      }
       this.showWeatherMax = false;
       this.showMaxT = false;
       this.showAddress = false;
+      let hello = ["您", "好", "今", "天", "想", "問", "點", "什", "麼", "?"];
+      this.sayHelloTxt = ""; // 將文字重置為空字串
+
+      let intervalId = setInterval(() => {
+        if (hello.length > 0) {
+          this.sayHelloTxt += hello.shift();
+        } else {
+          clearInterval(intervalId);
+        }
+      }, 150);
     },
+
     moveAddress() {
       this.showWeatherMax = false;
       this.showMaxT = false;
@@ -103,24 +121,33 @@ export default {
   cursor: pointer;
   img {
     width: 100%;
+    border-radius: 50px;
   }
 }
 .showWindow {
-  width: 200px;
-  height: 500px;
+  width: 400px;
+  height: 400px;
   position: fixed;
   top: 40%;
   right: 100px;
   border: 1px black solid;
   background-color: white;
+  border-radius: 10px;
   z-index: 51;
   transition: 1s;
   transform: translateX(1000px);
   .windowBtnAll {
     div {
       @include selectBtn;
-      margin: 5px 0px;
+      width: fit-content;
+      display: flex;
+      text-align: center;
+      margin: 5px 5px;
     }
+  }
+  .sayHelloTxt {
+    border-top: 1px black;
+    margin: 5px 5px;
   }
 }
 </style>
