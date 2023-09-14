@@ -50,13 +50,14 @@
         </div>
 
         <!-- 會員登入 -->
+        <div class="icons">
         <span @click="this.$store.state.storeShowLogin = true">
           <i class="fa-solid fa-user" style="color: #eee"></i>
         </span>
 
         <!-- 購物車 -->
         <router-link to="/shoppingcart"><i class="fa-solid fa-cart-shopping" style="color: #eee"></i></router-link>
-
+      </div>
         <!-- 語言切換 -->
         <div class="select">
           <select v-model="selectName">
@@ -253,6 +254,9 @@ select {
   /* appearance: none; */
   /* -moz-appearance: none; */
   width: 150px;
+}
+.icons{
+  cursor: pointer;
 }
 
 .select {
