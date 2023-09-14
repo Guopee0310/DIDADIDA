@@ -5,11 +5,13 @@
       <span @click="showLaba">拉霸</span>
     </div>
     <quiz v-if="isQuiz"></quiz>
+    <laba v-if="isLaba"></laba>
     <button @click="this.$route.path('../')"></button>
   </div>
 </template>
 <script>
 import quiz from "../components/quiz.vue";
+import laba from "../components/laba.vue";
 export default {
   name: "product",
   data() {
@@ -21,6 +23,7 @@ export default {
   props: {},
   components: {
     quiz,
+    laba,
   },
   computed: {},
   watch: {},

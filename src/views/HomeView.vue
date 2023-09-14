@@ -10,24 +10,28 @@
     <!-- banner + open time -->
     <div class="banner">
       <p>DIDA DIDA海洋公園</p>
-      <div class="open">
-        <span>營業時間</span>
-        <span>09:00-17:00</span>
-        <svg
-          x="0px"
-          y="0px"
-          width="200px"
-          height="15px"
-          viewBox="0 0 399.6 15.9"
-        >
-          <polyline
-            class="op_line"
-            points="0.1,5.5 58,15.4 118.4,5.5 189.2,5.5 258.7,10.4 368.3,0.5 399.5,7.9 "
-          />
-        </svg>
-        <span>最後入場</span>
-        <span>16:00</span>
-      </div>
+      <lightCircle>
+        <template v-slot:circle>
+          <div class="open">
+            <span>營業時間</span>
+            <span>09:00-17:00</span>
+            <svg
+              x="0px"
+              y="0px"
+              width="200px"
+              height="15px"
+              viewBox="0 0 399.6 15.9"
+            >
+              <polyline
+                class="op_line"
+                points="0.1,5.5 58,15.4 118.4,5.5 189.2,5.5 258.7,10.4 368.3,0.5 399.5,7.9 "
+              />
+            </svg>
+            <span>最後入場</span>
+            <span>16:00</span>
+          </div>
+        </template>
+      </lightCircle>
     </div>
 
     <!-- 今日入園人數 -->
@@ -124,6 +128,7 @@
 import visual from "../components/visualGame.vue";
 import LoadingBox from "../components/loading.vue";
 import h3Title from "../components/h3TitleComponent.vue";
+import lightCircle from "../components/lightCircle.vue";
 export default {
   name: "HomeView",
   data() {
@@ -191,6 +196,7 @@ export default {
     visual,
     LoadingBox: LoadingBox,
     h3Title,
+    lightCircle,
   },
   mounted() {
     this.fetchProd();
@@ -239,18 +245,18 @@ export default {
 
     // open time
     .open {
-      background-color: #232d47;
+      // background-color: #232d47;
       width: 250px;
       height: 250px;
       border-radius: 50%;
-      margin: -150px 70px;
+      // margin: -150px 70px;
       position: relative;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       text-align: center;
-
+      z-index: 3;
       svg polyline {
         fill: none;
       }
