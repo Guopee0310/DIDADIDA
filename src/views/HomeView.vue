@@ -15,17 +15,8 @@
           <div class="open">
             <span>營業時間</span>
             <span>09:00-17:00</span>
-            <svg
-              x="0px"
-              y="0px"
-              width="200px"
-              height="15px"
-              viewBox="0 0 399.6 15.9"
-            >
-              <polyline
-                class="op_line"
-                points="0.1,5.5 58,15.4 118.4,5.5 189.2,5.5 258.7,10.4 368.3,0.5 399.5,7.9 "
-              />
+            <svg x="0px" y="0px" width="200px" height="15px" viewBox="0 0 399.6 15.9">
+              <polyline class="op_line" points="0.1,5.5 58,15.4 118.4,5.5 189.2,5.5 258.7,10.4 368.3,0.5 399.5,7.9 " />
             </svg>
             <span>最後入場</span>
             <span>16:00</span>
@@ -45,14 +36,13 @@
       <div class="drop">
         <div class="wave water"></div>
         <div class="wave water"></div>
-        <div class="wave water"></div>
+        <!-- <div class="wave water"></div> -->
       </div>
-      <p>75%</p>
+      <p>35%</p>
     </div>
 
     <!-- 營業資訊 -->
     <div class="ticket">
-      <!-- <h3>營業資訊</h3> -->
       <h3Title>
         <template v-slot:h3>
           <h3>營業資訊</h3>
@@ -72,7 +62,6 @@
 
     <!-- 交通指南 -->
     <div class="map">
-      <!-- <h3>交通指南</h3> -->
       <h3Title>
         <template v-slot:h3>
           <h3>交通指南</h3>
@@ -80,17 +69,13 @@
       </h3Title>
       <iframe
         src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14468.996712784081!2d121.2250227!3d24.9576355!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x346823ea50c732a5%3A0x1b5e6ee66e9fec49!2z57ev6IKyVGliYU1l6ZmE6Kit5Lit5aOi6IG36KiT5Lit5b-D!5e0!3m2!1szh-TW!2stw!4v1690272123794!5m2!1szh-TW!2stw"
-        style="border: 0"
-        allowfullscreen=""
-        loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade"
-      >
+        style="border: 0" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
       </iframe>
       <div class="text"></div>
     </div>
 
+    <!-- 熱賣商品 -->
     <div class="product">
-      <!-- <h3>熱賣商品</h3> -->
       <h3Title>
         <template v-slot:h3>
           <h3>熱賣商品</h3>
@@ -228,6 +213,7 @@ export default {
   h3 {
     @include h3Title();
   }
+
   // banner
   .banner {
     background-image: url(../../public/all_images/banner/index.png);
@@ -257,6 +243,7 @@ export default {
       justify-content: center;
       text-align: center;
       z-index: 3;
+
       svg polyline {
         fill: none;
       }
@@ -307,6 +294,53 @@ export default {
       border: 10px solid #57a3f3;
       border-top-right-radius: 0;
       transform: rotate(-45deg);
+
+      position: relative;
+      overflow: hidden;
+
+      .wave {
+        transform: rotate(45deg);
+        position: absolute;
+        bottom: 0px;
+        left: 0;
+        right: 0;
+        width: 100%;
+        height: 100px;
+        background: url(../../public/all_images/wave.png);
+        background-size: 500px 100px;
+      }
+
+      .wave.water {
+        animation: wave 9s linear infinite;
+        animation-delay: 0s;
+        margin: 0 -55px;
+        opacity: 1;
+      }
+
+      .wave.water:nth-child(2) {
+        animation: wave 9s linear infinite;
+        opacity: 0.6;
+        animation-delay: -3s;
+        bottom: 12px;
+      }
+
+      // .wave.water:nth-child(3) {
+      //   animation: wave 20s linear infinite;
+      //   opacity: 0.3;
+      //   animation-delay: -5s;
+      //   bottom: 25px;
+      //   margin: 0 -30px;
+      // }
+
+      @keyframes wave {
+        0% {
+          background-position-x: 0;
+        }
+
+        100% {
+          background-position-x: 1000px;
+        }
+      }
     }
 
     p {
