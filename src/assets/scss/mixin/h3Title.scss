@@ -1,0 +1,12 @@
+@mixin h3Title() {
+  width: 100px;
+  margin: 30px auto;
+  font-size: 25px;
+  border-bottom: 3.5px solid #9fbdce;
+  &::after {
+    content: "";
+    border: 2px solid #9fbdce;
+    display: block;
+    margin: 0 0 6px;
+  }
+}
