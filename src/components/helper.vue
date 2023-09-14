@@ -1,7 +1,7 @@
 <template>
   <div class="helperAll">
     <img
-      :src="require('@/assets/images/dr.dolphin.jpg')"
+      :src="require('/public/all_images/dr.dolphin.png')"
       alt=""
       @click="moveShowText"
     />
