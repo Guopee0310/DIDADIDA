@@ -81,10 +81,7 @@ export default {
 </script>
 <style scoped lang="scss">
 .quizAll {
-  width: 80%;
-  margin: 20px auto;
-  border: 1px red solid;
-  padding: 20px;
+  @include LQ;
   display: flex;
   flex-direction: column;
   .showMsg {

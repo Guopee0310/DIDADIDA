@@ -1,87 +1,77 @@
 <template>
-  <div class="header" id="header">
-    <div id="app">
-      <div
-        class="wrap"
-        :style="{
-          'background-color': headerColor,
-          top: 0,
-          left: 0,
-          'z-index': 10,
-          width: '100%',
-        }"
-      >
-        <!-- logo -->
-        <div class="logo">
-          <router-link to="/" @click="hideBanner()"
-            ><img src="../assets/images/dida_logo.png"
-          /></router-link>
-        </div>
+  <div class="header">
+    <div class="wrap" :style="{
+      'background-color': headerColor,
+      top: 0,
+      left: 0,
+      'z-index': 10,
+      width: '100%',
+    }">
 
-        <nav class="main-nav">
-          <!-- 關於我們 -->
-          <div class="main-menu">
-            <router-link to="/about">關於我們</router-link>
-            <ul class="sub-menu">
-              <li><router-link to="/faq">常見問題</router-link></li>
-              <li><router-link to="/guide">園區導覽</router-link></li>
-              <li><router-link to="/interact">互動遊戲</router-link></li>
-            </ul>
-          </div>
-
-          <!-- 最新消息 -->
-          <div class="main-menu">
-            <router-link to="/news">最新消息</router-link>
-            <ul class="sub-menu">
-              <li><router-link to="/#">表演資訊</router-link></li>
-              <li><router-link to="/#">優惠消息</router-link></li>
-            </ul>
-          </div>
-
-          <div class="main-menu">
-            <router-link to="/explore">探索海洋生物</router-link>
-            <ul class="sub-menu">
-              <li><router-link to="/#">表層海洋帶</router-link></li>
-              <li><router-link to="/#">中層海洋帶</router-link></li>
-              <li><router-link to="/#">深層海洋帶</router-link></li>
-              <li><router-link to="/#">深淵層海洋帶</router-link></li>
-              <li><router-link to="/#">超深淵層海洋帶</router-link></li>
-            </ul>
-          </div>
-
-          <div class="main-menu">
-            <a>DIDA商城</a>
-            <ul class="sub-menu">
-              <li><router-link to="/product">DIDA購物</router-link></li>
-              <li><router-link to="/ticket">DIDA購票</router-link></li>
-            </ul>
-          </div>
-
-          <!-- 會員登入 -->
-          <span @click="this.$store.state.storeShowLogin = true">
-            <i class="fa-solid fa-user" style="color: #eee"></i>
-          </span>
-
-          <!-- 購物車 -->
-          <router-link to="/shoppingcart"
-            ><i class="fa-solid fa-cart-shopping" style="color: #eee"></i
-          ></router-link>
-
-          <!-- 語言切換 -->
-          <div class="select">
-            <select v-model="selectName">
-              <option v-for="item in language" :value="item.option">
-                {{ item.option }}
-              </option>
-            </select>
-          </div>
-        </nav>
+      <!-- logo -->
+      <div class="logo">
+        <router-link to="/" @click="hideBanner()"><img src="../assets/images/dida_logo.png" /></router-link>
       </div>
 
-      <!-- <a href="#" class="Smart">
+      <nav class="main-nav">
+        <!-- 關於我們 -->
+        <div class="main-menu">
+          <router-link to="/about">{{ menuTitle.about }}</router-link>
+          <ul class="sub-menu">
+            <li v-for="aboutSub in aboutSub" key="aboutSub">
+              <router-link :to="aboutSub.link">{{ aboutSub.name }}</router-link>
+            </li>
+          </ul>
+        </div>
+
+        <!-- 最新消息 -->
+        <div class="main-menu">
+          <router-link to="/news">{{ menuTitle.news }}</router-link>
+        </div>
+
+        <!-- 探索海洋生物 -->
+        <div class="main-menu">
+          <router-link to="/explore">{{ menuTitle.animal }}</router-link>
+          <ul class="sub-menu">
+            <li v-for="animalSub in animalSub" key="animalSub">
+              <router-link :to="animalSub.link">{{ animalSub.name }}</router-link>
+            </li>
+          </ul>
+        </div>
+
+        <!-- DIDA商城 -->
+        <div class="main-menu">
+          <a>{{ menuTitle.buy }}</a>
+          <ul class="sub-menu">
+            <li v-for="buySub in buySub" key="buySub">
+              <router-link :to="buySub.link">{{ buySub.name }}</router-link>
+            </li>
+          </ul>
+        </div>
+
+        <!-- 會員登入 -->
+        <span @click="this.$store.state.storeShowLogin = true">
+          <i class="fa-solid fa-user" style="color: #eee"></i>
+        </span>
+
+        <!-- 購物車 -->
+        <router-link to="/shoppingcart"><i class="fa-solid fa-cart-shopping" style="color: #eee"></i></router-link>
+
+        <!-- 語言切換 -->
+        <div class="select">
+          <select v-model="selectName">
+            <option v-for="item in language" :value="item.option">
+              {{ item.option }}
+            </option>
+          </select>
+        </div>
+      </nav>
+    </div>
+
+    <!-- <a href="#" class="Smart">
                   <img src="imgs/問號.png" alt="智能小幫手">
               </a> -->
-    </div>
+
   </div>
 </template>
 
@@ -95,6 +85,28 @@ export default {
     return {
       headerColor: "rgba(35, 45, 71, 0)",
       headerPosition: "relative",
+      menuTitle: {
+        about: '關於我們',
+        news: '最新消息',
+        animal: '探索海洋生物',
+        buy: 'DIDA商城',
+      },
+      aboutSub: [
+        { link: '/faq', name: '常見問題' },
+        { link: '/guide', name: '園區導覽' },
+        { link: '/interact', name: '互動遊戲' },
+      ],
+      animalSub: [
+        { link: '/#', name: '表層海洋帶' },
+        { link: '/#', name: '中層海洋帶' },
+        { link: '/#', name: '深層海洋帶' },
+        { link: '/#', name: '深淵層海洋帶' },
+        { link: '/#', name: '超深淵層海洋帶' },
+      ],
+      buySub: [
+        { link: '/product', name: 'DIDA購物' },
+        { link: '/ticket', name: 'DIDA購票' },
+      ],
       icon: [
         {
           link: "#",
@@ -109,19 +121,12 @@ export default {
         },
       ],
       selectName: "繁體中文",
-
       language: [
         {
           option: "繁體中文",
         },
         {
-          option: "簡體中文",
-        },
-        {
-          option: "韓文",
-        },
-        {
-          option: "日文",
+          option: "英文",
         },
       ],
     };
@@ -175,6 +180,7 @@ export default {
   right: 0;
   z-index: 3;
   transition: 1s;
+
   // logo 樣式
   .logo img {
     vertical-align: top;
