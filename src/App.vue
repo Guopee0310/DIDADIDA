@@ -80,7 +80,7 @@ export default {
     helper,
   },
   mounted() {
-    this.$router.push("/?section=hide");
+    // this.$router.push("/?section=hide");
   },
   watch: {
     "$route.query"(nVal, oVal) {
