@@ -1,40 +1,78 @@
 <template>
-  <div class="wrap" id="header">
-    <div id="app">
-      <div class="header">
-        <div class="logo">
-          <router-link to="/" @click="hideBanner()"
-            ><img src="../assets/images/dida_logo.png"
-          /></router-link>
-        </div>
+  <div class="header">
+    <div class="wrap" :style="{
+      'background-color': headerColor,
+      top: 0,
+      left: 0,
+      'z-index': 10,
+      width: '100%',
+    }">
 
-        <nav class="main-nav">
-          <router-link to="/about">關於我們</router-link>
-          <router-link to="/news">最新消息</router-link>
-          <router-link to="/explore">探索海洋生物</router-link>
-          <!-- @click="toFooter()" -->
-          <router-link to="/product">DIDA商城</router-link>
-          <span @click="this.$store.state.storeShowLogin = true"
-            ><i class="fa-solid fa-user" style="color: #eeeeee"></i
-          ></span>
-          <span
-            ><i class="fa-solid fa-cart-shopping" style="color: #eeeeee"></i
-          ></span>
-
-          <div class="select">
-            <select v-model="selectName">
-              <option v-for="item in language" :value="item.option">
-                {{ item.option }}
-              </option>
-            </select>
-          </div>
-        </nav>
+      <!-- logo -->
+      <div class="logo">
+        <router-link to="/" @click="hideBanner()"><img src="../assets/images/dida_logo.png" /></router-link>
       </div>
 
-      <!-- <a href="#" class="Smart">
-                <img src="imgs/問號.png" alt="智能小幫手">
-            </a> -->
+      <nav class="main-nav">
+        <!-- 關於我們 -->
+        <div class="main-menu">
+          <router-link to="/about">{{ menuTitle.about }}</router-link>
+          <ul class="sub-menu">
+            <li v-for="aboutSub in aboutSub" key="aboutSub">
+              <router-link :to="aboutSub.link">{{ aboutSub.name }}</router-link>
+            </li>
+          </ul>
+        </div>
+
+        <!-- 最新消息 -->
+        <div class="main-menu">
+          <router-link to="/news">{{ menuTitle.news }}</router-link>
+        </div>
+
+        <!-- 探索海洋生物 -->
+        <div class="main-menu">
+          <router-link to="/explore">{{ menuTitle.animal }}</router-link>
+          <ul class="sub-menu">
+            <li v-for="animalSub in animalSub" key="animalSub">
+              <router-link :to="animalSub.link">{{ animalSub.name }}</router-link>
+            </li>
+          </ul>
+        </div>
+
+        <!-- DIDA商城 -->
+        <div class="main-menu">
+          <a>{{ menuTitle.buy }}</a>
+          <ul class="sub-menu">
+            <li v-for="buySub in buySub" key="buySub">
+              <router-link :to="buySub.link">{{ buySub.name }}</router-link>
+            </li>
+          </ul>
+        </div>
+
+        <!-- 會員登入 -->
+        <div class="icons">
+        <span @click="this.$store.state.storeShowLogin = true">
+          <i class="fa-solid fa-user" style="color: #eee"></i>
+        </span>
+
+        <!-- 購物車 -->
+        <router-link to="/shoppingcart"><i class="fa-solid fa-cart-shopping" style="color: #eee"></i></router-link>
+      </div>
+        <!-- 語言切換 -->
+        <div class="select">
+          <select v-model="selectName">
+            <option v-for="item in language" :value="item.option">
+              {{ item.option }}
+            </option>
+          </select>
+        </div>
+      </nav>
     </div>
+
+    <!-- <a href="#" class="Smart">
+                  <img src="imgs/問號.png" alt="智能小幫手">
+              </a> -->
+
   </div>
 </template>
 
@@ -46,6 +84,30 @@ export default {
   components: {},
   data() {
     return {
+      headerColor: "rgba(35, 45, 71, 0)",
+      headerPosition: "relative",
+      menuTitle: {
+        about: '關於我們',
+        news: '最新消息',
+        animal: '探索海洋生物',
+        buy: 'DIDA商城',
+      },
+      aboutSub: [
+        { link: '/faq', name: '常見問題' },
+        { link: '/guide', name: '園區導覽' },
+        { link: '/interact', name: '互動遊戲' },
+      ],
+      animalSub: [
+        { link: '/#', name: '表層海洋帶' },
+        { link: '/#', name: '中層海洋帶' },
+        { link: '/#', name: '深層海洋帶' },
+        { link: '/#', name: '深淵層海洋帶' },
+        { link: '/#', name: '超深淵層海洋帶' },
+      ],
+      buySub: [
+        { link: '/product', name: 'DIDA購物' },
+        { link: '/ticket', name: 'DIDA購票' },
+      ],
       icon: [
         {
           link: "#",
@@ -60,31 +122,39 @@ export default {
         },
       ],
       selectName: "繁體中文",
-
       language: [
         {
           option: "繁體中文",
         },
         {
-          option: "簡體中文",
-        },
-        {
-          option: "韓文",
-        },
-        {
-          option: "日文",
+          option: "英文",
         },
       ],
     };
   },
   watch: {
     "$route.query"(nVal, oVal) {
-      console.log(nVal);
+      //   console.log(nVal);
     },
+  },
+  mounted() {
+    window.addEventListener("scroll", this.handleScroll);
+  },
+  beforeDestroy() {
+    window.removeEventListener("scroll", this.handleScroll);
   },
   methods: {
     hideBanner() {
       this.$router.push({ path: "/", query: { section: "hide" } });
+    },
+    handleScroll(event) {
+      console.log(event);
+      console.log(window.scrollY);
+      if (window.scrollY == 0) {
+        this.headerColor = "rgba(35, 45, 71, 0)";
+      } else {
+        this.headerColor = "rgba(35, 45, 71, 1)";
+      }
     },
     // toFooter(){
     //     this.$router.push({ path: '/product', query: { article: 'footer' } });
@@ -96,17 +166,29 @@ export default {
 <style scoped lang="scss">
 // @import "~@/assets/scss/base/reset.scss";
 
-.wrap {
+.header {
   width: 100%;
   margin: auto;
 }
 
-.header {
+.wrap {
   display: flex;
   justify-content: space-between;
-  padding: 10px;
-  background-color: #232d47;
+  padding: 10px 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 3;
+  transition: 1s;
 
+  // logo 樣式
+  .logo img {
+    vertical-align: top;
+    width: 80px;
+  }
+
+  // 選單樣式
   .main-nav {
     display: flex;
     justify-content: center;
@@ -116,19 +198,48 @@ export default {
       @include selectBtn;
     }
   }
+
+  .main-nav a {
+    line-height: 1.8;
+    padding: 10px;
+    text-decoration: none;
+    color: white;
+    font-size: map-get($fontSizes, "nav");
+  }
+
+  .main-menu {
+    position: relative;
+    margin: 0 10px;
+    display: flex;
+    justify-content: center;
+  }
+
+  // 子選單樣式
+  .sub-menu {
+    display: none;
+    position: absolute;
+    top: 40px;
+    padding: 10px 0;
+    background-color: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(3px);
+    border-radius: 3px;
+
+    li:nth-child(4) {
+      width: 140px;
+    }
+  }
+
+  .main-menu:hover .sub-menu {
+    display: block;
+  }
+
+  .sub-menu a:hover {
+    color: map-get($colors, hoverColor);
+  }
 }
 
-.logo img {
-  vertical-align: top;
-  width: 80px;
-}
-
-.main-nav a {
-  line-height: 40px;
-  padding: 10px;
-  text-decoration: none;
-  color: white;
-  font-size: map-get($fontSizes, "nav");
+.wrap.show {
+  background-color: map-get($colors, mainColor);
 }
 
 select {
@@ -139,10 +250,13 @@ select {
   font-size: map-get($fontSizes, "p");
   cursor: pointer;
   /* background-image:url(imgs/Vector.png) ;
-            background-position: right center; */
+              background-position: right center; */
   /* appearance: none; */
   /* -moz-appearance: none; */
   width: 150px;
+}
+.icons{
+  cursor: pointer;
 }
 
 .select {
@@ -161,7 +275,7 @@ select:hover {
 /* 選擇狀態的樣式 */
 select:focus {
   outline: none;
-  border: 2px solid #3498db;
+  border: 2px solid map-get($colors, hoverColor);
 }
 
 /* 下拉選項樣式 */
@@ -172,18 +286,18 @@ option {
 
 /* 選擇的下拉選項樣式 */
 option:checked {
-  background-color: #3498db;
+  background-color: map-get($colors, hoverColor);
   color: #fff;
 }
 
 /* .Smart{
-            position: fixed;
-            right:0;
-            bottom:0;
-            width:100px;
-        }
-        .Smart img{
-            width:50%;
-            vertical-align: top;
-        } */
+              position: fixed;
+              right:0;
+              bottom:0;
+              width:100px;
+          }
+          .Smart img{
+              width:50%;
+              vertical-align: top;
+          } */
 </style>

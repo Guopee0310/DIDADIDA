@@ -1,6 +1,7 @@
 <template>
     <footer id="footer">
         <div class="footer_wrap">
+            <!-- 關於我們 -->
             <div class="footer_item">
                 <h3>{{ footerTitle.about }}</h3>
                 <ul>
@@ -9,6 +10,7 @@
 
                 </ul>
             </div>
+            <!-- 最新消息 -->
             <div class="footer_item">
                 <h3>{{ footerTitle.news }}</h3>
                 <ul>
@@ -17,6 +19,7 @@
                     }}</router-link></li>
                 </ul>
             </div>
+            <!-- 探索海洋生物 -->
             <div class="footer_item">
                 <h3>{{ footerTitle.animal }}</h3>
                 <ul>
@@ -24,6 +27,7 @@
                         animal.name }}</router-link></li>
                 </ul>
             </div>
+            <!-- DIDA購物 -->
             <div class="footer_item">
                 <h3>{{ footerTitle.buy }}</h3>
                 <ul>
@@ -31,18 +35,20 @@
                     }}</router-link></li>
                 </ul>
             </div>
+            <!-- 社群媒體 -->
             <div class="footer_item">
                 <h3>{{ footerTitle.media }}</h3>
                 <div>
                     <span v-for="media in footer_mediaArray" :key="media"><router-link :to="media.link"><i
-                                :class="media.name"></i></router-link></span>
+                                :class="media.class" :style="media.style"></i></router-link></span>
                 </div>
             </div>
+            <!-- 裝飾 -->
             <div class="deco-right">
-                <img src="../../public/all_images/footer/deco_fish.png" alt="">
+                <img src="../../public/all_images/deco/deco_fish.png" alt="">
             </div>
             <div class="deco-left">
-                <img src="../../public/all_images/footer/deco_coral.png" alt="">
+                <img src="../../public/all_images/deco/deco_coral.png" alt="">
             </div>
         </div>
         <div class="copyright">
@@ -91,9 +97,9 @@ export default {
                 { link: '/ticket', name: 'DIDA購票' },
             ],
             footer_mediaArray: [
-                { link: '#', name: 'fa-brands fa-square-facebook" style="color: #eeeeee;' },
-                { link: '#', name: 'fa-brands fa-instagram" style="color: #eeeeee;' },
-                { link: '#', name: 'fa-brands fa-youtube" style="color: #eeeeee;' },
+                { link: '#', class: 'fa-brands fa-square-facebook', style: 'color: #eeeeee' },
+                { link: '#', class: 'fa-brands fa-instagram', style: 'color: #eeeeee' },
+                { link: '#', class: 'fa-brands fa-youtube', style: 'color: #eeeeee' },
             ],
             copyright: '本網站為緯育TibaMe_前端設計工程師班CHD103學員專題成果作品,本平台僅供學習、展示之用。若有抵觸有關著作權, 或有第三人主張侵害智慧財產權等情事, 均由學員負法律上責任, 緯育公司概不負責。若有侵權疑慮, 您可以私訊[緯育TibaMe], 後續會由專人協助處理。'
         }
@@ -131,7 +137,7 @@ footer {
         }
 
         a:hover {
-            color: map-get($colors, h2Blue);
+            color: map-get($colors, hoverColor);
             transition: .3s;
         }
 
@@ -152,7 +158,7 @@ footer {
 
     .footer_item {
         span {
-            margin-right: 5px;
+            margin-right: 8px;
             font-size: 17px;
         }
 

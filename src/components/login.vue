@@ -1,11 +1,6 @@
 <template>
   <div v-if="this.$store.state.storeShowLogin">
-    <div
-      class="backplate"
-      @click="
-        this.$store.state.storeShowLogin = !this.$store.state.storeShowLogin
-      "
-    ></div>
+    <div class="backplate" @click="hideLogin"></div>
 
     <div
       class="container"
@@ -14,39 +9,82 @@
     >
       <!-- signup固定填單 -->
       <div class="form-container sign-up-container">
-        <form action="#">
+        <form>
           <h1>創建帳號</h1>
           <div class="social-container">
             <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
             <a href="#" class="social"><i class="fa-brands fa-google"></i></a>
-            <a href="#" class="social"
-              ><i class="fa-brands fa-square-instagram"></i
-            ></a>
+            <a href="#" class="social"><i class="fa-brands fa-instagram fa-lg"></i></a>
           </div>
           <span>或使用電子郵件登入</span>
-          <input type="text" placeholder="姓名" />
-          <input type="email" placeholder="電子信箱" />
-          <input type="password" placeholder="密碼" />
+          <input
+            type="text"
+            v-model="name"
+            placeholder="姓名"
+            @input="testNameSignUp"
+            :class="{ checkInput: !isValidName, correctInput: isValidName }"
+          />
+          <span v-if="!isValidName" class="caution">請輸入有效姓名</span>
+
+          <input
+            type="email"
+            v-model="email"
+            placeholder="電子信箱"
+            @input="testMailSignUp"
+            :class="{ checkInput: !isValidEmail, correctInput: isValidEmail }"
+          />
+          <span v-if="!isValidEmail" class="caution">請輸入有效的信箱</span>
+
+          <input
+            type="password"
+            v-model="password"
+            placeholder="密碼"
+            @input="testPassWordSignUp"
+            :class="{
+              checkInput: !isValidPassword,
+              correctInput: isValidPassword,
+            }"
+          />
+          <span v-if="!isValidPassword" class="caution"
+            >密碼長度需在8~12個字之間,至少含一個英文字母(不分大小寫)</span
+          >
+
           <button>註冊</button>
         </form>
       </div>
 
       <!-- signin固定填單 -->
       <div class="form-container sign-in-container">
-        <form action="#">
+        <form @submit.prevent="submitSignInForm">
           <h1>登入</h1>
           <div class="social-container">
             <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
             <a href="#" class="social"><i class="fa-brands fa-google"></i></a>
-            <a href="#" class="social"
-              ><i class="fa-brands fa-square-instagram"></i
-            ></a>
+            <a href="#" class="social"><i class="fa-brands fa-instagram fa-lg"></i></a>
           </div>
           <span>或使用您的帳號</span>
-          <input type="email" placeholder="電子信箱" />
-          <input type="password" placeholder="密碼" />
+          <input
+            type="email"
+            v-model="signInEmail"
+            placeholder="電子信箱"
+            :class="{
+              checkInput: !signInNotCorrect,
+              correctInput: signInNotCorrect,
+            }"
+          />
+          <span v-if="!signInNotCorrect" class="caution">信箱或密碼錯誤</span>
+          <input
+            type="password"
+            v-model="signInPassword"
+            placeholder="密碼"
+            :class="{
+              checkInput: !signInNotCorrect,
+              correctInput: signInNotCorrect,
+            }"
+          />
+          <span v-if="!signInNotCorrect" class="caution">信箱或密碼錯誤</span>
           <a href="#">忘記密碼?</a>
-          <button>登入</button>
+          <button @click="signInMem">登入</button>
         </form>
       </div>
       <!-- 滑蓋區 -->
@@ -75,12 +113,102 @@ export default {
   data() {
     return {
       isSignUp: false,
-      showLogin: true,
+      memArr: [],
+      name: "",
+      email: "",
+      password: "",
+      signInEmail: "",
+      signInPassword: "",
+      isValidName: true,
+      isValidEmail: true,
+      isValidPassword: true,
+      signInNotCorrect: true,
+      testEmail: "123@gmail.com",
+      testPassword: "123",
+      showAllPage: true,
     };
   },
+  mounted() {},
   methods: {
+    hideLogin() {
+      this.$store.state.storeShowLogin = !this.$store.state.storeShowLogin;
+      this.name = "";
+      this.email = "";
+      this.password = "";
+      this.isValidName = true;
+      this.isValidEmail = true;
+      this.isValidPassword = true;
+      this.signInEmail = "";
+      this.signInPassword = "";
+      this.signInNotCorrect = true;
+    },
+    signInMem() {
+      if (
+        this.signInEmail !== this.testEmail ||
+        this.signInPassword !== this.testPassword
+      ) {
+        this.signInNotCorrect = false;
+      } else {
+        this.$store.state.storeShowLogin = !this.$store.state.storeShowLogin;
+      }
+    },
+    testNameSignUp() {
+      let regex = /^[\u4e00-\u9fa5]{2,4}$/;
+      this.isValidName = regex.test(this.name);
+    },
+    testMailSignUp() {
+      let regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+      this.isValidEmail = regex.test(this.email);
+    },
+    testPassWordSignUp() {
+      let regex = /^(?=.*[a-zA-Z]).{8,12}$/;
+      this.isValidPassword = regex.test(this.password);
+    },
     toggleSignUp() {
       this.isSignUp = !this.isSignUp;
+      if (!this.isSignUp) {
+        this.name = "";
+        this.email = "";
+        this.password = "";
+        this.isValidName = true;
+        this.isValidEmail = true;
+        this.isValidPassword = true;
+      } else {
+        this.signInEmail = "";
+        this.signInPassword = "";
+        this.signInNotCorrect = true;
+      }
+    },
+    validateName() {
+      // 正则表达式示例：只包含字母和空格的姓名
+      var regex = /^[A-Za-z\s]+$/;
+      this.isValidName = regex.test(this.name);
+    },
+    validateEmail() {
+      // 正则表达式示例：验证电子邮件地址
+      var regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+      this.isValidEmail = regex.test(this.email);
+    },
+    validatePassword() {
+      // 正则表达式示例：密码包含字母、数字和特殊字符
+      var regex = /^(?=.*[a-zA-Z]).{8,12}$/;
+      this.isValidPassword = regex.test(this.password);
+    },
+    submitSignUpForm() {
+      this.validateName();
+      this.validateEmail();
+      this.validatePassword();
+
+      // 在这里执行注册逻辑
+      if (this.isValidName && this.isValidEmail && this.isValidPassword) {
+        // 执行注册逻辑
+        // ...
+      }
+    },
+    submitSignInForm() {
+      // 在这里执行登录逻辑
+      // 使用 this.signInEmail 和 this.signInPassword 进行验证和登录
+      // ...
     },
   },
 };
@@ -93,7 +221,12 @@ export default {
 * {
   box-sizing: border-box;
 }
-
+.checkInput {
+  border: 2px red solid;
+}
+.correctInput:focus {
+  border: 2px black solid;
+}
 body {
   background: #f6f5f7;
   display: flex;
@@ -122,7 +255,9 @@ h1 {
 h2 {
   text-align: center;
 }
-
+.caution {
+  color: red;
+}
 p {
   font-size: 14px;
   font-weight: 100;
@@ -186,6 +321,11 @@ input {
   padding: 12px 15px;
   margin: 8px 0;
   width: 100%;
+}
+input:focus {
+  outline: none; /* 去掉外边框 */
+  /* 或者将外边框样式设置为透明 */
+  outline: 2px solid transparent;
 }
 
 .container {

@@ -1,5 +1,5 @@
 <template>
-  <div class="banner_pic">
+  <div class="banner_pic" :style="{ backgroundImage: `url(${banner_pic})` }">
     <div class="bannerTitle">
       <h1>{{ h1Name }}</h1>
       <h2>{{ h2Name }}</h2>
@@ -25,6 +25,7 @@ export default {
     return {
       h1Title: "",
       h2Title: "",
+
     };
   },
   computed: {
@@ -45,9 +46,12 @@ export default {
                     ? "互動遊戲"
                     : this.$route.path == "/faq"
                       ? "常見問答"
+                      : this.$route.path == "/shoppingcart"
+                        ? "購物車"
                       : this.$route.path == "/ticket"
                         ? "購買票券"
                         : "";
+
     },
     h2Name() {
       return this.$route.path == "/product"
@@ -66,8 +70,33 @@ export default {
                     ? "Interaction"
                     : this.$route.path == "/faq"
                       ? "FAQs"
+                      : this.$route.path == "/shoppingcart"
+                        ? "Cart"
                       : this.$route.path == "/ticket"
                         ? "Tickets"
+                        : "";
+    },
+    banner_pic() {
+      return this.$route.path == "/product"
+        ? "/all_images/cenote-280252_1920.jpg"
+        : this.$route.path == "/explore"
+          ? "/all_images/cenote-280252_1920.jpg"
+          : this.$route.path == "/news"
+            ? "/all_images/news_banner.jpg"
+            : this.$route.path == "/about"
+              ? "/all_images/banner/about.jpg"
+              : this.$route.path == "/member"
+                ? "/all_images/cenote-280252_1920.jpg"
+                : this.$route.path == "/guide"
+                  ? "/all_images/guide_banner.jpg"
+                  : this.$route.path == "/interact"
+                    ? "/all_images/cenote-280252_1920.jpg"
+                    : this.$route.path == "/faq"
+                    ? "/all_images/cenote-280252_1920.jpg"
+                    : this.$route.path == "/shoppingcart"
+                      ? "/all_images/cenote-280252_1920.jpg"
+                      : this.$route.path == "/ticket"
+                        ? "/all_images/cenote-280252_1920.jpg"
                         : "";
     },
   },
@@ -81,8 +110,7 @@ body {
 .banner_pic {
   height: 90vh;
   position: relative;
-  background-image: url(../../public/all_images/cenote-280252_1920.jpg);
-  background-position: bottom;
+  background-position: center;
   background-size: cover;
   display: flex;
   justify-content: center;
@@ -94,6 +122,7 @@ body {
     align-items: center;
     flex-direction: column;
     color: map-get($colors, "light");
+    text-shadow: black 0.1em 0.1em 0.2em;
 
     h1 {
       border-bottom: 1px solid map-get($colors, "light");

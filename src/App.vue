@@ -1,6 +1,7 @@
 <template>
   <header1></header1>
   <wave v-if="showWave"></wave>
+  <helper></helper>
   <login></login>
 
   <!-- 
@@ -57,6 +58,7 @@ import header1 from "@/components/header.vue";
 import footer1 from "@/components/footer.vue";
 import wave from "@/components/wave.vue";
 import login from "@/components/login.vue";
+import helper from "@/components/helper.vue";
 export default {
   data() {
     return {
@@ -65,24 +67,29 @@ export default {
           title: "面包屑",
         },
       ],
-      showWave: true,
+      showWave: false,
     };
   },
+
   components: {
     header1,
     footer1,
     wave,
     login,
+    helper,
+  },
+  mounted() {
+    this.$router.push("/?section=hide");
   },
   watch: {
     "$route.query"(nVal, oVal) {
       console.log("新的值", nVal.section);
       console.log("舊的值", oVal.section);
 
-      if (nVal.section == "hide") {
-        this.showWave = false;
-      } else {
+      if (nVal.section !== "hide") {
         this.showWave = true;
+      } else {
+        this.showWave = false;
       }
     },
   },
