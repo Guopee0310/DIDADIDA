@@ -206,17 +206,7 @@ export default {
     };
   },
   methods: {
-    fetchProd() {
-      fetch("https://fakestoreapi.com/products")
-        .then((res) => res.json())
-        // .then(json => {
-        //   this.loading = false
-        // })
-        .catch((error) => {
-          console.error(error);
-          this.loading = false;
-        });
-    },
+
   },
   components: {
     visual,
@@ -226,7 +216,6 @@ export default {
     blingText,
   },
   mounted() {
-    this.fetchProd();
     setTimeout(() => {
       this.loading = false;
     }, this.animationDuration);
