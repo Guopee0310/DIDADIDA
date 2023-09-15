@@ -75,6 +75,7 @@
       :title1="title"
       :post1="post"
       :point1="point"
+      :finalShow1="finalShow"
     ></labaResult>
   </div>
 </template>
@@ -91,6 +92,7 @@ export default {
       title: "",
       post: "",
       point: "",
+      finalShow: false,
       introArr: [
         {
           imgSrc: "../assets/images/dolphin_pillow.jpg",
@@ -151,6 +153,9 @@ export default {
         this.post = this.introArr[3].post;
         this.point = this.introArr[3].point;
       }
+      setTimeout(() => {
+        this.finalShow = true;
+      }, 1000);
     },
   },
   components: {
@@ -170,6 +175,8 @@ export default {
   padding: 50px;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
   .containerPic {
     width: 474px;
     height: 474px;
@@ -208,7 +215,7 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 10px 20px;
+    padding: 10px 200px;
     color: #03e9f4;
     font-size: 16px;
     text-decoration: none;

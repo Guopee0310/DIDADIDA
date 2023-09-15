@@ -1,12 +1,47 @@
 <template>
-  <div>
-    <img :src="require(getSrc)" alt="" />
-    <!-- <img :src="require('../assets/images/dolphin_pillow.jpg')" alt="" /> -->
-  </div>
-  <div>
-    <div>{{ title1 }}是您的幸運星</div>
-    <div>{{ post1 }}</div>
-    <div>您共獲得{{ point1 }}點紅利點數!</div>
+  <div class="controlResult" v-if="title1">
+    <div>
+      <!-- <img :src="require(imgSrcGet)" alt="" /> -->
+      <img
+        :src="require('../assets/images/dolphin_pillow.jpg')"
+        alt=""
+        v-if="this.point1 == '15'"
+        class="isOpacity"
+        :class="{ notOpacity: finalShow1 }"
+      />
+      <img
+        :src="require('../assets/images/dolphin_pillow.jpg')"
+        alt=""
+        v-else-if="this.point1 == '30'"
+        class="isOpacity"
+        :class="{ notOpacity: finalShow1 }"
+      />
+      <img
+        :src="require('../assets/images/dolphin_pillow.jpg')"
+        alt=""
+        v-else-if="this.point1 == '50'"
+        class="isOpacity"
+        :class="{ notOpacity: finalShow1 }"
+      />
+      <img
+        :src="require('../assets/images/dolphin_pillow.jpg')"
+        alt=""
+        v-else-if="this.point1 == '5'"
+        class="isOpacity"
+        :class="{ notOpacity: finalShow1 }"
+      />
+    </div>
+    <div>
+      <div class="isOpacity" :class="{ notOpacity: finalShow1 }">
+        {{ title1 }}是您的幸運星
+      </div>
+      <div class="isOpacity" :class="{ notOpacity: finalShow1 }">
+        {{ post1 }}
+      </div>
+      <div class="isOpacity" :class="{ notOpacity: finalShow1 }">
+        您共獲得{{ point1 }}點紅利點數!
+      </div>
+    </div>
   </div>
 </template>
 
@@ -23,25 +58,44 @@ export default {
       ],
     };
   },
-  props: ["imgSrc1", "title1", "post1", "point1"],
+  props: ["imgSrc1", "title1", "post1", "point1", "finalShow1"],
   methods: {},
   computed: {
     getSrc() {
       //   if (this.point1 == "15") {
       //     return this.imgSrcArr[0];
       //   }
-      return this.point1 == "15"
-        ? this.imgSrcArr[0]
-        : this.point1 == "30"
-        ? this.imgSrcArr[1]
-        : this.point1 == "50"
-        ? this.imgSrcArr[2]
-        : this.point1 == "5"
-        ? this.imgSrcArr[3]
-        : "";
+      //   return this.point1 == "15"
+      //     ? (this.imgSrcGet = this.imgSrcArr[0])
+      //     : this.point1 == "30"
+      //     ? (this.imgSrcGet = this.imgSrcArr[1])
+      //     : this.point1 == "50"
+      //     ? (this.imgSrcGet = this.imgSrcArr[2])
+      //     : this.point1 == "5"
+      //     ? (this.imgSrcGet = this.imgSrcArr[3])
+      //     : "";
     },
   },
   components: {},
 };
 </script>
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.controlResult {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px white solid;
+  color: white;
+  margin: 50px 0px;
+  padding: 20px;
+  .isOpacity {
+    opacity: 0;
+    transition: 1.5s;
+  }
+  .notOpacity {
+    opacity: 1;
+    transition: 1.5s;
+  }
+}
+</style>
