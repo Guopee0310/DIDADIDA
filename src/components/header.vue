@@ -10,7 +10,7 @@
 
       <!-- logo -->
       <div class="logo">
-        <router-link to="/" @click="hideBanner()"><img src="../assets/images/dida_logo.png" /></router-link>
+        <router-link to="/" @click="hideBanner()"><img src="../assets/images/logo_all.svg" /></router-link>
       </div>
 
       <nav class="main-nav">
@@ -152,6 +152,7 @@ export default {
       console.log(window.scrollY);
       if (window.scrollY == 0) {
         this.headerColor = "rgba(35, 45, 71, 0)";
+        
       } else {
         this.headerColor = "rgba(35, 45, 71, 1)";
       }
