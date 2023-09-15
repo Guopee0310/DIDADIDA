@@ -68,7 +68,7 @@ export default {
           title: "面包屑",
         },
       ],
-      showWave: false,
+      // showWave: false,
     };
   },
 
@@ -87,11 +87,16 @@ export default {
       console.log("新的值", nVal.section);
       console.log("舊的值", oVal.section);
 
-      if (nVal.section !== "hide") {
-        this.showWave = true;
-      } else {
-        this.showWave = false;
-      }
+      // if (nVal.section !== "hide") {
+      //   this.showWave = true;
+      // } else {
+      //   this.showWave = false;
+      // }
+    },
+  },
+  computed: {
+    showWave() {
+      return this.$route.name !== "home";
     },
   },
 };
