@@ -15,9 +15,20 @@
 </template> -->
 <template>
   <div class="wrapper">
-    <video :src="require('../assets/video/pexels_videos_2556894 (1080p).mp4')" class="videoShark" autoplay loop
-      v-if="autoPlayTrue"></video>
-    <div class="shadow" :style="{ transform: `translate(${x}px, ${y}px)` }" ref="shadow"></div>
+    <video
+      :src="require('../assets/video/pexels_videos_2556894 (1080p).mp4')"
+      class="videoShark"
+      autoplay
+      loop
+      v-if="autoPlayTrue"
+      :key="aaa"
+      muted
+    ></video>
+    <div
+      class="shadow"
+      :style="{ transform: `translate(${x}px, ${y}px)` }"
+      ref="shadow"
+    ></div>
   </div>
 </template>
 <script>
@@ -28,7 +39,8 @@ export default {
       x: 0,
       y: 0,
       change: false,
-      autoPlayTrue: false,
+      autoPlayTrue: true,
+      aaa: 1,
     };
   },
   methods: {
@@ -49,9 +61,9 @@ export default {
   mounted() {
     document.addEventListener("mousemove", this.getClient);
     document.addEventListener("touchmove", this.getClient);
-    if (this.$route.fullPath === "/?section=hide") {
-      this.autoPlayTrue = true;
-    }
+    // if (this.$route.fullPath === "/?section=hide") {
+    //   this.autoPlayTrue = true;
+    // }
   },
 };
 </script>
@@ -87,9 +99,11 @@ body {
   left: 50%;
   top: 50%;
   transform: translateX(-50%) translateY(-50%);
-  background-image: radial-gradient(circle at center,
-      transparent,
-      #000000bf 10%);
+  background-image: radial-gradient(
+    circle at center,
+    transparent,
+    #000000bf 10%
+  );
 }
 </style>
 
