@@ -16,6 +16,7 @@
 import quiz2 from "../components/quiz2.vue";
 import laba from "../components/laba.vue";
 import interactBtn from "../components/interactBtn.vue";
+
 export default {
   name: "product",
   data() {
