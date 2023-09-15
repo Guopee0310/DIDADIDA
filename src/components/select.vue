@@ -17,7 +17,7 @@ export default {
         return {
             prodSelect: [
                 { option: '所有商品' },
-                { option: '食品' },
+                { option: '抱枕' },
                 { option: '玩偶' },
                 { option: '配飾' },
             ],
@@ -36,14 +36,14 @@ export default {
     emit: ['transferClass', 'transferPrice'],
     watch: {
         selectedItem(newValue, oldValue) {
-            // 在这里可以处理选项变化的逻辑
-            console.log('新选项：', newValue);
+            // 在這裡可以處理選項變化的邏輯
+            console.log('新選項：', newValue);
             console.log('this.selectedItem', this.selectedItem)
             this.$emit('transferClass', this.selectedItem);
         },
         selectedPrice(newValue, oldValue) {
-            // 在这里可以处理选项变化的逻辑
-            console.log('新选项：', newValue);
+            // 在這裡可以處理選項變化的邏輯
+            console.log('新選項：', newValue);
             console.log('this.selectedPrice', this.selectedPrice)
             this.$emit('transferPrice', this.selectedPrice);
         },

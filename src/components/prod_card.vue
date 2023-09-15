@@ -48,50 +48,50 @@ export default {
       cardsAll: [
         {
           imageSrc: require("../assets/images/dolphin_pillow.jpg"),
-          titleName: "大型乾燥花束【和煦】食品",
-          prodPrice: "900",
-          tag: "食品",
+          titleName: "極舒適海豚抱枕",
+          prodPrice: "380",
+          tag: "抱枕",
         },
         {
-          imageSrc: require("../assets/images/dolphin_pillow.jpg"),
-          titleName: "大型乾燥花束【和煦】玩偶",
-          prodPrice: "750",
+          imageSrc: require("../assets/images/whaleshark_doll.png"),
+          titleName: "Q版鯨鯊玩偶",
+          prodPrice: "499",
           tag: "玩偶",
         },
         {
-          imageSrc: require("../assets/images/dolphin_pillow.jpg"),
-          titleName: "大型乾燥花束【和煦】配飾",
-          prodPrice: "500",
+          imageSrc: require("../assets/images/dolphin_doll.png"),
+          titleName: "超可愛海豚寶寶玩偶",
+          prodPrice: "399",
+          tag: "玩偶",
+        },
+        {
+          imageSrc: require("../assets/images/shark_doll.jpg"),
+          titleName: "愛睏a鯊鯊玩偶",
+          prodPrice: "499",
+          tag: "玩偶",
+        },
+        {
+          imageSrc: require("../assets/images/shark_keyring.jpg"),
+          titleName: "鯊鯊吊飾",
+          prodPrice: "160",
           tag: "配飾",
         },
         {
-          imageSrc: require("../assets/images/dolphin_pillow.jpg"),
-          titleName: "大型乾燥花束【和煦】配飾",
-          prodPrice: "500",
-          tag: "配飾",
+          imageSrc: require("../assets/images/Nemo_doll.jpg"),
+          titleName: "Nemo玩偶",
+          prodPrice: "299",
+          tag: "玩偶",
         },
         {
-          imageSrc: require("../assets/images/dolphin_pillow.jpg"),
-          titleName: "大型乾燥花束【和煦】配飾",
-          prodPrice: "500",
-          tag: "配飾",
+          imageSrc: require("../assets/images/sealion_doll.png"),
+          titleName: "Q版海獅玩偶",
+          prodPrice: "499",
+          tag: "玩偶",
         },
         {
-          imageSrc: require("../assets/images/dolphin_pillow.jpg"),
-          titleName: "大型乾燥花束【和煦】配飾",
-          prodPrice: "500",
-          tag: "配飾",
-        },
-        {
-          imageSrc: require("../assets/images/dolphin_pillow.jpg"),
-          titleName: "大型乾燥花束【和煦】食品",
-          prodPrice: "900",
-          tag: "食品",
-        },
-        {
-          imageSrc: require("../assets/images/dolphin_pillow.jpg"),
-          titleName: "大型乾燥花束【和煦】玩偶",
-          prodPrice: "750",
+          imageSrc: require("../assets/images/shark_doll_2.png"),
+          titleName: "Q版鯊鯊",
+          prodPrice: "499",
           tag: "玩偶",
         },
         {
@@ -269,7 +269,7 @@ export default {
     };
   },
   mounted() {
-    // 初始加载时只显示前八个项目
+    // 初始加載時只顯示前八個項目
     this.chooseItem = this.cardsAll.slice(0, this.pageSize);
   },
   props: {
@@ -294,7 +294,7 @@ export default {
       }
     },
     getPrice(data) {
-      this.chooseItem = [...this.cardsAll]; // 克隆 cardsAll 数组
+      this.chooseItem = [...this.cardsAll]; // 克隆 cardsAll 數组
 
       if (data === "由低到高") {
         this.chooseItem.sort((a, b) => {
@@ -333,10 +333,12 @@ export default {
   .pic {
     overflow: hidden;
     margin-bottom: 10px;
+    box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.2)
   }
 
   .pic img {
-    width: 100%;
+    width: 280px;
+    height: 280px;
     vertical-align: top;
     transform: scale(1);
     transition: 0.7s;
@@ -349,7 +351,8 @@ export default {
 
   .name {
     font-size: 17px;
-    margin-bottom: 15px;
+    margin-top: 10px;
+    margin-bottom: 10px;
     line-height: 1.5;
     font-family: Gowun Batang, "Times New Roman", Times, NotoSerifCJKtc-Regular,
       serif;
