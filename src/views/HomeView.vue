@@ -9,14 +9,24 @@
   <div class="index">
     <!-- banner + open time -->
     <div class="banner">
-      <p>DIDA DIDA海洋公園</p>
+      <p><blingText></blingText></p>
+
       <lightCircle>
         <template v-slot:circle>
           <div class="open">
             <span>營業時間</span>
             <span>09:00-17:00</span>
-            <svg x="0px" y="0px" width="200px" height="15px" viewBox="0 0 399.6 15.9">
-              <polyline class="op_line" points="0.1,5.5 58,15.4 118.4,5.5 189.2,5.5 258.7,10.4 368.3,0.5 399.5,7.9 " />
+            <svg
+              x="0px"
+              y="0px"
+              width="200px"
+              height="15px"
+              viewBox="0 0 399.6 15.9"
+            >
+              <polyline
+                class="op_line"
+                points="0.1,5.5 58,15.4 118.4,5.5 189.2,5.5 258.7,10.4 368.3,0.5 399.5,7.9 "
+              />
             </svg>
             <span>最後入場</span>
             <span>16:00</span>
@@ -74,7 +84,11 @@
     <div class="map">
       <iframe
         src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14468.996712784081!2d121.2250227!3d24.9576355!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x346823ea50c732a5%3A0x1b5e6ee66e9fec49!2z57ev6IKyVGliYU1l6ZmE6Kit5Lit5aOi6IG36KiT5Lit5b-D!5e0!3m2!1szh-TW!2stw!4v1690272123794!5m2!1szh-TW!2stw"
-        style="border: 0" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+        style="border: 0"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+      >
       </iframe>
       <div class="text">
         <div class="address">
@@ -132,6 +146,7 @@ import visual from "../components/visualGame.vue";
 import LoadingBox from "../components/loading.vue";
 import h3Title from "../components/h3TitleComponent.vue";
 import lightCircle from "../components/lightCircle.vue";
+import blingText from "../components/blingText.vue";
 export default {
   name: "HomeView",
   data() {
@@ -208,6 +223,7 @@ export default {
     LoadingBox: LoadingBox,
     h3Title,
     lightCircle,
+    blingText,
   },
   mounted() {
     this.fetchProd();

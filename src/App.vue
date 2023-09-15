@@ -59,6 +59,7 @@ import footer1 from "@/components/footer.vue";
 import wave from "@/components/wave.vue";
 import login from "@/components/login.vue";
 import helper from "@/components/helper.vue";
+
 export default {
   data() {
     return {
