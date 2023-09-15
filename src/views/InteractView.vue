@@ -1,8 +1,16 @@
 <template>
   <div class="interact">
     <div class="titleAll">
-      <interactBtn @click="showQuiz" :quiz1="quizz"></interactBtn>
-      <interactBtn @click="showLaba" :laba1="labaa"></interactBtn>
+      <interactBtn
+        @click="showQuiz"
+        :quiz1="quizz"
+        class="titleChangeBtn"
+      ></interactBtn>
+      <interactBtn
+        @click="showLaba"
+        :laba1="labaa"
+        class="titleChangeBtn"
+      ></interactBtn>
       <!-- <span >問卷</span>
       <span >拉霸</span> -->
     </div>
@@ -16,6 +24,7 @@
 import quiz2 from "../components/quiz2.vue";
 import laba from "../components/laba.vue";
 import interactBtn from "../components/interactBtn.vue";
+
 export default {
   name: "product",
   data() {
@@ -50,10 +59,17 @@ export default {
 <style lang="scss" scoped>
 .interact {
   .titleAll {
+    // border: 1px red solid;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     span {
       border: 1px black solid;
       padding: 10px;
       cursor: pointer;
+    }
+    .titleChangeBtn {
+      margin: 15px;
     }
   }
 }

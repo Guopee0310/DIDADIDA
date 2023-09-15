@@ -1,9 +1,6 @@
 <template>
   <div class="select_btn">
-    <prodSelect
-      @transferClass="getClass"
-      @transferPrice="getPrice"
-    ></prodSelect>
+    <prodSelect @transferClass="getClass" @transferPrice="getPrice"></prodSelect>
   </div>
   <div class="card" v-for="i in chooseItem" :key="i.imageSrc">
     <div class="heart">
@@ -48,220 +45,220 @@ export default {
       cardsAll: [
         {
           imageSrc: require("../assets/images/dolphin_pillow.jpg"),
-          titleName: "大型乾燥花束【和煦】食品",
-          prodPrice: "900",
-          tag: "食品",
+          titleName: "極舒適海豚抱枕",
+          prodPrice: "380",
+          tag: "抱枕",
         },
         {
-          imageSrc: require("../assets/images/dolphin_pillow.jpg"),
-          titleName: "大型乾燥花束【和煦】玩偶",
-          prodPrice: "750",
+          imageSrc: require("../assets/images/whaleshark_doll.png"),
+          titleName: "Q版鯨鯊玩偶",
+          prodPrice: "499",
           tag: "玩偶",
         },
         {
-          imageSrc: require("../assets/images/dolphin_pillow.jpg"),
-          titleName: "大型乾燥花束【和煦】配飾",
-          prodPrice: "500",
-          tag: "配飾",
-        },
-        {
-          imageSrc: require("../assets/images/dolphin_pillow.jpg"),
-          titleName: "大型乾燥花束【和煦】配飾",
-          prodPrice: "500",
-          tag: "配飾",
-        },
-        {
-          imageSrc: require("../assets/images/dolphin_pillow.jpg"),
-          titleName: "大型乾燥花束【和煦】配飾",
-          prodPrice: "500",
-          tag: "配飾",
-        },
-        {
-          imageSrc: require("../assets/images/dolphin_pillow.jpg"),
-          titleName: "大型乾燥花束【和煦】配飾",
-          prodPrice: "500",
-          tag: "配飾",
-        },
-        {
-          imageSrc: require("../assets/images/dolphin_pillow.jpg"),
-          titleName: "大型乾燥花束【和煦】食品",
-          prodPrice: "900",
-          tag: "食品",
-        },
-        {
-          imageSrc: require("../assets/images/dolphin_pillow.jpg"),
-          titleName: "大型乾燥花束【和煦】玩偶",
-          prodPrice: "750",
+          imageSrc: require("../assets/images/dolphin_doll.png"),
+          titleName: "超可愛海豚寶寶玩偶",
+          prodPrice: "399",
           tag: "玩偶",
         },
         {
-          imageSrc: require("../assets/images/dolphin_pillow.jpg"),
-          titleName: "大型乾燥花束【和煦】配飾",
-          prodPrice: "1000",
-          tag: "配飾",
-        },
-        {
-          imageSrc: require("../assets/images/dolphin_pillow.jpg"),
-          titleName: "大型乾燥花束【和煦】配飾",
-          prodPrice: "500",
-          tag: "配飾",
-        },
-        {
-          imageSrc: require("../assets/images/dolphin_pillow.jpg"),
-          titleName: "大型乾燥花束【和煦】配飾",
-          prodPrice: "500",
-          tag: "配飾",
-        },
-        {
-          imageSrc: require("../assets/images/dolphin_pillow.jpg"),
-          titleName: "大型乾燥花束【和煦】配飾",
-          prodPrice: "500",
-          tag: "配飾",
-        },
-        {
-          imageSrc: require("../assets/images/dolphin_pillow.jpg"),
-          titleName: "大型乾燥花束【和煦】食品",
-          prodPrice: "900",
-          tag: "食品",
-        },
-        {
-          imageSrc: require("../assets/images/dolphin_pillow.jpg"),
-          titleName: "大型乾燥花束【和煦】玩偶",
-          prodPrice: "750",
+          imageSrc: require("../assets/images/shark_doll.jpg"),
+          titleName: "愛睏a鯊鯊玩偶",
+          prodPrice: "499",
           tag: "玩偶",
         },
         {
-          imageSrc: require("../assets/images/dolphin_pillow.jpg"),
-          titleName: "大型乾燥花束【和煦】配飾",
-          prodPrice: "600",
+          imageSrc: require("../assets/images/shark_keyring.jpg"),
+          titleName: "QQ的鯊鯊鑰匙圈",
+          prodPrice: "160",
           tag: "配飾",
         },
         {
-          imageSrc: require("../assets/images/dolphin_pillow.jpg"),
-          titleName: "大型乾燥花束【和煦】配飾",
-          prodPrice: "500",
-          tag: "配飾",
+          imageSrc: require("../assets/images/Nemo_doll.jpg"),
+          titleName: "Nemo玩偶",
+          prodPrice: "299",
+          tag: "玩偶",
         },
         {
-          imageSrc: require("../assets/images/dolphin_pillow.jpg"),
-          titleName: "大型乾燥花束【和煦】配飾",
-          prodPrice: "800",
-          tag: "配飾",
+          imageSrc: require("../assets/images/sealion_doll.png"),
+          titleName: "Q版海獅玩偶",
+          prodPrice: "499",
+          tag: "玩偶",
         },
         {
-          imageSrc: require("../assets/images/dolphin_pillow.jpg"),
-          titleName: "大型乾燥花束【和煦】配飾",
-          prodPrice: "500",
-          tag: "配飾",
+          imageSrc: require("../assets/images/shark_doll_2.png"),
+          titleName: "Q版鯊鯊玩偶",
+          prodPrice: "499",
+          tag: "玩偶",
+        },
+        {
+          imageSrc: require("../assets/images/loveing_garden_eel.png"),
+          titleName: "戀愛ing花園鰻玩偶",
+          prodPrice: "399",
+          tag: "玩偶",
+        },
+        {
+          imageSrc: require("../assets/images/whale_doll.jpg"),
+          titleName: "勾錐a小鯨魚玩偶",
+          prodPrice: "350",
+          tag: "玩偶",
+        },
+        {
+          imageSrc: require("../assets/images/lantern_fish_doll.jpg"),
+          titleName: "貪吃燈籠魚玩偶",
+          prodPrice: "499",
+          tag: "玩偶",
+        },
+        {
+          imageSrc: require("../assets/images/pufferfish_doll.jpg"),
+          titleName: "愛睏a河豚玩偶",
+          prodPrice: "499",
+          tag: "玩偶",
+        },
+        {
+          imageSrc: require("../assets/images/octopus_doll.jpg"),
+          titleName: "老爺爺章魚玩偶",
+          prodPrice: "399",
+          tag: "玩偶",
+        },
+        {
+          imageSrc: require("../assets/images/sea_turtle_doll.jpg"),
+          titleName: "勾錐a海龜玩偶",
+          prodPrice: "399",
+          tag: "玩偶",
+        },
+        {
+          imageSrc: require("../assets/images/killer_whale_doll.jpg"),
+          titleName: "帥氣a虎鯨玩偶",
+          prodPrice: "499",
+          tag: "玩偶",
+        },
+        {
+          imageSrc: require("../assets/images/stingray_pillow.jpg"),
+          titleName: "極舒適魟魚抱枕",
+          prodPrice: "380",
+          tag: "抱枕",
+        },
+        {
+          imageSrc: require("../assets/images/shark_pillow2.jpg"),
+          titleName: "滿出來鯊鯊抱枕",
+          prodPrice: "660",
+          tag: "抱枕",
+        },
+        {
+          imageSrc: require("../assets/images/shark_pillow.jpg"),
+          titleName: "極舒適鯊魚抱枕",
+          prodPrice: "499",
+          tag: "抱枕",
         },
       ],
       chooseItem: [
         {
-          imageSrc: require("../assets/images/dolphin_pillow.jpg"),
-          titleName: "大型乾燥花束【和煦】食品",
-          prodPrice: "900",
-          tag: "食品",
+          imageSrc: require("../assets/images/seahorse_pillow.jpg"),
+          titleName: "極舒適海馬抱枕",
+          prodPrice: "499",
+          tag: "抱枕",
         },
         {
-          imageSrc: require("../assets/images/dolphin_pillow.jpg"),
-          titleName: "大型乾燥花束【和煦】玩偶",
-          prodPrice: "750",
-          tag: "玩偶",
+          imageSrc: require("../assets/images/whale_pillow.jpg"),
+          titleName: "極舒適鯨魚抱枕",
+          prodPrice: "499",
+          tag: "抱枕",
         },
         {
-          imageSrc: require("../assets/images/dolphin_pillow.jpg"),
-          titleName: "大型乾燥花束【和煦】配飾",
-          prodPrice: "500",
+          imageSrc: require("../assets/images/seal_pillow.jpg"),
+          titleName: "極舒適海豹抱枕",
+          prodPrice: "499",
+          tag: "抱枕",
+        },
+        {
+          imageSrc: require("../assets/images/killer_whale_pillow.jpg"),
+          titleName: "極舒適虎鯨抱枕",
+          prodPrice: "499",
+          tag: "抱枕",
+        },
+        {
+          imageSrc: require("../assets/images/octopus_pillow.jpg"),
+          titleName: "章魚大海怪抱枕",
+          prodPrice: "650",
+          tag: "抱枕",
+        },
+        {
+          imageSrc: require("../assets/images/starfish_pillow.jpg"),
+          titleName: "極舒適海星抱枕",
+          prodPrice: "499",
+          tag: "抱枕",
+        },
+        {
+          imageSrc: require("../assets/images/jellyfish_pillow.jpg"),
+          titleName: "極舒適水母抱枕",
+          prodPrice: "499",
+          tag: "抱枕",
+        },
+        {
+          imageSrc: require("../assets/images/pufferfish_pillow.jpg"),
+          titleName: "極舒適河豚抱枕",
+          prodPrice: "499",
+          tag: "抱枕",
+        },
+        {
+          imageSrc: require("../assets/images/dolphin_keyring.jpg"),
+          titleName: "QQ的海豚鑰匙圈",
+          prodPrice: "199",
           tag: "配飾",
         },
         {
-          imageSrc: require("../assets/images/dolphin_pillow.jpg"),
-          titleName: "大型乾燥花束【和煦】配飾",
-          prodPrice: "500",
+          imageSrc: require("../assets/images/shark_hat.jpg"),
+          titleName: "動感鯊鯊帽",
+          prodPrice: "399",
           tag: "配飾",
         },
         {
-          imageSrc: require("../assets/images/dolphin_pillow.jpg"),
-          titleName: "大型乾燥花束【和煦】配飾",
-          prodPrice: "500",
+          imageSrc: require("../assets/images/shark_cap.jpg"),
+          titleName: "造型鯊鯊帽",
+          prodPrice: "399",
           tag: "配飾",
         },
         {
-          imageSrc: require("../assets/images/dolphin_pillow.jpg"),
-          titleName: "大型乾燥花束【和煦】配飾",
-          prodPrice: "500",
+          imageSrc: require("../assets/images/whale_shark_purse.jpg"),
+          titleName: "鯨鯊零錢包",
+          prodPrice: "300",
           tag: "配飾",
         },
         {
-          imageSrc: require("../assets/images/dolphin_pillow.jpg"),
-          titleName: "大型乾燥花束【和煦】食品",
-          prodPrice: "900",
-          tag: "食品",
-        },
-        {
-          imageSrc: require("../assets/images/dolphin_pillow.jpg"),
-          titleName: "大型乾燥花束【和煦】玩偶",
-          prodPrice: "750",
-          tag: "玩偶",
-        },
-        {
-          imageSrc: require("../assets/images/dolphin_pillow.jpg"),
-          titleName: "大型乾燥花束【和煦】配飾",
-          prodPrice: "1000",
+          imageSrc: require("../assets/images/starfish_purse.jpg"),
+          titleName: "海星零錢包",
+          prodPrice: "300",
           tag: "配飾",
         },
         {
-          imageSrc: require("../assets/images/dolphin_pillow.jpg"),
-          titleName: "大型乾燥花束【和煦】配飾",
-          prodPrice: "500",
+          imageSrc: require("../assets/images/killer_whale_purse.jpg"),
+          titleName: "虎鯨零錢包",
+          prodPrice: "300",
           tag: "配飾",
         },
         {
-          imageSrc: require("../assets/images/dolphin_pillow.jpg"),
-          titleName: "大型乾燥花束【和煦】配飾",
-          prodPrice: "500",
-          tag: "配飾",
-        },
-        {
-          imageSrc: require("../assets/images/dolphin_pillow.jpg"),
-          titleName: "大型乾燥花束【和煦】配飾",
-          prodPrice: "500",
-          tag: "配飾",
-        },
-        {
-          imageSrc: require("../assets/images/dolphin_pillow.jpg"),
-          titleName: "大型乾燥花束【和煦】食品",
-          prodPrice: "900",
-          tag: "食品",
-        },
-        {
-          imageSrc: require("../assets/images/dolphin_pillow.jpg"),
-          titleName: "大型乾燥花束【和煦】玩偶",
-          prodPrice: "750",
-          tag: "玩偶",
-        },
-        {
-          imageSrc: require("../assets/images/dolphin_pillow.jpg"),
-          titleName: "大型乾燥花束【和煦】配飾",
+          imageSrc: require("../assets/images/whale_purse.jpg"),
+          titleName: "鯨魚零錢包",
           prodPrice: "600",
           tag: "配飾",
         },
         {
-          imageSrc: require("../assets/images/dolphin_pillow.jpg"),
-          titleName: "大型乾燥花束【和煦】配飾",
+          imageSrc: require("../assets/images/fish_kettle.jpg"),
+          titleName: "滿滿的魚水壺",
           prodPrice: "500",
           tag: "配飾",
         },
         {
-          imageSrc: require("../assets/images/dolphin_pillow.jpg"),
-          titleName: "大型乾燥花束【和煦】配飾",
-          prodPrice: "800",
+          imageSrc: require("../assets/images/shark_slippers.jpg"),
+          titleName: "超好走鯊鯊拖鞋",
+          prodPrice: "499",
           tag: "配飾",
         },
         {
-          imageSrc: require("../assets/images/dolphin_pillow.jpg"),
-          titleName: "大型乾燥花束【和煦】配飾",
-          prodPrice: "500",
+          imageSrc: require("../assets/images/killer_whale_phonecase.jpg"),
+          titleName: "虎鯨手機殼",
+          prodPrice: "499",
           tag: "配飾",
         },
       ],
@@ -529,10 +526,13 @@ export default {
   .pic {
     overflow: hidden;
     margin-bottom: 10px;
+    box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.2)
   }
 
   .pic img {
-    width: 100%;
+    width: 280px;
+    height: 280px;
+    object-fit: cover;
     vertical-align: top;
     transform: scale(1);
     transition: 0.7s;
@@ -545,7 +545,9 @@ export default {
 
   .name {
     font-size: 17px;
-    margin-bottom: 15px;
+    letter-spacing: 1px;
+    margin-top: 10px;
+    margin-bottom: 10px;
     line-height: 1.5;
     font-family: Gowun Batang, "Times New Roman", Times, NotoSerifCJKtc-Regular,
       serif;

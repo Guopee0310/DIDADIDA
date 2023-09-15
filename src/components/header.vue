@@ -1,16 +1,25 @@
 <template>
   <div class="header">
-    <div class="wrap" :style="{
-      'background-color': headerColor,
-      top: 0,
-      left: 0,
-      'z-index': 10,
-      width: '100%',
-    }">
-
+    <div
+      class="wrap"
+      :style="{
+        'background-color': headerColor,
+        top: 0,
+        left: 0,
+        'z-index': 10,
+        width: '100%',
+      }"
+    >
       <!-- logo -->
-      <div class="logo">
-        <router-link to="/" @click="hideBanner()"><img src="../assets/images/dida_logo.png" /></router-link>
+
+      <!-- this.checkLogoPic = false; -->
+      <div :class="{ logo: !checkLogoPic, logoChange: checkLogoPic }">
+        <router-link to="/" v-if="!checkLogoPic"
+          ><img src="../../public/all_images/logo_all.svg"
+        /></router-link>
+        <router-link to="/" v-if="checkLogoPic"
+          ><img src="../../public/all_images/logo_half.svg"
+        /></router-link>
       </div>
 
       <nav class="main-nav">
@@ -34,7 +43,9 @@
           <router-link to="/explore">{{ menuTitle.animal }}</router-link>
           <ul class="sub-menu">
             <li v-for="animalSub in animalSub" key="animalSub">
-              <router-link :to="animalSub.link">{{ animalSub.name }}</router-link>
+              <router-link :to="animalSub.link">{{
+                animalSub.name
+              }}</router-link>
             </li>
           </ul>
         </div>
@@ -51,13 +62,15 @@
 
         <!-- 會員登入 -->
         <div class="icons">
-        <span @click="this.$store.state.storeShowLogin = true">
-          <i class="fa-solid fa-user" style="color: #eee"></i>
-        </span>
+          <span @click="this.$store.state.storeShowLogin = true">
+            <i class="fa-solid fa-user" style="color: #eee"></i>
+          </span>
 
-        <!-- 購物車 -->
-        <router-link to="/shoppingcart"><i class="fa-solid fa-cart-shopping" style="color: #eee"></i></router-link>
-      </div>
+          <!-- 購物車 -->
+          <router-link to="/shoppingcart"
+            ><i class="fa-solid fa-cart-shopping" style="color: #eee"></i
+          ></router-link>
+        </div>
         <!-- 語言切換 -->
         <div class="select">
           <select v-model="selectName">
@@ -72,7 +85,6 @@
     <!-- <a href="#" class="Smart">
                   <img src="imgs/問號.png" alt="智能小幫手">
               </a> -->
-
   </div>
 </template>
 
@@ -84,29 +96,30 @@ export default {
   components: {},
   data() {
     return {
+      checkLogoPic: false,
       headerColor: "rgba(35, 45, 71, 0)",
       headerPosition: "relative",
       menuTitle: {
-        about: '關於我們',
-        news: '最新消息',
-        animal: '探索海洋生物',
-        buy: 'DIDA商城',
+        about: "關於我們",
+        news: "最新消息",
+        animal: "探索海洋生物",
+        buy: "DIDA商城",
       },
       aboutSub: [
-        { link: '/faq', name: '常見問題' },
-        { link: '/guide', name: '園區導覽' },
-        { link: '/interact', name: '互動遊戲' },
+        { link: "/faq", name: "常見問題" },
+        { link: "/guide", name: "園區導覽" },
+        { link: "/interact", name: "互動遊戲" },
       ],
       animalSub: [
-        { link: '/#', name: '表層海洋帶' },
-        { link: '/#', name: '中層海洋帶' },
-        { link: '/#', name: '深層海洋帶' },
-        { link: '/#', name: '深淵層海洋帶' },
-        { link: '/#', name: '超深淵層海洋帶' },
+        { link: "/#", name: "表層海洋帶" },
+        { link: "/#", name: "中層海洋帶" },
+        { link: "/#", name: "深層海洋帶" },
+        { link: "/#", name: "深淵層海洋帶" },
+        { link: "/#", name: "超深淵層海洋帶" },
       ],
       buySub: [
-        { link: '/product', name: 'DIDA購物' },
-        { link: '/ticket', name: 'DIDA購票' },
+        { link: "/product", name: "DIDA購物" },
+        { link: "/ticket", name: "DIDA購票" },
       ],
       icon: [
         {
@@ -144,16 +157,15 @@ export default {
     window.removeEventListener("scroll", this.handleScroll);
   },
   methods: {
-    hideBanner() {
-      this.$router.push({ path: "/", query: { section: "hide" } });
-    },
     handleScroll(event) {
       console.log(event);
       console.log(window.scrollY);
       if (window.scrollY == 0) {
         this.headerColor = "rgba(35, 45, 71, 0)";
+        this.checkLogoPic = false;
       } else {
         this.headerColor = "rgba(35, 45, 71, 1)";
+        this.checkLogoPic = true;
       }
     },
     // toFooter(){
@@ -183,9 +195,21 @@ export default {
   transition: 1s;
 
   // logo 樣式
-  .logo img {
-    vertical-align: top;
+  .logoChange {
+    width: 50px;
+    transition: 1s;
+    img {
+      vertical-align: top;
+      width: 100%;
+    }
+  }
+  .logo {
     width: 80px;
+    transition: 1s;
+    img {
+      vertical-align: top;
+      width: 100%;
+    }
   }
 
   // 選單樣式
@@ -255,7 +279,7 @@ select {
   /* -moz-appearance: none; */
   width: 150px;
 }
-.icons{
+.icons {
   cursor: pointer;
 }
 

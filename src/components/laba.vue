@@ -77,6 +77,7 @@
       :point1="point"
       :finalShow1="finalShow"
     ></labaResult>
+    <div class="rePlay" v-if="!randomStart" @click="resetAll">再玩一次</div>
   </div>
 </template>
 
@@ -122,6 +123,12 @@ export default {
     };
   },
   methods: {
+    resetAll() {
+      this.randomStart = !this.randomStart;
+      this.randomStart = true;
+      this.guessNum = 0;
+      this.finalShow = false;
+    },
     movePic() {
       const min = 1;
       const max = 4;
@@ -170,13 +177,12 @@ export default {
 }
 .labaAll {
   @include LQ;
-  border: 1px #03e9f4 solid;
-  background-color: rgb(35, 45, 71);
   padding: 50px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  background-color: #232d47;
   .containerPic {
     width: 474px;
     height: 474px;
@@ -187,7 +193,6 @@ export default {
     .resetImg {
       vertical-align: top;
       translate: 0px -2370px;
-      transition: 1.5s;
     }
     .resetImg2 {
       vertical-align: top;
@@ -270,6 +275,10 @@ export default {
         animation-delay: 0.75s;
       }
     }
+  }
+  .rePlay {
+    @include selectBtn;
+    padding: 5px 35px;
   }
 }
 

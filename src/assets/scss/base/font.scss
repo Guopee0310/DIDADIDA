@@ -2,20 +2,19 @@
 //     font-family: NotoSerifCJKtc-Regular;
 //     src: url("@/assets/font/NotoSerifCJKtc-Regular.otf");
 // }
-  *{
-    font-family: 'NotoSerifCJKtc-Regular' 
-  }
+* {
+  font-family: "NotoSerifCJKtc-Regular";
+}
 
-$fontSizes:(
-    'h1':50px,
-    'h2':40px,
-    'h3':36px,
-    "h4":20px,
-    'span':14px,
-    'div':20px,
-    'p':16px,
-    'nav':16px,
-    'a':16px,
-    'mini':12px
+$fontSizes: (
+  "h1": 50px,
+  "h2": 40px,
+  "h3": 36px,
+  "h4": 20px,
+  "span": 14px,
+  "div": 20px,
+  "p": 16px,
+  "nav": 16px,
+  "a": 16px,
+  "mini": 12px,
 );
-

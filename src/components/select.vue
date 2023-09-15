@@ -18,14 +18,18 @@ export default {
   data() {
     return {
       prodSelect: [
-        { option: "所有商品" },
-        { option: "食品" },
-        { option: "玩偶" },
-        { option: "配飾" },
+        { option: '所有商品' },
+        { option: '抱枕' },
+        { option: '玩偶' },
+        { option: '配飾' },
       ],
-      costSelect: [{ option: "由低到高" }, { option: "由高到低" }],
-      selectedItem: "所有商品",
-      selectedPrice: "由低到高",
+      costSelect: [
+        { option: '價格' },
+        { option: '由低到高' },
+        { option: '由高到低' },
+      ],
+      selectedItem: '所有商品',
+      selectedPrice: '價格'
     };
   },
   methods: {},
@@ -44,7 +48,8 @@ export default {
       this.$emit("transferPrice", this.selectedPrice);
     },
   },
-};
+}
+
 </script>
 <style scoped lang="scss">
 select {

@@ -31,6 +31,7 @@ export default {
 .resultAll {
   @include LQ;
   display: flex;
+  border: 1px solid #a7cbec;
   padding: 40px;
   border-radius: 5px;
   justify-content: center;

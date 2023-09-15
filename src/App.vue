@@ -59,6 +59,7 @@ import footer1 from "@/components/footer.vue";
 import wave from "@/components/wave.vue";
 import login from "@/components/login.vue";
 import helper from "@/components/helper.vue";
+
 export default {
   data() {
     return {
@@ -67,7 +68,7 @@ export default {
           title: "面包屑",
         },
       ],
-      showWave: false,
+      // showWave: false,
     };
   },
 
@@ -79,18 +80,23 @@ export default {
     helper,
   },
   mounted() {
-    this.$router.push("/?section=hide");
+    // this.$router.push("/?section=hide");
   },
   watch: {
     "$route.query"(nVal, oVal) {
       console.log("新的值", nVal.section);
       console.log("舊的值", oVal.section);
 
-      if (nVal.section !== "hide") {
-        this.showWave = true;
-      } else {
-        this.showWave = false;
-      }
+      // if (nVal.section !== "hide") {
+      //   this.showWave = true;
+      // } else {
+      //   this.showWave = false;
+      // }
+    },
+  },
+  computed: {
+    showWave() {
+      return this.$route.name !== "home";
     },
   },
 };
