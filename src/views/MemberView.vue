@@ -1,12 +1,16 @@
 <template>
-  <div style="height: 120px;">
+  <div style="height: 100px;">
     <div class="photo_stickers">
-      <img src="../assets/images/S__37208068.jpg" alt="">
+      <img src="../assets/images/member_nini.jpg" alt="">
     </div>
   </div>
 
   <div class="member_hello">
     <p>妮妮，您好！</p>
+  </div>
+
+  <div class="bonuspoints">
+    <p>我的紅利點數 : <span>100</span> 點</p>
   </div>
 
   <div class="mem_main">
@@ -25,7 +29,7 @@
         <button @click="btn = 'mem_account_settings'"><span>會員帳號設定</span></button>
         <button @click="btn = 'prod_order_inquiry'"><span>購物訂單查詢</span></button>
         <button @click="btn = 'tick_order_inquiry'"><span>購票訂單查詢</span></button>
-        <button @click="btn = 'mem_bonuspoint'"><span>我的紅利點數</span></button>
+        <!-- <button @click="btn = 'mem_bonuspoint'"><span>我的紅利點數</span></button> -->
         <button @click="btn = 'favorites_list'"><span>我的收藏清單</span></button>
       </div>
     </div>
@@ -319,7 +323,7 @@
         </div>
       </div>
     </div>
-    <div v-else-if="btn === 'mem_bonuspoint'" class="mem_bonuspoint">
+    <!-- <div v-else-if="btn === 'mem_bonuspoint'" class="mem_bonuspoint">
       <h6>我的紅利點數</h6>
       <div class="nowpoint">
         <p>目前點數 : <span>100</span> 點 </p>
@@ -347,7 +351,7 @@
       <div class="change_page">
         <button>下一頁</button>
       </div>
-    </div>
+    </div> -->
     <div v-else="btn === 'mem_bonuspoint'" class="favorites_list">
       <h6>我的收藏清單</h6>
       <div class="favorites_list_main">
@@ -438,8 +442,8 @@ export default {
   border-radius: 50%;
   overflow: hidden;
   position: absolute;
-  top: 88%;
-  left: 8%;
+  top: 60%;
+  left: 6%;
   z-index: 2;
 
   img {
@@ -450,9 +454,22 @@ export default {
 
 .member_hello {
   width: 1200px;
-  padding: 30px 55px 10px 55px;
+  padding: 30px 55px 0px 55px;
   margin: 0 auto;
   font-size: map-get($fontSizes, 'h3');
+}
+
+.bonuspoints {
+  width: 400px;
+  margin-left: 90px;
+
+  p {
+    font-size: 14px;
+
+    span {
+      font-size: 20px;
+    }
+  }
 }
 
 .mem_main {
@@ -491,7 +508,7 @@ export default {
 
 .member_nav {
   width: 400px;
-  height: 500px;
+  height: 400px;
   margin: 30px;
   border: 1px solid #333;
   border-radius: 15px;
@@ -726,57 +743,57 @@ h6 {
   }
 }
 
-.mem_bonuspoint {
-  width: 600px;
-  height: 800px;
-  margin: 30px;
-  border: 1px solid #333;
-  border-radius: 15px;
+// .mem_bonuspoint {
+//   width: 600px;
+//   height: 800px;
+//   margin: 30px;
+//   border: 1px solid #333;
+//   border-radius: 15px;
 
-  .nowpoint {
-    width: 300px;
-    height: 80px;
-    border-bottom: 1px solid;
-    margin: 0 auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+//   .nowpoint {
+//     width: 300px;
+//     height: 80px;
+//     border-bottom: 1px solid;
+//     margin: 0 auto;
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
 
-    p {
-      font-size: map-get($fontSizes, 'div');
-    }
+//     p {
+//       font-size: map-get($fontSizes, 'div');
+//     }
 
-    span {
-      font-size: map-get($fontSizes, 'h3');
-    }
-  }
+//     span {
+//       font-size: map-get($fontSizes, 'h3');
+//     }
+//   }
 
-  .point_record {
-    width: 500px;
-    height: 500px;
-    margin: 20px auto;
+//   .point_record {
+//     width: 500px;
+//     height: 500px;
+//     margin: 20px auto;
 
-    table {
-      width: 500px;
+//     table {
+//       width: 500px;
 
-      caption {
-        font-size: map-get($fontSizes, 'div');
-        margin-bottom: 10px;
-      }
+//       caption {
+//         font-size: map-get($fontSizes, 'div');
+//         margin-bottom: 10px;
+//       }
 
-      tr {
-        height: 30px;
-        border-bottom: 1px solid #ddd;
-      }
+//       tr {
+//         height: 30px;
+//         border-bottom: 1px solid #ddd;
+//       }
 
-      td,
-      th {
-        text-align: center;
-        vertical-align: middle;
-      }
-    }
-  }
-}
+//       td,
+//       th {
+//         text-align: center;
+//         vertical-align: middle;
+//       }
+//     }
+//   }
+// }
 
 .favorites_list {
   width: 600px;
@@ -843,8 +860,8 @@ h6 {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.7);
-  z-index: 2;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 10;
   justify-content: center;
   align-items: center;
 
