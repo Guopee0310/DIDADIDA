@@ -45,10 +45,10 @@
             </div>
             <!-- 裝飾 -->
             <div class="deco-right">
-                <img src="../../public/all_images/footer/deco_fish.png" alt="">
+                <img src="../../public/all_images/deco/deco_fish.png" alt="">
             </div>
             <div class="deco-left">
-                <img src="../../public/all_images/footer/deco_coral.png" alt="">
+                <img src="../../public/all_images/deco/deco_coral.png" alt="">
             </div>
         </div>
         <div class="copyright">

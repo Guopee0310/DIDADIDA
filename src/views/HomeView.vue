@@ -36,16 +36,21 @@
       <div class="drop">
         <div class="wave water"></div>
         <div class="wave water"></div>
-        <!-- <div class="wave water"></div> -->
       </div>
       <p>35%</p>
+      <div class="deco turtle">
+        <img src="../../public/all_images/deco/deco_turtle.png" alt="">
+      </div>
+      <div class="deco fishes">
+        <img src="../../public/all_images/deco/deco_fishes.png" alt="">
+      </div>
     </div>
 
     <!-- 營業資訊 -->
     <div class="ticket">
       <h3Title>
         <template v-slot:h3>
-          <h3>營業資訊</h3>
+          <h3>票價資訊</h3>
         </template>
       </h3Title>
       <table>
@@ -61,17 +66,29 @@
     </div>
 
     <!-- 交通指南 -->
+    <h3Title>
+      <template v-slot:h3>
+        <h3>交通指南</h3>
+      </template>
+    </h3Title>
     <div class="map">
-      <h3Title>
-        <template v-slot:h3>
-          <h3>交通指南</h3>
-        </template>
-      </h3Title>
       <iframe
         src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14468.996712784081!2d121.2250227!3d24.9576355!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x346823ea50c732a5%3A0x1b5e6ee66e9fec49!2z57ev6IKyVGliYU1l6ZmE6Kit5Lit5aOi6IG36KiT5Lit5b-D!5e0!3m2!1szh-TW!2stw!4v1690272123794!5m2!1szh-TW!2stw"
         style="border: 0" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
       </iframe>
-      <div class="text"></div>
+      <div class="text">
+        <div class="address">
+          <span>地址</span>
+          <p>海洋市深海區珊瑚一街404號</p>
+        </div>
+        <div class="car">
+          <span>交通</span>
+          <div class="way" v-for="car in car" :key="car">
+            <p>{{ car.name }}</p>
+            <p>{{ car.content }}</p>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- 熱賣商品 -->
@@ -81,24 +98,25 @@
           <h3>熱賣商品</h3>
         </template>
       </h3Title>
-      <div class="image">
-        <img src="" alt="" />
-      </div>
-      <div class="item" v-for="product in product">
-        <div class="nmb">{{ product.nmb }}</div>
-        <h4>{{ product.name }}</h4>
-        <div class="text">{{ product.text }}</div>
-        <span>{{ product.price }}</span>
+      <div class="item" v-for="product in product" :key="product">
+        <div class="image">
+          <img :src="product.image" alt="" />
+        </div>
+        <div class="content">
+          <div class="nmb">{{ product.nmb }}</div>
+          <h4>{{ product.name }}</h4>
+          <div class="text">{{ product.text }}</div>
+          <span>{{ product.price }}</span>
+        </div>
       </div>
     </div>
 
     <div class="active">
-      <h3>活動倒數</h3>
-      <!-- <h3Title>
+      <h3Title>
         <template v-slot:h3>
           <h3>活動倒數</h3>
         </template>
-      </h3Title> -->
+      </h3Title>
     </div>
 
     <!-- game -->
@@ -144,23 +162,31 @@ export default {
       ],
       product: [
         {
+          image: "../../public/all_images/product/index_p1.png",
           nmb: "01",
           name: "海豚娃娃",
           text: "由DIDADIDA深海區最有名的傑尼海龜為造型。",
           price: "NT 500",
         },
         {
+          image: "../../public/all_images/product/index_p2.png",
           nmb: "02",
           name: "海豚抱枕",
           text: "由DIDADIDA深海區最有名的傑尼海龜為造型。",
           price: "NT 300",
         },
         {
+          image: "../../public/all_images/product/index_p3.png",
           nmb: "03",
           name: "人魚吊飾",
           text: "由DIDADIDA深海區最有名的傑尼海龜為造型。",
           price: "NT 200",
         },
+      ],
+      car: [
+        { name: '自行開車', content: '請於國道10號，海洋交流道下，左轉直行珊瑚一街' },
+        { name: '搭乘公車', content: '請於海洋市區，搭乘海洋路線777公車' },
+        { name: '搭乘捷運', content: '請搭乘海洋線，於滴答滴答站下車，2號出口' },
       ],
     };
   },
@@ -197,19 +223,6 @@ export default {
   width: 100%;
   background-color: #dbdbe5;
 
-  // h3 {
-  //   width: 100px;
-  //   margin: 30px auto;
-  //   font-size: 25px;
-  //   border-bottom: 3.5px solid #9fbdce;
-  // }
-
-  // h3::after {
-  //   content: "";
-  //   border: 2px solid #9fbdce;
-  //   display: block;
-  //   margin: 0 0 6px;
-  // }
   h3 {
     @include h3Title();
   }
@@ -229,7 +242,7 @@ export default {
       line-height: 80vh;
     }
 
-    // open time
+    // 營業時間
     .open {
       // background-color: #232d47;
       width: 250px;
@@ -263,19 +276,9 @@ export default {
         font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
       }
     }
-
-    // .open::after {
-    //   content: '';
-    //   position: absolute;
-    //   width: 250px;
-    //   height: 250px;
-    //   background-color: #9fbdce;
-    //   border-radius: 50%;
-    //   top: 10px;
-    //   right: -10px;
-    // }
   }
 
+  // 今日入園人數
   .entrance {
     width: 1200px;
     margin: 50px auto;
@@ -324,14 +327,6 @@ export default {
         bottom: 12px;
       }
 
-      // .wave.water:nth-child(3) {
-      //   animation: wave 20s linear infinite;
-      //   opacity: 0.3;
-      //   animation-delay: -5s;
-      //   bottom: 25px;
-      //   margin: 0 -30px;
-      // }
-
       @keyframes wave {
         0% {
           background-position-x: 0;
@@ -352,32 +347,118 @@ export default {
       left: 0;
       right: 0;
     }
+
+    .deco {
+      position: absolute;
+    }
+
+    .deco.turtle {
+      bottom: -140px;
+      left: 10px;
+    }
+
+    .deco.fishes {
+      bottom: -80px;
+      right: -30px;
+    }
+
   }
 
+  // 票價資訊
   .ticket {
     // border: 1px solid red;
     width: 1200px;
     margin: auto;
 
     table {
-      margin: 0 10px;
+      margin: 0 auto 100px;
       font-size: 16px;
-      border: 1px solid #68769a;
+      // border: 1px solid #68769a;
       border-radius: 5px;
       background-color: #68769a;
       color: #eee;
 
       tr:nth-child(2n) {
-        background-color: #dbdbe5;
+        background-color: #eee;
         color: #333;
       }
 
       td,
       th {
-        padding: 10px 30px;
+        padding: 15px 30px;
         text-align: left;
       }
     }
+  }
+
+  // 交通指南
+  .map {
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto 90px;
+    display: flex;
+
+    iframe {
+      width: 60%;
+      height: 350px;
+      margin-right: 30px;
+    }
+
+    .text {
+      width: 40%;
+
+      span {
+        font-weight: 800;
+        display: block;
+        background-color: #68769a;
+        color: #eee;
+        border-radius: 3px;
+        padding: 5px 10px;
+        margin: 10px 0;
+      }
+
+      .way {
+        margin: 20px 0;
+      }
+
+      .way p:first-child {
+        // font-size: 15px;
+        font-weight: 800;
+        border-bottom: 3px solid #9fbdce;
+        width: 60px;
+        margin-bottom: 5px;
+      }
+
+      .way p:last-child {
+        margin-bottom: 20px;
+      }
+    }
+  }
+
+  // 熱銷商品
+  .item {
+    max-width: 960px;
+    width: 100%;
+    margin: auto;
+    display: flex;
+
+    .image {}
+
+    .image img {
+      vertical-align: top;
+    }
+
+    .nmb {
+      border-bottom: 1px solid #68769a;
+      font-size: 50px;
+      width: 100px;
+    }
+
+    h4 {}
+
+    span {}
+
+
   }
 }
 </style>
