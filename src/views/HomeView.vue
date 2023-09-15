@@ -1,133 +1,169 @@
 <template>
-  <!-- <div v-if="loading">
+  <div v-if="loading">
     <LoadingBox />
-  </div> -->
-  <!-- <div v-else>
-    <visual v-if="!loading" />
-  </div> -->
+  </div>
+  <div v-else>
 
-  <div class="index">
-    <!-- banner + open time -->
-    <div class="banner">
-      <p>DIDA DIDA海洋公園</p>
-      <lightCircle>
-        <template v-slot:circle>
-          <div class="open">
-            <span>營業時間</span>
-            <span>09:00-17:00</span>
-            <svg x="0px" y="0px" width="200px" height="15px" viewBox="0 0 399.6 15.9">
-              <polyline class="op_line" points="0.1,5.5 58,15.4 118.4,5.5 189.2,5.5 258.7,10.4 368.3,0.5 399.5,7.9 " />
-            </svg>
-            <span>最後入場</span>
-            <span>16:00</span>
-          </div>
-        </template>
-      </lightCircle>
-    </div>
 
-    <!-- 今日入園人數 -->
-    <div class="entrance">
-      <!-- <h3>今日入園人數</h3> -->
-      <h3Title>
-        <template v-slot:h3>
-          <h3>今日入園人數</h3>
-        </template>
-      </h3Title>
-      <div class="drop">
-        <div class="wave water"></div>
-        <div class="wave water"></div>
+    <div class="index">
+      <!-- banner + open time ------------------------------------------ -->
+      <div class="banner">
+        <p>DIDA DIDA海洋公園</p>
+        <lightCircle>
+          <template v-slot:circle>
+            <div class="open">
+              <span>營業時間</span>
+              <span>09:00-17:00</span>
+              <svg x="0px" y="0px" width="200px" height="15px" viewBox="0 0 399.6 15.9">
+                <polyline class="op_line" points="0.1,5.5 58,15.4 118.4,5.5 189.2,5.5 258.7,10.4 368.3,0.5 399.5,7.9 " />
+              </svg>
+              <span>最後入場</span>
+              <span>16:00</span>
+            </div>
+          </template>
+        </lightCircle>
       </div>
-      <p>35%</p>
-      <div class="deco turtle">
-        <img src="../../public/all_images/deco/deco_turtle.png" alt="">
-      </div>
-      <div class="deco fishes">
-        <img src="../../public/all_images/deco/deco_fishes.png" alt="">
-      </div>
-    </div>
 
-    <!-- 營業資訊 -->
-    <div class="ticket">
-      <h3Title>
-        <template v-slot:h3>
-          <h3>票價資訊</h3>
-        </template>
-      </h3Title>
-      <table>
-        <tr>
-          <th v-for="title in priceTitle">{{ title.name }}</th>
-        </tr>
-        <tr v-for="ticket in ticket">
-          <td>{{ ticket.name }}</td>
-          <td>{{ ticket.price }}</td>
-          <td>{{ ticket.object }}</td>
-        </tr>
-      </table>
-    </div>
-
-    <!-- 交通指南 -->
-    <h3Title>
-      <template v-slot:h3>
-        <h3>交通指南</h3>
-      </template>
-    </h3Title>
-    <div class="map">
-      <iframe
-        src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14468.996712784081!2d121.2250227!3d24.9576355!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x346823ea50c732a5%3A0x1b5e6ee66e9fec49!2z57ev6IKyVGliYU1l6ZmE6Kit5Lit5aOi6IG36KiT5Lit5b-D!5e0!3m2!1szh-TW!2stw!4v1690272123794!5m2!1szh-TW!2stw"
-        style="border: 0" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
-      </iframe>
-      <div class="text">
-        <div class="address">
-          <span>地址</span>
-          <p>海洋市深海區珊瑚一街404號</p>
+      <!-- 今日入園人數 ------------------------------------------ -->
+      <div class="entrance">
+        <h3Title>
+          <template v-slot:h3>
+            <h3>今日入園人數</h3>
+          </template>
+        </h3Title>
+        <div class="drop">
+          <div class="wave water"></div>
+          <div class="wave water"></div>
         </div>
-        <div class="car">
-          <span>交通</span>
-          <div class="way" v-for="car in car" :key="car">
-            <p>{{ car.name }}</p>
-            <p>{{ car.content }}</p>
-          </div>
+        <p>35%</p>
+        <div class="deco turtle">
+          <img src="../../public/all_images/deco/deco_turtle.png" alt="">
+        </div>
+        <div class="deco fishes">
+          <img src="../../public/all_images/deco/deco_fishes.png" alt="">
         </div>
       </div>
-    </div>
 
-    <!-- 熱賣商品 -->
-    <div class="product">
+      <!-- 營業資訊 ------------------------------------------ -->
+      <div class="ticket">
+        <h3Title>
+          <template v-slot:h3>
+            <h3>票價資訊</h3>
+          </template>
+        </h3Title>
+        <table>
+          <tr>
+            <th v-for="title in priceTitle">{{ title.name }}</th>
+          </tr>
+          <tr v-for="ticket in ticket">
+            <td>{{ ticket.name }}</td>
+            <td>{{ ticket.price }}</td>
+            <td>{{ ticket.object }}</td>
+          </tr>
+        </table>
+        <button>立即購票</button>
+      </div>
+
+      <!-- 交通指南 ------------------------------------------ -->
+      <h3Title>
+        <template v-slot:h3>
+          <h3>交通指南</h3>
+        </template>
+      </h3Title>
+      <div class="map">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14468.996712784081!2d121.2250227!3d24.9576355!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x346823ea50c732a5%3A0x1b5e6ee66e9fec49!2z57ev6IKyVGliYU1l6ZmE6Kit5Lit5aOi6IG36KiT5Lit5b-D!5e0!3m2!1szh-TW!2stw!4v1690272123794!5m2!1szh-TW!2stw"
+          style="border: 0" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+        <div class="text">
+          <div class="address">
+            <span>地址</span>
+            <p>海洋市深海區珊瑚一街404號</p>
+          </div>
+          <div class="car">
+            <span>交通</span>
+            <div class="way" v-for="car in car" :key="car">
+              <p>{{ car.name }}</p>
+              <p>{{ car.content }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 熱賣商品 ------------------------------------------ -->
       <h3Title>
         <template v-slot:h3>
           <h3>熱賣商品</h3>
         </template>
       </h3Title>
-      <div class="item" v-for="product in product" :key="product">
-        <div class="image">
-          <img :src="product.image" alt="" />
-        </div>
-        <div class="content">
-          <div class="nmb">{{ product.nmb }}</div>
-          <h4>{{ product.name }}</h4>
-          <div class="text">{{ product.text }}</div>
-          <span>{{ product.price }}</span>
+      <div class="product">
+        <div class="item" v-for="product in products" :key="product">
+          <div class="image">
+            <a href="#"><img :src="product.src" alt="product.alt" /></a>
+          </div>
+          <div class="content">
+            <div class="nmb">{{ product.nmb }}</div>
+            <a href="#">
+              <h4>{{ product.name }}</h4>
+              <div class="text">{{ product.text }}</div>
+            </a>
+            <span>{{ product.price }}</span>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="active">
+      <!-- 活動倒數 ------------------------------------------ -->
       <h3Title>
         <template v-slot:h3>
           <h3>活動倒數</h3>
         </template>
       </h3Title>
-    </div>
+      <div class="active">
+        <div class="card">
+          <div class="item">
+            <div class="image">
+              <img src="../assets/images/openActive.png" alt="">
+            </div>
+            <div class="text">
+              <span class="date">活動時間 : 5月1日至5月31日</span>
+              <p class="title">DIDADIDA水族館開幕慶</p>
+              <p class="self">票價限時優惠<span> 10% </span>off</p>
+            </div>
+          </div>
+          <div class="day">
+            <span>倒數</span>
+            <span>5</span>
+            <span>天</span>
+          </div>
+        </div>
+        <div class="card">
+          <div class="item">
+            <div class="image">
+              <img src="../assets/images/blueCloth.png" alt="">
+            </div>
+            <div class="text">
+              <span class="date">活動時間 : 5月1日至5月31日</span>
+              <p class="title">海洋藍慶典</p>
+              <p class="self">入場穿藍色系服裝可享半價優惠</p>
+            </div>
+          </div>
+          <div class="day">
+            <span>倒數</span>
+            <span>9</span>
+            <span>天</span>
+          </div>
+        </div>
+      </div>
 
-    <!-- game -->
-    <div>
-      <visual></visual>
+      <!-- 視覺互動 ------------------------------------------ -->
+      <div class="game">
+        <visual></visual>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
 import visual from "../components/visualGame.vue";
 import LoadingBox from "../components/loading.vue";
 import h3Title from "../components/h3TitleComponent.vue";
@@ -160,23 +196,26 @@ export default {
         { name: "團體票", price: "NT 350", object: "15名以上適用" },
         { name: "※未滿4歲且有家長陪同的幼童可免費入場" },
       ],
-      product: [
+      products: [
         {
-          image: "../../public/all_images/product/index_p1.png",
+          src: require('../assets/images/index_p1.png'),
+          alt: "index_image1",
           nmb: "01",
           name: "海豚娃娃",
           text: "由DIDADIDA深海區最有名的傑尼海龜為造型。",
           price: "NT 500",
         },
         {
-          image: "../../public/all_images/product/index_p2.png",
+          src: require('../assets/images/index_p2.png'),
+          alt: "index_image2",
           nmb: "02",
           name: "海豚抱枕",
           text: "由DIDADIDA深海區最有名的傑尼海龜為造型。",
           price: "NT 300",
         },
         {
-          image: "../../public/all_images/product/index_p3.png",
+          src: require('../assets/images/index_p3.png'),
+          alt: "index_image3",
           nmb: "03",
           name: "人魚吊飾",
           text: "由DIDADIDA深海區最有名的傑尼海龜為造型。",
@@ -194,9 +233,6 @@ export default {
     fetchProd() {
       fetch("https://fakestoreapi.com/products")
         .then((res) => res.json())
-        // .then(json => {
-        //   this.loading = false
-        // })
         .catch((error) => {
           console.error(error);
           this.loading = false;
@@ -220,14 +256,14 @@ export default {
 
 <style lang="scss">
 .index {
-  width: 100%;
   background-color: #dbdbe5;
+  width: 100%;
 
   h3 {
     @include h3Title();
   }
 
-  // banner
+  // banner ---------------------------------------------
   .banner {
     background-image: url(../../public/all_images/banner/index.png);
     width: 100%;
@@ -242,13 +278,11 @@ export default {
       line-height: 80vh;
     }
 
-    // 營業時間
+    // 營業時間 ---------------------------------------------
     .open {
-      // background-color: #232d47;
       width: 250px;
       height: 250px;
       border-radius: 50%;
-      // margin: -150px 70px;
       position: relative;
       display: flex;
       flex-direction: column;
@@ -278,9 +312,10 @@ export default {
     }
   }
 
-  // 今日入園人數
+  // 今日入園人數 ---------------------------------------------
   .entrance {
-    width: 1200px;
+    max-width: 1200px;
+    width: 100%;
     margin: 50px auto;
     position: relative;
 
@@ -294,7 +329,7 @@ export default {
       width: 250px;
       height: 250px;
       border-radius: 50%;
-      border: 10px solid #57a3f3;
+      border: 10px solid #68769a;
       border-top-right-radius: 0;
       transform: rotate(-45deg);
 
@@ -350,6 +385,7 @@ export default {
 
     .deco {
       position: absolute;
+      opacity: 0.5;
     }
 
     .deco.turtle {
@@ -364,16 +400,15 @@ export default {
 
   }
 
-  // 票價資訊
+  // 票價資訊 ---------------------------------------------
   .ticket {
-    // border: 1px solid red;
-    width: 1200px;
-    margin: auto;
+    max-width: 1200px;
+    width: 100%;
+    margin: 30px auto 100px;
 
     table {
-      margin: 0 auto 100px;
+      margin: auto;
       font-size: 16px;
-      // border: 1px solid #68769a;
       border-radius: 5px;
       background-color: #68769a;
       color: #eee;
@@ -389,13 +424,50 @@ export default {
         text-align: left;
       }
     }
+
+    button {
+      display: block;
+      margin: 50px auto;
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      border: none;
+      color: #232D47;
+      font-size: 18px;
+      background-color: #9fbdce;
+      cursor: pointer;
+
+      box-shadow: 0 0 0 0 rgba(#9fbdce, .5);
+      -webkit-animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(.9);
+      }
+
+      70% {
+        transform: scale(1);
+        box-shadow: 0 0 0 30px rgba(#9fbdce, 0);
+      }
+
+      100% {
+        transform: scale(.9);
+        box-shadow: 0 0 0 0 rgba(#9fbdce, 0);
+      }
+    }
+
+    button:hover {
+      animation: none;
+      box-shadow: inset 0 0 20px #95b1c3;
+    }
   }
 
-  // 交通指南
+  // 交通指南 ---------------------------------------------
   .map {
     max-width: 1200px;
     width: 100%;
-    margin: 0 auto 90px;
+    margin: 0 auto 100px;
     display: flex;
 
     iframe {
@@ -422,7 +494,6 @@ export default {
       }
 
       .way p:first-child {
-        // font-size: 15px;
         font-weight: 800;
         border-bottom: 3px solid #9fbdce;
         width: 60px;
@@ -435,30 +506,148 @@ export default {
     }
   }
 
-  // 熱銷商品
-  .item {
+  // 熱銷商品 ---------------------------------------------
+  .product {
     max-width: 960px;
     width: 100%;
-    margin: auto;
-    display: flex;
+    margin: 0 auto 100px;
 
-    .image {}
-
-    .image img {
-      vertical-align: top;
+    .item:nth-child(2) {
+      flex-direction: row-reverse;
+      text-align: right;
     }
 
-    .nmb {
-      border-bottom: 1px solid #68769a;
-      font-size: 50px;
-      width: 100px;
+    .item:nth-child(2) .nmb {
+      margin-left: auto;
     }
 
-    h4 {}
+    .item {
+      margin: auto;
+      display: flex;
+      color: #232D47;
 
-    span {}
+      .image {
+        margin: 0 50px;
+      }
 
+      .image img {
+        vertical-align: top;
+        width: 100%;
+      }
 
+      .content {
+        margin: auto 0;
+
+        .nmb {
+          border-bottom: 1px solid #232D47;
+          font-size: 50px;
+          line-height: 1.2;
+          width: 50px;
+        }
+
+        a {
+          color: #232D47;
+          transition: .3s;
+
+          h4 {
+            font-size: 20px;
+            padding-top: 15px;
+          }
+        }
+
+        a:hover {
+          color: #57a3f3;
+          transition: .3s;
+        }
+
+        span {
+          font-size: 18px;
+          line-height: 4;
+        }
+      }
+    }
   }
+
+  // 活動倒數 ---------------------------------------------
+  .active {
+    max-width: 1200px;
+    width: 100%;
+    margin: 20px auto 100px;
+
+
+    .item {
+      width: 100%;
+      height: 230px;
+      display: flex;
+      background-color: #68769a;
+      border-radius: 10px;
+      overflow: hidden;
+
+      .image {
+        width: 50%;
+      }
+
+      .image img {
+        width: 100%;
+        vertical-align: top;
+      }
+
+      .text {
+        margin: auto;
+        color: #eee;
+        text-align: center;
+
+        .date {
+          display: block;
+          padding-bottom: 25px;
+          color: #232D47;
+        }
+
+        .title {
+          font-size: 35px;
+        }
+
+        .self {
+          font-size: 18px;
+
+          span {
+            font-size: 35px;
+          }
+        }
+      }
+
+    }
+
+    .card {
+      position: relative;
+      margin-bottom: 70px;
+    }
+
+    .day {
+      position: absolute;
+      top: -25px;
+      right: -20px;
+      width: 110px;
+      height: 110px;
+      text-align: center;
+      background-color: #fff;
+      border-radius: 50%;
+      padding: 17px 0;
+
+      span {
+        line-height: 0.9;
+      }
+    }
+
+    .day>span:first-child {
+      display: block;
+    }
+
+    .day>span:nth-child(2) {
+      font-size: 80px;
+      font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    }
+  }
+
 }
 </style>
