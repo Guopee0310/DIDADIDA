@@ -1,10 +1,10 @@
 <template>
-  <!-- <div v-if="loading">
+  <div v-if="loading">
     <LoadingBox />
-  </div> -->
-  <!-- <div v-else>
-    <visual v-if="!loading" />
-  </div> -->
+  </div>
+  <div v-else>
+   
+ 
 
   <div class="index">
     <!-- banner + open time -->
@@ -132,12 +132,13 @@
         </template>
       </h3Title>
     </div>
-
+  
     <!-- game -->
     <div>
       <visual></visual>
     </div>
   </div>
+</div>
 </template>
 
 <script>
