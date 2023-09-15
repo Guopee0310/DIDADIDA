@@ -1,6 +1,6 @@
 <template>
   <div class="controlResult" v-if="title1">
-    <div>
+    <div class="resultPic">
       <!-- <img :src="require(imgSrcGet)" alt="" /> -->
       <img
         :src="require('../assets/images/dolphin_pillow.jpg')"
@@ -31,14 +31,14 @@
         :class="{ notOpacity: finalShow1 }"
       />
     </div>
-    <div>
-      <div class="isOpacity" :class="{ notOpacity: finalShow1 }">
+    <div class="resultPost">
+      <div class="isOpacity postTitle" :class="{ notOpacity: finalShow1 }">
         {{ title1 }}是您的幸運星
       </div>
-      <div class="isOpacity" :class="{ notOpacity: finalShow1 }">
+      <div class="isOpacity postText" :class="{ notOpacity: finalShow1 }">
         {{ post1 }}
       </div>
-      <div class="isOpacity" :class="{ notOpacity: finalShow1 }">
+      <div class="isOpacity postPoint" :class="{ notOpacity: finalShow1 }">
         您共獲得{{ point1 }}點紅利點數!
       </div>
     </div>
@@ -82,7 +82,6 @@ export default {
 <style scoped lang="scss">
 .controlResult {
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
   border: 1px white solid;
@@ -96,6 +95,30 @@ export default {
   .notOpacity {
     opacity: 1;
     transition: 1.5s;
+  }
+  .resultPic {
+    width: 200px;
+    height: 200px;
+    img {
+      width: 100%;
+    }
+  }
+  .resultPost {
+    // border: 1px red solid;
+    padding: 0 20px;
+    .postTitle {
+      font-size: map-get($fontSizes, "h4");
+      font-weight: bold;
+      margin: 10px 0px;
+    }
+    .postText {
+      letter-spacing: 1px;
+      margin-bottom: 15px;
+    }
+    .postPoint {
+      color: red;
+      font-size: map-get($fontSizes, "span");
+    }
   }
 }
 </style>

@@ -177,13 +177,12 @@ export default {
 }
 .labaAll {
   @include LQ;
-  border: 1px #03e9f4 solid;
-  background-color: rgb(35, 45, 71);
   padding: 50px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  background-color: #232d47;
   .containerPic {
     width: 474px;
     height: 474px;
@@ -279,6 +278,7 @@ export default {
   }
   .rePlay {
     @include selectBtn;
+    padding: 5px 35px;
   }
 }
 
