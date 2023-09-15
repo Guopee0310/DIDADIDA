@@ -11,11 +11,13 @@
       }"
     >
       <!-- logo -->
+
+      <!-- this.checkLogoPic = false; -->
       <div :class="{ logo: !checkLogoPic, logoChange: checkLogoPic }">
-        <router-link to="/" @click="hideBanner()" v-if="!checkLogoPic"
+        <router-link to="/" v-if="!checkLogoPic"
           ><img src="../../public/all_images/logo_all.svg"
         /></router-link>
-        <router-link to="/" @click="hideBanner()" v-if="checkLogoPic"
+        <router-link to="/" v-if="checkLogoPic"
           ><img src="../../public/all_images/logo_half.svg"
         /></router-link>
       </div>
@@ -155,9 +157,6 @@ export default {
     window.removeEventListener("scroll", this.handleScroll);
   },
   methods: {
-    hideBanner() {
-      this.$router.push({ path: "/", query: { section: "hide" } });
-    },
     handleScroll(event) {
       console.log(event);
       console.log(window.scrollY);
