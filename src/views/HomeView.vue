@@ -4,37 +4,6 @@
   </div>
   <div v-else>
 
-<<<<<<< HEAD
-=======
-  <div class="index">
-    <!-- banner + open time -->
-    <div class="banner">
-      <p><blingText></blingText></p>
-
-      <lightCircle>
-        <template v-slot:circle>
-          <div class="open">
-            <span>營業時間</span>
-            <span>09:00-17:00</span>
-            <svg
-              x="0px"
-              y="0px"
-              width="200px"
-              height="15px"
-              viewBox="0 0 399.6 15.9"
-            >
-              <polyline
-                class="op_line"
-                points="0.1,5.5 58,15.4 118.4,5.5 189.2,5.5 258.7,10.4 368.3,0.5 399.5,7.9 "
-              />
-            </svg>
-            <span>最後入場</span>
-            <span>16:00</span>
-          </div>
-        </template>
-      </lightCircle>
-    </div>
->>>>>>> a8a8fb8722e58ac1fbe525f2d121465d0277c2e5
 
     <div class="index">
       <!-- banner + open time ------------------------------------------ -->
@@ -55,7 +24,6 @@
         </lightCircle>
       </div>
 
-<<<<<<< HEAD
       <!-- 今日入園人數 ------------------------------------------ -->
       <div class="entrance">
         <h3Title>
@@ -66,46 +34,6 @@
         <div class="drop">
           <div class="wave water"></div>
           <div class="wave water"></div>
-=======
-    <!-- 營業資訊 -->
-    <div class="ticket">
-      <h3Title>
-        <template v-slot:h3>
-          <h3>票價資訊</h3>
-        </template>
-      </h3Title>
-      <table>
-        <tr>
-          <th v-for="title in priceTitle">{{ title.name }}</th>
-        </tr>
-        <tr v-for="ticket in ticket">
-          <td>{{ ticket.name }}</td>
-          <td>{{ ticket.price }}</td>
-          <td>{{ ticket.object }}</td>
-        </tr>
-      </table>
-    </div>
-
-    <!-- 交通指南 -->
-    <h3Title>
-      <template v-slot:h3>
-        <h3>交通指南</h3>
-      </template>
-    </h3Title>
-    <div class="map">
-      <iframe
-        src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14468.996712784081!2d121.2250227!3d24.9576355!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x346823ea50c732a5%3A0x1b5e6ee66e9fec49!2z57ev6IKyVGliYU1l6ZmE6Kit5Lit5aOi6IG36KiT5Lit5b-D!5e0!3m2!1szh-TW!2stw!4v1690272123794!5m2!1szh-TW!2stw"
-        style="border: 0"
-        allowfullscreen=""
-        loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade"
-      >
-      </iframe>
-      <div class="text">
-        <div class="address">
-          <span>地址</span>
-          <p>海洋市深海區珊瑚一街404號</p>
->>>>>>> a8a8fb8722e58ac1fbe525f2d121465d0277c2e5
         </div>
         <p>35%</p>
         <div class="deco turtle">

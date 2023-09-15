@@ -26,9 +26,10 @@
     ></video>
     <div
       class="shadow"
-      :style="{ transform: `translate(${x}px, ${y}px)` }"
       ref="shadow"
     ></div>
+    <!-- 把shadow綁的style拿掉，解決遮蓋問題
+      :style="{ transform: `translate(${x}px, ${y}px)` }" -->
   </div>
 </template>
 <script>
@@ -51,7 +52,7 @@ export default {
       this.x = x;
       this.y = y;
 
-      //   this.$refs.shadow.style.transform = 'translate(' + x + 'px, ' + y + 'px)';
+        this.$refs.shadow.style.transform = 'translate(' + x + 'px, ' + y + 'px)';
     },
     changeBkPosition() {
       let x = e.clientX - document.documentElement.clientWidth * 1.5;
