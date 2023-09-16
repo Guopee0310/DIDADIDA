@@ -250,7 +250,7 @@ export default {
 
 <style lang="scss">
 .index {
-  background-color: #dbdbe5;
+  background-color: map-get($colors, 'bgc');
   width: 100%;
 
   h3 {
@@ -267,7 +267,7 @@ export default {
 
     p {
       font-size: 50px;
-      color: #eee;
+      color: map-get($colors, 'light');
       text-align: center;
       line-height: 80vh;
     }
@@ -299,7 +299,7 @@ export default {
 
       span {
         display: block;
-        color: #eee;
+        color: map-get($colors, 'light');
         font-size: 27px;
         font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
       }
@@ -404,12 +404,12 @@ export default {
       margin: auto;
       font-size: 16px;
       border-radius: 5px;
-      background-color: #68769a;
-      color: #eee;
+      background-color: map-get($colors, 'secondary');
+      color: map-get($colors, 'light');
 
       tr:nth-child(2n) {
-        background-color: #eee;
-        color: #333;
+        background-color: map-get($colors, 'light');
+        color: map-get($colors, 'dark');
       }
 
       td,
@@ -426,12 +426,12 @@ export default {
       height: 100px;
       border-radius: 50%;
       border: none;
-      color: #232D47;
+      color: map-get($colors, 'maincolor');
       font-size: 18px;
-      background-color: #9fbdce;
+      background-color: map-get($colors, 'h2Blue');
       cursor: pointer;
 
-      box-shadow: 0 0 0 0 rgba(#9fbdce, .5);
+      box-shadow: 0 0 0 0 rgba(map-get($colors, 'h2Blue'), .5);
       -webkit-animation: pulse 1.5s infinite;
     }
 
@@ -442,18 +442,18 @@ export default {
 
       70% {
         transform: scale(1);
-        box-shadow: 0 0 0 30px rgba(#9fbdce, 0);
+        box-shadow: 0 0 0 30px rgba(map-get($colors, 'h2Blue'), 0);
       }
 
       100% {
         transform: scale(.9);
-        box-shadow: 0 0 0 0 rgba(#9fbdce, 0);
+        box-shadow: 0 0 0 0 rgba(map-get($colors, 'h2Blue'), 0);
       }
     }
 
     button:hover {
       animation: none;
-      box-shadow: inset 0 0 20px #95b1c3;
+      box-shadow: inset 0 0 20px map-get($colors, 'h2Blue');
     }
   }
 
@@ -476,7 +476,7 @@ export default {
       span {
         font-weight: 800;
         display: block;
-        background-color: #68769a;
+        background-color: map-get($colors, 'secondary');
         color: #eee;
         border-radius: 3px;
         padding: 5px 10px;
@@ -489,7 +489,7 @@ export default {
 
       .way p:first-child {
         font-weight: 800;
-        border-bottom: 3px solid #9fbdce;
+        border-bottom: 3px solid map-get($colors, 'h2Blue');
         width: 60px;
         margin-bottom: 5px;
       }
@@ -518,7 +518,7 @@ export default {
     .item {
       margin: auto;
       display: flex;
-      color: #232D47;
+      color: map-get($colors, 'mainColor');
 
       .image {
         margin: 0 50px;
@@ -533,14 +533,14 @@ export default {
         margin: auto 0;
 
         .nmb {
-          border-bottom: 1px solid #232D47;
+          border-bottom: 1px solid map-get($colors, 'mainColor');
           font-size: 50px;
           line-height: 1.2;
           width: 50px;
         }
 
         a {
-          color: #232D47;
+          color: map-get($colors, 'mainColor');
           transition: .3s;
 
           h4 {
@@ -550,7 +550,7 @@ export default {
         }
 
         a:hover {
-          color: #57a3f3;
+          color: map-get($colors, 'hoverColor');
           transition: .3s;
         }
 
@@ -573,7 +573,7 @@ export default {
       width: 100%;
       height: 230px;
       display: flex;
-      background-color: #68769a;
+      background-color: map-get($colors, 'secondary');
       border-radius: 10px;
       overflow: hidden;
 
@@ -588,13 +588,13 @@ export default {
 
       .text {
         margin: auto;
-        color: #eee;
+        color: map-get($colors, 'light');
         text-align: center;
 
         .date {
           display: block;
           padding-bottom: 25px;
-          color: #232D47;
+          color: map-get($colors, 'mainColor');
         }
 
         .title {
@@ -624,7 +624,7 @@ export default {
       width: 110px;
       height: 110px;
       text-align: center;
-      background-color: #fff;
+      background-color: map-get($colors, 'light');
       border-radius: 50%;
       padding: 17px 0;
 
