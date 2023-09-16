@@ -1,10 +1,13 @@
 <template>
   <div class="select_btn">
-    <prodSelect @transferClass="getClass" @transferPrice="getPrice"></prodSelect>
+    <prodSelect
+      @transferClass="getClass"
+      @transferPrice="getPrice"
+    ></prodSelect>
   </div>
   <div class="card" v-for="i in chooseItem" :key="i.imageSrc">
     <div class="heart">
-      <heart></heart>
+      <heart @change-heart="changeHeart($event, i)"></heart>
     </div>
     <div class="pic">
       <a href="#"><img :src="i.imageSrc" alt="" /></a>
@@ -397,6 +400,10 @@ export default {
       console.log(this.chooseItem2);
       this.chooseItem = this.chooseItem2.slice(optionStartIdx, optionEndIdx);
     },
+    changeHeart(isFav, i) {
+      console.log(isFav, i);
+      // TODO　ＣＡＬＬ　ＡＰＩ
+    },
     // getClass(data) {
     //   this.chooseItem2 = [];
     //   this.selectOption = data;
@@ -526,7 +533,7 @@ export default {
   .pic {
     overflow: hidden;
     margin-bottom: 10px;
-    box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.2)
+    box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.2);
   }
 
   .pic img {

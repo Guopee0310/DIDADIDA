@@ -1,141 +1,139 @@
 <template>
-  <!-- <div v-if="loading">
+  <div v-if="loading">
     <LoadingBox />
-  </div> -->
-  <!-- <div v-else>
-    <visual v-if="!loading" />
-  </div> -->
+  </div>
+  <div v-else>
+    <div class="index">
+      <!-- banner + open time -->
+      <div class="banner">
+        <p><blingText></blingText></p>
 
-  <div class="index">
-    <!-- banner + open time -->
-    <div class="banner">
-      <p><blingText></blingText></p>
-
-      <lightCircle>
-        <template v-slot:circle>
-          <div class="open">
-            <span>營業時間</span>
-            <span>09:00-17:00</span>
-            <svg
-              x="0px"
-              y="0px"
-              width="200px"
-              height="15px"
-              viewBox="0 0 399.6 15.9"
-            >
-              <polyline
-                class="op_line"
-                points="0.1,5.5 58,15.4 118.4,5.5 189.2,5.5 258.7,10.4 368.3,0.5 399.5,7.9 "
-              />
-            </svg>
-            <span>最後入場</span>
-            <span>16:00</span>
-          </div>
-        </template>
-      </lightCircle>
-    </div>
-
-    <!-- 今日入園人數 -->
-    <div class="entrance">
-      <!-- <h3>今日入園人數</h3> -->
-      <h3Title>
-        <template v-slot:h3>
-          <h3>今日入園人數</h3>
-        </template>
-      </h3Title>
-      <div class="drop">
-        <div class="wave water"></div>
-        <div class="wave water"></div>
+        <lightCircle>
+          <template v-slot:circle>
+            <div class="open">
+              <span>營業時間</span>
+              <span>09:00-17:00</span>
+              <svg
+                x="0px"
+                y="0px"
+                width="200px"
+                height="15px"
+                viewBox="0 0 399.6 15.9"
+              >
+                <polyline
+                  class="op_line"
+                  points="0.1,5.5 58,15.4 118.4,5.5 189.2,5.5 258.7,10.4 368.3,0.5 399.5,7.9 "
+                />
+              </svg>
+              <span>最後入場</span>
+              <span>16:00</span>
+            </div>
+          </template>
+        </lightCircle>
       </div>
-      <p>35%</p>
-      <div class="deco turtle">
-        <img src="../../public/all_images/deco/deco_turtle.png" alt="">
-      </div>
-      <div class="deco fishes">
-        <img src="../../public/all_images/deco/deco_fishes.png" alt="">
-      </div>
-    </div>
 
-    <!-- 營業資訊 -->
-    <div class="ticket">
-      <h3Title>
-        <template v-slot:h3>
-          <h3>票價資訊</h3>
-        </template>
-      </h3Title>
-      <table>
-        <tr>
-          <th v-for="title in priceTitle">{{ title.name }}</th>
-        </tr>
-        <tr v-for="ticket in ticket">
-          <td>{{ ticket.name }}</td>
-          <td>{{ ticket.price }}</td>
-          <td>{{ ticket.object }}</td>
-        </tr>
-      </table>
-    </div>
-
-    <!-- 交通指南 -->
-    <h3Title>
-      <template v-slot:h3>
-        <h3>交通指南</h3>
-      </template>
-    </h3Title>
-    <div class="map">
-      <iframe
-        src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14468.996712784081!2d121.2250227!3d24.9576355!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x346823ea50c732a5%3A0x1b5e6ee66e9fec49!2z57ev6IKyVGliYU1l6ZmE6Kit5Lit5aOi6IG36KiT5Lit5b-D!5e0!3m2!1szh-TW!2stw!4v1690272123794!5m2!1szh-TW!2stw"
-        style="border: 0"
-        allowfullscreen=""
-        loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade"
-      >
-      </iframe>
-      <div class="text">
-        <div class="address">
-          <span>地址</span>
-          <p>海洋市深海區珊瑚一街404號</p>
+      <!-- 今日入園人數 -->
+      <div class="entrance">
+        <!-- <h3>今日入園人數</h3> -->
+        <h3Title>
+          <template v-slot:h3>
+            <h3>今日入園人數</h3>
+          </template>
+        </h3Title>
+        <div class="drop">
+          <div class="wave water"></div>
+          <div class="wave water"></div>
         </div>
-        <div class="car">
-          <span>交通</span>
-          <div class="way" v-for="car in car" :key="car">
-            <p>{{ car.name }}</p>
-            <p>{{ car.content }}</p>
+        <p>35%</p>
+        <div class="deco turtle">
+          <img src="../../public/all_images/deco/deco_turtle.png" alt="" />
+        </div>
+        <div class="deco fishes">
+          <img src="../../public/all_images/deco/deco_fishes.png" alt="" />
+        </div>
+      </div>
+
+      <!-- 營業資訊 -->
+      <div class="ticket">
+        <h3Title>
+          <template v-slot:h3>
+            <h3>票價資訊</h3>
+          </template>
+        </h3Title>
+        <table>
+          <tr>
+            <th v-for="title in priceTitle">{{ title.name }}</th>
+          </tr>
+          <tr v-for="ticket in ticket">
+            <td>{{ ticket.name }}</td>
+            <td>{{ ticket.price }}</td>
+            <td>{{ ticket.object }}</td>
+          </tr>
+        </table>
+      </div>
+
+      <!-- 交通指南 -->
+      <h3Title>
+        <template v-slot:h3>
+          <h3>交通指南</h3>
+        </template>
+      </h3Title>
+      <div class="map">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14468.996712784081!2d121.2250227!3d24.9576355!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x346823ea50c732a5%3A0x1b5e6ee66e9fec49!2z57ev6IKyVGliYU1l6ZmE6Kit5Lit5aOi6IG36KiT5Lit5b-D!5e0!3m2!1szh-TW!2stw!4v1690272123794!5m2!1szh-TW!2stw"
+          style="border: 0"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+        >
+        </iframe>
+        <div class="text">
+          <div class="address">
+            <span>地址</span>
+            <p>海洋市深海區珊瑚一街404號</p>
+          </div>
+          <div class="car">
+            <span>交通</span>
+            <div class="way" v-for="car in car" :key="car">
+              <p>{{ car.name }}</p>
+              <p>{{ car.content }}</p>
+            </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <!-- 熱賣商品 -->
-    <div class="product">
-      <h3Title>
-        <template v-slot:h3>
-          <h3>熱賣商品</h3>
-        </template>
-      </h3Title>
-      <div class="item" v-for="product in product" :key="product">
-        <div class="image">
-          <img :src="product.image" alt="" />
-        </div>
-        <div class="content">
-          <div class="nmb">{{ product.nmb }}</div>
-          <h4>{{ product.name }}</h4>
-          <div class="text">{{ product.text }}</div>
-          <span>{{ product.price }}</span>
+      <!-- 熱賣商品 -->
+      <div class="product">
+        <h3Title>
+          <template v-slot:h3>
+            <h3>熱賣商品</h3>
+          </template>
+        </h3Title>
+        <div class="item" v-for="product in product" :key="product">
+          <div class="image">
+            <img :src="product.image" alt="" />
+          </div>
+          <div class="content">
+            <div class="nmb">{{ product.nmb }}</div>
+            <h4>{{ product.name }}</h4>
+            <div class="text">{{ product.text }}</div>
+            <span>{{ product.price }}</span>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="active">
-      <h3Title>
-        <template v-slot:h3>
-          <h3>活動倒數</h3>
-        </template>
-      </h3Title>
-    </div>
+      <div class="active">
+        <h3Title>
+          <template v-slot:h3>
+            <h3>活動倒數</h3>
+          </template>
+        </h3Title>
+      </div>
 
-    <!-- game -->
-    <div>
-      <visual></visual>
+      <!-- game -->
+      <div>
+        <visual v-if="resetVisual"></visual>
+      </div>
     </div>
   </div>
 </template>
@@ -151,6 +149,7 @@ export default {
   name: "HomeView",
   data() {
     return {
+      resetVisual: false,
       loading: true,
       animationDuration: 4200,
       priceTitle: [{ name: "票種" }, { name: "價格" }, { name: "適用對象" }],
@@ -199,9 +198,15 @@ export default {
         },
       ],
       car: [
-        { name: '自行開車', content: '請於國道10號，海洋交流道下，左轉直行珊瑚一街' },
-        { name: '搭乘公車', content: '請於海洋市區，搭乘海洋路線777公車' },
-        { name: '搭乘捷運', content: '請搭乘海洋線，於滴答滴答站下車，2號出口' },
+        {
+          name: "自行開車",
+          content: "請於國道10號，海洋交流道下，左轉直行珊瑚一街",
+        },
+        { name: "搭乘公車", content: "請於海洋市區，搭乘海洋路線777公車" },
+        {
+          name: "搭乘捷運",
+          content: "請搭乘海洋線，於滴答滴答站下車，2號出口",
+        },
       ],
     };
   },
@@ -230,6 +235,9 @@ export default {
     setTimeout(() => {
       this.loading = false;
     }, this.animationDuration);
+    setTimeout(() => {
+      this.resetVisual = true;
+    }, this.animationDuration + 300);
   },
 };
 </script>
@@ -377,7 +385,6 @@ export default {
       bottom: -80px;
       right: -30px;
     }
-
   }
 
   // 票價資訊
@@ -458,7 +465,8 @@ export default {
     margin: auto;
     display: flex;
 
-    .image {}
+    .image {
+    }
 
     .image img {
       vertical-align: top;
@@ -470,11 +478,11 @@ export default {
       width: 100px;
     }
 
-    h4 {}
+    h4 {
+    }
 
-    span {}
-
-
+    span {
+    }
   }
 }
 </style>
