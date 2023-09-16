@@ -5,6 +5,8 @@ import router from './router'
 import store from './store'
 import 'view-ui-plus/dist/styles/viewuiplus.css';
 import { createI18n } from 'vue-i18n'
+import VCalendar from 'v-calendar';
+import 'v-calendar/style.css';
 
 const i18n = createI18n({
     locale: 'zh-TW', // 默認語言
@@ -43,5 +45,6 @@ vueApp.use(store)
 vueApp.use(router)
 vueApp.use(ViewUIPlus)  //套件也要宣告
 vueApp.use(i18n)  // 語言切換
+vueApp.use(VCalendar, {})
 vueApp.mount('#app')
 
