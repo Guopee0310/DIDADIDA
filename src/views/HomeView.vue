@@ -3,7 +3,6 @@
     <LoadingBox />
   </div>
   <div v-else>
-
     <div class="index">
       <!-- banner + open time ------------------------------------------ -->
       <div class="banner">
@@ -13,12 +12,21 @@
         <lightCircle>
           <template v-slot:circle>
             <div class="open">
-              <span>{{ $t('營業時間') }}</span>
+              <span>{{ $t("營業時間") }}</span>
               <span>09:00-17:00</span>
-              <svg x="0px" y="0px" width="200px" height="15px" viewBox="0 0 399.6 15.9">
-                <polyline class="op_line" points="0.1,5.5 58,15.4 118.4,5.5 189.2,5.5 258.7,10.4 368.3,0.5 399.5,7.9 " />
+              <svg
+                x="0px"
+                y="0px"
+                width="200px"
+                height="15px"
+                viewBox="0 0 399.6 15.9"
+              >
+                <polyline
+                  class="op_line"
+                  points="0.1,5.5 58,15.4 118.4,5.5 189.2,5.5 258.7,10.4 368.3,0.5 399.5,7.9 "
+                />
               </svg>
-              <span>{{ $t('最後入場') }}</span>
+              <span>{{ $t("最後入場") }}</span>
               <span>16:00</span>
             </div>
           </template>
@@ -29,7 +37,7 @@
       <div class="entrance">
         <h3Title>
           <template v-slot:h3>
-            <h3>{{ $t('今日入園人數') }}</h3>
+            <h3>{{ $t("今日入園人數") }}</h3>
           </template>
         </h3Title>
         <div class="drop">
@@ -38,10 +46,10 @@
         </div>
         <p>35%</p>
         <div class="deco turtle">
-          <img src="../../public/all_images/deco/deco_turtle.png" alt="">
+          <img src="../../public/all_images/deco/deco_turtle.png" alt="" />
         </div>
         <div class="deco fishes">
-          <img src="../../public/all_images/deco/deco_fishes.png" alt="">
+          <img src="../../public/all_images/deco/deco_fishes.png" alt="" />
         </div>
       </div>
 
@@ -74,7 +82,11 @@
       <div class="map">
         <iframe
           src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14468.996712784081!2d121.2250227!3d24.9576355!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x346823ea50c732a5%3A0x1b5e6ee66e9fec49!2z57ev6IKyVGliYU1l6ZmE6Kit5Lit5aOi6IG36KiT5Lit5b-D!5e0!3m2!1szh-TW!2stw!4v1690272123794!5m2!1szh-TW!2stw"
-          style="border: 0" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+          style="border: 0"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+        >
         </iframe>
         <div class="text">
           <div class="address">
@@ -123,7 +135,7 @@
         <div class="card">
           <div class="item">
             <div class="image">
-              <img src="../assets/images/openActive.png" alt="">
+              <img src="../assets/images/openActive.png" alt="" />
             </div>
             <div class="text">
               <span class="date">活動時間 : 5月1日至5月31日</span>
@@ -140,7 +152,7 @@
         <div class="card">
           <div class="item">
             <div class="image">
-              <img src="../assets/images/blueCloth.png" alt="">
+              <img src="../assets/images/blueCloth.png" alt="" />
             </div>
             <div class="text">
               <span class="date">活動時間 : 5月1日至5月31日</span>
@@ -174,6 +186,7 @@ export default {
   name: "HomeView",
   data() {
     return {
+      resetVisual: false,
       loading: true,
       animationDuration: 4200,
       priceTitle: [{ name: "票種" }, { name: "價格" }, { name: "適用對象" }],
@@ -200,7 +213,7 @@ export default {
       ],
       products: [
         {
-          src: require('../assets/images/index_p1.png'),
+          src: require("../assets/images/index_p1.png"),
           alt: "index_image1",
           nmb: "01",
           name: "海豚娃娃",
@@ -208,7 +221,7 @@ export default {
           price: "NT 500",
         },
         {
-          src: require('../assets/images/index_p2.png'),
+          src: require("../assets/images/index_p2.png"),
           alt: "index_image2",
           nmb: "02",
           name: "海豚抱枕",
@@ -216,7 +229,7 @@ export default {
           price: "NT 300",
         },
         {
-          src: require('../assets/images/index_p3.png'),
+          src: require("../assets/images/index_p3.png"),
           alt: "index_image3",
           nmb: "03",
           name: "人魚吊飾",
@@ -225,14 +238,19 @@ export default {
         },
       ],
       car: [
-        { name: '自行開車', content: '請於國道10號，海洋交流道下，左轉直行珊瑚一街' },
-        { name: '搭乘公車', content: '請於海洋市區，搭乘海洋路線777公車' },
-        { name: '搭乘捷運', content: '請搭乘海洋線，於滴答滴答站下車，2號出口' },
+        {
+          name: "自行開車",
+          content: "請於國道10號，海洋交流道下，左轉直行珊瑚一街",
+        },
+        { name: "搭乘公車", content: "請於海洋市區，搭乘海洋路線777公車" },
+        {
+          name: "搭乘捷運",
+          content: "請搭乘海洋線，於滴答滴答站下車，2號出口",
+        },
       ],
     };
   },
-  methods: {
-  },
+  methods: {},
   components: {
     visual,
     LoadingBox: LoadingBox,
@@ -244,13 +262,16 @@ export default {
     setTimeout(() => {
       this.loading = false;
     }, this.animationDuration);
+    setTimeout(() => {
+      this.resetVisual = true;
+    }, this.animationDuration + 300);
   },
 };
 </script>
 
 <style lang="scss">
 .index {
-  background-color: map-get($colors, 'bgc');
+  background-color: map-get($colors, "bgc");
   width: 100%;
 
   h3 {
@@ -267,7 +288,7 @@ export default {
 
     p {
       font-size: 50px;
-      color: map-get($colors, 'light');
+      color: map-get($colors, "light");
       text-align: center;
       line-height: 80vh;
     }
@@ -299,7 +320,7 @@ export default {
 
       span {
         display: block;
-        color: map-get($colors, 'light');
+        color: map-get($colors, "light");
         font-size: 27px;
         font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
       }
@@ -391,7 +412,6 @@ export default {
       bottom: -80px;
       right: -30px;
     }
-
   }
 
   // 票價資訊 ---------------------------------------------
@@ -404,12 +424,12 @@ export default {
       margin: auto;
       font-size: 16px;
       border-radius: 5px;
-      background-color: map-get($colors, 'secondary');
-      color: map-get($colors, 'light');
+      background-color: map-get($colors, "secondary");
+      color: map-get($colors, "light");
 
       tr:nth-child(2n) {
-        background-color: map-get($colors, 'light');
-        color: map-get($colors, 'dark');
+        background-color: map-get($colors, "light");
+        color: map-get($colors, "dark");
       }
 
       td,
@@ -426,34 +446,34 @@ export default {
       height: 100px;
       border-radius: 50%;
       border: none;
-      color: map-get($colors, 'maincolor');
+      color: map-get($colors, "maincolor");
       font-size: 18px;
-      background-color: map-get($colors, 'h2Blue');
+      background-color: map-get($colors, "h2Blue");
       cursor: pointer;
 
-      box-shadow: 0 0 0 0 rgba(map-get($colors, 'h2Blue'), .5);
+      box-shadow: 0 0 0 0 rgba(map-get($colors, "h2Blue"), 0.5);
       -webkit-animation: pulse 1.5s infinite;
     }
 
     @keyframes pulse {
       0% {
-        transform: scale(.9);
+        transform: scale(0.9);
       }
 
       70% {
         transform: scale(1);
-        box-shadow: 0 0 0 30px rgba(map-get($colors, 'h2Blue'), 0);
+        box-shadow: 0 0 0 30px rgba(map-get($colors, "h2Blue"), 0);
       }
 
       100% {
-        transform: scale(.9);
-        box-shadow: 0 0 0 0 rgba(map-get($colors, 'h2Blue'), 0);
+        transform: scale(0.9);
+        box-shadow: 0 0 0 0 rgba(map-get($colors, "h2Blue"), 0);
       }
     }
 
     button:hover {
       animation: none;
-      box-shadow: inset 0 0 20px map-get($colors, 'h2Blue');
+      box-shadow: inset 0 0 20px map-get($colors, "h2Blue");
     }
   }
 
@@ -476,7 +496,7 @@ export default {
       span {
         font-weight: 800;
         display: block;
-        background-color: map-get($colors, 'secondary');
+        background-color: map-get($colors, "secondary");
         color: #eee;
         border-radius: 3px;
         padding: 5px 10px;
@@ -489,7 +509,7 @@ export default {
 
       .way p:first-child {
         font-weight: 800;
-        border-bottom: 3px solid map-get($colors, 'h2Blue');
+        border-bottom: 3px solid map-get($colors, "h2Blue");
         width: 60px;
         margin-bottom: 5px;
       }
@@ -518,7 +538,7 @@ export default {
     .item {
       margin: auto;
       display: flex;
-      color: map-get($colors, 'mainColor');
+      color: map-get($colors, "mainColor");
 
       .image {
         margin: 0 50px;
@@ -533,15 +553,15 @@ export default {
         margin: auto 0;
 
         .nmb {
-          border-bottom: 1px solid map-get($colors, 'mainColor');
+          border-bottom: 1px solid map-get($colors, "mainColor");
           font-size: 50px;
           line-height: 1.2;
           width: 50px;
         }
 
         a {
-          color: map-get($colors, 'mainColor');
-          transition: .3s;
+          color: map-get($colors, "mainColor");
+          transition: 0.3s;
 
           h4 {
             font-size: 20px;
@@ -550,8 +570,8 @@ export default {
         }
 
         a:hover {
-          color: map-get($colors, 'hoverColor');
-          transition: .3s;
+          color: map-get($colors, "hoverColor");
+          transition: 0.3s;
         }
 
         span {
@@ -568,12 +588,11 @@ export default {
     width: 100%;
     margin: 20px auto 100px;
 
-
     .item {
       width: 100%;
       height: 230px;
       display: flex;
-      background-color: map-get($colors, 'secondary');
+      background-color: map-get($colors, "secondary");
       border-radius: 10px;
       overflow: hidden;
 
@@ -588,13 +607,13 @@ export default {
 
       .text {
         margin: auto;
-        color: map-get($colors, 'light');
+        color: map-get($colors, "light");
         text-align: center;
 
         .date {
           display: block;
           padding-bottom: 25px;
-          color: map-get($colors, 'mainColor');
+          color: map-get($colors, "mainColor");
         }
 
         .title {
@@ -609,7 +628,6 @@ export default {
           }
         }
       }
-
     }
 
     .card {
@@ -624,7 +642,7 @@ export default {
       width: 110px;
       height: 110px;
       text-align: center;
-      background-color: map-get($colors, 'light');
+      background-color: map-get($colors, "light");
       border-radius: 50%;
       padding: 17px 0;
 
@@ -633,15 +651,14 @@ export default {
       }
     }
 
-    .day>span:first-child {
+    .day > span:first-child {
       display: block;
     }
 
-    .day>span:nth-child(2) {
+    .day > span:nth-child(2) {
       font-size: 80px;
-      font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+      font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
     }
   }
-
 }
 </style>

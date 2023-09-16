@@ -1,21 +1,60 @@
 <template>
   <div class="ticketAll">
-    <div>
-      <div>購票資訊</div>
+    <div class="topIntro">
+      <div class="topTitle">購票資訊</div>
+      <div class="ticketRow" v-for="(i, index) in ticketRowArr" :key="index">
+        <div>{{ i[0] }}</div>
+        <div>{{ i[1] }}</div>
+        <div>{{ i[2] }}</div>
+      </div>
+      <div class="warning">※未滿4歲且有家長陪同的幼童可免費入場</div>
+    </div>
+    <bookDate></bookDate>
+    <div class="bottomIntro">
+      <div class="bottomTitle">購票須知</div>
       <div>
-        <div>票種</div>
-        <div>價格</div>
-        <div>適用對象</div>
+        <div v-for="(i, index) in warningArr" :key="index" class="singleNotice">
+          <span> ◆ </span>{{ i }}
+        </div>
       </div>
     </div>
   </div>
 </template>
 <script>
+import bookDate from "../components/bookDate.vue";
 export default {
   name: "HomeView",
-  components: {},
+  components: {
+    bookDate,
+  },
   data() {
     return {
+      ticketRowArr: [
+        ["票種", "價格", "適用對象"],
+        ["一般票", "NT 500", "限18(含)以上成人使用"],
+        ["學生票", "NT 300", "限12歲(含)以上持學生證之學生使用"],
+        ["孩童票", "NT 200", "限4歲(含)以上及未滿12歲兒童使用"],
+        [
+          "優待票",
+          "NT 200",
+          "限持有身心障礙證明者、身心障礙者的1位陪同者、孕婦、滿65歲以上長者適用",
+        ],
+        ["團體票", "NT 350", "15名以上適用"],
+      ],
+      warningArr: [
+        "未滿 4 歲的兒童可免費入場，需有家長陪同入場。",
+        "下訂時請以「票券使用日」為主，下訂後即無法變更，敬請留意。",
+        "訂單一次最高訂購上限為 6 張，每日場次數量為限量販售，售完為止 : ",
+        "訂單恕不接受部分變更，若需變更入場日及場次請整筆重新下訂。",
+        "長者票（博愛票）適用對象：限持有身心障礙證明者、身心障礙者的1位陪同者、孕婦、滿65歲以上長者適用。",
+        "本館禁止攜帶外食、寵物，可攜帶開水。",
+        "館內提供嬰兒車租借，未提供輪椅租借，敬請旅客見諒。",
+        "請務必於訂購時確認訂購之票種是否正確，資格是否符合。",
+        "此商品恕無法使用任何折扣券，敬請見諒。",
+        "購票時請主動出示相關證件供售票處工作人員驗證，相關證件說明如下：",
+        " 1. 學生票：本人有效學生證正本(若為應屆畢業生則提供當年度正式入學通知單或註冊單及攜帶身分證)。",
+        "  2. 兒童票、長者票(博愛票)：身心障礙證明、孕婦健康手冊、國民身分證或政府核發附有照片、身分證字號及出生年、月、日等足以證明身分證件。",
+      ],
       checkLogoPic: false,
       headerColor: "rgba(35, 45, 71, 0)",
       headerPosition: "relative",
@@ -76,7 +115,11 @@ export default {
   beforeDestroy() {
     window.removeEventListener("scroll", this.handleScroll);
   },
+  computed: {},
   methods: {
+    titleCount(idx) {
+      return idx + 1;
+    },
     hideBanner() {
       this.$router.push({ path: "/", query: { section: "hide" } });
     },
@@ -98,3 +141,62 @@ export default {
   },
 };
 </script>
+<style lang="scss" scoped>
+.topIntro {
+  @include ticket;
+
+  .topTitle {
+    @include h3Title;
+  }
+  .ticketRow {
+    display: flex;
+    border: 1px rgb(35, 45, 71) solid;
+    &:nth-child(2),
+    &:last-child {
+      background-color: rgb(35, 45, 71);
+      color: white;
+    }
+    &:nth-child(4) {
+      background-color: rgb(151, 149, 149);
+      color: white;
+    }
+    &:nth-child(6) {
+      background-color: rgb(151, 149, 149);
+      color: white;
+    }
+    div {
+      // border: 1px red solid;
+      width: 150px;
+      padding: 20px 12px;
+      &:nth-child(2) {
+        border-left: none;
+        border-right: none;
+      }
+      &:last-child {
+        flex-grow: 4;
+      }
+    }
+  }
+  .warning {
+    background-color: rgb(35, 45, 71);
+    color: white;
+    padding: 10px;
+  }
+}
+.bottomIntro {
+  @include ticket;
+  background-color: #979595;
+  color: white;
+  padding: 50px;
+  .bottomTitle {
+    font-size: map-get($fontSizes, "h3");
+    // border: 1px red solid;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .singleNotice {
+    line-height: 2;
+  }
+}
+</style>

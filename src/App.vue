@@ -10,7 +10,8 @@
     <router-link to="/about">About</router-link>
   </nav> -->
   <router-view />
-
+  <!-- <button @click="loginAPI">商品目錄</button>
+  <button @click="loginAPI2">登入</button> -->
   <footer1></footer1>
   <span id="firstPage"></span>
 </template>
@@ -68,6 +69,7 @@ export default {
           title: "面包屑",
         },
       ],
+      apiKey: "1f6646a3927d488d95974940231609",
       // showWave: false,
     };
   },
@@ -97,6 +99,42 @@ export default {
   computed: {
     showWave() {
       return this.$route.name !== "home";
+    },
+  },
+  methods: {
+    loginAPI() {
+      console.log("login");
+      // https://tibamef2e.com/cgd103/g1/api/getProducts.php?order=prod_name&limit=9&page=1
+      fetch(
+        "https://tibamef2e.com/cgd103/g1/api/getProducts.php?order=prod_name&limit=9&page=1"
+      )
+        .then((res) => res.json())
+        .then((json) => console.log(json));
+    },
+    loginAPI2() {
+      // console.log("login2");
+      // [post]前台登入
+      // https://tibamef2e.com/cgd103/g1/api/getConfirmMember.php
+      // mem_account : charmy101@gmail.com
+      // mem_psw : 1"
+      let input = {
+        mem_account: "charmy101@gmail.com",
+        mem_psw: "charmy101",
+      };
+      fetch(
+        `${this.$store.state.loginURL}/getConfirmMember.php`,
+        // "https://tibamef2e.com/cgd103/g1/api/getConfirmMember.php"
+        {
+          method: "POST",
+          // body: new URLSearchParams(input),
+          body: new URLSearchParams({
+            mem_account: "charmy101@gmail.com",
+            mem_psw: "charmy101",
+          }),
+        }
+      )
+        .then((res) => res.json())
+        .then((json) => console.log(json));
     },
   },
 };
