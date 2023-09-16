@@ -1,31 +1,24 @@
 <template>
   <div class="header">
-    <div
-      class="wrap"
-      :style="{
-        'background-color': headerColor,
-        top: 0,
-        left: 0,
-        'z-index': 10,
-        width: '100%',
-      }"
-    >
+    <div class="wrap" :style="{
+      'background-color': headerColor,
+      top: 0,
+      left: 0,
+      'z-index': 10,
+      width: '100%',
+    }">
       <!-- logo -->
 
       <!-- this.checkLogoPic = false; -->
       <div :class="{ logo: !checkLogoPic, logoChange: checkLogoPic }">
-        <router-link to="/" v-if="!checkLogoPic"
-          ><img src="../../public/all_images/logo_all.svg"
-        /></router-link>
-        <router-link to="/" v-if="checkLogoPic"
-          ><img src="../../public/all_images/logo_half.svg"
-        /></router-link>
+        <router-link to="/" v-if="!checkLogoPic"><img src="../../public/all_images/logo_all.svg" /></router-link>
+        <router-link to="/" v-if="checkLogoPic"><img src="../../public/all_images/logo_half.svg" /></router-link>
       </div>
 
       <nav class="main-nav">
         <!-- 關於我們 -->
         <div class="main-menu">
-          <router-link to="/about">{{ menuTitle.about }}</router-link>
+          <router-link to="/about">{{ $t(menuTitle.about) }}</router-link>
           <ul class="sub-menu">
             <li v-for="aboutSub in aboutSub" key="aboutSub">
               <router-link :to="aboutSub.link">{{ aboutSub.name }}</router-link>
@@ -35,12 +28,12 @@
 
         <!-- 最新消息 -->
         <div class="main-menu">
-          <router-link to="/news">{{ menuTitle.news }}</router-link>
+          <router-link to="/news">{{ $t(menuTitle.news) }}</router-link>
         </div>
 
         <!-- 探索海洋生物 -->
         <div class="main-menu">
-          <router-link to="/explore">{{ menuTitle.animal }}</router-link>
+          <router-link to="/explore">{{ $t(menuTitle.animal) }}</router-link>
           <ul class="sub-menu">
             <li v-for="animalSub in animalSub" key="animalSub">
               <router-link :to="animalSub.link">{{
@@ -52,7 +45,7 @@
 
         <!-- DIDA商城 -->
         <div class="main-menu">
-          <a>{{ menuTitle.buy }}</a>
+          <a>{{ $t(menuTitle.buy) }}</a>
           <ul class="sub-menu">
             <li v-for="buySub in buySub" key="buySub">
               <router-link :to="buySub.link">{{ buySub.name }}</router-link>
@@ -67,16 +60,14 @@
           </span>
 
           <!-- 購物車 -->
-          <router-link to="/shoppingcart"
-            ><i class="fa-solid fa-cart-shopping" style="color: #eee"></i
-          ></router-link>
+          <router-link to="/shoppingcart"><i class="fa-solid fa-cart-shopping" style="color: #eee"></i></router-link>
         </div>
         <!-- 語言切換 -->
         <div class="select">
-          <select v-model="selectName">
-            <option v-for="item in language" :value="item.option">
-              {{ item.option }}
-            </option>
+          <select v-model="selectedLanguage" @change="changeLanguage">
+            <option value="zh-TW">繁體中文</option>
+            <option value="en">English</option>
+            <!-- 添加其他支持的語言選項 -->
           </select>
         </div>
       </nav>
@@ -134,15 +125,15 @@ export default {
             '<i class="fa-solid fa-cart-shopping" style="color: #eeeeee;"></i>',
         },
       ],
-      selectName: "繁體中文",
-      language: [
-        {
-          option: "繁體中文",
-        },
-        {
-          option: "英文",
-        },
-      ],
+      selectedLanguage: 'zh-TW',  // 默認語言
+      // language: [
+      //   {
+      //     option: "繁體中文",
+      //   },
+      //   {
+      //     option: "英文",
+      //   },
+      // ],
     };
   },
   watch: {
@@ -167,6 +158,10 @@ export default {
         this.headerColor = "rgba(35, 45, 71, 1)";
         this.checkLogoPic = true;
       }
+    },
+    changeLanguage() {
+      // 使用i18n的setLocale方法来切换语言
+      this.$i18n.locale = this.selectedLanguage;
     },
     // toFooter(){
     //     this.$router.push({ path: '/product', query: { article: 'footer' } });
@@ -198,14 +193,17 @@ export default {
   .logoChange {
     width: 50px;
     transition: 1s;
+
     img {
       vertical-align: top;
       width: 100%;
     }
   }
+
   .logo {
     width: 80px;
     transition: 1s;
+
     img {
       vertical-align: top;
       width: 100%;
@@ -279,6 +277,7 @@ select {
   /* -moz-appearance: none; */
   width: 150px;
 }
+
 .icons {
   cursor: pointer;
 }

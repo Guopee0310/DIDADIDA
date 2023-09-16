@@ -10,9 +10,9 @@
         <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v30h-355z"></path>
       </defs>
       <g class="parallax">
-        <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(255,255,255,0.6" />
-        <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(70, 130, 191,0.7)" />
-        <use xlink:href="#gentle-wave" x="48" y="7" fill="#fff" />
+        <use xlink:href="#gentle-wave" x="48" y="0" :fill="waveColor1"/>
+        <use xlink:href="#gentle-wave" x="48" y="3" :fill="waveColor2"/>
+        <use xlink:href="#gentle-wave" x="48" y="7" :fill="waveColor3"/>
       </g>
     </svg>
   </div>
@@ -25,6 +25,9 @@ export default {
     return {
       h1Title: "",
       h2Title: "",
+      waveColor1:"",
+      waveColor2:"",
+      waveColor3:"",
 
     };
   },
@@ -48,9 +51,9 @@ export default {
                       ? "常見問答"
                       : this.$route.path == "/shoppingcart"
                         ? "購物車"
-                      : this.$route.path == "/ticket"
-                        ? "購買票券"
-                        : "";
+                        : this.$route.path == "/ticket"
+                          ? "購買票券"
+                          : "";
 
     },
     h2Name() {
@@ -72,9 +75,9 @@ export default {
                       ? "FAQs"
                       : this.$route.path == "/shoppingcart"
                         ? "Cart"
-                      : this.$route.path == "/ticket"
-                        ? "Tickets"
-                        : "";
+                        : this.$route.path == "/ticket"
+                          ? "Tickets"
+                          : "";
     },
     banner_pic() {
       return this.$route.path == "/product"
@@ -92,20 +95,53 @@ export default {
                   : this.$route.path == "/interact"
                     ? "/all_images/cenote-280252_1920.jpg"
                     : this.$route.path == "/faq"
-                    ? "/all_images/cenote-280252_1920.jpg"
-                    : this.$route.path == "/shoppingcart"
                       ? "/all_images/cenote-280252_1920.jpg"
-                      : this.$route.path == "/ticket"
+                      : this.$route.path == "/shoppingcart"
                         ? "/all_images/cenote-280252_1920.jpg"
-                        : "";
+                        : this.$route.path == "/ticket"
+                          ? "/all_images/cenote-280252_1920.jpg"
+                          : "";
+    },
+   
+  },
+  methods:{
+    setWaveColors() {
+      switch (this.$route.path) {
+        case "/about":
+          this.waveColor1 = "rgba(255,255,255,0.6)";
+          this.waveColor2 = "rgba(70, 130, 191,0.7)";
+          this.waveColor3 = "#fff";
+          break;
+     
+        default:
+          // 默認顏色
+          this.waveColor1 = "rgba(255, 255, 255, 0.6)";
+          this.waveColor2 = "rgba(70, 130, 191, 0.7)";
+          this.waveColor3 = "#fff";
+      }
     },
   },
+  mounted(){
+    this.setWaveColors();
+  }
 };
 </script>
 <style scoped lang="scss">
-body {
-  margin: 0;
-}
+
+
+// .parallax use {
+//   &:nth-child(1) {
+//     fill: rgba(255,255,255,0.6);
+//   }
+
+//   &:nth-child(2) {
+//     fill: rgba(70, 130, 191,0.7);
+//   }
+
+//   &:nth-child(3) {
+//     fill: #fff;
+//   }
+// }
 
 .banner_pic {
   height: 90vh;

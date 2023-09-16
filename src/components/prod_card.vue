@@ -31,7 +31,7 @@
       </div>
     </div>
   </div>
-  <Page :total="100" @on-change="updatePage" />
+  <Page :total="100" @on-change="updatePage" class="changepage" />
 </template>
 
 <script>
@@ -633,5 +633,9 @@ export default {
   margin: 50px auto;
   display: flex;
   justify-content: end;
+}
+.changepage {
+  width: 1200px;
+  text-align: center;
 }
 </style>
