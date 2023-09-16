@@ -1,5 +1,5 @@
 <template>
-  <p>DIDADIDA海洋館</p>
+  <p>{{ $t('DIDADIDA海洋館') }}</p>
 </template>
 
 <script>
@@ -7,7 +7,7 @@ export default {
   data() {
     return {};
   },
-  mounted() {},
+  mounted() { },
   methods: {},
 };
 </script>
@@ -43,6 +43,7 @@ p {
   0% {
     background-position: -300%;
   }
+
   100% {
     background-position: 300%;
   }
