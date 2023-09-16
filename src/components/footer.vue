@@ -3,41 +3,41 @@
         <div class="footer_wrap">
             <!-- 關於我們 -->
             <div class="footer_item">
-                <h3>{{ footerTitle.about }}</h3>
+                <h3>{{ $t(footerTitle.about) }}</h3>
                 <ul>
-                    <li v-for="about in footer_aboutArray" :key="about"><router-link :to="about.link">{{ about.name
+                    <li v-for="about in footer_aboutArray" :key="about"><router-link :to="about.link">{{ $t(about.name)
                     }}</router-link></li>
 
                 </ul>
             </div>
             <!-- 最新消息 -->
             <div class="footer_item">
-                <h3>{{ footerTitle.news }}</h3>
+                <h3>{{ $t(footerTitle.news) }}</h3>
                 <ul>
                     <!-- <li><a :href="news.link">{{ news.name }}</a></li> -->
-                    <li v-for="news in footer_newsArray" :key="news"><router-link :to="news.link">{{ news.name
+                    <li v-for="news in footer_newsArray" :key="news"><router-link :to="news.link">{{ $t(news.name)
                     }}</router-link></li>
                 </ul>
             </div>
             <!-- 探索海洋生物 -->
             <div class="footer_item">
-                <h3>{{ footerTitle.animal }}</h3>
+                <h3>{{ $t(footerTitle.animal) }}</h3>
                 <ul>
                     <li v-for="animal in footer_animalArray" :key="animal"><router-link :to="animal.link">{{
-                        animal.name }}</router-link></li>
+                        $t(animal.name) }}</router-link></li>
                 </ul>
             </div>
             <!-- DIDA購物 -->
             <div class="footer_item">
-                <h3>{{ footerTitle.buy }}</h3>
+                <h3>{{ $t(footerTitle.buy) }}</h3>
                 <ul>
-                    <li v-for="buy in footer_buyArray" :key="buy"><router-link :to="buy.link">{{ buy.name
+                    <li v-for="buy in footer_buyArray" :key="buy"><router-link :to="buy.link">{{ $t(buy.name)
                     }}</router-link></li>
                 </ul>
             </div>
             <!-- 社群媒體 -->
             <div class="footer_item">
-                <h3>{{ footerTitle.media }}</h3>
+                <h3>{{ $t(footerTitle.media) }}</h3>
                 <div>
                     <span v-for="media in footer_mediaArray" :key="media"><router-link :to="media.link"><i
                                 :class="media.class" :style="media.style"></i></router-link></span>
