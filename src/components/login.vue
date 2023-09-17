@@ -168,6 +168,10 @@ export default {
           console.log(json);
           this.checkApiRes = json.code;
           console.log(this.checkApiRes);
+          if (this.checkApiRes == 1) {
+            this.$store.state.userName = json.memInfo.mem_name;
+            console.log(this.$store.state.userName);
+          }
         })
         .then(() => {
           if (this.checkApiRes == 0) {
