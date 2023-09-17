@@ -8,6 +8,8 @@ export default createStore({
     loginToogle: false,
     loading: false,
     loginURL: "https://tibamef2e.com/cgd103/g1/api",
+    mem_account: "charmy101@gmail.com",
+    mem_psw: "charmy101",
   },
   getters: {},
   mutations: {

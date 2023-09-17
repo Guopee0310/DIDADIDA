@@ -14,7 +14,9 @@
           <div class="social-container">
             <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
             <a href="#" class="social"><i class="fa-brands fa-google"></i></a>
-            <a href="#" class="social"><i class="fa-brands fa-instagram fa-lg"></i></a>
+            <a href="#" class="social"
+              ><i class="fa-brands fa-instagram fa-lg"></i
+            ></a>
           </div>
           <span>或使用電子郵件登入</span>
           <input
@@ -60,7 +62,9 @@
           <div class="social-container">
             <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
             <a href="#" class="social"><i class="fa-brands fa-google"></i></a>
-            <a href="#" class="social"><i class="fa-brands fa-instagram fa-lg"></i></a>
+            <a href="#" class="social"
+              ><i class="fa-brands fa-instagram fa-lg"></i
+            ></a>
           </div>
           <span>或使用您的帳號</span>
           <input
