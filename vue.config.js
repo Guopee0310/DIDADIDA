@@ -9,7 +9,11 @@ module.exports = defineConfig({
         `
       },
     }
-  }
+  },
+  // publicPath: process.env.NODE_ENV === 'production'
+  // ? '/chd103/g4/DIDA/'
+  // : '/',
+  // outputDir: 'DIDA'
 })
 // @import "~@/assets/scss/base/base.scss";
 // @import "~@/assets/scss/base/reset.scss";
