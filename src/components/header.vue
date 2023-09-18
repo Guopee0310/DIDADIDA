@@ -70,13 +70,18 @@
               style="color: #eee"
             ></i>
             <div
-              v-else
+              v-if="this.$store.state.userName"
               @click="this.$router.push('./member')"
               style="color: #eee"
             >
               {{ this.$store.state.userName }}
-              <span>登出</span>
             </div>
+            <span
+              v-if="this.$store.state.userName"
+              @click="logOutAPI()"
+              class="logOutBtn"
+              >登出</span
+            >
           </span>
 
           <!-- 購物車 -->
@@ -170,6 +175,11 @@ export default {
     window.removeEventListener("scroll", this.handleScroll);
   },
   methods: {
+    logOutAPI() {
+      fetch("https://tibamef2e.com/cgd103/g1/api/postMemberLogout.php")
+        .then((res) => res.json())
+        .then((json) => console.log(json));
+    },
     handleScroll(event) {
       console.log(event);
       console.log(window.scrollY);
@@ -302,6 +312,12 @@ select {
 
 .icons {
   cursor: pointer;
+  span {
+    .logOutBtn {
+      // border: 1px red solid;
+      color: white;
+    }
+  }
 }
 
 .select {
