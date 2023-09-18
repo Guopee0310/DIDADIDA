@@ -55,9 +55,9 @@ export default {
     },
     h2Name() {
       return this.$route.path == "/product"
-        ? "Shop"
+        ? "Products"
         : this.$route.path == "/explore"
-          ? "Animal"
+          ? "Explore"
           : this.$route.path == "/news"
             ? "News"
             : this.$route.path == "/about"
