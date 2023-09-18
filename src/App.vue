@@ -63,11 +63,7 @@ import helper from "@/components/helper.vue";
 export default {
   data() {
     return {
-      breadcrumbList: [
-        {
-          title: "面包屑",
-        },
-      ],
+      apiky: '527092236ac2427880275012231609',
       // showWave: false,
     };
   },

@@ -148,7 +148,8 @@ footer {
     }
 
     p {
-        width: 960px;
+        width: 100%;
+        max-width: 960px;
         color: #eee;
         margin: auto;
         font-size: map-get($fontSizes, 'mini');

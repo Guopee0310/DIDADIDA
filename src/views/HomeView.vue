@@ -61,6 +61,9 @@
             <td>{{ ticket.price }}</td>
             <td>{{ ticket.object }}</td>
           </tr>
+          <tr>
+            <td>※未滿4歲且有家長陪同的幼童可免費入場</td>
+          </tr>
         </table>
         <button>立即購票</button>
       </div>
@@ -196,7 +199,6 @@ export default {
             "限持有身心障礙證明者、身心障礙者的1位陪同者、孕婦、滿65歲以上長者適用",
         },
         { name: "團體票", price: "NT 350", object: "15名以上適用" },
-        { name: "※未滿4歲且有家長陪同的幼童可免費入場" },
       ],
       products: [
         {
@@ -642,6 +644,9 @@ export default {
       font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     }
   }
+
+  // -- RWD --------------------------------------
+  @media screen and (max-width:768px) {}
 
 }
 </style>
