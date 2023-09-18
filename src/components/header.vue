@@ -75,6 +75,7 @@
               style="color: #eee"
             >
               {{ this.$store.state.userName }}
+              <span>登出</span>
             </div>
           </span>
 

@@ -1,12 +1,12 @@
 <template>
-  <div style="height: 100px;">
+  <div style="height: 100px">
     <div class="photo_stickers">
-      <img src="../assets/images/member_nini.jpg" alt="">
+      <img src="../assets/images/member_nini.jpg" alt="" />
     </div>
   </div>
 
   <div class="member_hello">
-    <p>妮妮，您好！</p>
+    <p>{{ this.$store.state.userName }}，您好！</p>
   </div>
 
   <div class="bonuspoints">
@@ -17,20 +17,34 @@
     <div>
       <div class="verification">
         <div class="verification_google">
-          <img src="../assets/images/google_icon.png" alt="">
+          <img src="../assets/images/google_icon.png" alt="" />
           <span>Google</span>
         </div>
         <label class="verification_label" for="verification_id">
-          已驗證<input class="verification_input" type="checkbox" value="" id="verification_id" style="zoom: 160%;">
+          已驗證<input
+            class="verification_input"
+            type="checkbox"
+            value=""
+            id="verification_id"
+            style="zoom: 160%"
+          />
         </label>
       </div>
 
       <div class="member_nav">
-        <button @click="btn = 'mem_account_settings'"><span>會員帳號設定</span></button>
-        <button @click="btn = 'prod_order_inquiry'"><span>購物訂單查詢</span></button>
-        <button @click="btn = 'tick_order_inquiry'"><span>購票訂單查詢</span></button>
+        <button @click="btn = 'mem_account_settings'">
+          <span>會員帳號設定</span>
+        </button>
+        <button @click="btn = 'prod_order_inquiry'">
+          <span>購物訂單查詢</span>
+        </button>
+        <button @click="btn = 'tick_order_inquiry'">
+          <span>購票訂單查詢</span>
+        </button>
         <!-- <button @click="btn = 'mem_bonuspoint'"><span>我的紅利點數</span></button> -->
-        <button @click="btn = 'favorites_list'"><span>我的收藏清單</span></button>
+        <button @click="btn = 'favorites_list'">
+          <span>我的收藏清單</span>
+        </button>
       </div>
     </div>
 
@@ -40,44 +54,41 @@
         <div class="field__group" id="member_name">
           <div class="name">
             <div class="field__label">名</div>
-            <input type="text" class="field_input" maxlength="50">
+            <input type="text" class="field_input" maxlength="50" />
           </div>
           <div class="surname">
             <div class="field__label">姓</div>
-            <input type="text" class="field_input" maxlength="50">
+            <input type="text" class="field_input" maxlength="50" />
           </div>
         </div>
         <div class="field__group">
           <div>
             <div class="field__label">性別</div>
-            <input type="text" class="field_input">
+            <input type="text" class="field_input" />
           </div>
-
         </div>
         <div class="field__group">
           <div>
             <div class="field__label">出生日期</div>
-            <input type="date" class="field_input">
+            <input type="date" class="field_input" />
           </div>
-
         </div>
         <div class="field__group">
           <div>
             <div class="field__label">電話號碼</div>
-            <input type="tel" class="field_input">
+            <input type="tel" class="field_input" />
           </div>
-
         </div>
         <div class="field__group">
           <div>
             <div class="field__label">聯絡Email</div>
-            <input type="email" class="field_input mem_email">
+            <input type="email" class="field_input mem_email" />
           </div>
         </div>
         <div class="field__group">
           <div>
             <div class="field__label">地址</div>
-            <input type="text" class="field_input mem_addr">
+            <input type="text" class="field_input mem_addr" />
           </div>
         </div>
       </section>
@@ -90,9 +101,13 @@
       <h6>購物訂單查詢</h6>
       <div class="prod_order_main">
         <div class="order_area">
-          <div class="prod_order_group" v-for="prod in prodOrder" :key="prod.prodImg">
+          <div
+            class="prod_order_group"
+            v-for="prod in prodOrder"
+            :key="prod.prodImg"
+          >
             <div class="prod_img">
-              <img :src="prod.prodImg" alt="">
+              <img :src="prod.prodImg" alt="" />
             </div>
             <div class="prod_info">
               <div class="item_info prod_item">
@@ -124,9 +139,13 @@
       <h6>購票訂單查詢</h6>
       <div class="tick_order_main">
         <div class="tick_area">
-          <div class="tick_order_group" v-for="tick in tickOrder" :key="tick.tickImg">
+          <div
+            class="tick_order_group"
+            v-for="tick in tickOrder"
+            :key="tick.tickImg"
+          >
             <div class="tick_img">
-              <img :src="tick.tickImg" alt="">
+              <img :src="tick.tickImg" alt="" />
             </div>
             <div class="tick_info">
               <div class="item_info tick_item">
@@ -159,9 +178,13 @@
       <h6>我的收藏清單</h6>
       <div class="favorites_list_main">
         <div class="favorites_list_area">
-          <div class="favorites_list_group" v-for="favo in favoList" :key="favo.favoImg">
+          <div
+            class="favorites_list_group"
+            v-for="favo in favoList"
+            :key="favo.favoImg"
+          >
             <div class="favorites_list_img">
-              <img :src="favo.favoImg" alt="">
+              <img :src="favo.favoImg" alt="" />
             </div>
             <div class="favorites_list_info">
               <div>
@@ -185,16 +208,16 @@
 </template>
 <script>
 // import VueQrcode from '../../node_modules/vue-qrcode';
-import QRCode from '../components/QRCode.vue';
+import QRCode from "../components/QRCode.vue";
 export default {
   components: {
     QRCode,
   },
   data() {
     return {
-      btn: 'mem_account_settings',
+      btn: "mem_account_settings",
       showModal: false,
-      qrCodeData: 'https://yahoo.com.tw', // QR碼連到的地方
+      qrCodeData: "https://yahoo.com.tw", // QR碼連到的地方
       prodOrder: [
         {
           prodImg: require("../assets/images/dolphin_pillow.jpg"),
@@ -225,7 +248,7 @@ export default {
           tickCount: "2",
           tickDate: "2023.08.31",
           tickPrice: "250",
-        }
+        },
       ],
       favoList: [
         {
@@ -233,17 +256,16 @@ export default {
           favoName: "極舒適海豚抱枕",
           favoPrice: "499",
           favoIntroduction: {
-            mainIntro: "海豚玩偶採用了沖繩傳統染色技法「紅型染」設計而成，充滿沖繩色彩。",
+            mainIntro:
+              "海豚玩偶採用了沖繩傳統染色技法「紅型染」設計而成，充滿沖繩色彩。",
             recommendation: "同一系列產品中更有「海豚鑰匙圈」可供選擇。",
             size: "尺寸：14×11×22.5公分",
           },
         },
-      ]
-
-    }
+      ],
+    };
   },
-}
-
+};
 </script>
 <style scoped lang="scss">
 .header {
@@ -272,7 +294,7 @@ export default {
   width: 1200px;
   padding: 30px 55px 0px 55px;
   margin: 0 auto;
-  font-size: map-get($fontSizes, 'h3');
+  font-size: map-get($fontSizes, "h3");
 }
 
 .bonuspoints {
@@ -342,14 +364,14 @@ export default {
   }
 
   span {
-    font-size: map-get($fontSizes, 'h4');
+    font-size: map-get($fontSizes, "h4");
     letter-spacing: 1px;
   }
 }
 
 h6 {
   padding: 20px 55px;
-  font-size: map-get($fontSizes, 'h3');
+  font-size: map-get($fontSizes, "h3");
 }
 
 .mem_account_settings {
@@ -360,8 +382,6 @@ h6 {
   border-radius: 15px;
   position: relative;
 
-
-
   .profile__main {
     height: 550px;
     display: flex;
@@ -371,7 +391,7 @@ h6 {
 
   .field__label {
     letter-spacing: 1px;
-    font-size: map-get($fontSizes, 'h4');
+    font-size: map-get($fontSizes, "h4");
   }
 
   .field_input {
@@ -380,7 +400,7 @@ h6 {
     margin: 5px 0;
     padding: 10px;
     letter-spacing: 1px;
-    font-size: map-get($fontSizes, 'h4');
+    font-size: map-get($fontSizes, "h4");
     border: 1px solid #333;
     border-radius: 5px;
   }
@@ -401,7 +421,7 @@ h6 {
     height: 40px;
     border: 1px solid #333;
     border-radius: 5px;
-    font-size: map-get($fontSizes, 'h4');
+    font-size: map-get($fontSizes, "h4");
     letter-spacing: 1px;
   }
 
@@ -411,8 +431,6 @@ h6 {
     bottom: 60px;
   }
 }
-
-
 
 .prod_order_inquiry {
   width: 600px;
@@ -552,7 +570,6 @@ h6 {
     width: 80px;
     margin-left: 10px;
   }
-
 }
 
 .favorites_list {
@@ -583,11 +600,11 @@ h6 {
   }
 
   h5 {
-    font-size: map-get($fontSizes, 'h4');
+    font-size: map-get($fontSizes, "h4");
   }
 
   p {
-    font-size: map-get($fontSizes, 'span');
+    font-size: map-get($fontSizes, "span");
   }
 
   .favorites_list_group:last-child {
