@@ -1,18 +1,25 @@
 <template>
   <div class="header">
-    <div class="wrap" :style="{
-      'background-color': headerColor,
-      top: 0,
-      left: 0,
-      'z-index': 10,
-      width: '100%',
-    }">
+    <div
+      class="wrap"
+      :style="{
+        'background-color': headerColor,
+        top: 0,
+        left: 0,
+        'z-index': 10,
+        width: '100%',
+      }"
+    >
       <!-- logo -->
 
       <!-- this.checkLogoPic = false; -->
       <div :class="{ logo: !checkLogoPic, logoChange: checkLogoPic }">
-        <router-link to="/" v-if="!checkLogoPic"><img src="../../public/all_images/logo_all.svg" /></router-link>
-        <router-link to="/" v-if="checkLogoPic"><img src="../../public/all_images/logo_half.svg" /></router-link>
+        <router-link to="/" v-if="!checkLogoPic"
+          ><img src="../../public/all_images/logo_all.svg"
+        /></router-link>
+        <router-link to="/" v-if="checkLogoPic"
+          ><img src="../../public/all_images/logo_half.svg"
+        /></router-link>
       </div>
 
       <nav class="main-nav">
@@ -55,12 +62,26 @@
 
         <!-- 會員登入 -->
         <div class="icons">
-          <span @click="this.$store.state.storeShowLogin = true">
-            <i class="fa-solid fa-user" style="color: #eee"></i>
+          <span>
+            <i
+              @click="this.$store.state.storeShowLogin = true"
+              v-if="!this.$store.state.userName"
+              class="fa-solid fa-user"
+              style="color: #eee"
+            ></i>
+            <div
+              v-else
+              @click="this.$router.push('./member')"
+              style="color: #eee"
+            >
+              {{ this.$store.state.userName }}
+            </div>
           </span>
 
           <!-- 購物車 -->
-          <router-link to="/shoppingcart"><i class="fa-solid fa-cart-shopping" style="color: #eee"></i></router-link>
+          <router-link to="/shoppingcart"
+            ><i class="fa-solid fa-cart-shopping" style="color: #eee"></i
+          ></router-link>
         </div>
         <!-- 語言切換 -->
         <div class="select">
@@ -121,7 +142,7 @@ export default {
             '<i class="fa-solid fa-cart-shopping" style="color: #eeeeee;"></i>',
         },
       ],
-      selectedLanguage: 'zh-TW',  // 默認語言
+      selectedLanguage: "zh-TW", // 默認語言
       // language: [
       //   {
       //     option: "繁體中文",

@@ -1,14 +1,24 @@
 <template>
   <div class="helperAll">
-    <img :src="require('../../public/all_images/doctor dida.png')" alt="" @click="moveShowText" />
+    <img
+      :src="require('../../public/all_images/doctor dida.png')"
+      alt=""
+      @click="moveShowText"
+    />
   </div>
-  <div class="showWindow" :style="{ transform: showText ? 'translateX(0px)' : 'translateX(1000px)' }">
+  <div
+    class="showWindow"
+    :style="{ transform: showText ? 'translateX(0px)' : 'translateX(1000px)' }"
+  >
     <div class="windowBtnAll">
       <div @click="moveAddress">地址</div>
       <div @click="moveWeatherMax">降雨機率</div>
       <div @click="moveMaxT">今日溫度</div>
     </div>
-    <div class="sayHelloTxt" v-if="!(showAddress || showWeatherMax || showMaxT)">
+    <div
+      class="sayHelloTxt"
+      v-if="!(showAddress || showWeatherMax || showMaxT)"
+    >
       {{ sayHelloTxt }}
     </div>
     <div v-if="showAddress">地址 : {{ locationName }}</div>
@@ -37,6 +47,7 @@ export default {
       showWeatherMax: false,
       showMaxT: false,
       sayHelloTxt: "",
+      intervalId: "",
     };
   },
   mounted() {
@@ -62,6 +73,7 @@ export default {
   },
   methods: {
     moveShowText() {
+      clearInterval(this.intervalId);
       this.showText = !this.showText;
       if (!this.showText) {
         this.sayHelloTxt = "";
@@ -72,11 +84,9 @@ export default {
       let hello = ["您", "好", "今", "天", "想", "問", "點", "什", "麼", "?"];
       this.sayHelloTxt = ""; // 將文字重置為空字串
 
-      let intervalId = setInterval(() => {
+      this.intervalId = setInterval(() => {
         if (hello.length > 0) {
           this.sayHelloTxt += hello.shift();
-        } else {
-          clearInterval(intervalId);
         }
       }, 150);
     },

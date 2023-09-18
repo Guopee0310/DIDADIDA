@@ -14,7 +14,9 @@
           <div class="social-container">
             <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
             <a href="#" class="social"><i class="fa-brands fa-google"></i></a>
-            <a href="#" class="social"><i class="fa-brands fa-instagram fa-lg"></i></a>
+            <a href="#" class="social"
+              ><i class="fa-brands fa-instagram fa-lg"></i
+            ></a>
           </div>
           <span>或使用電子郵件登入</span>
           <input
@@ -60,7 +62,9 @@
           <div class="social-container">
             <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
             <a href="#" class="social"><i class="fa-brands fa-google"></i></a>
-            <a href="#" class="social"><i class="fa-brands fa-instagram fa-lg"></i></a>
+            <a href="#" class="social"
+              ><i class="fa-brands fa-instagram fa-lg"></i
+            ></a>
           </div>
           <span>或使用您的帳號</span>
           <input
@@ -126,6 +130,7 @@ export default {
       testEmail: "123@gmail.com",
       testPassword: "123",
       showAllPage: true,
+      checkApiRes: false,
     };
   },
   mounted() {},
@@ -143,14 +148,40 @@ export default {
       this.signInNotCorrect = true;
     },
     signInMem() {
-      if (
-        this.signInEmail !== this.testEmail ||
-        this.signInPassword !== this.testPassword
-      ) {
-        this.signInNotCorrect = false;
-      } else {
-        this.$store.state.storeShowLogin = !this.$store.state.storeShowLogin;
-      }
+      fetch(
+        `${this.$store.state.loginURL}/getConfirmMember.php`,
+        // "https://tibamef2e.com/cgd103/g1/api/getConfirmMember.php"
+        {
+          method: "POST",
+          // body: new URLSearchParams(input),
+          body: new URLSearchParams({
+            // 正確帳密
+            // mem_account: "charmy101@gmail.com",
+            // mem_psw: "charmy101",
+            mem_account: this.signInEmail,
+            mem_psw: this.signInPassword,
+          }),
+        }
+      )
+        .then((res) => res.json())
+        .then((json) => {
+          console.log(json);
+          this.checkApiRes = json.code;
+          console.log(this.checkApiRes);
+          if (this.checkApiRes == 1) {
+            this.$store.state.userName = json.memInfo.mem_name;
+            console.log(this.$store.state.userName);
+          }
+        })
+        .then(() => {
+          if (this.checkApiRes == 0) {
+            this.signInNotCorrect = false;
+          } else if (this.checkApiRes == 1) {
+            this.signInNotCorrect = true;
+            this.$store.state.storeShowLogin =
+              !this.$store.state.storeShowLogin;
+          }
+        });
     },
     testNameSignUp() {
       let regex = /^[\u4e00-\u9fa5]{2,4}$/;
