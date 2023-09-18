@@ -2,6 +2,8 @@
 node_modules
 /dist
 
+#prod folder
+/DIDA
 
 # local env files
 .env.local

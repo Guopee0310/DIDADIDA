@@ -101,72 +101,30 @@
       <h6>購物訂單查詢</h6>
       <div class="prod_order_main">
         <div class="order_area">
-          <div class="prod_order_group">
+          <div
+            class="prod_order_group"
+            v-for="prod in prodOrder"
+            :key="prod.prodImg"
+          >
             <div class="prod_img">
-              <img src="../assets/images/dolphin_doll.png" alt="" />
+              <img :src="prod.prodImg" alt="" />
             </div>
             <div class="prod_info">
               <div class="item_info prod_item">
                 <p>品項</p>
-                <p>海豚玩偶</p>
+                <p>{{ prod.prodName }}</p>
               </div>
               <div class="item_info prod_count">
                 <p>數量</p>
-                <p>2件</p>
+                <p>{{ prod.prodCount }}</p>
               </div>
               <div class="item_info prod_date">
                 <p>時間</p>
-                <p>2023.08.31</p>
+                <p>{{ prod.prodDate }}</p>
               </div>
               <div class="item_info prod_price">
                 <p>金額</p>
-                <p>NT 900</p>
-              </div>
-            </div>
-          </div>
-          <div class="prod_order_group">
-            <div class="prod_img">
-              <img src="../assets/images/Nemo_doll.jpg" alt="" />
-            </div>
-            <div class="prod_info">
-              <div class="item_info prod_item">
-                <p>品項</p>
-                <p>海豚玩偶</p>
-              </div>
-              <div class="item_info prod_count">
-                <p>數量</p>
-                <p>2件</p>
-              </div>
-              <div class="item_info prod_date">
-                <p>時間</p>
-                <p>2023.08.31</p>
-              </div>
-              <div class="item_info prod_price">
-                <p>金額</p>
-                <p>NT 900</p>
-              </div>
-            </div>
-          </div>
-          <div class="prod_order_group">
-            <div class="prod_img">
-              <img src="../assets/images/sealion_doll.png" alt="" />
-            </div>
-            <div class="prod_info">
-              <div class="item_info prod_item">
-                <p>品項</p>
-                <p>海豚玩偶</p>
-              </div>
-              <div class="item_info prod_count">
-                <p>數量</p>
-                <p>2件</p>
-              </div>
-              <div class="item_info prod_date">
-                <p>時間</p>
-                <p>2023.08.31</p>
-              </div>
-              <div class="item_info prod_price">
-                <p>金額</p>
-                <p>NT 900</p>
+                <p>NT {{ prod.prodPrice }}</p>
               </div>
             </div>
           </div>
@@ -181,178 +139,32 @@
       <h6>購票訂單查詢</h6>
       <div class="tick_order_main">
         <div class="tick_area">
-          <div class="tick_order_group">
+          <div
+            class="tick_order_group"
+            v-for="tick in tickOrder"
+            :key="tick.tickImg"
+          >
             <div class="tick_img">
-              <img src="" alt="" />
+              <img :src="tick.tickImg" alt="" />
             </div>
             <div class="tick_info">
               <div class="item_info tick_item">
                 <p>票種</p>
-                <p>一般全票</p>
+                <p>{{ tick.tickName }}</p>
               </div>
               <div class="item_info tick_count">
                 <p>數量</p>
-                <p>1張</p>
+                <p>{{ tick.tickName }}</p>
               </div>
               <div class="item_info tick_date">
                 <p>時間</p>
-                <p>2023.08.31</p>
+                <p>{{ tick.tickDate }}</p>
               </div>
               <div class="item_info tick_price">
                 <p>金額</p>
-                <p>NT 900</p>
+                <p>NT {{ tick.tickPrice }}</p>
               </div>
-              <div>
-                <button class="qr_btn" @click="showModal = true">
-                  顯示電子票券
-                </button>
-                <transition name="fade">
-                  <div v-if="showModal" class="modal">
-                    <div class="modal-content">
-                      <div class="qrcode-content">
-                        <div class="qrcode-img">
-                          <span class="close" @click="showModal = false"
-                            >&times;</span
-                          >
-                          <vue-qrcode
-                            :value="qrCodeData"
-                            :size="150"
-                          ></vue-qrcode>
-                        </div>
-                        <div class="qrcode-info">
-                          <div
-                            style="height: 60px; border-left: 3px solid #333"
-                          ></div>
-                          <div>
-                            <p>DIDADIDA好時光全票</p>
-                            <p>2023.08.31</p>
-                            <p>請掃描電子票券入場</p>
-                          </div>
-                        </div>
-                        <div class="qr-confirm-btn" @click="showModal = false">
-                          <button>確認</button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </transition>
-              </div>
-            </div>
-          </div>
-          <div class="tick_order_group">
-            <div class="tick_img">
-              <img src="" alt="" />
-            </div>
-            <div class="tick_info">
-              <div class="item_info tick_item">
-                <p>票種</p>
-                <p>一般全票</p>
-              </div>
-              <div class="item_info tick_count">
-                <p>數量</p>
-                <p>1張</p>
-              </div>
-              <div class="item_info tick_date">
-                <p>時間</p>
-                <p>2023.08.31</p>
-              </div>
-              <div class="item_info tick_price">
-                <p>金額</p>
-                <p>NT 900</p>
-              </div>
-              <div>
-                <button class="qr_btn" @click="showModal = true">
-                  顯示電子票券
-                </button>
-                <transition name="fade">
-                  <div v-if="showModal" class="modal">
-                    <div class="modal-content">
-                      <div class="qrcode-content">
-                        <div class="qrcode-img">
-                          <span class="close" @click="showModal = false"
-                            >&times;</span
-                          >
-                          <vue-qrcode
-                            :value="qrCodeData"
-                            :size="150"
-                          ></vue-qrcode>
-                        </div>
-                        <div class="qrcode-info">
-                          <div
-                            style="height: 60px; border-left: 3px solid #333"
-                          ></div>
-                          <div>
-                            <p>DIDADIDA好時光全票</p>
-                            <p>2023.08.31</p>
-                            <p>請掃描電子票券入場</p>
-                          </div>
-                        </div>
-                        <div class="qr-confirm-btn" @click="showModal = false">
-                          <button>確認</button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </transition>
-              </div>
-            </div>
-          </div>
-          <div class="tick_order_group">
-            <div class="tick_img">
-              <img src="" alt="" />
-            </div>
-            <div class="tick_info">
-              <div class="item_info tick_item">
-                <p>票種</p>
-                <p>一般全票</p>
-              </div>
-              <div class="item_info tick_count">
-                <p>數量</p>
-                <p>1張</p>
-              </div>
-              <div class="item_info tick_date">
-                <p>時間</p>
-                <p>2023.08.31</p>
-              </div>
-              <div class="item_info tick_price">
-                <p>金額</p>
-                <p>NT 900</p>
-              </div>
-              <div>
-                <button class="qr_btn" @click="showModal = true">
-                  顯示電子票券
-                </button>
-                <transition name="fade">
-                  <div v-if="showModal" class="modal">
-                    <div class="modal-content">
-                      <div class="qrcode-content">
-                        <div class="qrcode-img">
-                          <span class="close" @click="showModal = false"
-                            >&times;</span
-                          >
-                          <vue-qrcode
-                            :value="qrCodeData"
-                            :size="150"
-                          ></vue-qrcode>
-                        </div>
-                        <div class="qrcode-info">
-                          <div
-                            style="height: 60px; border-left: 3px solid #333"
-                          ></div>
-                          <div>
-                            <p>DIDADIDA好時光全票</p>
-                            <p>2023.08.31</p>
-                            <p>請掃描電子票券入場</p>
-                          </div>
-                        </div>
-                        <div class="qr-confirm-btn" @click="showModal = false">
-                          <button>確認</button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </transition>
-              </div>
+              <QRCode></QRCode>
             </div>
           </div>
         </div>
@@ -361,90 +173,28 @@
         </div>
       </div>
     </div>
-    <!-- <div v-else-if="btn === 'mem_bonuspoint'" class="mem_bonuspoint">
-      <h6>我的紅利點數</h6>
-      <div class="nowpoint">
-        <p>目前點數 : <span>100</span> 點 </p>
-      </div>
-      <div class="point_record">
-        <table>
-          <caption>點數紀錄</caption>
-          <tr>
-            <th>日期</th>
-            <th>項目</th>
-            <th>點數</th>
-          </tr>
-          <tr>
-            <td>8 / 31</td>
-            <td>試手氣</td>
-            <td> + 110 點 </td>
-          </tr>
-          <tr>
-            <td>9 / 1</td>
-            <td>商品折抵</td>
-            <td> - 10 點 </td>
-          </tr>
-        </table>
-      </div>
-      <div class="change_page">
-        <button>下一頁</button>
-      </div>
-    </div> -->
+
     <div v-else="btn === 'mem_bonuspoint'" class="favorites_list">
       <h6>我的收藏清單</h6>
       <div class="favorites_list_main">
         <div class="favorites_list_area">
-          <div class="favorites_list_group">
+          <div
+            class="favorites_list_group"
+            v-for="favo in favoList"
+            :key="favo.favoImg"
+          >
             <div class="favorites_list_img">
-              <img src="../assets/images/dolphin_doll.png" alt="" />
+              <img :src="favo.favoImg" alt="" />
             </div>
             <div class="favorites_list_info">
               <div>
-                <h5>海豚玩偶</h5>
-                <p>NT 450</p>
+                <h5>{{ favo.favoName }}</h5>
+                <p>NT {{ favo.favoPrice }}</p>
               </div>
               <div>
-                <p>
-                  海豚玩偶採用了沖繩傳統染色技法「紅型染」設計而成，充滿沖繩色彩。
-                </p>
-                <p>同一系列產品中更有「海豚鑰匙圈」可供選擇。</p>
-                <p>尺寸：14×11×22.5公分</p>
-              </div>
-            </div>
-          </div>
-          <div class="favorites_list_group">
-            <div class="favorites_list_img">
-              <img src="../assets/images/dolphin_doll.png" alt="" />
-            </div>
-            <div class="favorites_list_info">
-              <div>
-                <h5>海豚玩偶</h5>
-                <p>NT 450</p>
-              </div>
-              <div>
-                <p>
-                  海豚玩偶採用了沖繩傳統染色技法「紅型染」設計而成，充滿沖繩色彩。
-                </p>
-                <p>同一系列產品中更有「海豚鑰匙圈」可供選擇。</p>
-                <p>尺寸：14×11×22.5公分</p>
-              </div>
-            </div>
-          </div>
-          <div class="favorites_list_group">
-            <div class="favorites_list_img">
-              <img src="../assets/images/dolphin_doll.png" alt="" />
-            </div>
-            <div class="favorites_list_info">
-              <div>
-                <h5>海豚玩偶</h5>
-                <p>NT 450</p>
-              </div>
-              <div>
-                <p>
-                  海豚玩偶採用了沖繩傳統染色技法「紅型染」設計而成，充滿沖繩色彩。
-                </p>
-                <p>同一系列產品中更有「海豚鑰匙圈」可供選擇。</p>
-                <p>尺寸：14×11×22.5公分</p>
+                <p>{{ favo.favoIntroduction.mainIntro }}</p>
+                <p>{{ favo.favoIntroduction.recommendation }}</p>
+                <p>{{ favo.favoIntroduction.size }}</p>
               </div>
             </div>
           </div>
@@ -457,17 +207,62 @@
   </div>
 </template>
 <script>
-import VueQrcode from "../../node_modules/vue-qrcode";
-
+// import VueQrcode from '../../node_modules/vue-qrcode';
+import QRCode from "../components/QRCode.vue";
 export default {
   components: {
-    VueQrcode,
+    QRCode,
   },
   data() {
     return {
       btn: "mem_account_settings",
       showModal: false,
       qrCodeData: "https://yahoo.com.tw", // QR碼連到的地方
+      prodOrder: [
+        {
+          prodImg: require("../assets/images/dolphin_pillow.jpg"),
+          prodName: "極舒適海豚",
+          prodCount: "2",
+          prodDate: "2023.08.31",
+          prodPrice: "399",
+        },
+        {
+          prodImg: require("../assets/images/dolphin_pillow.jpg"),
+          prodName: "極舒適海豚",
+          prodCount: "2",
+          prodDate: "2023.08.31",
+          prodPrice: "399",
+        },
+        {
+          prodImg: require("../assets/images/dolphin_pillow.jpg"),
+          prodName: "極舒適海豚抱枕",
+          prodCount: "2",
+          prodDate: "2023.08.31",
+          prodPrice: "399",
+        },
+      ],
+      tickOrder: [
+        {
+          tickImg: require("../assets/images/dolphin_pillow.jpg"),
+          tickName: "一般全票",
+          tickCount: "2",
+          tickDate: "2023.08.31",
+          tickPrice: "250",
+        },
+      ],
+      favoList: [
+        {
+          favoImg: require("../assets/images/dolphin_pillow.jpg"),
+          favoName: "極舒適海豚抱枕",
+          favoPrice: "499",
+          favoIntroduction: {
+            mainIntro:
+              "海豚玩偶採用了沖繩傳統染色技法「紅型染」設計而成，充滿沖繩色彩。",
+            recommendation: "同一系列產品中更有「海豚鑰匙圈」可供選擇。",
+            size: "尺寸：14×11×22.5公分",
+          },
+        },
+      ],
     };
   },
 };
@@ -653,7 +448,7 @@ h6 {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: flex-start;
   }
 
   .prod_order_group {
@@ -702,7 +497,7 @@ h6 {
   }
 
   .item_info p:nth-child(2) {
-    width: 80px;
+    width: 120px;
     margin-left: 10px;
   }
 }
@@ -723,7 +518,7 @@ h6 {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: flex-start;
   }
 
   .tick_order_group {
@@ -775,64 +570,7 @@ h6 {
     width: 80px;
     margin-left: 10px;
   }
-
-  .qr_btn {
-    width: 150px;
-    margin: 5px;
-  }
 }
-
-// .mem_bonuspoint {
-//   width: 600px;
-//   height: 800px;
-//   margin: 30px;
-//   border: 1px solid #333;
-//   border-radius: 15px;
-
-//   .nowpoint {
-//     width: 300px;
-//     height: 80px;
-//     border-bottom: 1px solid;
-//     margin: 0 auto;
-//     display: flex;
-//     justify-content: center;
-//     align-items: center;
-
-//     p {
-//       font-size: map-get($fontSizes, 'div');
-//     }
-
-//     span {
-//       font-size: map-get($fontSizes, 'h3');
-//     }
-//   }
-
-//   .point_record {
-//     width: 500px;
-//     height: 500px;
-//     margin: 20px auto;
-
-//     table {
-//       width: 500px;
-
-//       caption {
-//         font-size: map-get($fontSizes, 'div');
-//         margin-bottom: 10px;
-//       }
-
-//       tr {
-//         height: 30px;
-//         border-bottom: 1px solid #ddd;
-//       }
-
-//       td,
-//       th {
-//         text-align: center;
-//         vertical-align: middle;
-//       }
-//     }
-//   }
-// }
 
 .favorites_list {
   width: 600px;
@@ -850,7 +588,7 @@ h6 {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: flex-start;
   }
 
   .favorites_list_group {
@@ -889,101 +627,6 @@ h6 {
   .favorites_list_info {
     width: 300px;
   }
-}
-
-.modal {
-  // display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.3);
-  z-index: 10;
-  justify-content: center;
-  align-items: center;
-
-  .modal-content {
-    width: 500px;
-    height: 550px;
-    margin: 0 auto;
-    border: 0;
-    border-radius: 15px;
-    text-align: center;
-    background-color: #fff;
-    padding: 20px;
-    position: relative;
-    top: 30px;
-    display: flex;
-    align-items: center;
-  }
-
-  .close {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    cursor: pointer;
-  }
-
-  .qrcode-content {
-    width: 420px;
-    height: 480px;
-    margin: 0 auto;
-    border: 0;
-    border-radius: 15px;
-    background-color: aqua;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-  }
-
-  .qrcode-img {
-    width: 200px;
-    height: 200px;
-    margin: 0 auto;
-
-    img {
-      width: 100%;
-      border: 0;
-      border-radius: 15px;
-    }
-  }
-
-  .qrcode-info {
-    width: 200px;
-    height: 120px;
-    margin: 0 auto;
-    text-align: justify;
-    display: flex;
-    // flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-
-    p {
-      font-size: map-get($fontSizes, "p");
-    }
-  }
-
-  .qr-confirm-btn button {
-    width: 70px;
-    height: 40px;
-    border: 0;
-    border-radius: 10px;
-    background-color: map-get($colors, "mainColor");
-    color: #eee;
-    font-weight: bold;
-  }
-}
-
-// 彈窗顯示與隱藏延遲動畫效果
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s;
-}
-
-.fade-enter,
-.fade-leave-to {
-  opacity: 0;
 }
 
 .change_page {
