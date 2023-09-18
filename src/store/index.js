@@ -5,6 +5,8 @@ import { createStore } from "vuex";
 // :'http'
 // 中央狀態管理
 export default createStore({
+
+  // 類似vue檔裡面的data
   state: {
     storeShowLogin: false,
     quizScore: 0,
@@ -15,6 +17,8 @@ export default createStore({
     mem_psw: "charmy101",
     userName: "",
   },
+
+  // 類似vue檔裡面的computed
   getters: {},
   mutations: {
     // 拿api

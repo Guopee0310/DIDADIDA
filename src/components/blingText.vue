@@ -30,7 +30,7 @@ p {
   font-size: 2em;
   letter-spacing: 4px;
   overflow: hidden;
-  background: linear-gradient(90deg, #000, #fff, #000);
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0), #fff, rgba(255, 255, 255, 0));
   background-repeat: no-repeat;
   background-size: 80%;
   font-weight: 700;

@@ -99,10 +99,6 @@
         </div>
       </nav>
     </div>
-
-    <!-- <a href="#" class="Smart">
-                  <img src="imgs/問號.png" alt="智能小幫手">
-              </a> -->
   </div>
 </template>
 
@@ -206,6 +202,7 @@ export default {
 // @import "~@/assets/scss/base/reset.scss";
 
 .header {
+  max-width: 1200px;
   width: 100%;
   margin: auto;
 }
@@ -270,13 +267,16 @@ export default {
 
   // 子選單樣式
   .sub-menu {
-    display: none;
+    visibility: hidden;
     position: absolute;
     top: 40px;
     padding: 10px 0;
-    background-color: rgba(255, 255, 255, 0.3);
+    background-color: rgba(101, 101, 101, 0.6);
     backdrop-filter: blur(3px);
-    border-radius: 3px;
+    border-radius: 2px;
+    transform: translateY(-1em);
+    transition: all 0.3s ease-in-out 0s, visibility 0s linear 0.3s, z-index 0s linear 0.01s;
+
 
     li:nth-child(4) {
       width: 140px;
@@ -284,7 +284,9 @@ export default {
   }
 
   .main-menu:hover .sub-menu {
-    display: block;
+    visibility: visible;
+    transform: translateY(0%);
+    transition-delay: 0s, 0s, 0.3s;
   }
 
   .sub-menu a:hover {
@@ -350,15 +352,4 @@ option:checked {
   background-color: map-get($colors, hoverColor);
   color: #fff;
 }
-
-/* .Smart{
-              position: fixed;
-              right:0;
-              bottom:0;
-              width:100px;
-          }
-          .Smart img{
-              width:50%;
-              vertical-align: top;
-          } */
 </style>
