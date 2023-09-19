@@ -15,8 +15,3 @@ module.exports = defineConfig({
   // : '/',
   // outputDir: 'DIDA'
 })
-// @import "~@/assets/scss/base/base.scss";
-// @import "~@/assets/scss/base/reset.scss";
-// @import "~@/assets/scss/base/font.scss";
-// @import "~@/assets/scss/base/color.scss";
-// @import "~@/assets/scss/mixin/btn.scss";

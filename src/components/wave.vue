@@ -10,9 +10,9 @@
         <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v30h-355z"></path>
       </defs>
       <g class="parallax">
-        <use xlink:href="#gentle-wave" x="48" y="0" :fill="waveColor1"/>
-        <use xlink:href="#gentle-wave" x="48" y="3" :fill="waveColor2"/>
-        <use xlink:href="#gentle-wave" x="48" y="7" :fill="waveColor3"/>
+        <use xlink:href="#gentle-wave" x="48" y="0" :fill="waveColor1" />
+        <use xlink:href="#gentle-wave" x="48" y="3" :fill="waveColor2" />
+        <use xlink:href="#gentle-wave" x="48" y="7" :fill="waveColor3" />
       </g>
     </svg>
   </div>
@@ -25,9 +25,9 @@ export default {
     return {
       h1Title: "",
       h2Title: "",
-      waveColor1:"",
-      waveColor2:"",
-      waveColor3:"",
+      waveColor1: "",
+      waveColor2: "",
+      waveColor3: "",
 
     };
   },
@@ -83,7 +83,7 @@ export default {
       return this.$route.path == "/product"
         ? "/all_images/cenote-280252_1920.jpg"
         : this.$route.path == "/explore"
-          ? "/all_images/cenote-280252_1920.jpg"
+          ? "/all_images/banner/explore.jpg"
           : this.$route.path == "/news"
             ? "/all_images/banner/news_banner.jpg"
             : this.$route.path == "/about"
@@ -102,9 +102,9 @@ export default {
                           ? "/all_images/cenote-280252_1920.jpg"
                           : "";
     },
-   
+
   },
-  methods:{
+  methods: {
     setWaveColors() {
       switch (this.$route.path) {
         case "/about":
@@ -112,7 +112,7 @@ export default {
           this.waveColor2 = "rgba(70, 130, 191,0.7)";
           this.waveColor3 = "#fff";
           break;
-     
+
         default:
           // 默認顏色
           this.waveColor1 = "rgba(255, 255, 255, 0.6)";
@@ -121,14 +121,12 @@ export default {
       }
     },
   },
-  mounted(){
+  mounted() {
     this.setWaveColors();
   }
 };
 </script>
 <style scoped lang="scss">
-
-
 // .parallax use {
 //   &:nth-child(1) {
 //     fill: rgba(255,255,255,0.6);

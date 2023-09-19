@@ -142,7 +142,7 @@ footer {
         }
 
         li {
-            margin: 5px 0;
+            margin: 10px 0;
         }
 
     }
@@ -153,6 +153,7 @@ footer {
         color: #eee;
         margin: auto;
         font-size: map-get($fontSizes, 'mini');
+        line-height: 1.5;
         text-align: center;
         padding: 0 0 25px;
     }
@@ -183,7 +184,7 @@ footer {
 
         img {
             vertical-align: bottom;
-            width: 200px;
+            width: 170px;
         }
     }
 }

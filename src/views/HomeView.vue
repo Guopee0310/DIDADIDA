@@ -51,19 +51,7 @@
             <h3>票價資訊</h3>
           </template>
         </h3Title>
-        <table>
-          <tr>
-            <th v-for="title in priceTitle">{{ title.name }}</th>
-          </tr>
-          <tr v-for="ticket in ticket">
-            <td>{{ ticket.name }}</td>
-            <td>{{ ticket.price }}</td>
-            <td>{{ ticket.object }}</td>
-          </tr>
-          <tr>
-            <td>※未滿4歲且有家長陪同的幼童可免費入場</td>
-          </tr>
-        </table>
+        <ticketPrice></ticketPrice>
         <button>立即購票</button>
       </div>
 
@@ -105,7 +93,7 @@
             <a href="#"><img :src="product.src" alt="product.alt" /></a>
           </div>
           <div class="content">
-            <div class="nmb">{{ product.nmb }}</div>
+            <div class="nub">{{ product.nub }}</div>
             <a href="#">
               <h4>{{ product.name }}</h4>
               <div class="text">{{ product.text }}</div>
@@ -113,6 +101,7 @@
             <span>{{ product.price }}</span>
           </div>
         </div>
+        <button>更多商品</button>
       </div>
 
       <!-- 活動倒數 ------------------------------------------ -->
@@ -172,6 +161,7 @@ import LoadingBox from "../components/loading.vue";
 import h3Title from "../components/h3TitleComponent.vue";
 import lightCircle from "../components/lightCircle.vue";
 import blingText from "../components/blingText.vue";
+import ticketPrice from "../components/ticketPrice.vue";
 export default {
   name: "HomeView",
   data() {
@@ -204,7 +194,7 @@ export default {
         {
           src: require("../assets/images/index_p1.png"),
           alt: "index_image1",
-          nmb: "01",
+          nub: "01",
           name: "海豚娃娃",
           text: "由DIDADIDA深海區最有名的傑尼海龜為造型。",
           price: "NT 500",
@@ -212,7 +202,7 @@ export default {
         {
           src: require("../assets/images/index_p2.png"),
           alt: "index_image2",
-          nmb: "02",
+          nub: "02",
           name: "海豚抱枕",
           text: "由DIDADIDA深海區最有名的傑尼海龜為造型。",
           price: "NT 300",
@@ -220,7 +210,7 @@ export default {
         {
           src: require("../assets/images/index_p3.png"),
           alt: "index_image3",
-          nmb: "03",
+          nub: "03",
           name: "人魚吊飾",
           text: "由DIDADIDA深海區最有名的傑尼海龜為造型。",
           price: "NT 200",
@@ -246,6 +236,7 @@ export default {
     h3Title,
     lightCircle,
     blingText,
+    ticketPrice,
   },
   mounted() {
     setTimeout(() => {
@@ -265,6 +256,43 @@ export default {
 
   h3 {
     @include h3Title();
+  }
+
+  button {
+    display: block;
+    margin: 50px auto;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: none;
+    color: map-get($colors, "maincolor");
+    font-size: 18px;
+    background-color: map-get($colors, "h2Blue");
+    cursor: pointer;
+
+    box-shadow: 0 0 0 0 rgba(map-get($colors, "h2Blue"), 0.5);
+    -webkit-animation: pulse 1.5s infinite;
+  }
+
+  @keyframes pulse {
+    0% {
+      transform: scale(0.9);
+    }
+
+    70% {
+      transform: scale(1);
+      box-shadow: 0 0 0 30px rgba(map-get($colors, "h2Blue"), 0);
+    }
+
+    100% {
+      transform: scale(0.9);
+      box-shadow: 0 0 0 0 rgba(map-get($colors, "h2Blue"), 0);
+    }
+  }
+
+  button:hover {
+    animation: none;
+    box-shadow: inset 0 0 20px map-get($colors, "h2Blue");
   }
 
   // banner ---------------------------------------------
@@ -427,43 +455,6 @@ export default {
         text-align: left;
       }
     }
-
-    button {
-      display: block;
-      margin: 50px auto;
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
-      border: none;
-      color: map-get($colors, "maincolor");
-      font-size: 18px;
-      background-color: map-get($colors, "h2Blue");
-      cursor: pointer;
-
-      box-shadow: 0 0 0 0 rgba(map-get($colors, "h2Blue"), 0.5);
-      -webkit-animation: pulse 1.5s infinite;
-    }
-
-    @keyframes pulse {
-      0% {
-        transform: scale(0.9);
-      }
-
-      70% {
-        transform: scale(1);
-        box-shadow: 0 0 0 30px rgba(map-get($colors, "h2Blue"), 0);
-      }
-
-      100% {
-        transform: scale(0.9);
-        box-shadow: 0 0 0 0 rgba(map-get($colors, "h2Blue"), 0);
-      }
-    }
-
-    button:hover {
-      animation: none;
-      box-shadow: inset 0 0 20px map-get($colors, "h2Blue");
-    }
   }
 
   // 交通指南 ---------------------------------------------
@@ -520,7 +511,7 @@ export default {
       text-align: right;
     }
 
-    .item:nth-child(2) .nmb {
+    .item:nth-child(2) .nub {
       margin-left: auto;
     }
 
@@ -541,7 +532,7 @@ export default {
       .content {
         margin: auto 0;
 
-        .nmb {
+        .nub {
           border-bottom: 1px solid map-get($colors, "mainColor");
           font-size: 50px;
           line-height: 1.2;
