@@ -3,7 +3,8 @@
     <div class="dateTitle">選擇日期與票數</div>
     <div class="dateTextAll">
       <div class="calendar">
-        <VCalendar borderless />
+        <VDatePicker borderless expanded :min-date="new Date()" locale="tw" :masks="{ title: 'YYYY MMM' }"
+          :select-attribute="selectAttribute" />
       </div>
       <div class="calendarOptionAll">
         <div class="optionTitle">
@@ -34,6 +35,14 @@
     </div>
   </div>
 </template>
+<!-- 日曆相關屬性 -->
+<script setup>
+import { ref } from 'vue';
+
+const date = ref(new Date());
+const selectAttribute = ref({ highlight: 'blue', });  // 改選取日期的顏色
+</script>
+
 <script>
 export default {
   name: "bookDate",
@@ -106,7 +115,7 @@ export default {
     .calendar {
       width: 45%;
       height: 80%;
-      border: 1px red solid;
+      border: 1px #68769a solid;
     }
 
     .calendarOptionAll {
@@ -190,4 +199,5 @@ export default {
       }
     }
   }
-}</style>
+}
+</style>
