@@ -15,7 +15,7 @@ export default {
 </script>
 <style scoped lang="scss">
 h3 {
-  width: 100px;
+  width: fit-content;
   margin: 30px auto;
   font-size: 25px;
   border-bottom: 3.5px solid #9fbdce;
