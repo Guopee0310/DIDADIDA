@@ -1,8 +1,8 @@
 <template>
-  <header1></header1>
-  <wave v-if="showWave"></wave>
-  <helper></helper>
-  <login></login>
+  <header1 v-if="!$route.meta.hideApp"></header1>
+  <wave v-if="!$route.meta.hideApp"></wave>
+  <helper v-if="!$route.meta.hideApp"></helper>
+  <login v-if="!$route.meta.hideApp"></login>
 
   <!-- 
   <nav>
@@ -12,7 +12,7 @@
   <router-view />
   <!-- <button @click="loginAPI">商品目錄</button>
   <button @click="loginAPI2">登入</button> -->
-  <footer1></footer1>
+  <footer1 v-if="!$route.meta.hideApp"></footer1>
   <span id="firstPage"></span>
 </template>
 
@@ -70,6 +70,7 @@ export default {
         },
       ],
       apiKey: "1f6646a3927d488d95974940231609",
+      showHeader: true,
       // showWave: false,
     };
   },
