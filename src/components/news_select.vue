@@ -22,7 +22,7 @@
         
         <input type="txt" placeholder="搜尋" v-model="searchInput">
         <button class="icon">
-            <i class="fa-solid fa-magnifying-glass"></i>
+          <i class="fa-sharp fa-solid fa-magnifying-glass" style="color: #bdc9db;"></i>
         </button>
     </div>
     </div>
@@ -100,6 +100,7 @@
       top: 8px;
       right: 18px;
       font-size: 15px;
+      pointer-events: none;
     }
   }
   
@@ -119,7 +120,8 @@
         border-radius: 1em;
         padding: 5px;
         margin-right: 40px;
-        
+        border: 1px solid #2c3e5041;
+        outline: none;
     }
     .icon{
         height: 100%;

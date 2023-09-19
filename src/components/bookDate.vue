@@ -2,17 +2,16 @@
   <div class="dateAll">
     <div class="dateTitle">選擇日期與票數</div>
     <div class="dateTextAll">
-      <div class="calendar"></div>
+      <div class="calendar">
+        <VDatePicker borderless expanded :min-date="new Date()" locale="tw" :masks="{ title: 'YYYY MMM' }"
+          :select-attribute="selectAttribute" />
+      </div>
       <div class="calendarOptionAll">
         <div class="optionTitle">
           <div>選擇數量</div>
           <div @click="clearTicketCount">全部重選</div>
         </div>
-        <div
-          v-for="(i, index) in optionDetailArr"
-          class="optionAll"
-          :key="index"
-        >
+        <div v-for="(i, index) in optionDetailArr" class="optionAll" :key="index">
           <div class="ticketType">
             <div>{{ i[0] }}</div>
             <div>{{ i[1] }}</div>
@@ -36,6 +35,14 @@
     </div>
   </div>
 </template>
+<!-- 日曆相關屬性 -->
+<script setup>
+import { ref } from 'vue';
+
+const date = ref(new Date());
+const selectAttribute = ref({ highlight: 'blue', });  // 改選取日期的顏色
+</script>
+
 <script>
 export default {
   name: "bookDate",
@@ -52,8 +59,8 @@ export default {
     };
   },
   watch: {},
-  mounted() {},
-  beforeDestroy() {},
+  mounted() { },
+  beforeDestroy() { },
   computed: {},
   methods: {
     clearTicketCount() {
@@ -68,12 +75,12 @@ export default {
         idx == 0
           ? (this.totalPrice -= 500)
           : idx == 1
-          ? (this.totalPrice -= 250)
-          : idx == 2
-          ? (this.totalPrice -= 400)
-          : idx == 3
-          ? (this.totalPrice -= 250)
-          : "";
+            ? (this.totalPrice -= 250)
+            : idx == 2
+              ? (this.totalPrice -= 400)
+              : idx == 3
+                ? (this.totalPrice -= 250)
+                : "";
       }
     },
     ticketPlus(idx) {
@@ -81,12 +88,12 @@ export default {
       idx == 0
         ? (this.totalPrice += 500)
         : idx == 1
-        ? (this.totalPrice += 250)
-        : idx == 2
-        ? (this.totalPrice += 400)
-        : idx == 3
-        ? (this.totalPrice += 250)
-        : "";
+          ? (this.totalPrice += 250)
+          : idx == 2
+            ? (this.totalPrice += 400)
+            : idx == 3
+              ? (this.totalPrice += 250)
+              : "";
     },
   },
 };
@@ -94,24 +101,29 @@ export default {
 <style lang="scss" scoped>
 .dateAll {
   @include ticket;
+
   .dateTitle {
     @include h3Title;
     // border: 1px red solid;
     width: 180px;
   }
+
   .dateTextAll {
     display: flex;
     justify-content: space-between;
+
     .calendar {
       width: 45%;
       height: 80%;
-      border: 1px red solid;
+      border: 1px #68769a solid;
     }
+
     .calendarOptionAll {
       width: 45%;
       height: 80%;
       display: flex;
       flex-direction: column;
+
       //   border: 1px red solid;
       .optionTitle {
         display: flex;
@@ -119,42 +131,51 @@ export default {
         padding-bottom: 5px;
         border-bottom: 1px #979595 solid;
         font-size: map-get($fontSizes, "h4");
+
         div {
           &:last-child {
             cursor: pointer;
           }
         }
       }
+
       .optionAll {
         display: flex;
         padding: 15px 0;
         justify-content: space-between;
         border-bottom: 1px #979595 solid;
+
         .ticketType {
           display: flex;
           align-items: flex-end;
+
           div {
             &:first-child {
               font-size: 18px;
               margin-right: 5px;
             }
+
             &:last-child {
               font-size: 12px;
               color: #979595;
             }
           }
         }
+
         .ticketSal {
           display: flex;
           align-items: flex-end;
+
           .clickTicket {
             // border: 1px red solid;
             background-color: #a7cbec;
             border-radius: 20px;
             display: flex;
             margin-left: 15px;
+
             div {
               padding: 0 15px;
+
               &:first-child,
               &:last-child {
                 cursor: pointer;
@@ -163,11 +184,13 @@ export default {
           }
         }
       }
+
       .totalNum {
         padding-top: 15px;
         padding-right: 20px;
         display: flex;
         justify-content: flex-end;
+
         div {
           &:first-child {
             margin: 0 15px;

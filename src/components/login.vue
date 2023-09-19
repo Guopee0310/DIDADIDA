@@ -133,7 +133,12 @@ export default {
       checkApiRes: false,
     };
   },
-  mounted() {},
+  mounted() {
+    localStorage.setItem("mem_account", "charmy101@gmail.com");
+    localStorage.setItem("mem_psww", "charmy101");
+    this.signInEmail = localStorage.getItem("mem_account");
+    this.signInPassword = localStorage.getItem("mem_psww");
+  },
   methods: {
     hideLogin() {
       this.$store.state.storeShowLogin = !this.$store.state.storeShowLogin;

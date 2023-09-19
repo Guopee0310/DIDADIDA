@@ -1,25 +1,18 @@
 <template>
   <div class="header">
-    <div
-      class="wrap"
-      :style="{
-        'background-color': headerColor,
-        top: 0,
-        left: 0,
-        'z-index': 10,
-        width: '100%',
-      }"
-    >
+    <div class="wrap" :style="{
+      'background-color': headerColor,
+      top: 0,
+      left: 0,
+      'z-index': 10,
+      width: '100%',
+    }">
       <!-- logo -->
 
       <!-- this.checkLogoPic = false; -->
       <div :class="{ logo: !checkLogoPic, logoChange: checkLogoPic }">
-        <router-link to="/" v-if="!checkLogoPic"
-          ><img src="../../public/all_images/logo_all.svg"
-        /></router-link>
-        <router-link to="/" v-if="checkLogoPic"
-          ><img src="../../public/all_images/logo_half.svg"
-        /></router-link>
+        <router-link to="/" v-if="!checkLogoPic"><img src="../../public/all_images/logo_all.svg" /></router-link>
+        <router-link to="/" v-if="checkLogoPic"><img src="../../public/all_images/logo_half.svg" /></router-link>
       </div>
 
       <nav class="main-nav">
@@ -28,7 +21,7 @@
           <router-link to="/about">{{ $t(menuTitle.about) }}</router-link>
           <ul class="sub-menu">
             <li v-for="aboutSub in aboutSub" key="aboutSub">
-              <router-link :to="aboutSub.link">{{ aboutSub.name }}</router-link>
+              <router-link :to="aboutSub.link">{{ $t(aboutSub.name) }}</router-link>
             </li>
           </ul>
         </div>
@@ -44,7 +37,7 @@
           <ul class="sub-menu">
             <li v-for="animalSub in animalSub" key="animalSub">
               <router-link :to="animalSub.link">{{
-                animalSub.name
+                $t(animalSub.name)
               }}</router-link>
             </li>
           </ul>
@@ -55,7 +48,7 @@
           <a>{{ $t(menuTitle.buy) }}</a>
           <ul class="sub-menu">
             <li v-for="buySub in buySub" key="buySub">
-              <router-link :to="buySub.link">{{ buySub.name }}</router-link>
+              <router-link :to="buySub.link">{{ $t(buySub.name) }}</router-link>
             </li>
           </ul>
         </div>
@@ -63,26 +56,16 @@
         <!-- 會員登入 -->
         <div class="icons">
           <span>
-            <i
-              @click="this.$store.state.storeShowLogin = true"
-              v-if="!this.$store.state.userName"
-              class="fa-solid fa-user"
-              style="color: #eee"
-            ></i>
-            <div
-              v-else
-              @click="this.$router.push('./member')"
-              style="color: #eee"
-            >
+            <i @click="this.$store.state.storeShowLogin = true" v-if="!this.$store.state.userName"
+              class="fa-solid fa-user" style="color: #eee"></i>
+            <div v-if="this.$store.state.userName" @click="this.$router.push('./member')" style="color: #eee">
               {{ this.$store.state.userName }}
-              <span>登出</span>
             </div>
+            <span v-if="this.$store.state.userName" @click="logOutAPI()" class="logOutBtn">登出</span>
           </span>
 
           <!-- 購物車 -->
-          <router-link to="/shoppingcart"
-            ><i class="fa-solid fa-cart-shopping" style="color: #eee"></i
-          ></router-link>
+          <router-link to="/shoppingcart"><i class="fa-solid fa-cart-shopping" style="color: #eee"></i></router-link>
         </div>
         <!-- 語言切換 -->
         <div class="select">
@@ -115,7 +98,7 @@ export default {
         buy: "DIDA商城",
       },
       aboutSub: [
-        { link: "/faq", name: "常見問題" },
+        { link: "/faq", name: "常見問答" },
         { link: "/guide", name: "園區導覽" },
         { link: "/interact", name: "互動遊戲" },
       ],
@@ -166,6 +149,11 @@ export default {
     window.removeEventListener("scroll", this.handleScroll);
   },
   methods: {
+    logOutAPI() {
+      fetch("https://tibamef2e.com/cgd103/g1/api/postMemberLogout.php")
+        .then((res) => res.json())
+        .then((json) => console.log(json));
+    },
     handleScroll(event) {
       console.log(event);
       console.log(window.scrollY);
@@ -304,6 +292,13 @@ select {
 
 .icons {
   cursor: pointer;
+
+  span {
+    .logOutBtn {
+      // border: 1px red solid;
+      color: white;
+    }
+  }
 }
 
 .select {
