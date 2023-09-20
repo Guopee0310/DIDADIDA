@@ -81,6 +81,7 @@ export default {
           border: 1px black solid;
           border-bottom: none;
           padding: 0 10px;
+          cursor: pointer;
         }
       }
     }

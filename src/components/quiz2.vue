@@ -4,6 +4,7 @@
       v-for="(i, index) in randomQuestions"
       :key="index"
       class="singelQuestion"
+      :class="{ showWrong: i.isWrong }"
     >
       <div class="questionTitle">第{{ indexPlus(index) }}題</div>
       <div class="questionPost">{{ i.question }}</div>
@@ -13,6 +14,7 @@
             type="radio"
             :name="i.index"
             @click="pushInArr(i.index, i.ans, '是')"
+            :disabled="isDisabled"
           />
           是
         </label>
@@ -21,6 +23,7 @@
             type="radio"
             :name="i.index"
             @click="pushInArr(i.index, i.ans, '否')"
+            :disabled="isDisabled"
           />
           否
         </label>
@@ -49,16 +52,16 @@ export default {
   data() {
     return {
       quesAndAns: [
-        { question: "鯊魚是魚嗎", ans: "是", index: 0 },
-        { question: "魚是魚嗎", ans: "是", index: 1 },
-        { question: "斑馬是魚嗎", ans: "否", index: 2 },
-        { question: "烏賊是魚嗎", ans: "否", index: 3 },
-        { question: "金魚是魚嗎", ans: "是", index: 4 },
-        { question: "牛是魚嗎", ans: "否", index: 5 },
-        { question: "狗是魚嗎", ans: "否", index: 6 },
-        { question: "人是魚嗎", ans: "否", index: 7 },
-        { question: "美人魚是魚嗎", ans: "是", index: 8 },
-        { question: "綿羊是魚嗎", ans: "否", index: 9 },
+        { question: "鯊魚是魚嗎", ans: "是", index: 0, isWrong: false },
+        { question: "魚是魚嗎", ans: "是", index: 1, isWrong: false },
+        { question: "斑馬是魚嗎", ans: "否", index: 2, isWrong: false },
+        { question: "烏賊是魚嗎", ans: "否", index: 3, isWrong: false },
+        { question: "金魚是魚嗎", ans: "是", index: 4, isWrong: false },
+        { question: "牛是魚嗎", ans: "否", index: 5, isWrong: false },
+        { question: "狗是魚嗎", ans: "否", index: 6, isWrong: false },
+        { question: "人是魚嗎", ans: "否", index: 7, isWrong: false },
+        { question: "美人魚是魚嗎", ans: "是", index: 8, isWrong: false },
+        { question: "綿羊是魚嗎", ans: "否", index: 9, isWrong: false },
       ],
       randomQuestions: [],
       finalAns: [],
@@ -66,6 +69,7 @@ export default {
       totalPoint: 0,
       showResult: false,
       moveSideKeyFrames: false,
+      isDisabled: false,
     };
   },
   mounted() {
@@ -87,6 +91,8 @@ export default {
       for (let i = 0; i < this.finalAns.length; i++) {
         if (this.finalAns[i][1] == this.finalAns[i][2]) {
           this.totalPoint++;
+        } else {
+          this.quesAndAns[i].isWrong = true;
         }
       }
       this.$store.state.quizScore = this.totalPoint;
@@ -99,6 +105,7 @@ export default {
           this.moveSideKeyFrames = false;
         }, 500);
       }
+      this.isDisabled = true;
     },
     pushInArr(index, ans, e) {
       for (let i = 0; i < this.finalAns.length; i++) {
@@ -126,7 +133,9 @@ export default {
 <style scoped lang="scss">
 .quizAll {
   @include LQ;
-
+  .showWrong {
+    background-color: red;
+  }
   .singelQuestion {
     // border: 1px red solid;
     padding: 15px 0px;
