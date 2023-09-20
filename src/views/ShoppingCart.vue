@@ -134,6 +134,12 @@ export default {
       picked: 0,
     };
   },
+  created() {
+    this.shopCartData = this.$store.state.shoppingCart;
+  },
+  mounted() {
+    console.log(this.$store.state.shoppingCart);
+  },
   components: {
     heart,
   },

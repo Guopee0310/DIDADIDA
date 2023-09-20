@@ -31,7 +31,14 @@
             <i
               class="fa-solid fa-cart-shopping"
               style="color: #9fbdce"
-              @click="pushInShoppingCart(i.titleName)"
+              @click.prevent="
+                pushInShoppingCart(
+                  i.imageSrc,
+                  i.titleName,
+                  i.count,
+                  i.prodPrice
+                )
+              "
             ></i>
           </a>
         </div>
@@ -336,7 +343,21 @@ export default {
         this.chooseItem[idx].count--;
       }
     },
-    pushInShoppingCart() {},
+    pushInShoppingCart(img1, name1, count1, price1) {
+      console.log([img1, name1, count1, price1]);
+      this.$store.state.shoppingCart.push({
+        imgURL: img1,
+        name: name1,
+        price: price1,
+        count: count1,
+        select: false,
+      });
+      console.log(this.$store.state.shoppingCart);
+      //   imgURL: './image/seagull_tshirt.png',
+      //   name: '海鷗T-Shirt',
+      //   price: '680',
+      //   count: 1,
+    },
     getClass(data) {
       this.selectOption = data;
       if (data == "所有商品") {
