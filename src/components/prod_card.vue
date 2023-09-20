@@ -345,6 +345,12 @@ export default {
     },
     pushInShoppingCart(img1, name1, count1, price1) {
       console.log([img1, name1, count1, price1]);
+      for (let i = 0; i < this.$store.state.shoppingCart.length; i++) {
+        if (img1 === this.$store.state.shoppingCart[i].imgURL) {
+          this.$store.state.shoppingCart[i].count += count1;
+          return;
+        }
+      }
       this.$store.state.shoppingCart.push({
         imgURL: img1,
         name: name1,
