@@ -1,24 +1,28 @@
 <template>
-  <div class="helperAll">
-    <img
-      :src="require('../../public/all_images/doctor dida.png')"
-      alt=""
-      @click="moveShowText"
-    />
+  <!-- 小幫手 -->
+  <div class="helperAll" @click="moveShowText">
+    <div class="item">
+      <div class="circular">
+        <svg viewBox="0 0 100 100">
+          <path d="M 0,50 a 50,50 0 1,1 0,1 z" id="circle" />
+          <text>
+            <textPath href="#circle">
+              DOCTER DIDA
+            </textPath>
+          </text>
+        </svg>
+      </div>
+      <img :src="require('../../public/all_images/doctor dida.png')" alt="" />
+    </div>
   </div>
-  <div
-    class="showWindow"
-    :style="{ transform: showText ? 'translateX(0px)' : 'translateX(1000px)' }"
-  >
+
+  <div class="showWindow" :style="{ transform: showText ? 'translateX(0px)' : 'translateX(1000px)' }">
     <div class="windowBtnAll">
       <div @click="moveAddress">地址</div>
       <div @click="moveWeatherMax">降雨機率</div>
       <div @click="moveMaxT">今日溫度</div>
     </div>
-    <div
-      class="sayHelloTxt"
-      v-if="!(showAddress || showWeatherMax || showMaxT)"
-    >
+    <div class="sayHelloTxt" v-if="!(showAddress || showWeatherMax || showMaxT)">
       {{ sayHelloTxt }}
     </div>
     <div v-if="showAddress">地址 : {{ locationName }}</div>
@@ -113,17 +117,40 @@ export default {
 <style scoped lang="scss">
 .helperAll {
   position: fixed;
-  right: 30px;
-  top: 80%;
+  right: 40px;
+  top: 85%;
   width: 50px;
   height: 50px;
   z-index: 50;
   cursor: pointer;
 
-  img {
-    width: 100%;
-    border-radius: 50px;
+  .item {
+    position: relative;
+
+    img {
+      width: 100%;
+    }
+
+    .circular {
+      position: absolute;
+      top: -13px;
+      left: -13px;
+      width: 6em;
+      height: 6em;
+
+      path {
+        fill-opacity: 0;
+      }
+
+      svg {
+        display: block;
+        overflow: visible;
+      }
+    }
   }
+
+
+
 }
 
 .showWindow {
