@@ -63,6 +63,7 @@ export default {
           prodPrice: "380",
           tag: "抱枕",
           count: 1,
+          info: "海豚抱枕的介紹海豚抱枕的介紹海豚抱枕的介紹海豚抱枕的介紹",
         },
         {
           imageSrc: require("../assets/images/whaleshark_doll.png"),
@@ -70,6 +71,7 @@ export default {
           prodPrice: "499",
           tag: "玩偶",
           count: 1,
+          info: "Q版鯨鯊玩偶的介紹Q版鯨鯊玩偶的介紹Q版鯨鯊玩偶的介紹Q版鯨鯊玩偶的介紹Q版鯨鯊玩偶的介紹",
         },
         {
           imageSrc: require("../assets/images/dolphin_doll.png"),
@@ -77,6 +79,7 @@ export default {
           prodPrice: "399",
           tag: "玩偶",
           count: 1,
+          info: "超可愛海豚寶寶玩偶的介紹超可愛海豚寶寶玩偶的介紹超可愛海豚寶寶玩偶的介紹超可愛海豚寶寶玩偶的介紹",
         },
         {
           imageSrc: require("../assets/images/shark_doll.jpg"),
@@ -84,6 +87,7 @@ export default {
           prodPrice: "499",
           tag: "玩偶",
           count: 1,
+          info: "愛睏a鯊鯊玩偶的介紹愛睏a鯊鯊玩偶的介紹愛睏a鯊鯊玩偶的介紹",
         },
         {
           imageSrc: require("../assets/images/shark_keyring.jpg"),
@@ -91,6 +95,7 @@ export default {
           prodPrice: "160",
           tag: "配飾",
           count: 1,
+          info: "QQ的鯊鯊鑰匙圈的介紹QQ的鯊鯊鑰匙圈的介紹QQ的鯊鯊鑰匙圈的介紹",
         },
         {
           imageSrc: require("../assets/images/Nemo_doll.jpg"),
@@ -98,6 +103,7 @@ export default {
           prodPrice: "299",
           tag: "玩偶",
           count: 1,
+          info: "Nemo玩偶的介紹Nemo玩偶的介紹Nemo玩偶的介紹Nemo玩偶的介紹",
         },
         {
           imageSrc: require("../assets/images/sealion_doll.png"),
@@ -105,6 +111,7 @@ export default {
           prodPrice: "499",
           tag: "玩偶",
           count: 1,
+          info: "Q版海獅玩偶的介紹Q版海獅玩偶的介紹Q版海獅玩偶的介紹Q版海獅玩偶的介紹",
         },
         {
           imageSrc: require("../assets/images/shark_doll_2.png"),
@@ -112,6 +119,7 @@ export default {
           prodPrice: "499",
           tag: "玩偶",
           count: 1,
+          info: "Q版鯊鯊玩偶的介紹Q版鯊鯊玩偶的介紹Q版鯊鯊玩偶的介紹",
         },
         {
           imageSrc: require("../assets/images/loveing_garden_eel.png"),
@@ -119,6 +127,7 @@ export default {
           prodPrice: "399",
           tag: "玩偶",
           count: 1,
+          info: "戀愛ing花園鰻玩偶的介紹戀愛ing花園鰻玩偶的介紹戀愛ing花園鰻玩偶的介紹",
         },
         {
           imageSrc: require("../assets/images/whale_doll.jpg"),
@@ -126,6 +135,7 @@ export default {
           prodPrice: "350",
           tag: "玩偶",
           count: 1,
+          info: "勾錐a小鯨魚玩偶的介紹勾錐a小鯨魚玩偶的介紹勾錐a小鯨魚玩偶的介紹",
         },
         {
           imageSrc: require("../assets/images/lantern_fish_doll.jpg"),
@@ -133,6 +143,7 @@ export default {
           prodPrice: "499",
           tag: "玩偶",
           count: 1,
+          info: "貪吃燈籠魚玩偶的介紹貪吃燈籠魚玩偶的介紹貪吃燈籠魚玩偶的介紹",
         },
         {
           imageSrc: require("../assets/images/pufferfish_doll.jpg"),
@@ -140,6 +151,7 @@ export default {
           prodPrice: "499",
           tag: "玩偶",
           count: 1,
+          info: "愛睏a河豚玩偶的介紹愛睏a河豚玩偶的介紹愛睏a河豚玩偶的介紹",
         },
         {
           imageSrc: require("../assets/images/octopus_doll.jpg"),
@@ -147,6 +159,7 @@ export default {
           prodPrice: "399",
           tag: "玩偶",
           count: 1,
+          info: "老爺爺章魚玩偶的介紹老爺爺章魚玩偶的介紹老爺爺章魚玩偶的介紹",
         },
         {
           imageSrc: require("../assets/images/sea_turtle_doll.jpg"),
@@ -154,6 +167,7 @@ export default {
           prodPrice: "399",
           tag: "玩偶",
           count: 1,
+          info: "勾錐a海龜玩偶的介紹勾錐a海龜玩偶的介紹勾錐a海龜玩偶的介紹",
         },
         {
           imageSrc: require("../assets/images/killer_whale_doll.jpg"),
@@ -476,6 +490,14 @@ export default {
     changeHeart(isFav, i) {
       console.log(isFav, i);
       // TODO　ＣＡＬＬ　ＡＰＩ
+      if (isFav) {
+        this.$store.state.favoList.push({
+          favoImg: `require(${i.imageSrc})`,
+          favoName: i.titleName,
+          favoPrice: i.prodPrice,
+          favoIntroduction: "",
+        });
+      }
     },
     // getClass(data) {
     //   this.chooseItem2 = [];
