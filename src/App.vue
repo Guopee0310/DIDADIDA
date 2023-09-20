@@ -1,6 +1,6 @@
 <template>
   <header1 v-if="!$route.meta.hideApp"></header1>
-  <wave v-if="!$route.meta.hideApp"></wave>
+  <wave v-if="!$route.meta.hideApp || !$route.meta.hideWave"></wave>
   <helper v-if="!$route.meta.hideApp"></helper>
   <login v-if="!$route.meta.hideApp"></login>
 

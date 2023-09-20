@@ -5,7 +5,7 @@
       @transferPrice="getPrice"
     ></prodSelect>
   </div>
-  <div class="card" v-for="i in chooseItem" :key="i.imageSrc">
+  <div class="card" v-for="(i, index) in chooseItem" :key="i.imageSrc">
     <div class="heart">
       <heart @change-heart="changeHeart($event, i)"></heart>
     </div>
@@ -22,13 +22,24 @@
       </div>
       <div class="prod_btn">
         <div class="num">
-          <input type="button" value="–" />
-          <input type="text" value="1" size="1" />
-          <input type="button" value="+" />
+          <input type="button" value="–" @click="productDown(index)" />
+          <input type="text" :value="i.count" size="1" />
+          <input type="button" value="+" @click="i.count++" />
         </div>
         <div class="buy">
           <a href="">
-            <i class="fa-solid fa-cart-shopping" style="color: #9fbdce"></i>
+            <i
+              class="fa-solid fa-cart-shopping"
+              style="color: #9fbdce"
+              @click.prevent="
+                pushInShoppingCart(
+                  i.imageSrc,
+                  i.titleName,
+                  i.count,
+                  i.prodPrice
+                )
+              "
+            ></i>
           </a>
         </div>
       </div>
@@ -51,108 +62,126 @@ export default {
           titleName: "極舒適海豚抱枕",
           prodPrice: "380",
           tag: "抱枕",
+          count: 1,
         },
         {
           imageSrc: require("../assets/images/whaleshark_doll.png"),
           titleName: "Q版鯨鯊玩偶",
           prodPrice: "499",
           tag: "玩偶",
+          count: 1,
         },
         {
           imageSrc: require("../assets/images/dolphin_doll.png"),
           titleName: "超可愛海豚寶寶玩偶",
           prodPrice: "399",
           tag: "玩偶",
+          count: 1,
         },
         {
           imageSrc: require("../assets/images/shark_doll.jpg"),
           titleName: "愛睏a鯊鯊玩偶",
           prodPrice: "499",
           tag: "玩偶",
+          count: 1,
         },
         {
           imageSrc: require("../assets/images/shark_keyring.jpg"),
           titleName: "QQ的鯊鯊鑰匙圈",
           prodPrice: "160",
           tag: "配飾",
+          count: 1,
         },
         {
           imageSrc: require("../assets/images/Nemo_doll.jpg"),
           titleName: "Nemo玩偶",
           prodPrice: "299",
           tag: "玩偶",
+          count: 1,
         },
         {
           imageSrc: require("../assets/images/sealion_doll.png"),
           titleName: "Q版海獅玩偶",
           prodPrice: "499",
           tag: "玩偶",
+          count: 1,
         },
         {
           imageSrc: require("../assets/images/shark_doll_2.png"),
           titleName: "Q版鯊鯊玩偶",
           prodPrice: "499",
           tag: "玩偶",
+          count: 1,
         },
         {
           imageSrc: require("../assets/images/loveing_garden_eel.png"),
           titleName: "戀愛ing花園鰻玩偶",
           prodPrice: "399",
           tag: "玩偶",
+          count: 1,
         },
         {
           imageSrc: require("../assets/images/whale_doll.jpg"),
           titleName: "勾錐a小鯨魚玩偶",
           prodPrice: "350",
           tag: "玩偶",
+          count: 1,
         },
         {
           imageSrc: require("../assets/images/lantern_fish_doll.jpg"),
           titleName: "貪吃燈籠魚玩偶",
           prodPrice: "499",
           tag: "玩偶",
+          count: 1,
         },
         {
           imageSrc: require("../assets/images/pufferfish_doll.jpg"),
           titleName: "愛睏a河豚玩偶",
           prodPrice: "499",
           tag: "玩偶",
+          count: 1,
         },
         {
           imageSrc: require("../assets/images/octopus_doll.jpg"),
           titleName: "老爺爺章魚玩偶",
           prodPrice: "399",
           tag: "玩偶",
+          count: 1,
         },
         {
           imageSrc: require("../assets/images/sea_turtle_doll.jpg"),
           titleName: "勾錐a海龜玩偶",
           prodPrice: "399",
           tag: "玩偶",
+          count: 1,
         },
         {
           imageSrc: require("../assets/images/killer_whale_doll.jpg"),
           titleName: "帥氣a虎鯨玩偶",
           prodPrice: "499",
           tag: "玩偶",
+          count: 1,
         },
         {
           imageSrc: require("../assets/images/stingray_pillow.jpg"),
           titleName: "極舒適魟魚抱枕",
           prodPrice: "380",
           tag: "抱枕",
+          count: 1,
         },
         {
           imageSrc: require("../assets/images/shark_pillow2.jpg"),
           titleName: "滿出來鯊鯊抱枕",
           prodPrice: "660",
           tag: "抱枕",
+          count: 1,
         },
         {
           imageSrc: require("../assets/images/shark_pillow.jpg"),
           titleName: "極舒適鯊魚抱枕",
           prodPrice: "499",
           tag: "抱枕",
+          count: 1,
         },
       ],
       chooseItem: [
@@ -161,108 +190,126 @@ export default {
           titleName: "極舒適海馬抱枕",
           prodPrice: "499",
           tag: "抱枕",
+          count: 1,
         },
         {
           imageSrc: require("../assets/images/whale_pillow.jpg"),
           titleName: "極舒適鯨魚抱枕",
           prodPrice: "499",
           tag: "抱枕",
+          count: 1,
         },
         {
           imageSrc: require("../assets/images/seal_pillow.jpg"),
           titleName: "極舒適海豹抱枕",
           prodPrice: "499",
           tag: "抱枕",
+          count: 1,
         },
         {
           imageSrc: require("../assets/images/killer_whale_pillow.jpg"),
           titleName: "極舒適虎鯨抱枕",
           prodPrice: "499",
           tag: "抱枕",
+          count: 1,
         },
         {
           imageSrc: require("../assets/images/octopus_pillow.jpg"),
           titleName: "章魚大海怪抱枕",
           prodPrice: "650",
           tag: "抱枕",
+          count: 1,
         },
         {
           imageSrc: require("../assets/images/starfish_pillow.jpg"),
           titleName: "極舒適海星抱枕",
           prodPrice: "499",
           tag: "抱枕",
+          count: 1,
         },
         {
           imageSrc: require("../assets/images/jellyfish_pillow.jpg"),
           titleName: "極舒適水母抱枕",
           prodPrice: "499",
           tag: "抱枕",
+          count: 1,
         },
         {
           imageSrc: require("../assets/images/pufferfish_pillow.jpg"),
           titleName: "極舒適河豚抱枕",
           prodPrice: "499",
           tag: "抱枕",
+          count: 1,
         },
         {
           imageSrc: require("../assets/images/dolphin_keyring.jpg"),
           titleName: "QQ的海豚鑰匙圈",
           prodPrice: "199",
           tag: "配飾",
+          count: 1,
         },
         {
           imageSrc: require("../assets/images/shark_hat.jpg"),
           titleName: "動感鯊鯊帽",
           prodPrice: "399",
           tag: "配飾",
+          count: 1,
         },
         {
           imageSrc: require("../assets/images/shark_cap.jpg"),
           titleName: "造型鯊鯊帽",
           prodPrice: "399",
           tag: "配飾",
+          count: 1,
         },
         {
           imageSrc: require("../assets/images/whale_shark_purse.jpg"),
           titleName: "鯨鯊零錢包",
           prodPrice: "300",
           tag: "配飾",
+          count: 1,
         },
         {
           imageSrc: require("../assets/images/starfish_purse.jpg"),
           titleName: "海星零錢包",
           prodPrice: "300",
           tag: "配飾",
+          count: 1,
         },
         {
           imageSrc: require("../assets/images/killer_whale_purse.jpg"),
           titleName: "虎鯨零錢包",
           prodPrice: "300",
           tag: "配飾",
+          count: 1,
         },
         {
           imageSrc: require("../assets/images/whale_purse.jpg"),
           titleName: "鯨魚零錢包",
           prodPrice: "600",
           tag: "配飾",
+          count: 1,
         },
         {
           imageSrc: require("../assets/images/fish_kettle.jpg"),
           titleName: "滿滿的魚水壺",
           prodPrice: "500",
           tag: "配飾",
+          count: 1,
         },
         {
           imageSrc: require("../assets/images/shark_slippers.jpg"),
           titleName: "超好走鯊鯊拖鞋",
           prodPrice: "499",
           tag: "配飾",
+          count: 1,
         },
         {
           imageSrc: require("../assets/images/killer_whale_phonecase.jpg"),
           titleName: "虎鯨手機殼",
           prodPrice: "499",
           tag: "配飾",
+          count: 1,
         },
       ],
       pageSize: 8,
@@ -291,6 +338,26 @@ export default {
   },
   computed: {},
   methods: {
+    productDown(idx) {
+      if (this.chooseItem[idx].count > 0) {
+        this.chooseItem[idx].count--;
+      }
+    },
+    pushInShoppingCart(img1, name1, count1, price1) {
+      console.log([img1, name1, count1, price1]);
+      this.$store.state.shoppingCart.push({
+        imgURL: img1,
+        name: name1,
+        price: price1,
+        count: count1,
+        select: false,
+      });
+      console.log(this.$store.state.shoppingCart);
+      //   imgURL: './image/seagull_tshirt.png',
+      //   name: '海鷗T-Shirt',
+      //   price: '680',
+      //   count: 1,
+    },
     getClass(data) {
       this.selectOption = data;
       if (data == "所有商品") {
