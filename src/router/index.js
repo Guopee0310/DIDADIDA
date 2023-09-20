@@ -10,6 +10,7 @@ const routes = [
     component: HomeView,
     meta: {
       title: "DIDA DIDA",
+      hideWave: true,
     },
   },
   {
