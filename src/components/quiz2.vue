@@ -14,6 +14,7 @@
             type="radio"
             :name="i.index"
             @click="pushInArr(i.index, i.ans, '是')"
+            :disabled="isDisabled"
           />
           是
         </label>
@@ -22,6 +23,7 @@
             type="radio"
             :name="i.index"
             @click="pushInArr(i.index, i.ans, '否')"
+            :disabled="isDisabled"
           />
           否
         </label>
@@ -67,6 +69,7 @@ export default {
       totalPoint: 0,
       showResult: false,
       moveSideKeyFrames: false,
+      isDisabled: false,
     };
   },
   mounted() {
@@ -102,6 +105,7 @@ export default {
           this.moveSideKeyFrames = false;
         }, 500);
       }
+      this.isDisabled = true;
     },
     pushInArr(index, ans, e) {
       for (let i = 0; i < this.finalAns.length; i++) {
