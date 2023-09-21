@@ -153,7 +153,7 @@ export default {
   },
   mounted() {
     if (this.$route.path == "/about") {
-      this.waveColor3 = "rgba(255,255,255,0)";
+      this.waveColor3 = "#68769a";
     }
     // this.setWaveColors();
   },
