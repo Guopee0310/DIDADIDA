@@ -1,9 +1,19 @@
 <template>
   <div class="explore">
+    <div class="navBar">
+      <ul>
+        <li><a href="#ep">0m</a></li>
+        <li><a href="#me">200m</a></li>
+        <li><a href="">1000m</a></li>
+        <li><a href="">4000m</a></li>
+        <li><a href="">6000m</a></li>
+        <li><a href="">11000m</a></li>
+      </ul>
+    </div>
     <div class="wapper">
 
       <!-- 表層海洋帶 -->
-      <div class="epipelagic">
+      <div class="epipelagic" id="ep">
         <h1 data="0m">0m</h1>
         <div class="goldfish">
           <img src="../../public/all_images/animal/goldfish.png" alt="goldfish">
@@ -16,7 +26,7 @@
       </div>
 
       <!-- 中層海洋帶 -->
-      <div class="Mesopelagic">
+      <div class="Mesopelagic" id="me">
         <h1 data="200m">200m</h1>
         <div class="whale">
           <img src="../../public/all_images/animal/whale.png" alt="">

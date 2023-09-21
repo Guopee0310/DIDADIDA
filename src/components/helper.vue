@@ -133,10 +133,10 @@ export default {
 
     .circular {
       position: absolute;
-      top: -13px;
-      left: -13px;
-      width: 6em;
-      height: 6em;
+      top: -9px;
+      left: -9px;
+      width: 5em;
+      height: 5em;
 
       path {
         fill-opacity: 0;
