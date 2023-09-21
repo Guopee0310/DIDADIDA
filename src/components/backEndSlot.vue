@@ -5,11 +5,7 @@
         <div v-for="i in featureAll" class="singleFeature">{{ i }}</div>
       </div>
       <div class="differentBox">
-        <div class="allTabs">
-          <div>購物訂單</div>
-          <div>票券訂單</div>
-        </div>
-        <slot></slot>
+        <router-view></router-view>
       </div>
     </div>
   </div>

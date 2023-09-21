@@ -86,6 +86,9 @@ export default {
         ? "Tickets"
         : "";
     },
+    // waveColor3() {
+    //   return this.$route.path == "/about" ? "#333" : "#fff";
+    // },
     banner_pic() {
       return this.$route.path == "/product"
         ? `${this.$store.state.chooseImgSrc}/all_images/cenote-280252_1920.jpg`
@@ -120,6 +123,17 @@ export default {
           "";
     },
   },
+  watch: {
+    "$route.path"(nVal, oVal) {
+      console.log(nVal);
+      console.log(oVal);
+      if (nVal == "/about" || nVal == "/explore") {
+        this.waveColor3 = "rgba(255,255,255,0)";
+      } else {
+        this.waveColor3 = "#fff";
+      }
+    },
+  },
   methods: {
     setWaveColors() {
       switch (this.$route.path) {
@@ -128,7 +142,6 @@ export default {
           this.waveColor2 = "rgba(70, 130, 191,0.7)";
           this.waveColor3 = "#fff";
           break;
-
         default:
           // 默認顏色
           this.waveColor1 = "rgba(255, 255, 255, 0.6)";

@@ -18,6 +18,7 @@ export default createStore({
     userName: "",
     shoppingCart: [],
     chooseImgSrc: publicURL,
+    favoList: [],
   },
 
   // 類似vue檔裡面的computed
