@@ -92,7 +92,7 @@ export default {
 
 
         .prod_order_group {
-            width: 500px;
+            width: 460px;
             height: 200px;
             border-bottom: 1px solid #eee;
             display: flex;

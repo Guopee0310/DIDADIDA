@@ -66,13 +66,13 @@ export default {
                     tickDate: "2023.08.31",
                     tickPrice: "250",
                 },
-                {
-                    tickImg: require("../assets/images/dolphin_pillow.jpg"),
-                    tickName: "一般全票",
-                    tickCount: "2",
-                    tickDate: "2023.08.31",
-                    tickPrice: "250",
-                },
+                // {
+                //     tickImg: require("../assets/images/dolphin_pillow.jpg"),
+                //     tickName: "一般全票",
+                //     tickCount: "2",
+                //     tickDate: "2023.08.31",
+                //     tickPrice: "250",
+                // },
             ],
         }
     }
@@ -99,7 +99,7 @@ export default {
 
 
         .tick_order_group {
-            width: 500px;
+            width: 460px;
             height: 208px;
             border-bottom: 1px solid #eee;
             display: flex;

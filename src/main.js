@@ -33,10 +33,12 @@ const i18n = createI18n({
             超深淵層海洋帶: 'Hadopelagic Zone',
             DIDA購物: 'DIDA Shopping',
             DIDA購票: 'DIDA Ticketing',
-            // index-------------------------------------
+            // index -------------------------------------
             DIDADIDA海洋館: 'DIDADIDA AQUARIUM',
             營業時間: 'Opening Hours',
             最後入場: 'Last Tours',
+            // Ticket ------------------------------------
+            購票資訊: 'Ticket Purchase Information'
         },
     },
 })

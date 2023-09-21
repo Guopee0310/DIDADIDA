@@ -1,7 +1,7 @@
 <template>
   <div class="ticketAll">
     <div class="topIntro">
-      <div class="topTitle">購票資訊</div>
+      <div class="topTitle">{{ $t('購票資訊') }}</div>
       <div class="ticketRow" v-for="(i, index) in ticketRowArr" :key="index">
         <div>{{ i[0] }}</div>
         <div>{{ i[1] }}</div>
@@ -142,50 +142,71 @@ export default {
 <style lang="scss" scoped>
 .topIntro {
   @include ticket;
+  // border: 1px map-get($colors, "secondary") solid;
 
   .topTitle {
     @include h3Title;
   }
+
   .ticketRow {
     display: flex;
-    border: 1px rgb(35, 45, 71) solid;
+    letter-spacing: 1px;
+
+
     &:nth-child(2),
     &:last-child {
-      background-color: rgb(35, 45, 71);
-      color: white;
+      background-color: map-get($colors, "secondary");
+      color: map-get($colors, "light");
     }
+
     &:nth-child(4) {
-      background-color: rgb(151, 149, 149);
-      color: white;
+      background-color: map-get($colors, "bgc");
+      color: map-get($colors, "dark");
     }
+
     &:nth-child(6) {
-      background-color: rgb(151, 149, 149);
-      color: white;
+      background-color: map-get($colors, "bgc");
+      color: map-get($colors, "dark");
     }
+
+
     div {
-      // border: 1px red solid;
       width: 150px;
       padding: 20px 12px;
+
+      &:first-child {
+        text-align: center;
+      }
+
       &:nth-child(2) {
+        text-align: center;
         border-left: none;
         border-right: none;
       }
+
       &:last-child {
         flex-grow: 4;
       }
     }
   }
+
   .warning {
-    background-color: rgb(35, 45, 71);
+    height: 61px;
+    display: flex;
+    align-items: center;
+    background-color: map-get($colors, "secondary");
     color: white;
-    padding: 10px;
+    padding-left: 50px;
+    letter-spacing: 1px;
   }
 }
+
 .bottomIntro {
   @include ticket;
   background-color: #979595;
   color: white;
   padding: 50px;
+
   .bottomTitle {
     font-size: map-get($fontSizes, "h3");
     // border: 1px red solid;
@@ -193,6 +214,7 @@ export default {
     justify-content: center;
     align-items: center;
   }
+
   .singleNotice {
     line-height: 2;
   }

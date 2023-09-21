@@ -94,7 +94,7 @@ export default {
               ? `${this.$store.state.chooseImgSrc}/all_images/banner/about.jpg`
               : // ? "/all_images/banner/about.jpg"
               this.$route.path == "/member"
-                ? `${this.$store.state.chooseImgSrc}/all_images/banner/member.jpg`
+                ? `${this.$store.state.chooseImgSrc}/all_images/banner/mem_center.jpg`
                 : // ? "/all_images/cenote-280252_1920.jpg"
                 this.$route.path == "/guide"
                   ? `${this.$store.state.chooseImgSrc}/all_images/banner/guide_banner.jpg`
