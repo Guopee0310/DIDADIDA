@@ -123,17 +123,25 @@ export default {
   methods: {
     setWaveColors() {
       switch (this.$route.path) {
+      
         case "/about":
           this.waveColor1 = "rgba(255,255,255,0.6)";
           this.waveColor2 = "rgba(70, 130, 191,0.7)";
           this.waveColor3 = "#fff";
           break;
-
+        case "/explore":
+          this.waveColor1 = "rgba(255,255,255,0.6)";
+          this.waveColor2 = "rgba(70, 130, 191,0.7)";
+          this.waveColor3 = "transparent";
+          break;
+     
         default:
           // 默認顏色
           this.waveColor1 = "rgba(255, 255, 255, 0.6)";
           this.waveColor2 = "rgba(70, 130, 191, 0.7)";
           this.waveColor3 = "#fff";
+         
+        
       }
     },
   },
