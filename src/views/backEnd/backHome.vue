@@ -2,7 +2,10 @@
   <div class="slotAll">
     <div class="controlWidth">
       <div class="featureBox">
-        <div v-for="i in featureAll" class="singleFeature">{{ i }}</div>
+        <!-- singleFeature -->
+        <router-link :to="i[1]" v-for="i in featureAll" class="singleFeature"
+          >{{ i[0] }}
+        </router-link>
       </div>
       <div class="differentBox">
         <router-view></router-view>
@@ -17,15 +20,14 @@ export default {
   data() {
     return {
       featureAll: [
-        "後台登入",
-        "首頁輪播圖片管理",
-        "最新消息管理",
-        "會員管理",
-        "訂單管理",
-        "商品管理",
-        "票券管理",
-        "智能小幫手",
-        "互動",
+        ["首頁輪播圖片管理", "/backHome/homePicMg"],
+        ["最新消息管理", "/backHome/newsMg"],
+        ["會員管理", "/backHome/memberMg"],
+        ["訂單管理", "/backHome/orderMg"],
+        ["商品管理", "/backHome/productMg"],
+        ["票券管理", "/backHome/ticketMg"],
+        ["智能小幫手", "/backHome/helperMg"],
+        ["互動", "/backHome/gamesMg"],
       ],
     };
   },
@@ -54,6 +56,8 @@ export default {
     margin: 0 auto;
     .featureBox {
       border: 1px black solid;
+      display: flex;
+      flex-direction: column;
       height: fit-content;
       padding: 20px;
       .singleFeature {
