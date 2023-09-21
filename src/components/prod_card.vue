@@ -7,7 +7,10 @@
   </div>
   <div class="card" v-for="(i, index) in chooseItem" :key="i.imageSrc">
     <div class="heart">
-      <heart @change-heart="changeHeart($event, i)"></heart>
+      <heart
+        @change-heart="changeHeart($event, i, index)"
+        :keepLove="keepHeartArr[index]"
+      ></heart>
     </div>
     <div class="pic">
       <a href="#"><img :src="i.imageSrc" alt="" /></a>
@@ -354,6 +357,7 @@ export default {
       selectOption: "",
       getPriceOption: "",
       getPage: 1,
+      keepHeartArr: [],
     };
   },
   mounted() {
@@ -362,6 +366,12 @@ export default {
     });
     this.chooseItem2 = this.cardsAll;
     this.chooseItem = this.chooseItem2.slice(0, this.pageSize);
+    for (let i = 0; i < this.chooseItem2.length; i++) {
+      this.keepHeartArr.push(true);
+    }
+    for (let i = 0; i < this.$store.state.favoList.length; i++) {
+      this.keepHeartArr[this.$store.state.favoList[i].favIndex] = false;
+    }
   },
   props: {
     msg1: [String, Number],
@@ -511,8 +521,8 @@ export default {
       console.log(this.chooseItem2);
       this.chooseItem = this.chooseItem2.slice(optionStartIdx, optionEndIdx);
     },
-    changeHeart(isFav, i) {
-      console.log(isFav, i);
+    changeHeart(isFav, i, index) {
+      console.log(isFav, i, index);
 
       for (let j = 0; j < this.$store.state.favoList.length; j++) {
         if (i.imageSrc == this.$store.state.favoList[j].favoImg) {
@@ -525,6 +535,7 @@ export default {
           favoName: i.titleName,
           favoPrice: i.prodPrice,
           favoIntroduction: i.info,
+          favIndex: index,
         });
       }
       console.log(this.$store.state.favoList);
