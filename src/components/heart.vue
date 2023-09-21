@@ -17,6 +17,10 @@ export default {
       changeHeart: true,
     };
   },
+  props: ["keepLove"],
+  mounted() {
+    // this.changeHeart = this.keepLove;
+  },
   methods: {
     change() {
       this.changeHeart = !this.changeHeart;
