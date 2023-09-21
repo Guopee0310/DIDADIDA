@@ -1,11 +1,7 @@
 <template>
   <div class="favorites_list_main">
     <div class="favorites_list_area">
-      <div
-        class="favorites_list_group"
-        v-for="favo in favoList"
-        :key="favo.favoImg"
-      >
+      <div class="favorites_list_group" v-for="favo in favoList" :key="favo.favoImg">
         <div class="favorites_list_img">
           <img :src="favo.favoImg" alt="" />
         </div>

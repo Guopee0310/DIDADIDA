@@ -21,6 +21,9 @@
                             <button>確認</button>
                         </div>
                     </div>
+                    <div class="deco_fishes">
+                        <img src="../../public/all_images/deco/deco_fishes.png" alt="">
+                    </div>
                 </div>
             </div>
         </transition>
@@ -46,6 +49,8 @@ export default {
 .qr_btn {
     width: 150px;
     margin: 5px;
+    border: 0;
+    background-color: map-get($colors, 'h2Blue');
 }
 
 .modal {
@@ -88,7 +93,7 @@ export default {
         margin: 0 auto;
         border: 0;
         border-radius: 15px;
-        background-color: aqua;
+        background-image: url(../../public/all_images/QRbg.jpg);
         display: flex;
         flex-direction: column;
         justify-content: space-evenly;
@@ -112,23 +117,28 @@ export default {
         margin: 0 auto;
         text-align: justify;
         display: flex;
-        // flex-direction: column;
         justify-content: space-evenly;
         align-items: center;
 
         p {
+            color: map-get($colors, 'light');
+            ;
             font-size: map-get($fontSizes, 'p');
         }
     }
 
-    .qr-confirm-btn button {
-        width: 70px;
-        height: 40px;
-        border: 0;
-        border-radius: 10px;
-        background-color: map-get($colors, 'mainColor');
-        color: #eee;
-        font-weight: bold;
+    .qr-confirm-btn {
+        z-index: 2;
+
+        button {
+            width: 70px;
+            height: 40px;
+            border: 0;
+            border-radius: 10px;
+            background-color: map-get($colors, 'QRbtn');
+            color: map-get($colors, 'dark');
+            font-weight: bold;
+        }
     }
 }
 
@@ -141,5 +151,11 @@ export default {
 .fade-enter,
 .fade-leave-to {
     opacity: 0;
+}
+
+.deco_fishes {
+    position: absolute;
+    bottom: -5px;
+    right: 40px;
 }
 </style>
