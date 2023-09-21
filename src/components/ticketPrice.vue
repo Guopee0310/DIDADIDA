@@ -1,17 +1,19 @@
 <template>
-    <table>
-        <tr>
-            <th v-for="title in priceTitle">{{ title.name }}</th>
-        </tr>
-        <tr v-for="ticket in ticket">
-            <td>{{ ticket.name }}</td>
-            <td>{{ ticket.price }}</td>
-            <td>{{ ticket.object }}</td>
-        </tr>
-        <tr>
-            <td colspan="2">※未滿4歲且有家長陪同的幼童可免費入場</td>
-        </tr>
-    </table>
+    <div class="ticket">
+        <table>
+            <tr>
+                <th v-for="title in priceTitle">{{ title.name }}</th>
+            </tr>
+            <tr v-for="ticket in ticket">
+                <td>{{ ticket.name }}</td>
+                <td>{{ ticket.price }}</td>
+                <td>{{ ticket.object }}</td>
+            </tr>
+            <tr>
+                <td colspan="2">※未滿4歲且有家長陪同的幼童可免費入場</td>
+            </tr>
+        </table>
+    </div>
 </template>
 
 <script>
@@ -45,11 +47,11 @@ export default {
 
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .ticket {
     max-width: 1200px;
     width: 100%;
-    margin: 30px auto 100px;
+    margin: 30px auto 0;
 
     table {
         margin: auto;
