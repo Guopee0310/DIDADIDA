@@ -175,6 +175,7 @@ export default {
           prodPrice: "499",
           tag: "玩偶",
           count: 1,
+          info: "帥氣a虎鯨玩偶的介紹帥氣a虎鯨玩偶的介紹帥氣a虎鯨玩偶的介紹帥氣a虎鯨玩偶的介紹",
         },
         {
           imageSrc: require("../assets/images/stingray_pillow.jpg"),
@@ -182,6 +183,7 @@ export default {
           prodPrice: "380",
           tag: "抱枕",
           count: 1,
+          info: "極舒適魟魚抱枕的介紹極舒適魟魚抱枕的介紹極舒適魟魚抱枕的介紹",
         },
         {
           imageSrc: require("../assets/images/shark_pillow2.jpg"),
@@ -189,6 +191,7 @@ export default {
           prodPrice: "660",
           tag: "抱枕",
           count: 1,
+          info: "滿出來鯊鯊抱枕的介紹滿出來鯊鯊抱枕的介紹滿出來鯊鯊抱枕的介紹",
         },
         {
           imageSrc: require("../assets/images/shark_pillow.jpg"),
@@ -196,134 +199,153 @@ export default {
           prodPrice: "499",
           tag: "抱枕",
           count: 1,
+          info: "極舒適鯊魚抱枕的介紹極舒適鯊魚抱枕的介紹極舒適鯊魚抱枕的介紹",
         },
       ],
       chooseItem: [
         {
-          imageSrc: require("../assets/images/seahorse_pillow.jpg"),
-          titleName: "極舒適海馬抱枕",
+          imageSrc: require("../assets/images/dolphin_pillow.jpg"),
+          titleName: "極舒適海豚抱枕",
+          prodPrice: "380",
+          tag: "抱枕",
+          count: 1,
+          info: "海豚抱枕的介紹海豚抱枕的介紹海豚抱枕的介紹海豚抱枕的介紹",
+        },
+        {
+          imageSrc: require("../assets/images/whaleshark_doll.png"),
+          titleName: "Q版鯨鯊玩偶",
           prodPrice: "499",
-          tag: "抱枕",
+          tag: "玩偶",
           count: 1,
+          info: "Q版鯨鯊玩偶的介紹Q版鯨鯊玩偶的介紹Q版鯨鯊玩偶的介紹Q版鯨鯊玩偶的介紹Q版鯨鯊玩偶的介紹",
         },
         {
-          imageSrc: require("../assets/images/whale_pillow.jpg"),
-          titleName: "極舒適鯨魚抱枕",
-          prodPrice: "499",
-          tag: "抱枕",
-          count: 1,
-        },
-        {
-          imageSrc: require("../assets/images/seal_pillow.jpg"),
-          titleName: "極舒適海豹抱枕",
-          prodPrice: "499",
-          tag: "抱枕",
-          count: 1,
-        },
-        {
-          imageSrc: require("../assets/images/killer_whale_pillow.jpg"),
-          titleName: "極舒適虎鯨抱枕",
-          prodPrice: "499",
-          tag: "抱枕",
-          count: 1,
-        },
-        {
-          imageSrc: require("../assets/images/octopus_pillow.jpg"),
-          titleName: "章魚大海怪抱枕",
-          prodPrice: "650",
-          tag: "抱枕",
-          count: 1,
-        },
-        {
-          imageSrc: require("../assets/images/starfish_pillow.jpg"),
-          titleName: "極舒適海星抱枕",
-          prodPrice: "499",
-          tag: "抱枕",
-          count: 1,
-        },
-        {
-          imageSrc: require("../assets/images/jellyfish_pillow.jpg"),
-          titleName: "極舒適水母抱枕",
-          prodPrice: "499",
-          tag: "抱枕",
-          count: 1,
-        },
-        {
-          imageSrc: require("../assets/images/pufferfish_pillow.jpg"),
-          titleName: "極舒適河豚抱枕",
-          prodPrice: "499",
-          tag: "抱枕",
-          count: 1,
-        },
-        {
-          imageSrc: require("../assets/images/dolphin_keyring.jpg"),
-          titleName: "QQ的海豚鑰匙圈",
-          prodPrice: "199",
-          tag: "配飾",
-          count: 1,
-        },
-        {
-          imageSrc: require("../assets/images/shark_hat.jpg"),
-          titleName: "動感鯊鯊帽",
+          imageSrc: require("../assets/images/dolphin_doll.png"),
+          titleName: "超可愛海豚寶寶玩偶",
           prodPrice: "399",
-          tag: "配飾",
+          tag: "玩偶",
           count: 1,
+          info: "超可愛海豚寶寶玩偶的介紹超可愛海豚寶寶玩偶的介紹超可愛海豚寶寶玩偶的介紹超可愛海豚寶寶玩偶的介紹",
         },
         {
-          imageSrc: require("../assets/images/shark_cap.jpg"),
-          titleName: "造型鯊鯊帽",
+          imageSrc: require("../assets/images/shark_doll.jpg"),
+          titleName: "愛睏a鯊鯊玩偶",
+          prodPrice: "499",
+          tag: "玩偶",
+          count: 1,
+          info: "愛睏a鯊鯊玩偶的介紹愛睏a鯊鯊玩偶的介紹愛睏a鯊鯊玩偶的介紹",
+        },
+        {
+          imageSrc: require("../assets/images/shark_keyring.jpg"),
+          titleName: "QQ的鯊鯊鑰匙圈",
+          prodPrice: "160",
+          tag: "配飾",
+          count: 1,
+          info: "QQ的鯊鯊鑰匙圈的介紹QQ的鯊鯊鑰匙圈的介紹QQ的鯊鯊鑰匙圈的介紹",
+        },
+        {
+          imageSrc: require("../assets/images/Nemo_doll.jpg"),
+          titleName: "Nemo玩偶",
+          prodPrice: "299",
+          tag: "玩偶",
+          count: 1,
+          info: "Nemo玩偶的介紹Nemo玩偶的介紹Nemo玩偶的介紹Nemo玩偶的介紹",
+        },
+        {
+          imageSrc: require("../assets/images/sealion_doll.png"),
+          titleName: "Q版海獅玩偶",
+          prodPrice: "499",
+          tag: "玩偶",
+          count: 1,
+          info: "Q版海獅玩偶的介紹Q版海獅玩偶的介紹Q版海獅玩偶的介紹Q版海獅玩偶的介紹",
+        },
+        {
+          imageSrc: require("../assets/images/shark_doll_2.png"),
+          titleName: "Q版鯊鯊玩偶",
+          prodPrice: "499",
+          tag: "玩偶",
+          count: 1,
+          info: "Q版鯊鯊玩偶的介紹Q版鯊鯊玩偶的介紹Q版鯊鯊玩偶的介紹",
+        },
+        {
+          imageSrc: require("../assets/images/loveing_garden_eel.png"),
+          titleName: "戀愛ing花園鰻玩偶",
           prodPrice: "399",
-          tag: "配飾",
+          tag: "玩偶",
           count: 1,
+          info: "戀愛ing花園鰻玩偶的介紹戀愛ing花園鰻玩偶的介紹戀愛ing花園鰻玩偶的介紹",
         },
         {
-          imageSrc: require("../assets/images/whale_shark_purse.jpg"),
-          titleName: "鯨鯊零錢包",
-          prodPrice: "300",
-          tag: "配飾",
+          imageSrc: require("../assets/images/whale_doll.jpg"),
+          titleName: "勾錐a小鯨魚玩偶",
+          prodPrice: "350",
+          tag: "玩偶",
           count: 1,
+          info: "勾錐a小鯨魚玩偶的介紹勾錐a小鯨魚玩偶的介紹勾錐a小鯨魚玩偶的介紹",
         },
         {
-          imageSrc: require("../assets/images/starfish_purse.jpg"),
-          titleName: "海星零錢包",
-          prodPrice: "300",
-          tag: "配飾",
-          count: 1,
-        },
-        {
-          imageSrc: require("../assets/images/killer_whale_purse.jpg"),
-          titleName: "虎鯨零錢包",
-          prodPrice: "300",
-          tag: "配飾",
-          count: 1,
-        },
-        {
-          imageSrc: require("../assets/images/whale_purse.jpg"),
-          titleName: "鯨魚零錢包",
-          prodPrice: "600",
-          tag: "配飾",
-          count: 1,
-        },
-        {
-          imageSrc: require("../assets/images/fish_kettle.jpg"),
-          titleName: "滿滿的魚水壺",
-          prodPrice: "500",
-          tag: "配飾",
-          count: 1,
-        },
-        {
-          imageSrc: require("../assets/images/shark_slippers.jpg"),
-          titleName: "超好走鯊鯊拖鞋",
+          imageSrc: require("../assets/images/lantern_fish_doll.jpg"),
+          titleName: "貪吃燈籠魚玩偶",
           prodPrice: "499",
-          tag: "配飾",
+          tag: "玩偶",
           count: 1,
+          info: "貪吃燈籠魚玩偶的介紹貪吃燈籠魚玩偶的介紹貪吃燈籠魚玩偶的介紹",
         },
         {
-          imageSrc: require("../assets/images/killer_whale_phonecase.jpg"),
-          titleName: "虎鯨手機殼",
+          imageSrc: require("../assets/images/pufferfish_doll.jpg"),
+          titleName: "愛睏a河豚玩偶",
           prodPrice: "499",
-          tag: "配飾",
+          tag: "玩偶",
           count: 1,
+          info: "愛睏a河豚玩偶的介紹愛睏a河豚玩偶的介紹愛睏a河豚玩偶的介紹",
+        },
+        {
+          imageSrc: require("../assets/images/octopus_doll.jpg"),
+          titleName: "老爺爺章魚玩偶",
+          prodPrice: "399",
+          tag: "玩偶",
+          count: 1,
+          info: "老爺爺章魚玩偶的介紹老爺爺章魚玩偶的介紹老爺爺章魚玩偶的介紹",
+        },
+        {
+          imageSrc: require("../assets/images/sea_turtle_doll.jpg"),
+          titleName: "勾錐a海龜玩偶",
+          prodPrice: "399",
+          tag: "玩偶",
+          count: 1,
+          info: "勾錐a海龜玩偶的介紹勾錐a海龜玩偶的介紹勾錐a海龜玩偶的介紹",
+        },
+        {
+          imageSrc: require("../assets/images/killer_whale_doll.jpg"),
+          titleName: "帥氣a虎鯨玩偶",
+          prodPrice: "499",
+          tag: "玩偶",
+          count: 1,
+          info: "帥氣a虎鯨玩偶的介紹帥氣a虎鯨玩偶的介紹帥氣a虎鯨玩偶的介紹帥氣a虎鯨玩偶的介紹",
+        },
+        {
+          imageSrc: require("../assets/images/stingray_pillow.jpg"),
+          titleName: "極舒適魟魚抱枕",
+          prodPrice: "380",
+          tag: "抱枕",
+          count: 1,
+          info: "極舒適魟魚抱枕的介紹極舒適魟魚抱枕的介紹極舒適魟魚抱枕的介紹",
+        },
+        {
+          imageSrc: require("../assets/images/shark_pillow2.jpg"),
+          titleName: "滿出來鯊鯊抱枕",
+          prodPrice: "660",
+          tag: "抱枕",
+          count: 1,
+          info: "滿出來鯊鯊抱枕的介紹滿出來鯊鯊抱枕的介紹滿出來鯊鯊抱枕的介紹",
+        },
+        {
+          imageSrc: require("../assets/images/shark_pillow.jpg"),
+          titleName: "極舒適鯊魚抱枕",
+          prodPrice: "499",
+          tag: "抱枕",
+          count: 1,
+          info: "極舒適鯊魚抱枕的介紹極舒適鯊魚抱枕的介紹極舒適鯊魚抱枕的介紹",
         },
       ],
       pageSize: 8,
@@ -359,6 +381,10 @@ export default {
     },
     pushInShoppingCart(img1, name1, count1, price1) {
       console.log([img1, name1, count1, price1]);
+      if (!this.$store.state.userName) {
+        alert("需先登入會員");
+        return;
+      }
       for (let i = 0; i < this.$store.state.shoppingCart.length; i++) {
         if (img1 === this.$store.state.shoppingCart[i].imgURL) {
           this.$store.state.shoppingCart[i].count += count1;
@@ -489,15 +515,30 @@ export default {
     },
     changeHeart(isFav, i) {
       console.log(isFav, i);
-      // TODO　ＣＡＬＬ　ＡＰＩ
-      if (isFav) {
+
+      for (let j = 0; j < this.$store.state.favoList.length; j++) {
+        if (i.imageSrc == this.$store.state.favoList[j].favoImg) {
+          return;
+        }
+      }
+      if (!isFav && this.$store.state.userName) {
         this.$store.state.favoList.push({
-          favoImg: `require(${i.imageSrc})`,
+          favoImg: i.imageSrc,
           favoName: i.titleName,
           favoPrice: i.prodPrice,
-          favoIntroduction: "",
+          favoIntroduction: i.info,
         });
       }
+      console.log(this.$store.state.favoList);
+      // TODO　ＣＡＬＬ　ＡＰＩ
+      // if (isFav) {
+      //   this.$store.state.favoList.push({
+      //     favoImg: `require(${i.imageSrc})`,
+      //     favoName: i.titleName,
+      //     favoPrice: i.prodPrice,
+      //     favoIntroduction: "",
+      //   });
+      // }
     },
     // getClass(data) {
     //   this.chooseItem2 = [];

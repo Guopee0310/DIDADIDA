@@ -46,16 +46,19 @@ export default {
         //         size: "尺寸：14×11×22.5公分",
         //     },
         // },
-
-        {
-          favoImg: require("../assets/images/dolphin_pillow.jpg"),
-          favoName: "極舒適海豚抱枕",
-          favoPrice: "499",
-          favoIntroduction:
-            "海豚玩偶採用了沖繩傳統染色技法「紅型染」設計而成，充滿沖繩色彩。",
-        },
+        // {
+        //   favoImg: require("../assets/images/dolphin_pillow.jpg"),
+        //   favoName: "極舒適海豚抱枕",
+        //   favoPrice: "499",
+        //   favoIntroduction:
+        //     "海豚玩偶採用了沖繩傳統染色技法「紅型染」設計而成，充滿沖繩色彩。",
+        // },
       ],
     };
+  },
+  mounted() {
+    this.favoList = this.$store.state.favoList;
+    console.log(this.favoList);
   },
 };
 </script>

@@ -22,6 +22,10 @@ export default {
       this.changeHeart = !this.changeHeart;
     },
     handleChange() {
+      if (!this.$store.state.userName) {
+        alert("需先登入會員");
+        return;
+      }
       this.change();
       this.$emit("change-heart", this.changeHeart);
     },
