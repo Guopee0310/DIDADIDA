@@ -59,6 +59,13 @@ export default {
                     prodDate: "2023.08.31",
                     prodPrice: "399",
                 },
+                {
+                    prodImg: require("../assets/images/dolphin_pillow.jpg"),
+                    prodName: "極舒適海豚抱枕",
+                    prodCount: "2",
+                    prodDate: "2023.08.31",
+                    prodPrice: "399",
+                },
             ],
         }
     }
@@ -66,66 +73,74 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.order_area {
-    width: 500px;
-    height: 650px;
-    // border: 1px solid #333;
-    border-radius: 15px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
+.prod_order_main {
+    p {
+        color: map-get($colors, 'dark');
+    }
 
-
-    .prod_order_group {
+    .order_area {
         width: 500px;
-        height: 200px;
-        border-bottom: 1px solid #333;
-        display: flex;
-        justify-content: space-evenly;
-    }
-
-    .prod_order_group:last-child {
-        border-bottom: 0;
-    }
-
-    .prod_img {
-        width: 200px;
-        height: 150px;
-        margin: 20px auto;
-        border: 1px solid #333;
-    }
-
-    .prod_img img {
-        width: 100%;
-        height: 100%;
-        object-fit: contain;
-    }
-
-    .prod_info {
-        width: 200px;
-        height: 150px;
-        margin: 20px auto;
+        height: 850px;
+        border: 0;
+        border-radius: 15px;
+        margin: 0 auto;
+        background-color: #eeee;
         display: flex;
         flex-direction: column;
-        justify-content: space-evenly;
-    }
+        align-items: center;
+        justify-content: flex-start;
 
-    .item_info {
-        display: flex;
-        justify-content: space-evenly;
-    }
 
-    .item_info p:first-child {
-        width: 50px;
-        text-align: center;
-        background-color: #eee;
-    }
+        .prod_order_group {
+            width: 500px;
+            height: 200px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-evenly;
+            z-index: 2;
+        }
 
-    .item_info p:nth-child(2) {
-        width: 120px;
-        margin-left: 10px;
+        .prod_order_group:nth-child(4) {
+            border-bottom: 0;
+        }
+
+        .prod_img {
+            width: 200px;
+            height: 150px;
+            margin: 20px auto;
+            border: 0;
+        }
+
+        .prod_img img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .prod_info {
+            width: 200px;
+            height: 150px;
+            margin: 20px auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+        }
+
+        .item_info {
+            display: flex;
+            justify-content: space-evenly;
+        }
+
+        .item_info p:first-child {
+            width: 50px;
+            text-align: center;
+            background-color: map-get($colors, 'h2Blue');
+        }
+
+        .item_info p:nth-child(2) {
+            width: 120px;
+            margin-left: 10px;
+        }
     }
 }
 </style>

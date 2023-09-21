@@ -21,12 +21,14 @@ export default {
 <style scoped lang="scss">
 .change_page {
     text-align: center;
+    margin-top: -50px;
 
     button {
         width: 80px;
         height: 30px;
-        border: 1px solid;
+        border: 0;
         border-radius: 5px;
+        background-color: map-get($colors, 'h2Blue');
     }
 }
 </style>

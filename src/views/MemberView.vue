@@ -1,11 +1,15 @@
 <template>
-  <div style="height: 100px">
+  <div style="width: 1200px; height: 100px; margin: 0 auto; position: relative;">
     <div class="photo_stickers">
       <img src="../assets/images/member_nini.jpg" alt="" />
     </div>
   </div>
 
+
   <div class="member_hello">
+    <div class="deco_fishes">
+      <img src="../../public/all_images/deco/deco_fishes.png" alt="">
+    </div>
     <p>{{ this.$store.state.userName }}，您好！</p>
   </div>
 
@@ -21,13 +25,7 @@
           <span>Google</span>
         </div>
         <label class="verification_label" for="verification_id">
-          已驗證<input
-            class="verification_input"
-            type="checkbox"
-            value=""
-            id="verification_id"
-            style="zoom: 160%"
-          />
+          已驗證<input class="verification_input" type="checkbox" value="" id="verification_id" style="zoom: 160%" />
         </label>
       </div>
 
@@ -36,27 +34,41 @@
         <button @click="btn = 'prod_order_inquiry'"><span>購物訂單查詢</span></button>
         <button @click="btn = 'tick_order_inquiry'"><span>購票訂單查詢</span></button>
         <button @click="btn = 'favorites_list'"><span>我的收藏清單</span></button>
+        <div class="bubble group_r">
+          <img src="../../public/all_images/bubble1.png" alt="">
+        </div>
+        <div class="bubble group_l">
+          <img src="../../public/all_images/bubble2.png" alt="">
+        </div>
       </div>
+      <div class="mempic">
+        <img src="../../public/all_images/pipi.jpg" alt="">
+      </div>
+
     </div>
 
     <div v-if="btn === 'mem_account_settings'" class="mem_account_settings member_area">
       <h6>會員帳號設定</h6>
       <memAccoutSettings></memAccoutSettings>
+      <memAreaBG></memAreaBG>
     </div>
 
     <div v-else-if="btn === 'prod_order_inquiry'" class="prod_order_inquiry member_area">
       <h6>購物訂單查詢</h6>
       <prodOrderInquiry></prodOrderInquiry>
+      <memAreaBG></memAreaBG>
     </div>
 
     <div v-else-if="btn === 'tick_order_inquiry'" class="tick_order_inquiry member_area">
       <h6>購票訂單查詢</h6>
       <tickOrderInquiry></tickOrderInquiry>
+      <memAreaBG></memAreaBG>
     </div>
 
     <div v-else="btn === 'mem_bonuspoint'" class="favorites_list member_area">
       <h6>我的收藏清單</h6>
       <favoritesList></favoritesList>
+      <memAreaBG></memAreaBG>
     </div>
   </div>
 </template>
@@ -65,6 +77,7 @@ import memAccoutSettings from '../components/memAccoutSettings.vue';
 import prodOrderInquiry from '../components/prodOrderInquiry.vue';
 import tickOrderInquiry from '../components/tickOrderInquiry.vue';
 import favoritesList from '../components/favoritesList.vue';
+import memAreaBG from '../components/memAreaBG.vue'
 
 export default {
   components: {
@@ -72,6 +85,7 @@ export default {
     prodOrderInquiry,
     tickOrderInquiry,
     favoritesList,
+    memAreaBG,
   },
   data() {
     return {
@@ -81,10 +95,6 @@ export default {
 };
 </script>
 <style scoped lang="scss">
-.header {
-  position: relative;
-}
-
 .photo_stickers {
   display: inline-block;
   width: 270px;
@@ -92,8 +102,8 @@ export default {
   border-radius: 50%;
   overflow: hidden;
   position: absolute;
-  top: 60%;
-  left: 6%;
+  top: -160px;
+  left: 65px;
   z-index: 2;
 
   img {
@@ -107,11 +117,19 @@ export default {
   padding: 30px 55px 0px 55px;
   margin: 0 auto;
   font-size: map-get($fontSizes, "h3");
+  position: relative;
+
+  .deco_fishes {
+    position: absolute;
+    top: -180px;
+    right: 230px;
+  }
 }
 
 .bonuspoints {
-  width: 400px;
-  margin-left: 90px;
+  padding-left: 60px;
+  width: 1200px;
+  margin: 0 auto;
 
   p {
     font-size: 14px;
@@ -134,12 +152,13 @@ export default {
     height: 80px;
     margin: 30px;
     padding: 30px;
-    border: 1px solid #333;
+    border: 0;
     border-radius: 15px;
     font-size: 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    background-color: map-get($colors, 'bgc');
 
     .verification_google {
       width: 100px;
@@ -158,21 +177,42 @@ export default {
 
   .member_nav {
     width: 400px;
-    height: 400px;
+    height: 500px;
     margin: 30px;
-    border: 1px solid #333;
     border-radius: 15px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
+    background-color: map-get($colors, 'secondary');
+    position: relative;
+
+    .bubble {
+      position: absolute;
+    }
+
+    .group_r {
+      right: -30px;
+      bottom: -180px;
+    }
+
+    .group_l {
+      left: -40px;
+      bottom: -415px;
+    }
+
 
     button {
       width: 320px;
       height: 60px;
-      border: 1px solid #333;
+      border: 0;
       border-radius: 15px;
       cursor: pointer;
+      background-color: #fff;
+    }
+
+    button:hover {
+      background-color: map-get($colors, 'memBtn');
     }
 
     span {
@@ -188,11 +228,33 @@ export default {
 
   .member_area {
     width: 600px;
-    height: 800px;
+    height: 1000px;
     margin: 30px;
-    border: 1px solid #333;
+    border: 0;
     border-radius: 15px;
     position: relative;
+    background-color: map-get($colors, 'mainColor');
+    color: map-get($colors, 'light');
+    overflow: hidden;
   }
+}
+
+.mempic {
+  display: inline-block;
+  width: 370px;
+  height: 320px;
+  border-radius: 50% 65% 65% 50%;
+  overflow: hidden;
+  margin: 20px 35px;
+  position: relative;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+
+
 }
 </style>
