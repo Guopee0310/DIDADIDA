@@ -102,6 +102,12 @@ const routes = [
     component: visual,
   },
   {
+    path: "/amountBtn",
+    name: "amountBtn",
+    component: () =>
+      import(/* webpackChunkName: "amountBtn" */ "../components/amountBtn.vue"),
+  },
+  {
     path: "/shoppingcart",
     name: "shoppingcart",
     component: () =>

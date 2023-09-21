@@ -1,4 +1,5 @@
 <template>
+  <amountBtn></amountBtn>
   <div class="interact">
     <div class="titleAll">
       <interactBtn
@@ -24,6 +25,7 @@
 import quiz2 from "../components/quiz2.vue";
 import laba from "../components/laba.vue";
 import interactBtn from "../components/interactBtn.vue";
+import amountBtn from "../components/amountBtn.vue";
 
 export default {
   name: "product",
@@ -40,6 +42,7 @@ export default {
     laba,
     quiz2,
     interactBtn,
+    amountBtn,
   },
   computed: {},
   watch: {},
