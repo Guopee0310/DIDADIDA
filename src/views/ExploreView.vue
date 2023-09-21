@@ -42,6 +42,12 @@
         </div>
       </div>
 
+      <div class="angryfish">
+        <img src="../../public/all_images/animal/angryfish.png" alt="turtle">
+        <h4>河豚</h4>
+      </div>
+
+
       <!-- 中層海洋帶 -->
       <div class="Mesopelagic" id="me">
         <h1 data="200m">200m</h1>
@@ -125,6 +131,21 @@ export default {
     z-index: -1;
   }
 
+}
+
+.angryfish {
+  cursor: pointer;
+  width: 130px;
+  margin: 150px 0 0 250px;
+
+  img {
+    visibility: top;
+    width: 130px;
+  }
+
+  h4 {
+    margin: 15px 70px 0 0;
+  }
 }
 
 .explore {

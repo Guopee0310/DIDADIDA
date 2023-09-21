@@ -115,17 +115,17 @@ export default {
     },
   },
 
-  watch: {
-    "$route.path"(nVal, oVal) {
-      console.log(nVal);
-      console.log(oVal);
-      if (nVal == "/about" || nVal == "/explore") {
-        this.waveColor3 = "rgba(255,255,255,0)";
-      } else {
-        this.waveColor3 = "#fff";
-      }
-    },
-  },
+  // watch: {
+  //   "$route.path"(nVal, oVal) {
+  //     console.log(nVal);
+  //     console.log(oVal);
+  //     if (nVal == "/about" || nVal == "/explore") {
+  //       this.waveColor3 = "rgba(255,255,255,0)";
+  //     } else {
+  //       this.waveColor3 = "#fff";
+  //     }
+  //   },
+  // },
   methods: {
     // setWaveColors() {
     //   switch (this.$route.path) {
