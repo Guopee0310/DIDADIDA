@@ -57,6 +57,7 @@
     </div>
 
     <div class="checkout">
+      <div checkoutleft>
       <div class="test">
         <h2>選擇運送方式</h2>
         <div class="item">
@@ -81,6 +82,32 @@
         </div>
       </div>
 
+      <div class="receive">
+        <h2>填寫收件資訊</h2>
+        <div class="item">
+          <input
+            name="transport"
+            id="7-11"
+            type="radio"
+            value="60"
+            v-model="picked"
+          />
+          <label for="7-11">711 店到店 + 60元</label>
+        </div>
+        <div class="item">
+          <input
+            name="transport"
+            id="free"
+            type="radio"
+            value="0"
+            v-model="picked"
+          />
+          <label for="free">到園領取 FREE</label>
+        </div>
+      </div>
+    </div>
+
+
       <div class="test2">
         <div class="item">
           <h2>商品金額:</h2>
@@ -92,6 +119,7 @@
         </div>
         <button>前往結帳</button>
       </div>
+      
     </div>
   </div>
 </template>
@@ -218,8 +246,11 @@ input[type="checkbox"] {
   margin: auto;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
   padding: 2rem;
-  border-radius: 5rem;
+  margin-top: 5rem;
+  margin-bottom: 5rem;
+  border-radius: 2rem;
   background-color: #fff;
+
 }
 
 .shop_cart h1 {
@@ -336,6 +367,12 @@ input[type="number"] {
   margin-left: 1rem;
 }
 
+.checkoutleft{
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 .checkout {
   max-width: 1000px;
   margin: auto;
@@ -349,13 +386,16 @@ input[type="number"] {
   justify-content: space-around;
 }
 
-.test {
+.test,.receive {
   display: flex;
   flex-direction: column;
-  width: 50%;
+  width: 100%;
 }
 
 .test .item {
+  margin: 10px;
+}
+.receive .item {
   margin: 10px;
 }
 
@@ -369,6 +409,10 @@ input[type="number"] {
   border: none;
   color: white;
   padding: 5px;
+}
+
+.receive{
+  display: block;
 }
 
 h2 {
