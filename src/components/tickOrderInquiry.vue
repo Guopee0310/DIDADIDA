@@ -22,7 +22,10 @@
                         <p>金額</p>
                         <p>NT {{ tick.tickPrice }}</p>
                     </div>
-                    <QRCode></QRCode>
+                    <div>
+                        <QRCode></QRCode>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -48,7 +51,28 @@ export default {
                     tickCount: "2",
                     tickDate: "2023.08.31",
                     tickPrice: "250",
-                }
+                },
+                {
+                    tickImg: require("../assets/images/dolphin_pillow.jpg"),
+                    tickName: "一般全票",
+                    tickCount: "2",
+                    tickDate: "2023.08.31",
+                    tickPrice: "250",
+                },
+                {
+                    tickImg: require("../assets/images/dolphin_pillow.jpg"),
+                    tickName: "一般全票",
+                    tickCount: "2",
+                    tickDate: "2023.08.31",
+                    tickPrice: "250",
+                },
+                {
+                    tickImg: require("../assets/images/dolphin_pillow.jpg"),
+                    tickName: "一般全票",
+                    tickCount: "2",
+                    tickDate: "2023.08.31",
+                    tickPrice: "250",
+                },
             ],
         }
     }
@@ -56,65 +80,74 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.tick_area {
-    width: 500px;
-    height: 650px;
-    border-radius: 15px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
+.tick_order_main {
+    p {
+        color: map-get($colors, 'dark');
+    }
 
-
-    .tick_order_group {
+    .tick_area {
         width: 500px;
-        height: 208px;
-        border-bottom: 1px solid #333;
-        display: flex;
-        justify-content: space-evenly;
-    }
-
-    .tick_order_group:last-child {
-        border-bottom: 0;
-    }
-
-    .tick_img {
-        width: 130px;
-        height: 160px;
-        margin: 20px auto;
-        border: 1px solid #333;
-    }
-
-    .tick_img img {
-        width: 100%;
-    }
-
-    .tick_info {
-        width: 200px;
-        height: 170px;
-        margin: 20px auto;
+        height: 880px;
+        border: 0;
+        border-radius: 15px;
+        margin: 0 auto;
+        background-color: #eeee;
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
-        align-items: flex-start;
-    }
+        align-items: center;
+        justify-content: flex-start;
 
-    .item_info {
-        padding: 5px;
-        display: flex;
-        justify-content: space-evenly;
-    }
 
-    .item_info p:first-child {
-        width: 50px;
-        text-align: center;
-        background-color: #eee;
-    }
+        .tick_order_group {
+            width: 500px;
+            height: 208px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-evenly;
+            // z-index: 2;
+        }
 
-    .item_info p:nth-child(2) {
-        width: 80px;
-        margin-left: 10px;
+        .tick_order_group:nth-child(4) {
+            border-bottom: 0;
+        }
+
+        .tick_img {
+            width: 130px;
+            height: 160px;
+            margin: 20px auto;
+            border: 0;
+        }
+
+        .tick_img img {
+            width: 100%;
+        }
+
+        .tick_info {
+            width: 200px;
+            height: 170px;
+            margin: 20px auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .item_info {
+            padding: 5px;
+            display: flex;
+            justify-content: space-evenly;
+        }
+
+        .item_info p:first-child {
+            width: 50px;
+            text-align: center;
+            background-color: map-get($colors, 'h2Blue');
+        }
+
+        .item_info p:nth-child(2) {
+            width: 80px;
+            margin-left: 10px;
+        }
     }
 }
 </style>

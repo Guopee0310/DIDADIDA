@@ -42,6 +42,36 @@ export default {
                         size: "尺寸：14×11×22.5公分",
                     },
                 },
+                {
+                    favoImg: require("../assets/images/dolphin_pillow.jpg"),
+                    favoName: "極舒適海豚抱枕",
+                    favoPrice: "499",
+                    favoIntroduction: {
+                        mainIntro: "海豚玩偶採用了沖繩傳統染色技法「紅型染」設計而成，充滿沖繩色彩。",
+                        recommendation: "同一系列產品中更有「海豚鑰匙圈」可供選擇。",
+                        size: "尺寸：14×11×22.5公分",
+                    },
+                },
+                {
+                    favoImg: require("../assets/images/dolphin_pillow.jpg"),
+                    favoName: "極舒適海豚抱枕",
+                    favoPrice: "499",
+                    favoIntroduction: {
+                        mainIntro: "海豚玩偶採用了沖繩傳統染色技法「紅型染」設計而成，充滿沖繩色彩。",
+                        recommendation: "同一系列產品中更有「海豚鑰匙圈」可供選擇。",
+                        size: "尺寸：14×11×22.5公分",
+                    },
+                },
+                {
+                    favoImg: require("../assets/images/dolphin_pillow.jpg"),
+                    favoName: "極舒適海豚抱枕",
+                    favoPrice: "499",
+                    favoIntroduction: {
+                        mainIntro: "海豚玩偶採用了沖繩傳統染色技法「紅型染」設計而成，充滿沖繩色彩。",
+                        recommendation: "同一系列產品中更有「海豚鑰匙圈」可供選擇。",
+                        size: "尺寸：14×11×22.5公分",
+                    },
+                },
             ]
         }
     }
@@ -49,52 +79,68 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.favorites_list_area {
-    width: 500px;
-    height: 650px;
-    border-radius: 15px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
+.favorites_list_main {
 
-
-    .favorites_list_group {
-        width: 500px;
-        height: 208px;
-        border-bottom: 1px solid #333;
-        display: flex;
-        align-items: center;
-    }
-
-    h5 {
-        font-size: map-get($fontSizes, 'h4');
-    }
-
+    h5,
     p {
-        font-size: map-get($fontSizes, 'span');
+        color: map-get($colors, 'dark');
     }
 
-    .favorites_list_group:last-child {
-        border-bottom: 0;
-    }
+    .favorites_list_area {
+        width: 500px;
+        height: 880px;
+        border: 0;
+        border-radius: 15px;
+        margin: 0 auto;
+        background-color: #eeee;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
 
-    .favorites_list_img {
-        width: 150px;
-        height: 150px;
-        margin: 20px auto;
-        border: 1px solid #333;
-    }
 
-    .favorites_list_img img {
-        width: 100%;
-        height: 100%;
-        object-fit: contain;
-    }
+        .favorites_list_group {
+            width: 500px;
+            height: 208px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+            z-index: 2;
+        }
 
-    .favorites_list_info {
-        width: 300px;
+        h5 {
+            font-size: map-get($fontSizes, 'h4');
+        }
+
+        p {
+            font-size: map-get($fontSizes, 'span');
+        }
+
+        .favorites_list_group:nth-child(4) {
+            border-bottom: 0;
+        }
+
+        .favorites_list_img {
+            width: 150px;
+            height: 150px;
+            margin: 20px auto;
+            border: 1px solid #333;
+        }
+
+        .favorites_list_img img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .favorites_list_info {
+            width: 300px;
+
+            :nth-child(2) {
+                width: 280px;
+            }
+        }
+
     }
 }
 </style>

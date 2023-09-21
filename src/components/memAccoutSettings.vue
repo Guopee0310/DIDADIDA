@@ -62,6 +62,7 @@ export default {
 <style scoped lang="scss">
 .profile__main {
     height: 550px;
+    margin-top: 60px;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -105,10 +106,12 @@ export default {
     .mem_btn {
         width: 150px;
         height: 40px;
-        border: 1px solid #333;
+        border: 0;
         border-radius: 5px;
         font-size: map-get($fontSizes, 'h4');
         letter-spacing: 1px;
+        color: map-get($colors, 'light');
+        background-color: map-get($colors, 'secondary');
     }
 }
 </style>

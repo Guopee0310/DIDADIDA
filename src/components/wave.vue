@@ -89,7 +89,7 @@ export default {
             : this.$route.path == "/about"
               ? "/all_images/banner/about.jpg"
               : this.$route.path == "/member"
-                ? "/all_images/cenote-280252_1920.jpg"
+                ? "/all_images/banner/mem_center.jpg"
                 : this.$route.path == "/guide"
                   ? "/all_images/banner/guide_banner.jpg"
                   : this.$route.path == "/interact"
