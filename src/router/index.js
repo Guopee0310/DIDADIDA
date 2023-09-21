@@ -116,15 +116,81 @@ const routes = [
     component: helper,
   },
   {
-    path: "/backEndSlot",
-    name: "backEndSlot",
+    path: "/backHome",
+    name: "backHome",
     meta: {
       hideApp: true, // 需要隐藏App.vue中的组件
     },
     component: () =>
       import(
-        /* webpackChunkName: "backEndSlot" */ "../components/backEndSlot.vue"
+        /* webpackChunkName: "backHome" */ "../views/backEnd/backHome.vue"
       ),
+    children: [
+      {
+        path: "/backHome/homePicMg",
+        name: "homePicMg",
+        component: () =>
+          import(
+            /* webpackChunkName: "homePicMg" */ "../views/backEnd/homePicMg.vue"
+          ),
+      },
+      {
+        path: "/backHome/gamesMg",
+        name: "gamesMg",
+        component: () =>
+          import(
+            /* webpackChunkName: "gamesMg" */ "../views/backEnd/gamesMg.vue"
+          ),
+      },
+      {
+        path: "/backHome/helperMg",
+        name: "helperMg",
+        component: () =>
+          import(
+            /* webpackChunkName: "helperMg" */ "../views/backEnd/helperMg.vue"
+          ),
+      },
+      {
+        path: "/backHome/memberMg",
+        name: "memberMg",
+        component: () =>
+          import(
+            /* webpackChunkName: "memberMg" */ "../views/backEnd/memberMg.vue"
+          ),
+      },
+      {
+        path: "/backHome/newsMg",
+        name: "newsMg",
+        component: () =>
+          import(
+            /* webpackChunkName: "newsMg" */ "../views/backEnd/newsMg.vue"
+          ),
+      },
+      {
+        path: "/backHome/orderMg",
+        name: "orderMg",
+        component: () =>
+          import(
+            /* webpackChunkName: "orderMg" */ "../views/backEnd/orderMg.vue"
+          ),
+      },
+      {
+        path: "/backHome/productMg",
+        name: "productMg",
+        component: () =>
+          import(
+            /* webpackChunkName: "productMg" */ "../views/backEnd/productMg.vue"
+          ),
+      },
+      {
+        path: "/backHome/ticketMg",
+        name: "ticketMg",
+        component: () =>
+          import(
+            /* webpackChunkName: "ticketMg" */ "../views/backEnd/ticketMg.vue"
+          ),
+      },
+    ],
   },
 ];
 
