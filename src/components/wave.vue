@@ -34,9 +34,9 @@ export default {
     return {
       h1Title: "",
       h2Title: "",
-      waveColor1: "",
-      waveColor2: "",
-      waveColor3: "",
+      waveColor1: "rgba(255,255,255,0.6)",
+      waveColor2: "rgba(70, 130, 191,0.7)",
+      waveColor3: "#fff",
     };
   },
   computed: {
@@ -123,6 +123,7 @@ export default {
           "";
     },
   },
+
   watch: {
     "$route.path"(nVal, oVal) {
       console.log(nVal);
@@ -135,23 +136,26 @@ export default {
     },
   },
   methods: {
-    setWaveColors() {
-      switch (this.$route.path) {
-        case "/about":
-          this.waveColor1 = "rgba(255,255,255,0.6)";
-          this.waveColor2 = "rgba(70, 130, 191,0.7)";
-          this.waveColor3 = "#fff";
-          break;
-        default:
-          // 默認顏色
-          this.waveColor1 = "rgba(255, 255, 255, 0.6)";
-          this.waveColor2 = "rgba(70, 130, 191, 0.7)";
-          this.waveColor3 = "#fff";
-      }
-    },
+    // setWaveColors() {
+    //   switch (this.$route.path) {
+    //     case "/about":
+    //       this.waveColor1 = "rgba(255,255,255,0.6)";
+    //       this.waveColor2 = "rgba(70, 130, 191,0.7)";
+    //       this.waveColor3 = "#fff";
+    //       break;
+    //     default:
+    //       // 默認顏色
+    //       this.waveColor1 = "rgba(255, 255, 255, 0.6)";
+    //       this.waveColor2 = "rgba(70, 130, 191, 0.7)";
+    //       this.waveColor3 = "#fff";
+    //   }
+    // },
   },
   mounted() {
-    this.setWaveColors();
+    if (this.$route.path == "/about") {
+      this.waveColor3 = "rgba(255,255,255,0)";
+    }
+    // this.setWaveColors();
   },
 };
 </script>
