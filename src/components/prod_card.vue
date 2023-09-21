@@ -49,7 +49,6 @@
 </template>
 
 <script>
-import btn2 from "./btn2.vue";
 import heart from "./heart.vue";
 import prodSelect from "../components/select.vue";
 export default {
@@ -368,7 +367,6 @@ export default {
     msg1: [String, Number],
   },
   components: {
-    btn2,
     heart,
     prodSelect,
   },

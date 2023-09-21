@@ -8,7 +8,7 @@ const publicURL =
 export default createStore({
   // 類似vue檔裡面的data
   state: {
-    chooseFrontBack: false,
+    chooseFrontBack: true,//記得改回來
     storeShowLogin: false,
     quizScore: 0,
     loginToogle: false,
