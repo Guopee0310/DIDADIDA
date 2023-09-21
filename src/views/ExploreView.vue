@@ -18,6 +18,11 @@
         </div>
       </div>
 
+      <div class="leofish">
+        <img src="../../public/all_images/animal/leofish.png" alt="turtle">
+        <h4>獅子魚</h4>
+      </div>
+
       <div class="angryfish">
         <img src="../../public/all_images/animal/angryfish.png" alt="turtle">
         <h4>河豚</h4>
@@ -38,9 +43,20 @@
           <h4>海星</h4>
         </div>
 
-        <div class="harifish">
-          <img src="../../public/all_images/animal/harifish.png" alt="">
+        <div class="leofish">
+          <img src="../../public/all_images/animal/leofish.png" alt="">
           <h4>獅子魚</h4>
+        </div>
+
+        <div class="shark">
+          <img src="../../public/all_images/animal/shark.png" alt="">
+          <h4>鯊魚</h4>
+        </div>
+
+
+        <div class="white">
+          <img src="../../public/all_images/animal/white.png" alt="">
+          <h4>儒艮</h4>
         </div>
 
 
@@ -289,6 +305,21 @@ export default {
     }
 
     // 表層 ~ 中層 ------------------------------------------------------------
+    .leofish {
+      cursor: pointer;
+      width: 130px;
+      margin: 0 530px 0 auto;
+
+      img {
+        visibility: top;
+        width: 130px;
+      }
+
+      h4 {
+        margin-top: 10px;
+      }
+    }
+
     .angryfish {
       cursor: pointer;
       width: 130px;
@@ -346,14 +377,34 @@ export default {
         }
       }
 
-      .harifish {
+      .shark {
         cursor: pointer;
-        width: 130px;
-        margin: -30px 350px 0 auto;
+        width: 700px;
+        margin: -30px 0 0 60px;
 
         img {
           visibility: top;
-          width: 130px;
+          width: 700px;
+        }
+
+        h4 {
+          margin-right: 200px;
+        }
+      }
+
+      .white {
+        cursor: pointer;
+        width: 700px;
+        margin-left: auto;
+
+        img {
+          visibility: top;
+          width: 700px;
+        }
+
+        h4 {
+          margin-right: 500px;
+          margin-top: -200px;
         }
       }
     }
