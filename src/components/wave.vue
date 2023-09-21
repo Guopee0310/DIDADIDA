@@ -34,9 +34,9 @@ export default {
     return {
       h1Title: "",
       h2Title: "",
-      waveColor1: "",
-      waveColor2: "",
-      waveColor3: "",
+      waveColor1: "rgba(255,255,255,0.6)",
+      waveColor2: "rgba(70, 130, 191,0.7)",
+      waveColor3: "#fff",
     };
   },
   computed: {
@@ -88,68 +88,60 @@ export default {
     },
     banner_pic() {
       return this.$route.path == "/product"
-        ? `${this.$store.state.chooseImgSrc}/all_images/cenote-280252_1920.jpg`
+        ? ${this.$store.state.chooseImgSrc}/all_images/cenote-280252_1920.jpg
         : // ? "/all_images/cenote-280252_1920.jpg"
         this.$route.path == "/explore"
-        ? `${this.$store.state.chooseImgSrc}/all_images/cenote-280252_1920.jpg`
+        ? ${this.$store.state.chooseImgSrc}/all_images/banner/explore.jpg
         : // ? "/all_images/cenote-280252_1920.jpg"
         this.$route.path == "/news"
-        ? `${this.$store.state.chooseImgSrc}/all_images/banner/news_banner.jpg`
+        ? ${this.$store.state.chooseImgSrc}/all_images/banner/news_banner.jpg
         : // ? "/all_images/banner/news_banner.jpg"
         this.$route.path == "/about"
-        ? `${this.$store.state.chooseImgSrc}/all_images/banner/about.jpg`
+        ? ${this.$store.state.chooseImgSrc}/all_images/banner/about.jpg
         : // ? "/all_images/banner/about.jpg"
         this.$route.path == "/member"
-        ? `${this.$store.state.chooseImgSrc}/all_images/cenote-280252_1920.jpg`
+        ? ${this.$store.state.chooseImgSrc}/all_images/cenote-280252_1920.jpg
         : // ? "/all_images/cenote-280252_1920.jpg"
         this.$route.path == "/guide"
-        ? `${this.$store.state.chooseImgSrc}/all_images/banner/guide_banner.jpg`
+        ? ${this.$store.state.chooseImgSrc}/all_images/banner/guide_banner.jpg
         : // ? "/all_images/banner/guide_banner.jpg"
         this.$route.path == "/interact"
-        ? `${this.$store.state.chooseImgSrc}/all_images/cenote-280252_1920.jpg`
+        ? ${this.$store.state.chooseImgSrc}/all_images/cenote-280252_1920.jpg
         : // ? "/all_images/cenote-280252_1920.jpg"
         this.$route.path == "/faq"
-        ? `${this.$store.state.chooseImgSrc}/all_images/cenote-280252_1920.jpg`
+        ? ${this.$store.state.chooseImgSrc}/all_images/cenote-280252_1920.jpg
         : // ? "/all_images/cenote-280252_1920.jpg"
         this.$route.path == "/shoppingcart"
-        ? `${this.$store.state.chooseImgSrc}/all_images/cenote-280252_1920.jpg`
+        ? ${this.$store.state.chooseImgSrc}/all_images/cenote-280252_1920.jpg
         : // ? "/all_images/cenote-280252_1920.jpg"
         this.$route.path == "/ticket"
-        ? `${this.$store.state.chooseImgSrc}/all_images/cenote-280252_1920.jpg`
+        ? ${this.$store.state.chooseImgSrc}/all_images/cenote-280252_1920.jpg
         : // ? "/all_images/cenote-280252_1920.jpg"
           "";
     },
   },
-  methods: {
-    setWaveColors() {
-      switch (this.$route.path) {
-      
-        case "/about":
-          this.waveColor1 = "rgba(255,255,255,0.6)";
-          this.waveColor2 = "rgba(70, 130, 191,0.7)";
-          this.waveColor3 = "#fff";
-          break;
-        case "/explore":
-          this.waveColor1 = "rgba(255,255,255,0.6)";
-          this.waveColor2 = "rgba(70, 130, 191,0.7)";
-          this.waveColor3 = "transparent";
-          break;
-     
-        default:
-          // 默認顏色
-          this.waveColor1 = "rgba(255, 255, 255, 0.6)";
-          this.waveColor2 = "rgba(70, 130, 191, 0.7)";
-          this.waveColor3 = "#fff";
-         
-        
+
+  watch: {
+    "$route.path"(nVal, oVal) {
+      console.log(nVal);
+      console.log(oVal);
+      if (nVal == "/about" || nVal == "/explore") {
+        this.waveColor3 = "rgba(255,255,255,0)";
+      } else {
+        this.waveColor3 = "#fff";
       }
     },
   },
   mounted() {
-    this.setWaveColors();
+    if (this.$route.path == "/about") {
+      this.waveColor3 = "rgba(255,255,255,0)";
+    }
+    // this.setWaveColors();
   },
 };
 </script>
+
+
 <style scoped lang="scss">
 // .parallax use {
 //   &:nth-child(1) {
