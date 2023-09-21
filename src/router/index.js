@@ -117,6 +117,12 @@ const routes = [
     },
   },
   {
+    path: "/cartpop",
+    name: "cartpop",
+    component: () =>
+      import(/* webpackChunkName: "member" */ "../components/cartPopup.vue"),
+    },
+  {
     path: "/helper",
     name: "helper",
     component: helper,

@@ -314,7 +314,7 @@ input[type="checkbox"] {
 }
 .count > * {
   width: 20%;
-  background-color: #e1dada;
+  background-color: #96bacf;
   text-align: center;
   outline: none;
   border: none;
@@ -327,6 +327,7 @@ input[type="checkbox"] {
 
 .minus {
   border-radius: 1em 0 0 1em;
+  
 }
 
 .plus {

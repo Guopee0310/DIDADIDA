@@ -31,16 +31,20 @@
             <i
               class="fa-solid fa-cart-shopping"
               style="color: #9fbdce"
-              @click.prevent="
-                pushInShoppingCart(
+              @click.prevent=" pushAndTogglePopup(
+                  i.imageSrc,
+                  i.titleName,
+                  i.count,
+                  i.prodPrice)"
+            ></i>
+            <!-- pushInShoppingCart(
                   i.imageSrc,
                   i.titleName,
                   i.count,
                   i.prodPrice
-                )
-              "
-            ></i>
+                ) -->
           </a>
+          <cartpop/>
         </div>
       </div>
     </div>
@@ -51,6 +55,8 @@
 <script>
 import heart from "./heart.vue";
 import prodSelect from "../components/select.vue";
+import cartpop from "../components/cartPopup.vue";
+import { mapMutations } from "vuex";
 export default {
   name: "son",
   data() {
@@ -369,6 +375,7 @@ export default {
   components: {
     heart,
     prodSelect,
+    cartpop,
   },
   computed: {},
   methods: {
@@ -538,6 +545,12 @@ export default {
       //   });
       // }
     },
+    closeCartPopup() {
+      // 延迟一秒后关闭购物车弹出视图
+      setTimeout(() => {
+        this.toggleCartPopup();
+      }, 500); // 500毫秒（1秒）后关闭
+    },
     // getClass(data) {
     //   this.chooseItem2 = [];
     //   this.selectOption = data;
@@ -647,6 +660,15 @@ export default {
     //     this.chooseItem = this.cardsAll.slice(startIdx, endIdx);
     //   }
     // },
+    ...mapMutations(["toggleCartPopup"]),
+    pushAndTogglePopup(imageSrc, titleName, count, prodPrice) {
+    // 添加商品到购物车
+    this.pushInShoppingCart(imageSrc, titleName, count, prodPrice);
+
+    // 切换购物车弹出视图的显示状态
+    this.toggleCartPopup();
+    this.closeCartPopup();
+  }
   },
 };
 </script>

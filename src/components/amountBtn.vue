@@ -1,6 +1,6 @@
 <template>
   <div class="count">
-    <input class="minus" value="–" @click="decrement"/>
+    <input class="minus" value="-" @click="decrement"/>
     <input v-model="value" type="number" />
     <input  class="plus" value="+" @click="increment"/>
   </div>
