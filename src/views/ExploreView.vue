@@ -38,6 +38,11 @@
           <h4>海星</h4>
         </div>
 
+        <div class="harifish">
+          <img src="../../public/all_images/animal/harifish.png" alt="">
+          <h4>獅子魚</h4>
+        </div>
+
 
       </div>
       <!-- 深層海洋帶 -->
@@ -300,6 +305,7 @@ export default {
     }
 
     .whale {
+      cursor: pointer;
       width: 700px;
       margin: -100px 150px 0 auto;
 
@@ -337,6 +343,17 @@ export default {
 
         h4 {
           margin: 10px 70px 0 0;
+        }
+      }
+
+      .harifish {
+        cursor: pointer;
+        width: 130px;
+        margin: -30px 350px 0 auto;
+
+        img {
+          visibility: top;
+          width: 130px;
         }
       }
     }
