@@ -1,18 +1,36 @@
 <template>
-  <header1 v-if="!$route.meta.hideApp"></header1>
-  <wave v-if="!$route.meta.hideApp && !$route.meta.hideWave"></wave>
-  <helper v-if="!$route.meta.hideApp"></helper>
-  <login v-if="!$route.meta.hideApp"></login>
+  <path1
+    v-if="!this.$store.state.chooseFrontBack"
+    @click="this.$store.state.chooseFrontBack = true"
+  ></path1>
+  <header1
+    v-if="!$route.meta.hideApp && this.$store.state.chooseFrontBack"
+  ></header1>
+  <wave
+    v-if="
+      !$route.meta.hideApp &&
+      !$route.meta.hideWave &&
+      this.$store.state.chooseFrontBack
+    "
+  ></wave>
+  <helper
+    v-if="!$route.meta.hideApp && this.$store.state.chooseFrontBack"
+  ></helper>
+  <login
+    v-if="!$route.meta.hideApp && this.$store.state.chooseFrontBack"
+  ></login>
 
   <!-- 
   <nav>
     <router-link to="/?aa=123">Home</router-link> |
     <router-link to="/about">About</router-link>
   </nav> -->
-  <router-view />
+  <router-view v-if="this.$store.state.chooseFrontBack" />
   <!-- <button @click="loginAPI">商品目錄</button>
   <button @click="loginAPI2">登入</button> -->
-  <footer1 v-if="!$route.meta.hideApp"></footer1>
+  <footer1
+    v-if="!$route.meta.hideApp && this.$store.state.chooseFrontBack"
+  ></footer1>
   <span id="firstPage"></span>
 </template>
 
@@ -60,7 +78,7 @@ import footer1 from "@/components/footer.vue";
 import wave from "@/components/wave.vue";
 import login from "@/components/login.vue";
 import helper from "@/components/helper.vue";
-
+import path1 from "@/components/Path.vue";
 export default {
   data() {
     return {
@@ -81,6 +99,7 @@ export default {
     wave,
     login,
     helper,
+    path1,
   },
   mounted() {
     // this.$router.push("/?section=hide");
