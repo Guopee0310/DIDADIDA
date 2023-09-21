@@ -45,15 +45,15 @@
       </div>
 
       <!-- 營業資訊 ------------------------------------------ -->
-      <div class="ticket">
-        <h3Title>
-          <template v-slot:h3>
-            <h3>票價資訊</h3>
-          </template>
-        </h3Title>
-        <ticketPrice></ticketPrice>
-        <button>立即購票</button>
-      </div>
+
+      <h3Title>
+        <template v-slot:h3>
+          <h3>票價資訊</h3>
+        </template>
+      </h3Title>
+      <ticketPrice></ticketPrice>
+      <button>立即購票</button>
+
 
       <!-- 交通指南 ------------------------------------------ -->
       <h3Title>
@@ -432,30 +432,30 @@ export default {
   }
 
   // 票價資訊 ---------------------------------------------
-  .ticket {
-    max-width: 1200px;
-    width: 100%;
-    margin: 30px auto 100px;
+  // .ticket {
+  //   max-width: 1200px;
+  //   width: 100%;
+  //   margin: 30px auto 100px;
 
-    table {
-      margin: auto;
-      font-size: 16px;
-      border-radius: 5px;
-      background-color: map-get($colors, "secondary");
-      color: map-get($colors, "light");
+  //   table {
+  //     margin: auto;
+  //     font-size: 16px;
+  //     border-radius: 5px;
+  //     background-color: map-get($colors, "secondary");
+  //     color: map-get($colors, "light");
 
-      tr:nth-child(2n) {
-        background-color: map-get($colors, "light");
-        color: map-get($colors, "dark");
-      }
+  //     tr:nth-child(2n) {
+  //       background-color: map-get($colors, "light");
+  //       color: map-get($colors, "dark");
+  //     }
 
-      td,
-      th {
-        padding: 15px 30px;
-        text-align: left;
-      }
-    }
-  }
+  //     td,
+  //     th {
+  //       padding: 15px 30px;
+  //       text-align: left;
+  //     }
+  //   }
+  // }
 
   // 交通指南 ---------------------------------------------
   .map {

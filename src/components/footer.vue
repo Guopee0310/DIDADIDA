@@ -122,10 +122,10 @@ export default {
     changePageMove(name) {
       if (name == "表層海洋帶") {
         // this.$router.push({ path: '/product', query: { article: 'footer' } });
-        this.$router.push({ path: "/explore", query: { article: "ep" } });
+        this.$router.push({ path: "/explore", query: { article: "one" } });
         setTimeout(() => {
           // 获取滚动目标元素
-          const target = document.getElementById("ep");
+          const target = document.getElementById("one");
 
           // 滚动到目标元素
           if (target) {
@@ -133,10 +133,10 @@ export default {
           }
         }, 100);
       } else if (name == "中層海洋帶") {
-        this.$router.push({ path: "/explore", query: { article: "me" } });
+        this.$router.push({ path: "/explore", query: { article: "two" } });
         setTimeout(() => {
           // 获取滚动目标元素
-          const target = document.getElementById("me");
+          const target = document.getElementById("two");
 
           // 滚动到目标元素
           if (target) {
@@ -144,10 +144,10 @@ export default {
           }
         }, 100);
       } else if (name == "深層海洋帶") {
-        this.$router.push({ path: "/explore", query: { article: "ba" } });
+        this.$router.push({ path: "/explore", query: { article: "three" } });
         setTimeout(() => {
           // 获取滚动目标元素
-          const target = document.getElementById("ba");
+          const target = document.getElementById("three");
 
           // 滚动到目标元素
           if (target) {
@@ -155,10 +155,10 @@ export default {
           }
         }, 100);
       } else if (name == "深淵層海洋帶") {
-        this.$router.push({ path: "/explore", query: { article: "ab" } });
+        this.$router.push({ path: "/explore", query: { article: "four" } });
         setTimeout(() => {
           // 获取滚动目标元素
-          const target = document.getElementById("ab");
+          const target = document.getElementById("four");
 
           // 滚动到目标元素
           if (target) {
@@ -166,10 +166,10 @@ export default {
           }
         }, 100);
       } else if (name == "超深淵層海洋帶") {
-        this.$router.push({ path: "/explore", query: { article: "ha" } });
+        this.$router.push({ path: "/explore", query: { article: "five" } });
         setTimeout(() => {
           // 获取滚动目标元素
-          const target = document.getElementById("ha");
+          const target = document.getElementById("five");
 
           // 滚动到目标元素
           if (target) {
