@@ -1,34 +1,11 @@
 <template>
-  <div class="navBar">
-    <ul>
-      <li><a href="#ep">0m
-          <div class="drop"></div>
-        </a>
-      </li>
-      <li><a href="#me">200m
-          <div class="drop"></div>
-        </a>
-      </li>
-      <li><a href="#ba">1000m
-          <div class="drop"></div>
-        </a>
-      </li>
-      <li><a href="#ab">4000m
-          <div class="drop"></div>
-        </a>
-      </li>
-      <li><a href="#ha">6000m
-          <div class="drop"></div>
-        </a>
-      </li>
-    </ul>
-    <div class="line"></div>
-  </div>
+  
   <div class="explore">
 
     <div class="wapper">
       <!-- 表層海洋帶 -->
-      <div class="epipelagic" id="ep">
+      <div class="epipelagic">
+        <div class="slot" id="one"></div>
         <h1 data="0m">0m</h1>
 
         <div class="goldfish">
@@ -49,7 +26,8 @@
 
 
       <!-- 中層海洋帶 -->
-      <div class="Mesopelagic" id="me">
+      <div class="Mesopelagic">
+        <div class="slot" id="two"></div>
         <h1 data="200m">200m</h1>
         <div class="whale">
           <img src="../../public/all_images/animal/whale.png" alt="">
@@ -59,18 +37,47 @@
 
       </div>
       <!-- 深層海洋帶 -->
-      <div class="bathypelagic" id="ba">
+      <div class="bathypelagic">
+        <div class="slot" id="three"></div>
         <h1 data="1000m">1000m</h1>
       </div>
       <!-- 深淵層海洋帶 -->
-      <div class="Abyssopelagic" id="ab">
+      <div class="Abyssopelagic">
+        <div class="slot" id="four"></div>
         <h1 data="4000m">4000m</h1>
       </div>
       <!-- 超深淵層海洋帶 -->
-      <div class="Hadopelagic" id="ha">
+      <div class="Hadopelagic">
+        <div class="slot" id="five"></div>
         <h1 data="6000m">6000m</h1>
       </div>
     </div>
+  </div>
+
+  <div class="navBar">
+    <ul>
+      <li><a href="#one" @click="btnScroll()">0m
+          <div class="drop"></div>
+        </a>
+      </li>
+      <li><a href="#two">200m
+          <div class="drop"></div>
+        </a>
+      </li>
+      <li><a href="#three">1000m
+          <div class="drop"></div>
+        </a>
+      </li>
+      <li><a href="#four">4000m
+          <div class="drop"></div>
+        </a>
+      </li>
+      <li><a href="#five">6000m
+          <div class="drop"></div>
+        </a>
+      </li>
+    </ul>
+    <div class="line"></div>
   </div>
 </template>
 
@@ -78,6 +85,11 @@
 export default {
   data() {
     return {
+
+    }
+  },
+  methods:{
+    btnScroll(){
 
     }
   }
@@ -133,6 +145,8 @@ export default {
 
 }
 
+
+
 .angryfish {
   cursor: pointer;
   width: 130px;
@@ -151,7 +165,14 @@ export default {
 .explore {
   width: 100%;
   background-image: linear-gradient(to bottom, #ECF0F3, #93B7CD, #285f9d, #114466, #0b2f4a);
+position: relative;
 
+  .slot{
+    width: 100%;
+  height: 100px;
+  position: absolute;
+  top: -100px;
+}
   h1 {
     font-size: 75px;
     // font-size: map-get($fontSizes , h3);
