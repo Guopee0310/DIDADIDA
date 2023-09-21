@@ -3,13 +3,12 @@
     <div class="dateTitle">選擇日期與票數</div>
     <div class="dateTextAll">
       <div class="calendar">
-        <VDatePicker borderless expanded :min-date="new Date()" locale="tw" :masks="{ title: 'YYYY MMM' }"
-          :select-attribute="selectAttribute" />
+        <VDatePicker borderless expanded :min-date="new Date()" locale="tw" :masks="{ title: 'YYYY MMM' }" />
       </div>
       <div class="calendarOptionAll">
         <div class="optionTitle">
           <div>選擇數量</div>
-          <div @click="clearTicketCount">全部重選</div>
+          <div @click="clearTicketCount"><img src="../assets/images/reorganize.png" alt="">全部重選</div>
         </div>
         <div v-for="(i, index) in optionDetailArr" class="optionAll" :key="index">
           <div class="ticketType">
@@ -31,17 +30,15 @@
             TWD <span>{{ totalPrice }}</span>
           </div>
         </div>
+        <div class="bookbtn">
+          <button>立即購票</button>
+        </div>
+
       </div>
     </div>
   </div>
 </template>
-<!-- 日曆相關屬性 -->
-<script setup>
-import { ref } from 'vue';
 
-const date = ref(new Date());
-const selectAttribute = ref({ highlight: 'blue', });  // 改選取日期的顏色
-</script>
 
 <script>
 export default {
@@ -99,6 +96,34 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+:deep(.calendar) .vc-disabled {
+  cursor: not-allowed;
+  text-decoration: line-through;
+}
+
+:deep(.calendar) .vc-week {
+  padding: 10px;
+}
+
+:deep(.calendar) .vc-weeks {
+  margin: 10px;
+}
+
+:deep(.calendar) .vc-header {
+  height: 50px;
+  background-color: map-get($colors, "secondary");
+  margin: 0;
+  padding-left: 150px;
+  padding-right: 150px;
+}
+
+:deep(.calendar) .vc-arrow,
+:deep(.calendar) .vc-title {
+  color: map-get($colors, "light");
+  background-color: map-get($colors, "secondary");
+  z-index: 2;
+}
+
 .dateAll {
   @include ticket;
 
@@ -135,7 +160,30 @@ export default {
         div {
           &:last-child {
             cursor: pointer;
+
+            img {
+              margin-right: 10px;
+              margin-bottom: -5px;
+            }
           }
+        }
+      }
+
+      .bookbtn {
+        display: flex;
+        justify-content: flex-end;
+        padding: 20p;
+        margin: 40px 10px;
+        border: 0;
+
+        button {
+          width: 150px;
+          height: 50px;
+          border: 0;
+          border-radius: 5px;
+          font-size: map-get($fontSizes, "h4");
+          background-color: map-get($colors, "secondary");
+          color: map-get($colors, "light");;
         }
       }
 
@@ -144,6 +192,7 @@ export default {
         padding: 15px 0;
         justify-content: space-between;
         border-bottom: 1px #979595 solid;
+        font-weight: bold;
 
         .ticketType {
           display: flex;
@@ -190,11 +239,19 @@ export default {
         padding-right: 20px;
         display: flex;
         justify-content: flex-end;
+        align-items: baseline;
 
         div {
           &:first-child {
-            margin: 0 15px;
+            margin: 0 25px;
+            font-weight: bold;
           }
+        }
+
+        div:nth-child(2) {
+          color: map-get($colors, "secondary");
+          font-size: map-get($fontSizes, "h4");
+          font-weight: bold;
         }
       }
     }

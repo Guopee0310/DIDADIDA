@@ -94,33 +94,33 @@ export default {
         ? `${this.$store.state.chooseImgSrc}/all_images/cenote-280252_1920.jpg`
         : // ? "/all_images/cenote-280252_1920.jpg"
         this.$route.path == "/explore"
-        ? `${this.$store.state.chooseImgSrc}/all_images/banner/explore.jpg`
-        : // ? "/all_images/cenote-280252_1920.jpg"
-        this.$route.path == "/news"
-        ? `${this.$store.state.chooseImgSrc}/all_images/banner/news_banner.jpg`
-        : // ? "/all_images/banner/news_banner.jpg"
-        this.$route.path == "/about"
-        ? `${this.$store.state.chooseImgSrc}/all_images/banner/about.jpg`
-        : // ? "/all_images/banner/about.jpg"
-        this.$route.path == "/member"
-        ? `${this.$store.state.chooseImgSrc}/all_images/banner/member.jpg`
-        : // ? "/all_images/cenote-280252_1920.jpg"
-        this.$route.path == "/guide"
-        ? `${this.$store.state.chooseImgSrc}/all_images/banner/guide_banner.jpg`
-        : // ? "/all_images/banner/guide_banner.jpg"
-        this.$route.path == "/interact"
-        ? `${this.$store.state.chooseImgSrc}/all_images/cenote-280252_1920.jpg`
-        : // ? "/all_images/cenote-280252_1920.jpg"
-        this.$route.path == "/faq"
-        ? `${this.$store.state.chooseImgSrc}/all_images/cenote-280252_1920.jpg`
-        : // ? "/all_images/cenote-280252_1920.jpg"
-        this.$route.path == "/shoppingcart"
-        ? `${this.$store.state.chooseImgSrc}/all_images/cenote-280252_1920.jpg`
-        : // ? "/all_images/cenote-280252_1920.jpg"
-        this.$route.path == "/ticket"
-        ? `${this.$store.state.chooseImgSrc}/all_images/cenote-280252_1920.jpg`
-        : // ? "/all_images/cenote-280252_1920.jpg"
-          "";
+          ? `${this.$store.state.chooseImgSrc}/all_images/banner/explore.jpg`
+          : // ? "/all_images/cenote-280252_1920.jpg"
+          this.$route.path == "/news"
+            ? `${this.$store.state.chooseImgSrc}/all_images/banner/news_banner.jpg`
+            : // ? "/all_images/banner/news_banner.jpg"
+            this.$route.path == "/about"
+              ? `${this.$store.state.chooseImgSrc}/all_images/banner/about.jpg`
+              : // ? "/all_images/banner/about.jpg"
+              this.$route.path == "/member"
+                ? `${this.$store.state.chooseImgSrc}/all_images/banner/mem_center.jpg`
+                : // ? "/all_images/cenote-280252_1920.jpg"
+                this.$route.path == "/guide"
+                  ? `${this.$store.state.chooseImgSrc}/all_images/banner/guide_banner.jpg`
+                  : // ? "/all_images/banner/guide_banner.jpg"
+                  this.$route.path == "/interact"
+                    ? `${this.$store.state.chooseImgSrc}/all_images/cenote-280252_1920.jpg`
+                    : // ? "/all_images/cenote-280252_1920.jpg"
+                    this.$route.path == "/faq"
+                      ? `${this.$store.state.chooseImgSrc}/all_images/cenote-280252_1920.jpg`
+                      : // ? "/all_images/cenote-280252_1920.jpg"
+                      this.$route.path == "/shoppingcart"
+                        ? `${this.$store.state.chooseImgSrc}/all_images/cenote-280252_1920.jpg`
+                        : // ? "/all_images/cenote-280252_1920.jpg"
+                        this.$route.path == "/ticket"
+                          ? `${this.$store.state.chooseImgSrc}/all_images/cenote-280252_1920.jpg`
+                          : // ? "/all_images/cenote-280252_1920.jpg"
+                          "";
     },
   },
 

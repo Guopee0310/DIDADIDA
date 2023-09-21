@@ -62,28 +62,33 @@ export default {
 <style scoped lang="scss">
 .favorites_list_area {
   width: 500px;
-  height: 650px;
+  height: 850px;
+  border: 0;
   border-radius: 15px;
   margin: 0 auto;
+  background-color: #eeee;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
 
   .favorites_list_group {
-    width: 500px;
-    height: 208px;
-    border-bottom: 1px solid #333;
+    width: 460px;
+    height: 200px;
+    border-bottom: 1px solid #eee;
     display: flex;
-    align-items: center;
+    justify-content: space-evenly;
+    z-index: 2;
   }
 
   h5 {
     font-size: map-get($fontSizes, "h4");
+    color: map-get($colors, 'dark');
   }
 
   p {
     font-size: map-get($fontSizes, "span");
+    color: map-get($colors, 'dark');
   }
 
   .favorites_list_group:last-child {
@@ -94,7 +99,6 @@ export default {
     width: 150px;
     height: 150px;
     margin: 20px auto;
-    border: 1px solid #333;
   }
 
   .favorites_list_img img {
@@ -104,7 +108,8 @@ export default {
   }
 
   .favorites_list_info {
-    width: 300px;
+    width: 265px;
+    margin-top: 30px;
   }
 }
 </style>
