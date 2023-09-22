@@ -204,7 +204,7 @@ export default {
     searchClick(data) {
       const searchInput = data.toUpperCase();
       const res = this.news_content.filter((item, index, array) => {
-        const search_content = item.news_title.toUpperCase() && item.news_txt.toUpperCase();
+        const search_content = item.news_title.toUpperCase() || item.news_txt.toUpperCase();
         return search_content.includes(searchInput);
       });
       this.filteredNews = res;
