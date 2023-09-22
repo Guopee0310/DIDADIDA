@@ -62,7 +62,7 @@ export default {
 
 .product_allCards {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: start;
   align-items: center;
   flex-wrap: wrap;
 }
