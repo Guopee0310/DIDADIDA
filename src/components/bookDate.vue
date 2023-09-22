@@ -1,37 +1,37 @@
 <template>
   <div class="dateAll">
-    <div class="dateTitle">選擇日期與票數</div>
+    <div class="dateTitle">{{ $t('選擇日期與票數') }}</div>
     <div class="dateTextAll">
       <div class="calendar">
         <VDatePicker borderless expanded :min-date="new Date()" locale="tw" :masks="{ title: 'YYYY MMM' }" />
       </div>
       <div class="calendarOptionAll">
         <div class="optionTitle">
-          <div>選擇數量</div>
-          <div @click="clearTicketCount"><img src="../assets/images/reorganize.png" alt="">全部重選</div>
+          <div>{{ $t('選擇數量') }}</div>
+          <div @click="clearTicketCount"><img src="../assets/images/reorganize.png" alt="">{{ $t('全部重選') }}</div>
         </div>
         <div v-for="(i, index) in optionDetailArr" class="optionAll" :key="index">
           <div class="ticketType">
-            <div>{{ i[0] }}</div>
-            <div>{{ i[1] }}</div>
+            <div>{{ $t(i[0]) }}</div>
+            <div>{{ $t(i[1]) }}</div>
           </div>
           <div class="ticketSal">
-            <div>{{ i[2] }}</div>
+            <div>{{ $t(i[2]) }}</div>
             <div class="clickTicket">
-              <div @click="ticketdown(index)">-</div>
+              <div @click="ticketdown(index)">－</div>
               <div>{{ i[3] }}</div>
-              <div @click="ticketPlus(index)">+</div>
+              <div @click="ticketPlus(index)">＋</div>
             </div>
           </div>
         </div>
         <div class="totalNum">
-          <div>總金額</div>
+          <div>{{ $t('總金額') }}</div>
           <div>
-            TWD <span>{{ totalPrice }}</span>
+            NT <span>{{ totalPrice }}</span>
           </div>
         </div>
         <div class="bookbtn">
-          <button>立即購票</button>
+          <button>{{ $t('立即購票') }}</button>
         </div>
 
       </div>
@@ -47,10 +47,10 @@ export default {
   data() {
     return {
       optionDetailArr: [
-        ["成人", "(18~64歲)", "TWD 500/每人", 0],
-        ["兒童", "(4~11歲)", "TWD 250/每人", 0],
-        ["學生", "(12歲以上(含)持學生證者)", "TWD 400/每人", 0],
-        ["長者", "(65歲以上(含))", "TWD 250/每人", 0],
+        ["成人", "(18~64歲)", "NT 500 / 每人", 0],
+        ["兒童", "(4~11歲)", "NT 250 / 每人", 0],
+        ["學生", "(12歲以上(含)持學生證者)", "NT 400 / 每人", 0],
+        ["長者", "(65歲以上(含))", "NT 250 / 每人", 0],
       ],
       totalPrice: 0,
     };
@@ -105,6 +105,10 @@ export default {
   padding: 10px;
 }
 
+:deep(.calendar) .vc-weekdays {
+  padding: 10px;
+}
+
 :deep(.calendar) .vc-weeks {
   margin: 10px;
 }
@@ -129,8 +133,6 @@ export default {
 
   .dateTitle {
     @include h3Title;
-    // border: 1px red solid;
-    width: 180px;
   }
 
   .dateTextAll {
@@ -183,20 +185,24 @@ export default {
           border-radius: 5px;
           font-size: map-get($fontSizes, "h4");
           background-color: map-get($colors, "secondary");
-          color: map-get($colors, "light");;
+          color: map-get($colors, "light");
+          ;
         }
       }
 
       .optionAll {
         display: flex;
+        align-items: center;
         padding: 15px 0;
         justify-content: space-between;
         border-bottom: 1px #979595 solid;
         font-weight: bold;
+        letter-spacing: 1px;
 
         .ticketType {
           display: flex;
-          align-items: flex-end;
+          flex-wrap: wrap;
+          align-items: center;
 
           div {
             &:first-child {
@@ -214,6 +220,8 @@ export default {
         .ticketSal {
           display: flex;
           align-items: flex-end;
+          flex-wrap: wrap;
+          justify-content: flex-end;
 
           .clickTicket {
             // border: 1px red solid;

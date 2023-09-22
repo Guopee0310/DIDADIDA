@@ -1,20 +1,20 @@
 <template>
   <div class="ticketAll">
     <div class="topIntro">
-      <div class="topTitle">{{ $t('購票資訊') }}</div>
+      <div class="topTitle">{{ $t('票價資訊') }}</div>
       <div class="ticketRow" v-for="(i, index) in ticketRowArr" :key="index">
-        <div>{{ i[0] }}</div>
-        <div>{{ i[1] }}</div>
-        <div>{{ i[2] }}</div>
+        <div>{{ $t(i[0]) }}</div>
+        <div>{{ $t(i[1]) }}</div>
+        <div>{{ $t(i[2]) }}</div>
       </div>
-      <div class="warning">※未滿4歲且有家長陪同的幼童可免費入場</div>
+      <div class="warning">※{{ $t('未滿4歲且有家長陪同的幼童可免費入場') }}</div>
     </div>
     <bookDate></bookDate>
     <div class="bottomIntro">
-      <div class="bottomTitle">購票須知</div>
+      <div class="bottomTitle">{{ $t('購票須知') }}</div>
       <div>
         <div v-for="(i, index) in warningArr" :key="index" class="singleNotice">
-          <span> ◆ </span>{{ i }}
+          <span> ◆ </span>{{ $t(i) }}
         </div>
       </div>
     </div>
@@ -31,20 +31,20 @@ export default {
     return {
       ticketRowArr: [
         ["票種", "價格", "適用對象"],
-        ["一般票", "NT 500", "限18(含)以上成人使用"],
+        ["一般票", "NT 500", "限18歲(含)以上成人使用"],
         ["學生票", "NT 300", "限12歲(含)以上持學生證之學生使用"],
         ["孩童票", "NT 200", "限4歲(含)以上及未滿12歲兒童使用"],
         [
-          "優待票",
+          "愛心票",
           "NT 200",
           "限持有身心障礙證明者、身心障礙者的1位陪同者、孕婦、滿65歲以上長者適用",
         ],
-        ["團體票", "NT 350", "15名以上適用"],
+        ["團體票", "NT 350", "15人以上適用"],
       ],
       warningArr: [
         "未滿 4 歲的兒童可免費入場，需有家長陪同入場。",
         "下訂時請以「票券使用日」為主，下訂後即無法變更，敬請留意。",
-        "訂單一次最高訂購上限為 6 張，每日場次數量為限量販售，售完為止 : ",
+        "訂單一次最高訂購上限為 6 張，每日場次數量為限量販售，售完為止。",
         "訂單恕不接受部分變更，若需變更入場日及場次請整筆重新下訂。",
         "長者票（博愛票）適用對象：限持有身心障礙證明者、身心障礙者的1位陪同者、孕婦、滿65歲以上長者適用。",
         "本館禁止攜帶外食、寵物，可攜帶開水。",
@@ -53,7 +53,7 @@ export default {
         "此商品恕無法使用任何折扣券，敬請見諒。",
         "購票時請主動出示相關證件供售票處工作人員驗證，相關證件說明如下：",
         " 1. 學生票：本人有效學生證正本(若為應屆畢業生則提供當年度正式入學通知單或註冊單及攜帶身分證)。",
-        "  2. 兒童票、長者票(博愛票)：身心障礙證明、孕婦健康手冊、國民身分證或政府核發附有照片、身分證字號及出生年、月、日等足以證明身分證件。",
+        " 2. 兒童票、長者票(博愛票)：身心障礙證明、孕婦健康手冊、國民身分證或政府核發附有照片、身分證字號及出生年、月、日等足以證明身分證件。",
       ],
       checkLogoPic: false,
       headerColor: "rgba(35, 45, 71, 0)",
@@ -149,7 +149,9 @@ export default {
   }
 
   .ticketRow {
+    height: 61px;
     display: flex;
+    align-items: center;
     letter-spacing: 1px;
 
 
@@ -196,7 +198,7 @@ export default {
     align-items: center;
     background-color: map-get($colors, "secondary");
     color: white;
-    padding-left: 50px;
+    padding-left: 20px;
     letter-spacing: 1px;
   }
 }
