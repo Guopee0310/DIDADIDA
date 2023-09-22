@@ -151,7 +151,7 @@ export default {
       if (windowWidth > 992) {
         this.pageSize = 9;
       }
-      else if(windowWidth > 767 && windowWidth <= 992){
+      else if (windowWidth > 767 && windowWidth <= 992) {
         this.pageSize = 8;
       }
       else {
@@ -201,15 +201,24 @@ export default {
       // 重置当前页为第一页
       this.updatePage(1);
     },
+    // searchClick(data) {
+    //   const searchInput = data.toUpperCase();
+    //   const res = this.news_content.filter((item, index, array) => {
+    //     const search_content = item.news_title.toUpperCase() || item.news_txt.toUpperCase();
+    //     return search_content.includes(searchInput);
+    //   });
+    //   this.filteredNews = res;
+    //   this.updatePage(1);
+    // },
     searchClick(data) {
       const searchInput = data.toUpperCase();
-      const res = this.news_content.filter((item, index, array) => {
-        const search_content = item.news_title.toUpperCase() || item.news_txt.toUpperCase();
+      const res = this.news_content.filter((item) => {
+        const search_content = item.news_title.toUpperCase() + item.news_txt.toUpperCase();
         return search_content.includes(searchInput);
       });
       this.filteredNews = res;
       this.updatePage(1);
-    },
+    }
   },
   beforeDestroy() {
     // 移除窗口宽度监听器，以防止内存泄漏
