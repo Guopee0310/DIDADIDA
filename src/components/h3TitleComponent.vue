@@ -8,16 +8,16 @@ export default {
   data() {
     return {};
   },
-  mounted() {},
+  mounted() { },
   methods: {},
   computed: {},
 };
 </script>
-<style scoped lang="scss">
+<style lang="scss">
 h3 {
   width: fit-content;
-  margin: 30px auto;
-  font-size: 25px;
+  margin: 0px auto;
+  font-size: 200px;
   border-bottom: 3.5px solid #9fbdce;
 }
 

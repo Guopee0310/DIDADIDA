@@ -2,12 +2,12 @@
     <div class="ticket">
         <table>
             <tr>
-                <th v-for="title in priceTitle">{{ title.name }}</th>
+                <th v-for="title in priceTitle">{{ $t(title.name) }}</th>
             </tr>
             <tr v-for="ticket in ticket">
-                <td>{{ ticket.name }}</td>
-                <td>{{ ticket.price }}</td>
-                <td>{{ ticket.object }}</td>
+                <td>{{ $t(ticket.name) }}</td>
+                <td>{{ $t(ticket.price) }}</td>
+                <td>{{ $t(ticket.object) }}</td>
             </tr>
             <tr>
                 <td colspan="2">※未滿4歲且有家長陪同的幼童可免費入場</td>
