@@ -1,58 +1,57 @@
 <template>
-    <div class="choose">
-        <div class="select_wrap">
-        <div class="select">
-      <select name="" id="itemClass" v-model="selectedItem">
-        <option v-for="(item, index) in tagSelect" :key="index">
-          {{ item.option }}
-        </option>
-      </select>
-      <span><i class="fa-solid fa-chevron-down" style="color: #eeeeee"></i></span>
+  <div class="choose">
+    <div class="search_box">
+      <div class="search">
+        <button class="icon"><i class="fas fa-search"></i></button>
+        <input type="text" class="input-search" placeholder="搜尋" v-model="searchInput">
+      </div>
     </div>
-    <div class="select" >
-      <select v-model="selectedmonth">
-        <option v-for="(item, index) in monthSelect" :key="index" >
-          {{ item.option }}
-        </option>
-      </select>
-      <span><i class="fa-solid fa-chevron-down" style="color: #eeeeee"></i></span>
+    <div class="select_wrap">
+      <div class="select">
+        <select name="" id="itemClass" v-model="selectedItem">
+          <option v-for="(item, index) in tagSelect" :key="index">
+            {{ item.option }}
+          </option>
+        </select>
+        <span><i class="fa-solid fa-chevron-down" style="color: #eeeeee"></i></span>
+      </div>
+      <div class="select">
+        <select v-model="selectedmonth">
+          <option v-for="(item, index) in monthSelect" :key="index">
+            {{ item.option }}
+          </option>
+        </select>
+        <span><i class="fa-solid fa-chevron-down" style="color: #eeeeee"></i></span>
+      </div>
     </div>
-    </div>
-    <div class="search">
-        
-        <input type="txt" placeholder="搜尋" v-model="searchInput">
-        <button class="icon">
-          <i class="fa-sharp fa-solid fa-magnifying-glass" style="color: #bdc9db;"></i>
-        </button>
-    </div>
-    </div>
-  </template>
+  </div>
+</template>
   
-  <script>
-  export default {
-    data() {
-      return {
-        tagSelect: [
-          { option: "所有主題" },
-          { option: "表演" },
-          { option: "活動" },
-          { option: "優惠" }
-        ],
-        monthSelect: [{ option: "由新到舊" }, { option: "由舊到新" }],
-        selectedItem: "所有主題",
-        selectedmonth: "由新到舊",
-        searchInput:""
-        
-      };
+<script>
+export default {
+  data() {
+    return {
+      tagSelect: [
+        { option: "所有主題" },
+        { option: "表演" },
+        { option: "活動" },
+        { option: "優惠" }
+      ],
+      monthSelect: [{ option: "由新到舊" }, { option: "由舊到新" }],
+      selectedItem: "所有主題",
+      selectedmonth: "由新到舊",
+      searchInput: ""
+
+    };
+  },
+  methods: {
+    handleSearch(e) {
+      console.log(e.target.value)
+      this.searchInput = e.target.value
     },
-    methods: {
-        handleSearch(e){
-                    console.log(e.target.value)
-                    this.searchInput = e.target.value
-                },
-    },
-    emits: ["transferClass","transfertime"],
-    watch: {
+  },
+  emits: ["transferClass", "transfertime"],
+  watch: {
     selectedItem(newValue, oldValue) {
       // 在这里可以处理选项变化的逻辑
       console.log("新选项：", newValue);
@@ -72,78 +71,146 @@
       this.$emit("transferSearch", this.searchInput);
     },
   },
-   
-  };
-  </script>
-  <style scoped lang="scss">
- .choose{
-    width: 90vw;
-    margin: 50px 0;
-    display: flex;
-    justify-content: space-evenly;
-    select {
+
+};
+</script>
+<style scoped lang="scss">
+.choose {
+  width: 100vw;
+  margin: 50px 0;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-evenly;
+  box-sizing: border-box;
+
+  select {
     @include selectBtn;
   }
-  
+
   /* Remove IE arrow */
   select::-ms-expand {
     display: none;
   }
-  
+
   /* Custom Select wrapper */
   .select {
     @include btnWidth;
-    margin: 0 30px;
-  
+    margin: 0 1rem;
+    display: flex;
+
     span {
       position: absolute;
       top: 8px;
-      right: 18px;
-      font-size: 15px;
+      right: 10px;
+      font-size: 1rem;
       pointer-events: none;
     }
   }
-  
+
   option {
     background-color: #2c3e50;
   }
-  .select_wrap{
+
+  .select_wrap {
     width: 50%;
     display: flex;
   }
-  .search{
-    width: 50%;
-    position: relative;
-    text-align: right;
-    input[type="txt"]{
-        width: 50%;
-        border-radius: 1em;
-        padding: 5px;
-        margin-right: 40px;
-        border: 1px solid #2c3e5041;
-        outline: none;
+
+  .search_box {
+    width: 45%;
+    margin-right: auto;
+
+    .search {
+      width: fit-content;
+      height: fit-content;
+      position: relative;
+      margin-left: auto;
     }
-    .icon{
-        height: 100%;
-        position: absolute;
-        top: 0;
-        right: 50px;
-        border: 0;
-        background-color: transparent;
-        cursor: pointer;
-        i{
-            height: 100%;
-            display: flex;
-            align-items: center;
-            vertical-align: top;
-        }
+
+    .input-search,
+    .input-search:focus {
+      height: 50px;
+      width: 50px;
+      border-style: none;
+      padding: 10px;
+      font-size: 18px;
+      letter-spacing: 2px;
+      outline: none;
+      border-radius: 25px;
+      transition: all .5s ease-in-out;
+      background-color: #b6e3d8;
+      padding-right: 40px;
+      color: #000000;
+    }
+
+    .input-search::placeholder {
+      color: rgba(146, 126, 132, 0.5);
+      letter-spacing: 2px;
+    }
+
+    .icon {
+      width: 50px;
+      height: 50px;
+      border-style: none;
+      font-size: 20px;
+      font-weight: bold;
+      outline: none;
+      cursor: pointer;
+      border-radius: 50%;
+      position: absolute;
+      right: 0px;
+      color: #584d4d;
+      background-color: transparent;
+      pointer-events: painted;
+    }
+
+    .icon:focus~.input-search {
+      width: 15em;
+      border-radius: 0px;
+      background-color: transparent;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+      transition: all 500ms cubic-bezier(0, 0.110, 0.35, 2);
+    }
+
+    .input-search:focus,
+    .input-search:not(:placeholder-shown) {
+      width: 15em;
+      border-radius: 0px;
+      background-color: transparent;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+      transition: all 500ms cubic-bezier(0, 0.110, 0.35, 2);
+    }
+
+  }
+}
+
+
+
+@media screen and (max-width:767px) {
+  .choose {
+    display: block;
+
+    .select_wrap {
+      width: 100%;
+      justify-content: center;
+    }
+
+    .search_box {
+      width: 100%;
+      margin-bottom: 1rem;
+      margin-left: auto;
+
+      .icon:focus~.input-search {
+        width: 10em;
+      }
+
+      .input-search:focus,
+      .input-search:not(:placeholder-shown) {
+        width: 10em;
+      }
 
     }
   }
- }
- @media screen and (max-width:992px) {
-  
 
-}
-  </style>
+}</style>
   
