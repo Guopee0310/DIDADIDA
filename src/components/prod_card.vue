@@ -10,6 +10,7 @@
       <heart
         @change-heart="changeHeart($event, i, index)"
         :keepLove="keepHeartArr[index]"
+        :is-active="favList.findIndex((v) => v.favoName === i.titleName) > -1"
       ></heart>
     </div>
     <div class="pic">
@@ -380,7 +381,11 @@ export default {
     heart,
     prodSelect,
   },
-  computed: {},
+  computed: {
+    favList() {
+      return this.$store.state.favoList;
+    },
+  },
   methods: {
     productDown(idx) {
       if (this.chooseItem[idx].count > 0) {
@@ -524,12 +529,12 @@ export default {
     changeHeart(isFav, i, index) {
       console.log(isFav, i, index);
 
-      for (let j = 0; j < this.$store.state.favoList.length; j++) {
-        if (i.imageSrc == this.$store.state.favoList[j].favoImg) {
-          return;
-        }
-      }
-      if (!isFav && this.$store.state.userName) {
+      const favListIndex = this.favList.findIndex(
+        (v) => v.favoName === i.titleName
+      );
+      if (favListIndex > -1) {
+        this.$store.state.favoList.splice(favListIndex, 1);
+      } else {
         this.$store.state.favoList.push({
           favoImg: i.imageSrc,
           favoName: i.titleName,
@@ -538,6 +543,21 @@ export default {
           favIndex: index,
         });
       }
+
+      // for (let j = 0; j < this.$store.state.favoList.length; j++) {
+      //   if (i.imageSrc == this.$store.state.favoList[j].favoImg) {
+      //     return;
+      //   }
+      // }
+      // if (!isFav && this.$store.state.userName) {
+      //   this.$store.state.favoList.push({
+      //     favoImg: i.imageSrc,
+      //     favoName: i.titleName,
+      //     favoPrice: i.prodPrice,
+      //     favoIntroduction: i.info,
+      //     favIndex: index,
+      //   });
+      // }
       console.log(this.$store.state.favoList);
       // TODO　ＣＡＬＬ　ＡＰＩ
       // if (isFav) {
