@@ -1,13 +1,8 @@
 <template>
   <div class="ticketAll">
     <div class="topIntro">
-      <div class="topTitle">{{ $t('購票資訊') }}</div>
-      <div class="ticketRow" v-for="(i, index) in ticketRowArr" :key="index">
-        <div>{{ i[0] }}</div>
-        <div>{{ i[1] }}</div>
-        <div>{{ i[2] }}</div>
-      </div>
-      <div class="warning">※未滿4歲且有家長陪同的幼童可免費入場</div>
+      <div class="topTitle">購票資訊</div>
+      <ticketPrice></ticketPrice>
     </div>
     <bookDate></bookDate>
     <div class="bottomIntro">
@@ -22,25 +17,16 @@
 </template>
 <script>
 import bookDate from "../components/bookDate.vue";
+import ticketPrice from "../components/ticketPrice.vue";
+
 export default {
   name: "HomeView",
   components: {
     bookDate,
+    ticketPrice,
   },
   data() {
     return {
-      ticketRowArr: [
-        ["票種", "價格", "適用對象"],
-        ["一般票", "NT 500", "限18(含)以上成人使用"],
-        ["學生票", "NT 300", "限12歲(含)以上持學生證之學生使用"],
-        ["孩童票", "NT 200", "限4歲(含)以上及未滿12歲兒童使用"],
-        [
-          "優待票",
-          "NT 200",
-          "限持有身心障礙證明者、身心障礙者的1位陪同者、孕婦、滿65歲以上長者適用",
-        ],
-        ["團體票", "NT 350", "15名以上適用"],
-      ],
       warningArr: [
         "未滿 4 歲的兒童可免費入場，需有家長陪同入場。",
         "下訂時請以「票券使用日」為主，下訂後即無法變更，敬請留意。",

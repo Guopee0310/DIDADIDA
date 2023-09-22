@@ -18,6 +18,7 @@ export default createStore({
     mem_psw: "charmy101",
     userName: "",
     shoppingCart: [],
+    showCartPopup: false, // 控制购物车弹出窗口的显示状态
     chooseImgSrc: publicURL,
     favoList: [],
   },
@@ -29,7 +30,17 @@ export default createStore({
     updateSiteLoad(state, val) {
       state.siteLoading = val;
     },
+    toggleCartPopup(state) {
+      // 切换购物车弹出视图的显示状态
+      state.showCartPopup = !state.showCartPopup;
+    },
+    closeCartPopup() {
+      // 延迟一秒后关闭购物车弹出视图
+      setTimeout(() => {
+        this.toggleCartPopup();
+      }, 500); // 500毫秒（1秒）后关闭
+    }
+
   },
-  actions: {},
   modules: {},
 });
