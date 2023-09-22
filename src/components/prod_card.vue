@@ -35,11 +35,14 @@
             <i
               class="fa-solid fa-cart-shopping"
               style="color: #9fbdce"
-              @click.prevent=" pushAndTogglePopup(
+              @click.prevent="
+                pushAndTogglePopup(
                   i.imageSrc,
                   i.titleName,
                   i.count,
-                  i.prodPrice)"
+                  i.prodPrice
+                )
+              "
             ></i>
             <!-- pushInShoppingCart(
                   i.imageSrc,
@@ -48,7 +51,7 @@
                   i.prodPrice
                 ) -->
           </a>
-          <cartpop/>
+          <cartpop />
         </div>
       </div>
     </div>
@@ -693,13 +696,15 @@ export default {
     // },
     ...mapMutations(["toggleCartPopup"]),
     pushAndTogglePopup(imageSrc, titleName, count, prodPrice) {
-    // 添加商品到购物车
-    this.pushInShoppingCart(imageSrc, titleName, count, prodPrice);
+      // 添加商品到购物车
+      this.pushInShoppingCart(imageSrc, titleName, count, prodPrice);
 
-    // 切换购物车弹出视图的显示状态
-    this.toggleCartPopup();
-    this.closeCartPopup();
-  }
+      // 切换购物车弹出视图的显示状态
+      if (this.$store.state.userName) {
+        this.toggleCartPopup();
+        this.closeCartPopup();
+      }
+    },
   },
 };
 </script>
