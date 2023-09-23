@@ -29,4 +29,28 @@
     bottom: 30px;
     left: -5px;
 }
+
+@media screen and (min-width: 414px) {
+    .deco_shark {
+        top: -10px;
+        right: -80px;
+
+        img {
+            width: 70%;
+        }
+    }
+
+    .deco_whale {
+        display: none;
+    }
+
+    .deco_seastar {
+        bottom: -30px;
+        right: 120px;
+
+        img {
+            width: 70%;
+        }
+    }
+}
 </style>

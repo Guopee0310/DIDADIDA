@@ -25,7 +25,6 @@
                 </div>
             </div>
         </div>
-        <memChangePage></memChangePage>
     </div>
 </template>
 <script>
@@ -48,6 +47,13 @@ export default {
                 {
                     prodImg: require("../assets/images/dolphin_pillow.jpg"),
                     prodName: "極舒適海豚",
+                    prodCount: "2",
+                    prodDate: "2023.08.31",
+                    prodPrice: "399",
+                },
+                {
+                    prodImg: require("../assets/images/dolphin_pillow.jpg"),
+                    prodName: "極舒適海豚抱枕",
                     prodCount: "2",
                     prodDate: "2023.08.31",
                     prodPrice: "399",
@@ -89,18 +95,42 @@ export default {
         flex-direction: column;
         align-items: center;
         justify-content: flex-start;
+        overflow-y: scroll;
+
+        &::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        &::-webkit-scrollbar-track-piece {
+            background: transparent;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            border-radius: 4px;
+            background-color: rgba(0, 0, 0, 0.4);
+            border: 1px solid slategrey;
+        }
+
+        &::-webkit-scrollbar-track {
+            box-shadow: transparent;
+        }
+
+        &::-webkit-scrollbar-button {
+            height: 5px;
+            background: transparent;
+            border-radius: 4px;
+        }
 
 
         .prod_order_group {
             width: 460px;
-            height: 200px;
             border-bottom: 1px solid #eee;
             display: flex;
             justify-content: space-evenly;
             z-index: 2;
         }
 
-        .prod_order_group:nth-child(4) {
+        .prod_order_group:last-child {
             border-bottom: 0;
         }
 
@@ -142,5 +172,29 @@ export default {
             margin-left: 10px;
         }
     }
+}
+
+@media screen and (max-width: 414px) {
+    .prod_order_main {
+        .order_area {
+            width: 330px;
+            height: 720px;
+
+            .prod_order_group {
+                width: 300px;
+                flex-direction: column;
+            }
+
+            .prod_img {
+                width: 50%;
+            }
+
+            .prod_info {
+                width: 50%;
+                margin: 0 auto;
+            }
+        }
+    }
+
 }
 </style>

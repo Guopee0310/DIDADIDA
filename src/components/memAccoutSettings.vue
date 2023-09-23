@@ -114,4 +114,28 @@ export default {
         background-color: map-get($colors, 'secondary');
     }
 }
+
+@media screen and (max-width: 414px) {
+    .profile__main {
+        margin-top: 20px;
+
+        .field__group {
+            margin: 5px 30px;
+            flex-direction: column
+        }
+
+        .mem_email,
+        .mem_addr {
+            width: 300px;
+        }
+        .field_input{
+            border: 0;
+        }
+    }
+
+    .field__action {
+        right: 25px;
+        bottom: 70px;
+    }
+}
 </style>

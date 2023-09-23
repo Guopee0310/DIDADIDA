@@ -3,6 +3,7 @@
         <button class="qr_btn" @click="showModal = true">顯示電子票券</button>
         <transition name="fade">
             <div v-if="showModal" class="modal">
+                <div class="shadow" @click="showModal = false"></div>
                 <div class="modal-content">
                     <div class="qrcode-content">
                         <div class="qrcode-img">
@@ -41,7 +42,10 @@ export default {
             showModal: false,
             qrCodeData: 'https://yahoo.com.tw', // QR碼連到的地方
         }
-    }
+    },
+    methods: {
+
+    },
 }
 </script>
 
@@ -51,10 +55,11 @@ export default {
     margin: 5px;
     border: 0;
     background-color: map-get($colors, 'h2Blue');
+    cursor: pointer;
 }
 
 .modal {
-    // display: none;
+    // display: flex;
     position: fixed;
     top: 0;
     left: 0;
@@ -64,6 +69,17 @@ export default {
     z-index: 10;
     justify-content: center;
     align-items: center;
+
+    .shadow {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.6);
+        z-index: -1;
+        /* 在蓋板下面 */
+    }
 
     .modal-content {
         width: 500px;
@@ -84,6 +100,7 @@ export default {
         position: absolute;
         top: 10px;
         right: 10px;
+        color: #333;
         cursor: pointer;
     }
 
@@ -138,6 +155,7 @@ export default {
             background-color: map-get($colors, 'QRbtn');
             color: map-get($colors, 'dark');
             font-weight: bold;
+            cursor: pointer;
         }
     }
 }

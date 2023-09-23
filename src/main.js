@@ -65,6 +65,7 @@ const i18n = createI18n({
             '(4~11歲)': '(4~11 years old)',
             '(12歲以上(含)持學生證者)': '(Those 12 years old and above(inclusive) holding student ID card)',
             '(65歲以上(含))': '(65 years and above (inclusive))',
+            每人: 'per',
             總金額: 'Total',
             立即購票: 'Buy Now',
             購票須知: 'Ticket Purchase Instructions',
