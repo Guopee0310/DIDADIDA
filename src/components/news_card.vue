@@ -227,6 +227,9 @@ export default {
 };
 </script>
 <style scoped lang="scss">
+.select_btn{
+  margin: auto;
+}
 .card {
   max-width: calc(100% / 3);
   aspect-ratio: 1/1;

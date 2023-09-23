@@ -2,24 +2,24 @@
   <div class="guide">
     <h3Title>
       <template v-slot:h3>
-        <h3>園區地圖</h3>
+        <h3 >園區地圖</h3>
       </template>
     </h3Title>
-    <div class="guide_map" id="section1">
+    <div class="guide_map">
       <div class="mask">
         <svg width="100%" height="100%" viewBox="0 0 200 100">
           <!-- 線性漸層 -->
-          <defs>
+          <!-- <defs>
             <linearGradient id="myGradient" x1="20%" y1="80%" x2="100%" y2="0%">
               <stop offset="0%" style="stop-color:  rgba(83,79,156,1);" />
               <stop offset="35%" style="stop-color:  rgba(236,187,152,1);" />
               <stop offset="89%" style="stop-color:  rgba(10,202,234,1);" />
             </linearGradient>
-          </defs>
+          </defs> -->
           <!-- 表層區 -->
           <g opacity="0.8">
             <circle cx="15" cy="0" r="8" fill="#67DBF4" filter="drop-shadow(0.1em 0.2em 0.1em rgba(0,0,0,.5))"
-              class="circle" @click="scrollToSection(2)" />
+              class="circle" @click="scrollToSection(2)" id="section1"/>
           </g>
           <text x="9" y="2" style="font: 4px noto-serif-kr;fill:#000000"
             filter="drop-shadow(0.1em 0.2em 0.1em rgba(0,0,0,.5))">表層區</text>
@@ -287,7 +287,6 @@ h3 {
   max-width: 100%;
   height: 130vh;
   padding: 2rem;
-  margin-bottom: 2rem;
   overflow: hidden;
 
   .sea+img {
@@ -384,14 +383,14 @@ h3 {
 
   .content {
     width: 75%;
-    height: 90%;
+    height: 95vh;
     overflow-y: scroll;
     padding: 1.5rem;
     border-radius: 2rem;
     position: absolute;
     z-index: 2;
     right: 1rem;
-    transition: transform 0.4s ease;
+    transition: transform 0.4s ease-in-out;
     margin-bottom: 2rem;
 
     &:nth-of-type(1) {

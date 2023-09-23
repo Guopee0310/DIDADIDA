@@ -5,12 +5,14 @@
       <div class="logo_name">
         <p>DIDADIDA</p>
         <span></span>
-        <h3>AQUARIUM</h3>
+        <p>AQUARIUM</p>
       </div>
     </div>
   </div>
 </template>
 <style scoped lang="scss">
+@import url('https://fonts.googleapis.com/css2?family=Inknut+Antiqua&display=swap');
+
 .loading_animation {
   position: fixed;
   z-index: 100;
@@ -46,7 +48,7 @@
 .logo_name {
   position: relative;
   margin-top: 10rem;
-  letter-spacing: 5px;
+  letter-spacing: 1.2px;
   font-size: map-get($fontSizes, "h4");
   color: #fff;
 
@@ -57,23 +59,27 @@
     text-align: center;
     opacity: 0;
     animation: appear 1.6s 2s forwards;
+    font-family: 'Inknut Antiqua';
+
+    &:nth-of-type(2) {
+      top: 33px;
+      left: 5px;
+      opacity: 0;
+      animation: appear 1.6s 2s forwards;
+      letter-spacing: 4px;
+      font-size: 15px;
+    }
   }
 
   span {
     background-color: #fff;
-    width: 150px;
-    height: 1.2px;
+    width: 145px;
+    height: 1px;
     position: absolute;
-    top: 40px;
+    top: 30px;
     opacity: 0;
+    left: 2px;
     animation: appear 1.6s 2.2s forwards;
-  }
-
-  h3 {
-    position: absolute;
-    top: 50px;
-    opacity: 0;
-    animation: appear 1.6s 2s forwards;
   }
 }
 

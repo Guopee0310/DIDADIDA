@@ -76,12 +76,13 @@ export default {
 </script>
 <style scoped lang="scss">
 .choose {
-  width: 100vw;
+  width: 94vw;
   margin: 50px 0;
   display: flex;
   flex-direction: row-reverse;
   justify-content: space-evenly;
   box-sizing: border-box;
+
 
   select {
     @include selectBtn;
@@ -95,7 +96,7 @@ export default {
   /* Custom Select wrapper */
   .select {
     @include btnWidth;
-    margin: 0 1rem;
+    margin: 0 1em 0 0;
     display: flex;
 
     span {
@@ -114,11 +115,11 @@ export default {
   .select_wrap {
     width: 50%;
     display: flex;
+    justify-content: start;
   }
 
   .search_box {
-    width: 45%;
-    margin-right: auto;
+    width: 50%;
 
     .search {
       width: fit-content;
