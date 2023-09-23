@@ -37,11 +37,11 @@ const i18n = createI18n({
             DIDADIDA海洋館: 'DIDADIDA AQUARIUM',
             營業時間: 'Opening Hours',
             最後入場: 'Last Tours',
-            今日入園人數: 'Number of people entering the park today',
+            今日入園人數: 'Number of People Today',
             // Ticket ------------------------------------
             票價資訊: 'Ticket Information',
             票種: 'Ticket Type',
-            一般票: 'regular Ticket',
+            一般票: 'Regular Ticket',
             學生票: 'Student Ticket',
             孩童票: 'Children Ticket',
             愛心票: 'Disabled Ticket',
@@ -49,8 +49,8 @@ const i18n = createI18n({
             價格: 'Price',
             適用對象: 'Suitable',
             '限18歲(含)以上成人使用': 'Restricted to adults aged 18 years and above (inclusive).',
-            '限12歲(含)以上持學生證之學生使用': 'Only available to students aged 12 or above (inclusive) with a student ID card.',
-            '限4歲(含)以上及未滿12歲兒童使用': 'Restricted to children aged 4 years and above and under 12 years old.',
+            '限12歲(含)以上持學生證之學生適用': 'Only available to students aged 12 or above (inclusive) with a student ID card.',
+            '限4歲(含)以上及未滿12歲兒童適用': 'Restricted to children aged 4 years and above and under 12 years old.',
             '限持有身心障礙證明者、身心障礙者的1位陪同者、孕婦、滿65歲以上長者適用': 'Applicable only to people with a disability certificate, one person accompanying the person with a disability, pregnant women, and seniors over 65 years old.',
             '15人以上適用': 'Applicable to more than 15 people.',
             '未滿4歲且有家長陪同的幼童可免費入場': 'Children under 4 years old and accompanied by their parents can enter for free.',
@@ -91,7 +91,7 @@ vueApp.use(store);
 vueApp.use(router);
 vueApp.use(ViewUIPlus); // 套件也要宣告
 vueApp.use(i18n); // 語言切換
-vueApp.use(VCalendar, {});
+vueApp.use(VCalendar, {}); // 日曆套件
 vueApp.mount("#app");
 
 router.beforeEach((to, from, next) => {
