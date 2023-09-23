@@ -381,8 +381,8 @@ select:focus {
 
 /* 下拉選項樣式 */
 option {
-  background-color: #fff;
-  color: #333;
+  background-color: #2c3e50;
+  color: #eee;
 }
 
 /* 選擇的下拉選項樣式 */
