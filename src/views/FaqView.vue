@@ -1,7 +1,7 @@
 <template>
   <ul class="card">
-             <li class="card-item">
-                 <div class="card-item-header">
+             <li class="card-item" >
+                 <div class="card-item-header" :class="{active: showHoliday}">
                      <a href="#" @click.prevent="showHolidayM()">
                          <h3>營業相關</h3>
                          
@@ -20,7 +20,7 @@
                 
              </li>
              <li class="card-item">
-                 <div class="card-item-header">
+                 <div class="card-item-header" :class="{active: showTicketPrice}">
                      <a href="#" @click.prevent="showTicketPriceM()">
                          <h3>購票資訊</h3>
                          <i class="fa-solid fa-chevron-down down" style="color: #fafafa;"></i>
@@ -30,11 +30,11 @@
                  <div class="card-item-body" v-if="showTicketPrice" :class="{showOpacity:ticketOpa}">
                      <h4>Q:門票價錢?</h4>
                      <p>A:一般門票價格：<br>
-                         成人：$500
-                         兒童(4-11歲):$250
-                         學生（需出示有效學生證）：$400
-                         長者(65歲以上):$250</p>
-                       
+                         成人：$500<br>
+                         兒童(4-11歲):$250<br>
+                         學生（需出示有效學生證):$400<br>
+                         長者(65歲以上):$250
+                    </p>
                  </div>
                  <div class="card-item-body" v-if="showTicketPrice" :class="{showOpacity:ticketOpa}">
                      <h4>Q:購票方式?</h4>
@@ -46,8 +46,8 @@
                  </div>
              </li>
  
-             <li class="card-item">
-                 <div class="card-item-header">
+             <li class="card-item" >
+                 <div class="card-item-header" :class="{active: showService}">
                      <a href="#" @click.prevent="showServiceM()">
                          <h3>館內服務</h3>
                          <i class="fa-solid fa-chevron-down down" style="color: #fafafa;"></i>
@@ -68,13 +68,12 @@
                     
                  </div>
              </li>
-             <li class="card-item">
-                 <div class="card-item-header" @click.prevent="showTrafficM()">
-                     <a href="#">
+             <li class="card-item" >
+                 <div class="card-item-header" :class="{active: showTraffic}">
+                     <a href="#" @click.prevent="showTrafficM()">
                          <h3>交通&周邊環境</h3>
                          <i class="fa-solid fa-chevron-down down" style="color: #fafafa;"></i>
                          <i class="fa-solid fa-chevron-up up" style="color: #ffffff;"></i>
-                             
                      </a>
                  </div>
                  <div class="card-item-body" v-if="showTraffic" :class="{showOpacity:trafficOpa}">
@@ -87,22 +86,25 @@
                     
                  </div>
              </li>
+
+             <li class="card-item" >
+                 <div class="card-item-header" :class="{active: showExperience}">
+                     <a href="#" @click.prevent="showExperienceM()">
+                         <h3>海洋體驗相關</h3>
+                         <i class="fa-solid fa-chevron-down down" style="color: #fafafa;"></i>
+                         <i class="fa-solid fa-chevron-up up" style="color: #ffffff;"></i>
+                     </a>
+                 </div>
+                 <div class="card-item-body" v-if="showExperience" :class="{showOpacity:experienceOpa}">
+                      <h4>Q:每項產品可接受身高?</h4>
+                     <p>A:身高必須高達110cm才能參與此活動，另外我們建議年紀需達6歲-70歲較適合參加活動。</p>
+                     <h4>Q:幾歲是需要大人陪同參與?</h4>
+                     <p> 因親水活動且與大型動物接觸，12歲以下(含12歲)孩童務必需有至少一名大人陪同報名參與下水活動。</p>
+                    
+                 </div>
+             </li>
+
          </ul>
-       
-    <!-- <ul class="card">
-      <li class="card-item" v-for="(section, index) in sections" :key="index">
-        <div class="card-item-header">
-          <a href="#" @click="toggleSection(index)">
-            <h3>{{ section.title }}</h3>
-            <i class="fa-solid" :class="section.isExpanded ? 'fa-chevron-up up' : 'fa-chevron-down down'"
-               :style="{ color: section.isExpanded ? '#ffffff' : '#fafafa' }"></i>
-          </a>
-        </div>
-        <div class="card-item-body" v-if="section.isExpanded">
-          <p v-html="section.content"></p>
-        </div>
-      </li>
-    </ul> -->
   
    </template>
    <script>
@@ -114,32 +116,13 @@
         showService:false,
         showTicketPrice:false,
         showHoliday:false,
+        showExperience:false,
+
         holidayOpa:false,
         ticketOpa:false,
         serviceOpa:false,
         trafficOpa:false,
-      //   sections: [
-      //   {
-      //     title: '營業相關',
-      //     isExpanded: false,
-      //     content: '營業時間為上午9:00至下午17:00，最後入場時間為下午16:00。國定假日及颱風天休館。',
-      //   },
-      //   {
-      //     title: '購票資訊',
-      //     isExpanded: false,
-      //     content: '<h4>Q:門票價錢?</h4> A:一般門票價格：<br>成人：$500兒童（4-11歲）：$250學生（需出示有效學生證）：$400長者（65歲以上）：$250',
-      //   },
-      //   {
-      //     title: '館內服務',
-      //     isExpanded: false,
-      //     content: '1. 導覽和導遊 ...',
-      //   },
-      //   {
-      //     title: '交通&周邊環境',
-      //     isExpanded: false,
-      //     content: '<h4>Q:如何前往水族館?</h4> ... ',
-      //   },
-      // ],
+        experienceOpa:false
       };
     },
     props: {},
@@ -165,9 +148,9 @@
         if(this.showHoliday){
           setTimeout(()=>{
           this.holidayOpa = true
-        },500)
+        },200)
         }
-
+      
       },
       showTrafficM(){
         this.showHoliday = false;
@@ -180,7 +163,7 @@
         if(this.showTraffic){
           setTimeout(()=>{
           this.trafficOpa = true
-        },500)
+        },200)
         }
        
       },
@@ -195,7 +178,7 @@
         if(this.showService){
           setTimeout(()=>{
           this.serviceOpa = true
-        },500)
+        },200)
         }
       
       },
@@ -210,29 +193,35 @@
         if(this.showTicketPrice){
           setTimeout(()=>{
           this.ticketOpa = true
-        },500)
+        },200)
         }
    
-      }
+      },
+
+      showExperienceM(){
+        this.showHoliday = false;
+        this.showTraffic=false;
+        this.showService=false;
+        this.showTicketPrice=false;
+        this.showExperience=!this.showExperience;
+
+        if(!this. showExperience){
+          this.experienceOpa = false
+        }
+        if(this. showExperience){
+          setTimeout(()=>{
+          this.experienceOpa = true
+        },200)
+        }
+   
+      },
+
     },
     mounted() {},
   };
   </script>
    
-   <!-- <script>
-      $('.card-item-body').hide();
-      $('.card-item').eq(0).addClass('active');
-      $('.card-item-body').eq(0).show();
- 
-     
-      $('.card-item').click(function (e) {
-       
-          e.preventDefault();
-          $(this).toggleClass('active').siblings().removeClass('active');
-          $(this).children().next().slideToggle();
-          $(this).siblings().children().next().slideUp();
-      })
-  </script> -->
+
   <style scoped lang="scss" >
   
      .content {
@@ -241,7 +230,7 @@
      }
  
      .content h3 {
-       font-size: map-get($fontSizes, "h3");
+         font-size: map-get($fontSizes, "h3");
          font-weight: bold;
          color:white;
          margin:auto auto auto 0;
@@ -250,12 +239,13 @@
      .card{
         max-width: 600px;
         margin: 0 auto;
-       
       }
      .card-item {
          width:100%;
          list-style: none;
          margin: 0 auto;
+
+
      }
  
      .card-item-header {
@@ -263,7 +253,9 @@
          padding: 16px 0;
          background-color: map-get($colors, "secondary");
          margin: 30px 0;
-        
+
+         border-radius: 5px;
+         border: 2px solid map-get($colors, "secondary");
      }
  
      .card-item-header a {
@@ -286,12 +278,14 @@
      .card-item-body {
       width: 100%;
       margin: auto;
-      padding:0 50px;
-      font-size: map-get($fontSizes, "a");
-      line-height: 21px;
-      transition: 1s;
-      opacity: 0;
+         padding:0 50px;
+         font-size: map-get($fontSizes, "a");
+         line-height: 21px;
+         transition: 1s;
+         opacity: 0;
+  
      }
+
      .showOpacity{
       transition: 1s;
       opacity: 1;
@@ -303,23 +297,32 @@
        line-height:2;
       //  border-bottom: 1px solid map-get($colors, "secondary"); 
      }
- 
+     .card-item-body p{
+      border-bottom: 2px solid map-get($colors, "secondary");
+     }
      .card-item-body p:last-child{
        width: 100%;
        border-bottom: none; 
      }
- 
-     .card-item:not(.active) .up {
+
+     .card-item-header:not(.active) .up {
          display: none;
      }
  
-     .card-item.active .down {
+     .card-item-header.active .down {
          display: none;
      }
-     .card-item.active{
+     .card-item-header.active{
          border: 2px solid map-get($colors, "secondary");
          margin-bottom: 50px;
          border-radius: 5px;
+     }
+
+     @media screen and (max-width: 768px) {
+      .card{
+        width: 60%;
+        margin: 0 auto;
+      }
      }
  
   </style>

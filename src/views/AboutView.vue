@@ -2,7 +2,7 @@
   <div class="content" id="app">
     <div v-for="(item, index) in cardItems" :key="index" class="card" :id="'card'+index">
       <div class="carousel">
-        <Carousel v-model="item.value" arrow="never" dots="none" autoplay>
+        <Carousel v-model="item.value" arrow="never" dots="none" autoplay >
           <CarouselItem v-for="(imgSrc, index) in item.imgSrc" :key="index" >
             <img :src="imgSrc"/>
           </CarouselItem>
@@ -32,7 +32,7 @@ export default {
       cardItems: [
         {
           value: 0,
-          imgSrc: [require("../../public/all_images/about/about1.png"),require("../../public/all_images/about/about1.png"),require("../../public/all_images/about/about1.png")],
+          imgSrc: [require("../../public/all_images/about/about1.png"),require("../../public/all_images/about/about1-2.png"),require("../../public/all_images/about/about1-3.png")],
           altText: "關於我們第一張圖",
           title: "與海洋世界的美好相遇",
           description:
@@ -43,18 +43,18 @@ export default {
         },
         {
           value: 0,
-          imgSrc: [require("../../public/all_images/about/about2.png"),require("../../public/all_images/about/about2.png"),require("../../public/all_images/about/about2.png")],
+          imgSrc: [require("../../public/all_images/about/about2.png"),require("../../public/all_images/about/about2-2.png"),require("../../public/all_images/about/about2-3.png")],
           altText: "關於我們第二張圖",
-          title: "跨域合作的展示及研究活動",
+          title: "跨域合作的研究活動",
           description:
-            "我們深信透過教育和互動，我們可以喚起人們對於海洋保護的重視。在這裡可以近距離觀察到令人驚嘆的海洋生物，探索海洋的奧秘。只有真正了解海洋的價值和重要性，才能夠更好地保護它。因此我們通過生動的展覽、互動體驗和教育活動，將海洋科學帶入您的生活中。您可以在這裡探索各種海洋生物、觸摸海洋的心跳，並參與各種互動體驗",
+            "我們深信透過教育和互動，可以喚起人們對於海洋保護的重視。在這裡可以近距離觀察到令人驚嘆的海洋生物，探索海洋的奧秘。只有真正了解海洋的價值和重要性，才能夠更好地保護它。因此我們通過生動的展覽、互動體驗和教育活動，將海洋科學帶入您的生活中。您可以在這裡探索各種海洋生物、觸摸海洋的心跳，並參與各種互動體驗",
           bubble: false,
           whale: true,
           star: false,
         },
         {
       value: 0,
-          imgSrc: [require("../../public/all_images/about/about3.png"),require("../../public/all_images/about/about3.png"),require("../../public/all_images/about/about3.png")],
+          imgSrc: [require("../../public/all_images/about/about3.png"),require("../../public/all_images/about/about3-2.png"),require("../../public/all_images/about/about3-3.png")],
           altText: "關於我們第三張圖",
           title: "參與海洋保育計畫",
           description:
@@ -88,15 +88,15 @@ export default {
 }
 
 .whale {
-  width: 30%;
+  width: 20%;
   position: absolute;
-  top: 450px;
-  left: -110px;
+  top: 550px;
+  left: -130px;
 }
 
 .bubble {
   position: absolute;
-  bottom: -100px;
+  bottom: -120px;
   left: 100px;
   // border:1px solid black;
 }
@@ -113,7 +113,8 @@ export default {
 .card .text {
   color: white;
   padding: 60px;
-  line-height: 1.5;
+  line-height: 2;
+  width:60%;
 }
 
 /* 泡泡 */
@@ -127,6 +128,8 @@ export default {
 
 .card p {
   font-size: map-get($fontSizes, "p");
+  width:80%;
+  margin:auto;
 }
 
 .card img {
@@ -140,16 +143,18 @@ export default {
 }
 
 .star {
-  width: 50%;
+  width: 30%;
   // transform: translate(600px, 150px);
-  transform: translate(10em, 150px);
+  transform: translate(1em, 150px);
 }
 @media screen and (max-width: 768px) {
   .card {
     flex-direction: column;
     padding: 20px;
   }
-
+  .card h4 {
+  font-size: map-get($fontSizes, "h4");
+}
   .bubble {
     position: absolute;
     width: 5%;
@@ -160,9 +165,9 @@ export default {
 
   .card .text {
     color: white;
-    padding: 40px;
-    line-height: 1.5;
-    width: 80%;
+    // padding: 40px;
+    line-height: 2;
+    width: 100%;
     align-items: center;
   }
   /* 泡泡 */
@@ -173,6 +178,12 @@ export default {
     width: 80%;
     margin: 30px;
   }
+  .card p {
+    font-size: map-get($fontSizes, "p");
+    width:100%;
+    margin:auto;
+    
+}
 
   .card:nth-child(2) {
     flex-direction: column;
