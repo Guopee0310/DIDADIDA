@@ -47,7 +47,7 @@ export default {
           altText: "關於我們第二張圖",
           title: "跨域合作的研究活動",
           description:
-            "我們深信透過教育和互動，可以喚起人們對於海洋保護的重視。在這裡可以近距離觀察到令人驚嘆的海洋生物，探索海洋的奧秘。只有真正了解海洋的價值和重要性，才能夠更好地保護它。因此我們通過生動的展覽、互動體驗和教育活動，將海洋科學帶入您的生活中。您可以在這裡探索各種海洋生物、觸摸海洋的心跳，並參與各種互動體驗",
+            "在這裡可以近距離觀察到令人驚嘆的海洋生物，探索海洋的奧秘。只有真正了解海洋的價值和重要性，才能夠更好的保護它。因此我們通過生動的展覽、互動體驗和教育活動，將海洋科學帶入您的生活中。您可以在這裡探索各種海洋生物、觸摸海洋的心跳，並參與各種互動體驗",
           bubble: false,
           whale: true,
           star: false,
@@ -81,6 +81,10 @@ export default {
   align-items: center;
   padding: 20px;
 }
+
+.card h3{
+  margin: 0 auto;
+}
 .card:nth-child(2) {
   display: flex;
   flex-direction: row;
@@ -90,8 +94,8 @@ export default {
 .whale {
   width: 20%;
   position: absolute;
-  top: 550px;
-  left: -130px;
+  top: 378px;
+  left: -70px;
 }
 
 .bubble {
@@ -112,9 +116,10 @@ export default {
 
 .card .text {
   color: white;
-  padding: 60px;
+  padding: 40px;
   line-height: 2;
   width:60%;
+
 }
 
 /* 泡泡 */
@@ -128,7 +133,7 @@ export default {
 
 .card p {
   font-size: map-get($fontSizes, "p");
-  width:80%;
+  width:90%;
   margin:auto;
 }
 
@@ -145,14 +150,14 @@ export default {
 .star {
   width: 30%;
   // transform: translate(600px, 150px);
-  transform: translate(1em, 150px);
+  transform: translate(1em, 120px);
 }
 @media screen and (max-width: 768px) {
   .card {
     flex-direction: column;
     padding: 20px;
   }
-  .card h4 {
+  .card h3 {
   font-size: map-get($fontSizes, "h4");
 }
   .bubble {
@@ -204,7 +209,7 @@ export default {
   }
 }
 .carousel {
-  width: 40%;
+  width: 30%;
   .ivu-carousel-item {
     width: 100%;
     img {

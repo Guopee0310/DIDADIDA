@@ -35,15 +35,15 @@
                          學生（需出示有效學生證):$400<br>
                          長者(65歲以上):$250
                     </p>
-                 </div>
-                 <div class="card-item-body" v-if="showTicketPrice" :class="{showOpacity:ticketOpa}">
+                
+               
                      <h4>Q:購票方式?</h4>
                      <p>
                          1.網上預訂： 在我們的官方網站上預訂門票，可享受5%的網上預訂折扣。<br>
                          2.現場購票： 您也可以在水族館入口處現場購買門票。<br>
                          3.團體訪問：
                          如果您是一個大型團體（例如學校、公司或旅行團），我們提供特別優惠和團體行程安排。請提前與我們的團體訪問部門聯繫，以獲取更多信息和價格。</p>
-                 </div>
+                  </div>
              </li>
  
              <li class="card-item" >
@@ -76,6 +76,7 @@
                          <i class="fa-solid fa-chevron-up up" style="color: #ffffff;"></i>
                      </a>
                  </div>
+
                  <div class="card-item-body" v-if="showTraffic" :class="{showOpacity:trafficOpa}">
                       <h4>Q:如何前往水族館?</h4>
                      <p>1.自駕車：園區設有汽車停車場收費為150元/次，機車停車場收費50元/次 </p>
@@ -96,10 +97,10 @@
                      </a>
                  </div>
                  <div class="card-item-body" v-if="showExperience" :class="{showOpacity:experienceOpa}">
-                      <h4>Q:每項產品可接受身高?</h4>
+                      <h4>Q:有身高限制?</h4>
                      <p>A:身高必須高達110cm才能參與此活動，另外我們建議年紀需達6歲-70歲較適合參加活動。</p>
                      <h4>Q:幾歲是需要大人陪同參與?</h4>
-                     <p> 因親水活動且與大型動物接觸，12歲以下(含12歲)孩童務必需有至少一名大人陪同報名參與下水活動。</p>
+                     <p>A:因親水活動且與大型動物接觸，12歲以下(含12歲)孩童務必需有至少一名大人陪同報名參與下水活動。</p>
                     
                  </div>
              </li>
@@ -254,7 +255,7 @@
          background-color: map-get($colors, "secondary");
          margin: 30px 0;
 
-         border-radius: 5px;
+         border-radius: 10px;
          border: 2px solid map-get($colors, "secondary");
      }
  
@@ -315,7 +316,7 @@
      .card-item-header.active{
          border: 2px solid map-get($colors, "secondary");
          margin-bottom: 50px;
-         border-radius: 5px;
+         border-radius: 10px;
      }
 
      @media screen and (max-width: 768px) {
@@ -323,6 +324,24 @@
         width: 60%;
         margin: 0 auto;
       }
+
+      .card-item-header {
+         width:100%;
+         padding: 7px 0;
+         background-color: map-get($colors, "secondary");
+         margin: 30px 0;
+
+         border-radius: 5px;
+         border: 2px solid map-get($colors, "secondary");
+     }
+     .card-item-body {
+      width: 100%;
+      margin: auto;
+         padding:0 20px;
+         font-size: map-get($fontSizes, "a");
+         line-height: 21px;
+         transition: 1s;
+     }
      }
  
   </style>
