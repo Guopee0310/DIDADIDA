@@ -34,12 +34,12 @@ export default {
                     object: "限4歲(含)以上及未滿12歲兒童適用",
                 },
                 {
-                    name: "優待票",
+                    name: "愛心票",
                     price: "NT 200",
                     object:
                         "限持有身心障礙證明者、身心障礙者的1位陪同者、孕婦、滿65歲以上長者適用",
                 },
-                { name: "團體票", price: "NT 350", object: "15名以上適用" },
+                { name: "團體票", price: "NT 350", object: "15人以上適用" },
             ],
         }
     }

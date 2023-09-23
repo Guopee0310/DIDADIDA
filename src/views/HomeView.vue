@@ -107,7 +107,7 @@
       <!-- 活動倒數 ------------------------------------------ -->
       <h3Title>
         <template v-slot:h3>
-          <h3>活動倒數</h3>
+          <h3>{{ $t('活動倒數') }}</h3>
         </template>
       </h3Title>
       <div class="active">
@@ -117,9 +117,9 @@
               <img src="../assets/images/openActive.png" alt="" />
             </div>
             <div class="text">
-              <span class="date">活動時間 : 5月1日至5月31日</span>
-              <p class="title">DIDADIDA水族館開幕慶</p>
-              <p class="self">票價限時優惠<span> 10% </span>off</p>
+              <span class="date">{{ $t('活動時間 : 5月1日至5月31日') }}</span>
+              <p class="title">{{ $t('DIDADIDA水族館開幕慶') }}</p>
+              <p class="self">{{ $t('票價限時優惠') }}<span> 10% </span>off</p>
             </div>
           </div>
           <div class="day">
@@ -183,12 +183,12 @@ export default {
           object: "限4歲(含)以上及未滿12歲兒童適用",
         },
         {
-          name: "優待票",
+          name: "愛心票",
           price: "NT 200",
           object:
             "限持有身心障礙證明者、身心障礙者的1位陪同者、孕婦、滿65歲以上長者適用",
         },
-        { name: "團體票", price: "NT 350", object: "15名以上適用" },
+        { name: "團體票", price: "NT 350", object: "15人以上適用" },
       ],
       products: [
         {
