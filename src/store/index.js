@@ -24,6 +24,7 @@ export default createStore({
     favoList: [],
     ticketList: [],
     totalScorePoint: 0,
+    prodOrderArr: [],
   },
 
   // 類似vue檔裡面的computed

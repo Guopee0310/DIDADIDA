@@ -122,7 +122,7 @@
             總計:<span>{{ allProduct_Price + parseInt(picked) }}</span>
           </p>
         </div>
-        <button>前往結帳</button>
+        <button @click="clearShopping">前往結帳</button>
       </div>
     </div>
   </div>
@@ -206,6 +206,29 @@ export default {
     },
   },
   methods: {
+    //   imgURL: './image/dolphin_doll.png',
+    //   name: '海豚玩偶',
+    //   price: '890',
+    //   count: 1,
+    //   select: false
+    clearShopping() {
+      for (let i = 0; i < this.shopCartData.length; i++) {
+        this.$store.state.prodOrderArr.push({
+          prodImg: this.shopCartData[i].imgURL,
+          prodName: this.shopCartData[i].name,
+          prodCount: this.shopCartData[i].count,
+          prodPrice: this.shopCartData[i].price,
+          prodDate: `${new Date().getFullYear()}.${new Date().getMonth()}.${new Date().getDate()}`,
+        });
+      }
+      this.shopCartData = [];
+      setTimeout(() => {
+        this.$store.state.shoppingCart = [];
+      }, 100);
+      setInterval(() => {
+        this.$router.push("/member");
+      }, 300);
+    },
     pushInFav(i) {
       const favListIndex = this.favList.findIndex(
         (v) => v.favoName === i.titleName
