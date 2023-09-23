@@ -242,6 +242,9 @@ export default {
         .then((res) => res.json())
         .then((json) => console.log(json));
       this.$store.state.userName = "";
+      this.$store.state.shoppingCart = [];
+      this.$store.state.favoList = [];
+      this.$store.state.ticketList = [];
     },
     handleScroll(event) {
       console.log(event);
