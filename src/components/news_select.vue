@@ -100,11 +100,7 @@ export default {
     display: flex;
 
     span {
-      position: absolute;
-      top: 8px;
-      right: 10px;
-      font-size: 1rem;
-      pointer-events: none;
+      @include btnSpan;
     }
   }
 
@@ -213,5 +209,6 @@ export default {
     }
   }
 
-}</style>
+}
+</style>
   

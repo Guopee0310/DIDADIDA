@@ -249,7 +249,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .index {
   background-color: map-get($colors, "bgc");
   width: 100%;

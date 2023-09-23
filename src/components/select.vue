@@ -3,13 +3,13 @@
     <select name="" id="itemClass" v-model="selectedItem">
       <option v-for="(prod, proIndex) in prodSelect" :key="proIndex">{{ prod.option }}</option>
     </select>
-    <!-- <span><i class="fa-solid fa-chevron-down" style="color: #eeeeee;"></i></span> -->
+    <span><i class="fa-solid fa-chevron-down" style="color: #eeeeee;"></i></span>
   </div>
   <div class="select">
     <select v-model="selectedPrice">
       <option v-for="(cost, costIndex) in costSelect" :key="costIndex">{{ cost.option }}</option>
     </select>
-    <!-- <span><i class="fa-solid fa-chevron-down" style="color: #eeeeee;"></i></span> -->
+    <span><i class="fa-solid fa-chevron-down" style="color: #eeeeee;"></i></span>
   </div>
 </template>
 
@@ -68,18 +68,9 @@ select::-ms-expand {
   @include btnWidth;
 
   span {
-    position: absolute;
-    top: 8px;
+    @include btnSpan;
     right: 18px;
-    font-size: 15px;
-    pointer-events: none;
   }
-}
-
-
-.select::after {
-  @include arrow;
-  top: 0px;
 }
 
 option {
