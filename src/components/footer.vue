@@ -3,7 +3,7 @@
     <div class="footer_wrap">
       <!-- 關於我們 -->
       <div class="footer_item">
-        <h3>{{ $t(footerTitle.about) }}</h3>
+        <h3><router-link to="/about">{{ $t(footerTitle.about) }}</router-link></h3>
         <ul>
           <li v-for="about in footer_aboutArray" :key="about">
             <router-link :to="about.link">{{ $t(about.name) }}</router-link>
@@ -12,24 +12,14 @@
       </div>
       <!-- 最新消息 -->
       <div class="footer_item">
-        <h3>{{ $t(footerTitle.news) }}</h3>
-        <ul>
-          <!-- <li><a :href="news.link">{{ news.name }}</a></li> -->
-          <li v-for="news in footer_newsArray" :key="news">
-            <router-link :to="news.link">{{ $t(news.name) }}</router-link>
-          </li>
-        </ul>
+        <h3><router-link to="/news">{{ $t(footerTitle.news) }}</router-link></h3>
       </div>
       <!-- 探索海洋生物 -->
       <div class="footer_item">
-        <h3>{{ $t(footerTitle.animal) }}</h3>
+        <h3><router-link to="/explore">{{ $t(footerTitle.animal) }}</router-link></h3>
         <ul>
           <li v-for="animal in footer_animalArray" :key="animal">
-            <router-link
-              :to="animal.link"
-              @click="changePageMove(animal.name)"
-              >{{ $t(animal.name) }}</router-link
-            >
+            <router-link :to="animal.link" @click="changePageMove(animal.name)">{{ $t(animal.name) }}</router-link>
           </li>
         </ul>
       </div>
@@ -46,10 +36,8 @@
       <div class="footer_item">
         <h3>{{ $t(footerTitle.media) }}</h3>
         <div>
-          <span v-for="media in footer_mediaArray" :key="media"
-            ><router-link :to="media.link"
-              ><i :class="media.class" :style="media.style"></i></router-link
-          ></span>
+          <span v-for="media in footer_mediaArray" :key="media"><router-link :to="media.link"><i :class="media.class"
+                :style="media.style"></i></router-link></span>
         </div>
       </div>
       <!-- 裝飾 -->
@@ -88,11 +76,6 @@ export default {
         { link: "/faq", name: "常見問答" },
         { link: "/guide", name: "園區導覽" },
         { link: "/interact", name: "互動遊戲" },
-      ],
-      footer_newsArray: [
-        { link: "/news", name: "最新活動" },
-        { link: "#", name: "表演資訊" },
-        { link: "#", name: "優惠消息" },
       ],
       footer_animalArray: [
         { link: "#", name: "表層海洋帶" },
