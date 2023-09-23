@@ -1,8 +1,12 @@
 <template>
   <div class="favorites_list_main">
     <div class="favorites_list_area">
-      <div class="favorites_list_group" v-for="favo in favoList" :key="favo.favoImg">
-        <span class="close">&times;</span>
+      <div
+        class="favorites_list_group"
+        v-for="(favo, index) in favoList"
+        :key="favo.favoImg"
+      >
+        <span class="close" @click="delSingleItem(index)">&times;</span>
         <div class="favorites_list_img">
           <img :src="favo.favoImg" alt="" />
         </div>
@@ -57,6 +61,12 @@ export default {
     this.favoList = this.$store.state.favoList;
     console.log(this.favoList);
   },
+  methods: {
+    delSingleItem(idx) {
+      this.favoList.splice(idx, 1);
+      this.$store.commit("removeFavoItem", idx);
+    },
+  },
 };
 </script>
 
@@ -87,18 +97,18 @@ export default {
       top: 10px;
       right: 10px;
       cursor: pointer;
-      color: map-get($colors, 'dark');
+      color: map-get($colors, "dark");
     }
   }
 
   h5 {
     font-size: map-get($fontSizes, "h4");
-    color: map-get($colors, 'dark');
+    color: map-get($colors, "dark");
   }
 
   p {
     font-size: map-get($fontSizes, "span");
-    color: map-get($colors, 'dark');
+    color: map-get($colors, "dark");
   }
 
   .favorites_list_group:last-child {

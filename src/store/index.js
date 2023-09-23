@@ -27,6 +27,10 @@ export default createStore({
   // 類似vue檔裡面的computed
   getters: {},
   mutations: {
+    removeFavoItem(state, idx) {
+      // 通过索引删除 favoList 中的项
+      state.favoList.splice(idx, 1);
+    },
     // 拿api
     updateSiteLoad(state, val) {
       state.siteLoading = val;
