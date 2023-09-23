@@ -40,7 +40,13 @@
             </div>
             <div class="product_price">NTD{{ calculatePrice[index] }}</div>
             <div class="icons">
-              <heart class="heart" />
+              <heart
+                class="heart"
+                @click="pushInFav(prod)"
+                :is-active="
+                  favList.findIndex((v) => v.favoName === prod.name) > -1
+                "
+              />
               <div class="cancel_icon" @click="deleteProduct(index)">
                 <i class="fa-solid fa-trash-can"></i>
               </div>
@@ -58,55 +64,54 @@
 
     <div class="checkout">
       <div checkoutleft>
-      <div class="test">
-        <h2>選擇運送方式</h2>
-        <div class="item">
-          <input
-            name="transport"
-            id="7-11"
-            type="radio"
-            value="60"
-            v-model="picked"
-          />
-          <label for="7-11">711 店到店 + 60元</label>
+        <div class="test">
+          <h2>選擇運送方式</h2>
+          <div class="item">
+            <input
+              name="transport"
+              id="7-11"
+              type="radio"
+              value="60"
+              v-model="picked"
+            />
+            <label for="7-11">711 店到店 + 60元</label>
+          </div>
+          <div class="item">
+            <input
+              name="transport"
+              id="free"
+              type="radio"
+              value="0"
+              v-model="picked"
+            />
+            <label for="free">到園領取 FREE</label>
+          </div>
         </div>
-        <div class="item">
-          <input
-            name="transport"
-            id="free"
-            type="radio"
-            value="0"
-            v-model="picked"
-          />
-          <label for="free">到園領取 FREE</label>
+
+        <div class="receive">
+          <h2>填寫收件資訊</h2>
+          <div class="item">
+            <input
+              name="transport"
+              id="7-11"
+              type="radio"
+              value="60"
+              v-model="picked"
+            />
+            <label for="7-11">711 店到店 + 60元</label>
+          </div>
+          <div class="item">
+            <input
+              name="transport"
+              id="free"
+              type="radio"
+              value="0"
+              v-model="picked"
+            />
+            <label for="free">到園領取 FREE</label>
+          </div>
         </div>
       </div>
-
-      <div class="receive">
-        <h2>填寫收件資訊</h2>
-        <div class="item">
-          <input
-            name="transport"
-            id="7-11"
-            type="radio"
-            value="60"
-            v-model="picked"
-          />
-          <label for="7-11">711 店到店 + 60元</label>
-        </div>
-        <div class="item">
-          <input
-            name="transport"
-            id="free"
-            type="radio"
-            value="0"
-            v-model="picked"
-          />
-          <label for="free">到園領取 FREE</label>
-        </div>
-      </div>
-    </div>
-
 
       <div class="test2">
         <div class="item">
@@ -119,7 +124,6 @@
         </div>
         <button>前往結帳</button>
       </div>
-      
     </div>
   </div>
 </template>
@@ -129,6 +133,7 @@ import heart from "@/components/heart.vue";
 export default {
   data() {
     return {
+      activeHeart: true,
       shopCartData: [
         // {
         //   imgURL: './image/dolphin_doll.png',
@@ -172,6 +177,9 @@ export default {
     heart,
   },
   computed: {
+    favList() {
+      return this.$store.state.favoList;
+    },
     calculatePrice() {
       return this.shopCartData.map((prod) => prod.price * prod.count);
     },
@@ -198,6 +206,21 @@ export default {
     },
   },
   methods: {
+    pushInFav(i) {
+      const favListIndex = this.favList.findIndex(
+        (v) => v.favoName === i.titleName
+      );
+      if (favListIndex > -1) {
+        this.$store.state.favoList.splice(favListIndex, 1);
+      } else {
+        this.$store.state.favoList.push({
+          favoImg: i.imgURL,
+          favoName: i.name,
+          favoPrice: i.price,
+          favoIntroduction: `${i.name}的介紹`,
+        });
+      }
+    },
     minusBtn(prod) {
       if (prod.count == 1) return;
       prod.count -= 1;
@@ -250,7 +273,6 @@ input[type="checkbox"] {
   margin-bottom: 5rem;
   border-radius: 2rem;
   background-color: #fff;
-
 }
 
 .shop_cart h1 {
@@ -327,7 +349,6 @@ input[type="checkbox"] {
 
 .minus {
   border-radius: 1em 0 0 1em;
-  
 }
 
 .plus {
@@ -368,7 +389,7 @@ input[type="number"] {
   margin-left: 1rem;
 }
 
-.checkoutleft{
+.checkoutleft {
   width: 50%;
   display: flex;
   flex-direction: column;
@@ -387,7 +408,8 @@ input[type="number"] {
   justify-content: space-around;
 }
 
-.test,.receive {
+.test,
+.receive {
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -412,7 +434,7 @@ input[type="number"] {
   padding: 5px;
 }
 
-.receive{
+.receive {
   display: block;
 }
 
