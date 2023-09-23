@@ -7,20 +7,35 @@
         <div class="slot" id="one"></div>
         <h1 data="0m">0m</h1>
 
-        <div class="goldfish">
-          <img src="../../public/all_images/animal/goldfish.png" alt="goldfish">
+        <!-- 測試:vue-parallax -->
+        <!-- <div class="goldfish">
+          <vue-parallax :value="parallaxValue">
+            <img src="../../public/all_images/animal/goldfish.png" alt="goldfish">
+          </vue-parallax>
           <h4>黃金魚</h4>
+        </div> -->
+
+        <!-- 測試:parallax,js -->
+        <div class="goldfish" ref="parallaxScene" data-relative-input="true" id="scene">
+          <img src="../../public/all_images/animal/goldfish.png" alt="goldfish" data-depth="0.2">
+          <h4 data-depth="0.2">黃金魚</h4>
         </div>
 
+
         <div class="turtle">
-          <img src="../../public/all_images/animal/turtle.png" alt="turtle">
+          <img src="../../public/all_images/animal/turtle.png" alt="turtle" data-depth="0.2">
           <h4>綠海龜</h4>
         </div>
       </div>
 
-      <div class="leofish">
-        <img src="../../public/all_images/animal/leofish.png" alt="turtle">
-        <h4>獅子魚</h4>
+      <div class="dory">
+        <img src="../../public/all_images/animal/dory.png" alt="turtle">
+        <h4>藍藻魚</h4>
+      </div>
+
+      <div class="nimo">
+        <img src="../../public/all_images/animal/nimo.png" alt="turtle">
+        <h4>小丑魚</h4>
       </div>
 
       <div class="angryfish">
@@ -30,7 +45,7 @@
 
       <div class="whale">
         <img src="../../public/all_images/animal/whale.png" alt="">
-        <h4>鯨魚</h4>
+        <h4>鯨鯊</h4>
       </div>
 
       <!-- 中層海洋帶 -->
@@ -56,11 +71,11 @@
 
         <div class="white">
           <img src="../../public/all_images/animal/white.png" alt="">
-          <h4>儒艮</h4>
+          <h4>白鯨</h4>
         </div>
-
-
       </div>
+
+
       <!-- 深層海洋帶 -->
       <div class="bathypelagic">
         <div class="slot" id="three"></div>
@@ -107,10 +122,13 @@
 </template>
 
 <script>
+import Parallax from 'parallax-js';
+import VueParallax from 'vue-parallax';
+
 export default {
   data() {
     return {
-
+      parallaxValue: 30,
     }
   },
   methods: {
@@ -173,8 +191,19 @@ export default {
           }
         }, 100);
       }
-    }
-  }
+    },
+  },
+  mounted() {
+    // 使用Parallax.js初始化視差效果
+    const scene = this.$refs.parallaxScene; // 使用ref引用DOM元素
+    const parallaxInstance = new Parallax(scene);
+
+
+  },
+  components: {
+    VueParallax,
+    Parallax,
+  },
 }
 </script>
 
@@ -189,6 +218,7 @@ export default {
   top: 50%;
   right: 40px;
   text-align: right;
+  z-index: 1;
 
 
   ul {
@@ -244,7 +274,6 @@ export default {
 
   h1 {
     font-size: 75px;
-    // font-size: map-get($fontSizes , h3);
     color: map-get($colors, light);
     font-family: Helvetica, Arial, sans-serif, 'Lucida Sans Regular', Geneva;
     font-weight: 800;
@@ -297,22 +326,41 @@ export default {
         }
 
         h4 {
-          margin-left: 70px;
-          margin-top: 10px;
+          translate: 4em 6em;
+          // margin-left: -20px;
+          // margin-top: -10px;
         }
       }
 
     }
 
     // 表層 ~ 中層 ------------------------------------------------------------
-    .leofish {
+    .dory {
       cursor: pointer;
       width: 130px;
       margin: 0 530px 0 auto;
 
+
       img {
         visibility: top;
         width: 130px;
+        transform: rotate(10deg);
+      }
+
+      h4 {
+        margin-top: 10px;
+      }
+    }
+
+    .nimo {
+      cursor: pointer;
+      width: 80px;
+      margin: auto;
+
+
+      img {
+        visibility: top;
+        width: 80px;
       }
 
       h4 {
@@ -322,32 +370,32 @@ export default {
 
     .angryfish {
       cursor: pointer;
-      width: 130px;
-      margin: 150px 0 0 180px;
+      width: 100px;
+      margin: 50px 0 80px 350px;
 
       img {
         visibility: top;
-        width: 130px;
+        width: 100px;
       }
 
       h4 {
-        margin: 15px 70px 0 0;
+        margin: 15px 30px 0 0;
       }
     }
 
     .whale {
       cursor: pointer;
-      width: 700px;
-      margin: -100px 150px 0 auto;
+      width: 1200px;
+      margin: -50px 10px 0 auto;
 
       img {
         visibility: top;
-        width: 700px;
+        width: 1200px;
       }
 
       h4 {
         margin-right: 130px;
-        margin-top: -30px;
+        margin-top: -80px;
       }
     }
 
@@ -374,6 +422,21 @@ export default {
 
         h4 {
           margin: 10px 70px 0 0;
+        }
+      }
+
+      .leofish {
+        cursor: pointer;
+        width: 130px;
+        margin: 0 530px 0 auto;
+
+        img {
+          visibility: top;
+          width: 130px;
+        }
+
+        h4 {
+          margin-top: 10px;
         }
       }
 
