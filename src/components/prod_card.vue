@@ -1,17 +1,11 @@
 <template>
   <div class="select_btn">
-    <prodSelect
-      @transferClass="getClass"
-      @transferPrice="getPrice"
-    ></prodSelect>
+    <prodSelect @transferClass="getClass" @transferPrice="getPrice"></prodSelect>
   </div>
   <div class="card" v-for="(i, index) in chooseItem" :key="i.imageSrc">
     <div class="heart">
-      <heart
-        @change-heart="changeHeart($event, i, index)"
-        :keepLove="keepHeartArr[index]"
-        :is-active="favList.findIndex((v) => v.favoName === i.titleName) > -1"
-      ></heart>
+      <heart @change-heart="changeHeart($event, i, index)" :keepLove="keepHeartArr[index]"
+        :is-active="favList.findIndex((v) => v.favoName === i.titleName) > -1"></heart>
     </div>
     <div class="pic">
       <a href="#"><img :src="i.imageSrc" alt="" /></a>
@@ -31,26 +25,22 @@
           <input type="button" value="+" @click="i.count++" />
         </div>
         <div class="buy">
-          <a href="">
-            <i
-              class="fa-solid fa-cart-shopping"
-              style="color: #9fbdce"
-              @click.prevent="
-                pushAndTogglePopup(
-                  i.imageSrc,
-                  i.titleName,
-                  i.count,
-                  i.prodPrice
-                )
-              "
-            ></i>
-            <!-- pushInShoppingCart(
+
+          <i class="fa-solid fa-cart-shopping" style="color: #9fbdce" @click.prevent="
+            pushAndTogglePopup(
+              i.imageSrc,
+              i.titleName,
+              i.count,
+              i.prodPrice
+            )
+            "></i>
+          <!-- pushInShoppingCart(
                   i.imageSrc,
                   i.titleName,
                   i.count,
                   i.prodPrice
                 ) -->
-          </a>
+
           <cartpop />
         </div>
       </div>
@@ -782,10 +772,12 @@ export default {
 
   .num input:first-child {
     border-radius: 15px 0 0 15px;
+    cursor: pointer;
   }
 
   .num input:last-child {
     border-radius: 0 15px 15px 0;
+    cursor: pointer;
   }
 
   .buy {
@@ -794,6 +786,7 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
   }
 
   .buy i {
@@ -833,6 +826,7 @@ export default {
   display: flex;
   justify-content: end;
 }
+
 .changepage {
   width: 1200px;
   text-align: center;
