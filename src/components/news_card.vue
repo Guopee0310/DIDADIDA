@@ -1,10 +1,6 @@
 <template>
   <div class="select_btn">
-    <newsSelect
-      @transferClass="filterNewsByTag"
-      @transfertime="filterNewsByTime"
-      @transferSearch="searchClick"
-    >
+    <newsSelect @transferClass="filterNewsByTag" @transfertime="filterNewsByTime" @transferSearch="searchClick">
     </newsSelect>
   </div>
   <div class="card" v-for="(item, index) in displayedNews" :key="index">
@@ -25,12 +21,7 @@
       </div>
     </a>
   </div>
-  <Page
-    class="page"
-    :total="filteredNews.length"
-    @on-change="updatePage"
-    v-if="showPage"
-  />
+  <Page class="page" :total="filteredNews.length" @on-change="updatePage" v-if="showPage" />
 </template>
 
 <script>
@@ -148,11 +139,26 @@ export default {
     this.filterNewsByTag(this.tagOption);
     this.filterNewsByTime(this.timeOption);
     this.updatePage(1); // 触发一次分页更新，显示第一页的数据
+    window.addEventListener('resize', this.handleWindowSize);
+    this.handleWindowSize();
   },
   components: {
     newsSelect,
   },
   methods: {
+    handleWindowSize() {
+      const windowWidth = window.innerWidth;
+      if (windowWidth > 992) {
+        this.pageSize = 9;
+      }
+      else if (windowWidth > 767 && windowWidth <= 992) {
+        this.pageSize = 8;
+      }
+      else {
+        this.pageSize = 6;
+      }
+      this.updatePage(this.currentPage);
+    },
     updatePage(page) {
       this.currentPage = page;
       console.log(this.currentPage);
@@ -195,26 +201,42 @@ export default {
       // 重置当前页为第一页
       this.updatePage(1);
     },
+    // searchClick(data) {
+    //   const searchInput = data.toUpperCase();
+    //   const res = this.news_content.filter((item, index, array) => {
+    //     const search_content = item.news_title.toUpperCase() || item.news_txt.toUpperCase();
+    //     return search_content.includes(searchInput);
+    //   });
+    //   this.filteredNews = res;
+    //   this.updatePage(1);
+    // },
     searchClick(data) {
       const searchInput = data.toUpperCase();
-      const res = this.news_content.filter((item, index, array) => {
-        const title = item.news_title.toUpperCase();
-        return title.includes(searchInput);
+      const res = this.news_content.filter((item) => {
+        const search_content = item.news_title.toUpperCase() + item.news_txt.toUpperCase();
+        return search_content.includes(searchInput);
       });
       this.filteredNews = res;
       this.updatePage(1);
-    },
+    }
+  },
+  beforeDestroy() {
+    // 移除窗口宽度监听器，以防止内存泄漏
+    window.removeEventListener('resize', this.handleWindowSize);
   },
 };
 </script>
 <style scoped lang="scss">
+.select_btn{
+  margin: auto;
+}
 .card {
   max-width: calc(100% / 3);
   aspect-ratio: 1/1;
   padding: 0 30px 0;
   font-size: map-get($fontSizes, "a");
   position: relative;
-  margin-bottom: 50px;
+  margin-bottom: 1rem;
 
   a {
     text-decoration: none;
@@ -265,15 +287,19 @@ export default {
   }
 
   .news_title {
+    max-width: 100%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
     font-size: map-get($fontSizes, "div");
     position: relative;
+    padding-top: 0.5rem;
 
     .info {
-      width: 10rem;
-      height: 3.2rem;
+      width: 8rem;
+      height: 3.1rem;
       position: absolute;
       bottom: 0;
-      right: -15px;
+      right: -25px;
       background-image: url(../../public/all_images/news/output-onlinepngtools.png);
       background-size: contain;
       background-repeat: no-repeat;
@@ -282,7 +308,6 @@ export default {
       font-size: 0.9rem;
       text-align: center;
       padding-top: 1.5rem;
-      padding-left: 1.7em;
       z-index: 4;
     }
   }
@@ -292,18 +317,33 @@ export default {
     color: #333;
     transition: 0.3s;
     margin-top: 0.5em;
+
   }
 }
 
 .page {
   width: 100%;
   text-align: center;
-  margin-bottom: 50px;
+  margin-bottom: 1rem;
 }
 
-@media screen and (max-width: 768px) {
+
+@media screen and (max-width: 992px) {
   .card {
-    max-width: calc(100% - 60px);
+    max-width: calc(100%/2);
+
+    .news_content {
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 3;
+      overflow: hidden;
+    }
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .card {
+    max-width: 100%
   }
 }
 </style>

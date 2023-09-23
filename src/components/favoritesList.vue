@@ -2,6 +2,7 @@
   <div class="favorites_list_main">
     <div class="favorites_list_area">
       <div class="favorites_list_group" v-for="favo in favoList" :key="favo.favoImg">
+        <span class="close">&times;</span>
         <div class="favorites_list_img">
           <img :src="favo.favoImg" alt="" />
         </div>
@@ -79,6 +80,15 @@ export default {
     display: flex;
     justify-content: space-evenly;
     z-index: 2;
+    position: relative;
+
+    .close {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      cursor: pointer;
+      color: map-get($colors, 'dark');
+    }
   }
 
   h5 {

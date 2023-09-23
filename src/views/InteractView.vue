@@ -1,5 +1,4 @@
 <template>
-  <amountBtn></amountBtn>
   <div class="interact">
     <div class="titleAll">
       <interactBtn

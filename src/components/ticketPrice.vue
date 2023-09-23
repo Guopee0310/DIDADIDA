@@ -2,12 +2,12 @@
     <div class="ticket">
         <table>
             <tr>
-                <th v-for="title in priceTitle">{{ title.name }}</th>
+                <th v-for="title in priceTitle">{{ $t(title.name) }}</th>
             </tr>
             <tr v-for="ticket in ticket">
-                <td>{{ ticket.name }}</td>
-                <td>{{ ticket.price }}</td>
-                <td>{{ ticket.object }}</td>
+                <td>{{ $t(ticket.name) }}</td>
+                <td>{{ $t(ticket.price) }}</td>
+                <td>{{ $t(ticket.object) }}</td>
             </tr>
             <tr>
                 <td colspan="2">※未滿4歲且有家長陪同的幼童可免費入場</td>
@@ -34,12 +34,12 @@ export default {
                     object: "限4歲(含)以上及未滿12歲兒童適用",
                 },
                 {
-                    name: "優待票",
+                    name: "愛心票",
                     price: "NT 200",
                     object:
                         "限持有身心障礙證明者、身心障礙者的1位陪同者、孕婦、滿65歲以上長者適用",
                 },
-                { name: "團體票", price: "NT 350", object: "15名以上適用" },
+                { name: "團體票", price: "NT 350", object: "15人以上適用" },
             ],
         }
     }

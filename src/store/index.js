@@ -8,7 +8,7 @@ const publicURL =
 export default createStore({
   // 類似vue檔裡面的data
   state: {
-    chooseFrontBack: true,//記得改回來
+    chooseFrontBack: true, //記得改回來
     storeShowLogin: false,
     quizScore: 0,
     loginToogle: false,
@@ -18,8 +18,10 @@ export default createStore({
     mem_psw: "charmy101",
     userName: "",
     shoppingCart: [],
+    showCartPopup: false, // 控制购物车弹出窗口的显示状态
     chooseImgSrc: publicURL,
     favoList: [],
+    ticketList: [],
   },
 
   // 類似vue檔裡面的computed
@@ -29,7 +31,16 @@ export default createStore({
     updateSiteLoad(state, val) {
       state.siteLoading = val;
     },
+    toggleCartPopup(state) {
+      // 切换购物车弹出视图的显示状态
+      state.showCartPopup = !state.showCartPopup;
+    },
+    closeCartPopup() {
+      // 延迟一秒后关闭购物车弹出视图
+      setTimeout(() => {
+        this.toggleCartPopup();
+      }, 500); // 500毫秒（1秒）后关闭
+    },
   },
-  actions: {},
   modules: {},
 });

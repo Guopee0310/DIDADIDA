@@ -7,7 +7,11 @@
   </div>
   <div class="card" v-for="(i, index) in chooseItem" :key="i.imageSrc">
     <div class="heart">
-      <heart @change-heart="changeHeart($event, i)"></heart>
+      <heart
+        @change-heart="changeHeart($event, i, index)"
+        :keepLove="keepHeartArr[index]"
+        :is-active="favList.findIndex((v) => v.favoName === i.titleName) > -1"
+      ></heart>
     </div>
     <div class="pic">
       <a href="#"><img :src="i.imageSrc" alt="" /></a>
@@ -32,7 +36,7 @@
               class="fa-solid fa-cart-shopping"
               style="color: #9fbdce"
               @click.prevent="
-                pushInShoppingCart(
+                pushAndTogglePopup(
                   i.imageSrc,
                   i.titleName,
                   i.count,
@@ -40,7 +44,14 @@
                 )
               "
             ></i>
+            <!-- pushInShoppingCart(
+                  i.imageSrc,
+                  i.titleName,
+                  i.count,
+                  i.prodPrice
+                ) -->
           </a>
+          <cartpop />
         </div>
       </div>
     </div>
@@ -51,6 +62,8 @@
 <script>
 import heart from "./heart.vue";
 import prodSelect from "../components/select.vue";
+import cartpop from "../components/cartPopup.vue";
+import { mapMutations } from "vuex";
 export default {
   name: "son",
   data() {
@@ -354,6 +367,7 @@ export default {
       selectOption: "",
       getPriceOption: "",
       getPage: 1,
+      keepHeartArr: [],
     };
   },
   mounted() {
@@ -362,6 +376,12 @@ export default {
     });
     this.chooseItem2 = this.cardsAll;
     this.chooseItem = this.chooseItem2.slice(0, this.pageSize);
+    for (let i = 0; i < this.chooseItem2.length; i++) {
+      this.keepHeartArr.push(true);
+    }
+    for (let i = 0; i < this.$store.state.favoList.length; i++) {
+      this.keepHeartArr[this.$store.state.favoList[i].favIndex] = false;
+    }
   },
   props: {
     msg1: [String, Number],
@@ -369,8 +389,13 @@ export default {
   components: {
     heart,
     prodSelect,
+    cartpop,
   },
-  computed: {},
+  computed: {
+    favList() {
+      return this.$store.state.favoList;
+    },
+  },
   methods: {
     productDown(idx) {
       if (this.chooseItem[idx].count > 0) {
@@ -511,22 +536,38 @@ export default {
       console.log(this.chooseItem2);
       this.chooseItem = this.chooseItem2.slice(optionStartIdx, optionEndIdx);
     },
-    changeHeart(isFav, i) {
-      console.log(isFav, i);
+    changeHeart(isFav, i, index) {
+      console.log(isFav, i, index);
 
-      for (let j = 0; j < this.$store.state.favoList.length; j++) {
-        if (i.imageSrc == this.$store.state.favoList[j].favoImg) {
-          return;
-        }
-      }
-      if (!isFav && this.$store.state.userName) {
+      const favListIndex = this.favList.findIndex(
+        (v) => v.favoName === i.titleName
+      );
+      if (favListIndex > -1) {
+        this.$store.state.favoList.splice(favListIndex, 1);
+      } else {
         this.$store.state.favoList.push({
           favoImg: i.imageSrc,
           favoName: i.titleName,
           favoPrice: i.prodPrice,
           favoIntroduction: i.info,
+          favIndex: index,
         });
       }
+
+      // for (let j = 0; j < this.$store.state.favoList.length; j++) {
+      //   if (i.imageSrc == this.$store.state.favoList[j].favoImg) {
+      //     return;
+      //   }
+      // }
+      // if (!isFav && this.$store.state.userName) {
+      //   this.$store.state.favoList.push({
+      //     favoImg: i.imageSrc,
+      //     favoName: i.titleName,
+      //     favoPrice: i.prodPrice,
+      //     favoIntroduction: i.info,
+      //     favIndex: index,
+      //   });
+      // }
       console.log(this.$store.state.favoList);
       // TODO　ＣＡＬＬ　ＡＰＩ
       // if (isFav) {
@@ -537,6 +578,12 @@ export default {
       //     favoIntroduction: "",
       //   });
       // }
+    },
+    closeCartPopup() {
+      // 延迟一秒后关闭购物车弹出视图
+      setTimeout(() => {
+        this.toggleCartPopup();
+      }, 500); // 500毫秒（1秒）后关闭
     },
     // getClass(data) {
     //   this.chooseItem2 = [];
@@ -647,6 +694,17 @@ export default {
     //     this.chooseItem = this.cardsAll.slice(startIdx, endIdx);
     //   }
     // },
+    ...mapMutations(["toggleCartPopup"]),
+    pushAndTogglePopup(imageSrc, titleName, count, prodPrice) {
+      // 添加商品到购物车
+      this.pushInShoppingCart(imageSrc, titleName, count, prodPrice);
+
+      // 切换购物车弹出视图的显示状态
+      if (this.$store.state.userName) {
+        this.toggleCartPopup();
+        this.closeCartPopup();
+      }
+    },
   },
 };
 </script>

@@ -1,5 +1,529 @@
 <template>
-    <div class="guide">
-      <h1>This is a guide page</h1>
+  <div class="guide">
+    <h3Title>
+      <template v-slot:h3>
+        <h3 >園區地圖</h3>
+      </template>
+    </h3Title>
+    <div class="guide_map">
+      <div class="mask">
+        <svg width="100%" height="100%" viewBox="0 0 200 100">
+          <!-- 線性漸層 -->
+          <!-- <defs>
+            <linearGradient id="myGradient" x1="20%" y1="80%" x2="100%" y2="0%">
+              <stop offset="0%" style="stop-color:  rgba(83,79,156,1);" />
+              <stop offset="35%" style="stop-color:  rgba(236,187,152,1);" />
+              <stop offset="89%" style="stop-color:  rgba(10,202,234,1);" />
+            </linearGradient>
+          </defs> -->
+          <!-- 表層區 -->
+          <g opacity="0.8">
+            <circle cx="15" cy="0" r="8" fill="#67DBF4" filter="drop-shadow(0.1em 0.2em 0.1em rgba(0,0,0,.5))"
+              class="circle" @click="scrollToSection(2)" id="section1"/>
+          </g>
+          <text x="9" y="2" style="font: 4px noto-serif-kr;fill:#000000"
+            filter="drop-shadow(0.1em 0.2em 0.1em rgba(0,0,0,.5))">表層區</text>
+          <polyline points="23,2 34,2,36,22" style="fill:none; stroke:rgb(50, 40, 40); stroke-width:0.5" />
+          <!-- 中層區 -->
+          <g opacity="0.8">
+            <circle cx="115" cy="0" r="8" fill="#8497FF" filter="drop-shadow(0.1em 0.2em 0.1em rgba(0,0,0,.5))"
+              class="shallow" @click="scrollToSection(3)" />
+          </g>
+          <text x="108.5" y="2" style="font: 4px noto-serif-kr;fill:#ffffff"
+            filter="drop-shadow(0.1em 0.2em 0.1em rgba(0,0,0,.5))">中層區</text>
+          <polyline points="123,0,135,0,137,14" style="fill:none; stroke:rgb(50, 40, 40); stroke-width:0.5" />
+          <!-- 深層區 -->
+          <g opacity="0.8">
+            <circle cx="180" cy="83" r="8" fill="#1400FF" filter="drop-shadow(0.1em 0.2em 0.1em rgba(0,0,0,.5))"
+              class="shallow" @click="scrollToSection(4)" />
+          </g>
+          <text x="174" y="85" style="font: 4px noto-serif-kr;fill:#ffffff"
+            filter="drop-shadow(0.1em 0.2em 0.1em rgba(0,0,0,.5))">深層區</text>
+          <polyline points="150,71 160,85, 172,85" style="fill:none; stroke:rgb(50, 40, 40); stroke-width:0.5" />
+        </svg>
+      </div>
     </div>
-  </template>
+  </div>
+  <h3Title>
+    <template v-slot:h3>
+      <h3>園區導覽</h3>
+    </template>
+  </h3Title>
+
+  <transition name="fade">
+      <div class="click_scroll" v-if="isClickScrollVisible">
+        <div class="click_top">
+          <i class="fa-solid fa-angles-up" style="color: #ffffff;"></i><br>
+          <span @click="scrollToSection(1)">Scroll<br>Top</span>
+        </div>
+      </div>
+    </transition>
+  <div class="tabs">
+    <h4><img v-if="selectedTab == 'tab2'" src="../../public/all_images/guide/lighthouse.png" alt="">海洋表層區</h4>
+    <input type="radio" name="name" v-model="selectedTab" value="tab2" id="section2" />
+
+    <div class="content">
+      <div class="wrap">
+        <div class="about_pic">
+          <img src="../../public/all_images/guide/shallow.png" alt="">
+          <p>
+            海洋表層區是指地球上的海洋中的最上層部分，通常指的是水面以下的相對較薄的水層，它包括了海洋中最頂部的數百米到一千米的水深範圍。這個區域在海洋學和生態學中非常重要，因為它直接受到陽光照射、風浪、潮汐和季節變化的影響，同時也是眾多海洋生物的居住地。
+          </p>
+        </div>
+        <div class="fish_wrap">
+          <div class="fish" v-for="(item, index) in shallow_pic" :key="index">
+            <div class="num">{{ index + 1 }}</div>
+            <div class="pic_shape" :style="{ backgroundImage: `url(${item.pic})` }">
+              <div class="name">{{ item.name }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <h4><img v-if="selectedTab == 'tab3'" src="../../public/all_images/guide/lighthouse.png" alt="">海洋中層區</h4>
+    <input type="radio" name="name" v-model="selectedTab" value="tab3" id="section3" />
+    <div class="content">
+      <div class="wrap">
+        <div class="about_pic">
+          <img src="../../public/all_images/guide/middle.jpg" alt="">
+          <p>
+            這個區域在海洋生態系統中非常重要，因為它承載著各種生物和生態過程。海洋中層區的深度通常位於海平面以下約200米到1000米之間。這個區域的深度可以因地理位置而異，但大致處於此範圍內。隨著深度的增加，光線變得越來越有限，所以這個區域被稱為"光線不足層"。此外，水溫也隨著深度的增加而下降。這個區域通常有一個稱為"增溫層"的區域，水溫在這個區域內會有一個較大的變化。海洋中層區擁有豐富的生物多樣性，包括各種魚類、烏賊、燈籠魚等生物。這些生物通常會遷徙到這個區域，以覓食或避開掠食者。
+          </p>
+        </div>
+        <div class="fish_wrap">
+          <div class="fish" v-for="(item, index) in middle_pic" :key="index">
+            <div class="num">{{ index + 1 }}</div>
+            <div class="pic_shape" :style="{ backgroundImage: `url(${item.pic})` }">
+              <div class="name">{{ item.name }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <h4><img v-if="selectedTab == 'tab4'" src="../../public/all_images/guide/lighthouse.png" alt="">海洋深層區</h4>
+    <input type="radio" name="name" v-model="selectedTab" value="tab4" id="section4" />
+    <div class="content">
+      <div class="wrap">
+        <div class="about_pic">
+          <img src="../../public/all_images/guide/nature-2575575_1920.jpg" alt="">
+          <p>深海區，是地球上最神祕和未被完全探索的地方之一，隱藏着無數令人驚奇的祕密。這片深不可測的海域位於陸地架的邊緣，通常從水面下200米（656英尺）深處開始，一直延伸到世界各個海洋的深部。</p>
+        </div>
+        <div class="fish_wrap">
+          <div class="fish" v-for="(item, index) in deep_pic" :key="index">
+            <div class="num">{{ index + 1 }}</div>
+            <div class="pic_shape" :style="{ backgroundImage: `url(${item.pic})` }">
+              <div class="name">{{ item.name }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="sea_bg">
+      <svg width="0" height="0" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="sea">
+        <filter id="water">
+          <feTurbulence type="fractalNoise" baseFrequency=".05 .05" numOctaves="1" result="noise1"></feTurbulence>
+          <feColorMatrix in="noise1" type="hueRotate" values="0" result="noise2">
+            <animate attributeName="values" from="0" to="360" dur="1s" repeatCount="indefinite" />
+          </feColorMatrix>
+          <feDisplacementMap xChannelSelector="R" yChannelSelector="G" scale="7" in="SourceGraphic" in2="noise2" />
+        </filter>
+      </svg>
+
+      <img src="../../public/all_images/guide/tyler-lastovich-6s2fFIsyyTc-unsplash.jpg"
+        alt="Hawaiian water crashes against the rocks" class="ocean">
+    </div>
+  </div>
+</template>
+<script>
+import h3Title from "../components/h3TitleComponent.vue";
+
+export default {
+  data() {
+    return {
+      selectedTab: "tab2", // 默认选中的选项卡
+      isClickScrollVisible: false,
+      currentSection: 1,
+      shallow_pic: [
+        { pic: '../all_images/guide/pexels-francesco-ungaro-2289411.jpg', name: '海星'},
+        { pic: '../all_images/guide/Mark_Rosenstein,iNaturalist.org.CC_BY-NC-SA.©Sea_Cucumbers.jpg', name: '海參' },
+        { pic: '../all_images/guide/pexels-nirav-shah-10303342.jpg', name: '黃邊裸胸鱔' },
+        { pic: '../all_images/guide/jellyfish.jpg', name: '水母' },
+        { pic: '../all_images/guide/dolphin.jpg', name: '海豚' },
+        { pic: '../all_images/guide/stingray.jpg', name: '魟魚' },
+        { pic: '../all_images/guide/shark_pic.jpg', name: '鯊魚' },
+        { pic: '../all_images/guide/killer_whale.jpg', name: '虎鯨' },
+        { pic: '../all_images/guide/lionfish-711799_1280.jpg', name: '獅子魚' },
+        { pic: '../all_images/guide/blue-5059268_1280.jpg', name: '斑紋刺蓋魚' },
+        { pic: '../all_images/guide/longhorn-cowfish-375110_1280.jpg', name: '角箱魨' },
+        { pic: '../all_images/guide/fish-7391851_1280.jpg', name: '突角鼻魚' },
+        { pic: '../all_images/guide/fish-2921430_1280.jpg', name: '黃高鰭刺尾魚' },
+        { pic: '../all_images/guide/pallet-doctor-fish-793369_1280.jpg', name: '擬刺尾鯛' },
+        { pic: '../all_images/guide/david-clode-HDVmdzQxAds-unsplash.jpg', name: '小丑魚' }
+      ],
+      middle_pic: [
+        { pic: '../all_images/guide/peter-boshra-j8BRxbtTwTQ-unsplash.jpg', name: '烏賊' },
+        { pic: '../all_images/guide/michael-worden-7hrNYNE7x44-unsplash.jpg', name: '旗魚' },
+        { pic: '../all_images/guide/noe-sardet-hp4SVuJM2-g-unsplash.jpg', name: '櫛棘燈籠魚' },
+        { pic: '../all_images/guide/ocean-sunfish-7177835_1280.jpg', name: '翻車魨' },
+        { pic: '../all_images/guide/sea-toad-62916_1280.jpg', name: '斑點單棘躄魚' },
+    
+      ],
+      deep_pic: [
+        { pic: '../all_images/guide/Dumbo_Octopus©NOAA-Ocean-Exploration.jpg', name: '小飛象章魚' },
+        { pic: '../all_images/guide/Swimming_Sea_Cucumber©NOAA-Ocean-Exploration.jpg', name: '浮游海參' },
+        { pic: '../all_images/guide/Bobtail_Squid©Rickard_Zerpe.jpg', name: '短尾烏賊' },
+        { pic: '../all_images/guide/Chimaera©NOAA-Ocean-Exploration.jpg', name: '銀鮫' },
+        { pic: '../all_images/guide/giant_isopod©NOAA-Ocean-Exploration.jpg', name: '大王具足蟲' },
+    
+      ]
+    };
+  },
+  components: {
+    h3Title,
+  },
+  // computed:{
+  //   imageCount() {
+  //   return this.all_pic.length;
+  // }
+  // },
+  methods: {
+    scrollToSection(sectionIndex) {
+      const sectionElement = document.querySelector("#section" + sectionIndex);
+      if (sectionElement) {
+        sectionElement.scrollIntoView({
+          behavior: "smooth",
+          block: "center",
+          inline: "nearest",
+        });
+      }
+      this.selectedTab = "tab" + sectionIndex;
+    },
+    handleScroll() {
+      const scrollY = window.scrollY;
+
+      if (scrollY < 1300) {
+        this.isClickScrollVisible = false;
+      } else {
+        this.isClickScrollVisible = true;
+      } 
+    }
+  },
+  mounted() {
+    window.addEventListener("scroll", this.handleScroll);
+  },
+  beforeDestroy() {
+    window.removeEventListener("scroll", this.handleScroll);
+  },
+};
+</script>
+
+<style scoped lang="scss">
+h3 {
+  @include h3Title();
+}
+
+/* 網頁捲軸【寬度】 */
+::-webkit-scrollbar {
+  width: 10px;
+
+}
+
+/* 網頁捲軸【背景】顏色 */
+::-webkit-scrollbar-track {
+  background: #9cbae0;
+  margin: 5rem 25px;
+  border-radius: 10px;
+  
+}
+
+/* 網頁捲軸【把手】顏色 */
+::-webkit-scrollbar-thumb {
+  background: #2972b5;
+  border-radius: 10px;
+}
+
+/* 網頁捲軸【滑過時】把手的顏色 */
+::-webkit-scrollbar-thumb:hover {
+  background: #747d86;
+}
+.guide_map {
+  width: 100%;
+  height: 900px;
+  background-image: url(../../public/all_images/guide/guide_map.jpg);
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  margin: auto;
+
+  .mask {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+
+    circle {
+      cursor: pointer;
+      opacity: 1;
+      transition: opacity 0.5s;
+      scale: 1;
+
+      &:hover {
+        opacity: 0.8;
+      }
+    }
+
+    text {
+      pointer-events: none;
+
+    }
+  }
+}
+
+.tabs {
+  display: flex;
+  box-sizing: border-box;
+  position: relative;
+  max-width: 100%;
+  height: 130vh;
+  padding: 2rem;
+  overflow: hidden;
+
+  .sea+img {
+    width: 110vw;
+    height: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+    object-fit: cover;
+    filter: url(#water);
+  }
+
+  h4 {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    left: 5px;
+    width: 19%;
+    height: 5.3rem;
+    z-index: 3;
+    pointer-events: none;
+    color: #fff;
+    font-size: 18px;
+    text-shadow: black 0.1em 0.1em 0.1em;
+
+
+    &:nth-of-type(1) {
+      top: 10%;
+    }
+
+    &:nth-of-type(2) {
+      top: 22%;
+    }
+
+    &:nth-of-type(3) {
+      top: 35%;
+    }
+
+    img {
+      position: absolute;
+      vertical-align: top;
+      z-index: 10;
+      top: 20px;
+      width: 40px;
+      left: 80%;
+      animation: animate 2s alternate-reverse infinite;
+    }
+  }
+
+  input[type="radio"] {
+    position: absolute;
+    width: 20%;
+    height: 5.3rem;
+    appearance: none;
+    cursor: pointer;
+    z-index: 5;
+
+
+    &:nth-of-type(1) {
+      top: 10%;
+    }
+
+    &:nth-of-type(2) {
+      top: 22%;
+    }
+
+    &:nth-of-type(3) {
+      top: 35%;
+    }
+
+    &:checked {
+      transition: .5s;
+      overflow: hidden;
+
+    }
+
+    &:checked+.content {
+      transform: translateX(0%);
+      transition: transform 0.5s ease 0.5s;
+    }
+  }
+
+  @keyframes animate {
+    0% {
+      transform: translate(0%, -15%) rotate(-5deg);
+    }
+
+    100% {
+      transform: translate(0%, 0%)rotate(4deg);
+    }
+  }
+
+  .content {
+    width: 75%;
+    height: 95vh;
+    overflow-y: scroll;
+    padding: 1.5rem;
+    border-radius: 2rem;
+    position: absolute;
+    z-index: 2;
+    right: 1rem;
+    transition: transform 0.4s ease-in-out;
+    margin-bottom: 2rem;
+
+    &:nth-of-type(1) {
+      transform: translateX(150%);
+      background-color: #828ca6b9;
+    }
+
+    &:nth-of-type(2) {
+      transform: translateX(250%);
+      background-color: #666e7ebe;
+    }
+
+    &:nth-of-type(3) {
+      transform: translateX(300%);
+      background-color: #40465dcd;
+    }
+
+    .wrap {
+      display: flex;
+      align-items: start;
+      color: #fff;
+      line-height: 1.5em;
+
+      .about_pic {
+        width: 40%;
+
+        img {
+          width: 100%;
+          vertical-align: top;
+        }
+        p{
+          padding-top: 1rem;
+        }
+      }
+
+      .fish_wrap {
+        height: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        margin-left: 2rem;
+        width: 60%;
+        color: #fff;
+
+        .fish {
+          display: flex;
+          width: calc(100%/3);
+          position: relative;
+          padding: 1.5em;
+
+          .name {
+            position: absolute;
+            text-align: center;
+            bottom: 0;
+            left: 45%;
+            transform: translate(-45%, 0);
+
+          }
+
+          .num {
+            aspect-ratio: 1/1;
+            width: 1.2rem;
+            height: 1.2rem;
+            border-radius: 50%;
+            background-color: rgb(30, 35, 35);
+            text-align: center;
+            color: #fff;
+          }
+
+          .pic_shape {
+            width: 6rem;
+            aspect-ratio: 1/1;
+            border-radius: 5rem;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width:768px) {
+  .wrap {
+    display: flex;
+    flex-direction: column;
+
+    .about_pic {
+      width: 100%;
+    }
+
+    .fish_wrap {
+      width: 100%;
+    }
+  }
+
+}
+
+
+.click_scroll {
+  position: fixed;
+  bottom: 25%;
+  right: 30px;
+  z-index: 4;
+  cursor: pointer;
+ 
+
+  .click_top {
+    text-align: center;
+    animation: top .8s alternate infinite;
+    span {
+      font-size: 20px;
+      font-weight: 600;
+      color: #ffffff;
+      text-shadow: #000 0.1em 0.1em 0.1em;
+
+      img {
+        width: 2.5rem;
+        vertical-align: top;
+        position: absolute;
+        right: 80px;
+      }
+    }
+  }
+}
+@keyframes top {
+  0%{
+    transform: translateY(10px);
+  }
+  100%{
+    transform: translateY(0px);
+  }
+  
+}
+</style>

@@ -12,12 +12,12 @@
         <lightCircle>
           <template v-slot:circle>
             <div class="open">
-              <span>{{ $t("營業時間") }}</span>
+              <span>{{ $t('營業時間') }}</span>
               <span>09:00-17:00</span>
               <svg x="0px" y="0px" width="200px" height="15px" viewBox="0 0 399.6 15.9">
                 <polyline class="op_line" points="0.1,5.5 58,15.4 118.4,5.5 189.2,5.5 258.7,10.4 368.3,0.5 399.5,7.9 " />
               </svg>
-              <span>{{ $t("最後入場") }}</span>
+              <span>{{ $t('最後入場') }}</span>
               <span>16:00</span>
             </div>
           </template>
@@ -28,7 +28,7 @@
       <div class="entrance">
         <h3Title>
           <template v-slot:h3>
-            <h3>{{ $t("今日入園人數") }}</h3>
+            <h3>{{ $t('今日入園人數') }}</h3>
           </template>
         </h3Title>
         <div class="drop">
@@ -48,17 +48,17 @@
 
       <h3Title>
         <template v-slot:h3>
-          <h3>票價資訊</h3>
+          <h3>{{ $t('票價資訊') }}</h3>
         </template>
       </h3Title>
       <ticketPrice></ticketPrice>
-      <button>立即購票</button>
+      <router-link to="/ticket"><button>立即購票</button></router-link>
 
 
       <!-- 交通指南 ------------------------------------------ -->
       <h3Title>
         <template v-slot:h3>
-          <h3>交通指南</h3>
+          <h3>{{ $t('交通指南') }}</h3>
         </template>
       </h3Title>
       <div class="map">
@@ -101,13 +101,13 @@
             <span>{{ product.price }}</span>
           </div>
         </div>
-        <button>更多商品</button>
+        <router-link to="/product"><button>更多商品</button></router-link>
       </div>
 
       <!-- 活動倒數 ------------------------------------------ -->
       <h3Title>
         <template v-slot:h3>
-          <h3>活動倒數</h3>
+          <h3>{{ $t('活動倒數') }}</h3>
         </template>
       </h3Title>
       <div class="active">
@@ -117,14 +117,14 @@
               <img src="../assets/images/openActive.png" alt="" />
             </div>
             <div class="text">
-              <span class="date">活動時間 : 5月1日至5月31日</span>
+              <span class="date">活動時間 : 9月1日至9月28日</span>
               <p class="title">DIDADIDA水族館開幕慶</p>
               <p class="self">票價限時優惠<span> 10% </span>off</p>
             </div>
           </div>
           <div class="day">
             <span>倒數</span>
-            <span>5</span>
+            <span>6</span>
             <span>天</span>
           </div>
         </div>
@@ -134,14 +134,14 @@
               <img src="../assets/images/blueCloth.png" alt="" />
             </div>
             <div class="text">
-              <span class="date">活動時間 : 5月1日至5月31日</span>
+              <span class="date">活動時間 : 9月1日至9月28日</span>
               <p class="title">海洋藍慶典</p>
               <p class="self">入場穿藍色系服裝可享半價優惠</p>
             </div>
           </div>
           <div class="day">
             <span>倒數</span>
-            <span>9</span>
+            <span>6</span>
             <span>天</span>
           </div>
         </div>
@@ -183,12 +183,12 @@ export default {
           object: "限4歲(含)以上及未滿12歲兒童適用",
         },
         {
-          name: "優待票",
+          name: "愛心票",
           price: "NT 200",
           object:
             "限持有身心障礙證明者、身心障礙者的1位陪同者、孕婦、滿65歲以上長者適用",
         },
-        { name: "團體票", price: "NT 350", object: "15名以上適用" },
+        { name: "團體票", price: "NT 350", object: "15人以上適用" },
       ],
       products: [
         {
@@ -351,10 +351,10 @@ export default {
     margin: 50px auto;
     position: relative;
 
-    h3 {
-      width: 150px;
-      margin: -30px auto 0;
-    }
+    // h3 {
+    //   width: 150px;
+    //   margin: -30px auto 0;
+    // }
 
     .drop {
       margin: 80px auto;
@@ -430,32 +430,6 @@ export default {
       right: -30px;
     }
   }
-
-  // 票價資訊 ---------------------------------------------
-  // .ticket {
-  //   max-width: 1200px;
-  //   width: 100%;
-  //   margin: 30px auto 100px;
-
-  //   table {
-  //     margin: auto;
-  //     font-size: 16px;
-  //     border-radius: 5px;
-  //     background-color: map-get($colors, "secondary");
-  //     color: map-get($colors, "light");
-
-  //     tr:nth-child(2n) {
-  //       background-color: map-get($colors, "light");
-  //       color: map-get($colors, "dark");
-  //     }
-
-  //     td,
-  //     th {
-  //       padding: 15px 30px;
-  //       text-align: left;
-  //     }
-  //   }
-  // }
 
   // 交通指南 ---------------------------------------------
   .map {

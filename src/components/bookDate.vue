@@ -1,44 +1,58 @@
 <template>
   <div class="dateAll">
-    <div class="dateTitle">選擇日期與票數</div>
+    <div class="dateTitle">{{ $t("選擇日期與票數") }}</div>
     <div class="dateTextAll">
       <div class="calendar">
-        <VDatePicker borderless expanded :min-date="new Date()" locale="tw" :masks="{ title: 'YYYY MMM' }" />
+        <VDatePicker
+          v-model="date"
+          borderless
+          expanded
+          :min-date="new Date()"
+          locale="tw"
+          :masks="{ title: 'YYYY MMM' }"
+          mode="date"
+        />
       </div>
       <div class="calendarOptionAll">
         <div class="optionTitle">
-          <div>選擇數量</div>
-          <div @click="clearTicketCount"><img src="../assets/images/reorganize.png" alt="">全部重選</div>
+          <div>{{ $t("選擇數量") }}</div>
+          <div @click="clearTicketCount">
+            <img src="../assets/images/reorganize.png" alt="" />{{
+              $t("全部重選")
+            }}
+          </div>
         </div>
-        <div v-for="(i, index) in optionDetailArr" class="optionAll" :key="index">
+        <div
+          v-for="(i, index) in optionDetailArr"
+          class="optionAll"
+          :key="index"
+        >
           <div class="ticketType">
-            <div>{{ i[0] }}</div>
-            <div>{{ i[1] }}</div>
+            <div>{{ $t(i[0]) }}</div>
+            <div>{{ $t(i[1]) }}</div>
           </div>
           <div class="ticketSal">
-            <div>{{ i[2] }}</div>
+            <div>NT {{ $t(i[2]) }} / 每人</div>
             <div class="clickTicket">
-              <div @click="ticketdown(index)">-</div>
+              <div @click="ticketdown(index)">－</div>
               <div>{{ i[3] }}</div>
-              <div @click="ticketPlus(index)">+</div>
+              <div @click="ticketPlus(index)">＋</div>
             </div>
           </div>
         </div>
         <div class="totalNum">
-          <div>總金額</div>
+          <div>{{ $t("總金額") }}</div>
           <div>
-            TWD <span>{{ totalPrice }}</span>
+            NT <span>{{ totalPrice }}</span>
           </div>
         </div>
         <div class="bookbtn">
-          <button>立即購票</button>
+          <button @click="bookTickets">{{ $t("立即購票") }}</button>
         </div>
-
       </div>
     </div>
   </div>
 </template>
-
 
 <script>
 export default {
@@ -46,20 +60,58 @@ export default {
   components: {},
   data() {
     return {
+      date: "",
       optionDetailArr: [
-        ["成人", "(18~64歲)", "TWD 500/每人", 0],
-        ["兒童", "(4~11歲)", "TWD 250/每人", 0],
-        ["學生", "(12歲以上(含)持學生證者)", "TWD 400/每人", 0],
-        ["長者", "(65歲以上(含))", "TWD 250/每人", 0],
+        ["成人", "(18~64歲)", "500", 0],
+        ["兒童", "(4~11歲)", "250", 0],
+        ["學生", "(12歲以上(含)持學生證者)", "400", 0],
+        ["長者", "(65歲以上(含))", "250", 0],
       ],
       totalPrice: 0,
     };
   },
   watch: {},
-  mounted() { },
-  beforeDestroy() { },
-  computed: {},
+  mounted() {},
+  beforeDestroy() {},
+  computed: {
+    catchDate() {
+      return `${new Date(this.date).getFullYear()}.${new Date(
+        this.date
+      ).getMonth()}.${new Date(this.date).getDate()}`;
+    },
+  },
   methods: {
+    bookTickets() {
+      if (!this.$store.state.userName) {
+        alert("需先登入會員");
+      } else {
+        for (let i = 0; i < this.optionDetailArr.length; i++) {
+          const lastElement =
+            this.optionDetailArr[i][this.optionDetailArr[i].length - 1];
+          if (lastElement === 0) {
+            continue; // 如果最後一個元素是零，則跳過這個子陣列
+          } else {
+            for (let j = 0; j < lastElement; j++) {
+              //     tickImg: require("../assets/images/dolphin_pillow.jpg"),
+              //     tickName: "一般全票",
+              //     tickCount: "2",
+              //     tickDate: "2023.08.31",
+              //     tickPrice: "250",
+              console.log(
+                this.optionDetailArr[i][this.optionDetailArr[i].length - 1]
+              );
+              this.$store.state.ticketList.push({
+                tickImg: require("../assets/images/dolphin_pillow.jpg"),
+                tickName: `${this.optionDetailArr[i][0]}票`,
+                tickCount: `1`,
+                tickDate: this.catchDate,
+                tickPrice: `${this.optionDetailArr[i][2]}`,
+              });
+            }
+          }
+        }
+      }
+    },
     clearTicketCount() {
       for (let i = 0; i < this.optionDetailArr.length; i++) {
         this.optionDetailArr[i][3] = 0;
@@ -72,12 +124,12 @@ export default {
         idx == 0
           ? (this.totalPrice -= 500)
           : idx == 1
-            ? (this.totalPrice -= 250)
-            : idx == 2
-              ? (this.totalPrice -= 400)
-              : idx == 3
-                ? (this.totalPrice -= 250)
-                : "";
+          ? (this.totalPrice -= 250)
+          : idx == 2
+          ? (this.totalPrice -= 400)
+          : idx == 3
+          ? (this.totalPrice -= 250)
+          : "";
       }
     },
     ticketPlus(idx) {
@@ -85,12 +137,12 @@ export default {
       idx == 0
         ? (this.totalPrice += 500)
         : idx == 1
-          ? (this.totalPrice += 250)
-          : idx == 2
-            ? (this.totalPrice += 400)
-            : idx == 3
-              ? (this.totalPrice += 250)
-              : "";
+        ? (this.totalPrice += 250)
+        : idx == 2
+        ? (this.totalPrice += 400)
+        : idx == 3
+        ? (this.totalPrice += 250)
+        : "";
     },
   },
 };
@@ -102,6 +154,10 @@ export default {
 }
 
 :deep(.calendar) .vc-week {
+  padding: 10px;
+}
+
+:deep(.calendar) .vc-weekdays {
   padding: 10px;
 }
 
@@ -129,8 +185,6 @@ export default {
 
   .dateTitle {
     @include h3Title;
-    // border: 1px red solid;
-    width: 180px;
   }
 
   .dateTextAll {
@@ -183,20 +237,23 @@ export default {
           border-radius: 5px;
           font-size: map-get($fontSizes, "h4");
           background-color: map-get($colors, "secondary");
-          color: map-get($colors, "light");;
+          color: map-get($colors, "light");
         }
       }
 
       .optionAll {
         display: flex;
+        align-items: center;
         padding: 15px 0;
         justify-content: space-between;
         border-bottom: 1px #979595 solid;
         font-weight: bold;
+        letter-spacing: 1px;
 
         .ticketType {
           display: flex;
-          align-items: flex-end;
+          flex-wrap: wrap;
+          align-items: center;
 
           div {
             &:first-child {
@@ -214,6 +271,8 @@ export default {
         .ticketSal {
           display: flex;
           align-items: flex-end;
+          flex-wrap: wrap;
+          justify-content: flex-end;
 
           .clickTicket {
             // border: 1px red solid;
