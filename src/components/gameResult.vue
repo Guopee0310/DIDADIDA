@@ -10,9 +10,7 @@
       </div>
       <div></div>
     </div>
-    <router-link to="/?section=hide" class="toPoint"
-      >我的紅利點數 >
-    </router-link>
+    <router-link to="/member" class="toPoint">我的紅利點數 > </router-link>
   </div>
 </template>
 

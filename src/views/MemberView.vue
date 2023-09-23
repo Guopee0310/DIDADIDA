@@ -1,20 +1,21 @@
 <template>
-  <div style="width: 1200px; height: 100px; margin: 0 auto; position: relative;">
+  <div style="width: 1200px; height: 100px; margin: 0 auto; position: relative">
     <div class="photo_stickers">
       <img src="../assets/images/member_nini.jpg" alt="" />
     </div>
   </div>
 
-
   <div class="member_hello">
     <div class="deco_fishes">
-      <img src="../../public/all_images/deco/deco_fishes.png" alt="">
+      <img src="../../public/all_images/deco/deco_fishes.png" alt="" />
     </div>
     <p>{{ this.$store.state.userName }}，您好！</p>
   </div>
 
   <div class="bonuspoints">
-    <p>我的紅利點數 : <span>100</span> 點</p>
+    <p>
+      我的紅利點數 : <span>{{ remainingTodos }}</span> 點
+    </p>
   </div>
 
   <div class="mem_main">
@@ -25,41 +26,63 @@
           <span>Google</span>
         </div>
         <label class="verification_label" for="verification_id">
-          已驗證<input class="verification_input" type="checkbox" value="" id="verification_id" style="zoom: 160%" />
+          已驗證<input
+            class="verification_input"
+            type="checkbox"
+            value=""
+            id="verification_id"
+            style="zoom: 160%"
+          />
         </label>
       </div>
 
       <div class="member_nav">
-        <button @click="btn = 'mem_account_settings'"><span>會員帳號設定</span></button>
-        <button @click="btn = 'prod_order_inquiry'"><span>購物訂單查詢</span></button>
-        <button @click="btn = 'tick_order_inquiry'"><span>購票訂單查詢</span></button>
-        <button @click="btn = 'favorites_list'"><span>我的收藏清單</span></button>
+        <button @click="btn = 'mem_account_settings'">
+          <span>會員帳號設定</span>
+        </button>
+        <button @click="btn = 'prod_order_inquiry'">
+          <span>購物訂單查詢</span>
+        </button>
+        <button @click="btn = 'tick_order_inquiry'">
+          <span>購票訂單查詢</span>
+        </button>
+        <button @click="btn = 'favorites_list'">
+          <span>我的收藏清單</span>
+        </button>
         <div class="bubble group_r">
-          <img src="../../public/all_images/bubble1.png" alt="">
+          <img src="../../public/all_images/bubble1.png" alt="" />
         </div>
         <div class="bubble group_l">
-          <img src="../../public/all_images/bubble2.png" alt="">
+          <img src="../../public/all_images/bubble2.png" alt="" />
         </div>
       </div>
       <div class="mempic">
-        <img src="../../public/all_images/pipi.jpg" alt="">
+        <img src="../../public/all_images/pipi.jpg" alt="" />
       </div>
-
     </div>
 
-    <div v-if="btn === 'mem_account_settings'" class="mem_account_settings member_area">
+    <div
+      v-if="btn === 'mem_account_settings'"
+      class="mem_account_settings member_area"
+    >
       <h6>會員帳號設定</h6>
       <memAccoutSettings></memAccoutSettings>
       <memAreaBG></memAreaBG>
     </div>
 
-    <div v-else-if="btn === 'prod_order_inquiry'" class="prod_order_inquiry member_area">
+    <div
+      v-else-if="btn === 'prod_order_inquiry'"
+      class="prod_order_inquiry member_area"
+    >
       <h6>購物訂單查詢</h6>
       <prodOrderInquiry></prodOrderInquiry>
       <memAreaBG></memAreaBG>
     </div>
 
-    <div v-else-if="btn === 'tick_order_inquiry'" class="tick_order_inquiry member_area">
+    <div
+      v-else-if="btn === 'tick_order_inquiry'"
+      class="tick_order_inquiry member_area"
+    >
       <h6>購票訂單查詢</h6>
       <tickOrderInquiry></tickOrderInquiry>
       <memAreaBG></memAreaBG>
@@ -73,12 +96,12 @@
   </div>
 </template>
 <script>
-import memAccoutSettings from '../components/memAccoutSettings.vue';
-import prodOrderInquiry from '../components/prodOrderInquiry.vue';
-import tickOrderInquiry from '../components/tickOrderInquiry.vue';
-import favoritesList from '../components/favoritesList.vue';
-import memAreaBG from '../components/memAreaBG.vue'
-
+import memAccoutSettings from "../components/memAccoutSettings.vue";
+import prodOrderInquiry from "../components/prodOrderInquiry.vue";
+import tickOrderInquiry from "../components/tickOrderInquiry.vue";
+import favoritesList from "../components/favoritesList.vue";
+import memAreaBG from "../components/memAreaBG.vue";
+import { mapGetters } from "vuex";
 export default {
   components: {
     memAccoutSettings,
@@ -89,8 +112,14 @@ export default {
   },
   data() {
     return {
-      btn: 'mem_account_settings',
-    }
+      btn: "mem_account_settings",
+    };
+  },
+  computed: {
+    score() {
+      return this.$store.state.totalScorePoint;
+    },
+    ...mapGetters(["remainingTodos"]),
   },
 };
 </script>
@@ -146,7 +175,6 @@ export default {
   display: flex;
   justify-content: space-evenly;
 
-
   .verification {
     width: 400px;
     height: 80px;
@@ -158,7 +186,7 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: map-get($colors, 'bgc');
+    background-color: map-get($colors, "bgc");
 
     .verification_google {
       width: 100px;
@@ -184,7 +212,7 @@ export default {
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
-    background-color: map-get($colors, 'secondary');
+    background-color: map-get($colors, "secondary");
     position: relative;
 
     .bubble {
@@ -201,7 +229,6 @@ export default {
       bottom: -415px;
     }
 
-
     button {
       width: 320px;
       height: 60px;
@@ -212,18 +239,18 @@ export default {
     }
 
     button:hover {
-      background-color: map-get($colors, 'memBtn');
+      background-color: map-get($colors, "memBtn");
     }
 
     span {
-      font-size: map-get($fontSizes, 'h4');
+      font-size: map-get($fontSizes, "h4");
       letter-spacing: 1px;
     }
   }
 
   h6 {
     padding: 20px 55px;
-    font-size: map-get($fontSizes, 'h3');
+    font-size: map-get($fontSizes, "h3");
   }
 
   .member_area {
@@ -233,8 +260,8 @@ export default {
     border: 0;
     border-radius: 15px;
     position: relative;
-    background-color: map-get($colors, 'mainColor');
-    color: map-get($colors, 'light');
+    background-color: map-get($colors, "mainColor");
+    color: map-get($colors, "light");
     overflow: hidden;
   }
 }
@@ -253,8 +280,5 @@ export default {
     height: 100%;
     object-fit: cover;
   }
-
-
-
 }
 </style>

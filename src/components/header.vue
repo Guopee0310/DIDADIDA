@@ -245,6 +245,7 @@ export default {
       this.$store.state.shoppingCart = [];
       this.$store.state.favoList = [];
       this.$store.state.ticketList = [];
+      this.$store.state.totalScorePoint = 0;
     },
     handleScroll(event) {
       console.log(event);
