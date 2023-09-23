@@ -1,11 +1,7 @@
 <template>
   <div class="tick_order_main">
     <div class="tick_area">
-      <div
-        class="tick_order_group"
-        v-for="tick in tickOrder"
-        :key="tick.tickImg"
-      >
+      <div class="tick_order_group" v-for="tick in tickOrder" :key="tick.tickImg">
         <div class="tick_img">
           <img :src="tick.tickImg" alt="" />
         </div>
@@ -32,7 +28,6 @@
         </div>
       </div>
     </div>
-    <memChangePage></memChangePage>
   </div>
 </template>
 
@@ -102,6 +97,31 @@ export default {
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
+    overflow-y: auto;
+
+    &::-webkit-scrollbar {
+      width: 10px;
+    }
+
+    &::-webkit-scrollbar-track-piece {
+      background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      border-radius: 4px;
+      background-color: rgba(0, 0, 0, 0.4);
+      border: 1px solid slategrey;
+    }
+
+    &::-webkit-scrollbar-track {
+      box-shadow: transparent;
+    }
+
+    &::-webkit-scrollbar-button {
+      height: 5px;
+      background: transparent;
+      border-radius: 4px;
+    }
 
     .tick_order_group {
       width: 460px;
@@ -112,7 +132,7 @@ export default {
       // z-index: 2;
     }
 
-    .tick_order_group:nth-child(4) {
+    .tick_order_group:last-child {
       border-bottom: 0;
     }
 

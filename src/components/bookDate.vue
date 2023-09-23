@@ -3,15 +3,8 @@
     <div class="dateTitle">{{ $t("選擇日期與票數") }}</div>
     <div class="dateTextAll">
       <div class="calendar">
-        <VDatePicker
-          v-model="date"
-          borderless
-          expanded
-          :min-date="new Date()"
-          locale="tw"
-          :masks="{ title: 'YYYY MMM' }"
-          mode="date"
-        />
+        <VDatePicker v-model="date" borderless expanded :min-date="new Date()" locale="tw" :masks="{ title: 'YYYY MMM' }"
+          mode="date" />
       </div>
       <div class="calendarOptionAll">
         <div class="optionTitle">
@@ -22,17 +15,13 @@
             }}
           </div>
         </div>
-        <div
-          v-for="(i, index) in optionDetailArr"
-          class="optionAll"
-          :key="index"
-        >
+        <div v-for="(i, index) in optionDetailArr" class="optionAll" :key="index">
           <div class="ticketType">
             <div>{{ $t(i[0]) }}</div>
             <div>{{ $t(i[1]) }}</div>
           </div>
           <div class="ticketSal">
-            <div>NT {{ $t(i[2]) }} / 每人</div>
+            <div>NT {{ $t(i[2]) }} / {{ $t('每人') }}</div>
             <div class="clickTicket">
               <div @click="ticketdown(index)">－</div>
               <div>{{ i[3] }}</div>
@@ -71,8 +60,8 @@ export default {
     };
   },
   watch: {},
-  mounted() {},
-  beforeDestroy() {},
+  mounted() { },
+  beforeDestroy() { },
   computed: {
     catchDate() {
       return `${new Date(this.date).getFullYear()}.${new Date(
@@ -124,12 +113,12 @@ export default {
         idx == 0
           ? (this.totalPrice -= 500)
           : idx == 1
-          ? (this.totalPrice -= 250)
-          : idx == 2
-          ? (this.totalPrice -= 400)
-          : idx == 3
-          ? (this.totalPrice -= 250)
-          : "";
+            ? (this.totalPrice -= 250)
+            : idx == 2
+              ? (this.totalPrice -= 400)
+              : idx == 3
+                ? (this.totalPrice -= 250)
+                : "";
       }
     },
     ticketPlus(idx) {
@@ -137,12 +126,12 @@ export default {
       idx == 0
         ? (this.totalPrice += 500)
         : idx == 1
-        ? (this.totalPrice += 250)
-        : idx == 2
-        ? (this.totalPrice += 400)
-        : idx == 3
-        ? (this.totalPrice += 250)
-        : "";
+          ? (this.totalPrice += 250)
+          : idx == 2
+            ? (this.totalPrice += 400)
+            : idx == 3
+              ? (this.totalPrice += 250)
+              : "";
     },
   },
 };

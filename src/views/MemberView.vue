@@ -1,5 +1,5 @@
 <template>
-  <div style="width: 1200px; height: 100px; margin: 0 auto; position: relative">
+  <div class="stickers">
     <div class="photo_stickers">
       <img src="../assets/images/member_nini.jpg" alt="" />
     </div>
@@ -38,16 +38,16 @@
 
       <div class="member_nav">
         <button @click="btn = 'mem_account_settings'">
-          <span>會員帳號設定</span>
+          <span>{{ $t('會員帳號設定') }}</span>
         </button>
         <button @click="btn = 'prod_order_inquiry'">
-          <span>購物訂單查詢</span>
+          <span>{{ $t('購物訂單查詢') }}</span>
         </button>
         <button @click="btn = 'tick_order_inquiry'">
-          <span>購票訂單查詢</span>
+          <span>{{ $t('購票訂單查詢') }}</span>
         </button>
         <button @click="btn = 'favorites_list'">
-          <span>我的收藏清單</span>
+          <span>{{ $t('我的收藏清單') }}</span>
         </button>
         <div class="bubble group_r">
           <img src="../../public/all_images/bubble1.png" alt="" />
@@ -61,35 +61,26 @@
       </div>
     </div>
 
-    <div
-      v-if="btn === 'mem_account_settings'"
-      class="mem_account_settings member_area"
-    >
-      <h6>會員帳號設定</h6>
+    <div v-if="btn === 'mem_account_settings'" class="mem_account_settings member_area">
+      <h6>{{ $t('會員帳號設定') }}</h6>
       <memAccoutSettings></memAccoutSettings>
       <memAreaBG></memAreaBG>
     </div>
 
-    <div
-      v-else-if="btn === 'prod_order_inquiry'"
-      class="prod_order_inquiry member_area"
-    >
-      <h6>購物訂單查詢</h6>
+    <div v-else-if="btn === 'prod_order_inquiry'" class="prod_order_inquiry member_area">
+      <h6>{{ $t('購物訂單查詢') }}</h6>
       <prodOrderInquiry></prodOrderInquiry>
       <memAreaBG></memAreaBG>
     </div>
 
-    <div
-      v-else-if="btn === 'tick_order_inquiry'"
-      class="tick_order_inquiry member_area"
-    >
-      <h6>購票訂單查詢</h6>
+    <div v-else-if="btn === 'tick_order_inquiry'" class="tick_order_inquiry member_area">
+      <h6>{{ $t('購票訂單查詢') }}</h6>
       <tickOrderInquiry></tickOrderInquiry>
       <memAreaBG></memAreaBG>
     </div>
 
     <div v-else="btn === 'mem_bonuspoint'" class="favorites_list member_area">
-      <h6>我的收藏清單</h6>
+      <h6>{{ $t('我的收藏清單') }}</h6>
       <favoritesList></favoritesList>
       <memAreaBG></memAreaBG>
     </div>
@@ -121,25 +112,37 @@ export default {
     },
     ...mapGetters(["remainingTodos"]),
   },
+  methods: {
+
+  }
 };
 </script>
 <style scoped lang="scss">
-.photo_stickers {
-  display: inline-block;
-  width: 270px;
-  height: 270px;
-  border-radius: 50%;
-  overflow: hidden;
-  position: absolute;
-  top: -160px;
-  left: 65px;
-  z-index: 2;
+.stickers {
+  width: 1200px;
+  height: 100px;
+  margin: 0 auto;
+  position: relative;
 
-  img {
-    width: 100%;
-    height: 100%;
+  .photo_stickers {
+    display: inline-block;
+    width: 270px;
+    height: 270px;
+    border-radius: 50%;
+    overflow: hidden;
+    position: absolute;
+    top: -160px;
+    left: 65px;
+    z-index: 2;
+
+    img {
+      width: 100%;
+      height: 100%;
+    }
   }
 }
+
+
 
 .member_hello {
   width: 1200px;
@@ -238,8 +241,8 @@ export default {
       background-color: #fff;
     }
 
-    button:hover {
-      background-color: map-get($colors, "memBtn");
+    :hover {
+      background-color: map-get($colors, 'memBtn');
     }
 
     span {
@@ -264,21 +267,129 @@ export default {
     color: map-get($colors, "light");
     overflow: hidden;
   }
+
+  .mempic {
+    display: inline-block;
+    width: 370px;
+    height: 320px;
+    border-radius: 50% 65% 65% 50%;
+    overflow: hidden;
+    margin: 20px 35px;
+    position: relative;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
 }
 
-.mempic {
-  display: inline-block;
-  width: 370px;
-  height: 320px;
-  border-radius: 50% 65% 65% 50%;
-  overflow: hidden;
-  margin: 20px 35px;
-  position: relative;
 
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+
+@media screen and (max-width:768px) {
+  .stickers {
+    .photo_stickers {
+      width: 200px;
+      height: 200px;
+      top: -120px;
+    }
   }
+
+  .member_hello {
+    width: 768px;
+    font-size: map-get($fontSizes, "h5");
+
+    .deco_fishes {
+      right: 100px;
+    }
+  }
+
+  .mem_main {
+    width: 768px;
+    flex-direction: column;
+    align-items: center;
+
+    .verification {
+      width: 600px;
+    }
+
+    .member_nav {
+      width: 600px;
+
+      button {
+        width: 550px;
+      }
+    }
+
+    .mempic,
+    .bubble {
+      display: none;
+    }
+  }
+
+}
+
+@media screen and (max-width:414px) {
+  .stickers {
+    height: 40px;
+
+    .photo_stickers {
+      width: 120px;
+      height: 120px;
+      top: -75px;
+    }
+  }
+
+  .member_hello {
+    width: 414px;
+    font-size: map-get($fontSizes, "h5");
+
+    .deco_fishes {
+      right: -100px;
+      top: -80px;
+
+      img {
+        width: 60%;
+      }
+    }
+  }
+
+  .mem_main {
+    width: 414px;
+
+    h6 {
+      padding: 20px 25px;
+    }
+
+    .verification {
+      width: 350px;
+    }
+
+    .member_nav {
+      width: 350px;
+      height: 380px;
+      margin: 0 30px;
+      background-color: map-get($colors, 'bgc');
+
+      button {
+        width: 310px;
+        background-color: map-get($colors, 'memnav');
+      }
+    }
+
+    .member_area {
+      width: 350px;
+      height: 850px;
+      background-color: map-get($colors, 'bgc');
+      color: map-get($colors, 'dark');
+    }
+
+    .mempic,
+    .bubble {
+      display: none;
+    }
+  }
+
 }
 </style>

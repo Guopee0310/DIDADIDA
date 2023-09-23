@@ -23,7 +23,6 @@
         </div>
       </div>
     </div>
-    <memChangePage></memChangePage>
   </div>
 </template>
 
@@ -82,6 +81,31 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
+  overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  &::-webkit-scrollbar-track-piece {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: rgba(0, 0, 0, 0.4);
+    border: 1px solid slategrey;
+  }
+
+  &::-webkit-scrollbar-track {
+    box-shadow: transparent;
+  }
+
+  &::-webkit-scrollbar-button {
+    height: 5px;
+    background: transparent;
+    border-radius: 4px;
+  }
 
   .favorites_list_group {
     width: 460px;
