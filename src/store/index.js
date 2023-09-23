@@ -11,6 +11,7 @@ export default createStore({
     chooseFrontBack: true, //記得改回來
     storeShowLogin: false,
     quizScore: 0,
+    labaScore: 0,
     loginToogle: false,
     loading: false,
     loginURL: "https://tibamef2e.com/cgd103/g1/api",
@@ -22,10 +23,15 @@ export default createStore({
     chooseImgSrc: publicURL,
     favoList: [],
     ticketList: [],
+    totalScorePoint: 0,
   },
 
   // 類似vue檔裡面的computed
-  getters: {},
+  getters: {
+    remainingTodos: (state) => {
+      return (state.totalScorePoint = state.quizScore + state.labaScore);
+    },
+  },
   mutations: {
     removeFavoItem(state, idx) {
       // 通过索引删除 favoList 中的项

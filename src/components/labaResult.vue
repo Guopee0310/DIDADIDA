@@ -59,8 +59,21 @@ export default {
     };
   },
   props: ["imgSrc1", "title1", "post1", "point1", "finalShow1"],
-  methods: {},
+  methods: {
+    updateLabaScore() {
+      this.$store.commit("setLabaScore", this.labaScore);
+    },
+  },
+  mounted() {
+    window.addEventListener("load", this.updateLabaScore);
+  },
+  beforeDestroy() {
+    window.removeEventListener("load", this.updateLabaScore);
+  },
   computed: {
+    labaScore() {
+      return parseInt(this.point1);
+    },
     getSrc() {
       //   if (this.point1 == "15") {
       //     return this.imgSrcArr[0];

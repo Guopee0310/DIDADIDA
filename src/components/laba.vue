@@ -141,24 +141,28 @@ export default {
         this.title = this.introArr[0].title;
         this.post = this.introArr[0].post;
         this.point = this.introArr[0].point;
+        this.$store.state.labaScore = parseInt(this.introArr[0].point);
       } else if (randomNum == 2) {
         this.guessNum = 2;
         this.imgSrc = this.introArr[1].imgSrc;
         this.title = this.introArr[1].title;
         this.post = this.introArr[1].post;
         this.point = this.introArr[1].point;
+        this.$store.state.labaScore = parseInt(this.introArr[0].point);
       } else if (randomNum == 3) {
         this.guessNum = 3;
         this.imgSrc = this.introArr[2].imgSrc;
         this.title = this.introArr[2].title;
         this.post = this.introArr[2].post;
         this.point = this.introArr[2].point;
+        this.$store.state.labaScore = parseInt(this.introArr[0].point);
       } else if (randomNum == 4) {
         this.guessNum = 4;
         this.imgSrc = this.introArr[3].imgSrc;
         this.title = this.introArr[3].title;
         this.post = this.introArr[3].post;
         this.point = this.introArr[3].point;
+        this.$store.state.labaScore = parseInt(this.introArr[0].point);
       }
       setTimeout(() => {
         this.finalShow = true;
