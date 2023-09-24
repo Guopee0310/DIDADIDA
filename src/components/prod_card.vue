@@ -2,13 +2,10 @@
   <div class="select_btn">
     <prodSelect @transferClass="getClass" @transferPrice="getPrice" @transferSearch="searchClick"></prodSelect>
   </div>
-  <div class="card" v-for="(i, index) in chooseItem" :key="i.imageSrc">
+  <div class="card" v-for="(i, index) in chooseItem" :key="i.imageSrc" @click="showProductDetails(i)">
     <div class="heart">
-      <heart
-        @change-heart="changeHeart($event, i, index)"
-        :keepLove="keepHeartArr[index]"
-        :is-active="favList.findIndex((v) => v.favoName === i.titleName) > -1"
-      ></heart>
+      <heart @change-heart="changeHeart($event, i, index)" :keepLove="keepHeartArr[index]"
+        :is-active="favList.findIndex((v) => v.favoName === i.titleName) > -1"></heart>
     </div>
     <div class="pic">
       <a href="#"><img :src="i.imageSrc" alt="" /></a>
@@ -28,13 +25,9 @@
           <input type="button" value="+" @click="i.count++" />
         </div>
         <div class="buy">
-          <i
-            class="fa-solid fa-cart-shopping"
-            style="color: #9fbdce"
-            @click.prevent="
-              pushAndTogglePopup(i.imageSrc, i.titleName, i.count, i.prodPrice)
-            "
-          ></i>
+          <i class="fa-solid fa-cart-shopping" style="color: #9fbdce" @click.prevent="
+            pushAndTogglePopup(i.imageSrc, i.titleName, i.count, i.prodPrice)
+            "></i>
           <!-- pushInShoppingCart(
                   i.imageSrc,
                   i.titleName,
@@ -47,6 +40,28 @@
       </div>
     </div>
   </div>
+  <!-- ↓↓↓ 商品彈窗 ↓↓↓ -->
+  <transition name="fade">
+    <div v-if="selectedProduct" class="modal">
+      <div class="shadow" @click="closeModal"></div>
+      <div class="modal-content">
+        <div class="prod-content">
+          <div class="prod-img">
+            <span class="close" @click="closeModal">&times;</span>
+            <img :src="selectedProduct.imageSrc">
+          </div>
+          <div class="prod-info">
+            <div>
+              <h5>{{ $t(selectedProduct.titleName) }}</h5>
+              <p>NT {{ $t(selectedProduct.prodPrice) }}</p>
+            </div>
+            <p>{{ $t(selectedProduct.info) }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </transition>
+  <!-- ↑↑↑ 商品彈窗 ↑↑↑ -->
   <Page :total="chooseItem2.length" @on-change="updatePage" class="changepage" />
 </template>
 
@@ -360,6 +375,8 @@ export default {
       getPage: 1,
       keepHeartArr: [],
       searchInput: "",
+      showModal: false,
+      selectedProduct: null,
     };
   },
   mounted() {
@@ -389,6 +406,14 @@ export default {
     },
   },
   methods: {
+    // 商品彈窗 ----------------------------------
+    showProductDetails(i) {
+      this.selectedProduct = i;
+    },
+    closeModal() {
+      this.selectedProduct = null;
+    },
+    // ------------------------------------------
     productDown(idx) {
       if (this.chooseItem[idx].count > 0) {
         this.chooseItem[idx].count--;
@@ -836,6 +861,7 @@ export default {
 .changepage {
   width: 1200px;
   text-align: center;
+  margin-bottom: 20px;
 }
 
 @media screen and (max-width: 768px) {
@@ -854,19 +880,170 @@ export default {
   }
 }
 
+.modal {
+  // display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6); // 彈窗背景亮度
+  z-index: 10;
+  justify-content: center;
+  align-items: center;
+
+  .shadow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: -1;
+    /* 在蓋板下面 */
+  }
+
+  .modal-content {
+    width: 1000px;
+    height: 400px;
+    margin: 0 auto;
+    border: 0;
+    border-radius: 15px;
+    text-align: center;
+    background-color: #fff;
+    padding: 20px;
+    position: relative;
+    top: 100px;
+    display: flex;
+    align-items: center;
+  }
+
+  .close {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    color: #333;
+    cursor: pointer;
+  }
+
+  .prod-content {
+    width: 90%;
+    height: 90%;
+    margin: 0 auto;
+    // border: 1px solid #333;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  .prod-img {
+    margin-right: 20px;
+    width: 40%;
+    height: 80%;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border: 0;
+      border-radius: 15px;
+    }
+  }
+
+  .prod-info {
+    width: 40%;
+    height: 80%;
+    text-align: justify;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+
+    p {
+      color: map-get($colors, 'dark');
+      font-size: map-get($fontSizes, 'p');
+    }
+
+    >p {
+      margin-top: 30px;
+      line-height: 40px;
+    }
+  }
+
+}
+
+// 彈窗顯示與隱藏延遲動畫效果
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
+
+@media screen and (max-width: 768px) {
+  .modal {
+    .modal-content {
+      width: 700px;
+      top: 60px;
+    }
+  }
+  .changepage {
+    width: 100%;
+  }
+}
+
 @media screen and (max-width: 414px) {
   .card {
     margin: 0 15px 50px;
-    .pic{
+
+    .pic {
       width: 160px;
       height: 160px;
     }
+
     .prod_btn {
       display: none;
     }
-     .heart {
+
+    .heart {
       margin: 0 0 -50px auto;
     }
+  }
+
+  .modal {
+    .modal-content {
+      width: 80%;
+      top: 60px;
+      padding: 0;
+    }
+
+    .prod-content {
+      flex-direction: column;
+    }
+
+    .prod-img {
+      height: 180px;
+      width: 180px;
+      margin: 0;
+    }
+
+    .prod-info {
+      width: 80%;
+      margin-top: 10px;
+
+      >p {
+        margin-top: 10px;
+        line-height: 30px;
+      }
+    }
+  }
+  .changepage {
+    width: 100%;
   }
 }
 </style>
