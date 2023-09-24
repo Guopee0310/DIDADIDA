@@ -1,6 +1,6 @@
 <template>
   <div class="select_btn">
-    <prodSelect @transferClass="getClass" @transferPrice="getPrice"></prodSelect>
+    <prodSelect @transferClass="getClass" @transferPrice="getPrice" @transferSearch="searchClick"></prodSelect>
   </div>
   <div class="card" v-for="(i, index) in chooseItem" :key="i.imageSrc">
     <div class="heart">
@@ -46,7 +46,7 @@
       </div>
     </div>
   </div>
-  <Page :total="100" @on-change="updatePage" class="changepage" />
+  <Page :total="chooseItem2.length" @on-change="updatePage" class="changepage" />
 </template>
 
 <script>
@@ -358,6 +358,7 @@ export default {
       getPriceOption: "",
       getPage: 1,
       keepHeartArr: [],
+      searchInput: "",
     };
   },
   mounted() {
@@ -516,6 +517,15 @@ export default {
       //     return parseInt(a.prodPrice) - parseInt(b.prodPrice);
       //   });
       // }
+    },
+    searchClick(data) {
+      const searchInput = data.toUpperCase();
+      const res = this.cardsAll.filter((i) => {
+        const search_content = i.titleName.toUpperCase();
+        return search_content.includes(searchInput);
+      });
+      this.chooseItem2 = res;
+      this.updatePage(1);
     },
     updatePage(data) {
       this.getPage = data;
@@ -713,14 +723,16 @@ export default {
   }
 
   .pic {
+    width: 280px;
+    height: 280px;
     overflow: hidden;
     margin-bottom: 10px;
     box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.2);
   }
 
   .pic img {
-    width: 280px;
-    height: 280px;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
     vertical-align: top;
     transform: scale(1);
@@ -830,5 +842,37 @@ export default {
 .changepage {
   width: 1200px;
   text-align: center;
+}
+
+@media screen and (max-width: 768px) {
+  .select_btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .card {
+    width: 40%;
+    margin: 0 30px 50px;
+
+    .heart {
+      margin: 0 30px -50px auto;
+    }
+  }
+}
+
+@media screen and (max-width: 414px) {
+  .card {
+    margin: 0 15px 50px;
+    .pic{
+      width: 160px;
+      height: 160px;
+    }
+    .prod_btn {
+      display: none;
+    }
+     .heart {
+      margin: 0 0 -50px auto;
+    }
+  }
 }
 </style>
