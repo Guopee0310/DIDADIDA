@@ -274,6 +274,7 @@ export default {
   margin-bottom: 50px;
   border-radius: 10px;
   border: 2px solid map-get($colors, "secondary");
+  cursor:pointer;
 }
 
 .card-item-header a {
