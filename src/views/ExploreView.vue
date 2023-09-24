@@ -1,18 +1,27 @@
 <template>
   <div class="explore">
-
     <div class="wapper">
       <!-- 表層海洋帶 -->
       <div class="slot" id="one"></div>
       <h1 data="0m">0m</h1>
 
       <!-- 動物們 -->
-      <div v-for="(animal, index) in animals" :key="index" :ref="`parallaxScene${index}`" :id="`scene${index}`"
-        data-relative-input="true" :class="animal.category" @click="showCard(animal)">
-        <img :src="animal.image" :alt="animal.name" :data-depth="animal.depth">
+      <div
+        v-for="(animal, index) in animals"
+        :key="index"
+        :ref="`parallaxScene${index}`"
+        :id="`scene${index}`"
+        data-relative-input="true"
+        :class="animal.category"
+        @click="showCard(animal)"
+      >
+        <img
+          :src="animal.image"
+          :alt="animal.name"
+          :data-depth="animal.depth"
+        />
         <h4 :data-depth="animal.depth">{{ animal.name }}</h4>
       </div>
-
 
       <!-- 中層海洋帶 -->
       <div class="line middle">
@@ -38,7 +47,7 @@
 
     <div class="card" v-if="showText">
       <div v-for="(introduce, index) in introduce">
-        <img :src="introduce.image" alt="">
+        <img :src="introduce.image" alt="" />
         <h4>{{ introduce.name }}</h4>
         <span>{{ introduce.enName }}</span>
         <p>{{ introduce.p }}</p>
@@ -47,32 +56,42 @@
         </ul>
       </div>
       <div class="close" @click="closeCard">
-        <i class="fa-solid fa-xmark" style="color: #062f4a;"></i>
+        <i class="fa-solid fa-xmark" style="color: #062f4a"></i>
       </div>
     </div>
   </div>
 
   <div class="navBar">
     <ul>
-      <li><router-link to="#" @click.prevent="btnScroll('表層海洋帶')">0m
+      <li>
+        <a href="#" @click.prevent="btnScroll('表層海洋帶')"
+          >0m
           <div class="drop"></div>
-        </router-link>
+        </a>
       </li>
-      <li><router-link to="#" @click.prevent="btnScroll('中層海洋帶')">200m
+      <li>
+        <a href="#" @click.prevent="btnScroll('中層海洋帶')"
+          >200m
           <div class="drop"></div>
-        </router-link>
+        </a>
       </li>
-      <li><router-link to="#" @click.prevent="btnScroll('深層海洋帶')">1000m
+      <li>
+        <a href="#" @click.prevent="btnScroll('深層海洋帶')"
+          >1000m
           <div class="drop"></div>
-        </router-link>
+        </a>
       </li>
-      <li><router-link to="#" @click.prevent="btnScroll('深淵層海洋帶')">4000m
+      <li>
+        <a href="#" @click.prevent="btnScroll('深淵層海洋帶')"
+          >4000m
           <div class="drop"></div>
-        </router-link>
+        </a>
       </li>
-      <li><router-link to="#" @click.prevent="btnScroll('超深淵層海洋帶')">6000m
+      <li>
+        <a href="#" @click.prevent="btnScroll('超深淵層海洋帶')"
+          >6000m
           <div class="drop"></div>
-        </router-link>
+        </a>
       </li>
     </ul>
     <div class="line"></div>
@@ -80,8 +99,8 @@
 </template>
 
 <script>
-import Parallax from 'parallax-js';
-import VueParallax from 'vue-parallax';
+import Parallax from "parallax-js";
+import VueParallax from "vue-parallax";
 
 export default {
   data() {
@@ -90,30 +109,80 @@ export default {
       showText: false,
       selectedAnimal: null,
       animals: [
-        { name: '黃金魚', image: require('../../public/all_images/animal/goldfish.png'), depth: '0.2', category: 'goldfish' },
-        { name: '玳瑁', image: require('../../public/all_images/animal/turtle.png'), depth: '0.5', category: 'turtle' },
-        { name: '藍藻魚', image: require('../../public/all_images/animal/dory.png'), depth: '0.4', category: 'dory' },
-        { name: '小丑魚', image: require('../../public/all_images/animal/nimo.png'), depth: '0.2', category: 'nimo' },
-        { name: '河豚', image: require('../../public/all_images/animal/angryfish.png'), depth: '0.3', category: 'angryfish' },
-        { name: '鯨鯊', image: require('../../public/all_images/animal/whale.png'), depth: '0.4', category: 'whale' },
-        { name: '海星', image: require('../../public/all_images/animal/star.png'), depth: '0.2', category: 'star' },
-        { name: '獅子魚', image: require('../../public/all_images/animal/leofish.png'), depth: '0.4', category: 'leofish' },
-        { name: '鯊魚', image: require('../../public/all_images/animal/shark.png'), depth: '0.7', category: 'shark' },
-        { name: '白鯨', image: require('../../public/all_images/animal/white.png'), depth: '0.1', category: 'white' },
+        {
+          name: "黃金魚",
+          image: require("../../public/all_images/animal/goldfish.png"),
+          depth: "0.2",
+          category: "goldfish",
+        },
+        {
+          name: "玳瑁",
+          image: require("../../public/all_images/animal/turtle.png"),
+          depth: "0.5",
+          category: "turtle",
+        },
+        {
+          name: "藍藻魚",
+          image: require("../../public/all_images/animal/dory.png"),
+          depth: "0.4",
+          category: "dory",
+        },
+        {
+          name: "小丑魚",
+          image: require("../../public/all_images/animal/nimo.png"),
+          depth: "0.2",
+          category: "nimo",
+        },
+        {
+          name: "河豚",
+          image: require("../../public/all_images/animal/angryfish.png"),
+          depth: "0.3",
+          category: "angryfish",
+        },
+        {
+          name: "鯨鯊",
+          image: require("../../public/all_images/animal/whale.png"),
+          depth: "0.4",
+          category: "whale",
+        },
+        {
+          name: "海星",
+          image: require("../../public/all_images/animal/star.png"),
+          depth: "0.2",
+          category: "star",
+        },
+        {
+          name: "獅子魚",
+          image: require("../../public/all_images/animal/leofish.png"),
+          depth: "0.4",
+          category: "leofish",
+        },
+        {
+          name: "鯊魚",
+          image: require("../../public/all_images/animal/shark.png"),
+          depth: "0.7",
+          category: "shark",
+        },
+        {
+          name: "白鯨",
+          image: require("../../public/all_images/animal/white.png"),
+          depth: "0.1",
+          category: "white",
+        },
       ],
       introduce: [
         // { name: '黃金魚', image: require('../../public/all_images/animal/goldfish.png'), enName: '', p: 'goldfish' },
         {
-          name: '玳瑁',
-          image: require('../../public/all_images/animal/turtle.png'),
-          enName: 'Hawksbill Turtle',
-          p: '是一種海龜物種，屬於海洋爬行動物，被廣泛認為是美麗而又瀕危的物種。',
+          name: "玳瑁",
+          image: require("../../public/all_images/animal/turtle.png"),
+          enName: "Hawksbill Turtle",
+          p: "是一種海龜物種，屬於海洋爬行動物，被廣泛認為是美麗而又瀕危的物種。",
           features: [
             "— 外觀特徵 —",
             "玳瑁的外殼呈現五角形的形狀，有許多彎曲的甲板，讓牠們在水中更靈活。這些甲板上通常有不規則的金黃色、紅棕色或綠色的斑紋，為牠們提供了極佳的保護色。",
             "— 棲息地 —",
-            "玳瑁廣泛分佈於熱帶和亞熱帶海域，包括大西洋、印度洋和太平洋。牠們在珊瑚礁、海草床、潟湖等地找到適合的棲息地。"
-          ]
+            "玳瑁廣泛分佈於熱帶和亞熱帶海域，包括大西洋、印度洋和太平洋。牠們在珊瑚礁、海草床、潟湖等地找到適合的棲息地。",
+          ],
         },
         // { name: '藍藻魚', image: require('../../public/all_images/animal/dory.png'), enName: '0.4', p: 'dory' },
         // { name: '小丑魚', image: require('../../public/all_images/animal/nimo.png'), enName: '0.2', p: 'nimo' },
@@ -124,14 +193,13 @@ export default {
         // { name: '鯊魚', image: require('../../public/all_images/animal/shark.png'), enName: '0.7', p: 'shark' },
         // { name: '白鯨', image: require('../../public/all_images/animal/white.png'), enName: '0.1', p: 'white' },
       ],
-    }
+    };
   },
   methods: {
     btnScroll(name) {
-
       if (name == "表層海洋帶") {
         // this.$router.push({ path: '/product', query: { article: 'footer' } });
-        this.$router.push({ path: "/explore", query: { article: "one" } });
+        // this.$router.push({ path: "/explore", query: { article: "one" } });
         setTimeout(() => {
           // 获取滚动目标元素
           const target = document.getElementById("one");
@@ -142,7 +210,7 @@ export default {
           }
         }, 100);
       } else if (name == "中層海洋帶") {
-        this.$router.push({ path: "/explore", query: { article: "two" } });
+        // this.$router.push({ path: "/explore", query: { article: "two" } });
         setTimeout(() => {
           // 获取滚动目标元素
           const target = document.getElementById("two");
@@ -153,7 +221,7 @@ export default {
           }
         }, 100);
       } else if (name == "深層海洋帶") {
-        this.$router.push({ path: "/explore", query: { article: "three" } });
+        // this.$router.push({ path: "/explore", query: { article: "three" } });
         setTimeout(() => {
           // 获取滚动目标元素
           const target = document.getElementById("three");
@@ -164,7 +232,7 @@ export default {
           }
         }, 100);
       } else if (name == "深淵層海洋帶") {
-        this.$router.push({ path: "/explore", query: { article: "four" } });
+        // this.$router.push({ path: "/explore", query: { article: "four" } });
         setTimeout(() => {
           // 获取滚动目标元素
           const target = document.getElementById("four");
@@ -175,7 +243,7 @@ export default {
           }
         }, 100);
       } else if (name == "超深淵層海洋帶") {
-        this.$router.push({ path: "/explore", query: { article: "five" } });
+        // this.$router.push({ path: "/explore", query: { article: "five" } });
         setTimeout(() => {
           // 获取滚动目标元素
           const target = document.getElementById("five");
@@ -196,24 +264,21 @@ export default {
     closeCard() {
       this.showText = false;
       this.selectedAnimal = null;
-
-    }
+    },
   },
   mounted() {
     this.animals.forEach((animal, index) => {
       const scene = document.getElementById(`scene${index}`);
       const parallaxInstance = new Parallax(scene, {
-        relativeInput: true
+        relativeInput: true,
       });
     });
-
-
   },
   components: {
     VueParallax,
     Parallax,
   },
-}
+};
 </script>
 
 <style lang="scss">
@@ -243,7 +308,7 @@ export default {
       height: 15px;
       border: 3px solid #0b2f4a;
       border-radius: 50%;
-      background-color: #93B7CD;
+      background-color: #93b7cd;
       border-top-right-radius: 0;
       transform: rotate(-45deg);
       margin-bottom: -5px;
@@ -259,13 +324,18 @@ export default {
     right: 17px;
     z-index: -1;
   }
-
 }
 
 // 探索動物 ------------------------------------------------------------
 .explore {
   width: 100%;
-  background-image: linear-gradient(to bottom, #93B7CD, #285f9d, #114466, #0b2f4a);
+  background-image: linear-gradient(
+    to bottom,
+    #93b7cd,
+    #285f9d,
+    #114466,
+    #0b2f4a
+  );
   position: relative;
 
   .slot {
@@ -285,7 +355,6 @@ export default {
     top: 25%;
   }
 
-
   .deep {
     top: 50%;
   }
@@ -301,7 +370,7 @@ export default {
   h1 {
     font-size: 75px;
     color: map-get($colors, light);
-    font-family: Helvetica, Arial, sans-serif, 'Lucida Sans Regular', Geneva;
+    font-family: Helvetica, Arial, sans-serif, "Lucida Sans Regular", Geneva;
     font-weight: 800;
     color: transparent;
     -webkit-text-stroke: 3px #eee;
@@ -310,10 +379,8 @@ export default {
 
   h4 {
     font-size: map-get($fontSizes, h4);
-    color: map-get($colors , light);
+    color: map-get($colors, light);
   }
-
-
 
   // 內容 ------------------------------------------------------------
   .wapper {
@@ -361,14 +428,11 @@ export default {
       }
     }
 
-
-
     .dory {
       cursor: pointer;
       width: 130px;
       // translate: 45em 10em;
       margin: 50px 430px 0 auto;
-
 
       img {
         visibility: top;
@@ -503,7 +567,6 @@ export default {
     right: 0;
     z-index: 10;
 
-
     img {
       vertical-align: top;
       width: 35%;
@@ -520,14 +583,13 @@ export default {
     }
 
     h4::after {
-      content: '';
+      content: "";
       position: absolute;
       width: 50px;
-      border-bottom: 3px solid #93B7CD;
+      border-bottom: 3px solid #93b7cd;
       bottom: -20%;
       left: 46.5%;
     }
-
 
     span {
       display: block;
@@ -562,7 +624,7 @@ export default {
     .close {
       width: 45px;
       height: 45px;
-      background-color: #93B7CD;
+      background-color: #93b7cd;
       border-radius: 50%;
       text-align: center;
       margin-bottom: -20px;
