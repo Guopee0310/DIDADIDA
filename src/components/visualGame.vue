@@ -78,10 +78,11 @@ body {
 
 .videoShark {
   width: 100%;
+  vertical-align: bottom;
 }
 
 .wrapper {
-  height: 80vh;
+  // height: 80vh;
   // background-image: url("https://churaumi.okinawa/userfiles/images/area/kuroshio/media-03.jpg");
   // background-size: cover;
   position: relative;

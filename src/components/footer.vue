@@ -242,5 +242,13 @@ footer {
       width: 170px;
     }
   }
+
+  @media screen and (max-width: 768px) {
+
+    .footer_wrap,
+    p {
+      max-width: 90%;
+    }
+  }
 }
 </style>

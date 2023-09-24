@@ -1,25 +1,18 @@
 <template>
   <div class="header">
-    <div
-      class="wrap"
-      :style="{
-        'background-color': headerColor,
-        top: 0,
-        left: 0,
-        'z-index': 10,
-        width: '100%',
-      }"
-    >
+    <div class="wrap" :style="{
+      'background-color': headerColor,
+      top: 0,
+      left: 0,
+      'z-index': 10,
+      width: '100%',
+    }">
       <!-- logo -->
 
       <!-- this.checkLogoPic = false; -->
       <div :class="{ logo: !checkLogoPic, logoChange: checkLogoPic }">
-        <router-link to="/" v-if="!checkLogoPic"
-          ><img src="../../public/all_images/logo_all.svg"
-        /></router-link>
-        <router-link to="/" v-if="checkLogoPic"
-          ><img src="../../public/all_images/logo_half.svg"
-        /></router-link>
+        <router-link to="/" v-if="!checkLogoPic"><img src="../../public/all_images/logo_all.svg" /></router-link>
+        <router-link to="/" v-if="checkLogoPic"><img src="../../public/all_images/logo_half.svg" /></router-link>
       </div>
 
       <nav class="main-nav">
@@ -45,11 +38,8 @@
           <router-link to="/explore">{{ $t(menuTitle.animal) }}</router-link>
           <ul class="sub-menu">
             <li v-for="animalSub in animalSub" key="animalSub">
-              <router-link
-                :to="animalSub.link"
-                @click="changePageMove(animalSub.name)"
-                >{{ $t(animalSub.name) }}</router-link
-              >
+              <router-link :to="animalSub.link" @click="changePageMove(animalSub.name)">{{ $t(animalSub.name)
+              }}</router-link>
             </li>
           </ul>
         </div>
@@ -67,31 +57,16 @@
         <!-- 會員登入 -->
         <div class="icons">
           <span>
-            <i
-              @click="this.$store.state.storeShowLogin = true"
-              v-if="!this.$store.state.userName"
-              class="fa-solid fa-user"
-              style="color: #eee"
-            ></i>
-            <div
-              v-if="this.$store.state.userName"
-              @click="this.$router.push('./member')"
-              style="color: #eee"
-            >
+            <i @click="this.$store.state.storeShowLogin = true" v-if="!this.$store.state.userName"
+              class="fa-solid fa-user" style="color: #eee"></i>
+            <div v-if="this.$store.state.userName" @click="this.$router.push('./member')" style="color: #eee">
               {{ this.$store.state.userName }}
             </div>
-            <span
-              v-if="this.$store.state.userName"
-              @click="logOutAPI()"
-              class="logOutBtn"
-              >登出</span
-            >
+            <span v-if="this.$store.state.userName" @click="logOutAPI()" class="logOutBtn">登出</span>
           </span>
 
           <!-- 購物車 -->
-          <router-link to="/shoppingcart"
-            ><i class="fa-solid fa-cart-shopping" style="color: #eee"></i
-          ></router-link>
+          <router-link to="/shoppingcart"><i class="fa-solid fa-cart-shopping" style="color: #eee"></i></router-link>
         </div>
         <!-- 語言切換 -->
         <div class="select">
@@ -100,9 +75,7 @@
             <option value="en">English</option>
             <!-- 添加其他支持的語言選項 -->
           </select>
-          <span
-            ><i class="fa-solid fa-chevron-down" style="color: #eeeeee"></i
-          ></span>
+          <span><i class="fa-solid fa-chevron-down" style="color: #eeeeee"></i></span>
         </div>
       </nav>
     </div>
@@ -424,4 +397,6 @@ option:checked {
   background-color: map-get($colors, hoverColor);
   color: #fff;
 }
+
+@media screen and (max-width:768px) {}
 </style>
