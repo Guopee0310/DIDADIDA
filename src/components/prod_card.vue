@@ -1,9 +1,6 @@
 <template>
   <div class="select_btn">
-    <prodSelect
-      @transferClass="getClass"
-      @transferPrice="getPrice"
-    ></prodSelect>
+    <prodSelect @transferClass="getClass" @transferPrice="getPrice" @transferSearch="searchClick"></prodSelect>
   </div>
   <div class="card" v-for="(i, index) in chooseItem" :key="i.imageSrc">
     <div class="heart">
@@ -50,7 +47,7 @@
       </div>
     </div>
   </div>
-  <Page :total="100" @on-change="updatePage" class="changepage" />
+  <Page :total="chooseItem2.length" @on-change="updatePage" class="changepage" />
 </template>
 
 <script>
@@ -362,6 +359,7 @@ export default {
       getPriceOption: "",
       getPage: 1,
       keepHeartArr: [],
+      searchInput: "",
     };
   },
   mounted() {
@@ -514,44 +512,15 @@ export default {
         }
       }
     },
-    // getPrice(data) {
-    //   this.getPriceOption = data;
-    //   if (!this.selectOption) {
-    //     this.chooseItem2 = this.cardsAll;
-    //     this.chooseItem2.sort((a, b) => {
-    //       return parseInt(b.prodPrice) - parseInt(a.prodPrice);
-    //     });
-    //     console.log(this.chooseItem2);
-    //     this.chooseItem = this.chooseItem2.slice(0, this.pageSize);
-    //   } else if (this.selectOption == "所有商品") {
-    //     this.chooseItem2 = this.cardsAll;
-    //     this.chooseItem2.sort((a, b) => {
-    //       return parseInt(b.prodPrice) - parseInt(a.prodPrice);
-    //     });
-    //     console.log(this.chooseItem2);
-    //     this.chooseItem = this.chooseItem2.slice(0, this.pageSize);
-    //   } else if (this.selectOption !== "所有商品") {
-    //     this.chooseItem2 = [];
-    //     for (let i = 0; i < this.cardsAll.length; i++) {
-    //       if (this.cardsAll[i].tag === this.selectOption) {
-    //         this.chooseItem2.push(this.cardsAll[i].tag);
-    //         this.chooseItem = this.chooseItem2;
-    //       }
-    //       if (this.getPriceOption == "由高到低") {
-    //         this.chooseItem.sort((a, b) => {
-    //           return parseInt(b.prodPrice) - parseInt(a.prodPrice);
-    //         });
-    //         this.chooseItem2 = this.chooseItem;
-    //       } else if (this.getPriceOption == "由低到高") {
-    //         this.chooseItem.sort((a, b) => {
-    //           return parseInt(a.prodPrice) - parseInt(b.prodPrice);
-    //         });
-    //         this.chooseItem2 = this.chooseItem;
-    //         this.chooseItem = this.chooseItem2.slice(0, this.pageSize);
-    //       }
-    //     }
-    //   }
-    // },
+    searchClick(data) {
+      const searchInput = data.toUpperCase();
+      const res = this.cardsAll.filter((i) => {
+        const search_content = i.titleName.toUpperCase();
+        return search_content.includes(searchInput);
+      });
+      this.chooseItem2 = res;
+      this.updatePage(1);
+    },
     updatePage(data) {
       this.getPage = data;
       const optionStartIdx = (this.getPage - 1) * this.pageSize;
@@ -748,14 +717,16 @@ export default {
   }
 
   .pic {
+    width: 280px;
+    height: 280px;
     overflow: hidden;
     margin-bottom: 10px;
     box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.2);
   }
 
   .pic img {
-    width: 280px;
-    height: 280px;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
     vertical-align: top;
     transform: scale(1);
@@ -865,5 +836,37 @@ export default {
 .changepage {
   width: 1200px;
   text-align: center;
+}
+
+@media screen and (max-width: 768px) {
+  .select_btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .card {
+    width: 40%;
+    margin: 0 30px 50px;
+
+    .heart {
+      margin: 0 30px -50px auto;
+    }
+  }
+}
+
+@media screen and (max-width: 414px) {
+  .card {
+    margin: 0 15px 50px;
+    .pic{
+      width: 160px;
+      height: 160px;
+    }
+    .prod_btn {
+      display: none;
+    }
+     .heart {
+      margin: 0 0 -50px auto;
+    }
+  }
 }
 </style>

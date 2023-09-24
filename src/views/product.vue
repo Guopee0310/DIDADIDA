@@ -113,4 +113,17 @@ export default {
 div {
   font-size: map-get($fontSizes, 'div');
 }
+
+@media screen and (max-width: 768px) {
+  .product_allCards {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
+
+@media screen and (max-width: 414px) {
+  .product_allCards {
+    margin: 0;
+  }
+}
 </style>
