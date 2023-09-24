@@ -30,7 +30,7 @@
     left: -5px;
 }
 
-@media screen and (min-width: 414px) {
+@media screen and (max-width: 414px) {
     .deco_shark {
         top: -10px;
         right: -80px;

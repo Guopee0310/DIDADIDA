@@ -2,12 +2,13 @@
   <div class="ticketAll">
     <div class="topIntro">
       <div class="topTitle">{{ $t('票價資訊') }}</div>
-      <div class="ticketRow" v-for="(i, index) in ticketRowArr" :key="index">
+      <ticketPrice></ticketPrice>
+      <!-- <div class="ticketRow" v-for="(i, index) in ticketRowArr" :key="index">
         <div>{{ $t(i[0]) }}</div>
         <div>{{ $t(i[1]) }}</div>
         <div>{{ $t(i[2]) }}</div>
       </div>
-      <div class="warning">※{{ $t('未滿4歲且有家長陪同的幼童可免費入場') }}</div>
+      <div class="warning">※{{ $t('未滿4歲且有家長陪同的幼童可免費入場') }}</div> -->
     </div>
     <bookDate></bookDate>
     <div class="bottomIntro">
@@ -151,49 +152,50 @@ export default {
     @include h3Title;
   }
 
-  .ticketRow {
-    height: 61px;
-    display: flex;
-    align-items: center;
-    letter-spacing: 1px;
+
+  // .ticketRow {
+  //   height: 61px;
+  //   display: flex;
+  //   align-items: center;
+  //   letter-spacing: 1px;
 
 
-    &:nth-child(2),
-    &:last-child {
-      background-color: map-get($colors, "secondary");
-      color: map-get($colors, "light");
-    }
+  //   &:nth-child(2),
+  //   &:last-child {
+  //     background-color: map-get($colors, "secondary");
+  //     color: map-get($colors, "light");
+  //   }
 
-    &:nth-child(4) {
-      background-color: map-get($colors, "bgc");
-      color: map-get($colors, "dark");
-    }
+  //   &:nth-child(4) {
+  //     background-color: map-get($colors, "bgc");
+  //     color: map-get($colors, "dark");
+  //   }
 
-    &:nth-child(6) {
-      background-color: map-get($colors, "bgc");
-      color: map-get($colors, "dark");
-    }
+  //   &:nth-child(6) {
+  //     background-color: map-get($colors, "bgc");
+  //     color: map-get($colors, "dark");
+  //   }
 
 
-    div {
-      width: 150px;
-      padding: 20px 12px;
+  //   div {
+  //     width: 150px;
+  //     padding: 20px 12px;
 
-      &:first-child {
-        text-align: center;
-      }
+  //     &:first-child {
+  //       text-align: center;
+  //     }
 
-      &:nth-child(2) {
-        text-align: center;
-        border-left: none;
-        border-right: none;
-      }
+  //     &:nth-child(2) {
+  //       text-align: center;
+  //       border-left: none;
+  //       border-right: none;
+  //     }
 
-      &:last-child {
-        flex-grow: 4;
-      }
-    }
-  }
+  //     &:last-child {
+  //       flex-grow: 4;
+  //     }
+  //   }
+  // }
 
   .warning {
     height: 61px;

@@ -109,8 +109,8 @@ export default {
 
     &::-webkit-scrollbar-thumb {
       border-radius: 4px;
-      background-color: rgba(0, 0, 0, 0.4);
-      border: 1px solid slategrey;
+      background-color: rgba(0, 0, 0, 0.2);
+      // border: 1px solid slategrey;
     }
 
     &::-webkit-scrollbar-track {
@@ -125,7 +125,6 @@ export default {
 
     .tick_order_group {
       width: 460px;
-      height: 208px;
       border-bottom: 1px solid #eee;
       display: flex;
       justify-content: space-evenly;
@@ -137,19 +136,21 @@ export default {
     }
 
     .tick_img {
-      width: 130px;
-      height: 160px;
+      width: 50%;
+      height: 150px;
       margin: 20px auto;
       border: 0;
     }
 
     .tick_img img {
       width: 100%;
+      height: 100%;
+      object-fit: contain;
     }
 
     .tick_info {
-      width: 200px;
-      height: 170px;
+      width: 50%;
+      height: 150px;
       margin: 20px auto;
       display: flex;
       flex-direction: column;
@@ -158,20 +159,42 @@ export default {
     }
 
     .item_info {
+      width: 100%;
       padding: 5px;
       display: flex;
       justify-content: space-evenly;
     }
 
     .item_info p:first-child {
-      width: 50px;
+      width: 30%;
       text-align: center;
       background-color: map-get($colors, "h2Blue");
     }
 
     .item_info p:nth-child(2) {
-      width: 80px;
+      width: 70%;
       margin-left: 10px;
+    }
+  }
+}
+
+@media screen and (max-width: 414px) {
+  .tick_order_main {
+    .tick_area {
+      width: 330px;
+      height: 720px;
+
+      .tick_order_group {
+        width: 300px;
+      }
+
+      .tick_img {
+        width: 50%;
+      }
+
+      .tick_info {
+        width: 50%;
+      }
     }
   }
 }

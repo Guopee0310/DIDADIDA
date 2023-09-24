@@ -13,7 +13,7 @@
         alt=""
       />
       <img
-        :src="require('../assets/images/dolphin_pillow.jpg')"
+        :src="require('../../public/all_images/laba/bluewhale.jpg')"
         :class="{
           resetImg: randomStart,
           resetImg2: guessNum == 1,
@@ -24,7 +24,7 @@
         alt=""
       />
       <img
-        :src="require('../assets/images/dolphin_pillow.jpg')"
+        :src="require('../../public/all_images/laba/dolphin.jpg')"
         :class="{
           resetImg: randomStart,
           resetImg2: guessNum == 1,
@@ -35,7 +35,7 @@
         alt=""
       />
       <img
-        :src="require('../assets/images/dolphin_pillow.jpg')"
+        :src="require('../../public/all_images/laba/jellyfish.jpg')"
         :class="{
           resetImg: randomStart,
           resetImg2: guessNum == 1,
@@ -46,7 +46,7 @@
         alt=""
       />
       <img
-        :src="require('../assets/images/dolphin_pillow.jpg')"
+        :src="require('../../public/all_images/laba/sailfish.jpg')"
         :class="{
           resetImg: randomStart,
           resetImg2: guessNum == 1,
@@ -57,7 +57,7 @@
         alt=""
       />
       <img
-        :src="require('../assets/images/dolphin_pillow.jpg')"
+        :src="require('../../public/all_images/laba/whiteshark.jpg')"
         :class="{
           resetImg: randomStart,
           resetImg2: guessNum == 1,
@@ -186,12 +186,16 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: #232d47;
+  background-image: url('../../public/all_images/laba_bg.gif');
+  /* 其他背景属性，如背景颜色、大小、重复方式等可以继续添加 */
+  background-color: #f0f0f0;
+  background-size: cover;
+  background-repeat: no-repeat;
   .containerPic {
     width: 474px;
     height: 474px;
-
-    border: 5px #03e9f4 solid;
+    border-radius: 5px;
+    border: 5px #172c40 solid;
     margin: 0 auto;
     overflow: hidden;
     .resetImg {

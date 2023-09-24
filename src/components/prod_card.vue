@@ -1,17 +1,11 @@
 <template>
   <div class="select_btn">
-    <prodSelect
-      @transferClass="getClass"
-      @transferPrice="getPrice"
-    ></prodSelect>
+    <prodSelect @transferClass="getClass" @transferPrice="getPrice" @transferSearch="searchClick"></prodSelect>
   </div>
-  <div class="card" v-for="(i, index) in chooseItem" :key="i.imageSrc">
+  <div class="card" v-for="(i, index) in chooseItem" :key="i.imageSrc" @click="showProductDetails(i)">
     <div class="heart">
-      <heart
-        @change-heart="changeHeart($event, i, index)"
-        :keepLove="keepHeartArr[index]"
-        :is-active="favList.findIndex((v) => v.favoName === i.titleName) > -1"
-      ></heart>
+      <heart @change-heart="changeHeart($event, i, index)" :keepLove="keepHeartArr[index]"
+        :is-active="favList.findIndex((v) => v.favoName === i.titleName) > -1"></heart>
     </div>
     <div class="pic">
       <a href="#"><img :src="i.imageSrc" alt="" /></a>
@@ -31,32 +25,44 @@
           <input type="button" value="+" @click="i.count++" />
         </div>
         <div class="buy">
-          <a href="">
-            <i
-              class="fa-solid fa-cart-shopping"
-              style="color: #9fbdce"
-              @click.prevent="
-                pushAndTogglePopup(
-                  i.imageSrc,
-                  i.titleName,
-                  i.count,
-                  i.prodPrice
-                )
-              "
-            ></i>
-            <!-- pushInShoppingCart(
+          <i class="fa-solid fa-cart-shopping" style="color: #9fbdce" @click.prevent="
+            pushAndTogglePopup(i.imageSrc, i.titleName, i.count, i.prodPrice)
+            "></i>
+          <!-- pushInShoppingCart(
                   i.imageSrc,
                   i.titleName,
                   i.count,
                   i.prodPrice
                 ) -->
-          </a>
+
           <cartpop />
         </div>
       </div>
     </div>
   </div>
-  <Page :total="100" @on-change="updatePage" class="changepage" />
+  <!-- ↓↓↓ 商品彈窗 ↓↓↓ -->
+  <transition name="fade">
+    <div v-if="selectedProduct" class="modal">
+      <div class="shadow" @click="closeModal"></div>
+      <div class="modal-content">
+        <div class="prod-content">
+          <div class="prod-img">
+            <span class="close" @click="closeModal">&times;</span>
+            <img :src="selectedProduct.imageSrc">
+          </div>
+          <div class="prod-info">
+            <div>
+              <h5>{{ $t(selectedProduct.titleName) }}</h5>
+              <p>NT {{ $t(selectedProduct.prodPrice) }}</p>
+            </div>
+            <p>{{ $t(selectedProduct.info) }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </transition>
+  <!-- ↑↑↑ 商品彈窗 ↑↑↑ -->
+  <Page :total="chooseItem2.length" @on-change="updatePage" class="changepage" />
 </template>
 
 <script>
@@ -368,6 +374,9 @@ export default {
       getPriceOption: "",
       getPage: 1,
       keepHeartArr: [],
+      searchInput: "",
+      showModal: false,
+      selectedProduct: null,
     };
   },
   mounted() {
@@ -397,6 +406,14 @@ export default {
     },
   },
   methods: {
+    // 商品彈窗 ----------------------------------
+    showProductDetails(i) {
+      this.selectedProduct = i;
+    },
+    closeModal() {
+      this.selectedProduct = null;
+    },
+    // ------------------------------------------
     productDown(idx) {
       if (this.chooseItem[idx].count > 0) {
         this.chooseItem[idx].count--;
@@ -472,7 +489,9 @@ export default {
                 return parseInt(a.prodPrice) - parseInt(b.prodPrice);
               });
               this.chooseItem2 = this.chooseItem;
-              this.chooseItem = this.chooseItem2.slice(0, this.pageSize);
+              if (this.chooseItem.length >= this.pageSize) {
+                this.chooseItem = this.chooseItem2.slice(0, this.pageSize);
+              }
             }
           }
         }
@@ -481,51 +500,51 @@ export default {
     getPrice(data) {
       this.getPriceOption = data;
       if (!this.selectOption) {
-        this.chooseItem2 = this.cardsAll;
-        this.chooseItem2.sort((a, b) => {
-          return parseInt(b.prodPrice) - parseInt(a.prodPrice);
-        });
-        console.log(this.chooseItem2);
-        this.chooseItem = this.chooseItem2.slice(0, this.pageSize);
+        if (data == "由低到高") {
+          this.cardsAll.sort((a, b) => {
+            return parseInt(a.prodPrice) - parseInt(b.prodPrice);
+          });
+          this.chooseItem = this.cardsAll.slice(0, this.pageSize);
+        } else if (data == "由高到低") {
+          this.cardsAll.sort((a, b) => {
+            return parseInt(b.prodPrice) - parseInt(a.prodPrice);
+          });
+          this.chooseItem = this.cardsAll.slice(0, this.pageSize);
+        }
       } else if (this.selectOption == "所有商品") {
         this.chooseItem2 = this.cardsAll;
         this.chooseItem2.sort((a, b) => {
           return parseInt(b.prodPrice) - parseInt(a.prodPrice);
         });
-        console.log(this.chooseItem2);
         this.chooseItem = this.chooseItem2.slice(0, this.pageSize);
       } else if (this.selectOption !== "所有商品") {
         this.chooseItem2 = [];
         for (let i = 0; i < this.cardsAll.length; i++) {
           if (this.cardsAll[i].tag === this.selectOption) {
-            this.chooseItem2.push(this.cardsAll[i].tag);
-            this.chooseItem = this.chooseItem2;
-          }
-          if (this.getPriceOption == "由高到低") {
-            this.chooseItem.sort((a, b) => {
-              return parseInt(b.prodPrice) - parseInt(a.prodPrice);
-            });
-            this.chooseItem2 = this.chooseItem;
-            this.chooseItem = this.chooseItem2.slice(0, this.pageSize);
-          } else if (this.getPriceOption == "由低到高") {
-            this.chooseItem.sort((a, b) => {
-              return parseInt(a.prodPrice) - parseInt(b.prodPrice);
-            });
-            this.chooseItem2 = this.chooseItem;
-            this.chooseItem = this.chooseItem2.slice(0, this.pageSize);
+            this.chooseItem2.push(this.cardsAll[i]);
           }
         }
+        if (data == "由高到低") {
+          this.chooseItem2.sort((a, b) => {
+            return parseInt(b.prodPrice) - parseInt(a.prodPrice);
+          });
+          this.chooseItem = this.chooseItem2.slice(0, this.pageSize);
+        } else if (data == "由低到高") {
+          this.chooseItem2.sort((a, b) => {
+            return parseInt(a.prodPrice) - parseInt(b.prodPrice);
+          });
+          this.chooseItem = this.chooseItem2.slice(0, this.pageSize);
+        }
       }
-
-      // if (data == "由高到低") {
-      //   this.chooseItem.sort((a, b) => {
-      //     return parseInt(b.prodPrice) - parseInt(a.prodPrice);
-      //   });
-      // } else if (data == "由低到高") {
-      //   this.chooseItem.sort((a, b) => {
-      //     return parseInt(a.prodPrice) - parseInt(b.prodPrice);
-      //   });
-      // }
+    },
+    searchClick(data) {
+      const searchInput = data.toUpperCase();
+      const res = this.cardsAll.filter((i) => {
+        const search_content = i.titleName.toUpperCase();
+        return search_content.includes(searchInput);
+      });
+      this.chooseItem2 = res;
+      this.updatePage(1);
     },
     updatePage(data) {
       this.getPage = data;
@@ -723,14 +742,16 @@ export default {
   }
 
   .pic {
+    width: 280px;
+    height: 280px;
     overflow: hidden;
     margin-bottom: 10px;
     box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.2);
   }
 
   .pic img {
-    width: 280px;
-    height: 280px;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
     vertical-align: top;
     transform: scale(1);
@@ -782,10 +803,12 @@ export default {
 
   .num input:first-child {
     border-radius: 15px 0 0 15px;
+    cursor: pointer;
   }
 
   .num input:last-child {
     border-radius: 0 15px 15px 0;
+    cursor: pointer;
   }
 
   .buy {
@@ -794,6 +817,7 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
   }
 
   .buy i {
@@ -833,8 +857,193 @@ export default {
   display: flex;
   justify-content: end;
 }
+
 .changepage {
   width: 1200px;
   text-align: center;
+  margin-bottom: 20px;
+}
+
+@media screen and (max-width: 768px) {
+  .select_btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .card {
+    width: 40%;
+    margin: 0 30px 50px;
+
+    .heart {
+      margin: 0 30px -50px auto;
+    }
+  }
+}
+
+.modal {
+  // display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6); // 彈窗背景亮度
+  z-index: 10;
+  justify-content: center;
+  align-items: center;
+
+  .shadow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: -1;
+    /* 在蓋板下面 */
+  }
+
+  .modal-content {
+    width: 1000px;
+    height: 400px;
+    margin: 0 auto;
+    border: 0;
+    border-radius: 15px;
+    text-align: center;
+    background-color: #fff;
+    padding: 20px;
+    position: relative;
+    top: 100px;
+    display: flex;
+    align-items: center;
+  }
+
+  .close {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    color: #333;
+    cursor: pointer;
+  }
+
+  .prod-content {
+    width: 90%;
+    height: 90%;
+    margin: 0 auto;
+    // border: 1px solid #333;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  .prod-img {
+    margin-right: 20px;
+    width: 40%;
+    height: 80%;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border: 0;
+      border-radius: 15px;
+    }
+  }
+
+  .prod-info {
+    width: 40%;
+    height: 80%;
+    text-align: justify;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+
+    p {
+      color: map-get($colors, 'dark');
+      font-size: map-get($fontSizes, 'p');
+    }
+
+    >p {
+      margin-top: 30px;
+      line-height: 40px;
+    }
+  }
+
+}
+
+// 彈窗顯示與隱藏延遲動畫效果
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
+
+@media screen and (max-width: 768px) {
+  .modal {
+    .modal-content {
+      width: 700px;
+      top: 60px;
+    }
+  }
+  .changepage {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 414px) {
+  .card {
+    margin: 0 15px 50px;
+
+    .pic {
+      width: 160px;
+      height: 160px;
+    }
+
+    .prod_btn {
+      display: none;
+    }
+
+    .heart {
+      margin: 0 0 -50px auto;
+    }
+  }
+
+  .modal {
+    .modal-content {
+      width: 80%;
+      top: 60px;
+      padding: 0;
+    }
+
+    .prod-content {
+      flex-direction: column;
+    }
+
+    .prod-img {
+      height: 180px;
+      width: 180px;
+      margin: 0;
+    }
+
+    .prod-info {
+      width: 80%;
+      margin-top: 10px;
+
+      >p {
+        margin-top: 10px;
+        line-height: 30px;
+      }
+    }
+  }
+  .changepage {
+    width: 100%;
+  }
 }
 </style>

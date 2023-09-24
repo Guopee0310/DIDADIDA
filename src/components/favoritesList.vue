@@ -1,11 +1,7 @@
 <template>
   <div class="favorites_list_main">
     <div class="favorites_list_area">
-      <div
-        class="favorites_list_group"
-        v-for="(favo, index) in favoList"
-        :key="favo.favoImg"
-      >
+      <div class="favorites_list_group" v-for="(favo, index) in favoList" :key="favo.favoImg">
         <span class="close" @click="delSingleItem(index)">&times;</span>
         <div class="favorites_list_img">
           <img :src="favo.favoImg" alt="" />
@@ -17,8 +13,6 @@
           </div>
           <div>
             <p>{{ favo.favoIntroduction }}</p>
-            <!-- <p>{{ favo.favoIntroduction.recommendation }}</p>
-                        <p>{{ favo.favoIntroduction.size }}</p> -->
           </div>
         </div>
       </div>
@@ -36,23 +30,6 @@ export default {
   data() {
     return {
       favoList: [
-        // {
-        //     favoImg: require("../assets/images/dolphin_pillow.jpg"),
-        //     favoName: "極舒適海豚抱枕",
-        //     favoPrice: "499",
-        //     favoIntroduction: {
-        //         mainIntro: "海豚玩偶採用了沖繩傳統染色技法「紅型染」設計而成，充滿沖繩色彩。",
-        //         recommendation: "同一系列產品中更有「海豚鑰匙圈」可供選擇。",
-        //         size: "尺寸：14×11×22.5公分",
-        //     },
-        // },
-        // {
-        //   favoImg: require("../assets/images/dolphin_pillow.jpg"),
-        //   favoName: "極舒適海豚抱枕",
-        //   favoPrice: "499",
-        //   favoIntroduction:
-        //     "海豚玩偶採用了沖繩傳統染色技法「紅型染」設計而成，充滿沖繩色彩。",
-        // },
       ],
     };
   },
@@ -93,8 +70,8 @@ export default {
 
   &::-webkit-scrollbar-thumb {
     border-radius: 4px;
-    background-color: rgba(0, 0, 0, 0.4);
-    border: 1px solid slategrey;
+    background-color: rgba(0, 0, 0, 0.2);
+    // border: 1px solid slategrey;
   }
 
   &::-webkit-scrollbar-track {
@@ -109,7 +86,6 @@ export default {
 
   .favorites_list_group {
     width: 460px;
-    height: 200px;
     border-bottom: 1px solid #eee;
     display: flex;
     justify-content: space-evenly;
@@ -131,6 +107,8 @@ export default {
   }
 
   p {
+    width: 90%;
+    text-align: justify;
     font-size: map-get($fontSizes, "span");
     color: map-get($colors, "dark");
   }
@@ -140,7 +118,7 @@ export default {
   }
 
   .favorites_list_img {
-    width: 150px;
+    width: 50%;
     height: 150px;
     margin: 20px auto;
   }
@@ -152,8 +130,31 @@ export default {
   }
 
   .favorites_list_info {
-    width: 265px;
-    margin-top: 30px;
+    width: 50%;
+    height: 150px;
+    margin-top: 20px;
+  }
+}
+
+@media screen and (max-width: 414px) {
+
+  .favorites_list_area {
+    width: 330px;
+    height: 720px;
+
+    .favorites_list_group {
+      width: 300px;
+      flex-direction: column;
+    }
+
+    .favorites_list_img {
+      width: 100%;
+    }
+
+    .favorites_list_info {
+      width: 100%;
+      margin: 0 auto;
+    }
   }
 }
 </style>
