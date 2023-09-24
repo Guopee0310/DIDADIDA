@@ -25,6 +25,7 @@ export default createStore({
     ticketList: [],
     totalScorePoint: 0,
     prodOrderArr: [],
+    memberBtn: "mem_account_settings",
   },
 
   // 類似vue檔裡面的computed

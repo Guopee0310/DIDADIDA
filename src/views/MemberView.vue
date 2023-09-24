@@ -83,7 +83,7 @@
       v-else-if="this.$store.state.memberBtn === 'tick_order_inquiry'"
       class="tick_order_inquiry member_area"
     >
-      <h6>{{ $t("購票訂單查詢") }}</h6>
+      <h6 id="showtickOrder">{{ $t("購票訂單查詢") }}</h6>
       <tickOrderInquiry></tickOrderInquiry>
       <memAreaBG></memAreaBG>
     </div>
