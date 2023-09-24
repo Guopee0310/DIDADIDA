@@ -243,9 +243,7 @@ export default {
       }, 300);
     },
     pushInFav(i) {
-      const favListIndex = this.favList.findIndex(
-        (v) => v.favoName === i.titleName
-      );
+      const favListIndex = this.favList.findIndex((v) => v.favoName === i.name);
       if (favListIndex > -1) {
         this.$store.state.favoList.splice(favListIndex, 1);
       } else {
