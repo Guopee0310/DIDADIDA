@@ -43,6 +43,8 @@
         <div class="deco fishes">
           <img src="../../public/all_images/deco/deco_fishes.png" alt="" />
         </div>
+        <div class="paopao"></div>
+        <!-- <paoPao></paoPao> -->
       </div>
 
       <!-- 營業資訊 ------------------------------------------ -->
@@ -80,6 +82,9 @@
             </div>
           </div>
         </div>
+        <div class="deco">
+          <img src="../../public/all_images/deco/deco_fishes.png" alt="">
+        </div>
       </div>
 
       <!-- 熱賣商品 ------------------------------------------ -->
@@ -103,6 +108,15 @@
           </div>
         </div>
         <router-link to="/product"><button>更多商品</button></router-link>
+        <div class="deco star">
+          <img src="../../public/all_images/index/deco_index_star.png" alt="">
+        </div>
+        <div class="deco shark">
+          <img src="../../public/all_images/index/deco_index_shark.png" alt="">
+        </div>
+        <div class="deco whale">
+          <img src="../../public/all_images/index/deco_index_whale.png" alt="">
+        </div>
       </div>
 
       <!-- 活動倒數 ------------------------------------------ -->
@@ -163,6 +177,7 @@ import h3Title from "../components/h3TitleComponent.vue";
 import lightCircle from "../components/lightCircle.vue";
 import blingText from "../components/blingText.vue";
 import ticketPrice from "../components/ticketPrice.vue";
+import paoPao from "../components/paoPao.vue";
 export default {
   name: "HomeView",
   data() {
@@ -238,6 +253,7 @@ export default {
     lightCircle,
     blingText,
     ticketPrice,
+    paoPao,
   },
   mounted() {
     setTimeout(() => {
@@ -424,11 +440,19 @@ export default {
     .deco.turtle {
       bottom: -140px;
       left: 10px;
+
+      img {
+        width: 150%;
+      }
     }
 
     .deco.fishes {
       bottom: -100px;
-      right: 0px;
+      right: 30px;
+
+      img {
+        width: 120%;
+      }
     }
   }
 
@@ -438,6 +462,7 @@ export default {
     width: 100%;
     margin: 0 auto 100px;
     display: flex;
+    position: relative;
 
     iframe {
       width: 60%;
@@ -473,6 +498,18 @@ export default {
         margin-bottom: 20px;
       }
     }
+
+    .deco {
+      position: absolute;
+      top: -200px;
+      left: -100px;
+
+      img {
+        width: 90%;
+        vertical-align: top;
+        transform: scaleX(-1);
+      }
+    }
   }
 
   // 熱銷商品 ---------------------------------------------
@@ -480,6 +517,7 @@ export default {
     max-width: 960px;
     width: 100%;
     margin: 0 auto 100px;
+    position: relative;
 
     .item:nth-child(2) {
       flex-direction: row-reverse;
@@ -534,6 +572,26 @@ export default {
           line-height: 4;
         }
       }
+    }
+
+    .deco {
+      position: absolute;
+
+    }
+
+    .star {
+      top: -300px;
+      right: -380px;
+    }
+
+    .shark {
+      top: 400px;
+      left: -330px;
+    }
+
+    .whale {
+      bottom: -150px;
+      right: -450px;
     }
   }
 
@@ -690,11 +748,10 @@ export default {
   }
 
   @media screen and (max-width:415px) {
-    .entrance {
-      .deco {
-        display: none;
-      }
+    .deco {
+      display: none;
     }
+
   }
 }
 </style>
