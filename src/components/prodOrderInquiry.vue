@@ -39,14 +39,14 @@ export default {
             prodOrder: [
                 {
                     prodImg: require("../assets/images/dolphin_pillow.jpg"),
-                    prodName: "極舒適海豚",
+                    prodName: "極舒適海豚抱枕抱抱枕",
                     prodCount: "2",
                     prodDate: "2023.08.31",
                     prodPrice: "399",
                 },
                 {
                     prodImg: require("../assets/images/dolphin_pillow.jpg"),
-                    prodName: "極舒適海豚",
+                    prodName: "極舒適海豚抱枕",
                     prodCount: "2",
                     prodDate: "2023.08.31",
                     prodPrice: "399",
@@ -107,8 +107,8 @@ export default {
 
         &::-webkit-scrollbar-thumb {
             border-radius: 4px;
-            background-color: rgba(0, 0, 0, 0.4);
-            border: 1px solid slategrey;
+            background-color: rgba(0, 0, 0, 0.2);
+            // border: 1px solid slategrey;
         }
 
         &::-webkit-scrollbar-track {
@@ -135,7 +135,7 @@ export default {
         }
 
         .prod_img {
-            width: 200px;
+            width: 50%;
             height: 150px;
             margin: 20px auto;
             border: 0;
@@ -148,7 +148,7 @@ export default {
         }
 
         .prod_info {
-            width: 200px;
+            width: 50%;
             height: 150px;
             margin: 20px auto;
             display: flex;
@@ -159,16 +159,17 @@ export default {
         .item_info {
             display: flex;
             justify-content: space-evenly;
+            width: 100%;
         }
 
         .item_info p:first-child {
-            width: 50px;
+            width: 20%;
             text-align: center;
             background-color: map-get($colors, 'h2Blue');
         }
 
         .item_info p:nth-child(2) {
-            width: 120px;
+            width: 80%;
             margin-left: 10px;
         }
     }
@@ -186,15 +187,20 @@ export default {
             }
 
             .prod_img {
-                width: 50%;
+                width: 100%;
             }
 
             .prod_info {
-                width: 50%;
+                width: 100%;
                 margin: 0 auto;
+            }
+
+            .item_info {
+                p:nth-child(2) {
+                    width: 70%;
+                }
             }
         }
     }
-
 }
 </style>
