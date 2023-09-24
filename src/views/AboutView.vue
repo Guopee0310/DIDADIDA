@@ -136,7 +136,7 @@ export default {
 
 .card p {
   font-size: map-get($fontSizes, "p");
-  max-width:800px;
+  max-width:500px;
   margin:auto;
 }
 
