@@ -1,4 +1,5 @@
 <template>
+
   <div class="shop_cart">
     <h1>購物車</h1>
     <p class="product_count">總共有{{ prodCount }}件商品</p>
@@ -14,9 +15,11 @@
         <li v-for="(prod, index) in shopCartData" :key="index">
           <div class="card">
             <div class="product_name">
-              <label><input type="checkbox" v-model="prod.select" /></label>
+              
+              <label class="check"><input type="checkbox" v-model="prod.select" /></label>
               <img :src="prod.imgURL" alt="" />
-              <span>{{ prod.name }}</span>
+              
+              <span class="prodname">{{ prod.name }}</span>
             </div>
             <div class="price">NTD{{ prod.price }}</div>
             <div class="count">
@@ -90,26 +93,21 @@
 
         <div class="receive">
           <h2>填寫收件資訊</h2>
-          <div class="item">
-            <input
-              name="transport"
-              id="7-11"
-              type="radio"
-              value="60"
-              v-model="picked"
-            />
-            <label for="7-11">711 店到店 + 60元</label>
-          </div>
-          <div class="item">
-            <input
-              name="transport"
-              id="free"
-              type="radio"
-              value="0"
-              v-model="picked"
-            />
-            <label for="free">到園領取 FREE</label>
-          </div>
+          <div class="input_group" id="receive_info">
+            <div class="name">
+                <div class="field__label">收件人姓名</div>
+                <input type="text" class="field_input" maxlength="50">
+            </div>
+            <div class="surname">
+                <div class="field__label">收件人手機</div>
+                <input type="text" class="field_input" maxlength="50">
+            </div>
+            <div>
+                <div class="field__label">收件地址</div>
+                <input type="text" class="field_input">
+            </div>
+
+        </div>
         </div>
       </div>
 
@@ -455,9 +453,13 @@ input[type="number"] {
 .receive .item {
   margin: 10px;
 }
-
+.input_group{
+  margin-left: 10px;
+  margin-top:5px;
+}
 .test2 {
   width: 50%;
+  position: relative;
 }
 
 .test2 button {
@@ -466,6 +468,9 @@ input[type="number"] {
   border: none;
   color: white;
   padding: 5px;
+  position: absolute;
+  transform: translate(10%,350%);
+  cursor: pointer;
 }
 
 .receive {
@@ -487,5 +492,75 @@ h2 {
 
 .freight {
   border-bottom: 1.5px solid #666;
+}
+
+//rwd
+@media (max-width: 414px) {
+  .shop_cart {
+    width: 80%;
+    padding: 1rem;
+  }
+h1{
+  border-bottom: 1px solid rgba(0, 0, 0, 0.16);;
+}
+  .sort_name{
+ display: none;
+}
+
+  /* 调整购物车项布局 */
+  .card {
+    flex-direction: column;
+    // align-items: flex-start;
+  }
+
+  .card div {
+    width: 80%;
+    margin-bottom: 1rem;
+  }
+
+  /* 调整购物车商品图片大小 */
+ .check{
+  margin-left: -250px;
+  }
+  .picname img {
+   margin: -10px;
+  }
+  .product_name{
+display: flex;
+flex-direction: column;
+width: 100%;
+  }
+  .prodname {
+    width: 100%;
+  }
+  .heart{
+   margin-right: 40px;
+  }
+
+  /* 调整全选复选框样式 */
+  .selectAll {
+    margin-top: 1rem;
+  }
+  .checkout{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .test2{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    
+  }
+  .test2 .item {
+  margin-left: -20px;
+}
+.test2 button{
+  left: 35%;
+}
+
+  .checkoutleft,.test2{
+    margin:20px;
+  }
 }
 </style>
