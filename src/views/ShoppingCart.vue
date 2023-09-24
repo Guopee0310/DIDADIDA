@@ -226,7 +226,20 @@ export default {
         this.$store.state.shoppingCart = [];
       }, 100);
       setTimeout(() => {
-        this.$router.push("/member");
+        this.$store.state.memberBtn = "prod_order_inquiry";
+        this.$router.push({
+          path: "/member",
+          query: { section: "showProdOrder" },
+        });
+        setTimeout(() => {
+          // 获取滚动目标元素
+          const target = document.getElementById("showProdOrder");
+
+          // 滚动到目标元素
+          if (target) {
+            target.scrollIntoView({ behavior: "smooth" });
+          }
+        }, 400);
       }, 300);
     },
     pushInFav(i) {
