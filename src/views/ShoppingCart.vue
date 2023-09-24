@@ -225,7 +225,7 @@ export default {
       setTimeout(() => {
         this.$store.state.shoppingCart = [];
       }, 100);
-      setInterval(() => {
+      setTimeout(() => {
         this.$router.push("/member");
       }, 300);
     },
