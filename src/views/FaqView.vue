@@ -270,6 +270,7 @@ export default {
   padding: 16px 0;
   background-color: map-get($colors, "secondary");
   // margin: 30px 0;
+  margin-top: 30px;
   margin-bottom: 50px;
   border-radius: 10px;
   border: 2px solid map-get($colors, "secondary");
@@ -309,6 +310,7 @@ export default {
 .showOpacity {
   transition: 1s;
   opacity: 1;
+  padding:20px 30px;
 }
 
 .card-item-body p {
@@ -360,6 +362,12 @@ export default {
     font-size: map-get($fontSizes, "a");
     line-height: 21px;
     transition: 1s;
+    margin-bottom: 30px;
   }
+  .showOpacity {
+  transition: 1s;
+  opacity: 1;
+  padding:20px 30px;
+}
 }
 </style>

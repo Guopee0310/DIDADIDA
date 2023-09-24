@@ -4,7 +4,9 @@
       <div class="carousel">
         <Carousel v-model="item.value" arrow="never" dots="none" autoplay >
           <CarouselItem v-for="(imgSrc, index) in item.imgSrc" :key="index" >
-            <img :src="imgSrc"/>
+            <transition name="fade">
+              <img :src="imgSrc" v-show="index === item.value"/>
+            </transition>
           </CarouselItem>
         </Carousel>
       </div>
@@ -78,6 +80,7 @@ export default {
 .card {
   display: flex;
   flex-direction: row-reverse;
+  justify-content: center;
   align-items: center;
   padding: 20px;
 }
@@ -94,7 +97,7 @@ export default {
 .whale {
   width: 20%;
   position: absolute;
-  top: 378px;
+  bottom: -161px;
   left: -70px;
 }
 
@@ -133,7 +136,7 @@ export default {
 
 .card p {
   font-size: map-get($fontSizes, "p");
-  width:90%;
+  max-width:800px;
   margin:auto;
 }
 
@@ -209,7 +212,10 @@ export default {
   }
 }
 .carousel {
-  width: 30%;
+  width: 40%;
+  @media screen and (max-width: 768px) {
+    width: 80%;
+  }
   .ivu-carousel-item {
     width: 100%;
     img {
