@@ -1,8 +1,9 @@
 <template>
-  <div v-if="loading">
+  <!-- <div v-if="loading">
     <LoadingBox />
-  </div>
-  <div v-else>
+  </div> -->
+  <!-- <div v-else> -->
+  <div>
     <div class="index">
       <!-- banner + open time ------------------------------------------ -->
       <div class="banner">
@@ -114,7 +115,7 @@
         <div class="card">
           <div class="item">
             <div class="image">
-              <img src="../assets/images/openActive.png" alt="" />
+              <img src="../assets/images/openActive.jpg" alt="" />
             </div>
             <div class="text">
               <span class="date">活動時間 : 9月1日至9月28日</span>
@@ -124,14 +125,14 @@
           </div>
           <div class="day">
             <span>倒數</span>
-            <span>6</span>
+            <span>5</span>
             <span>天</span>
           </div>
         </div>
         <div class="card">
           <div class="item">
             <div class="image">
-              <img src="../assets/images/blueCloth.png" alt="" />
+              <img src="../assets/images/blueCloth.jpg" alt="" />
             </div>
             <div class="text">
               <span class="date">活動時間 : 9月1日至9月28日</span>
@@ -141,7 +142,7 @@
           </div>
           <div class="day">
             <span>倒數</span>
-            <span>6</span>
+            <span>5</span>
             <span>天</span>
           </div>
         </div>
@@ -426,8 +427,8 @@ export default {
     }
 
     .deco.fishes {
-      bottom: -80px;
-      right: -30px;
+      bottom: -100px;
+      right: 0px;
     }
   }
 
@@ -549,20 +550,40 @@ export default {
       background-color: map-get($colors, "secondary");
       border-radius: 10px;
       overflow: hidden;
+      // background-image: url(../assets/images/openActive.png);
+      // background-repeat: no-repeat;
 
       .image {
         width: 50%;
+        position: relative;
+      }
+
+      .image::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        border-right: 50px solid #68769a;
+        border-bottom: 200px solid #68769a;
+        border-top: 200px solid transparent;
+        border-left: 50px solid transparent;
       }
 
       .image img {
         width: 100%;
+        height: 100%;
         vertical-align: top;
+        object-fit: cover;
       }
 
       .text {
+        width: 50%;
         margin: auto;
         color: map-get($colors, "light");
         text-align: center;
+        background-color: #9fbdce;
+        background:
+          linear-gradient(80deg, transparent 75px, #68769a 0);
 
         .date {
           display: block;
@@ -571,7 +592,7 @@ export default {
         }
 
         .title {
-          font-size: 35px;
+          font-size: 30px;
         }
 
         .self {
@@ -616,7 +637,64 @@ export default {
   }
 
   // -- RWD --------------------------------------
-  @media screen and (max-width:768px) {}
+  @media screen and (max-width:768px) {
 
+    .ticket {
+      max-width: 90%;
+    }
+
+
+    .map {
+      max-width: 90%;
+      flex-wrap: wrap;
+      margin: 0 auto 60px;
+
+      iframe {
+        width: 100%;
+        margin: auto;
+      }
+
+      .text {
+        width: 100%;
+        margin-top: 30px;
+      }
+
+    }
+
+    // .map::after {
+    //   content: '';
+    //   width: 100%;
+    //   border-bottom: 2px solid #68769a;
+    //   border-radius: 5px;
+    // }
+
+
+    .active {
+      max-width: 90%;
+
+      .day {
+        width: 90px;
+        height: 90px;
+        top: -25px;
+        right: -20px;
+      }
+
+      .text {
+        padding-right: 15px;
+      }
+
+      .day>span:nth-child(2) {
+        font-size: 60px;
+      }
+    }
+  }
+
+  @media screen and (max-width:415px) {
+    .entrance {
+      .deco {
+        display: none;
+      }
+    }
+  }
 }
 </style>

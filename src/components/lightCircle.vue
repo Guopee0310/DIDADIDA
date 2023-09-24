@@ -23,6 +23,7 @@ export default {
   display: flex;
   width: 300px;
   margin: -70px 100px;
+
   .circle-border {
     position: absolute;
     width: 250px;
@@ -31,15 +32,14 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 70%;
+    border-radius: 50%;
     z-index: 2;
     background: rgb(63, 249, 220);
-    background: linear-gradient(
-      0deg,
-      rgba(63, 249, 220, 0.1) 33%,
-      rgb(85, 153, 176) 100%
-    );
+    background: linear-gradient(0deg,
+        rgba(63, 249, 220, 0.1) 33%,
+        rgb(85, 153, 176) 100%);
     animation: spin 4s linear 0s infinite;
+
     .circle-core {
       width: 100%;
       height: 100%;
@@ -47,6 +47,7 @@ export default {
       border-radius: 50%;
     }
   }
+
   .text {
     position: absolute;
     color: white;
@@ -62,8 +63,15 @@ export default {
   from {
     transform: rotate(0);
   }
+
   to {
     transform: rotate(359deg);
+  }
+}
+
+@media screen and (max-width:768px) {
+  .all-circle {
+    margin: -120px 30px;
   }
 }
 </style>
