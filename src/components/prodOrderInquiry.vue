@@ -108,8 +108,94 @@ export default {
       width: 10px;
     }
 
-    &::-webkit-scrollbar-track-piece {
-      background: transparent;
+    .order_area {
+        width: 500px;
+        height: 850px;
+        border: 0;
+        border-radius: 15px;
+        margin: 0 auto;
+        background-color: #eeee;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        overflow-y: scroll;
+
+        &::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        &::-webkit-scrollbar-track-piece {
+            background: transparent;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            border-radius: 4px;
+            background-color: rgba(0, 0, 0, 0.2);
+            // border: 1px solid slategrey;
+        }
+
+        &::-webkit-scrollbar-track {
+            box-shadow: transparent;
+        }
+
+        &::-webkit-scrollbar-button {
+            height: 5px;
+            background: transparent;
+            border-radius: 4px;
+        }
+
+
+        .prod_order_group {
+            width: 460px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-evenly;
+            z-index: 2;
+        }
+
+        .prod_order_group:last-child {
+            border-bottom: 0;
+        }
+
+        .prod_img {
+            width: 50%;
+            height: 150px;
+            margin: 20px auto;
+            border: 0;
+        }
+
+        .prod_img img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .prod_info {
+            width: 50%;
+            height: 150px;
+            margin: 20px auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+        }
+
+        .item_info {
+            display: flex;
+            justify-content: space-evenly;
+            width: 100%;
+        }
+
+        .item_info p:first-child {
+            width: 20%;
+            text-align: center;
+            background-color: map-get($colors, 'h2Blue');
+        }
+
+        .item_info p:nth-child(2) {
+            width: 80%;
+            margin-left: 10px;
+        }
     }
 
     &::-webkit-scrollbar-thumb {

@@ -176,4 +176,35 @@ export default {
     bottom: -5px;
     right: 40px;
 }
-</style>
+
+@media screen and (max-width: 414px) {
+    .qr_btn {
+        width: 130px;
+    }
+
+    .modal {
+        .modal-content {
+            width: 300px;
+            height: 400px;
+        }
+
+        .qrcode-content {
+            width: 270px;
+            height: 370px;
+        }
+
+        .qrcode-img {
+            width: 160px;
+            height: 140px;
+        }
+    }
+
+    .deco_fishes {
+        right: -25px;
+        bottom: -20px;
+
+        img {
+            width: 70%;
+        }
+    }
+}</style>

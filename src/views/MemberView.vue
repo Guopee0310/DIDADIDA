@@ -26,13 +26,7 @@
           <span>Google</span>
         </div>
         <label class="verification_label" for="verification_id">
-          已驗證<input
-            class="verification_input"
-            type="checkbox"
-            value=""
-            id="verification_id"
-            style="zoom: 160%"
-          />
+          已驗證<input class="verification_input" type="checkbox" value="" id="verification_id" style="zoom: 160%" />
         </label>
       </div>
 
@@ -297,7 +291,7 @@ export default {
   }
 
   .member_hello {
-    width: 768px;
+    width: 100%;
     font-size: map-get($fontSizes, "h5");
 
     .deco_fishes {
@@ -306,7 +300,7 @@ export default {
   }
 
   .mem_main {
-    width: 768px;
+    width: 100%;
     flex-direction: column;
     align-items: center;
 
@@ -342,7 +336,7 @@ export default {
   }
 
   .member_hello {
-    width: 414px;
+    width: 100%;
     font-size: map-get($fontSizes, "h5");
 
     .deco_fishes {
@@ -356,7 +350,7 @@ export default {
   }
 
   .mem_main {
-    width: 414px;
+    width: 100%;
 
     h6 {
       padding: 20px 25px;
@@ -390,6 +384,5 @@ export default {
       display: none;
     }
   }
-
 }
 </style>
