@@ -8,7 +8,7 @@
 
       <!-- 動物們 -->
       <div v-for="(animal, index) in animals" :key="index" :ref="`parallaxScene${index}`" :id="`scene${index}`"
-        data-relative-input="true" :class="animal.category" @click="showCard(animal)">
+        data-pointer-events="true" :class="animal.category" @click="showCard(animal)">
         <img :src="animal.image" :alt="animal.name" :data-depth="animal.depth">
         <h4 :data-depth="animal.depth">{{ animal.name }}</h4>
       </div>
@@ -36,6 +36,32 @@
       </div>
     </div>
 
+    <div class="navBar">
+      <ul>
+        <li><router-link to="#" @click.prevent="btnScroll('表層海洋帶')">0m
+            <div class="drop"></div>
+          </router-link>
+        </li>
+        <li><router-link to="#" @click.prevent="btnScroll('中層海洋帶')">200m
+            <div class="drop"></div>
+          </router-link>
+        </li>
+        <li><router-link to="#" @click.prevent="btnScroll('深層海洋帶')">1000m
+            <div class="drop"></div>
+          </router-link>
+        </li>
+        <li><router-link to="#" @click.prevent="btnScroll('深淵層海洋帶')">4000m
+            <div class="drop"></div>
+          </router-link>
+        </li>
+        <li><router-link to="#" @click.prevent="btnScroll('超深淵層海洋帶')">6000m
+            <div class="drop"></div>
+          </router-link>
+        </li>
+      </ul>
+      <div class="line"></div>
+    </div>
+
     <div class="card" v-if="showText">
       <div v-for="(introduce, index) in introduce">
         <img :src="introduce.image" alt="">
@@ -50,32 +76,6 @@
         <i class="fa-solid fa-xmark" style="color: #062f4a;"></i>
       </div>
     </div>
-  </div>
-
-  <div class="navBar">
-    <ul>
-      <li><router-link to="#" @click.prevent="btnScroll('表層海洋帶')">0m
-          <div class="drop"></div>
-        </router-link>
-      </li>
-      <li><router-link to="#" @click.prevent="btnScroll('中層海洋帶')">200m
-          <div class="drop"></div>
-        </router-link>
-      </li>
-      <li><router-link to="#" @click.prevent="btnScroll('深層海洋帶')">1000m
-          <div class="drop"></div>
-        </router-link>
-      </li>
-      <li><router-link to="#" @click.prevent="btnScroll('深淵層海洋帶')">4000m
-          <div class="drop"></div>
-        </router-link>
-      </li>
-      <li><router-link to="#" @click.prevent="btnScroll('超深淵層海洋帶')">6000m
-          <div class="drop"></div>
-        </router-link>
-      </li>
-    </ul>
-    <div class="line"></div>
   </div>
 </template>
 
@@ -92,14 +92,22 @@ export default {
       animals: [
         { name: '黃金魚', image: require('../../public/all_images/animal/goldfish.png'), depth: '0.2', category: 'goldfish' },
         { name: '玳瑁', image: require('../../public/all_images/animal/turtle.png'), depth: '0.5', category: 'turtle' },
+        { name: '魚魚', image: require('../../public/all_images/animal/jokfish.png'), depth: '0.1', category: 'jokfish' },
         { name: '藍藻魚', image: require('../../public/all_images/animal/dory.png'), depth: '0.4', category: 'dory' },
         { name: '小丑魚', image: require('../../public/all_images/animal/nimo.png'), depth: '0.2', category: 'nimo' },
         { name: '河豚', image: require('../../public/all_images/animal/angryfish.png'), depth: '0.3', category: 'angryfish' },
         { name: '鯨鯊', image: require('../../public/all_images/animal/whale.png'), depth: '0.4', category: 'whale' },
         { name: '海星', image: require('../../public/all_images/animal/star.png'), depth: '0.2', category: 'star' },
         { name: '獅子魚', image: require('../../public/all_images/animal/leofish.png'), depth: '0.4', category: 'leofish' },
+        { name: '魚魚', image: require('../../public/all_images/animal/linefish.png'), depth: '0.4', category: 'linefish' },
         { name: '鯊魚', image: require('../../public/all_images/animal/shark.png'), depth: '0.7', category: 'shark' },
         { name: '白鯨', image: require('../../public/all_images/animal/white.png'), depth: '0.1', category: 'white' },
+        { name: '劍魚', image: require('../../public/all_images/animal/nosefish.png'), depth: '0.1', category: 'nosefish' },
+        { name: '儒艮', image: require('../../public/all_images/animal/manatee.png'), depth: '0.1', category: 'manatee' },
+        { name: '章魚', image: require('../../public/all_images/animal/taco.png'), depth: '0.1', category: 'taco' },
+        { name: '水母', image: require('../../public/all_images/animal/jellyfish.png'), depth: '0.1', category: 'jellyfish' },
+        { name: '深海魚', image: require('../../public/all_images/animal/ohpsfish.png'), depth: '0.1', category: 'ohpsfish' },
+        { name: '藍鯨', image: require('../../public/all_images/animal/Blue whale.png'), depth: '0.1', category: 'blueWhale' },
       ],
       introduce: [
         // { name: '黃金魚', image: require('../../public/all_images/animal/goldfish.png'), enName: '', p: 'goldfish' },
@@ -203,7 +211,8 @@ export default {
     this.animals.forEach((animal, index) => {
       const scene = document.getElementById(`scene${index}`);
       const parallaxInstance = new Parallax(scene, {
-        relativeInput: true
+        relativeInput: true,
+        pointerEvents: true
       });
     });
 
@@ -265,8 +274,10 @@ export default {
 // 探索動物 ------------------------------------------------------------
 .explore {
   width: 100%;
-  background-image: linear-gradient(to bottom, #93B7CD, #285f9d, #114466, #0b2f4a);
+  background-image: linear-gradient(to bottom, #93b4cd, #114166, #0b2f4a, #082033);
   position: relative;
+  pointer-events: none;
+  // #285f9d
 
   .slot {
     width: 100%;
@@ -295,7 +306,7 @@ export default {
   }
 
   .superdeep {
-    top: 85%;
+    top: 80%;
   }
 
   h1 {
@@ -330,8 +341,8 @@ export default {
     .turtle {
       cursor: pointer;
       width: 450px;
-      // translate: 15em 7em;
-      margin: 150px 0 0 250px;
+      translate: 15em 12em;
+      // margin: 150px 0 0 250px;
 
       img {
         visibility: top;
@@ -346,8 +357,8 @@ export default {
     .goldfish {
       cursor: pointer;
       width: 180px;
-      margin: 100px 350px -80px auto;
-      // translate: 55em 3em;
+      // margin: 100px 350px -80px auto;
+      translate: 55em 8em;
 
       img {
         visibility: top;
@@ -366,8 +377,8 @@ export default {
     .dory {
       cursor: pointer;
       width: 130px;
-      // translate: 45em 10em;
-      margin: 50px 430px 0 auto;
+      translate: 53em 10em;
+      // margin: 0 530px -10px auto;
 
 
       img {
@@ -384,8 +395,8 @@ export default {
     .nimo {
       cursor: pointer;
       width: 80px;
-      // translate: 40em 10em;
-      margin: 10px auto 0 730px;
+      translate: 45em 7em;
+      // margin: -40px auto 0 730px;
 
       img {
         visibility: top;
@@ -393,14 +404,15 @@ export default {
       }
 
       h4 {
-        margin: 60px 10px;
+        margin: -30px 10px;
       }
     }
 
     .angryfish {
       cursor: pointer;
       width: 100px;
-      margin: 50px 0 80px 350px;
+      translate: 20em 10em;
+      // margin: 50px 0 80px 350px;
 
       img {
         visibility: top;
@@ -415,7 +427,8 @@ export default {
     .whale {
       cursor: pointer;
       width: 1200px;
-      margin: -50px 10px 0 auto;
+      translate: 20em 15em;
+      // margin: -50px 10px 0 auto;
 
       img {
         visibility: top;
@@ -430,7 +443,8 @@ export default {
     .star {
       cursor: pointer;
       width: 130px;
-      margin: 30px 0 0 350px;
+      translate: 18em 15em;
+      // margin: 30px 0 0 350px;
 
       img {
         visibility: top;
@@ -445,7 +459,8 @@ export default {
     .leofish {
       cursor: pointer;
       width: 130px;
-      margin: 0 530px 0 auto;
+      translate: 55em 20em;
+      // margin: 0 530px 0 auto;
 
       img {
         visibility: top;
@@ -461,7 +476,8 @@ export default {
     .shark {
       cursor: pointer;
       width: 700px;
-      margin: -30px 0 0 60px;
+      translate: 3em 5em;
+      // margin: -30px 0 0 60px;
 
       img {
         visibility: top;
@@ -482,6 +498,139 @@ export default {
       img {
         visibility: top;
         width: 700px;
+      }
+    }
+
+    .linefish {
+      cursor: pointer;
+      width: 130px;
+      translate: 70em 5em;
+      // margin: 100px 230px 0 auto;
+
+      img {
+        visibility: top;
+        width: 130px;
+      }
+
+      h4 {
+        margin-top: -25px;
+        margin-left: 80px;
+      }
+    }
+
+    .jokfish {
+      cursor: pointer;
+      width: 130px;
+      translate: 65em 3em;
+      // margin: 0 550px 80px auto;
+
+      img {
+        visibility: top;
+        width: 130px;
+      }
+
+      h4 {
+        margin-top: -15px;
+        margin-left: 90px;
+      }
+    }
+
+
+    .manatee {
+      cursor: pointer;
+      width: 450px;
+      margin: 80px auto 0 530px;
+
+      img {
+        visibility: top;
+        width: 450px;
+      }
+
+      h4 {
+        margin-top: 150px;
+        margin-left: 30px;
+      }
+    }
+
+    .nosefish {
+      cursor: pointer;
+      width: 300px;
+      margin: -200px auto 0 330px;
+
+      img {
+        visibility: top;
+        width: 300px;
+      }
+
+      h4 {
+        margin-top: -35px;
+        margin-left: 70px;
+      }
+    }
+
+    .taco {
+      cursor: pointer;
+      width: 300px;
+      margin: 0 280px 0 auto;
+
+      img {
+        visibility: top;
+        width: 300px;
+        transform: rotate(30deg);
+      }
+
+      h4 {
+        margin-top: -35px;
+        margin-left: 70px;
+      }
+    }
+
+    .jellyfish {
+      cursor: pointer;
+      width: 130px;
+      margin: 0 530px 0 auto;
+
+      img {
+        visibility: top;
+        width: 130px;
+      }
+
+      h4 {
+        margin-top: -35px;
+        margin-left: 70px;
+      }
+    }
+
+    .ohpsfish {
+      cursor: pointer;
+      width: 130px;
+      margin: 0 530px 0 auto;
+
+      img {
+        visibility: top;
+        width: 130px;
+      }
+
+      h4 {
+        margin-top: -35px;
+        margin-left: 70px;
+      }
+    }
+
+    .blueWhale {
+      cursor: pointer;
+      width: 700px;
+      margin: 30px auto 60px 0;
+      // translate: 10em 10em;
+
+      img {
+        visibility: top;
+        width: 700px;
+      }
+
+      h4 {
+        margin-top: -35px;
+        margin-left: 70px;
       }
     }
   }
