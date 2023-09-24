@@ -108,6 +108,12 @@ const routes = [
       import(/* webpackChunkName: "amountBtn" */ "../components/amountBtn.vue"),
   },
   {
+    path: "/login",
+    name: "login",
+    component: () =>
+      import(/* webpackChunkName: "login" */ "../components/login.vue"),
+  },
+  {
     path: "/shoppingcart",
     name: "shoppingcart",
     component: () =>
@@ -115,6 +121,14 @@ const routes = [
     meta: {
       title: "Cart",
     },
+    // beforeEnter: (to, from, next) => {
+    //   if (!store.state.userName) {
+    //     alert('需先登入會員');
+    //     next('/login'); // 未登录时跳转到登录页面
+    //   } else {
+    //     next();
+    //   }
+    // },
   },
   {
     path: "/cartpop",
