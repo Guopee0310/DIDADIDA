@@ -2,44 +2,37 @@
   <div class="guide">
     <h3Title>
       <template v-slot:h3>
-        <h3 >園區地圖</h3>
+        <h3>園區地圖</h3>
       </template>
     </h3Title>
     <div class="guide_map">
+      <img src="../../public/all_images/guide/guide_map.jpg" alt="">
       <div class="mask">
-        <svg width="100%" height="100%" viewBox="0 0 200 100">
+        <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 100 100">
           <!-- 線性漸層 -->
-          <!-- <defs>
-            <linearGradient id="myGradient" x1="20%" y1="80%" x2="100%" y2="0%">
-              <stop offset="0%" style="stop-color:  rgba(83,79,156,1);" />
-              <stop offset="35%" style="stop-color:  rgba(236,187,152,1);" />
-              <stop offset="89%" style="stop-color:  rgba(10,202,234,1);" />
-            </linearGradient>
-          </defs> -->
+          <defs>
+            <filter id="drop-shadow-filter" x="0" y="0" width="150%" height="150%">
+              <feDropShadow dx="0.1em" dy="0.2em" stdDeviation="0.1em" flood-color="rgba(0,0,0,0.5)" />
+            </filter>
+          </defs>
           <!-- 表層區 -->
-          <g opacity="0.8">
-            <circle cx="15" cy="0" r="8" fill="#67DBF4" filter="drop-shadow(0.1em 0.2em 0.1em rgba(0,0,0,.5))"
-              class="circle" @click="scrollToSection(2)" id="section1"/>
+          <g @click="scrollToSection(2)" id="section1">
+            <rect x="5" y="16" width="15" height="6" rx="1" ry="1" style="fill:#67daf4a2;stroke-width:10;"
+              filter="url(#drop-shadow-filter)"></rect>
+            <text x="6.5" y="20.5" font-size="4" fill="#fff" filter="url(#drop-shadow-filter)">淺層館</text>
           </g>
-          <text x="9" y="2" style="font: 4px noto-serif-kr;fill:#000000"
-            filter="drop-shadow(0.1em 0.2em 0.1em rgba(0,0,0,.5))">表層區</text>
-          <polyline points="23,2 34,2,36,22" style="fill:none; stroke:rgb(50, 40, 40); stroke-width:0.5" />
           <!-- 中層區 -->
-          <g opacity="0.8">
-            <circle cx="115" cy="0" r="8" fill="#8497FF" filter="drop-shadow(0.1em 0.2em 0.1em rgba(0,0,0,.5))"
-              class="shallow" @click="scrollToSection(3)" />
+          <g @click="scrollToSection(3)">
+            <rect x="50" y="10" width="15" height="6" rx="1" ry="1" style="fill:#4B88FFa2;stroke-width:10;"
+              filter="url(#drop-shadow-filter)"></rect>
+            <text x="51.5" y="14.5" font-size="4" fill="#fff" filter="url(#drop-shadow-filter)">中層館</text>
           </g>
-          <text x="108.5" y="2" style="font: 4px noto-serif-kr;fill:#ffffff"
-            filter="drop-shadow(0.1em 0.2em 0.1em rgba(0,0,0,.5))">中層區</text>
-          <polyline points="123,0,135,0,137,14" style="fill:none; stroke:rgb(50, 40, 40); stroke-width:0.5" />
           <!-- 深層區 -->
-          <g opacity="0.8">
-            <circle cx="180" cy="83" r="8" fill="#1400FF" filter="drop-shadow(0.1em 0.2em 0.1em rgba(0,0,0,.5))"
-              class="shallow" @click="scrollToSection(4)" />
+          <g @click="scrollToSection(4)">
+            <rect x="65" y="35" width="15" height="6" rx="1" ry="1" style="fill:#0016D8a2;stroke-width:10;"
+              filter="url(#drop-shadow-filter)"></rect>
+            <text x="66.5" y="39.5" font-size="4" fill="#fff" filter="url(#drop-shadow-filter)">深層館</text>
           </g>
-          <text x="174" y="85" style="font: 4px noto-serif-kr;fill:#ffffff"
-            filter="drop-shadow(0.1em 0.2em 0.1em rgba(0,0,0,.5))">深層區</text>
-          <polyline points="150,71 160,85, 172,85" style="fill:none; stroke:rgb(50, 40, 40); stroke-width:0.5" />
         </svg>
       </div>
     </div>
@@ -51,15 +44,15 @@
   </h3Title>
 
   <transition name="fade">
-      <div class="click_scroll" v-if="isClickScrollVisible">
-        <div class="click_top">
-          <i class="fa-solid fa-angles-up" style="color: #ffffff;"></i><br>
-          <span @click="scrollToSection(1)">Scroll<br>Top</span>
-        </div>
+    <div class="click_scroll" v-if="isClickScrollVisible">
+      <div class="click_top" @click="scrollToSection(1)">
+        <i class="fa-solid fa-angles-up" style="color: #ffffff;"></i><br>
+        <span>Scroll<br>Top</span>
       </div>
-    </transition>
+    </div>
+  </transition>
   <div class="tabs">
-    <h4><img v-if="selectedTab == 'tab2'" src="../../public/all_images/guide/lighthouse.png" alt="">海洋表層區</h4>
+    <h4><img v-if="selectedTab == 'tab2'" src="../../public/all_images/guide/lighthouse.png" alt="">表層館</h4>
     <input type="radio" name="name" v-model="selectedTab" value="tab2" id="section2" />
 
     <div class="content">
@@ -74,13 +67,13 @@
           <div class="fish" v-for="(item, index) in shallow_pic" :key="index">
             <div class="num">{{ index + 1 }}</div>
             <div class="pic_shape" :style="{ backgroundImage: `url(${item.pic})` }">
-              <div class="name">{{ item.name }}</div>
             </div>
+            <div class="name">{{ item.name }}</div>
           </div>
         </div>
       </div>
     </div>
-    <h4><img v-if="selectedTab == 'tab3'" src="../../public/all_images/guide/lighthouse.png" alt="">海洋中層區</h4>
+    <h4><img v-if="selectedTab == 'tab3'" src="../../public/all_images/guide/lighthouse.png" alt="">中層館</h4>
     <input type="radio" name="name" v-model="selectedTab" value="tab3" id="section3" />
     <div class="content">
       <div class="wrap">
@@ -94,13 +87,13 @@
           <div class="fish" v-for="(item, index) in middle_pic" :key="index">
             <div class="num">{{ index + 1 }}</div>
             <div class="pic_shape" :style="{ backgroundImage: `url(${item.pic})` }">
-              <div class="name">{{ item.name }}</div>
             </div>
+            <div class="name">{{ item.name }}</div>
           </div>
         </div>
       </div>
     </div>
-    <h4><img v-if="selectedTab == 'tab4'" src="../../public/all_images/guide/lighthouse.png" alt="">海洋深層區</h4>
+    <h4><img v-if="selectedTab == 'tab4'" src="../../public/all_images/guide/lighthouse.png" alt="">深層館</h4>
     <input type="radio" name="name" v-model="selectedTab" value="tab4" id="section4" />
     <div class="content">
       <div class="wrap">
@@ -112,8 +105,8 @@
           <div class="fish" v-for="(item, index) in deep_pic" :key="index">
             <div class="num">{{ index + 1 }}</div>
             <div class="pic_shape" :style="{ backgroundImage: `url(${item.pic})` }">
-              <div class="name">{{ item.name }}</div>
             </div>
+            <div class="name">{{ item.name }}</div>
           </div>
         </div>
       </div>
@@ -144,7 +137,7 @@ export default {
       isClickScrollVisible: false,
       currentSection: 1,
       shallow_pic: [
-        { pic: '../all_images/guide/pexels-francesco-ungaro-2289411.jpg', name: '海星'},
+        { pic: '../all_images/guide/pexels-francesco-ungaro-2289411.jpg', name: '海星' },
         { pic: '../all_images/guide/Mark_Rosenstein,iNaturalist.org.CC_BY-NC-SA.©Sea_Cucumbers.jpg', name: '海參' },
         { pic: '../all_images/guide/pexels-nirav-shah-10303342.jpg', name: '黃邊裸胸鱔' },
         { pic: '../all_images/guide/jellyfish.jpg', name: '水母' },
@@ -166,7 +159,7 @@ export default {
         { pic: '../all_images/guide/noe-sardet-hp4SVuJM2-g-unsplash.jpg', name: '櫛棘燈籠魚' },
         { pic: '../all_images/guide/ocean-sunfish-7177835_1280.jpg', name: '翻車魨' },
         { pic: '../all_images/guide/sea-toad-62916_1280.jpg', name: '斑點單棘躄魚' },
-    
+
       ],
       deep_pic: [
         { pic: '../all_images/guide/Dumbo_Octopus©NOAA-Ocean-Exploration.jpg', name: '小飛象章魚' },
@@ -174,18 +167,13 @@ export default {
         { pic: '../all_images/guide/Bobtail_Squid©Rickard_Zerpe.jpg', name: '短尾烏賊' },
         { pic: '../all_images/guide/Chimaera©NOAA-Ocean-Exploration.jpg', name: '銀鮫' },
         { pic: '../all_images/guide/giant_isopod©NOAA-Ocean-Exploration.jpg', name: '大王具足蟲' },
-    
+
       ]
     };
   },
   components: {
     h3Title,
   },
-  // computed:{
-  //   imageCount() {
-  //   return this.all_pic.length;
-  // }
-  // },
   methods: {
     scrollToSection(sectionIndex) {
       const sectionElement = document.querySelector("#section" + sectionIndex);
@@ -200,13 +188,19 @@ export default {
     },
     handleScroll() {
       const scrollY = window.scrollY;
+      const tabSection = document.querySelector(".tabs");
 
-      if (scrollY < 1300) {
-        this.isClickScrollVisible = false;
-      } else {
-        this.isClickScrollVisible = true;
-      } 
-    }
+      if (tabSection) {
+        const tabSectionTop = tabSection.offsetTop;
+
+        // 根据滚动位置和选项卡区域位置来控制按钮的显示和隐藏
+        if (scrollY >= tabSectionTop - 300 ) {
+          this.isClickScrollVisible = true;
+        } else {
+          this.isClickScrollVisible = false;
+        }
+      }
+    },
   },
   mounted() {
     window.addEventListener("scroll", this.handleScroll);
@@ -233,7 +227,7 @@ h3 {
   background: #9cbae0;
   margin: 5rem 25px;
   border-radius: 10px;
-  
+
 }
 
 /* 網頁捲軸【把手】顏色 */
@@ -246,36 +240,39 @@ h3 {
 ::-webkit-scrollbar-thumb:hover {
   background: #747d86;
 }
+
 .guide_map {
-  width: 100%;
-  height: 900px;
-  background-image: url(../../public/all_images/guide/guide_map.jpg);
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
-  position: relative;
+  max-width: 1000px;
   margin: auto;
-
-  .mask {
-    position: absolute;
+  position: relative;
+  img{
     width: 100%;
-    height: 100%;
-    top: 0;
+    vertical-align: top;
+  }
 
-    circle {
+  svg {
+  
+    position: absolute;
+    inset: 0;
+    g {
       cursor: pointer;
       opacity: 1;
-      transition: opacity 0.5s;
-      scale: 1;
+      transition: opacity .3s;
+
+      text {
+        pointer-events: none;
+      }
 
       &:hover {
         opacity: 0.8;
       }
     }
 
-    text {
-      pointer-events: none;
-
+    .mask {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
     }
   }
 }
@@ -286,7 +283,6 @@ h3 {
   position: relative;
   max-width: 100%;
   height: 130vh;
-  padding: 2rem;
   overflow: hidden;
 
   .sea+img {
@@ -310,8 +306,8 @@ h3 {
     height: 5.3rem;
     z-index: 3;
     pointer-events: none;
-    color: #fff;
-    font-size: 18px;
+    color: map-get($colors, 'light');
+    font-size: map-get($fontSizes , 'div' );
     text-shadow: black 0.1em 0.1em 0.1em;
 
 
@@ -331,9 +327,9 @@ h3 {
       position: absolute;
       vertical-align: top;
       z-index: 10;
-      top: 20px;
+      top: 25%;
       width: 40px;
-      left: 80%;
+      left: 70%;
       animation: animate 2s alternate-reverse infinite;
     }
   }
@@ -345,6 +341,7 @@ h3 {
     appearance: none;
     cursor: pointer;
     z-index: 5;
+    opacity: 1;
 
 
     &:nth-of-type(1) {
@@ -367,7 +364,7 @@ h3 {
 
     &:checked+.content {
       transform: translateX(0%);
-      transition: transform 0.5s ease 0.5s;
+      transition: transform .5s ease 0.1s;
     }
   }
 
@@ -383,14 +380,15 @@ h3 {
 
   .content {
     width: 75%;
-    height: 95vh;
+    height: 80%;
     overflow-y: scroll;
     padding: 1.5rem;
     border-radius: 2rem;
     position: absolute;
     z-index: 2;
     right: 1rem;
-    transition: transform 0.4s ease-in-out;
+    transition: transform 0.2s ease-in-out;
+    margin-top: 2rem;
     margin-bottom: 2rem;
 
     &:nth-of-type(1) {
@@ -411,7 +409,7 @@ h3 {
     .wrap {
       display: flex;
       align-items: start;
-      color: #fff;
+      color: map-get($colors, 'light');
       line-height: 1.5em;
 
       .about_pic {
@@ -421,8 +419,11 @@ h3 {
           width: 100%;
           vertical-align: top;
         }
-        p{
+
+        p {
           padding-top: 1rem;
+          line-height: 1.5em;
+          font-size: map-get($fontSizes, "p" );
         }
       }
 
@@ -430,23 +431,22 @@ h3 {
         height: 100%;
         display: flex;
         flex-wrap: wrap;
-        margin-left: 2rem;
+        margin-left: 1em;
         width: 60%;
-        color: #fff;
-
+        color: map-get($colors, 'light');
+        
         .fish {
-          display: flex;
           width: calc(100%/3);
           position: relative;
-          padding: 1.5em;
+          padding: 1rem;
 
           .name {
-            position: absolute;
+            width: 100%;
             text-align: center;
-            bottom: 0;
-            left: 45%;
-            transform: translate(-45%, 0);
-
+            margin-top: 1rem;
+            font-size: map-get($fontSizes, "p" );
+            font-weight: 600;
+            text-shadow: #000 0.1em 0.1em 0.1em;
           }
 
           .num {
@@ -456,13 +456,14 @@ h3 {
             border-radius: 50%;
             background-color: rgb(30, 35, 35);
             text-align: center;
-            color: #fff;
+            color: map-get($colors, 'light');
           }
 
           .pic_shape {
-            width: 6rem;
+            width: 80%;
+            margin: auto;
             aspect-ratio: 1/1;
-            border-radius: 5rem;
+            border-radius: 10rem;
             background-size: cover;
             background-repeat: no-repeat;
             background-position: center;
@@ -474,21 +475,7 @@ h3 {
   }
 }
 
-@media screen and (max-width:768px) {
-  .wrap {
-    display: flex;
-    flex-direction: column;
 
-    .about_pic {
-      width: 100%;
-    }
-
-    .fish_wrap {
-      width: 100%;
-    }
-  }
-
-}
 
 
 .click_scroll {
@@ -497,15 +484,16 @@ h3 {
   right: 30px;
   z-index: 4;
   cursor: pointer;
- 
+
 
   .click_top {
     text-align: center;
     animation: top .8s alternate infinite;
+
     span {
-      font-size: 20px;
+      font-size: map-get($fontSizes, 'div' );
       font-weight: 600;
-      color: #ffffff;
+      color: map-get($colors, 'light');
       text-shadow: #000 0.1em 0.1em 0.1em;
 
       img {
@@ -517,13 +505,66 @@ h3 {
     }
   }
 }
+
 @keyframes top {
-  0%{
+  0% {
     transform: translateY(10px);
   }
-  100%{
+
+  100% {
     transform: translateY(0px);
   }
-  
+
+}
+
+@media screen and (max-width:768px) {
+
+  .tabs {
+  height: 80vh;
+    h4{
+      font-size: map-get($fontSizes , 'span' );
+      justify-content: start;
+      img{
+        width: 25px;
+      }
+    }
+  .content {
+    margin-top: 2rem;
+    width: 90%;
+    .wrap {
+      display: flex;
+      flex-direction: column;
+      color: map-get($colors, 'light');
+      line-height: 1.5em;
+
+
+      .about_pic {
+        width: 100%;
+
+        img {
+          width: 100%;
+          vertical-align: top;
+        }
+
+        p {
+          padding-top: 1rem;
+        }
+      }
+
+      .fish_wrap {
+        width: 100%;
+        margin: auto;
+        
+        .fish {
+          width: calc(100%/2);
+          .name{
+          font-size: map-get($fontSizes, "span" );
+        }
+        }
+      }
+    }
+  }
+}
+
 }
 </style>
