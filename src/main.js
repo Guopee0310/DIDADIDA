@@ -18,7 +18,8 @@ const i18n = createI18n({
     en: {
       // 對應中文: '英文翻譯',
       // header & footer --------------------------
-      關於我們: 'About DIDADIDA',
+      關於DIDA:'About DIDA',
+      關於我們: 'About Us',
       最新消息: 'News',
       探索海洋生物: ' Explore Marine Creatures ',
       DIDA商城: 'DIDA Mall',

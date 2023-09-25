@@ -117,8 +117,8 @@
               </div>
               <!-- 關於DIDA -->
               <li class="navigation__item">
-                <a @click="toggleDropdown">{{ $t(menuTitle.rwd_about) }}</a>
-                <ul class="dropdown">
+                <a @click="toggleDropdown('about')">{{ $t(menuTitle.about) }}</a>
+                <ul class="dropdown" v-if="showAboutDropdown">
                   <li v-for="aboutSub in aboutSub" key="aboutSub">
                     <router-link :to="aboutSub.link" @click="closeMobileMenu">{{
                       $t(aboutSub.name)
@@ -136,10 +136,10 @@
               </li>
               <!-- 購物 -->
               <li class="navigation__item">
-                <a @click="toggleDropdown">{{ $t(menuTitle.buy) }}</a>
-                <ul class="dropdown" @click="closeMobileMenu">
-                  <li v-for="buySub in buySub" :key="buySub">
-                    <router-link :to="buySub.link" >{{
+                <a @click="toggleDropdown('buy')">{{ $t(menuTitle.buy) }}</a>
+                <ul class="dropdown" v-if="showBuyDropdown">
+                  <li v-for="buySub in buySub" key="buySub">
+                    <router-link :to="buySub.link" @click="closeMobileMenu">{{
                       $t(buySub.name)
                     }}</router-link>
                   </li>
@@ -164,9 +164,10 @@ export default {
       checkLogoPic: false,
       headerColor: "rgba(35, 45, 71, 0)",
       headerPosition: "relative",
+      showAboutDropdown: false,
+      showBuyDropdown: false,
       menuTitle: {
-        about: "關於我們",
-        rwd_about: "關於DIDA",
+        about: "關於DIDA",
         news: "最新消息",
         animal: "探索海洋生物",
         buy: "DIDA商城",
@@ -305,16 +306,16 @@ export default {
         this.checkLogoPic = true;
       }
     },
-    toggleDropdown(event) {
-      const target = event.target;
-      const dropdown = target.nextElementSibling; // 假設下拉菜單緊跟在觸發元素的後面
-
-      if (dropdown && dropdown.classList.contains('dropdown')) {
-        if (dropdown.style.display === 'block') {
-          dropdown.style.display = 'none';
-        } else {
-          dropdown.style.display = 'block';
-        }
+    toggleDropdown(menuType) {
+      // 根據不同的子選單類型來判斷是否展開或收起
+      if (menuType === 'about') {
+        this.showAboutDropdown = !this.showAboutDropdown;
+        // 如果展開about子選單，則收起buy子選單
+        this.showBuyDropdown = false;
+      } else if (menuType === 'buy') {
+        this.showBuyDropdown = !this.showBuyDropdown;
+        // 如果展開buy子選單，則收起about子選單
+        this.showAboutDropdown = false;
       }
     },
     closeMobileMenu() {
@@ -328,6 +329,8 @@ export default {
       if (dropdown) {
         dropdown.style.display = 'none';
       }
+      this.showAboutDropdown = false;
+      this.showBuyDropdown = false;
     },
     changeLanguage() {
       // 使用i18n的setLocale方法来切换语言
@@ -406,6 +409,7 @@ export default {
   // 子選單樣式
   .sub-menu {
     visibility: hidden;
+    text-align: center;
     position: absolute;
     top: 40px;
     padding: 10px 0;
@@ -581,23 +585,22 @@ option:checked {
 
       .navigation__background {
         position: absolute;
-        height: 2em;
-        width: 2em;
+        max-height: 100vh;
+        max-width: 100vw;
         inset: 0;
         opacity: 0;
         border-radius: 50%;
-        background: map-get($colors , 'mainColor' );
+        background: map-get($colors , 'mainColor');
         z-index: 4;
         transition: all .8s cubic-bezier(0.86, 0, 0.07, 1);
       }
 
       .navigation__nav {
         position: fixed;
-        top: 0;
-        left: 0;
-        height: 100vh;
+        inset: 0;
+        max-width: 100vw;
+        max-height: 100vh;
         opacity: 0;
-        width: 0;
         visibility: hidden;
         z-index: 4;
         transition: all 1s cubic-bezier(0.68, -0.55, 0.265, 1.55) -.2s;
@@ -610,11 +613,14 @@ option:checked {
         transform: translate(-50%, -50%);
         text-align: center;
         width: 100%;
+        height: 70%;
       }
 
       .navigation__item {
         margin: 2rem;
+        padding: 1rem;
         position: relative;
+      
 
         a {
           display: inline-block;
@@ -626,12 +632,12 @@ option:checked {
         }
 
         .dropdown {
-          display: none;
           position: absolute;
           width: 100%;
-          top: 150%;
+          top: 120%;
+          left: 0;
           margin: auto;
-          background-color: rgba(101, 101, 101, 1);
+          background-color: map-get($colors , 'h2Blue' );
           border-radius: 2rem;
           transform: translateY(-1em);
           transition: all 0.3s ease-in-out 0s, visibility 0s linear 0.3s;
@@ -645,7 +651,7 @@ option:checked {
           a {
             width: 100%;
             font-size: map-get($fontSizes , 'div');
-
+            color: map-get($colors , 'dark' );
           }
         }
       }
@@ -656,7 +662,7 @@ option:checked {
         display: inline-block;
         padding: 1rem 2rem;
         text-transform: uppercase;
-        color: #f4f4f4;
+        color: map-get($colors , 'light' );
         font-size: 2.4rem;
         text-decoration: none;
         transition: all .2s;
@@ -701,7 +707,6 @@ option:checked {
         width: 2rem;
         height: 2px;
         background-color: #eef6f7;
-        box-shadow: #2c3e50 0.1em 0.1em 0.1em;
       }
 
       .navigation__icon::before,

@@ -3,7 +3,7 @@
     <div class="footer_wrap">
       <!-- 關於我們 -->
       <div class="footer_item">
-        <h3><router-link to="/about">{{ $t(footerTitle.about) }}</router-link></h3>
+        <h3>{{ $t(footerTitle.about) }}</h3>
         <ul>
           <li v-for="about in footer_aboutArray" :key="about">
             <router-link :to="about.link">{{ $t(about.name) }}</router-link>
@@ -66,13 +66,14 @@ export default {
   data() {
     return {
       footerTitle: {
-        about: "關於我們",
+        about: "關於DIDA",
         news: "最新消息",
         animal: "探索海洋生物",
         buy: "DIDA商城",
         media: "社群媒體",
       },
       footer_aboutArray: [
+      { link: "/about", name: "關於我們" },
         { link: "/faq", name: "常見問答" },
         { link: "/guide", name: "園區導覽" },
         { link: "/interact", name: "互動遊戲" },
