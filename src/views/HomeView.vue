@@ -13,12 +13,21 @@
         <lightCircle>
           <template v-slot:circle>
             <div class="open">
-              <span>{{ $t('營業時間') }}</span>
+              <span>{{ $t("營業時間") }}</span>
               <span>09:00-17:00</span>
-              <svg x="0px" y="0px" width="200px" height="15px" viewBox="0 0 399.6 15.9">
-                <polyline class="op_line" points="0.1,5.5 58,15.4 118.4,5.5 189.2,5.5 258.7,10.4 368.3,0.5 399.5,7.9 " />
+              <svg
+                x="0px"
+                y="0px"
+                width="200px"
+                height="15px"
+                viewBox="0 0 399.6 15.9"
+              >
+                <polyline
+                  class="op_line"
+                  points="0.1,5.5 58,15.4 118.4,5.5 189.2,5.5 258.7,10.4 368.3,0.5 399.5,7.9 "
+                />
               </svg>
-              <span>{{ $t('最後入場') }}</span>
+              <span>{{ $t("最後入場") }}</span>
               <span>16:00</span>
             </div>
           </template>
@@ -29,14 +38,14 @@
       <div class="entrance">
         <h3Title>
           <template v-slot:h3>
-            <h3>{{ $t('今日入園人數') }}</h3>
+            <h3>{{ $t("今日入園人數") }}</h3>
           </template>
         </h3Title>
         <div class="drop">
           <div class="wave water"></div>
           <div class="wave water"></div>
         </div>
-        <p>35%</p>
+        <p>{{ this.$store.state.visitCount }}人</p>
         <div class="deco turtle">
           <img src="../../public/all_images/deco/deco_turtle.png" alt="" />
         </div>
@@ -51,23 +60,26 @@
 
       <h3Title>
         <template v-slot:h3>
-          <h3>{{ $t('票價資訊') }}</h3>
+          <h3>{{ $t("票價資訊") }}</h3>
         </template>
       </h3Title>
       <ticketPrice></ticketPrice>
       <router-link to="/ticket"><button>立即購票</button></router-link>
 
-
       <!-- 交通指南 ------------------------------------------ -->
       <h3Title>
         <template v-slot:h3>
-          <h3>{{ $t('交通指南') }}</h3>
+          <h3>{{ $t("交通指南") }}</h3>
         </template>
       </h3Title>
       <div class="map">
         <iframe
           src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14468.996712784081!2d121.2250227!3d24.9576355!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x346823ea50c732a5%3A0x1b5e6ee66e9fec49!2z57ev6IKyVGliYU1l6ZmE6Kit5Lit5aOi6IG36KiT5Lit5b-D!5e0!3m2!1szh-TW!2stw!4v1690272123794!5m2!1szh-TW!2stw"
-          style="border: 0" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+          style="border: 0"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+        >
         </iframe>
         <div class="text">
           <div class="address">
@@ -83,7 +95,7 @@
           </div>
         </div>
         <div class="deco">
-          <img src="../../public/all_images/deco/deco_fishes.png" alt="">
+          <img src="../../public/all_images/deco/deco_fishes.png" alt="" />
         </div>
       </div>
 
@@ -109,20 +121,26 @@
         </div>
         <router-link to="/product"><button>更多商品</button></router-link>
         <div class="deco star">
-          <img src="../../public/all_images/index/deco_index_star.png" alt="">
+          <img src="../../public/all_images/index/deco_index_star.png" alt="" />
         </div>
         <div class="deco shark">
-          <img src="../../public/all_images/index/deco_index_shark.png" alt="">
+          <img
+            src="../../public/all_images/index/deco_index_shark.png"
+            alt=""
+          />
         </div>
         <div class="deco whale">
-          <img src="../../public/all_images/index/deco_index_whale.png" alt="">
+          <img
+            src="../../public/all_images/index/deco_index_whale.png"
+            alt=""
+          />
         </div>
       </div>
 
       <!-- 活動倒數 ------------------------------------------ -->
       <h3Title>
         <template v-slot:h3>
-          <h3>{{ $t('活動倒數') }}</h3>
+          <h3>{{ $t("活動倒數") }}</h3>
         </template>
       </h3Title>
       <div class="active">
@@ -576,7 +594,6 @@ export default {
 
     .deco {
       position: absolute;
-
     }
 
     .star {
@@ -617,7 +634,7 @@ export default {
       }
 
       .image::after {
-        content: '';
+        content: "";
         position: absolute;
         top: 0;
         right: 0;
@@ -640,8 +657,7 @@ export default {
         color: map-get($colors, "light");
         text-align: center;
         background-color: #9fbdce;
-        background:
-          linear-gradient(80deg, transparent 75px, #68769a 0);
+        background: linear-gradient(80deg, transparent 75px, #68769a 0);
 
         .date {
           display: block;
@@ -684,23 +700,21 @@ export default {
       }
     }
 
-    .day>span:first-child {
+    .day > span:first-child {
       display: block;
     }
 
-    .day>span:nth-child(2) {
+    .day > span:nth-child(2) {
       font-size: 80px;
       font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
     }
   }
 
   // -- RWD --------------------------------------
-  @media screen and (max-width:768px) {
-
+  @media screen and (max-width: 768px) {
     .ticket {
       max-width: 90%;
     }
-
 
     .map {
       max-width: 90%;
@@ -716,7 +730,6 @@ export default {
         width: 100%;
         margin-top: 30px;
       }
-
     }
 
     // .map::after {
@@ -725,7 +738,6 @@ export default {
     //   border-bottom: 2px solid #68769a;
     //   border-radius: 5px;
     // }
-
 
     .active {
       max-width: 90%;
@@ -741,17 +753,16 @@ export default {
         padding-right: 15px;
       }
 
-      .day>span:nth-child(2) {
+      .day > span:nth-child(2) {
         font-size: 60px;
       }
     }
   }
 
-  @media screen and (max-width:415px) {
+  @media screen and (max-width: 415px) {
     .deco {
       display: none;
     }
-
   }
 }
 </style>

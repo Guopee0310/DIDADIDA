@@ -3,8 +3,14 @@
     <div class="tick_area">
       <div
         class="tick_order_group"
-        v-for="tick in tickOrder"
+        v-for="(tick, index) in tickOrder"
         :key="tick.tickImg"
+        :class="{
+          tick_order_group_used:
+            this.$store.state.activeIndexes.findIndex(
+              (v) => v.tickIdx === index
+            ) > -1,
+        }"
       >
         <div class="tick_img">
           <img :src="tick.tickImg" alt="" />
@@ -27,7 +33,12 @@
             <p>NT {{ tick.tickPrice }}</p>
           </div>
           <div>
-            <QRCode :checkDate="tick.tickDate"></QRCode>
+            <QRCode
+              :checkDate="tick.tickDate"
+              :ticketIndex="index"
+              @click="activateGrayBkc(index)"
+              @checkTicket="getCheck"
+            ></QRCode>
           </div>
         </div>
       </div>
@@ -46,6 +57,8 @@ export default {
   },
   data() {
     return {
+      grayBkc: false,
+      activeIndexes: [],
       tickOrder: [
         // {
         //     tickImg: require("../assets/images/dolphin_pillow.jpg"),
@@ -80,6 +93,29 @@ export default {
   },
   mounted() {
     this.tickOrder = this.$store.state.ticketList;
+  },
+  computed: {
+    activeList(idx) {
+      return this.$store.state.activeIndexes[idx];
+    },
+  },
+  methods: {
+    getCheck(data, idx) {
+      console.log(data, idx);
+    },
+    isGrayBkcActive(index) {
+      return this.activeIndexes.includes(index);
+    },
+    activateGrayBkc(index) {
+      // 将索引添加到activeIndexes中
+      if (this.getCheck) {
+        // this.activeIndexes.push(index);
+        // alert(123);
+      }
+    },
+    getRsp(data) {
+      this.grayBkc = data;
+    },
   },
 };
 </script>
@@ -132,9 +168,13 @@ export default {
       border-bottom: 1px solid #eee;
       display: flex;
       justify-content: space-evenly;
+
       // z-index: 2;
     }
-
+    .tick_order_group_used {
+      background-color: gray;
+      color: rgb(147, 144, 144);
+    }
     .tick_order_group:last-child {
       border-bottom: 0;
     }

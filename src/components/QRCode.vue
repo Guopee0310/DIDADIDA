@@ -1,6 +1,8 @@
 <template>
   <div>
-    <button class="qr_btn" @click="showModal = true">顯示電子票券</button>
+    <button class="qr_btn" @click="showModal = true" v-if="!usedTicket">
+      顯示電子票券
+    </button>
     <transition name="fade">
       <div v-if="showModal" class="modal">
         <div class="shadow" @click="showModal = false"></div>
@@ -18,8 +20,8 @@
                 <p>請掃描電子票券入場</p>
               </div>
             </div>
-            <div class="qr-confirm-btn" @click="showModal = false">
-              <button>確認</button>
+            <div class="qr-confirm-btn" @click="visitPlus">
+              <button @click="sendUsed">確認</button>
             </div>
           </div>
           <div class="deco_fishes">
@@ -39,12 +41,26 @@ export default {
   },
   data() {
     return {
+      usedTicket: false,
       showModal: false,
       qrCodeData: "https://yahoo.com.tw", // QR碼連到的地方
     };
   },
-  methods: {},
-  props: ["checkDate"],
+  methods: {
+    visitPlus() {
+      this.showModal = false;
+      this.$store.state.visitCount++;
+    },
+    sendUsed() {
+      this.usedTicket = true;
+      this.$emit("checkTicket", true, this.ticketIndex);
+      this.$store.state.activeIndexes.push({
+        visted: true,
+        tickIdx: this.ticketIndex,
+      });
+    },
+  },
+  props: ["checkDate", "ticketIndex"],
 };
 </script>
 
