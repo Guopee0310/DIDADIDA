@@ -398,5 +398,29 @@ option:checked {
   color: #fff;
 }
 
-@media screen and (max-width:768px) {}
+@media screen and (max-width:415px) {
+
+  .main-nav {
+    position: fixed;
+    top: 5%;
+    left: 0;
+    right: 0;
+    flex-wrap: wrap;
+    width: 80%;
+    margin: auto;
+    background-color: rgba(40, 61, 84, 0.8);
+    backdrop-filter: blur(3px);
+    border-radius: 10px;
+    padding: 20px 0;
+
+    .main-menu {
+      width: 300px;
+      text-align: center;
+    }
+
+    .sub-menu {
+      // visibility: visible;
+    }
+  }
+}
 </style>

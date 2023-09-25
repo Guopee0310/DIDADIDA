@@ -85,9 +85,9 @@ export default {
   beforeDestroy() {},
   computed: {
     catchDate() {
-      return `${new Date(this.date).getFullYear()}.${new Date(
-        this.date
-      ).getMonth()}.${new Date(this.date).getDate()}`;
+      return `${new Date(this.date).getFullYear()}.${
+        new Date(this.date).getMonth() + 1
+      }.${new Date(this.date).getDate()}`;
     },
   },
   methods: {

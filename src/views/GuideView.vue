@@ -52,7 +52,7 @@
     </div>
   </transition>
   <div class="tabs">
-    <h4><img v-if="selectedTab == 'tab2'" src="../../public/all_images/guide/lighthouse.png" alt="">表層館</h4>
+    <h4><img v-if="selectedTab == 'tab2'" src="../../public/all_images/guide/lighthouse.png" alt="">淺層館</h4>
     <input type="radio" name="name" v-model="selectedTab" value="tab2" id="section2" />
 
     <div class="content">
@@ -282,7 +282,7 @@ h3 {
   box-sizing: border-box;
   position: relative;
   max-width: 100%;
-  height: 130vh;
+  height: 100vh;
   overflow: hidden;
 
   .sea+img {
@@ -414,6 +414,7 @@ h3 {
 
       .about_pic {
         width: 40%;
+        height: 100%;
 
         img {
           width: 100%;
@@ -428,7 +429,6 @@ h3 {
       }
 
       .fish_wrap {
-        height: 100%;
         display: flex;
         flex-wrap: wrap;
         margin-left: 1em;
@@ -517,7 +517,7 @@ h3 {
 
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:992px) {
 
   .tabs {
   height: 80vh;

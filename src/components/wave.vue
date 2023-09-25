@@ -34,12 +34,21 @@ export default {
     return {
       h1Title: "",
       h2Title: "",
-      waveColor1: "rgba(255,255,255,0.6)",
-      waveColor2: "rgba(70, 130, 191,0.7)",
-      waveColor3: "#fff",
+      // waveColor1: "rgba(255,255,255,0.6)",
+      // waveColor2: "rgba(70, 130, 191,0.7)",
+      // waveColor3: "#fff",
     };
   },
   computed: {
+    waveColor1() {
+      return "rgba(255,255,255,0.6)";
+    },
+    waveColor2() {
+      return "rgba(70, 130, 191,0.7)";
+    },
+    waveColor3() {
+      return this.$route.path === "/about" ? "#68769a" : "#fff";
+    },
     h1Name() {
       return this.$route.path == "/product"
         ? "周邊商品"
@@ -135,28 +144,13 @@ export default {
   //     }
   //   },
   // },
-  methods: {
-    // setWaveColors() {
-    //   switch (this.$route.path) {
-    //     case "/about":
-    //       this.waveColor1 = "rgba(255,255,255,0.6)";
-    //       this.waveColor2 = "rgba(70, 130, 191,0.7)";
-    //       this.waveColor3 = "#fff";
-    //       break;
-    //     default:
-    //       // 默認顏色
-    //       this.waveColor1 = "rgba(255, 255, 255, 0.6)";
-    //       this.waveColor2 = "rgba(70, 130, 191, 0.7)";
-    //       this.waveColor3 = "#fff";
-    //   }
-    // },
-  },
   mounted() {
-    if (this.$route.path == "/about") {
-      this.waveColor3 = "#68769a";
-    }
+    // if (this.$route.path == "/about") {
+    //   this.waveColor3 = "#68769a";
+    // }
     // this.setWaveColors();
   },
+  
 };
 </script>
 <style scoped lang="scss">

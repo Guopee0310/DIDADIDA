@@ -1,7 +1,11 @@
 <template>
   <div class="tick_order_main">
     <div class="tick_area">
-      <div class="tick_order_group" v-for="tick in tickOrder" :key="tick.tickImg">
+      <div
+        class="tick_order_group"
+        v-for="tick in tickOrder"
+        :key="tick.tickImg"
+      >
         <div class="tick_img">
           <img :src="tick.tickImg" alt="" />
         </div>
@@ -23,7 +27,7 @@
             <p>NT {{ tick.tickPrice }}</p>
           </div>
           <div>
-            <QRCode></QRCode>
+            <QRCode :checkDate="tick.tickDate"></QRCode>
           </div>
         </div>
       </div>
