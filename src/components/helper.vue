@@ -170,7 +170,7 @@ export default {
     div {
       @include selectBtn;
       width: fit-content;
-      display: flex;
+      display: inline-block;
       text-align: center;
       margin: 5px 5px;
     }
