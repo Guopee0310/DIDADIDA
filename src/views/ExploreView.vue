@@ -844,7 +844,8 @@ export default {
       vertical-align: top;
       width: 35%;
       margin: -50px auto 15px;
-      display: inline-block;
+      display: block;
+
     }
 
     h4 {
