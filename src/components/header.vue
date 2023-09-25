@@ -323,8 +323,8 @@ export default {
       z-index 0s linear 0.01s;
 
     li:nth-child(4) {
-      // width: 140px;
-      width: fit-content;
+      width: 155px;
+      // width: fit-content;
     }
   }
 

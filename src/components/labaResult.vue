@@ -51,9 +51,9 @@ export default {
     return {
       imgSrcGet: "",
       imgSrcArr: [
+        "../../public/all_images/laba/bluewhale.jpg",
         "../assets/images/dolphin_pillow.jpg",
-        "../assets/images/dolphin_pillow.jpg",
-        "../assets/images/dolphin_pillow.jpg",
+        "../../public/all_images/laba/jellyfish.jpg",
         "../assets/images/dolphin_pillow.jpg",
       ],
     };
@@ -94,11 +94,14 @@ export default {
 </script>
 <style scoped lang="scss">
 .controlResult {
+  // background-color: #fff;
+  background-color: rgb(255, 255, 255, 0.4);
   display: flex;
   align-items: center;
   justify-content: center;
   border: 1px white solid;
-  color: white;
+  border-radius: 10px;
+  color: black;
   margin: 50px 0px;
   padding: 20px;
   .isOpacity {
@@ -110,15 +113,18 @@ export default {
     transition: 1.5s;
   }
   .resultPic {
+    
     width: 200px;
     height: 200px;
     img {
+      border-radius: 50%;
       width: 100%;
     }
   }
   .resultPost {
     // border: 1px red solid;
     padding: 0 20px;
+
     .postTitle {
       font-size: map-get($fontSizes, "h4");
       font-weight: bold;
@@ -129,7 +135,7 @@ export default {
       margin-bottom: 15px;
     }
     .postPoint {
-      color: red;
+      color: rgb(215, 79, 79);
       font-size: map-get($fontSizes, "span");
     }
   }
