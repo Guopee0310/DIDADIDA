@@ -2,7 +2,7 @@
 
     <div class="cart-popup" v-if="showCartPopup">
       <div class="cart-content">
-        <p>已加入購物車</p>
+        <p>已加入購物車🛒✨</p>
         <img src="\all_images\doctor dida.png" alt="">
       </div>
     </div>
@@ -23,6 +23,10 @@
       setTimeout(() => {
         this.toggleCartPopup();
       }, 500); // 500毫秒（0.5秒）后关闭
+    },
+    changeLanguage() {
+      // 使用i18n的setLocale方法来切换语言
+      this.$i18n.locale = this.selectedLanguage;
     }
     }
   };
