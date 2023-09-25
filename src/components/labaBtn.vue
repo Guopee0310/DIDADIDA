@@ -1,5 +1,5 @@
 <template>
-  <a href="#" @click.prevent="">
+  <a href="#" @click.prevent="" >
     <span></span>
     <span></span>
     <span></span>
@@ -13,7 +13,9 @@ export default {
   data() {
     return {};
   },
-  methods: {},
+  methods: {
+
+  },
 };
 </script>
 <style scoped lang="scss">

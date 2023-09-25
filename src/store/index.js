@@ -26,6 +26,9 @@ export default createStore({
     totalScorePoint: 0,
     prodOrderArr: [],
     memberBtn: "mem_account_settings",
+    visitCount: 0,
+    activeIndexes: [],
+    questionPic:true,
   },
 
   // 類似vue檔裡面的computed

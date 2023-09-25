@@ -1,8 +1,12 @@
 <template>
   <div class="labaAll">
-    <div class="containerPic">
+    <div class="containerPic" v-if="this.$store.state.questionPic">
+      <img :src="require('../../public/all_images/laba/question_mark.jpg')" alt="">
+   </div> 
+
+    <div class="containerPic" v-else>
       <img
-        :src="require('../assets/images/dolphin_pillow.jpg')"
+        :src="require('../../public/all_images/laba/bluewhale.jpg')"
         :class="{
           resetImg: randomStart,
           resetImg2: guessNum == 1,
@@ -128,11 +132,15 @@ export default {
       this.randomStart = true;
       this.guessNum = 0;
       this.finalShow = false;
+      this.$store.state.questionPic = true;
     },
     movePic() {
-      const min = 1;
-      const max = 4;
+      this.$store.state.questionPic = false;
 
+      setTimeout(()=>{
+        const min = 1;
+      const max = 4;
+   
       const randomNum = Math.floor(Math.random() * (max - min + 1)) + min;
       this.randomStart = false;
       if (randomNum == 1) {
@@ -167,6 +175,9 @@ export default {
       setTimeout(() => {
         this.finalShow = true;
       }, 1000);
+
+      },50)
+
     },
   },
   components: {
@@ -194,8 +205,8 @@ export default {
   .containerPic {
     width: 474px;
     height: 474px;
-    border-radius: 5px;
-    border: 5px #172c40 solid;
+    border-radius: 20px;
+    // border: 5px #172c40 solid;
     margin: 0 auto;
     overflow: hidden;
     .resetImg {

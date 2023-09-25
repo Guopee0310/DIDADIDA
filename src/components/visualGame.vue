@@ -15,8 +15,15 @@
 </template> -->
 <template>
   <div class="wrapper">
-    <video :src="require('../assets/video/pexels_videos_2556894 (1080p).mp4')" class="videoShark" autoplay loop
-      v-if="autoPlayTrue" :key="aaa" muted></video>
+    <video
+      :src="require('../assets/video/pexels_videos_2556894 (1080p).mp4')"
+      class="videoShark"
+      autoplay
+      loop
+      v-if="autoPlayTrue"
+      :key="aaa"
+      muted
+    ></video>
     <div class="shadow" ref="shadow"></div>
     <!-- 把shadow綁的style拿掉，解決遮蓋問題
       :style="{ transform: `translate(${x}px, ${y}px)` }" -->
@@ -37,23 +44,17 @@ export default {
   methods: {
     getClient(e) {
       let x = e.clientX - document.documentElement.clientWidth * 1.8;
-      let y = e.clientY - document.documentElement.clientHeight * 1.6;
+      let y = e.clientY - document.documentElement.clientHeight * 1.8;
 
       this.x = x;
       this.y = y;
 
       if (this.$refs.shadow) {
-        this.$refs.shadow.style.transform = 'translate(' + x + 'px, ' + y + 'px)';
+        this.$refs.shadow.style.transform =
+          "translate(" + x + "px, " + y + "px)";
       } else {
         console.error("$refs.shadow is null");
       }
-
-
-
-
-
-
-
     },
     changeBkPosition() {
       let x = e.clientX - document.documentElement.clientWidth * 1.5;
@@ -98,13 +99,15 @@ body {
 .shadow {
   position: absolute;
   width: 250vw;
-  height: 200vh;
+  height: 300vh;
   left: 50%;
   top: 50%;
   transform: translateX(-50%) translateY(-50%);
-  background-image: radial-gradient(circle at center,
-      transparent,
-      #000000bf 10%);
+  background-image: radial-gradient(
+    circle at center,
+    transparent,
+    #000000bf 10%
+  );
 }
 </style>
 

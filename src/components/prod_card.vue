@@ -1,14 +1,23 @@
 <template>
   <div class="select_btn">
-    <prodSelect @transferClass="getClass" @transferPrice="getPrice" @transferSearch="searchClick"></prodSelect>
+    <prodSelect
+      @transferClass="getClass"
+      @transferPrice="getPrice"
+      @transferSearch="searchClick"
+    ></prodSelect>
   </div>
-  <div class="card" v-for="(i, index) in chooseItem" :key="i.imageSrc" @click="showProductDetails(i)">
+  <div class="card" v-for="(i, index) in chooseItem" :key="i.imageSrc">
     <div class="heart">
-      <heart @change-heart="changeHeart($event, i, index)" :keepLove="keepHeartArr[index]"
-        :is-active="favList.findIndex((v) => v.favoName === i.titleName) > -1"></heart>
+      <heart
+        @change-heart="changeHeart($event, i, index)"
+        :keepLove="keepHeartArr[index]"
+        :is-active="favList.findIndex((v) => v.favoName === i.titleName) > -1"
+      ></heart>
     </div>
     <div class="pic">
-      <a href="#"><img :src="i.imageSrc" alt="" /></a>
+      <a href="#" @click.prevent="showProductDetails(i)"
+        ><img :src="i.imageSrc" alt=""
+      /></a>
     </div>
 
     <div class="name">
@@ -25,9 +34,13 @@
           <input type="button" value="+" @click="i.count++" />
         </div>
         <div class="buy">
-          <i class="fa-solid fa-cart-shopping" style="color: #9fbdce" @click.prevent="
-            pushAndTogglePopup(i.imageSrc, i.titleName, i.count, i.prodPrice)
-            "></i>
+          <i
+            class="fa-solid fa-cart-shopping"
+            style="color: #9fbdce"
+            @click.prevent="
+              pushAndTogglePopup(i.imageSrc, i.titleName, i.count, i.prodPrice)
+            "
+          ></i>
           <!-- pushInShoppingCart(
                   i.imageSrc,
                   i.titleName,
@@ -48,7 +61,7 @@
         <div class="prod-content">
           <div class="prod-img">
             <span class="close" @click="closeModal">&times;</span>
-            <img :src="selectedProduct.imageSrc">
+            <img :src="selectedProduct.imageSrc" />
           </div>
           <div class="prod-info">
             <div>
@@ -62,7 +75,11 @@
     </div>
   </transition>
   <!-- ↑↑↑ 商品彈窗 ↑↑↑ -->
-  <Page :total="chooseItem2.length" @on-change="updatePage" class="changepage" />
+  <Page
+    :total="chooseItem2.length"
+    @on-change="updatePage"
+    class="changepage"
+  />
 </template>
 
 <script>
@@ -220,152 +237,7 @@ export default {
           info: "極舒適鯊魚抱枕的介紹極舒適鯊魚抱枕的介紹極舒適鯊魚抱枕的介紹",
         },
       ],
-      chooseItem: [
-        {
-          imageSrc: require("../assets/images/dolphin_pillow.jpg"),
-          titleName: "極舒適海豚抱枕",
-          prodPrice: "380",
-          tag: "抱枕",
-          count: 1,
-          info: "海豚抱枕的介紹海豚抱枕的介紹海豚抱枕的介紹海豚抱枕的介紹",
-        },
-        {
-          imageSrc: require("../assets/images/whaleshark_doll.png"),
-          titleName: "Q版鯨鯊玩偶",
-          prodPrice: "499",
-          tag: "玩偶",
-          count: 1,
-          info: "Q版鯨鯊玩偶的介紹Q版鯨鯊玩偶的介紹Q版鯨鯊玩偶的介紹Q版鯨鯊玩偶的介紹Q版鯨鯊玩偶的介紹",
-        },
-        {
-          imageSrc: require("../assets/images/dolphin_doll.png"),
-          titleName: "超可愛海豚寶寶玩偶",
-          prodPrice: "399",
-          tag: "玩偶",
-          count: 1,
-          info: "超可愛海豚寶寶玩偶的介紹超可愛海豚寶寶玩偶的介紹超可愛海豚寶寶玩偶的介紹超可愛海豚寶寶玩偶的介紹",
-        },
-        {
-          imageSrc: require("../assets/images/shark_doll.jpg"),
-          titleName: "愛睏a鯊鯊玩偶",
-          prodPrice: "499",
-          tag: "玩偶",
-          count: 1,
-          info: "愛睏a鯊鯊玩偶的介紹愛睏a鯊鯊玩偶的介紹愛睏a鯊鯊玩偶的介紹",
-        },
-        {
-          imageSrc: require("../assets/images/shark_keyring.jpg"),
-          titleName: "QQ的鯊鯊鑰匙圈",
-          prodPrice: "160",
-          tag: "配飾",
-          count: 1,
-          info: "QQ的鯊鯊鑰匙圈的介紹QQ的鯊鯊鑰匙圈的介紹QQ的鯊鯊鑰匙圈的介紹",
-        },
-        {
-          imageSrc: require("../assets/images/Nemo_doll.jpg"),
-          titleName: "Nemo玩偶",
-          prodPrice: "299",
-          tag: "玩偶",
-          count: 1,
-          info: "Nemo玩偶的介紹Nemo玩偶的介紹Nemo玩偶的介紹Nemo玩偶的介紹",
-        },
-        {
-          imageSrc: require("../assets/images/sealion_doll.png"),
-          titleName: "Q版海獅玩偶",
-          prodPrice: "499",
-          tag: "玩偶",
-          count: 1,
-          info: "Q版海獅玩偶的介紹Q版海獅玩偶的介紹Q版海獅玩偶的介紹Q版海獅玩偶的介紹",
-        },
-        {
-          imageSrc: require("../assets/images/shark_doll_2.png"),
-          titleName: "Q版鯊鯊玩偶",
-          prodPrice: "499",
-          tag: "玩偶",
-          count: 1,
-          info: "Q版鯊鯊玩偶的介紹Q版鯊鯊玩偶的介紹Q版鯊鯊玩偶的介紹",
-        },
-        {
-          imageSrc: require("../assets/images/loveing_garden_eel.png"),
-          titleName: "戀愛ing花園鰻玩偶",
-          prodPrice: "399",
-          tag: "玩偶",
-          count: 1,
-          info: "戀愛ing花園鰻玩偶的介紹戀愛ing花園鰻玩偶的介紹戀愛ing花園鰻玩偶的介紹",
-        },
-        {
-          imageSrc: require("../assets/images/whale_doll.jpg"),
-          titleName: "勾錐a小鯨魚玩偶",
-          prodPrice: "350",
-          tag: "玩偶",
-          count: 1,
-          info: "勾錐a小鯨魚玩偶的介紹勾錐a小鯨魚玩偶的介紹勾錐a小鯨魚玩偶的介紹",
-        },
-        {
-          imageSrc: require("../assets/images/lantern_fish_doll.jpg"),
-          titleName: "貪吃燈籠魚玩偶",
-          prodPrice: "499",
-          tag: "玩偶",
-          count: 1,
-          info: "貪吃燈籠魚玩偶的介紹貪吃燈籠魚玩偶的介紹貪吃燈籠魚玩偶的介紹",
-        },
-        {
-          imageSrc: require("../assets/images/pufferfish_doll.jpg"),
-          titleName: "愛睏a河豚玩偶",
-          prodPrice: "499",
-          tag: "玩偶",
-          count: 1,
-          info: "愛睏a河豚玩偶的介紹愛睏a河豚玩偶的介紹愛睏a河豚玩偶的介紹",
-        },
-        {
-          imageSrc: require("../assets/images/octopus_doll.jpg"),
-          titleName: "老爺爺章魚玩偶",
-          prodPrice: "399",
-          tag: "玩偶",
-          count: 1,
-          info: "老爺爺章魚玩偶的介紹老爺爺章魚玩偶的介紹老爺爺章魚玩偶的介紹",
-        },
-        {
-          imageSrc: require("../assets/images/sea_turtle_doll.jpg"),
-          titleName: "勾錐a海龜玩偶",
-          prodPrice: "399",
-          tag: "玩偶",
-          count: 1,
-          info: "勾錐a海龜玩偶的介紹勾錐a海龜玩偶的介紹勾錐a海龜玩偶的介紹",
-        },
-        {
-          imageSrc: require("../assets/images/killer_whale_doll.jpg"),
-          titleName: "帥氣a虎鯨玩偶",
-          prodPrice: "499",
-          tag: "玩偶",
-          count: 1,
-          info: "帥氣a虎鯨玩偶的介紹帥氣a虎鯨玩偶的介紹帥氣a虎鯨玩偶的介紹帥氣a虎鯨玩偶的介紹",
-        },
-        {
-          imageSrc: require("../assets/images/stingray_pillow.jpg"),
-          titleName: "極舒適魟魚抱枕",
-          prodPrice: "380",
-          tag: "抱枕",
-          count: 1,
-          info: "極舒適魟魚抱枕的介紹極舒適魟魚抱枕的介紹極舒適魟魚抱枕的介紹",
-        },
-        {
-          imageSrc: require("../assets/images/shark_pillow2.jpg"),
-          titleName: "滿出來鯊鯊抱枕",
-          prodPrice: "660",
-          tag: "抱枕",
-          count: 1,
-          info: "滿出來鯊鯊抱枕的介紹滿出來鯊鯊抱枕的介紹滿出來鯊鯊抱枕的介紹",
-        },
-        {
-          imageSrc: require("../assets/images/shark_pillow.jpg"),
-          titleName: "極舒適鯊魚抱枕",
-          prodPrice: "499",
-          tag: "抱枕",
-          count: 1,
-          info: "極舒適鯊魚抱枕的介紹極舒適鯊魚抱枕的介紹極舒適鯊魚抱枕的介紹",
-        },
-      ],
+      chooseItem: [],
       pageSize: 8,
       selectFirst: false,
       priceFirst: false,
@@ -380,6 +252,7 @@ export default {
     };
   },
   mounted() {
+    this.chooseItem = [...this.cardsAll];
     this.cardsAll.sort((a, b) => {
       return parseInt(a.prodPrice) - parseInt(b.prodPrice);
     });
@@ -962,16 +835,15 @@ export default {
     flex-direction: column;
 
     p {
-      color: map-get($colors, 'dark');
-      font-size: map-get($fontSizes, 'p');
+      color: map-get($colors, "dark");
+      font-size: map-get($fontSizes, "p");
     }
 
-    >p {
+    > p {
       margin-top: 30px;
       line-height: 40px;
     }
   }
-
 }
 
 // 彈窗顯示與隱藏延遲動畫效果
@@ -1036,7 +908,7 @@ export default {
       width: 80%;
       margin-top: 10px;
 
-      >p {
+      > p {
         margin-top: 10px;
         line-height: 30px;
       }
