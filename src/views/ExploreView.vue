@@ -12,6 +12,8 @@
         <h4 :data-depth="animal.depth">{{ animal.name }}</h4>
       </div>
 
+
+
       <!-- 中層海洋帶 -->
       <div class="line middle">
         <div class="slot" id="two"></div>
@@ -61,6 +63,31 @@
     </div>
 
     <div class="card" v-if="showText">
+      <!-- ↓↓↓ 商品彈窗 ↓↓↓ -->
+      <transition name="fade">
+        <div v-if="selectedAnimal" class="modal">
+          <div class="shadow" @click="closeCard"></div>
+          <div class="modal-content">
+            <div class="prod-content">
+              <div class="prod-img">
+                <span class="close" @click="closeCard">&times;</span>
+                <img :src="selectedAnimal.image">
+              </div>
+              <div class="prod-info">
+                <div>
+                  <h5>{{ $t(selectedAnimal.name) }}</h5>
+                  <p>NT {{ $t(selectedAnimal.enName) }}</p>
+                </div>
+                <p>{{ $t(selectedAnimal.p) }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </transition>
+      <!-- ↑↑↑ 商品彈窗 ↑↑↑ -->
+    </div>
+  </div>
+  <!-- <div class="card" v-if="showText">
       <div v-for="(introduce, index) in introduce">
         <img :src="introduce.image" alt="" />
         <h4>{{ introduce.name }}</h4>
@@ -74,7 +101,7 @@
         <i class="fa-solid fa-xmark" style="color: #062f4a"></i>
       </div>
     </div>
-  </div>
+  </div> -->
 
   <div class="navBar">
     <ul>
@@ -116,12 +143,24 @@ export default {
   data() {
     return {
       parallaxValue: 30,
-      showText: false,
+      // showText: false,
       selectedAnimal: null,
       animals: [
         { name: '黃金魚', image: require('../../public/all_images/animal/goldfish.png'), depth: '0.2', category: 'goldfish' },
-        { name: '玳瑁', image: require('../../public/all_images/animal/turtle.png'), depth: '0.5', category: 'turtle' },
-        { name: '魚魚', image: require('../../public/all_images/animal/jokfish.png'), depth: '0.1', category: 'jokfish' },
+
+        {
+          name: '玳瑁',
+          image: require('../../public/all_images/animal/turtle.png'),
+          depth: '0.5',
+          category: 'turtle',
+          enName: 'Hawksbill Turtle',
+          p: '是一種海龜物種，屬於海洋爬行動物，被廣泛認為是美麗而又瀕危的物種。',
+          features: [
+            "— 外觀特徵 —",
+            "玳瑁的外殼呈現五角形的形狀，有許多彎曲的甲板，讓牠們在水中更靈活。這些甲板上通常有不規則的金黃色、紅棕色或綠色的斑紋，為牠們提供了極佳的保護色。",
+            "— 棲息地 —",
+            "玳瑁廣泛分佈於熱帶和亞熱帶海域，包括大西洋、印度洋和太平洋。牠們在珊瑚礁、海草床、潟湖等地找到適合的棲息地。"]
+        },
         { name: '藍藻魚', image: require('../../public/all_images/animal/dory.png'), depth: '0.4', category: 'dory' },
         { name: '小丑魚', image: require('../../public/all_images/animal/nimo.png'), depth: '0.2', category: 'nimo' },
         { name: '河豚', image: require('../../public/all_images/animal/angryfish.png'), depth: '0.3', category: 'angryfish' },
@@ -162,6 +201,15 @@ export default {
         // { name: '白鯨', image: require('../../public/all_images/animal/white.png'), enName: '0.1', p: 'white' },
       ],
     };
+  },
+  mounted() {
+    this.animals.forEach((animal, index) => {
+      const scene = document.getElementById(`scene${index}`);
+      const parallaxInstance = new Parallax(scene, {
+        relativeInput: true,
+        pointerEvents: true,
+      });
+    });
   },
   methods: {
     btnScroll(name) {
@@ -225,12 +273,12 @@ export default {
     },
     showCard(animal) {
       // if (name == "玳瑁") {
-      this.showText = true;
+      // this.showText = true;
       this.selectedAnimal = animal;
       // }
     },
     closeCard() {
-      this.showText = false;
+      // this.showText = false;
       this.selectedAnimal = null;
     },
   },
@@ -346,6 +394,113 @@ export default {
     font-size: map-get($fontSizes, h4);
     color: map-get($colors, light);
   }
+
+  .modal {
+    // display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); // 彈窗背景亮度
+    z-index: 10;
+    justify-content: center;
+    align-items: center;
+
+    .shadow {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.6);
+      z-index: -1;
+      /* 在蓋板下面 */
+    }
+
+    .modal-content {
+      width: 1000px;
+      height: 400px;
+      margin: 0 auto;
+      border: 0;
+      border-radius: 15px;
+      text-align: center;
+      background-color: #fff;
+      padding: 20px;
+      position: relative;
+      top: 100px;
+      display: flex;
+      align-items: center;
+    }
+
+    .close {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      color: #333;
+      cursor: pointer;
+    }
+
+    .prod-content {
+      width: 90%;
+      height: 90%;
+      margin: 0 auto;
+      // border: 1px solid #333;
+      border-radius: 15px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: flex-start;
+    }
+
+    .prod-img {
+      margin-right: 20px;
+      width: 40%;
+      height: 80%;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border: 0;
+        border-radius: 15px;
+      }
+    }
+
+    .prod-info {
+      width: 40%;
+      height: 80%;
+      text-align: justify;
+      display: flex;
+      justify-content: flex-start;
+      align-items: flex-start;
+      flex-direction: column;
+
+      p {
+        color: map-get($colors, 'dark');
+        font-size: map-get($fontSizes, 'p');
+      }
+
+      >p {
+        margin-top: 30px;
+        line-height: 40px;
+      }
+    }
+
+  }
+
+  // 彈窗顯示與隱藏延遲動畫效果
+  .fade-enter-active,
+  .fade-leave-active {
+    transition: opacity 0.5s;
+  }
+
+  .fade-enter,
+  .fade-leave-to {
+    opacity: 0;
+  }
+
+
 
   // 內容 ------------------------------------------------------------
   .wapper {
@@ -653,91 +808,93 @@ export default {
     }
   }
 
-  .card {
-    width: 700px;
-    margin: auto;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    background-color: rgba(40, 61, 84, 0.8);
-    backdrop-filter: blur(3px);
-    border-radius: 20px;
-    color: #eee;
-    position: fixed;
-    top: 25%;
-    left: 0;
-    right: 0;
-    z-index: 10;
+  // .card {
+  //   width: 700px;
+  //   margin: auto;
+  //   display: flex;
+  //   flex-wrap: wrap;
+  //   justify-content: center;
+  //   align-items: center;
+  //   background-color: rgba(40, 61, 84, 0.8);
+  //   backdrop-filter: blur(3px);
+  //   border-radius: 20px;
+  //   color: #eee;
+  //   position: fixed;
+  //   top: 25%;
+  //   left: 0;
+  //   right: 0;
+  //   z-index: 10;
 
-    img {
-      vertical-align: top;
-      width: 35%;
-      margin: -50px auto 15px;
-      display: block;
-    }
 
-    h4 {
-      width: 700px;
-      text-align: center;
-      margin: 10px 0;
-      position: relative;
-      // border: 1px solid red;
-    }
+  //   img {
+  //     vertical-align: top;
+  //     width: 35%;
+  //     margin: -50px auto 15px;
+  //     display: inline-block;
+  //   }
 
-    h4::after {
-      content: "";
-      position: absolute;
-      width: 50px;
-      border-bottom: 3px solid #93b7cd;
-      bottom: -20%;
-      left: 46.5%;
-    }
+  //   h4 {
+  //     width: 700px;
+  //     text-align: center;
+  //     margin: 10px 0;
+  //     position: relative;
+  //     // border: 1px solid red;
+  //   }
 
-    span {
-      display: block;
-      width: 700px;
-      text-align: center;
-      color: #aaa;
-      font-style: italic;
-      // border: 1px solid red;
-    }
+  //   h4::after {
+  //     content: '';
+  //     position: absolute;
+  //     width: 50px;
+  //     border-bottom: 3px solid #93B7CD;
+  //     bottom: -20%;
+  //     left: 46.5%;
+  //   }
 
-    p {
-      margin: 15px auto 30px;
-      text-align: center;
-    }
 
-    ul {
-      margin: 15px;
-      line-height: 1.5;
-    }
+  //   span {
+  //     display: block;
+  //     width: 700px;
+  //     text-align: center;
+  //     color: #aaa;
+  //     font-style: italic;
+  //     // border: 1px solid red;
+  //   }
 
-    li {
-      text-align: center;
-      font-size: 17px;
-    }
+  //   p {
+  //     margin: 15px auto 30px;
+  //     text-align: center;
+  //   }
 
-    li:nth-child(2n) {
-      text-align: left;
-      font-size: 15px;
-      margin-bottom: 20px;
-    }
+  //   ul {
+  //     margin: 15px;
+  //     line-height: 1.5;
+  //   }
 
-    .close {
-      width: 45px;
-      height: 45px;
-      background-color: #93b7cd;
-      border-radius: 50%;
-      text-align: center;
-      margin-bottom: -20px;
-      cursor: pointer;
+  //   li {
+  //     text-align: center;
+  //     font-size: 17px;
+  //   }
 
-      i {
-        line-height: 45px;
-        font-size: 30px;
-      }
-    }
-  }
+  //   li:nth-child(2n) {
+  //     text-align: left;
+  //     font-size: 15px;
+  //     margin-bottom: 20px;
+  //   }
+
+  //   .close {
+  //     width: 45px;
+  //     height: 45px;
+  //     background-color: #93B7CD;
+  //     border-radius: 50%;
+  //     text-align: center;
+  //     margin-bottom: -20px;
+  //     cursor: pointer;
+
+  //     i {
+  //       line-height: 45px;
+  //       font-size: 30px;
+  //     }
+  //   }
+  // }
 }
 </style>
