@@ -34,7 +34,19 @@
         <div class="slot" id="five"></div>
         <h1 data="6000m">6000m</h1>
       </div>
+
+      <div class="line verysupperdeep">
+        <div class="slot" id="six"></div>
+        <h1 data="11000m">11000m</h1>
+      </div>
+      <!-- 深海動物們 -->
+      <!-- <div v-for="(animal, index) in deepAnimals" :key="index" :ref="`parallaxScene${index}`" :id="`scene${index}`"
+        data-relative-input="true" :class="animal.category" @click="showCard(animal)">
+        <img :src="animal.image" :alt="animal.name" :data-depth="animal.depth" />
+        <h4 :data-depth="animal.depth">{{ animal.name }}</h4>
+      </div> -->
     </div>
+
 
     <div class="navBar">
       <ul>
@@ -62,32 +74,7 @@
       <div class="line"></div>
     </div>
 
-    <div class="card" v-if="showText">
-      <!-- ↓↓↓ 商品彈窗 ↓↓↓ -->
-      <transition name="fade">
-        <div v-if="selectedAnimal" class="modal">
-          <div class="shadow" @click="closeCard"></div>
-          <div class="modal-content">
-            <div class="prod-content">
-              <div class="prod-img">
-                <span class="close" @click="closeCard">&times;</span>
-                <img :src="selectedAnimal.image">
-              </div>
-              <div class="prod-info">
-                <div>
-                  <h5>{{ $t(selectedAnimal.name) }}</h5>
-                  <p>NT {{ $t(selectedAnimal.enName) }}</p>
-                </div>
-                <p>{{ $t(selectedAnimal.p) }}</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </transition>
-      <!-- ↑↑↑ 商品彈窗 ↑↑↑ -->
-    </div>
-  </div>
-  <!-- <div class="card" v-if="showText">
+    <div class="card" v-if="selectedAnimal">
       <div v-for="(introduce, index) in introduce">
         <img :src="introduce.image" alt="" />
         <h4>{{ introduce.name }}</h4>
@@ -101,7 +88,7 @@
         <i class="fa-solid fa-xmark" style="color: #062f4a"></i>
       </div>
     </div>
-  </div> -->
+  </div>
 
   <div class="navBar">
     <ul>
@@ -173,9 +160,30 @@ export default {
         { name: '劍魚', image: require('../../public/all_images/animal/nosefish.png'), depth: '0.1', category: 'nosefish' },
         { name: '儒艮', image: require('../../public/all_images/animal/manatee.png'), depth: '0.1', category: 'manatee' },
         { name: '章魚', image: require('../../public/all_images/animal/taco.png'), depth: '0.1', category: 'taco' },
+        { name: '藍鯨', image: require('../../public/all_images/animal/Blue whale.png'), depth: '0.1', category: 'blueWhale' },
         { name: '水母', image: require('../../public/all_images/animal/jellyfish.png'), depth: '0.1', category: 'jellyfish' },
         { name: '深海魚', image: require('../../public/all_images/animal/ohpsfish.png'), depth: '0.1', category: 'ohpsfish' },
-        { name: '藍鯨', image: require('../../public/all_images/animal/Blue whale.png'), depth: '0.1', category: 'blueWhale' },
+        { name: '大眼魚', image: require('../../public/all_images/animal/bigeye.png'), depth: '0.1', category: 'ohpsfish' },
+        { name: '藍黃魚', image: require('../../public/all_images/animal/blueyellow.png'), depth: '0.1', category: 'ohpsfish' },
+        { name: '可愛魚', image: require('../../public/all_images/animal/cutefish.png'), depth: '0.1', category: 'ohpsfish' },
+        // { name: 'ET魚', image: require('../../public/all_images/animal/ETfish.png'), depth: '0.1', category: 'ohpsfish' },
+        // { name: '飛魚', image: require('../../public/all_images/animal/flyfish.png'), depth: '0.1', category: 'ohpsfish' },
+        // { name: '親切鯊魚', image: require('../../public/all_images/animal/great white shark.png'), depth: '0.1', category: 'ohpsfish' },
+        // { name: '尖鼻魚', image: require('../../public/all_images/animal/harinose.png'), depth: '0.1', category: 'ohpsfish' },
+        // { name: '長鼻魚', image: require('../../public/all_images/animal/longnose.png'), depth: '0.1', category: 'ohpsfish' },
+        // { name: '轟魚', image: require('../../public/all_images/animal/manta ray.png'), depth: '0.1', category: 'ohpsfish' },
+        // { name: '燈籠魚', image: require('../../public/all_images/animal/monkfish.png'), depth: '0.1', category: 'ohpsfish' },
+        // { name: '月亮魚', image: require('../../public/all_images/animal/moonfish.png'), depth: '0.1', category: 'ohpsfish' },
+        // { name: '黑魚', image: require('../../public/all_images/animal/Perch eel.png'), depth: '0.1', category: 'ohpsfish' },
+        // { name: '直立魚', image: require('../../public/all_images/animal/razorfish.png'), depth: '0.1', category: 'ohpsfish' },
+        // { name: '恐龍魚', image: require('../../public/all_images/animal/Sea eel.png'), depth: '0.1', category: 'ohpsfish' },
+        // { name: '轟魚', image: require('../../public/all_images/animal/smile.png'), depth: '0.1', category: 'ohpsfish' },
+        // { name: '黃魚', image: require('../../public/all_images/animal/snails.png'), depth: '0.1', category: 'ohpsfish' },
+        // { name: '河馬魚', image: require('../../public/all_images/animal/sperm whale.png'), depth: '0.1', category: 'ohpsfish' },
+        // { name: '轟魚', image: require('../../public/all_images/animal/stingray.png'), depth: '0.1', category: 'ohpsfish' },
+        // { name: '甲殼魚', image: require('../../public/all_images/animal/Stingrays.png'), depth: '0.1', category: 'ohpsfish' },
+        // { name: '太陽魚', image: require('../../public/all_images/animal/Sunfish.png'), depth: '0.1', category: 'ohpsfish' },
+        // { name: '咖啡魚', image: require('../../public/all_images/animal/toad.png'), depth: '0.1', category: 'ohpsfish' },
       ],
       introduce: [
         // { name: '黃金魚', image: require('../../public/all_images/animal/goldfish.png'), enName: '', p: 'goldfish' },
@@ -346,9 +354,9 @@ export default {
 // 探索動物 ------------------------------------------------------------
 .explore {
   width: 100%;
+  height: 300em;
   background-image: linear-gradient(to bottom, #93b4cd, #114166, #0b2f4a, #082033);
   position: relative;
-  pointer-events: none;
   // #285f9d
 
   .slot {
@@ -361,7 +369,6 @@ export default {
   .line {
     position: absolute;
     width: 100%;
-    height: 100px;
   }
 
   .middle {
@@ -377,7 +384,12 @@ export default {
   }
 
   .superdeep {
-    top: 80%;
+    top: 85%;
+  }
+
+  .verysupperdeep {
+    top: 100%;
+    color: transparent;
   }
 
   h1 {
@@ -744,12 +756,13 @@ export default {
     .taco {
       cursor: pointer;
       width: 300px;
-      margin: 0 280px 0 auto;
+      translate: 60em 0em;
+      // margin: 0 280px 0 auto;
 
       img {
-        visibility: top;
+        visibility: visible;
         width: 300px;
-        transform: rotate(30deg);
+        transform: rotate(90deg);
       }
 
       h4 {
@@ -761,7 +774,7 @@ export default {
     .jellyfish {
       cursor: pointer;
       width: 130px;
-      margin: 0 530px 0 auto;
+      translate: 50em -8em;
 
       img {
         visibility: top;
@@ -777,7 +790,8 @@ export default {
     .ohpsfish {
       cursor: pointer;
       width: 130px;
-      margin: 0 530px 0 auto;
+      translate: 45em 2em;
+      z-index: 2;
 
       img {
         visibility: top;
@@ -808,93 +822,93 @@ export default {
     }
   }
 
-  // .card {
-  //   width: 700px;
-  //   margin: auto;
-  //   display: flex;
-  //   flex-wrap: wrap;
-  //   justify-content: center;
-  //   align-items: center;
-  //   background-color: rgba(40, 61, 84, 0.8);
-  //   backdrop-filter: blur(3px);
-  //   border-radius: 20px;
-  //   color: #eee;
-  //   position: fixed;
-  //   top: 25%;
-  //   left: 0;
-  //   right: 0;
-  //   z-index: 10;
+  .card {
+    width: 700px;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(40, 61, 84, 0.8);
+    backdrop-filter: blur(3px);
+    border-radius: 20px;
+    color: #eee;
+    position: fixed;
+    top: 25%;
+    left: 0;
+    right: 0;
+    z-index: 10;
 
 
-  //   img {
-  //     vertical-align: top;
-  //     width: 35%;
-  //     margin: -50px auto 15px;
-  //     display: inline-block;
-  //   }
+    img {
+      vertical-align: top;
+      width: 35%;
+      margin: -50px auto 15px;
+      display: inline-block;
+    }
 
-  //   h4 {
-  //     width: 700px;
-  //     text-align: center;
-  //     margin: 10px 0;
-  //     position: relative;
-  //     // border: 1px solid red;
-  //   }
+    h4 {
+      width: 700px;
+      text-align: center;
+      margin: 10px 0;
+      position: relative;
+      // border: 1px solid red;
+    }
 
-  //   h4::after {
-  //     content: '';
-  //     position: absolute;
-  //     width: 50px;
-  //     border-bottom: 3px solid #93B7CD;
-  //     bottom: -20%;
-  //     left: 46.5%;
-  //   }
+    h4::after {
+      content: '';
+      position: absolute;
+      width: 50px;
+      border-bottom: 3px solid #93B7CD;
+      bottom: -20%;
+      left: 46.5%;
+    }
 
 
-  //   span {
-  //     display: block;
-  //     width: 700px;
-  //     text-align: center;
-  //     color: #aaa;
-  //     font-style: italic;
-  //     // border: 1px solid red;
-  //   }
+    span {
+      display: block;
+      width: 700px;
+      text-align: center;
+      color: #aaa;
+      font-style: italic;
+      // border: 1px solid red;
+    }
 
-  //   p {
-  //     margin: 15px auto 30px;
-  //     text-align: center;
-  //   }
+    p {
+      margin: 15px auto 30px;
+      text-align: center;
+    }
 
-  //   ul {
-  //     margin: 15px;
-  //     line-height: 1.5;
-  //   }
+    ul {
+      margin: 15px;
+      line-height: 1.5;
+    }
 
-  //   li {
-  //     text-align: center;
-  //     font-size: 17px;
-  //   }
+    li {
+      text-align: center;
+      font-size: 17px;
+    }
 
-  //   li:nth-child(2n) {
-  //     text-align: left;
-  //     font-size: 15px;
-  //     margin-bottom: 20px;
-  //   }
+    li:nth-child(2n) {
+      text-align: left;
+      font-size: 15px;
+      margin-bottom: 20px;
+    }
 
-  //   .close {
-  //     width: 45px;
-  //     height: 45px;
-  //     background-color: #93B7CD;
-  //     border-radius: 50%;
-  //     text-align: center;
-  //     margin-bottom: -20px;
-  //     cursor: pointer;
+    .close {
+      width: 45px;
+      height: 45px;
+      background-color: #93B7CD;
+      border-radius: 50%;
+      text-align: center;
+      margin-bottom: -20px;
+      cursor: pointer;
 
-  //     i {
-  //       line-height: 45px;
-  //       font-size: 30px;
-  //     }
-  //   }
-  // }
+      i {
+        line-height: 45px;
+        font-size: 30px;
+      }
+    }
+  }
 }
 </style>

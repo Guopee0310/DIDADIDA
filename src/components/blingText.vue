@@ -35,7 +35,7 @@ p {
   background-size: 80%;
   font-weight: 700;
   animation: animate 5s linear infinite;
-  -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: rgba(255, 255, 255, 0);
 }
 
