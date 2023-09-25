@@ -4,7 +4,7 @@
       'background-color': headerColor,
       top: 0,
       left: 0,
-      'z-index': 10,
+      'z-index': 8,
       width: '100%',
     }">
       <!-- logo -->
@@ -78,6 +78,77 @@
           <span><i class="fa-solid fa-chevron-down" style="color: #eeeeee"></i></span>
         </div>
       </nav>
+      <!-- 手機menu -->
+      <div class="rwd_menu">
+
+        <div class="navigation">
+          <input type="checkbox" class="navigation__checkbox" id="nav-toggle">
+          <label for="nav-toggle" class="navigation__button">
+            <span class="navigation__icon" aria-label="toggle navigation menu"></span>
+          </label>
+          <div class="navigation__background"></div>
+
+          <nav class="navigation__nav" role="navigation">
+
+            <ul class="navigation__list">
+              <div class="btn_wrap">
+                <div class="icons">
+                  <span>
+                    <i @click="this.$store.state.storeShowLogin = true" v-if="!this.$store.state.userName"
+                      class="fa-solid fa-user" style="color: #eee"></i>
+                    <div v-if="this.$store.state.userName" @click="this.$router.push('./member')" style="color: #eee">
+                      {{ this.$store.state.userName }}
+                    </div>
+                    <span v-if="this.$store.state.userName" @click="logOutAPI()" class="logOutBtn">登出</span>
+                  </span>
+
+                  <!-- 購物車 -->
+                  <router-link to="/shoppingcart" @click="closeMobileMenu"><i class="fa-solid fa-cart-shopping"
+                      style="color: #eee"></i></router-link>
+                </div>
+                <div class="select">
+                  <select v-model="selectedLanguage" @change="changeLanguage">
+                    <option value="zh-TW">繁體中文</option>
+                    <option value="en">English</option>
+                    <!-- 添加其他支持的語言選項 -->
+                  </select>
+                  <span><i class="fa-solid fa-chevron-down" style="color: #eeeeee"></i></span>
+                </div>
+              </div>
+              <!-- 關於DIDA -->
+              <li class="navigation__item">
+                <a @click="toggleDropdown">{{ $t(menuTitle.rwd_about) }}</a>
+                <ul class="dropdown">
+                  <li v-for="aboutSub in aboutSub" key="aboutSub">
+                    <router-link :to="aboutSub.link" @click="closeMobileMenu">{{
+                      $t(aboutSub.name)
+                    }}</router-link>
+                  </li>
+                </ul>
+              </li>
+              <!-- 最新消息 -->
+              <li class="navigation__item">
+                <router-link to="/news" @click="closeMobileMenu">{{ $t(menuTitle.news) }}</router-link>
+              </li>
+              <!-- 探索海洋 -->
+              <li class="navigation__item">
+                <router-link to="/explore" @click="closeMobileMenu">{{ $t(menuTitle.animal) }}</router-link>
+              </li>
+              <!-- 購物 -->
+              <li class="navigation__item">
+                <a @click="toggleDropdown">{{ $t(menuTitle.buy) }}</a>
+                <ul class="dropdown" @click="closeMobileMenu">
+                  <li v-for="buySub in buySub" :key="buySub">
+                    <router-link :to="buySub.link" >{{
+                      $t(buySub.name)
+                    }}</router-link>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -95,11 +166,13 @@ export default {
       headerPosition: "relative",
       menuTitle: {
         about: "關於我們",
+        rwd_about: "關於DIDA",
         news: "最新消息",
         animal: "探索海洋生物",
         buy: "DIDA商城",
       },
       aboutSub: [
+        { link: "/about", name: "關於我們" },
         { link: "/faq", name: "常見問答" },
         { link: "/guide", name: "園區導覽" },
         { link: "/interact", name: "互動遊戲" },
@@ -127,6 +200,7 @@ export default {
           imgSrc:
             '<i class="fa-solid fa-cart-shopping" style="color: #eeeeee;"></i>',
         },
+
       ],
       selectedLanguage: "zh-TW", // 默認語言
       // language: [
@@ -231,6 +305,30 @@ export default {
         this.checkLogoPic = true;
       }
     },
+    toggleDropdown(event) {
+      const target = event.target;
+      const dropdown = target.nextElementSibling; // 假設下拉菜單緊跟在觸發元素的後面
+
+      if (dropdown && dropdown.classList.contains('dropdown')) {
+        if (dropdown.style.display === 'block') {
+          dropdown.style.display = 'none';
+        } else {
+          dropdown.style.display = 'block';
+        }
+      }
+    },
+    closeMobileMenu() {
+      // 获取复选框元素
+      const checkbox = document.getElementById("nav-toggle");
+      const dropdown = document.querySelector(".dropdown");
+      // 关闭复选框
+      if (checkbox) {
+        checkbox.checked = false;
+      }
+      if (dropdown) {
+        dropdown.style.display = 'none';
+      }
+    },
     changeLanguage() {
       // 使用i18n的setLocale方法来切换语言
       this.$i18n.locale = this.selectedLanguage;
@@ -245,14 +343,10 @@ export default {
 <style scoped lang="scss">
 // @import "~@/assets/scss/base/reset.scss";
 
-.header {
-  max-width: 1200px;
-  width: 100%;
-  margin: auto;
-}
 
 .wrap {
   display: flex;
+  max-width: 100vw;
   justify-content: space-between;
   padding: 10px 20px;
   position: fixed;
@@ -399,28 +493,241 @@ option:checked {
   color: #fff;
 }
 
-@media screen and (max-width:415px) {
+.rwd_menu {
+  display: none;
+}
 
-  .main-nav {
-    position: fixed;
-    top: 5%;
-    left: 0;
-    right: 0;
-    flex-wrap: wrap;
-    width: 80%;
-    margin: auto;
-    background-color: rgba(40, 61, 84, 0.8);
-    backdrop-filter: blur(3px);
-    border-radius: 10px;
-    padding: 20px 0;
+@media screen and (max-width:768px) {
 
-    .main-menu {
-      width: 300px;
-      text-align: center;
+  .wrap {
+    .main-nav {
+      display: none;
     }
 
-    .sub-menu {
-      // visibility: visible;
+    .btn_wrap {
+      width: 80%;
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+
+      .icons {
+        font-size: map-get($fontSizes , 'div');
+        width: 60px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center
+      }
+
+      select {
+        @include selectBtn;
+      }
+
+      /* Remove IE arrow */
+      select::-ms-expand {
+        display: none;
+      }
+
+      /* Custom Select wrapper */
+      .select {
+        @include btnWidth;
+
+        span {
+          @include btnSpan;
+        }
+      }
+
+      option {
+        background-color: #2c3e50;
+      }
+    }
+
+    .rwd_menu {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+
+
+      .navigation {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        position: relative;
+        z-index: 7;
+      }
+
+      .navigation__checkbox {
+        display: none;
+      }
+
+      .navigation__button {
+        position: relative;
+        text-align: center;
+        border-radius: 50%;
+        z-index: 8;
+        cursor: pointer;
+
+        span {
+          margin-right: 1.5rem;
+          display: inline-block;
+        }
+
+        &:hover {
+          color: #C1D0D0;
+          transform: scale(1.1);
+        }
+      }
+
+
+      .navigation__background {
+        position: absolute;
+        height: 2em;
+        width: 2em;
+        inset: 0;
+        opacity: 0;
+        border-radius: 50%;
+        background: map-get($colors , 'mainColor' );
+        z-index: 4;
+        transition: all .8s cubic-bezier(0.86, 0, 0.07, 1);
+      }
+
+      .navigation__nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        opacity: 0;
+        width: 0;
+        visibility: hidden;
+        z-index: 4;
+        transition: all 1s cubic-bezier(0.68, -0.55, 0.265, 1.55) -.2s;
+      }
+
+      .navigation__list {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        width: 100%;
+      }
+
+      .navigation__item {
+        margin: 2rem;
+        position: relative;
+
+        a {
+          display: inline-block;
+          width: 100%;
+          text-decoration: none;
+          color: map-get($colors , 'light');
+          font-size: map-get($fontSizes , 'h5');
+          font-weight: 600;
+        }
+
+        .dropdown {
+          display: none;
+          position: absolute;
+          width: 100%;
+          top: 150%;
+          margin: auto;
+          background-color: rgba(101, 101, 101, 1);
+          border-radius: 2rem;
+          transform: translateY(-1em);
+          transition: all 0.3s ease-in-out 0s, visibility 0s linear 0.3s;
+          z-index: 2;
+
+          >li {
+            // margin: 1rem;
+            padding: 1rem 0;
+          }
+
+          a {
+            width: 100%;
+            font-size: map-get($fontSizes , 'div');
+
+          }
+        }
+      }
+
+      // menu字
+      .navigation__link:link,
+      .navigation__link:visited {
+        display: inline-block;
+        padding: 1rem 2rem;
+        text-transform: uppercase;
+        color: #f4f4f4;
+        font-size: 2.4rem;
+        text-decoration: none;
+        transition: all .2s;
+
+      }
+
+      // menu字
+
+      .navigation__checkbox:checked~.navigation__background {
+        transform: scale(80);
+        opacity: 1;
+      }
+
+      .navigation__checkbox:checked~.navigation__nav {
+        width: 100%;
+        visibility: visible;
+        opacity: 1;
+      }
+
+      .navigation__icon {
+        left: 50%;
+        top: 30%;
+        transform: translate(-50%, -30%);
+        position: relative;
+        margin: auto;
+
+        &::before {
+          top: -.7rem;
+        }
+
+        &::after {
+          top: .7rem;
+        }
+      }
+
+
+
+      .navigation__icon,
+      .navigation__icon::before,
+      .navigation__icon::after {
+        height: 100%;
+        width: 2rem;
+        height: 2px;
+        background-color: #eef6f7;
+        box-shadow: #2c3e50 0.1em 0.1em 0.1em;
+      }
+
+      .navigation__icon::before,
+      .navigation__icon::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        transition: all 200ms;
+      }
+
+
+      //menu叉叉
+      .navigation__checkbox:checked+.navigation__button .navigation__icon {
+        background-color: transparent;
+        box-shadow: none;
+      }
+
+      .navigation__checkbox:checked+.navigation__button .navigation__icon::before {
+        top: 0;
+        transform: rotate(135deg);
+      }
+
+      .navigation__checkbox:checked+.navigation__button .navigation__icon::after {
+        top: 0;
+        transform: rotate(-135deg);
+      }
     }
   }
 }
