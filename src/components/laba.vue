@@ -2,7 +2,7 @@
   <div class="labaAll">
     <div class="containerPic">
       <img
-        :src="require('../assets/images/dolphin_pillow.jpg')"
+        :src="require('../../public/all_images/laba/bluewhale.jpg')"
         :class="{
           resetImg: randomStart,
           resetImg2: guessNum == 1,

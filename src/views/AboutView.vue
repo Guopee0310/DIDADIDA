@@ -67,6 +67,12 @@ export default {
         },
       ],
     };
+  },
+  methods:{
+    changeLanguage() {
+      // 使用i18n的setLocale方法来切换语言
+      this.$i18n.locale = this.selectedLanguage;
+    },
   }
 };
 </script>
