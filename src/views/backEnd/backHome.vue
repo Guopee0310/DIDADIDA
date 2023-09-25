@@ -3,6 +3,7 @@
     <div class="controlWidth">
       <div class="featureBox">
         <!-- singleFeature -->
+
         <router-link :to="i[1]" v-for="i in featureAll" class="singleFeature"
           >{{ i[0] }}
         </router-link>
@@ -10,8 +11,6 @@
       <div class="differentBox">
         <router-view></router-view>
       </div>
-     
-      
     </div>
   </div>
 </template>
@@ -67,6 +66,11 @@ export default {
         border: 1px black solid;
         padding: 10px 5px;
         margin: 5px 0;
+        border-radius: 10px;
+        text-align: center;
+        &:hover {
+          color: blue;
+        }
       }
     }
     .differentBox {
