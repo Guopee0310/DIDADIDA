@@ -279,7 +279,7 @@ body {
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.5);
   position: fixed;
-  z-index: 5;
+  z-index: 9;
   top: 0;
   left: 0;
 }

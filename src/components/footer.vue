@@ -49,7 +49,7 @@
       </div>
     </div>
     <div class="copyright">
-      <p>{{ copyright }}</p>
+      <p>本網站為緯育TibaMe_前端設計工程師班CHD103學員專題成果作品,本平台僅供學習、展示之用。若有抵觸有關著作權, 或有第三人主張侵害智慧財產權等情事, 均由學員負法律上責任, 緯育公司概不負責。若有侵權疑慮, 您可以私訊<a href="https://www.facebook.com/TibaMe">[緯育TibaMe]</a>, 後續會由專人協助處理。</p>
     </div>
   </footer>
 </template>
@@ -97,8 +97,6 @@ export default {
         { link: "#", class: "fa-brands fa-instagram", style: "color: #eeeeee" },
         { link: "#", class: "fa-brands fa-youtube", style: "color: #eeeeee" },
       ],
-      copyright:
-        "本網站為緯育TibaMe_前端設計工程師班CHD103學員專題成果作品,本平台僅供學習、展示之用。若有抵觸有關著作權, 或有第三人主張侵害智慧財產權等情事, 均由學員負法律上責任, 緯育公司概不負責。若有侵權疑慮, 您可以私訊[緯育TibaMe], 後續會由專人協助處理。",
     };
   },
   methods: {
@@ -212,6 +210,10 @@ footer {
     line-height: 1.5;
     text-align: center;
     padding: 0 0 25px;
+    a{
+      text-decoration: none;
+      color: map-get($colors, 'QRbtn');
+    }
   }
 
   .footer_item {
@@ -244,11 +246,29 @@ footer {
   }
 
   @media screen and (max-width: 768px) {
-
-    .footer_wrap,
-    p {
-      max-width: 90%;
-    }
+    
+  
+    .footer_wrap {
+        width: 100%;
+        flex-wrap: wrap;
+        justify-content: center;
+      h3{
+        margin: auto;
+      }
+        .footer_item{
+          margin: 1em 0;
+          width: 50%;
+          text-align: center;
+          &:nth-of-type(5){
+            width: 100%;
+            span{
+              width: 100%;
+              font-size: 30px;
+              margin: 0 0.5em;
+            }
+          }
+        }
+      }
   }
 }
 </style>
