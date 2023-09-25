@@ -44,7 +44,7 @@ export default {
   methods: {
     getClient(e) {
       let x = e.clientX - document.documentElement.clientWidth * 1.8;
-      let y = e.clientY - document.documentElement.clientHeight * 1.6;
+      let y = e.clientY - document.documentElement.clientHeight * 1.8;
 
       this.x = x;
       this.y = y;
@@ -99,7 +99,7 @@ body {
 .shadow {
   position: absolute;
   width: 250vw;
-  height: 200vh;
+  height: 300vh;
   left: 50%;
   top: 50%;
   transform: translateX(-50%) translateY(-50%);
