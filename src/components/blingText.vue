@@ -48,4 +48,10 @@ p {
     background-position: 300%;
   }
 }
+
+@media screen and (max-width:415px) {
+  p {
+    font-size: 0.5em;
+  }
+}
 </style>
