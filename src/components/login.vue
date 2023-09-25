@@ -441,9 +441,10 @@ input:focus {
 }
 
 .overlay {
-  background: #0b2d7b;
+  background-image: url();
+  /* background: #0b2d7b;
   background: -webkit-linear-gradient(to right, #0b2d7b, #475aab);
-  background: linear-gradient(to right, #0b2d7b, #475aab);
+  background: linear-gradient(to right, #0b2d7b, #475aab); */
   background-repeat: no-repeat;
   background-size: cover;
   background-position: 0 0;

@@ -28,6 +28,7 @@ export default createStore({
     memberBtn: "mem_account_settings",
     visitCount: 0,
     activeIndexes: [],
+    questionPic:true,
   },
 
   // 類似vue檔裡面的computed
