@@ -98,7 +98,7 @@ body {
 
 .shadow {
   position: absolute;
-  width: 500vw;
+  width: 250vw;
   height: 200vh;
   left: 50%;
   top: 50%;

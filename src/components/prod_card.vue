@@ -1,14 +1,23 @@
 <template>
   <div class="select_btn">
-    <prodSelect @transferClass="getClass" @transferPrice="getPrice" @transferSearch="searchClick"></prodSelect>
+    <prodSelect
+      @transferClass="getClass"
+      @transferPrice="getPrice"
+      @transferSearch="searchClick"
+    ></prodSelect>
   </div>
-  <div class="card" v-for="(i, index) in chooseItem" :key="i.imageSrc" @click="showProductDetails(i)">
+  <div class="card" v-for="(i, index) in chooseItem" :key="i.imageSrc">
     <div class="heart">
-      <heart @change-heart="changeHeart($event, i, index)" :keepLove="keepHeartArr[index]"
-        :is-active="favList.findIndex((v) => v.favoName === i.titleName) > -1"></heart>
+      <heart
+        @change-heart="changeHeart($event, i, index)"
+        :keepLove="keepHeartArr[index]"
+        :is-active="favList.findIndex((v) => v.favoName === i.titleName) > -1"
+      ></heart>
     </div>
     <div class="pic">
-      <a href="#"><img :src="i.imageSrc" alt="" /></a>
+      <a href="#" @click.prevent="showProductDetails(i)"
+        ><img :src="i.imageSrc" alt=""
+      /></a>
     </div>
 
     <div class="name">
@@ -25,9 +34,13 @@
           <input type="button" value="+" @click="i.count++" />
         </div>
         <div class="buy">
-          <i class="fa-solid fa-cart-shopping" style="color: #9fbdce" @click.prevent="
-            pushAndTogglePopup(i.imageSrc, i.titleName, i.count, i.prodPrice)
-            "></i>
+          <i
+            class="fa-solid fa-cart-shopping"
+            style="color: #9fbdce"
+            @click.prevent="
+              pushAndTogglePopup(i.imageSrc, i.titleName, i.count, i.prodPrice)
+            "
+          ></i>
           <!-- pushInShoppingCart(
                   i.imageSrc,
                   i.titleName,
@@ -48,7 +61,7 @@
         <div class="prod-content">
           <div class="prod-img">
             <span class="close" @click="closeModal">&times;</span>
-            <img :src="selectedProduct.imageSrc">
+            <img :src="selectedProduct.imageSrc" />
           </div>
           <div class="prod-info">
             <div>
@@ -62,7 +75,11 @@
     </div>
   </transition>
   <!-- ↑↑↑ 商品彈窗 ↑↑↑ -->
-  <Page :total="chooseItem2.length" @on-change="updatePage" class="changepage" />
+  <Page
+    :total="chooseItem2.length"
+    @on-change="updatePage"
+    class="changepage"
+  />
 </template>
 
 <script>
@@ -962,16 +979,15 @@ export default {
     flex-direction: column;
 
     p {
-      color: map-get($colors, 'dark');
-      font-size: map-get($fontSizes, 'p');
+      color: map-get($colors, "dark");
+      font-size: map-get($fontSizes, "p");
     }
 
-    >p {
+    > p {
       margin-top: 30px;
       line-height: 40px;
     }
   }
-
 }
 
 // 彈窗顯示與隱藏延遲動畫效果
@@ -1036,7 +1052,7 @@ export default {
       width: 80%;
       margin-top: 10px;
 
-      >p {
+      > p {
         margin-top: 10px;
         line-height: 30px;
       }
