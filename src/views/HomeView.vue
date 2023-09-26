@@ -1,8 +1,8 @@
 <template>
   <!-- <div v-if="loading">
     <LoadingBox />
-  </div> -->
-  <!-- <div v-else> -->
+  </div>
+  <div v-else> -->
   <div>
     <div class="index">
       <!-- banner + open time ------------------------------------------ -->
@@ -167,6 +167,7 @@
       </div>
     </div>
   </div>
+  <!-- </div> -->
 </template>
 
 <script>
@@ -355,7 +356,6 @@ export default {
         display: block;
         color: map-get($colors, "light");
         font-size: 27px;
-        font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
       }
     }
   }
@@ -366,11 +366,6 @@ export default {
     width: 100%;
     margin: 50px auto;
     position: relative;
-
-    // h3 {
-    //   width: 150px;
-    //   margin: -30px auto 0;
-    // }
 
     .drop {
       margin: 80px auto;
@@ -425,7 +420,6 @@ export default {
       position: absolute;
       text-align: center;
       font-size: 75px;
-      font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
       top: 50%;
       left: 0;
       right: 0;

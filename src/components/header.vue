@@ -59,7 +59,8 @@
           <span>
             <i @click="this.$store.state.storeShowLogin = true" v-if="!this.$store.state.userName"
               class="fa-solid fa-user" style="color: #eee"></i>
-            <div v-if="this.$store.state.userName" @click="this.$router.push('./member')" style="color: #eee">
+            <div v-if="this.$store.state.userName" @click="this.$router.push('./member')" style="color: #eee"
+              class="name">
               {{ this.$store.state.userName }}
             </div>
             <span v-if="this.$store.state.userName" @click="logOutAPI()" class="logOutBtn">登出</span>
@@ -96,7 +97,7 @@
                   <span>
                     <i @click="this.$store.state.storeShowLogin = true" v-if="!this.$store.state.userName"
                       class="fa-solid fa-user" style="color: #eee"></i>
-                    <div v-if="this.$store.state.userName" @click="this.$router.push('./member')" style="color: #eee">
+                    <div v-if="this.$store.state.userName" @click="this.$router.push('./member')">
                       {{ this.$store.state.userName }}
                     </div>
                     <span v-if="this.$store.state.userName" @click="logOutAPI()" class="logOutBtn">登出</span>
@@ -452,6 +453,19 @@ select {
 .icons {
   cursor: pointer;
 
+
+  .name {
+    display: inline-block;
+    margin-right: 10px;
+    border-bottom: 1px solid #eee;
+  }
+
+  .name:hover {
+    color: map-get($colors, "hoverColor");
+    border-bottom: 1px solid map-get($colors, "hoverColor");
+
+  }
+
   span {
     .logOutBtn {
       // border: 1px red solid;
@@ -614,7 +628,7 @@ option:checked {
         margin: 2rem;
         padding: 1rem;
         position: relative;
-      
+
 
         a {
           display: inline-block;
@@ -631,7 +645,7 @@ option:checked {
           top: 120%;
           left: 0;
           margin: auto;
-          background-color: map-get($colors , 'h2Blue' );
+          background-color: map-get($colors , 'h2Blue');
           border-radius: 2rem;
           transform: translateY(-1em);
           transition: all 0.3s ease-in-out 0s, visibility 0s linear 0.3s;
@@ -645,7 +659,7 @@ option:checked {
           a {
             width: 100%;
             font-size: map-get($fontSizes , 'div');
-            color: map-get($colors , 'dark' );
+            color: map-get($colors , 'dark');
           }
         }
       }
@@ -656,7 +670,7 @@ option:checked {
         display: inline-block;
         padding: 1rem 2rem;
         text-transform: uppercase;
-        color: map-get($colors , 'light' );
+        color: map-get($colors , 'light');
         font-size: 2.4rem;
         text-decoration: none;
         transition: all .2s;

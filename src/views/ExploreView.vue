@@ -294,7 +294,7 @@ export default {
     border: 1px solid #0b2f4a;
     position: absolute;
     height: 85%;
-    top: 12px;
+    top: 20px;
     right: 17px;
     z-index: -1;
   }
@@ -389,8 +389,6 @@ export default {
 
     .goldfish {
       cursor: pointer;
-      width: 180px;
-      // margin: 100px 350px -80px auto;
       translate: 60em 8em;
 
       img {
@@ -407,7 +405,6 @@ export default {
 
     .dory {
       cursor: pointer;
-      width: 130px;
       translate: 53em 10em;
       // margin: 0 530px -10px auto;
 
@@ -424,7 +421,6 @@ export default {
 
     .nimo {
       cursor: pointer;
-      width: 80px;
       translate: 45em 7em;
       // margin: -40px auto 0 730px;
 
@@ -440,7 +436,6 @@ export default {
 
     .angryfish {
       cursor: pointer;
-      width: 100px;
       translate: 10em 15em;
       // margin: 50px 0 80px 350px;
 
@@ -456,7 +451,6 @@ export default {
 
     .blueyellow {
       cursor: pointer;
-      width: 100px;
       translate: 40em 15em;
       // margin: 50px 0 80px 350px;
 
@@ -472,7 +466,6 @@ export default {
 
     .whale {
       cursor: pointer;
-      width: 1200px;
       translate: 20em 15em;
       // margin: -50px 10px 0 auto;
 
@@ -488,7 +481,6 @@ export default {
 
     .star {
       cursor: pointer;
-      width: 130px;
       translate: 18em 15em;
       // margin: 30px 0 0 350px;
 
@@ -504,7 +496,6 @@ export default {
 
     .leofish {
       cursor: pointer;
-      width: 130px;
       translate: 55em 20em;
       // margin: 0 530px 0 auto;
 
@@ -521,7 +512,6 @@ export default {
 
     .shark {
       cursor: pointer;
-      width: 700px;
       translate: 3em 5em;
       // margin: -30px 0 0 60px;
 
@@ -549,7 +539,6 @@ export default {
 
     .linefish {
       cursor: pointer;
-      width: 130px;
       translate: 70em 5em;
       // margin: 100px 230px 0 auto;
 
@@ -566,7 +555,6 @@ export default {
 
     .jokfish {
       cursor: pointer;
-      width: 130px;
       translate: 65em 3em;
       // margin: 0 550px 80px auto;
 
@@ -584,7 +572,6 @@ export default {
 
     .manatee {
       cursor: pointer;
-      width: 450px;
       margin: 80px auto 0 530px;
 
       img {
@@ -600,7 +587,6 @@ export default {
 
     .nosefish {
       cursor: pointer;
-      width: 300px;
       margin: -200px auto 0 330px;
 
       img {
@@ -616,7 +602,6 @@ export default {
 
     .taco {
       cursor: pointer;
-      width: 300px;
       translate: 67em 0em;
       // margin: 0 280px 0 auto;
 
@@ -634,7 +619,6 @@ export default {
 
     .jellyfish {
       cursor: pointer;
-      width: 130px;
       translate: 62em -8em;
 
       img {
@@ -650,7 +634,6 @@ export default {
 
     .cutefish {
       cursor: pointer;
-      width: 220px;
       translate: 70em 0em;
 
       img {
@@ -666,7 +649,6 @@ export default {
 
     .ETfish {
       cursor: pointer;
-      width: 250px;
       translate: 33em -3em;
 
       img {
@@ -682,7 +664,6 @@ export default {
 
     .greatwhiteshark {
       cursor: pointer;
-      width: 600px;
       translate: 50em 7em;
 
       img {
@@ -698,7 +679,6 @@ export default {
 
     .harinose {
       cursor: pointer;
-      width: 250px;
       translate: 15em 3em;
 
       img {
@@ -713,7 +693,6 @@ export default {
 
     .longnose {
       cursor: pointer;
-      width: 150px;
       translate: 25em -15em;
 
       img {
@@ -729,7 +708,6 @@ export default {
 
     .smile {
       cursor: pointer;
-      width: 700px;
 
       img {
         visibility: top;
@@ -744,7 +722,6 @@ export default {
 
     .moonfish {
       cursor: pointer;
-      width: 300px;
       translate: 60em -17em;
 
       img {
@@ -760,7 +737,6 @@ export default {
 
     .spermwhale {
       cursor: pointer;
-      width: 500px;
       translate: 20em -7em;
 
       img {
@@ -776,8 +752,6 @@ export default {
 
     .stingray {
       cursor: pointer;
-      width: 500px;
-      // margin: 30px auto 60px 0;
       translate: 52em -20em;
 
       img {
@@ -793,8 +767,6 @@ export default {
 
     .sunfish {
       cursor: pointer;
-      width: 200px;
-      // margin: 30px auto 60px 0;
       translate: 10em -30em;
 
       img {
@@ -811,8 +783,6 @@ export default {
 
     .toad {
       cursor: pointer;
-      width: 200px;
-      // margin: 30px auto 60px 0;
       translate: 40em -30em;
 
       img {
@@ -829,7 +799,6 @@ export default {
 
     .monkfish {
       cursor: pointer;
-      width: 200px;
       translate: 65em -20em;
 
       img {
@@ -845,8 +814,6 @@ export default {
 
     .flyfish {
       cursor: pointer;
-      width: 200px;
-      // margin: 30px auto 60px 0;
       translate: 20em -40em;
 
       img {
@@ -876,7 +843,6 @@ export default {
 
     .blueWhale {
       cursor: pointer;
-      width: 700px;
       margin: 30px auto 60px 0;
       // translate: 10em 10em;
 
