@@ -252,7 +252,9 @@ export default {
     :hover {
       background-color: map-get($colors, "memBtn");
     }
-
+    // .button:active {
+    //  background-color: #e74c3c; /* 按钮被点击时的颜色 */
+    // }
     span {
       font-size: map-get($fontSizes, "h4");
       letter-spacing: 1px;

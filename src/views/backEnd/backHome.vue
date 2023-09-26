@@ -91,6 +91,7 @@ export default {
     }
 
     .differentBox {
+      padding: 2em;
       position: relative;
       background-color: map-get($colors , 'bgc');
       width: 80%;

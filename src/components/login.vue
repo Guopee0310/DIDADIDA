@@ -441,13 +441,13 @@ input:focus {
 }
 
 .overlay {
-  background-image: url();
+  background-image: url(../../public/all_images/login_overlay2.jpg);
   /* background: #0b2d7b;
   background: -webkit-linear-gradient(to right, #0b2d7b, #475aab);
   background: linear-gradient(to right, #0b2d7b, #475aab); */
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: 0 0;
+  background-position: center 80%; 
   color: #ffffff;
   position: relative;
   left: -100%;

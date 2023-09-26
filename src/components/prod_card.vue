@@ -47,7 +47,6 @@
       <div class="modal-content">
         <div class="prod-content">
           <div class="prod-img">
-            <span class="close" @click="closeModal">&times;</span>
             <img :src="selectedProduct.imageSrc" />
           </div>
           <div class="prod-info">
@@ -57,6 +56,9 @@
             </div>
             <p>{{ $t(selectedProduct.info) }}</p>
           </div>
+        </div>
+        <div class="close" @click="closeModal">
+          <i class="fa-solid fa-xmark" style="color: #062f4a"></i>
         </div>
       </div>
     </div>
@@ -818,9 +820,9 @@ export default {
     height: 400px;
     margin: 0 auto;
     border: 0;
-    border-radius: 15px;
+    border-radius: 5px;
     text-align: center;
-    background-color: #fff;
+    background-color: rgba(40, 61, 84, 0.8);
     padding: 20px;
     position: relative;
     top: 100px;
@@ -829,11 +831,20 @@ export default {
   }
 
   .close {
-    position: absolute;
-    top: 10px;
-    right: 20px;
-    color: #333;
+    width: 45px;
+    height: 45px;
+    background-color: #93B7CD;
+    border-radius: 50%;
+    text-align: center;
     cursor: pointer;
+    position: absolute;
+    top: -20px;
+    right: -20px;
+
+    i {
+      line-height: 45px;
+      font-size: 30px;
+    }
   }
 
   .prod-content {
@@ -871,8 +882,12 @@ export default {
     align-items: flex-start;
     flex-direction: column;
 
+    h5 {
+      color: map-get($colors, "light");
+    }
+
     p {
-      color: map-get($colors, "dark");
+      color: map-get($colors, "light");
       font-size: map-get($fontSizes, "p");
     }
 
