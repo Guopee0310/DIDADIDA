@@ -17,21 +17,18 @@
           </defs>
           <!-- 表層區 -->
           <g @click="scrollToSection(2)" id="section1">
-            <rect x="5" y="16" width="15" height="6" rx="1" ry="1" style="fill:#67daf4a2;stroke-width:10;"
-              filter="url(#drop-shadow-filter)"></rect>
-            <text x="6.5" y="20.5"  fill="#fff" filter="url(#drop-shadow-filter)">淺層館</text>
+            <rect x="7" y="16" width="15" height="6" rx="1" ry="1" style="fill:#67daf4a2;stroke-width:10;"></rect>
+            <text x="8.5" y="20"  fill="#fff" filter="url(#drop-shadow-filter)">淺層館</text>
           </g>
           <!-- 中層區 -->
           <g @click="scrollToSection(3)">
-            <rect x="50" y="10" width="15" height="6" rx="1" ry="1" style="fill:#4B88FFa2;stroke-width:10;"
-              filter="url(#drop-shadow-filter)"></rect>
-            <text x="51.5" y="14.5" fill="#fff" filter="url(#drop-shadow-filter)">中層館</text>
+            <rect x="50" y="10" width="15" height="6" rx="1" ry="1" style="fill:#4B88FFa2;stroke-width:10;"></rect>
+            <text x="51.5" y="14.2" fill="#fff" filter="url(#drop-shadow-filter)">中層館</text>
           </g>
           <!-- 深層區 -->
           <g @click="scrollToSection(4)">
-            <rect x="65" y="35" width="15" height="6" rx="1" ry="1" style="fill:#0016D8a2;stroke-width:10;"
-              filter="url(#drop-shadow-filter)"></rect>
-            <text x="66.5" y="39.5"  fill="#fff" filter="url(#drop-shadow-filter)">深層館</text>
+            <rect x="70" y="37" width="15" height="6" rx="1" ry="1" style="fill:#0016D8a2;stroke-width:10;"></rect>
+            <text x="72" y="41"  fill="#fff" filter="url(#drop-shadow-filter)">深層館</text>
           </g>
         </svg>
       </div>
