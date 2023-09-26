@@ -33,18 +33,6 @@
       <div @click="moveAddress">票價資訊</div>
 
     </div>
-<<<<<<< HEAD
-    <div class="rspbox">
-      <div class="sayHelloTxt" v-if="!(showAddress || showWeatherMax || showMaxT)">
-        {{ sayHelloTxt }}
-      </div>
-      <div class="response" v-if="showAddress">地址 : {{ locationName }}</div>
-      <div class="response" v-if="showWeatherMax">
-        天氣現象 : {{ weatherWX }} 最高氣溫 : {{ weatherMaxT }}
-      </div>
-      <div class="response" v-if="showMaxT">降雨機率 : {{ weatherPop }}</div>
-    </div>
-=======
   <div class="rspbox">
     <div class="sayHelloTxt" v-if="!(showAddress || showWeatherMax || showMaxT || showClosed)">
       {{ sayHelloTxt }}
@@ -58,7 +46,6 @@
     
   </div>
   
->>>>>>> host
   </div>
 </template>
 
@@ -145,7 +132,6 @@ export default {
       this.showAddress = false;
       this.showClosed = false;
     },
-<<<<<<< HEAD
     top() {
       // 获取按钮元素的引用
       const buttonElement = this.$refs.scrollTopButton;
@@ -157,7 +143,6 @@ export default {
       // 使用 { top: buttonOffsetTop, behavior: 'smooth' } 选项实现平滑滚动
       window.scrollTo({ top: buttonOffsetTop, behavior: 'smooth' });
     },
-=======
     moveClosed(){
       this.showWeatherMax = false;
       this.showMaxT = false;
@@ -165,7 +150,6 @@ export default {
       this.showClosed = true;
       
     }
->>>>>>> host
   },
   computed: {},
 };
