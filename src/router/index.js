@@ -80,6 +80,15 @@ const routes = [
     },
   },
   {
+    path: "/path",
+    name: "path",
+    component: () =>
+      import(/*  */ "../views/Path.vue"),
+    meta: {
+      title: "Path",
+    },
+  },
+  {
     path: "/member",
     name: "member",
     component: () =>
