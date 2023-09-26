@@ -703,24 +703,25 @@ export default {
 
   .prod_btn {
     display: flex;
-  }
 
-  .num input {
-    width: 27px;
-    border: 0;
-    text-align: center;
-    background-color: #9fbdce;
-    font-size: 15px;
-  }
+    .num input {
+      width: 27px;
+      border: 0;
+      text-align: center;
+      background-color: #9fbdce;
+      font-size: 15px;
+      outline: none;
+    }
 
-  .num input:first-child {
-    border-radius: 15px 0 0 15px;
-    cursor: pointer;
-  }
+    .num input:first-child {
+      border-radius: 15px 0 0 15px;
+      cursor: pointer;
+    }
 
-  .num input:last-child {
-    border-radius: 0 15px 15px 0;
-    cursor: pointer;
+    .num input:last-child {
+      border-radius: 0 15px 15px 0;
+      cursor: pointer;
+    }
   }
 
   .buy {
@@ -730,30 +731,30 @@ export default {
     justify-content: center;
     align-items: center;
     cursor: pointer;
-  }
 
-  .buy i {
-    font-size: 17px;
-  }
+    i {
+      font-size: 17px;
+    }
 
-  .buy .fa-cart-shopping {
-    width: 12px;
-  }
+    .fa-cart-shopping {
+      width: 12px;
+    }
 
-  .buy:hover .fa-plus {
-    display: none;
-  }
+    :hover .fa-plus {
+      display: none;
+    }
 
-  .buy:hover .fa-cart-shopping {
-    display: inline-block;
-  }
+    :hover .fa-cart-shopping {
+      display: inline-block;
+    }
 
-  .buy:hover {
-    background-color: #eee;
+    :hover {
+      background-color: #eee;
+    }
   }
 
   .name a:hover {
-    color: #c48710;
+    color: map-get($colors, hoverColor);
     transition: 0.2s;
   }
 
@@ -776,24 +777,9 @@ export default {
   margin-bottom: 20px;
 }
 
-@media screen and (max-width: 768px) {
-  .select_btn {
-    width: 100%;
-    justify-content: center;
-  }
 
-  .card {
-    width: 40%;
-    margin: 0 30px 50px;
-
-    .heart {
-      margin: 0 30px -50px auto;
-    }
-  }
-}
 
 .modal {
-  // display: none;
   position: fixed;
   top: 0;
   left: 0;
@@ -910,6 +896,20 @@ export default {
 }
 
 @media screen and (max-width: 768px) {
+  .select_btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .card {
+    width: 40%;
+    margin: 0 30px 50px;
+
+    .heart {
+      margin: 0 30px -50px auto;
+    }
+  }
+
   .modal {
     .modal-content {
       width: 700px;

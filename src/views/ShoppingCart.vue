@@ -1,5 +1,4 @@
 <template>
-
   <div class="shop_cart">
     <h1>購物車</h1>
     <p class="product_count">總共有{{ prodCount }}件商品</p>
@@ -15,41 +14,22 @@
         <li v-for="(prod, index) in shopCartData" :key="index">
           <div class="card">
             <div class="product_name">
-              
+
               <label class="check"><input type="checkbox" v-model="prod.select" /></label>
               <img :src="prod.imgURL" alt="" />
-              
+
               <span class="prodname">{{ prod.name }}</span>
             </div>
             <div class="price">NTD{{ prod.price }}</div>
             <div class="count">
-              <input
-                type="button"
-                value="-"
-                class="btn minus"
-                @click="minusBtn(prod)"
-              />
-              <input
-                type="number"
-                v-model="prod.count"
-                @input="handleCountInput(prod)"
-              />
-              <input
-                type="button"
-                value="+"
-                class="btn plus"
-                @click="plusBtn(prod)"
-              />
+              <input type="button" value="-" class="btn minus" @click="minusBtn(prod)" />
+              <input type="text" v-model="prod.count" @input="handleCountInput(prod)" />
+              <input type="button" value="+" class="btn plus" @click="plusBtn(prod)" />
             </div>
             <div class="product_price">NTD{{ calculatePrice[index] }}</div>
             <div class="icons">
-              <heart
-                class="heart"
-                @click="pushInFav(prod)"
-                :is-active="
-                  favList.findIndex((v) => v.favoName === prod.name) > -1
-                "
-              />
+              <heart class="heart" @click="pushInFav(prod)" :is-active="favList.findIndex((v) => v.favoName === prod.name) > -1
+                " />
               <div class="cancel_icon" @click="deleteProduct(index)">
                 <i class="fa-solid fa-trash-can"></i>
               </div>
@@ -57,11 +37,9 @@
           </div>
         </li>
       </ul>
-      <label
-        ><input type="checkbox" v-model="selectAll" class="selectAll" />全選({{
-          selectedCount
-        }})</label
-      >
+      <label><input type="checkbox" v-model="selectAll" class="selectAll" />全選({{
+        selectedCount
+      }})</label>
       <span @click="deleteSelected" class="deleteSelect">刪除已選物品</span>
     </div>
 
@@ -70,23 +48,11 @@
         <div class="test">
           <h2>選擇運送方式</h2>
           <div class="item">
-            <input
-              name="transport"
-              id="7-11"
-              type="radio"
-              value="60"
-              v-model="picked"
-            />
+            <input name="transport" id="7-11" type="radio" value="60" v-model="picked" />
             <label for="7-11">711 店到店 + 60元</label>
           </div>
           <div class="item">
-            <input
-              name="transport"
-              id="free"
-              type="radio"
-              value="0"
-              v-model="picked"
-            />
+            <input name="transport" id="free" type="radio" value="0" v-model="picked" />
             <label for="free">到園領取 FREE</label>
           </div>
         </div>
@@ -95,19 +61,19 @@
           <h2>填寫收件資訊</h2>
           <div class="input_group" id="receive_info">
             <div class="name">
-                <div class="field__label">收件人姓名</div>
-                <input type="text" class="field_input" maxlength="50">
+              <div class="field__label">收件人姓名</div>
+              <input type="text" class="field_input" maxlength="50">
             </div>
             <div class="surname">
-                <div class="field__label">收件人手機</div>
-                <input type="text" class="field_input" maxlength="50">
+              <div class="field__label">收件人手機</div>
+              <input type="text" class="field_input" maxlength="50">
             </div>
             <div>
-                <div class="field__label">收件地址</div>
-                <input type="text" class="field_input">
+              <div class="field__label">收件地址</div>
+              <input type="text" class="field_input">
             </div>
 
-        </div>
+          </div>
         </div>
       </div>
 
@@ -317,7 +283,7 @@ input[type="checkbox"] {
   border-bottom: 1px solid rgba(0, 0, 0, 0.6);
 }
 
-.sort_name > li {
+.sort_name>li {
   width: 20%;
   text-align: center;
 }
@@ -333,7 +299,7 @@ input[type="checkbox"] {
   align-items: center;
 }
 
-.card > div {
+.card>div {
   width: 20%;
   display: flex;
   justify-content: center;
@@ -358,6 +324,7 @@ input[type="checkbox"] {
   cursor: pointer;
   width: 1rem;
 }
+
 .heart {
   cursor: pointer;
   width: 0.5rem;
@@ -366,36 +333,28 @@ input[type="checkbox"] {
 .icons {
   width: 5%;
 }
-.count > * {
-  width: 20%;
-  background-color: #96bacf;
-  text-align: center;
-  outline: none;
-  border: none;
-  padding: 0.5em;
-}
 
-.count .btn {
-  cursor: pointer;
-}
+.count {
+  display: flex;
 
-.minus {
-  border-radius: 1em 0 0 1em;
-}
+  input {
+    width: 27px;
+    border: 0;
+    text-align: center;
+    background-color: #9fbdce;
+    font-size: 15px;
+    outline: none;
+  }
 
-.plus {
-  border-radius: 0 1em 1em 0;
-}
+  input:first-child {
+    border-radius: 15px 0 0 15px;
+    cursor: pointer;
+  }
 
-input[type="number"]::-webkit-inner-spin-button,
-input[type="number"]::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-input[type="number"] {
-  /* firefox */
-  -moz-appearance: textfield;
+  input:last-child {
+    border-radius: 0 15px 15px 0;
+    cursor: pointer;
+  }
 }
 
 .cart_null {
@@ -427,6 +386,7 @@ input[type="number"] {
   flex-direction: column;
   justify-content: center;
 }
+
 .checkout {
   max-width: 1000px;
   margin: auto;
@@ -450,13 +410,16 @@ input[type="number"] {
 .test .item {
   margin: 10px;
 }
+
 .receive .item {
   margin: 10px;
 }
-.input_group{
+
+.input_group {
   margin-left: 10px;
-  margin-top:5px;
+  margin-top: 5px;
 }
+
 .test2 {
   width: 50%;
   position: relative;
@@ -469,7 +432,7 @@ input[type="number"] {
   color: white;
   padding: 5px;
   position: absolute;
-  transform: translate(10%,350%);
+  transform: translate(10%, 350%);
   cursor: pointer;
 }
 
@@ -486,7 +449,7 @@ h2 {
   margin-bottom: 10px;
 }
 
-.test2 .item > * {
+.test2 .item>* {
   margin: 10px 0;
 }
 
@@ -500,12 +463,15 @@ h2 {
     width: 80%;
     padding: 1rem;
   }
-h1{
-  border-bottom: 1px solid rgba(0, 0, 0, 0.16);;
-}
-  .sort_name{
- display: none;
-}
+
+  h1 {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.16);
+    ;
+  }
+
+  .sort_name {
+    display: none;
+  }
 
   /* 调整购物车项布局 */
   .card {
@@ -519,48 +485,57 @@ h1{
   }
 
   /* 调整购物车商品图片大小 */
- .check{
-  margin-left: -250px;
+  .check {
+    margin-left: -250px;
   }
+
   .picname img {
-   margin: -10px;
+    margin: -10px;
   }
-  .product_name{
-display: flex;
-flex-direction: column;
-width: 100%;
+
+  .product_name {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
   }
+
   .prodname {
     width: 100%;
   }
-  .heart{
-   margin-right: 40px;
+
+  .heart {
+    margin-right: 40px;
   }
 
   /* 调整全选复选框样式 */
   .selectAll {
     margin-top: 1rem;
   }
-  .checkout{
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  .test2{
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    
-  }
-  .test2 .item {
-  margin-left: -20px;
-}
-.test2 button{
-  left: 35%;
-}
 
-  .checkoutleft,.test2{
-    margin:20px;
+  .checkout {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .test2 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+  }
+
+  .test2 .item {
+    margin-left: -20px;
+  }
+
+  .test2 button {
+    left: 35%;
+  }
+
+  .checkoutleft,
+  .test2 {
+    margin: 20px;
   }
 }
 </style>

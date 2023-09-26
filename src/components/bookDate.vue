@@ -3,15 +3,8 @@
     <div class="dateTitle">{{ $t("選擇日期與票數") }}</div>
     <div class="dateTextAll">
       <div class="calendar">
-        <VDatePicker
-          v-model="date"
-          borderless
-          expanded
-          :min-date="new Date()"
-          locale="tw"
-          :masks="{ title: 'YYYY MMM' }"
-          mode="date"
-        />
+        <VDatePicker v-model="date" borderless expanded :min-date="new Date()" locale="tw" :masks="{ title: 'YYYY MMM' }"
+          mode="date" />
       </div>
       <div class="calendarOptionAll">
         <div class="optionTitle">
@@ -22,11 +15,7 @@
             }}
           </div>
         </div>
-        <div
-          v-for="(i, index) in optionDetailArr"
-          class="optionAll"
-          :key="index"
-        >
+        <div v-for="(i, index) in optionDetailArr" class="optionAll" :key="index">
           <div class="ticketType">
             <div>{{ $t(i[0]) }}</div>
             <div>{{ $t(i[1]) }}</div>
@@ -34,9 +23,9 @@
           <div class="ticketSal">
             <div>NT {{ $t(i[2]) }} / {{ $t("每人") }}</div>
             <div class="clickTicket">
-              <div @click="ticketdown(index)">－</div>
-              <div>{{ i[3] }}</div>
-              <div @click="ticketPlus(index)">＋</div>
+              <input type="button" value="-" @click="ticketdown(index)" />
+              <input type="text" :value="i[3]" />
+              <input type="button" value="+" @click="ticketPlus(index)" />
             </div>
           </div>
         </div>
@@ -81,13 +70,12 @@ export default {
       this.totalPrice = 0;
     },
   },
-  mounted() {},
-  beforeDestroy() {},
+  mounted() { },
+  beforeDestroy() { },
   computed: {
     catchDate() {
-      return `${new Date(this.date).getFullYear()}.${
-        new Date(this.date).getMonth() + 1
-      }.${new Date(this.date).getDate()}`;
+      return `${new Date(this.date).getFullYear()}.${new Date(this.date).getMonth() + 1
+        }.${new Date(this.date).getDate()}`;
     },
   },
   methods: {
@@ -163,12 +151,12 @@ export default {
         idx == 0
           ? (this.totalPrice -= 500)
           : idx == 1
-          ? (this.totalPrice -= 250)
-          : idx == 2
-          ? (this.totalPrice -= 400)
-          : idx == 3
-          ? (this.totalPrice -= 250)
-          : "";
+            ? (this.totalPrice -= 250)
+            : idx == 2
+              ? (this.totalPrice -= 400)
+              : idx == 3
+                ? (this.totalPrice -= 250)
+                : "";
       }
     },
     ticketPlus(idx) {
@@ -176,12 +164,12 @@ export default {
       idx == 0
         ? (this.totalPrice += 500)
         : idx == 1
-        ? (this.totalPrice += 250)
-        : idx == 2
-        ? (this.totalPrice += 400)
-        : idx == 3
-        ? (this.totalPrice += 250)
-        : "";
+          ? (this.totalPrice += 250)
+          : idx == 2
+            ? (this.totalPrice += 400)
+            : idx == 3
+              ? (this.totalPrice += 250)
+              : "";
     },
   },
 };
@@ -314,19 +302,25 @@ export default {
           justify-content: flex-end;
 
           .clickTicket {
-            // border: 1px red solid;
-            background-color: #a7cbec;
-            border-radius: 20px;
             display: flex;
-            margin-left: 15px;
 
-            div {
-              padding: 0 15px;
+            input {
+              width: 27px;
+              border: 0;
+              text-align: center;
+              background-color: #9fbdce;
+              font-size: 15px;
+              outline: none;
+            }
 
-              &:first-child,
-              &:last-child {
-                cursor: pointer;
-              }
+            input:first-child {
+              border-radius: 15px 0 0 15px;
+              cursor: pointer;
+            }
+
+            input:last-child {
+              border-radius: 0 15px 15px 0;
+              cursor: pointer;
             }
           }
         }
