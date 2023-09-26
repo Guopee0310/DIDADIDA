@@ -138,7 +138,8 @@ export default {
 .quizAll {
   @include LQ;
   .showWrong {
-    background-color: rgb(134, 83, 83);
+    background-color: rgb(134, 83, 83,0.5);
+    border-radius: 5px;
   }
   .singelQuestion {
     // border: 1px red solid;
@@ -183,7 +184,7 @@ export default {
     margin-top: 20px;
   }
   .notCmpBtn {
-    color: red;
+    color: rgb(188, 91, 91);
     font-size: 14px;
     display: flex;
     justify-content: center;

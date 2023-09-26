@@ -27,12 +27,13 @@
       <div @click="moveAddress">地址</div>
       <div @click="moveWeatherMax">降雨機率</div>
       <div @click="moveMaxT">今日溫度</div>
-      <div @click="moveAddress">休館資訊</div>
+      <div @click="moveClosed">休館資訊</div>
       <div @click="moveWeatherMax">獲得與紅利點數</div>
       <div @click="moveMaxT">目前館內人數</div>
       <div @click="moveAddress">票價資訊</div>
 
     </div>
+<<<<<<< HEAD
     <div class="rspbox">
       <div class="sayHelloTxt" v-if="!(showAddress || showWeatherMax || showMaxT)">
         {{ sayHelloTxt }}
@@ -43,6 +44,21 @@
       </div>
       <div class="response" v-if="showMaxT">降雨機率 : {{ weatherPop }}</div>
     </div>
+=======
+  <div class="rspbox">
+    <div class="sayHelloTxt" v-if="!(showAddress || showWeatherMax || showMaxT || showClosed)">
+      {{ sayHelloTxt }}
+    </div>
+    <div class="response" v-if="showAddress">地址 : {{ locationName }}</div>
+    <div class="response" v-if="showWeatherMax">
+      天氣現象 : {{ weatherWX }} 最高氣溫 : {{ weatherMaxT }}
+    </div>
+    <div  class="response" v-if="showMaxT">降雨機率 : {{ weatherPop }}</div>
+    <div  class="response" v-if="showClosed">{{ closedtime }}</div>
+    
+  </div>
+  
+>>>>>>> host
   </div>
 </template>
 
@@ -59,10 +75,12 @@ export default {
       weatherMaxT: 0,
       //   降雨機率
       weatherPop: 0,
+      closedtime:"9/29~10/03 中秋假期休館",
       showText: false,
       showAddress: false,
       showWeatherMax: false,
       showMaxT: false,
+      showClosed: false,
       sayHelloTxt: "",
       intervalId: "",
     };
@@ -98,6 +116,7 @@ export default {
       this.showWeatherMax = false;
       this.showMaxT = false;
       this.showAddress = false;
+      this.showClosed = false;
       let hello = ["您", "好", "今", "天", "想", "問", "點", "什", "麼", "?"];
       this.sayHelloTxt = ""; // 將文字重置為空字串
 
@@ -112,17 +131,21 @@ export default {
       this.showWeatherMax = false;
       this.showMaxT = false;
       this.showAddress = true;
+      this.showClosed = false;
     },
     moveWeatherMax() {
       this.showWeatherMax = true;
       this.showMaxT = false;
       this.showAddress = false;
+      this.showClosed = false;
     },
     moveMaxT() {
       this.showWeatherMax = false;
       this.showMaxT = true;
       this.showAddress = false;
+      this.showClosed = false;
     },
+<<<<<<< HEAD
     top() {
       // 获取按钮元素的引用
       const buttonElement = this.$refs.scrollTopButton;
@@ -134,6 +157,15 @@ export default {
       // 使用 { top: buttonOffsetTop, behavior: 'smooth' } 选项实现平滑滚动
       window.scrollTo({ top: buttonOffsetTop, behavior: 'smooth' });
     },
+=======
+    moveClosed(){
+      this.showWeatherMax = false;
+      this.showMaxT = false;
+      this.showAddress = false;
+      this.showClosed = true;
+      
+    }
+>>>>>>> host
   },
   computed: {},
 };
