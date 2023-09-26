@@ -55,7 +55,11 @@
           <div class="picBox">
             <img :src="i[0]" alt="" />
           </div>
-          <input type="file" />
+          <input
+            type="file"
+            @change="pushImg($event, index)"
+            :disabled="i[2]"
+          />
         </div>
         <div class="inputAll">
           <input
@@ -74,7 +78,17 @@
             v-model="cloneLabaText[index]"
           ></textarea>
         </div>
-        <div>{{ i[1] }}點</div>
+        <select
+          name=""
+          id=""
+          :disabled="i[2]"
+          v-model="cloneLabaPoint[index]"
+          @change="getLabaPoint(index)"
+        >
+          <option value="3">3</option>
+          <option value="5">5</option>
+          <option value="7">7</option>
+        </select>
         <div class="chooseBtnAll">
           <label>
             <input
@@ -109,6 +123,7 @@ export default {
       cloneQusetion: [],
       cloneAns: [],
       clonePoint: [],
+      cloneLabaPoint: [],
       cloneLabaTitle: [],
       cloneLabaText: [],
       cloneLabashelf: [],
@@ -136,7 +151,7 @@ export default {
         ],
         [
           require("../../assets/images/blueCloth.png"),
-          5,
+          7,
           true,
           "海豚",
           "海豚是哺乳动物，生活在海洋中。它们通常有流线型的体形，灰色的皮肤，以及独特的喷水孔，用于呼吸。",
@@ -144,7 +159,7 @@ export default {
         ],
         [
           require("../../assets/images/blueCloth.png"),
-          5,
+          3,
           true,
           "海豚",
           "海豚是哺乳动物，生活在海洋中。它们通常有流线型的体形，灰色的皮肤，以及独特的喷水孔，用于呼吸。",
@@ -172,9 +187,18 @@ export default {
       this.cloneLabaTitle.push(this.labaAll[i][3]);
       this.cloneLabaText.push(this.labaAll[i][4]);
       this.cloneLabashelf.push(this.labaAll[i][5]);
+      this.cloneLabaPoint.push(this.labaAll[i][1]);
     }
   },
   methods: {
+    getLabaPoint(index) {
+      this.labaAll[index][1] = this.cloneLabaPoint[index];
+    },
+    pushImg(e, index) {
+      this.labaAll[
+        index
+      ][0] = require(`../../assets/images/${e.target.files[0].name}`);
+    },
     updateInput(index, e) {
       if (e.target.innerText == "確認") {
         this.labaAll[index][2] = true;
