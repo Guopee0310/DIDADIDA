@@ -1,75 +1,25 @@
 <template>
   <div class="labaAll">
     <div class="containerPic" v-if="this.$store.state.questionPic">
-      <img :src="require('../../public/all_images/laba/question_mark.jpg')" alt="">
-   </div> 
+      <img
+        :src="require('../../public/all_images/laba/question_mark.jpg')"
+        alt=""
+      />
+    </div>
 
     <div class="containerPic" v-else>
       <img
-        :src="require('../../public/all_images/laba/bluewhale.jpg')"
+        :src="i"
+        v-for="i in labaPicALL"
         :class="{
           resetImg: randomStart,
           resetImg2: guessNum == 1,
           resetImg3: guessNum == 2,
           resetImg4: guessNum == 3,
           resetImg5: guessNum == 4,
+          resetImg6: guessNum == 5,
+          resetImg7: guessNum == 6,
         }"
-        alt=""
-      />
-      <img
-        :src="require('../../public/all_images/laba/bluewhale.jpg')"
-        :class="{
-          resetImg: randomStart,
-          resetImg2: guessNum == 1,
-          resetImg3: guessNum == 2,
-          resetImg4: guessNum == 3,
-          resetImg5: guessNum == 4,
-        }"
-        alt=""
-      />
-      <img
-        :src="require('../../public/all_images/laba/dolphin.jpg')"
-        :class="{
-          resetImg: randomStart,
-          resetImg2: guessNum == 1,
-          resetImg3: guessNum == 2,
-          resetImg4: guessNum == 3,
-          resetImg5: guessNum == 4,
-        }"
-        alt=""
-      />
-      <img
-        :src="require('../../public/all_images/laba/jellyfish.jpg')"
-        :class="{
-          resetImg: randomStart,
-          resetImg2: guessNum == 1,
-          resetImg3: guessNum == 2,
-          resetImg4: guessNum == 3,
-          resetImg5: guessNum == 4,
-        }"
-        alt=""
-      />
-      <img
-        :src="require('../../public/all_images/laba/sailfish.jpg')"
-        :class="{
-          resetImg: randomStart,
-          resetImg2: guessNum == 1,
-          resetImg3: guessNum == 2,
-          resetImg4: guessNum == 3,
-          resetImg5: guessNum == 4,
-        }"
-        alt=""
-      />
-      <img
-        :src="require('../../public/all_images/laba/whiteshark.jpg')"
-        :class="{
-          resetImg: randomStart,
-          resetImg2: guessNum == 1,
-          resetImg3: guessNum == 2,
-          resetImg4: guessNum == 3,
-          resetImg5: guessNum == 4,
-        }"
-        alt=""
       />
     </div>
     <labaBtn @click="movePic" v-if="randomStart"></labaBtn>
@@ -98,6 +48,29 @@ export default {
       post: "",
       point: "",
       finalShow: false,
+      labaPicALL: [
+        // 三組一樣的
+        require("../../public/all_images/laba/bluewhale.jpg"),
+        require("../../public/all_images/laba/bluewhale.jpg"),
+        require("../../public/all_images/laba/dolphin.jpg"),
+        require("../../public/all_images/laba/jellyfish.jpg"),
+        require("../../public/all_images/laba/sailfish.jpg"),
+        require("../../public/all_images/laba/whiteshark.jpg"),
+
+        require("../../public/all_images/laba/bluewhale.jpg"),
+        require("../../public/all_images/laba/bluewhale.jpg"),
+        require("../../public/all_images/laba/dolphin.jpg"),
+        require("../../public/all_images/laba/jellyfish.jpg"),
+        require("../../public/all_images/laba/sailfish.jpg"),
+        require("../../public/all_images/laba/whiteshark.jpg"),
+
+        require("../../public/all_images/laba/bluewhale.jpg"),
+        require("../../public/all_images/laba/bluewhale.jpg"),
+        require("../../public/all_images/laba/dolphin.jpg"),
+        require("../../public/all_images/laba/jellyfish.jpg"),
+        require("../../public/all_images/laba/sailfish.jpg"),
+        require("../../public/all_images/laba/whiteshark.jpg"),
+      ],
       introArr: [
         {
           imgSrc: "../assets/images/dolphin_pillow.jpg",
@@ -123,6 +96,18 @@ export default {
           post: "小丑魚生活在淺海珊瑚礁區域，以互利共生的方式與海葵相處，保護海葵免受掠食者，生活深度通常在3到15米之間。",
           point: "5",
         },
+        {
+          imgSrc: "../assets/images/dolphin_pillow.jpg",
+          title: "小丑魚5555555",
+          post: "小丑魚生活在淺海珊瑚礁區域，以互利共生的方式與海葵相處，保護海葵免受掠食者，生活深度通常在3到15米之間。",
+          point: "5",
+        },
+        {
+          imgSrc: "../assets/images/dolphin_pillow.jpg",
+          title: "小丑魚66666666",
+          post: "小丑魚生活在淺海珊瑚礁區域，以互利共生的方式與海葵相處，保護海葵免受掠食者，生活深度通常在3到15米之間。",
+          point: "5",
+        },
       ],
     };
   },
@@ -137,47 +122,59 @@ export default {
     movePic() {
       this.$store.state.questionPic = false;
 
-      setTimeout(()=>{
-        const min = 1;
-      const max = 4;
-   
-      const randomNum = Math.floor(Math.random() * (max - min + 1)) + min;
-      this.randomStart = false;
-      if (randomNum == 1) {
-        this.guessNum = 1;
-        this.imgSrc = this.introArr[0].imgSrc;
-        this.title = this.introArr[0].title;
-        this.post = this.introArr[0].post;
-        this.point = this.introArr[0].point;
-        this.$store.state.labaScore = parseInt(this.introArr[0].point);
-      } else if (randomNum == 2) {
-        this.guessNum = 2;
-        this.imgSrc = this.introArr[1].imgSrc;
-        this.title = this.introArr[1].title;
-        this.post = this.introArr[1].post;
-        this.point = this.introArr[1].point;
-        this.$store.state.labaScore = parseInt(this.introArr[0].point);
-      } else if (randomNum == 3) {
-        this.guessNum = 3;
-        this.imgSrc = this.introArr[2].imgSrc;
-        this.title = this.introArr[2].title;
-        this.post = this.introArr[2].post;
-        this.point = this.introArr[2].point;
-        this.$store.state.labaScore = parseInt(this.introArr[0].point);
-      } else if (randomNum == 4) {
-        this.guessNum = 4;
-        this.imgSrc = this.introArr[3].imgSrc;
-        this.title = this.introArr[3].title;
-        this.post = this.introArr[3].post;
-        this.point = this.introArr[3].point;
-        this.$store.state.labaScore = parseInt(this.introArr[0].point);
-      }
       setTimeout(() => {
-        this.finalShow = true;
-      }, 1000);
+        const min = 1;
+        const max = 6;
 
-      },50)
-
+        const randomNum = Math.floor(Math.random() * (max - min + 1)) + min;
+        this.randomStart = false;
+        if (randomNum == 1) {
+          this.guessNum = 1;
+          this.imgSrc = this.introArr[0].imgSrc;
+          this.title = this.introArr[0].title;
+          this.post = this.introArr[0].post;
+          this.point = this.introArr[0].point;
+          this.$store.state.labaScore = parseInt(this.introArr[0].point);
+        } else if (randomNum == 2) {
+          this.guessNum = 2;
+          this.imgSrc = this.introArr[1].imgSrc;
+          this.title = this.introArr[1].title;
+          this.post = this.introArr[1].post;
+          this.point = this.introArr[1].point;
+          this.$store.state.labaScore = parseInt(this.introArr[0].point);
+        } else if (randomNum == 3) {
+          this.guessNum = 3;
+          this.imgSrc = this.introArr[2].imgSrc;
+          this.title = this.introArr[2].title;
+          this.post = this.introArr[2].post;
+          this.point = this.introArr[2].point;
+          this.$store.state.labaScore = parseInt(this.introArr[0].point);
+        } else if (randomNum == 4) {
+          this.guessNum = 4;
+          this.imgSrc = this.introArr[3].imgSrc;
+          this.title = this.introArr[3].title;
+          this.post = this.introArr[3].post;
+          this.point = this.introArr[3].point;
+          this.$store.state.labaScore = parseInt(this.introArr[0].point);
+        } else if (randomNum == 5) {
+          this.guessNum = 5;
+          this.imgSrc = this.introArr[4].imgSrc;
+          this.title = this.introArr[4].title;
+          this.post = this.introArr[4].post;
+          this.point = this.introArr[4].point;
+          this.$store.state.labaScore = parseInt(this.introArr[0].point);
+        } else if (randomNum == 6) {
+          this.guessNum = 6;
+          this.imgSrc = this.introArr[5].imgSrc;
+          this.title = this.introArr[5].title;
+          this.post = this.introArr[5].post;
+          this.point = this.introArr[5].point;
+          this.$store.state.labaScore = parseInt(this.introArr[0].point);
+        }
+        setTimeout(() => {
+          this.finalShow = true;
+        }, 1000);
+      }, 50);
     },
   },
   components: {
@@ -197,7 +194,7 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-image: url('../../public/all_images/laba_bg.gif');
+  background-image: url("../../public/all_images/laba_bg.gif");
   /* 其他背景属性，如背景颜色、大小、重复方式等可以继续添加 */
   background-color: #f0f0f0;
   background-size: cover;
@@ -212,27 +209,37 @@ export default {
     overflow: hidden;
     .resetImg {
       vertical-align: top;
-      translate: 0px -2370px;
+      translate: 0px -8058px;
     }
     .resetImg2 {
       vertical-align: top;
       translate: 0px -1896px;
-      transition: 1.5s;
+      transition: 3s;
     }
     .resetImg3 {
       vertical-align: top;
       translate: 0px -1422px;
-      transition: 1.5s;
+      transition: 3s;
     }
     .resetImg4 {
       vertical-align: top;
       translate: 0px -948px;
-      transition: 1.5s;
+      transition: 3s;
     }
     .resetImg5 {
       vertical-align: top;
       translate: 0px -474px;
-      transition: 1.5s;
+      transition: 3s;
+    }
+    .resetImg6 {
+      vertical-align: top;
+      translate: 0px 0px;
+      transition: 3s;
+    }
+    .resetImg7 {
+      vertical-align: top;
+      translate: 0px 474px;
+      transition: 3s;
     }
   }
   a {

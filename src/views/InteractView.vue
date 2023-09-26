@@ -47,6 +47,7 @@ export default {
     showQuiz() {
       this.isQuiz = true;
       this.isLaba = false;
+      this.$store.state.questionPic = true;
     },
     showLaba() {
       this.isQuiz = false;
