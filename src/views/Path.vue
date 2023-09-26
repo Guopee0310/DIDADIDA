@@ -3,17 +3,17 @@
   <main class="path_main">
     <div class="path_container">
       <h1>DIDA DIDA</h1>
-      <RouterLink to="/">
+      <router-link to="/">
         <div class="front">
           <button>前台</button>
         </div>
-      </RouterLink>
+      </router-link>
       <!-- 尚未建立 -->
-      <RouterLink to="/backHome">
+      <router-link to="/backHome">
         <div class="back">
           <button>後台</button>
         </div>
-      </RouterLink>
+      </router-link>
     </div>
   </main>
 </template>

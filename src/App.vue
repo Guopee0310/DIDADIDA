@@ -1,8 +1,8 @@
 <template>
-  <!-- <path1
+  <path1
     v-if="!this.$store.state.chooseFrontBack"
     @click="this.$store.state.chooseFrontBack = true"
-  ></path1> -->
+  ></path1>
   <header1
     v-if="!$route.meta.hideApp && this.$store.state.chooseFrontBack && $route.path !== '/path' " 
   ></header1>
@@ -79,7 +79,7 @@ import footer1 from "@/components/footer.vue";
 import wave from "@/components/wave.vue";
 import login from "@/components/login.vue";
 import helper from "@/components/helper.vue";
-// import path1 from "@/components/Path.vue";
+import path1 from "@/views/Path.vue";
 export default {
   data() {
     return {
@@ -100,7 +100,7 @@ export default {
     wave,
     login,
     helper,
-    // path1,
+    path1,
   },
   mounted() {
     // this.$router.push("/?section=hide");
