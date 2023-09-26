@@ -1,8 +1,8 @@
 <template>
-  <!-- <div v-if="loading">
+  <div v-if="loading">
     <LoadingBox />
   </div>
-  <div v-else> -->
+  <!-- <div v-else> -->
   <div>
     <div class="index">
       <!-- banner + open time ------------------------------------------ -->
