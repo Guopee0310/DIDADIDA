@@ -2,46 +2,56 @@
   <Tabs value="name1">
     <TabPane label="票種 / 票價管理" name="name1">
       <button class="add">+ 新增項目</button>
-      <ul>
-        <li>
+      <li>
           <p calss="tickettype">票種</p>
           <p>價格</p>
           <p>條件</p>
-        </li>
+     </li>
+      <ul v-for="(item,index) in ticket" :key="index">
+     
         <li>
-          <p class="tickettype">一般票</p>
-          <p>NT 500</p>
-          <p>限18歲(含)以上成人使用</p>
-          <button>修改</button>
+        
+          <p class="tickettype" :disabled="item[3]"><label for=""><input type="text" v-model="item.ticketname"></label></p>
+          <p :disabled="item[3]"><label for=""><input type="text" v-model="item.price"></label></p>
+          <p :disabled="item[3]"><label for=""><input type="text" v-model="item.content"></label></p>
+          <div class="updateBtnAll">
+            <button @click="updateQuestion(index, $event)">修改</button>
+          </div>
         </li>
-        <li>
-          <p class="tickettype">學生票</p>
-          <p>NT 300</p>
-          <p>限12歲(含)以上持學生證之學生適用</p>
-          <button>修改</button>
-        </li>
-        <li>
-          <p class="tickettype">孩童票</p>
-          <p>NT 200</p>
-          <p>限4歲(含)以上及未滿12歲兒童適用</p>
-          <button>修改</button>
-        </li>
-        <li>
-          <p class="tickettype">優待票</p>
-          <p>NT 200</p>
-          <p>
-            限持有身心障礙證明者、身心障礙者的1位陪同者、孕婦、滿65歲以上長者適用
-          </p>
-          <button>修改</button>
-        </li>
-        <li>
-          <p class="tickettype">團體票</p>
-          <p>NT 350</p>
-          <p>
-            限持有身心障礙證明者、身心障礙者的1位陪同者、孕婦、滿65歲以上長者適用
-          </p>
-          <button>修改</button>
-        </li>
+    <!-- //    <li>
+    //       <p class="tickettype">一般票</p>
+    //       <p>NT 500</p>
+    //       <p>限18歲(含)以上成人使用</p>
+    //       <button >修改</button>
+    //     </li>
+    //     <li>
+    //       <p class="tickettype">學生票</p>
+    //       <p>NT 300</p>
+    //       <p>限12歲(含)以上持學生證之學生適用</p>
+    //       <button >修改</button>
+    //     </li>
+    //     <li>
+    //       <p class="tickettype">孩童票</p>
+    //       <p>NT 200</p>
+    //       <p>限4歲(含)以上及未滿12歲兒童適用</p>
+    //       <button>修改</button>
+    //     </li>
+    //     <li>
+    //       <p class="tickettype">優待票</p>
+    //       <p>NT 200</p>
+    //       <p>
+    //         限持有身心障礙證明者、身心障礙者的1位陪同者、孕婦、滿65歲以上長者適用
+    //       </p>
+    //       <button>修改</button>
+    //     </li>
+    //     <li>
+    //       <p>團體票</p>
+    //       <p>NT 350</p>
+    //       <p>
+    //         最低人数要求：團隊人数必須超过 10 人，才能享受團體票折扣。
+    //       </p>
+    //       <button>修改</button>
+    //     </li>  -->
       </ul>
     </TabPane>
       
@@ -81,7 +91,40 @@ export default {
   components: { Radio },
   data() {
     return {
-      date: "",
+    ticket:[
+        {
+           ticketname:"一般票",
+           price:"NT 500",
+           content:"限18歲(含)以上成人使用",
+           change:true
+
+        },
+        {
+           ticketname:"學生票",
+           price:"NT 300",
+           content:"限12歲(含)以上持學生證之學生適用",
+           change:true
+        },
+        {
+           ticketname:"孩童票",
+           price:"NT 200",
+           content:"限4歲(含)以上及未滿12歲兒童適用",
+           change:true
+        },
+        {
+           ticketname:"優待票",
+           price:"NT 150",
+           content:"限持有身心障礙證明者、身心障礙者的1位陪同者、孕婦、滿65歲以上長者適用",
+           change:true
+        },
+        {
+           ticketname:"團體票",
+           price:"NT 350",
+           content:" 最低人数要求：團隊人数必須超過 10 人，才能享受團體票折扣。",
+           change:true
+        }
+    ]
+
     };
   },
 
@@ -94,12 +137,29 @@ export default {
       }.${new Date(this.date).getDate()}`;
     },
   },
-  methods: {},
-};
+  methods: {
+    updateQuestion(index, e) {
+      if (e.target.innerText == "確認") {
+        this.ticket[index][3] = true;
+        e.target.innerText = "修改";
+        return;
+      }
+      this.ticket[index][3] = false;
+      e.target.innerText = "確認";
+    }
+ }
+}
+
+
 
 </script>
 
 <style lang="scss" scoped>
+
+// .ivu-tabs .ivu-tabs-tabpane{
+//     width: 60%;
+//     height: 60%;
+// }
 .name2 p{
     margin-left: 30px;
     border: 2px black solid;
@@ -210,6 +270,32 @@ export default {
 </style>
 
 <style scoped lang="scss">
+
+li{
+    display: flex;
+    flex-direction: row;
+    border-bottom: 1px solid black;
+    width: 70%;
+    margin: 0 auto;
+    p {
+      &:first-child {
+        width: 30%;
+        margin: 20px 10px;
+      }
+    }
+    p {
+      &:nth-child(2) {
+        width: 30%;
+        margin: 20px 10px;
+      }
+    }
+    p {
+      &:nth-child(3) {
+        width: 40%;
+        margin: 20px 10px;
+      }
+    }
+}
 .add {
   margin-left: 130px;
   margin-top: 10px;
