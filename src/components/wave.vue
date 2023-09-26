@@ -4,19 +4,10 @@
       <h1>{{ h1Name }}</h1>
       <h2>{{ h2Name }}</h2>
     </div>
-    <svg
-      class="waves"
-      xmlns="http://www.w3.org/2000/svg"
-      xmlns:xlink="http://www.w3.org/1999/xlink"
-      viewBox="0 24 150 28"
-      preserveAspectRatio="none"
-      shape-rendering="auto"
-    >
+    <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28"
+      preserveAspectRatio="none" shape-rendering="auto">
       <defs>
-        <path
-          id="gentle-wave"
-          d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v30h-355z"
-        ></path>
+        <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v30h-355z"></path>
       </defs>
       <g class="parallax">
         <use xlink:href="#gentle-wave" x="48" y="0" :fill="waveColor1" />
@@ -53,47 +44,47 @@ export default {
       return this.$route.path == "/product"
         ? "周邊商品"
         : this.$route.path == "/explore"
-        ? "探索海洋生物"
-        : this.$route.path == "/news"
-        ? "最新消息"
-        : this.$route.path == "/about"
-        ? "關於我們"
-        : this.$route.path == "/member"
-        ? "會員中心"
-        : this.$route.path == "/guide"
-        ? "園區導覽"
-        : this.$route.path == "/interact"
-        ? "互動遊戲"
-        : this.$route.path == "/faq"
-        ? "常見問答"
-        : this.$route.path == "/shoppingcart"
-        ? "購物車"
-        : this.$route.path == "/ticket"
-        ? "購買票券"
-        : "";
+          ? "探索海洋生物"
+          : this.$route.path == "/news"
+            ? "最新消息"
+            : this.$route.path == "/about"
+              ? "關於我們"
+              : this.$route.path == "/member"
+                ? "會員中心"
+                : this.$route.path == "/guide"
+                  ? "園區導覽"
+                  : this.$route.path == "/interact"
+                    ? "互動遊戲"
+                    : this.$route.path == "/faq"
+                      ? "常見問答"
+                      : this.$route.path == "/shoppingcart"
+                        ? "購物車"
+                        : this.$route.path == "/ticket"
+                          ? "購買票券"
+                          : "";
     },
     h2Name() {
       return this.$route.path == "/product"
         ? "Products"
         : this.$route.path == "/explore"
-        ? "Explore"
-        : this.$route.path == "/news"
-        ? "News"
-        : this.$route.path == "/about"
-        ? "AboutUs"
-        : this.$route.path == "/member"
-        ? "Member"
-        : this.$route.path == "/guide"
-        ? "Guide"
-        : this.$route.path == "/interact"
-        ? "Interaction"
-        : this.$route.path == "/faq"
-        ? "FAQs"
-        : this.$route.path == "/shoppingcart"
-        ? "Cart"
-        : this.$route.path == "/ticket"
-        ? "Tickets"
-        : "";
+          ? "Explore"
+          : this.$route.path == "/news"
+            ? "News"
+            : this.$route.path == "/about"
+              ? "AboutUs"
+              : this.$route.path == "/member"
+                ? "Member"
+                : this.$route.path == "/guide"
+                  ? "Guide"
+                  : this.$route.path == "/interact"
+                    ? "Interaction"
+                    : this.$route.path == "/faq"
+                      ? "FAQs"
+                      : this.$route.path == "/shoppingcart"
+                        ? "Cart"
+                        : this.$route.path == "/ticket"
+                          ? "Tickets"
+                          : "";
     },
     // waveColor3() {
     //   return this.$route.path == "/about" ? "#333" : "#fff";
@@ -118,7 +109,7 @@ export default {
                   ? `${this.$store.state.chooseImgSrc}/all_images/banner/guide_banner.jpg`
                   : // ? "/all_images/banner/guide_banner.jpg"
                   this.$route.path == "/interact"
-                    ? `${this.$store.state.chooseImgSrc}/all_images/banner/interact.png`
+                    ? `${this.$store.state.chooseImgSrc}/all_images/banner/interact_banner.jpg`
                     : // ? "/all_images/cenote-280252_1920.jpg"
                     this.$route.path == "/faq"
                       ? `${this.$store.state.chooseImgSrc}/all_images/banner/faq.jpg`
@@ -150,7 +141,7 @@ export default {
     // }
     // this.setWaveColors();
   },
-  
+
 };
 </script>
 <style scoped lang="scss">
@@ -183,16 +174,19 @@ export default {
     align-items: center;
     flex-direction: column;
     color: map-get($colors, "light");
-    text-shadow: black 0.1em 0.1em 0.2em;
+    
 
     h1 {
       border-bottom: 1px solid map-get($colors, "light");
+      font-size: map-get($fontSizes, "h3");
+      letter-spacing: 2px;
     }
 
-    font-size: map-get($fontSizes, "h1");
+
 
     h2 {
-      font-size: map-get($fontSizes, "h2");
+      font-size: map-get($fontSizes, "h4");
+      letter-spacing: 2px;
     }
   }
 }
@@ -207,21 +201,21 @@ export default {
 
 /* Animation */
 
-.parallax > use {
+.parallax>use {
   animation: move-forever 20s cubic-bezier(0.55, 0.6, 0.59, 0.5) infinite;
 }
 
-.parallax > use:nth-child(1) {
+.parallax>use:nth-child(1) {
   animation-delay: -2s;
   animation-duration: 15s;
 }
 
-.parallax > use:nth-child(2) {
+.parallax>use:nth-child(2) {
   animation-delay: -4s;
   animation-duration: 10s;
 }
 
-.parallax > use:nth-child(3) {
+.parallax>use:nth-child(3) {
   animation-delay: -6s;
   animation-duration: 18s;
 }
