@@ -37,16 +37,16 @@
       </div>
 
       <div class="member_nav">
-        <button @click="this.$store.state.memberBtn = 'mem_account_settings'">
+        <button @click="memberSetting" :class="{ alreadyClick: memberClick }">
           <span>{{ $t("會員帳號設定") }}</span>
         </button>
-        <button @click="this.$store.state.memberBtn = 'prod_order_inquiry'">
+        <button @click="prodOrder" :class="{ alreadyClick: prodOrderClick }">
           <span>{{ $t("購物訂單查詢") }}</span>
         </button>
-        <button @click="this.$store.state.memberBtn = 'tick_order_inquiry'">
+        <button @click="tickOrder" :class="{ alreadyClick: tickOrderClick }">
           <span>{{ $t("購票訂單查詢") }}</span>
         </button>
-        <button @click="this.$store.state.memberBtn = 'favorites_list'">
+        <button @click="favList" :class="{ alreadyClick: favListClick }">
           <span>{{ $t("我的收藏清單") }}</span>
         </button>
         <div class="bubble group_r">
@@ -115,6 +115,10 @@ export default {
   },
   data() {
     return {
+      memberClick: true,
+      prodOrderClick: false,
+      tickOrderClick: false,
+      favListClick: false,
       btn: "mem_account_settings",
     };
   },
@@ -124,7 +128,36 @@ export default {
     },
     ...mapGetters(["remainingTodos"]),
   },
-  methods: {},
+  methods: {
+    favList() {
+      this.$store.state.memberBtn = "favorites_list";
+      this.prodOrderClick = false;
+      this.memberClick = false;
+      this.tickOrderClick = false;
+      this.favListClick = true;
+    },
+    tickOrder() {
+      this.$store.state.memberBtn = "tick_order_inquiry";
+      this.prodOrderClick = false;
+      this.memberClick = false;
+      this.tickOrderClick = true;
+      this.favListClick = false;
+    },
+    prodOrder() {
+      this.$store.state.memberBtn = "prod_order_inquiry";
+      this.prodOrderClick = true;
+      this.memberClick = false;
+      this.tickOrderClick = false;
+      this.favListClick = false;
+    },
+    memberSetting() {
+      this.$store.state.memberBtn = "mem_account_settings";
+      this.memberClick = true;
+      this.prodOrderClick = false;
+      this.tickOrderClick = false;
+      this.favListClick = false;
+    },
+  },
 };
 </script>
 <style scoped lang="scss">
@@ -248,9 +281,14 @@ export default {
       cursor: pointer;
       background-color: #fff;
     }
-
+    .alreadyClick {
+      background-color: #1fb0cb;
+      color: white;
+    }
     :hover {
-      background-color: map-get($colors, "memBtn");
+      // background-color: map-get($colors, "memBtn");
+      background-color: #1fb0cb;
+      color: white;
     }
     // .button:active {
     //  background-color: #e74c3c; /* 按钮被点击时的颜色 */
