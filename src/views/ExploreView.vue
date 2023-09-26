@@ -12,8 +12,6 @@
         <h4 :data-depth="animal.depth">{{ animal.name }}</h4>
       </div>
 
-
-
       <!-- 中層海洋帶 -->
       <div class="line middle">
         <div class="slot" id="two"></div>
@@ -37,7 +35,6 @@
 
       <div class="ship"><img src="../../public/all_images/animal/ship.png" alt=""></div>
     </div>
-
 
     <div class="navBar">
       <ul>
@@ -65,20 +62,27 @@
       <div class="line"></div>
     </div>
 
-    <div class="card" v-if="selectedAnimal">
-      <div v-for="(introduce, index) in introduce">
-        <img :src="introduce.image" alt="" />
-        <h4>{{ introduce.name }}</h4>
-        <span>{{ introduce.enName }}</span>
-        <p>{{ introduce.p }}</p>
-        <ul v-for="(feature, index) in introduce.features">
-          <li>{{ feature }}</li>
-        </ul>
+    <!-- ↓↓↓ 商品彈窗 ↓↓↓ -->
+    <transition name="fade">
+      <div class="card" v-if="selectedAnimal">
+        <div class="shadow" @click="closeCard"></div>
+        <div class="card_content">
+          <div v-for="(introduce, index) in introduce">
+            <img :src="introduce.image" alt="" />
+            <h4>{{ introduce.name }}</h4>
+            <span>{{ introduce.enName }}</span>
+            <p>{{ introduce.p }}</p>
+            <ul v-for="(feature, index) in introduce.features">
+              <li>{{ feature }}</li>
+            </ul>
+          </div>
+          <div class="close" @click="closeCard">
+            <i class="fa-solid fa-xmark" style="color: #062f4a"></i>
+          </div>
+        </div>
       </div>
-      <div class="close" @click="closeCard">
-        <i class="fa-solid fa-xmark" style="color: #062f4a"></i>
-      </div>
-    </div>
+    </transition>
+    <!-- ↑↑↑ 商品彈窗 ↑↑↑ -->
   </div>
 </template>
 
@@ -321,113 +325,6 @@ export default {
     letter-spacing: 2px;
 
   }
-
-  .modal {
-    // display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.6); // 彈窗背景亮度
-    z-index: 10;
-    justify-content: center;
-    align-items: center;
-
-    .shadow {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.6);
-      z-index: -1;
-      /* 在蓋板下面 */
-    }
-
-    .modal-content {
-      width: 1000px;
-      height: 400px;
-      margin: 0 auto;
-      border: 0;
-      border-radius: 15px;
-      text-align: center;
-      background-color: #fff;
-      padding: 20px;
-      position: relative;
-      top: 100px;
-      display: flex;
-      align-items: center;
-    }
-
-    .close {
-      position: absolute;
-      top: 10px;
-      right: 20px;
-      color: #333;
-      cursor: pointer;
-    }
-
-    .prod-content {
-      width: 90%;
-      height: 90%;
-      margin: 0 auto;
-      // border: 1px solid #333;
-      border-radius: 15px;
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: flex-start;
-    }
-
-    .prod-img {
-      margin-right: 20px;
-      width: 40%;
-      height: 80%;
-
-      img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        border: 0;
-        border-radius: 15px;
-      }
-    }
-
-    .prod-info {
-      width: 40%;
-      height: 80%;
-      text-align: justify;
-      display: flex;
-      justify-content: flex-start;
-      align-items: flex-start;
-      flex-direction: column;
-
-      p {
-        color: map-get($colors, 'dark');
-        font-size: map-get($fontSizes, 'p');
-      }
-
-      >p {
-        margin-top: 30px;
-        line-height: 40px;
-      }
-    }
-
-  }
-
-  // 彈窗顯示與隱藏延遲動畫效果
-  .fade-enter-active,
-  .fade-leave-active {
-    transition: opacity 0.5s;
-  }
-
-  .fade-enter,
-  .fade-leave-to {
-    opacity: 0;
-  }
-
-
 
   // 內容 ------------------------------------------------------------
   .wapper {
@@ -1005,23 +902,50 @@ export default {
 
   }
 
+  // 彈窗 ---------------------------------------------
   .card {
-    width: 700px;
-    margin: auto;
-    display: flex;
-    flex-wrap: wrap;
+    position: fixed;
+    width: 100%;
+    height: 100%;
     justify-content: center;
     align-items: center;
-    background-color: rgba(40, 61, 84, 0.8);
+    background-color: rgba(40, 61, 84, 0.4);
     backdrop-filter: blur(3px);
     border-radius: 20px;
     color: #eee;
-    position: fixed;
-    top: 20%;
+    top: 0;
+    // top: 20%;
     left: 0;
     right: 0;
     z-index: 10;
 
+    .shadow {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: linear-gradient(45deg, rgba(234, 153, 153, 0.3), rgba(11, 47, 74, 0.3), rgba(255, 217, 102, 0.3));
+      z-index: -1;
+      /* 在蓋板下面 */
+    }
+
+    .card_content {
+      width: 700px;
+      margin: auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      background-color: rgba(40, 61, 84, 0.8);
+      backdrop-filter: blur(3px);
+      border-radius: 20px;
+      color: #eee;
+      position: fixed;
+      top: 20%;
+      left: 0;
+      right: 0;
+    }
 
     img {
       vertical-align: top;
@@ -1092,5 +1016,16 @@ export default {
       }
     }
   }
+}
+
+// 彈窗顯示與隱藏延遲動畫效果
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>

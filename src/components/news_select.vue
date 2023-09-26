@@ -121,6 +121,7 @@ export default {
       height: fit-content;
       position: relative;
       margin-left: auto;
+      cursor: pointer;
     }
 
     .input-search,
@@ -157,7 +158,9 @@ export default {
       right: 0px;
       color: #584d4d;
       background-color: transparent;
-      pointer-events: painted;
+      .fas .fa-search{
+        pointer-events: none;
+      }
     }
 
     .icon:focus~.input-search {

@@ -1,23 +1,14 @@
 <template>
   <div class="select_btn">
-    <prodSelect
-      @transferClass="getClass"
-      @transferPrice="getPrice"
-      @transferSearch="searchClick"
-    ></prodSelect>
+    <prodSelect @transferClass="getClass" @transferPrice="getPrice" @transferSearch="searchClick"></prodSelect>
   </div>
   <div class="card" v-for="(i, index) in chooseItem" :key="i.imageSrc">
     <div class="heart">
-      <heart
-        @change-heart="changeHeart($event, i, index)"
-        :keepLove="keepHeartArr[index]"
-        :is-active="favList.findIndex((v) => v.favoName === i.titleName) > -1"
-      ></heart>
+      <heart @change-heart="changeHeart($event, i, index)" :keepLove="keepHeartArr[index]"
+        :is-active="favList.findIndex((v) => v.favoName === i.titleName) > -1"></heart>
     </div>
     <div class="pic">
-      <a href="#" @click.prevent="showProductDetails(i)"
-        ><img :src="i.imageSrc" alt=""
-      /></a>
+      <a href="#" @click.prevent="showProductDetails(i)"><img :src="i.imageSrc" alt="" /></a>
     </div>
 
     <div class="name">
@@ -34,13 +25,9 @@
           <input type="button" value="+" @click="i.count++" />
         </div>
         <div class="buy">
-          <i
-            class="fa-solid fa-cart-shopping"
-            style="color: #9fbdce"
-            @click.prevent="
-              pushAndTogglePopup(i.imageSrc, i.titleName, i.count, i.prodPrice)
-            "
-          ></i>
+          <i class="fa-solid fa-cart-shopping" style="color: #9fbdce" @click.prevent="
+            pushAndTogglePopup(i.imageSrc, i.titleName, i.count, i.prodPrice)
+            "></i>
           <!-- pushInShoppingCart(
                   i.imageSrc,
                   i.titleName,
@@ -75,11 +62,7 @@
     </div>
   </transition>
   <!-- ↑↑↑ 商品彈窗 ↑↑↑ -->
-  <Page
-    :total="chooseItem2.length"
-    @on-change="updatePage"
-    class="changepage"
-  />
+  <Page :total="chooseItem2.length" @on-change="updatePage" class="changepage" v-if="showPage" />
 </template>
 
 <script>
@@ -95,6 +78,7 @@ export default {
         {
           imageSrc: require("../assets/images/dolphin_pillow.jpg"),
           titleName: "極舒適海豚抱枕",
+          select: '極舒適海豚',
           prodPrice: "380",
           tag: "抱枕",
           count: 1,
@@ -103,6 +87,7 @@ export default {
         {
           imageSrc: require("../assets/images/whaleshark_doll.png"),
           titleName: "Q版鯨鯊玩偶",
+          select: 'Q版鯨鯊',
           prodPrice: "499",
           tag: "玩偶",
           count: 1,
@@ -111,6 +96,7 @@ export default {
         {
           imageSrc: require("../assets/images/dolphin_doll.png"),
           titleName: "超可愛海豚寶寶玩偶",
+          select: '超可愛海豚寶寶',
           prodPrice: "399",
           tag: "玩偶",
           count: 1,
@@ -119,6 +105,7 @@ export default {
         {
           imageSrc: require("../assets/images/shark_doll.jpg"),
           titleName: "愛睏a鯊鯊玩偶",
+          select: '愛睏a鯊鯊',
           prodPrice: "499",
           tag: "玩偶",
           count: 1,
@@ -127,6 +114,7 @@ export default {
         {
           imageSrc: require("../assets/images/shark_keyring.jpg"),
           titleName: "QQ的鯊鯊鑰匙圈",
+          select: 'QQ的鯊鯊鑰匙圈',
           prodPrice: "160",
           tag: "配飾",
           count: 1,
@@ -135,6 +123,7 @@ export default {
         {
           imageSrc: require("../assets/images/Nemo_doll.jpg"),
           titleName: "Nemo玩偶",
+          select: 'Nemo',
           prodPrice: "299",
           tag: "玩偶",
           count: 1,
@@ -143,6 +132,7 @@ export default {
         {
           imageSrc: require("../assets/images/sealion_doll.png"),
           titleName: "Q版海獅玩偶",
+          select: 'Q版海獅',
           prodPrice: "499",
           tag: "玩偶",
           count: 1,
@@ -151,6 +141,7 @@ export default {
         {
           imageSrc: require("../assets/images/shark_doll_2.png"),
           titleName: "Q版鯊鯊玩偶",
+          select: 'Q版鯊鯊',
           prodPrice: "499",
           tag: "玩偶",
           count: 1,
@@ -159,6 +150,7 @@ export default {
         {
           imageSrc: require("../assets/images/loveing_garden_eel.png"),
           titleName: "戀愛ing花園鰻玩偶",
+          select: '戀愛ing花園鰻',
           prodPrice: "399",
           tag: "玩偶",
           count: 1,
@@ -167,6 +159,7 @@ export default {
         {
           imageSrc: require("../assets/images/whale_doll.jpg"),
           titleName: "勾錐a小鯨魚玩偶",
+          select: '勾錐a小鯨魚',
           prodPrice: "350",
           tag: "玩偶",
           count: 1,
@@ -175,6 +168,7 @@ export default {
         {
           imageSrc: require("../assets/images/lantern_fish_doll.jpg"),
           titleName: "貪吃燈籠魚玩偶",
+          select: '貪吃燈籠魚',
           prodPrice: "499",
           tag: "玩偶",
           count: 1,
@@ -183,6 +177,7 @@ export default {
         {
           imageSrc: require("../assets/images/pufferfish_doll.jpg"),
           titleName: "愛睏a河豚玩偶",
+          select: '愛睏a河豚',
           prodPrice: "499",
           tag: "玩偶",
           count: 1,
@@ -191,6 +186,7 @@ export default {
         {
           imageSrc: require("../assets/images/octopus_doll.jpg"),
           titleName: "老爺爺章魚玩偶",
+          select: '老爺爺章魚',
           prodPrice: "399",
           tag: "玩偶",
           count: 1,
@@ -199,6 +195,7 @@ export default {
         {
           imageSrc: require("../assets/images/sea_turtle_doll.jpg"),
           titleName: "勾錐a海龜玩偶",
+          select: '勾錐a海龜',
           prodPrice: "399",
           tag: "玩偶",
           count: 1,
@@ -207,6 +204,7 @@ export default {
         {
           imageSrc: require("../assets/images/killer_whale_doll.jpg"),
           titleName: "帥氣a虎鯨玩偶",
+          select: '帥氣a虎鯨',
           prodPrice: "499",
           tag: "玩偶",
           count: 1,
@@ -215,6 +213,7 @@ export default {
         {
           imageSrc: require("../assets/images/stingray_pillow.jpg"),
           titleName: "極舒適魟魚抱枕",
+          select: '極舒適魟魚',
           prodPrice: "380",
           tag: "抱枕",
           count: 1,
@@ -223,6 +222,7 @@ export default {
         {
           imageSrc: require("../assets/images/shark_pillow2.jpg"),
           titleName: "滿出來鯊鯊抱枕",
+          select: '滿出來鯊鯊',
           prodPrice: "660",
           tag: "抱枕",
           count: 1,
@@ -231,6 +231,7 @@ export default {
         {
           imageSrc: require("../assets/images/shark_pillow.jpg"),
           titleName: "極舒適鯊魚抱枕",
+          select: '極舒適鯊魚',
           prodPrice: "499",
           tag: "抱枕",
           count: 1,
@@ -242,13 +243,14 @@ export default {
       selectFirst: false,
       priceFirst: false,
       chooseItem2: [],
-      selectOption: "",
-      getPriceOption: "",
+      selectOption: "所有商品",
+      getPriceOption: "價格",
       getPage: 1,
       keepHeartArr: [],
       searchInput: "",
       showModal: false,
       selectedProduct: null,
+      showPage: true,
     };
   },
   mounted() {
@@ -264,6 +266,8 @@ export default {
     for (let i = 0; i < this.$store.state.favoList.length; i++) {
       this.keepHeartArr[this.$store.state.favoList[i].favIndex] = false;
     }
+    this.getClass(this.selectOption);
+    this.getPrice(this.getPriceOption);
   },
   props: {
     msg1: [String, Number],
@@ -317,99 +321,132 @@ export default {
       //   price: '680',
       //   count: 1,
     },
+    // getClass(data) {
+    //   this.selectOption = data;
+    //   if (data == "所有商品") {
+    //     this.chooseItem = this.cardsAll;
+    //     if (this.getPriceOption == "由高到低") {
+    //       this.chooseItem.sort((a, b) => {
+    //         return parseInt(b.prodPrice) - parseInt(a.prodPrice);
+    //       });
+    //       this.chooseItem2 = this.chooseItem;
+    //       this.chooseItem = this.chooseItem2.slice(0, this.pageSize);
+    //     } else if (this.getPriceOption == "由低到高") {
+    //       this.chooseItem.sort((a, b) => {
+    //         return parseInt(a.prodPrice) - parseInt(b.prodPrice);
+    //       });
+    //       this.chooseItem2 = this.chooseItem;
+    //       this.chooseItem = this.chooseItem2.slice(0, this.pageSize);
+    //     } else if (this.getPriceOption == "") {
+    //       this.chooseItem.sort((a, b) => {
+    //         return parseInt(a.prodPrice) - parseInt(b.prodPrice);
+    //       });
+    //       this.chooseItem2 = this.chooseItem;
+    //       this.chooseItem = this.chooseItem2.slice(0, this.pageSize);
+    //     }
+    //   } else {
+    //     this.chooseItem = [];
+    //     for (let i = 0; i < this.cardsAll.length; i++) {
+    //       if (this.cardsAll[i].tag === data) {
+    //         this.chooseItem.push(this.cardsAll[i]);
+    //         if (this.getPriceOption == "由高到低") {
+    //           this.chooseItem.sort((a, b) => {
+    //             return parseInt(b.prodPrice) - parseInt(a.prodPrice);
+    //           });
+    //           this.chooseItem2 = this.chooseItem;
+    //           this.chooseItem = this.chooseItem2.slice(0, this.pageSize);
+    //         } else if (this.getPriceOption == "由低到高") {
+    //           this.chooseItem.sort((a, b) => {
+    //             return parseInt(a.prodPrice) - parseInt(b.prodPrice);
+    //           });
+    //           this.chooseItem2 = this.chooseItem;
+    //           this.chooseItem = this.chooseItem2.slice(0, this.pageSize);
+    //         } else if (this.getPriceOption == "") {
+    //           this.chooseItem.sort((a, b) => {
+    //             return parseInt(a.prodPrice) - parseInt(b.prodPrice);
+    //           });
+    //           this.chooseItem2 = this.chooseItem;
+    //           if (this.chooseItem.length >= this.pageSize) {
+    //             this.chooseItem = this.chooseItem2.slice(0, this.pageSize);
+    //           }
+    //         }
+    //       }
+    //     }
+    //   }
+    // },
+    // getPrice(data) {
+    //   this.getPriceOption = data;
+    //   if (!this.selectOption) {
+    //     if (data == "由低到高") {
+    //       this.cardsAll.sort((a, b) => {
+    //         return parseInt(a.prodPrice) - parseInt(b.prodPrice);
+    //       });
+    //       this.chooseItem = this.cardsAll.slice(0, this.pageSize);
+    //     } else if (data == "由高到低") {
+    //       this.cardsAll.sort((a, b) => {
+    //         return parseInt(b.prodPrice) - parseInt(a.prodPrice);
+    //       });
+    //       this.chooseItem = this.cardsAll.slice(0, this.pageSize);
+    //     }
+    //   } else if (this.selectOption == "所有商品") {
+    //     this.chooseItem2 = this.cardsAll;
+    //     this.chooseItem2.sort((a, b) => {
+    //       return parseInt(b.prodPrice) - parseInt(a.prodPrice);
+    //     });
+    //     this.chooseItem = this.chooseItem2.slice(0, this.pageSize);
+    //   } else if (this.selectOption !== "所有商品") {
+    //     this.chooseItem2 = [];
+    //     for (let i = 0; i < this.cardsAll.length; i++) {
+    //       if (this.cardsAll[i].tag === this.selectOption) {
+    //         this.chooseItem2.push(this.cardsAll[i]);
+    //       }
+    //     }
+    //     if (data == "由高到低") {
+    //       this.chooseItem2.sort((a, b) => {
+    //         return parseInt(b.prodPrice) - parseInt(a.prodPrice);
+    //       });
+    //       this.chooseItem = this.chooseItem2.slice(0, this.pageSize);
+    //     } else if (data == "由低到高") {
+    //       this.chooseItem2.sort((a, b) => {
+    //         return parseInt(a.prodPrice) - parseInt(b.prodPrice);
+    //       });
+    //       this.chooseItem = this.chooseItem2.slice(0, this.pageSize);
+    //     }
+    //   }
+    // },
     getClass(data) {
       this.selectOption = data;
-      if (data == "所有商品") {
-        this.chooseItem = this.cardsAll;
-        if (this.getPriceOption == "由高到低") {
-          this.chooseItem.sort((a, b) => {
-            return parseInt(b.prodPrice) - parseInt(a.prodPrice);
-          });
-          this.chooseItem2 = this.chooseItem;
-          this.chooseItem = this.chooseItem2.slice(0, this.pageSize);
-        } else if (this.getPriceOption == "由低到高") {
-          this.chooseItem.sort((a, b) => {
-            return parseInt(a.prodPrice) - parseInt(b.prodPrice);
-          });
-          this.chooseItem2 = this.chooseItem;
-          this.chooseItem = this.chooseItem2.slice(0, this.pageSize);
-        } else if (this.getPriceOption == "") {
-          this.chooseItem.sort((a, b) => {
-            return parseInt(a.prodPrice) - parseInt(b.prodPrice);
-          });
-          this.chooseItem2 = this.chooseItem;
-          this.chooseItem = this.chooseItem2.slice(0, this.pageSize);
-        }
+      if (data === "所有商品") {
+        this.chooseItem2 = this.cardsAll;
       } else {
-        this.chooseItem = [];
-        for (let i = 0; i < this.cardsAll.length; i++) {
-          if (this.cardsAll[i].tag === data) {
-            this.chooseItem.push(this.cardsAll[i]);
-            if (this.getPriceOption == "由高到低") {
-              this.chooseItem.sort((a, b) => {
-                return parseInt(b.prodPrice) - parseInt(a.prodPrice);
-              });
-              this.chooseItem2 = this.chooseItem;
-              this.chooseItem = this.chooseItem2.slice(0, this.pageSize);
-            } else if (this.getPriceOption == "由低到高") {
-              this.chooseItem.sort((a, b) => {
-                return parseInt(a.prodPrice) - parseInt(b.prodPrice);
-              });
-              this.chooseItem2 = this.chooseItem;
-              this.chooseItem = this.chooseItem2.slice(0, this.pageSize);
-            } else if (this.getPriceOption == "") {
-              this.chooseItem.sort((a, b) => {
-                return parseInt(a.prodPrice) - parseInt(b.prodPrice);
-              });
-              this.chooseItem2 = this.chooseItem;
-              if (this.chooseItem.length >= this.pageSize) {
-                this.chooseItem = this.chooseItem2.slice(0, this.pageSize);
-              }
-            }
-          }
-        }
+        this.chooseItem2 = this.cardsAll.filter(
+          (item) => item.tag === data
+        );
       }
+      this.showPage = false;
+      setTimeout(() => {
+        this.showPage = true;
+      }, 100);
+      this.getPage = 1;
+      this.getPrice(this.getPriceOption);
+      this.updatePage(1);
     },
     getPrice(data) {
       this.getPriceOption = data;
-      if (!this.selectOption) {
-        if (data == "由低到高") {
-          this.cardsAll.sort((a, b) => {
-            return parseInt(a.prodPrice) - parseInt(b.prodPrice);
-          });
-          this.chooseItem = this.cardsAll.slice(0, this.pageSize);
-        } else if (data == "由高到低") {
-          this.cardsAll.sort((a, b) => {
-            return parseInt(b.prodPrice) - parseInt(a.prodPrice);
-          });
-          this.chooseItem = this.cardsAll.slice(0, this.pageSize);
-        }
-      } else if (this.selectOption == "所有商品") {
-        this.chooseItem2 = this.cardsAll;
-        this.chooseItem2.sort((a, b) => {
-          return parseInt(b.prodPrice) - parseInt(a.prodPrice);
-        });
-        this.chooseItem = this.chooseItem2.slice(0, this.pageSize);
-      } else if (this.selectOption !== "所有商品") {
-        this.chooseItem2 = [];
-        for (let i = 0; i < this.cardsAll.length; i++) {
-          if (this.cardsAll[i].tag === this.selectOption) {
-            this.chooseItem2.push(this.cardsAll[i]);
-          }
-        }
-        if (data == "由高到低") {
-          this.chooseItem2.sort((a, b) => {
-            return parseInt(b.prodPrice) - parseInt(a.prodPrice);
-          });
-          this.chooseItem = this.chooseItem2.slice(0, this.pageSize);
-        } else if (data == "由低到高") {
-          this.chooseItem2.sort((a, b) => {
-            return parseInt(a.prodPrice) - parseInt(b.prodPrice);
-          });
-          this.chooseItem = this.chooseItem2.slice(0, this.pageSize);
-        }
+      if (data === "由低到高") {
+        this.chooseItem2.sort((a, b) => parseInt(a.prodPrice) - parseInt(b.prodPrice));
+        this.currentPage = 1;
+      } else if (data === "由高到低") {
+        this.chooseItem2.sort((a, b) => parseInt(b.prodPrice) - parseInt(a.prodPrice));
+        this.getPage = 1;
       }
+      this.showPage = false;
+      setTimeout(() => {
+        this.showPage = true;
+      }, 100);
+      this.updatePage(1);
     },
+
     searchClick(data) {
       const searchInput = data.toUpperCase();
       const res = this.cardsAll.filter((i) => {
@@ -839,7 +876,7 @@ export default {
       font-size: map-get($fontSizes, "p");
     }
 
-    > p {
+    >p {
       margin-top: 30px;
       line-height: 40px;
     }
@@ -864,6 +901,7 @@ export default {
       top: 60px;
     }
   }
+
   .changepage {
     width: 100%;
   }
@@ -908,12 +946,13 @@ export default {
       width: 80%;
       margin-top: 10px;
 
-      > p {
+      >p {
         margin-top: 10px;
         line-height: 30px;
       }
     }
   }
+
   .changepage {
     width: 100%;
   }
