@@ -35,16 +35,7 @@
         <h1 data="6000m">6000m</h1>
       </div>
 
-      <div class="line verysupperdeep">
-        <div class="slot" id="six"></div>
-        <h1 data="11000m">11000m</h1>
-      </div>
-      <!-- 深海動物們 -->
-      <!-- <div v-for="(animal, index) in deepAnimals" :key="index" :ref="`parallaxScene${index}`" :id="`scene${index}`"
-        data-relative-input="true" :class="animal.category" @click="showCard(animal)">
-        <img :src="animal.image" :alt="animal.name" :data-depth="animal.depth" />
-        <h4 :data-depth="animal.depth">{{ animal.name }}</h4>
-      </div> -->
+      <div class="ship"><img src="../../public/all_images/animal/ship.png" alt=""></div>
     </div>
 
 
@@ -89,37 +80,6 @@
       </div>
     </div>
   </div>
-
-  <div class="navBar">
-    <ul>
-      <li>
-        <a href="#" @click.prevent="btnScroll('表層海洋帶')">0m
-          <div class="drop"></div>
-        </a>
-      </li>
-      <li>
-        <a href="#" @click.prevent="btnScroll('中層海洋帶')">200m
-          <div class="drop"></div>
-        </a>
-      </li>
-      <li>
-        <a href="#" @click.prevent="btnScroll('深層海洋帶')">1000m
-          <div class="drop"></div>
-        </a>
-      </li>
-      <li>
-        <a href="#" @click.prevent="btnScroll('深淵層海洋帶')">4000m
-          <div class="drop"></div>
-        </a>
-      </li>
-      <li>
-        <a href="#" @click.prevent="btnScroll('超深淵層海洋帶')">6000m
-          <div class="drop"></div>
-        </a>
-      </li>
-    </ul>
-    <div class="line"></div>
-  </div>
 </template>
 
 <script>
@@ -151,6 +111,7 @@ export default {
         { name: '藍藻魚', image: require('../../public/all_images/animal/dory.png'), depth: '0.4', category: 'dory' },
         { name: '小丑魚', image: require('../../public/all_images/animal/nimo.png'), depth: '0.2', category: 'nimo' },
         { name: '河豚', image: require('../../public/all_images/animal/angryfish.png'), depth: '0.3', category: 'angryfish' },
+        { name: '藍黃魚', image: require('../../public/all_images/animal/blueyellow.png'), depth: '0.1', category: 'blueyellow' },
         { name: '鯨鯊', image: require('../../public/all_images/animal/whale.png'), depth: '0.4', category: 'whale' },
         { name: '海星', image: require('../../public/all_images/animal/star.png'), depth: '0.2', category: 'star' },
         { name: '獅子魚', image: require('../../public/all_images/animal/leofish.png'), depth: '0.4', category: 'leofish' },
@@ -162,28 +123,20 @@ export default {
         { name: '章魚', image: require('../../public/all_images/animal/taco.png'), depth: '0.1', category: 'taco' },
         { name: '藍鯨', image: require('../../public/all_images/animal/Blue whale.png'), depth: '0.1', category: 'blueWhale' },
         { name: '水母', image: require('../../public/all_images/animal/jellyfish.png'), depth: '0.1', category: 'jellyfish' },
+        { name: '可愛魚', image: require('../../public/all_images/animal/cutefish.png'), depth: '0.1', category: 'cutefish' },
+        { name: 'ET魚', image: require('../../public/all_images/animal/ETfish.png'), depth: '0.1', category: 'ETfish' },
+        { name: '尖鼻魚', image: require('../../public/all_images/animal/harinose.png'), depth: '0.1', category: 'harinose' },
+        { name: '親切鯊魚', image: require('../../public/all_images/animal/great white shark.png'), depth: '0.1', category: 'greatwhiteshark' },
+        { name: '長鼻魚', image: require('../../public/all_images/animal/longnose.png'), depth: '0.1', category: 'longnose' },
+        { name: '轟魚', image: require('../../public/all_images/animal/smile.png'), depth: '0.1', category: 'smile' },
+        { name: '月亮魚', image: require('../../public/all_images/animal/moonfish.png'), depth: '0.1', category: 'moonfish' },
+        { name: '河馬魚', image: require('../../public/all_images/animal/sperm whale.png'), depth: '0.1', category: 'spermwhale' },
+        { name: '轟魚', image: require('../../public/all_images/animal/stingray.png'), depth: '0.1', category: 'stingray' },
+        { name: '太陽魚', image: require('../../public/all_images/animal/Sunfish.png'), depth: '0.1', category: 'sunfish' },
+        { name: '咖啡魚', image: require('../../public/all_images/animal/toad.png'), depth: '0.1', category: 'toad' },
+        { name: '燈籠魚', image: require('../../public/all_images/animal/monkfish.png'), depth: '0.1', category: 'monkfish' },
         { name: '深海魚', image: require('../../public/all_images/animal/ohpsfish.png'), depth: '0.1', category: 'ohpsfish' },
-        { name: '大眼魚', image: require('../../public/all_images/animal/bigeye.png'), depth: '0.1', category: 'ohpsfish' },
-        { name: '藍黃魚', image: require('../../public/all_images/animal/blueyellow.png'), depth: '0.1', category: 'ohpsfish' },
-        { name: '可愛魚', image: require('../../public/all_images/animal/cutefish.png'), depth: '0.1', category: 'ohpsfish' },
-        // { name: 'ET魚', image: require('../../public/all_images/animal/ETfish.png'), depth: '0.1', category: 'ohpsfish' },
-        // { name: '飛魚', image: require('../../public/all_images/animal/flyfish.png'), depth: '0.1', category: 'ohpsfish' },
-        // { name: '親切鯊魚', image: require('../../public/all_images/animal/great white shark.png'), depth: '0.1', category: 'ohpsfish' },
-        // { name: '尖鼻魚', image: require('../../public/all_images/animal/harinose.png'), depth: '0.1', category: 'ohpsfish' },
-        // { name: '長鼻魚', image: require('../../public/all_images/animal/longnose.png'), depth: '0.1', category: 'ohpsfish' },
-        // { name: '轟魚', image: require('../../public/all_images/animal/manta ray.png'), depth: '0.1', category: 'ohpsfish' },
-        // { name: '燈籠魚', image: require('../../public/all_images/animal/monkfish.png'), depth: '0.1', category: 'ohpsfish' },
-        // { name: '月亮魚', image: require('../../public/all_images/animal/moonfish.png'), depth: '0.1', category: 'ohpsfish' },
-        // { name: '黑魚', image: require('../../public/all_images/animal/Perch eel.png'), depth: '0.1', category: 'ohpsfish' },
-        // { name: '直立魚', image: require('../../public/all_images/animal/razorfish.png'), depth: '0.1', category: 'ohpsfish' },
-        // { name: '恐龍魚', image: require('../../public/all_images/animal/Sea eel.png'), depth: '0.1', category: 'ohpsfish' },
-        // { name: '轟魚', image: require('../../public/all_images/animal/smile.png'), depth: '0.1', category: 'ohpsfish' },
-        // { name: '黃魚', image: require('../../public/all_images/animal/snails.png'), depth: '0.1', category: 'ohpsfish' },
-        // { name: '河馬魚', image: require('../../public/all_images/animal/sperm whale.png'), depth: '0.1', category: 'ohpsfish' },
-        // { name: '轟魚', image: require('../../public/all_images/animal/stingray.png'), depth: '0.1', category: 'ohpsfish' },
-        // { name: '甲殼魚', image: require('../../public/all_images/animal/Stingrays.png'), depth: '0.1', category: 'ohpsfish' },
-        // { name: '太陽魚', image: require('../../public/all_images/animal/Sunfish.png'), depth: '0.1', category: 'ohpsfish' },
-        // { name: '咖啡魚', image: require('../../public/all_images/animal/toad.png'), depth: '0.1', category: 'ohpsfish' },
+        { name: '飛魚', image: require('../../public/all_images/animal/flyfish.png'), depth: '0.1', category: 'flyfish' },
       ],
       introduce: [
         // { name: '黃金魚', image: require('../../public/all_images/animal/goldfish.png'), enName: '', p: 'goldfish' },
@@ -199,14 +152,6 @@ export default {
             "玳瑁廣泛分佈於熱帶和亞熱帶海域，包括大西洋、印度洋和太平洋。牠們在珊瑚礁、海草床、潟湖等地找到適合的棲息地。",
           ],
         },
-        // { name: '藍藻魚', image: require('../../public/all_images/animal/dory.png'), enName: '0.4', p: 'dory' },
-        // { name: '小丑魚', image: require('../../public/all_images/animal/nimo.png'), enName: '0.2', p: 'nimo' },
-        // { name: '河豚', image: require('../../public/all_images/animal/angryfish.png'), enName: '0.3', p: 'angryfish' },
-        // { name: '鯨鯊', image: require('../../public/all_images/animal/whale.png'), enName: '0.4', p: 'whale' },
-        // { name: '海星', image: require('../../public/all_images/animal/star.png'), enName: '0.2', p: 'star' },
-        // { name: '獅子魚', image: require('../../public/all_images/animal/leofish.png'), enName: '0.4', p: 'leofish' },
-        // { name: '鯊魚', image: require('../../public/all_images/animal/shark.png'), enName: '0.7', p: 'shark' },
-        // { name: '白鯨', image: require('../../public/all_images/animal/white.png'), enName: '0.1', p: 'white' },
       ],
     };
   },
@@ -354,43 +299,11 @@ export default {
 // 探索動物 ------------------------------------------------------------
 .explore {
   width: 100%;
-  height: 300em;
+  height: 400em;
   background-image: linear-gradient(to bottom, #93b4cd, #114166, #0b2f4a, #082033);
   position: relative;
   // #285f9d
 
-  .slot {
-    width: 100%;
-    height: 100px;
-    position: absolute;
-    top: -100px;
-  }
-
-  .line {
-    position: absolute;
-    width: 100%;
-  }
-
-  .middle {
-    top: 25%;
-  }
-
-  .deep {
-    top: 50%;
-  }
-
-  .verydeep {
-    top: 70%;
-  }
-
-  .superdeep {
-    top: 85%;
-  }
-
-  .verysupperdeep {
-    top: 100%;
-    color: transparent;
-  }
 
   h1 {
     font-size: 75px;
@@ -405,6 +318,8 @@ export default {
   h4 {
     font-size: map-get($fontSizes, h4);
     color: map-get($colors, light);
+    letter-spacing: 2px;
+
   }
 
   .modal {
@@ -517,6 +432,7 @@ export default {
   // 內容 ------------------------------------------------------------
   .wapper {
     width: 100%;
+    height: 100%;
     margin: auto;
     text-align: center;
     background-image: url(../../public/all_images/animal/sea4.png);
@@ -524,6 +440,38 @@ export default {
     background-size: 100%;
     background-position: top center;
     overflow: hidden;
+
+
+    .slot {
+      width: 100%;
+      height: 100px;
+      position: absolute;
+      top: -100px;
+    }
+
+    .line {
+      position: absolute;
+      width: 100%;
+    }
+
+    .middle {
+      top: 25%;
+    }
+
+    .deep {
+      top: 50%;
+    }
+
+    .verydeep {
+      top: 70%;
+    }
+
+    .supperdeep {
+      top: 90%;
+    }
+
+
+
 
     // 動物們 ------------------------------------------------------------
     .turtle {
@@ -546,7 +494,7 @@ export default {
       cursor: pointer;
       width: 180px;
       // margin: 100px 350px -80px auto;
-      translate: 55em 8em;
+      translate: 60em 8em;
 
       img {
         visibility: top;
@@ -596,7 +544,23 @@ export default {
     .angryfish {
       cursor: pointer;
       width: 100px;
-      translate: 20em 10em;
+      translate: 10em 15em;
+      // margin: 50px 0 80px 350px;
+
+      img {
+        visibility: top;
+        width: 100px;
+      }
+
+      h4 {
+        margin: -30px 0;
+      }
+    }
+
+    .blueyellow {
+      cursor: pointer;
+      width: 100px;
+      translate: 40em 15em;
       // margin: 50px 0 80px 350px;
 
       img {
@@ -756,7 +720,7 @@ export default {
     .taco {
       cursor: pointer;
       width: 300px;
-      translate: 60em 0em;
+      translate: 67em 0em;
       // margin: 0 280px 0 auto;
 
       img {
@@ -774,7 +738,7 @@ export default {
     .jellyfish {
       cursor: pointer;
       width: 130px;
-      translate: 50em -8em;
+      translate: 62em -8em;
 
       img {
         visibility: top;
@@ -787,11 +751,220 @@ export default {
       }
     }
 
+    .cutefish {
+      cursor: pointer;
+      width: 220px;
+      translate: 70em 0em;
+
+      img {
+        visibility: top;
+        width: 220px;
+      }
+
+      h4 {
+        margin-top: -35px;
+        margin-left: 70px;
+      }
+    }
+
+    .ETfish {
+      cursor: pointer;
+      width: 250px;
+      translate: 33em -3em;
+
+      img {
+        visibility: top;
+        width: 250px;
+      }
+
+      h4 {
+        margin-top: -35px;
+        margin-left: 70px;
+      }
+    }
+
+    .greatwhiteshark {
+      cursor: pointer;
+      width: 600px;
+      translate: 50em 7em;
+
+      img {
+        visibility: top;
+        width: 600px;
+      }
+
+      h4 {
+        margin-top: 20px;
+        margin-left: 70px;
+      }
+    }
+
+    .harinose {
+      cursor: pointer;
+      width: 250px;
+      translate: 15em 3em;
+
+      img {
+        visibility: top;
+        width: 250px;
+      }
+
+      h4 {
+        margin-left: 50px;
+      }
+    }
+
+    .longnose {
+      cursor: pointer;
+      width: 150px;
+      translate: 25em -15em;
+
+      img {
+        visibility: top;
+        width: 150px;
+      }
+
+      h4 {
+        margin-left: 50px;
+        margin-top: -10px;
+      }
+    }
+
+    .smile {
+      cursor: pointer;
+      width: 700px;
+
+      img {
+        visibility: top;
+        width: 700px;
+      }
+
+      h4 {
+        margin-left: 150px;
+        margin-top: -30px;
+      }
+    }
+
+    .moonfish {
+      cursor: pointer;
+      width: 300px;
+      translate: 60em -17em;
+
+      img {
+        visibility: top;
+        width: 300px;
+      }
+
+      h4 {
+        margin-left: 150px;
+        margin-top: -30px;
+      }
+    }
+
+    .spermwhale {
+      cursor: pointer;
+      width: 500px;
+      translate: 20em -7em;
+
+      img {
+        visibility: top;
+        width: 500px;
+      }
+
+      h4 {
+        margin-left: 150px;
+        margin-top: -30px;
+      }
+    }
+
+    .stingray {
+      cursor: pointer;
+      width: 500px;
+      // margin: 30px auto 60px 0;
+      translate: 52em -20em;
+
+      img {
+        visibility: top;
+        width: 500px;
+      }
+
+      h4 {
+        margin-top: 305px;
+        margin-left: 70px;
+      }
+    }
+
+    .sunfish {
+      cursor: pointer;
+      width: 200px;
+      // margin: 30px auto 60px 0;
+      translate: 10em -30em;
+
+      img {
+        visibility: top;
+        width: 200px;
+      }
+
+      h4 {
+        margin-left: 20px;
+        margin-top: -20px;
+      }
+    }
+
+
+    .toad {
+      cursor: pointer;
+      width: 200px;
+      // margin: 30px auto 60px 0;
+      translate: 40em -30em;
+
+      img {
+        visibility: top;
+        width: 200px;
+      }
+
+      h4 {
+        margin-left: -30px;
+        margin-top: -20px;
+      }
+    }
+
+
+    .monkfish {
+      cursor: pointer;
+      width: 200px;
+      translate: 65em -20em;
+
+      img {
+        visibility: top;
+        width: 200px;
+      }
+
+      h4 {
+        // margin-top: 10px;
+        margin-left: 20px;
+      }
+    }
+
+    .flyfish {
+      cursor: pointer;
+      width: 200px;
+      // margin: 30px auto 60px 0;
+      translate: 20em -40em;
+
+      img {
+        visibility: top;
+        width: 200px;
+      }
+
+      h4 {
+        margin-top: 80px;
+      }
+    }
+
     .ohpsfish {
       cursor: pointer;
-      width: 130px;
-      translate: 45em 2em;
-      z-index: 2;
+      translate: 45em -30em;
 
       img {
         visibility: top;
@@ -799,7 +972,7 @@ export default {
       }
 
       h4 {
-        margin-top: -35px;
+        margin-top: 95px;
         margin-left: 70px;
       }
     }
@@ -820,6 +993,16 @@ export default {
         margin-left: 70px;
       }
     }
+
+    .ship {
+      translate: 0 -50em;
+
+      img {
+        vertical-align: top;
+        width: 100%;
+      }
+    }
+
   }
 
   .card {
@@ -834,7 +1017,7 @@ export default {
     border-radius: 20px;
     color: #eee;
     position: fixed;
-    top: 25%;
+    top: 20%;
     left: 0;
     right: 0;
     z-index: 10;
@@ -871,7 +1054,7 @@ export default {
       width: 700px;
       text-align: center;
       color: #aaa;
-      font-style: italic;
+      font-family: SofiaProMedium-Italic;
       // border: 1px solid red;
     }
 
@@ -881,19 +1064,17 @@ export default {
     }
 
     ul {
-      margin: 15px;
-      line-height: 1.5;
+      margin: 0 20px;
     }
 
     li {
-      text-align: center;
       font-size: 17px;
+      text-align: center;
     }
 
-    li:nth-child(2n) {
+    ul:nth-child(2n) li {
       text-align: left;
-      font-size: 15px;
-      margin-bottom: 20px;
+      margin-bottom: 30px;
     }
 
     .close {
