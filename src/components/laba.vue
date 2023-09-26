@@ -207,7 +207,7 @@ export default {
     height: 474px;
     border-radius: 20px;
     // border: 5px #172c40 solid;
-    clip-path: ellipse(50% 50% at 50% 40%);
+    // clip-path: ellipse(50% 50% at 50% 40%);
     margin: 0 auto;
     overflow: hidden;
     .resetImg {
