@@ -1,10 +1,11 @@
 <template>
-  <path1
-    v-if="!this.$store.state.chooseFrontBack"
-    @click="this.$store.state.chooseFrontBack = true"
-  ></path1>
+  <path1 v-if="!this.$store.state.chooseFrontBack"></path1>
   <header1
-    v-if="!$route.meta.hideApp && this.$store.state.chooseFrontBack && $route.path !== '/path' " 
+    v-if="
+      !$route.meta.hideApp &&
+      this.$store.state.chooseFrontBack &&
+      $route.path !== '/path'
+    "
   ></header1>
   <wave
     v-if="
@@ -15,7 +16,11 @@
     "
   ></wave>
   <helper
-    v-if="!$route.meta.hideApp && this.$store.state.chooseFrontBack && $route.path !== '/path'"
+    v-if="
+      !$route.meta.hideApp &&
+      this.$store.state.chooseFrontBack &&
+      $route.path !== '/path'
+    "
   ></helper>
   <login
     v-if="!$route.meta.hideApp && this.$store.state.chooseFrontBack"
@@ -30,7 +35,11 @@
   <!-- <button @click="loginAPI">商品目錄</button>
   <button @click="loginAPI2">登入</button> -->
   <footer1
-    v-if="!$route.meta.hideApp && this.$store.state.chooseFrontBack && $route.path !== '/path'"
+    v-if="
+      !$route.meta.hideApp &&
+      this.$store.state.chooseFrontBack &&
+      $route.path !== '/path'
+    "
   ></footer1>
   <span id="firstPage"></span>
 </template>
@@ -93,6 +102,7 @@ export default {
       // showWave: false,
     };
   },
+  watch: {},
 
   components: {
     header1,

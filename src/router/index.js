@@ -82,8 +82,7 @@ const routes = [
   {
     path: "/path",
     name: "path",
-    component: () =>
-      import(/*  */ "../views/Path.vue"),
+    component: () => import(/*  */ "../views/Path.vue"),
     meta: {
       title: "Path",
     },
@@ -144,12 +143,13 @@ const routes = [
     name: "cartpop",
     component: () =>
       import(/* webpackChunkName: "member" */ "../components/cartPopup.vue"),
-    },
+  },
   {
     path: "/helper",
     name: "helper",
     component: helper,
   },
+
   {
     path: "/backHome",
     name: "backHome",
