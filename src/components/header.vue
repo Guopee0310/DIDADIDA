@@ -319,15 +319,9 @@ export default {
       }
     },
     closeMobileMenu() {
-      // 获取复选框元素
       const checkbox = document.getElementById("nav-toggle");
-      const dropdown = document.querySelector(".dropdown");
-      // 关闭复选框
       if (checkbox) {
         checkbox.checked = false;
-      }
-      if (dropdown) {
-        dropdown.style.display = 'none';
       }
       this.showAboutDropdown = false;
       this.showBuyDropdown = false;
