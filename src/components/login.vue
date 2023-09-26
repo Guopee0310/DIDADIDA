@@ -2,11 +2,7 @@
   <div v-if="this.$store.state.storeShowLogin">
     <div class="backplate" @click="hideLogin"></div>
 
-    <div
-      class="container"
-      :class="{ 'right-panel-active': isSignUp }"
-      id="container"
-    >
+    <div class="container" :class="{ 'right-panel-active': isSignUp }" id="container">
       <!-- signup固定填單 -->
       <div class="form-container sign-up-container">
         <form>
@@ -14,42 +10,22 @@
           <div class="social-container">
             <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
             <a href="#" class="social"><i class="fa-brands fa-google"></i></a>
-            <a href="#" class="social"
-              ><i class="fa-brands fa-instagram fa-lg"></i
-            ></a>
+            <a href="#" class="social"><i class="fa-brands fa-instagram fa-lg"></i></a>
           </div>
           <span>或使用電子郵件登入</span>
-          <input
-            type="text"
-            v-model="name"
-            placeholder="姓名"
-            @input="testNameSignUp"
-            :class="{ checkInput: !isValidName, correctInput: isValidName }"
-          />
+          <input type="text" v-model="name" placeholder="姓名" @input="testNameSignUp"
+            :class="{ checkInput: !isValidName, correctInput: isValidName }" />
           <span v-if="!isValidName" class="caution">請輸入有效姓名</span>
 
-          <input
-            type="email"
-            v-model="email"
-            placeholder="電子信箱"
-            @input="testMailSignUp"
-            :class="{ checkInput: !isValidEmail, correctInput: isValidEmail }"
-          />
+          <input type="email" v-model="email" placeholder="電子信箱" @input="testMailSignUp"
+            :class="{ checkInput: !isValidEmail, correctInput: isValidEmail }" />
           <span v-if="!isValidEmail" class="caution">請輸入有效的信箱</span>
 
-          <input
-            type="password"
-            v-model="password"
-            placeholder="密碼"
-            @input="testPassWordSignUp"
-            :class="{
-              checkInput: !isValidPassword,
-              correctInput: isValidPassword,
-            }"
-          />
-          <span v-if="!isValidPassword" class="caution"
-            >密碼長度需在8~12個字之間,至少含一個英文字母(不分大小寫)</span
-          >
+          <input type="password" v-model="password" placeholder="密碼" @input="testPassWordSignUp" :class="{
+            checkInput: !isValidPassword,
+            correctInput: isValidPassword,
+          }" />
+          <span v-if="!isValidPassword" class="caution">密碼長度需在8~12個字之間,至少含一個英文字母(不分大小寫)</span>
 
           <button>註冊</button>
         </form>
@@ -62,30 +38,18 @@
           <div class="social-container">
             <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
             <a href="#" class="social"><i class="fa-brands fa-google"></i></a>
-            <a href="#" class="social"
-              ><i class="fa-brands fa-instagram fa-lg"></i
-            ></a>
+            <a href="#" class="social"><i class="fa-brands fa-instagram fa-lg"></i></a>
           </div>
           <span>或使用您的帳號</span>
-          <input
-            type="email"
-            v-model="signInEmail"
-            placeholder="電子信箱"
-            :class="{
-              checkInput: !signInNotCorrect,
-              correctInput: signInNotCorrect,
-            }"
-          />
+          <input type="email" v-model="signInEmail" placeholder="電子信箱" :class="{
+            checkInput: !signInNotCorrect,
+            correctInput: signInNotCorrect,
+          }" />
           <span v-if="!signInNotCorrect" class="caution">信箱或密碼錯誤</span>
-          <input
-            type="password"
-            v-model="signInPassword"
-            placeholder="密碼"
-            :class="{
-              checkInput: !signInNotCorrect,
-              correctInput: signInNotCorrect,
-            }"
-          />
+          <input type="password" v-model="signInPassword" placeholder="密碼" :class="{
+            checkInput: !signInNotCorrect,
+            correctInput: signInNotCorrect,
+          }" />
           <span v-if="!signInNotCorrect" class="caution">信箱或密碼錯誤</span>
           <a href="#">忘記密碼?</a>
           <button @click="signInMem">登入</button>
@@ -250,19 +214,22 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 @import url("https://fonts.googleapis.com/css2?family=Cardo:ital,wght@0,400;0,700;1,400&family=Inknut+Antiqua:wght@300;400;500;600;700;800;900&display=swap");
 @import url("https://fonts.googleapis.com/css?family=Montserrat:400,800");
 
 * {
   box-sizing: border-box;
 }
+
 .checkInput {
   border: 2px red solid;
 }
+
 .correctInput:focus {
   border: 2px black solid;
 }
+
 body {
   background: #f6f5f7;
   display: flex;
@@ -274,6 +241,7 @@ body {
   margin: -20px 0 50px;
   position: relative;
 }
+
 .backplate {
   width: 100%;
   height: 100vh;
@@ -283,6 +251,7 @@ body {
   top: 0;
   left: 0;
 }
+
 h1 {
   font-weight: bold;
   margin: 0;
@@ -291,9 +260,11 @@ h1 {
 h2 {
   text-align: center;
 }
+
 .caution {
   color: red;
 }
+
 p {
   font-size: 14px;
   font-weight: 100;
@@ -315,15 +286,16 @@ a {
 
 button {
   border-radius: 20px;
-  border: 1px solid #0b2d7b;
-  background-color: #0b2d7b;
-  color: #ffffff;
+  border: 1px solid #fff;
+  background-color: #a2d2d4;
+  color: map-get($colors , 'light');
   font-size: 12px;
   font-weight: bold;
   padding: 12px 45px;
   letter-spacing: 1px;
   text-transform: uppercase;
   transition: transform 80ms ease-in;
+  cursor: pointer;
 }
 
 button:active {
@@ -358,8 +330,10 @@ input {
   margin: 8px 0;
   width: 100%;
 }
+
 input:focus {
-  outline: none; /* 去掉外边框 */
+  outline: none;
+  /* 去掉外边框 */
   /* 或者将外边框样式设置为透明 */
   outline: 2px solid transparent;
 }
@@ -412,6 +386,7 @@ input:focus {
 }
 
 @keyframes show {
+
   0%,
   49.99% {
     opacity: 0;
@@ -447,7 +422,7 @@ input:focus {
   background: linear-gradient(to right, #0b2d7b, #475aab); */
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: center 80%; 
+  background-position: center 80%;
   color: #ffffff;
   position: relative;
   left: -100%;

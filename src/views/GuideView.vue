@@ -43,14 +43,14 @@
     </template>
   </h3Title>
 
-  <transition name="fade">
+  <!-- <transition name="fade">
     <div class="click_scroll" v-if="isClickScrollVisible">
       <div class="click_top" @click="scrollToSection(1)">
         <i class="fa-solid fa-angles-up" style="color: #ffffff;"></i><br>
         <span>Scroll<br>Top</span>
       </div>
     </div>
-  </transition>
+  </transition> -->
   <div class="tabs">
     <h4><img v-if="selectedTab == 'tab2'" src="../../public/all_images/guide/lighthouse.png" alt="">淺層館</h4>
     <input type="radio" name="name" v-model="selectedTab" value="tab2" id="section2" />
