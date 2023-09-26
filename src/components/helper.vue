@@ -1,7 +1,13 @@
 <template>
   <!-- 小幫手 -->
-  <div class="helperAll" @click="moveShowText">
-    <div class="item">
+
+  <div class="helperAll">
+    <button class="noselect" @click="top()" ref="scrollTopButton"><svg xmlns="http://www.w3.org/2000/svg" width="24"
+        height="24" viewBox="0 0 24 24">
+        <path d="M0 16.67l2.829 2.83 9.175-9.339 9.167 9.339 2.829-2.83-11.996-12.17z" />
+      </svg>
+    </button>
+    <div class="item" @click="moveShowText">
       <div class="circular">
         <svg viewBox="0 0 100 100">
           <path d="M 0,50 a 50,50 0 1,1 0,1 z" id="circle" />
@@ -25,18 +31,18 @@
       <div @click="moveWeatherMax">獲得與紅利點數</div>
       <div @click="moveMaxT">目前館內人數</div>
       <div @click="moveAddress">票價資訊</div>
-      
+
     </div>
-  <div class="rspbox">
-    <div class="sayHelloTxt" v-if="!(showAddress || showWeatherMax || showMaxT)">
-      {{ sayHelloTxt }}
+    <div class="rspbox">
+      <div class="sayHelloTxt" v-if="!(showAddress || showWeatherMax || showMaxT)">
+        {{ sayHelloTxt }}
+      </div>
+      <div class="response" v-if="showAddress">地址 : {{ locationName }}</div>
+      <div class="response" v-if="showWeatherMax">
+        天氣現象 : {{ weatherWX }} 最高氣溫 : {{ weatherMaxT }}
+      </div>
+      <div class="response" v-if="showMaxT">降雨機率 : {{ weatherPop }}</div>
     </div>
-    <div class="response" v-if="showAddress">地址 : {{ locationName }}</div>
-    <div class="response" v-if="showWeatherMax">
-      天氣現象 : {{ weatherWX }} 最高氣溫 : {{ weatherMaxT }}
-    </div>
-    <div  class="response" v-if="showMaxT">降雨機率 : {{ weatherPop }}</div>
-  </div>
   </div>
 </template>
 
@@ -117,6 +123,17 @@ export default {
       this.showMaxT = true;
       this.showAddress = false;
     },
+    top() {
+      // 获取按钮元素的引用
+      const buttonElement = this.$refs.scrollTopButton;
+
+      // 使用 offsetTop 属性获取按钮距离页面顶部的距离
+      const buttonOffsetTop = buttonElement.offsetTop;
+
+      // 使用 window.scrollTo 方法滚动到页面顶部
+      // 使用 { top: buttonOffsetTop, behavior: 'smooth' } 选项实现平滑滚动
+      window.scrollTo({ top: buttonOffsetTop, behavior: 'smooth' });
+    },
   },
   computed: {},
 };
@@ -168,7 +185,7 @@ export default {
   top: 50%;
   right: 110px;
   border: 1.5px #232D47 solid;
-  background-color:#232D47;
+  background-color: #232D47;
   border-radius: 10px;
   z-index: 51;
   transition: 1s;
@@ -184,46 +201,148 @@ export default {
       margin: 5px 5px;
     }
   }
-  .rspbox{
-  border-radius:0 0 10px 10px  ;
-  border-top: 1px  rgb(16, 16, 82) solid;;
-  background-color: #fff;
-  width: 100%;
-  height: 50%;
-  position: absolute;
-  bottom:0%;
-  
-}
+
+  .rspbox {
+    border-radius: 0 0 10px 10px;
+    border-top: 1px rgb(16, 16, 82) solid;
+    ;
+    background-color: #fff;
+    width: 100%;
+    height: 50%;
+    position: absolute;
+    bottom: 0%;
+
+  }
 
   .sayHelloTxt {
     border-top: 2px rgb(124, 23, 23);
     padding: 10px 5px;
   }
-  .response{
+
+  .response {
     padding: 10px 5px;
     border-top: 2px rgb(124, 23, 23);
   }
 }
 
-@media (max-width: 414px) {
-.helperAll {
-  position: fixed;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-  top: 85%;
-  width: 50px;
-  height: 50px;
+body {
+  height: 100vh;
   overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #000000;
+  background-image: linear-gradient(147deg, #000000 0%, #434343 74%);
 }
-.showWindow {
-  width: 300px;
-  // height: 220px;
-  position: fixed;
-  top: 60%;
-  right: 60px;
-  border-radius: 10px;
-  z-index: 51;
-  transition: 1s;
-  overflow: hidden;
+
+.noselect {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
 }
+
+button {
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  background-color: #5de6de;
+  background-image: linear-gradient(315deg, #5de6de 0%, #b58ecc 74%);
+  border: none;
+  border-radius: 50%;
+  // transition: 200ms;
+  position: absolute;
+  bottom: 85px;
+  left: 10px;
+}
+
+button svg {
+  fill: white;
+  width: 15px;
+  height: 15px;
+  // position: absolute;
+  // transform: translateX(-50%) translateY(-50%);
+}
+
+button:before {
+  content: 'Back to Top';
+  position: absolute;
+  // transform: translateX(-50%) translateY(45px);
+  font-size: 15px;
+  transition: 200ms;
+  color: transparent;
+  font-weight: bold;
+}
+
+// button:hover {
+//   box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+//   width: 80px;
+//   height: 80px;
+// }
+
+// button:hover::before {
+//   color: #fff;
+// }
+
+// button:hover svg {
+//   animation: bounce 2s infinite linear;
+// }
+
+// @keyframes bounce {
+//   0% {
+//     transform: translateX(-50%) translateY(-50%)
+//   }
+
+//   25% {
+//     transform: translateX(-50%) translateY(-65%)
+//   }
+
+//   50% {
+//     transform: translateX(-50%) translateY(-50%)
+//   }
+
+//   75% {
+//     transform: translateX(-50%) translateY(-35%)
+//   }
+
+//   100% {
+//     transform: translateX(-50%) translateY(-50%)
+//   }
+// }
+
+button:focus {
+  outline: none;
+}
+
+@media (max-width: 414px) {
+  .helperAll {
+    position: fixed;
+
+    top: 85%;
+    width: 50px;
+    height: 50px;
+    overflow: hidden;
+  }
+
+  .showWindow {
+    width: 300px;
+    // height: 220px;
+    position: fixed;
+    top: 60%;
+    right: 60px;
+    border-radius: 10px;
+    z-index: 51;
+    transition: 1s;
+    overflow: hidden;
+  }
 }
 </style>

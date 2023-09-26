@@ -97,7 +97,7 @@ export default {
       // showText: false,
       selectedAnimal: null,
       animals: [
-        { name: '黃金魚', image: require('../../public/all_images/animal/goldfish.png'), depth: '0.2', category: 'goldfish' },
+        { name: '黃高鰭刺尾魚', image: require('../../public/all_images/animal/goldfish.png'), depth: '0.2', category: 'goldfish' },
 
         {
           name: '玳瑁',
@@ -115,32 +115,32 @@ export default {
         { name: '藍藻魚', image: require('../../public/all_images/animal/dory.png'), depth: '0.4', category: 'dory' },
         { name: '小丑魚', image: require('../../public/all_images/animal/nimo.png'), depth: '0.2', category: 'nimo' },
         { name: '河豚', image: require('../../public/all_images/animal/angryfish.png'), depth: '0.3', category: 'angryfish' },
-        { name: '藍黃魚', image: require('../../public/all_images/animal/blueyellow.png'), depth: '0.1', category: 'blueyellow' },
+        { name: '黃顱刺蓋魚', image: require('../../public/all_images/animal/blueyellow.png'), depth: '0.1', category: 'blueyellow' },
         { name: '鯨鯊', image: require('../../public/all_images/animal/whale.png'), depth: '0.4', category: 'whale' },
         { name: '海星', image: require('../../public/all_images/animal/star.png'), depth: '0.2', category: 'star' },
         { name: '獅子魚', image: require('../../public/all_images/animal/leofish.png'), depth: '0.4', category: 'leofish' },
-        { name: '魚魚', image: require('../../public/all_images/animal/linefish.png'), depth: '0.4', category: 'linefish' },
+        { name: '鑽嘴魚', image: require('../../public/all_images/animal/linefish.png'), depth: '0.4', category: 'linefish' },
         { name: '鯊魚', image: require('../../public/all_images/animal/shark.png'), depth: '0.7', category: 'shark' },
         { name: '白鯨', image: require('../../public/all_images/animal/white.png'), depth: '0.1', category: 'white' },
-        { name: '劍魚', image: require('../../public/all_images/animal/nosefish.png'), depth: '0.1', category: 'nosefish' },
+        { name: '鋸鯊', image: require('../../public/all_images/animal/nosefish.png'), depth: '0.1', category: 'nosefish' },
         { name: '儒艮', image: require('../../public/all_images/animal/manatee.png'), depth: '0.1', category: 'manatee' },
-        { name: '章魚', image: require('../../public/all_images/animal/taco.png'), depth: '0.1', category: 'taco' },
+        { name: '大王烏賊', image: require('../../public/all_images/animal/taco.png'), depth: '0.1', category: 'taco' },
         { name: '藍鯨', image: require('../../public/all_images/animal/Blue whale.png'), depth: '0.1', category: 'blueWhale' },
         { name: '水母', image: require('../../public/all_images/animal/jellyfish.png'), depth: '0.1', category: 'jellyfish' },
-        { name: '可愛魚', image: require('../../public/all_images/animal/cutefish.png'), depth: '0.1', category: 'cutefish' },
-        { name: 'ET魚', image: require('../../public/all_images/animal/ETfish.png'), depth: '0.1', category: 'ETfish' },
-        { name: '尖鼻魚', image: require('../../public/all_images/animal/harinose.png'), depth: '0.1', category: 'harinose' },
-        { name: '親切鯊魚', image: require('../../public/all_images/animal/great white shark.png'), depth: '0.1', category: 'greatwhiteshark' },
-        { name: '長鼻魚', image: require('../../public/all_images/animal/longnose.png'), depth: '0.1', category: 'longnose' },
-        { name: '轟魚', image: require('../../public/all_images/animal/smile.png'), depth: '0.1', category: 'smile' },
-        { name: '月亮魚', image: require('../../public/all_images/animal/moonfish.png'), depth: '0.1', category: 'moonfish' },
-        { name: '河馬魚', image: require('../../public/all_images/animal/sperm whale.png'), depth: '0.1', category: 'spermwhale' },
-        { name: '轟魚', image: require('../../public/all_images/animal/stingray.png'), depth: '0.1', category: 'stingray' },
-        { name: '太陽魚', image: require('../../public/all_images/animal/Sunfish.png'), depth: '0.1', category: 'sunfish' },
-        { name: '咖啡魚', image: require('../../public/all_images/animal/toad.png'), depth: '0.1', category: 'toad' },
+        { name: '章魚', image: require('../../public/all_images/animal/cutefish.png'), depth: '0.1', category: 'cutefish' },
+        { name: '白斑烏賊', image: require('../../public/all_images/animal/ETfish.png'), depth: '0.1', category: 'ETfish' },
+        { name: '圓鱗四鰭旗魚', image: require('../../public/all_images/animal/harinose.png'), depth: '0.1', category: 'harinose' },
+        { name: '大白鯊', image: require('../../public/all_images/animal/great white shark.png'), depth: '0.1', category: 'greatwhiteshark' },
+        { name: '突角鼻魚', image: require('../../public/all_images/animal/longnose.png'), depth: '0.1', category: 'longnose' },
+        { name: '魟魚', image: require('../../public/all_images/animal/smile.png'), depth: '0.1', category: 'smile' },
+        { name: '翻車魚', image: require('../../public/all_images/animal/moonfish.png'), depth: '0.1', category: 'moonfish' },
+        { name: '抹香鯨', image: require('../../public/all_images/animal/sperm whale.png'), depth: '0.1', category: 'spermwhale' },
+        { name: '魟魚', image: require('../../public/all_images/animal/stingray.png'), depth: '0.1', category: 'stingray' },
+        { name: '翻車魚', image: require('../../public/all_images/animal/Sunfish.png'), depth: '0.1', category: 'sunfish' },
+        { name: '星魚扁鯊', image: require('../../public/all_images/animal/toad.png'), depth: '0.1', category: 'toad' },
         { name: '燈籠魚', image: require('../../public/all_images/animal/monkfish.png'), depth: '0.1', category: 'monkfish' },
-        { name: '深海魚', image: require('../../public/all_images/animal/ohpsfish.png'), depth: '0.1', category: 'ohpsfish' },
-        { name: '飛魚', image: require('../../public/all_images/animal/flyfish.png'), depth: '0.1', category: 'flyfish' },
+        { name: '角高體金眼鯛', image: require('../../public/all_images/animal/ohpsfish.png'), depth: '0.1', category: 'ohpsfish' },
+        { name: '侏儒燈籠魚', image: require('../../public/all_images/animal/flyfish.png'), depth: '0.1', category: 'flyfish' },
       ],
       introduce: [
         // { name: '黃金魚', image: require('../../public/all_images/animal/goldfish.png'), enName: '', p: 'goldfish' },
@@ -243,7 +243,7 @@ export default {
     this.animals.forEach((animal, index) => {
       const scene = document.getElementById(`scene${index}`);
       const parallaxInstance = new Parallax(scene, {
-        relativeInput: true,
+        clipRelativeInput: true,
         pointerEvents: true
       });
     });
@@ -259,7 +259,7 @@ export default {
 // 導覽頁 ------------------------------------------------------------
 .navBar {
   position: fixed;
-  top: 40%;
+  top: 30%;
   right: 40px;
   text-align: right;
   z-index: 1;
@@ -373,13 +373,11 @@ export default {
     // 動物們 ------------------------------------------------------------
     .turtle {
       cursor: pointer;
-      width: 450px;
       translate: 15em 12em;
-      // margin: 150px 0 0 250px;
 
       img {
         visibility: top;
-        width: 450px;
+        width: 400px;
       }
 
       h4 {
@@ -393,20 +391,18 @@ export default {
 
       img {
         visibility: top;
-        width: 180px;
+        width: 100px;
       }
 
       h4 {
-        // translate: 4em 6em;
-        margin-left: 80px;
-        margin-top: 130px;
+        margin-left: 30px;
+        margin-top: 65px;
       }
     }
 
     .dory {
       cursor: pointer;
       translate: 53em 10em;
-      // margin: 0 530px -10px auto;
 
       img {
         visibility: top;
@@ -436,8 +432,7 @@ export default {
 
     .angryfish {
       cursor: pointer;
-      translate: 10em 15em;
-      // margin: 50px 0 80px 350px;
+      translate: 25em 10em;
 
       img {
         visibility: top;
@@ -466,22 +461,22 @@ export default {
 
     .whale {
       cursor: pointer;
-      translate: 20em 15em;
+      translate: 30em 20em;
       // margin: -50px 10px 0 auto;
 
       img {
         visibility: top;
-        width: 1200px;
+        width: 700px;
       }
 
       h4 {
-        margin-top: 80px;
+        margin-top: 25px;
       }
     }
 
     .star {
       cursor: pointer;
-      translate: 18em 15em;
+      translate: 40em 20em;
       // margin: 30px 0 0 350px;
 
       img {
@@ -496,7 +491,7 @@ export default {
 
     .leofish {
       cursor: pointer;
-      translate: 55em 20em;
+      translate: 12em 7em;
       // margin: 0 530px 0 auto;
 
       img {
@@ -513,38 +508,36 @@ export default {
     .shark {
       cursor: pointer;
       translate: 3em 5em;
-      // margin: -30px 0 0 60px;
 
       img {
         visibility: top;
-        width: 700px;
+        width: 450px;
       }
 
       h4 {
-        margin-top: 100px;
-        margin-left: 70px;
+        margin-top: 10px;
+        margin-left: 60px;
       }
     }
 
     .white {
       cursor: pointer;
-      width: 700px;
+      width: 500px;
       margin-left: auto;
 
       img {
         visibility: top;
-        width: 700px;
+        width: 500px;
       }
     }
 
     .linefish {
       cursor: pointer;
-      translate: 70em 5em;
-      // margin: 100px 230px 0 auto;
+      translate: 10em -15em;
 
       img {
         visibility: top;
-        width: 130px;
+        width: 100px;
       }
 
       h4 {
@@ -572,7 +565,7 @@ export default {
 
     .manatee {
       cursor: pointer;
-      margin: 80px auto 0 530px;
+      margin: -35px auto 0 530px;
 
       img {
         visibility: top;
@@ -587,11 +580,11 @@ export default {
 
     .nosefish {
       cursor: pointer;
-      margin: -200px auto 0 330px;
+      margin: -140px auto 0 210px;
 
       img {
         visibility: top;
-        width: 300px;
+        width: 350px;
       }
 
       h4 {
@@ -602,12 +595,12 @@ export default {
 
     .taco {
       cursor: pointer;
-      translate: 67em 0em;
+      translate: 30em 75em;
       // margin: 0 280px 0 auto;
 
       img {
         visibility: visible;
-        width: 300px;
+        width: 750px;
         transform: rotate(90deg);
       }
 
@@ -619,7 +612,7 @@ export default {
 
     .jellyfish {
       cursor: pointer;
-      translate: 62em -8em;
+      translate: 55em -95em;
 
       img {
         visibility: top;
@@ -634,7 +627,7 @@ export default {
 
     .cutefish {
       cursor: pointer;
-      translate: 70em 0em;
+      translate: 10em -45em;
 
       img {
         visibility: top;
@@ -649,11 +642,11 @@ export default {
 
     .ETfish {
       cursor: pointer;
-      translate: 33em -3em;
+      translate: 60em -60em;
 
       img {
         visibility: top;
-        width: 250px;
+        width: 200px;
       }
 
       h4 {
@@ -664,11 +657,11 @@ export default {
 
     .greatwhiteshark {
       cursor: pointer;
-      translate: 50em 7em;
+      translate: 45em -30em;
 
       img {
         visibility: top;
-        width: 600px;
+        width: 450px;
       }
 
       h4 {
@@ -679,7 +672,7 @@ export default {
 
     .harinose {
       cursor: pointer;
-      translate: 15em 3em;
+      translate: 3em -75em;
 
       img {
         visibility: top;
@@ -693,7 +686,7 @@ export default {
 
     .longnose {
       cursor: pointer;
-      translate: 25em -15em;
+      translate: 41em -74em;
 
       img {
         visibility: top;
@@ -708,10 +701,12 @@ export default {
 
     .smile {
       cursor: pointer;
+      translate: -2em -38em;
+
 
       img {
         visibility: top;
-        width: 700px;
+        width: 500px;
       }
 
       h4 {
@@ -722,11 +717,11 @@ export default {
 
     .moonfish {
       cursor: pointer;
-      translate: 60em -17em;
+      translate: 10em -17em;
 
       img {
         visibility: top;
-        width: 300px;
+        width: 215px;
       }
 
       h4 {
@@ -737,16 +732,16 @@ export default {
 
     .spermwhale {
       cursor: pointer;
-      translate: 20em -7em;
+      translate: 40em -20em;
 
       img {
         visibility: top;
-        width: 500px;
+        width: 950px;
       }
 
       h4 {
         margin-left: 150px;
-        margin-top: -30px;
+        margin-top: 40px;
       }
     }
 
@@ -799,7 +794,7 @@ export default {
 
     .monkfish {
       cursor: pointer;
-      translate: 65em -20em;
+      translate: 34em -2em;
 
       img {
         visibility: top;
@@ -848,7 +843,7 @@ export default {
 
       img {
         visibility: top;
-        width: 700px;
+        width: 900px;
       }
 
       h4 {
@@ -858,11 +853,13 @@ export default {
     }
 
     .ship {
-      translate: 0 -50em;
+      translate: 0 -10em;
+      z-index: -2;
 
       img {
         vertical-align: top;
         width: 100%;
+        z-index: -2;
       }
     }
 
