@@ -21,15 +21,22 @@
       <div @click="moveAddress">地址</div>
       <div @click="moveWeatherMax">降雨機率</div>
       <div @click="moveMaxT">今日溫度</div>
+      <div @click="moveAddress">休館資訊</div>
+      <div @click="moveWeatherMax">獲得與紅利點數</div>
+      <div @click="moveMaxT">目前館內人數</div>
+      <div @click="moveAddress">票價資訊</div>
+      
     </div>
+  <div class="rspbox">
     <div class="sayHelloTxt" v-if="!(showAddress || showWeatherMax || showMaxT)">
       {{ sayHelloTxt }}
     </div>
-    <div v-if="showAddress">地址 : {{ locationName }}</div>
-    <div v-if="showWeatherMax">
+    <div class="response" v-if="showAddress">地址 : {{ locationName }}</div>
+    <div class="response" v-if="showWeatherMax">
       天氣現象 : {{ weatherWX }} 最高氣溫 : {{ weatherMaxT }}
     </div>
-    <div v-if="showMaxT">降雨機率 : {{ weatherPop }}</div>
+    <div  class="response" v-if="showMaxT">降雨機率 : {{ weatherPop }}</div>
+  </div>
   </div>
 </template>
 
@@ -117,7 +124,7 @@ export default {
 <style scoped lang="scss">
 .helperAll {
   position: fixed;
-  right: 40px;
+  right: 3%;
   top: 85%;
   width: 50px;
   height: 50px;
@@ -153,18 +160,20 @@ export default {
 
 }
 
+
 .showWindow {
-  width: 400px;
-  height: 400px;
+  width: 300px;
+  height: 220px;
   position: fixed;
-  top: 40%;
-  right: 100px;
-  border: 1px black solid;
-  background-color: white;
+  top: 50%;
+  right: 110px;
+  border: 1.5px #232D47 solid;
+  background-color:#232D47;
   border-radius: 10px;
   z-index: 51;
   transition: 1s;
-  transform: translateX(1000px);
+  transform: translateX(-1000px);
+  overflow: hidden;
 
   .windowBtnAll {
     div {
@@ -175,10 +184,46 @@ export default {
       margin: 5px 5px;
     }
   }
+  .rspbox{
+  border-radius:0 0 10px 10px  ;
+  border-top: 1px  rgb(16, 16, 82) solid;;
+  background-color: #fff;
+  width: 100%;
+  height: 50%;
+  position: absolute;
+  bottom:0%;
+  
+}
 
   .sayHelloTxt {
-    border-top: 1px black;
-    margin: 5px 5px;
+    border-top: 2px rgb(124, 23, 23);
+    padding: 10px 5px;
   }
+  .response{
+    padding: 10px 5px;
+    border-top: 2px rgb(124, 23, 23);
+  }
+}
+
+@media (max-width: 414px) {
+.helperAll {
+  position: fixed;
+
+  top: 85%;
+  width: 50px;
+  height: 50px;
+  overflow: hidden;
+}
+.showWindow {
+  width: 300px;
+  // height: 220px;
+  position: fixed;
+  top: 60%;
+  right: 60px;
+  border-radius: 10px;
+  z-index: 51;
+  transition: 1s;
+  overflow: hidden;
+}
 }
 </style>
