@@ -201,15 +201,6 @@ export default {
       // 重置当前页为第一页
       this.updatePage(1);
     },
-    // searchClick(data) {
-    //   const searchInput = data.toUpperCase();
-    //   const res = this.news_content.filter((item, index, array) => {
-    //     const search_content = item.news_title.toUpperCase() || item.news_txt.toUpperCase();
-    //     return search_content.includes(searchInput);
-    //   });
-    //   this.filteredNews = res;
-    //   this.updatePage(1);
-    // },
     searchClick(data) {
       const searchInput = data.toUpperCase();
       const res = this.news_content.filter((item) => {
