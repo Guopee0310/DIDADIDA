@@ -174,18 +174,18 @@ export default {
     align-items: center;
     flex-direction: column;
     color: map-get($colors, "light");
-    
+
 
     h1 {
       border-bottom: 1px solid map-get($colors, "light");
-      font-size: map-get($fontSizes, "h3");
+      font-size: map-get($fontSizes, "h2");
       letter-spacing: 2px;
     }
 
 
 
     h2 {
-      font-size: map-get($fontSizes, "h4");
+      font-size: map-get($fontSizes, "h3");
       letter-spacing: 2px;
     }
   }

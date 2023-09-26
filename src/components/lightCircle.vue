@@ -22,7 +22,7 @@ export default {
   //   border: 1px red solid;
   display: flex;
   width: 300px;
-  margin: -70px 100px;
+  margin: -170px 170px;
 
   .circle-border {
     position: absolute;
