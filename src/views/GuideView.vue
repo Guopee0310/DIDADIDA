@@ -19,19 +19,19 @@
           <g @click="scrollToSection(2)" id="section1">
             <rect x="5" y="16" width="15" height="6" rx="1" ry="1" style="fill:#67daf4a2;stroke-width:10;"
               filter="url(#drop-shadow-filter)"></rect>
-            <text x="6.5" y="20.5" font-size="4" fill="#fff" filter="url(#drop-shadow-filter)">淺層館</text>
+            <text x="6.5" y="20.5"  fill="#fff" filter="url(#drop-shadow-filter)">淺層館</text>
           </g>
           <!-- 中層區 -->
           <g @click="scrollToSection(3)">
             <rect x="50" y="10" width="15" height="6" rx="1" ry="1" style="fill:#4B88FFa2;stroke-width:10;"
               filter="url(#drop-shadow-filter)"></rect>
-            <text x="51.5" y="14.5" font-size="4" fill="#fff" filter="url(#drop-shadow-filter)">中層館</text>
+            <text x="51.5" y="14.5" fill="#fff" filter="url(#drop-shadow-filter)">中層館</text>
           </g>
           <!-- 深層區 -->
           <g @click="scrollToSection(4)">
             <rect x="65" y="35" width="15" height="6" rx="1" ry="1" style="fill:#0016D8a2;stroke-width:10;"
               filter="url(#drop-shadow-filter)"></rect>
-            <text x="66.5" y="39.5" font-size="4" fill="#fff" filter="url(#drop-shadow-filter)">深層館</text>
+            <text x="66.5" y="39.5"  fill="#fff" filter="url(#drop-shadow-filter)">深層館</text>
           </g>
         </svg>
       </div>
@@ -249,9 +249,8 @@ h3 {
     width: 100%;
     vertical-align: top;
   }
-
-  svg {
-  
+}
+svg {
     position: absolute;
     inset: 0;
     g {
@@ -260,6 +259,7 @@ h3 {
       transition: opacity .3s;
 
       text {
+        font-size: 3px;
         pointer-events: none;
       }
 
@@ -275,8 +275,6 @@ h3 {
       top: 0;
     }
   }
-}
-
 .tabs {
   display: flex;
   box-sizing: border-box;
