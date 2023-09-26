@@ -27,6 +27,10 @@
         </router-link>
       </div>
       <div class="differentBox">
+        <div class="userName">
+          <div>User:Super</div>
+          <div class="logoutBtn" @click="logoutToHome">登出</div>
+        </div>
         <router-view></router-view>
       </div>
     </div>
@@ -55,6 +59,10 @@ export default {
     };
   },
   methods: {
+    logoutToHome() {
+      this.$router.push("/backHome");
+      this.loginCheck = true;
+    },
     checkLogin() {
       if (
         this.$refs.loginMail.value == this.loginMail &&
@@ -140,7 +148,18 @@ export default {
       width: 80%;
       border-radius: 0.3rem;
       box-shadow: black 0.1em 0.1em 0.1em;
-
+      .userName {
+        position: absolute;
+        top: -30px;
+        right: 50px;
+        display: flex;
+        align-items: center;
+        .logoutBtn {
+          border: 1px black solid;
+          padding: 3px;
+          cursor: pointer;
+        }
+      }
       .allTabs {
         position: absolute;
         display: flex;
