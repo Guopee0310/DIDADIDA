@@ -24,7 +24,8 @@ body {
 }
 
 p {
-  position: relative;
+  position: absolute;
+  // position: relative;
   //   font-family: sans-serif;
   text-transform: uppercase;
   font-size: 2em;
@@ -37,6 +38,9 @@ p {
   animation: animate 5s linear infinite;
   background-clip: text;
   -webkit-text-fill-color: rgba(255, 255, 255, 0);
+  top: -10%;
+  right: 0;
+  left: 0;
 }
 
 @keyframes animate {

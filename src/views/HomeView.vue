@@ -1,173 +1,196 @@
 <template>
-  <!-- <div v-if="loading">
+  <div v-if="loading">
     <LoadingBox />
   </div>
-  <div v-else> -->
-  <div>
-    <div class="index">
-      <!-- banner + open time ------------------------------------------ -->
-      <div class="banner">
-        <p>
-          <blingText></blingText>
-        </p>
-        <lightCircle>
-          <template v-slot:circle>
-            <div class="open">
-              <span>{{ $t("營業時間") }}</span>
-              <span>09:00-17:00</span>
-              <svg x="0px" y="0px" width="200px" height="15px" viewBox="0 0 399.6 15.9">
-                <polyline class="op_line" points="0.1,5.5 58,15.4 118.4,5.5 189.2,5.5 258.7,10.4 368.3,0.5 399.5,7.9 " />
-              </svg>
-              <span>{{ $t("最後入場") }}</span>
-              <span>16:00</span>
-            </div>
-          </template>
-        </lightCircle>
-      </div>
+  <div v-else>
+    <div>
+      <div class="index">
+        <!-- banner + open time ------------------------------------------ -->
+        <div class="banner">
+          <Carousel autoplay autoplay-speed="4800" dots="none" v-model="value" loop>
+            <CarouselItem>
+              <div class="demo-carousel">
+                <img src="../../public/all_images/banner/index_banner1.png" alt="">
+              </div>
+            </CarouselItem>
+            <CarouselItem>
+              <div class="demo-carousel">
+                <img src="../../public/all_images/banner/index_banner2.png" alt="">
+              </div>
+            </CarouselItem>
+            <CarouselItem>
+              <div class="demo-carousel">
+                <img src="../../public/all_images/banner/index_banner3.png" alt="">
+              </div>
+            </CarouselItem>
+            <CarouselItem>
+              <div class="demo-carousel">
+                <img src="../../public/all_images/banner/index_banner4.png" alt="">
+              </div>
+            </CarouselItem>
+          </Carousel>
+          <p>
+            <blingText></blingText>
+          </p>
+          <lightCircle>
+            <template v-slot:circle>
+              <div class="open">
+                <span>{{ $t("營業時間") }}</span>
+                <span>09:00-17:00</span>
+                <svg x="0px" y="0px" width="200px" height="15px" viewBox="0 0 399.6 15.9">
+                  <polyline class="op_line"
+                    points="0.1,5.5 58,15.4 118.4,5.5 189.2,5.5 258.7,10.4 368.3,0.5 399.5,7.9 " />
+                </svg>
+                <span>{{ $t("最後入場") }}</span>
+                <span>16:00</span>
+              </div>
+            </template>
+          </lightCircle>
+        </div>
 
-      <!-- 今日入園人數 ------------------------------------------ -->
-      <div class="entrance">
+        <!-- 今日入園人數 ------------------------------------------ -->
+        <div class="entrance">
+          <h3Title>
+            <template v-slot:h3>
+              <h3>{{ $t("今日入園人數") }}</h3>
+            </template>
+          </h3Title>
+          <div class="drop">
+            <div class="wave water"></div>
+            <div class="wave water"></div>
+          </div>
+          <p>{{ this.$store.state.visitCount }}人</p>
+          <div class="deco turtle">
+            <img src="../../public/all_images/deco/deco_turtle.png" alt="" />
+          </div>
+          <div class="deco fishes">
+            <img src="../../public/all_images/deco/deco_fishes.png" alt="" />
+          </div>
+          <div class="paopao"></div>
+          <!-- <paoPao></paoPao> -->
+        </div>
+
+        <!-- 營業資訊 ------------------------------------------ -->
+
         <h3Title>
           <template v-slot:h3>
-            <h3>{{ $t("今日入園人數") }}</h3>
+            <h3>{{ $t("票價資訊") }}</h3>
           </template>
         </h3Title>
-        <div class="drop">
-          <div class="wave water"></div>
-          <div class="wave water"></div>
-        </div>
-        <p>{{ this.$store.state.visitCount }}人</p>
-        <div class="deco turtle">
-          <img src="../../public/all_images/deco/deco_turtle.png" alt="" />
-        </div>
-        <div class="deco fishes">
-          <img src="../../public/all_images/deco/deco_fishes.png" alt="" />
-        </div>
-        <div class="paopao"></div>
-        <!-- <paoPao></paoPao> -->
-      </div>
+        <ticketPrice></ticketPrice>
+        <router-link to="/ticket"><button>立即購票</button></router-link>
 
-      <!-- 營業資訊 ------------------------------------------ -->
-
-      <h3Title>
-        <template v-slot:h3>
-          <h3>{{ $t("票價資訊") }}</h3>
-        </template>
-      </h3Title>
-      <ticketPrice></ticketPrice>
-      <router-link to="/ticket"><button>立即購票</button></router-link>
-
-      <!-- 交通指南 ------------------------------------------ -->
-      <h3Title>
-        <template v-slot:h3>
-          <h3>{{ $t("交通指南") }}</h3>
-        </template>
-      </h3Title>
-      <div class="map">
-        <iframe
-          src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14468.996712784081!2d121.2250227!3d24.9576355!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x346823ea50c732a5%3A0x1b5e6ee66e9fec49!2z57ev6IKyVGliYU1l6ZmE6Kit5Lit5aOi6IG36KiT5Lit5b-D!5e0!3m2!1szh-TW!2stw!4v1690272123794!5m2!1szh-TW!2stw"
-          style="border: 0" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
-        </iframe>
-        <div class="text">
-          <div class="address">
-            <span>地址</span>
-            <p>海洋市深海區珊瑚一街404號</p>
-          </div>
-          <div class="car">
-            <span>交通</span>
-            <div class="way" v-for="car in car" :key="car">
-              <p>{{ car.name }}</p>
-              <p>{{ car.content }}</p>
+        <!-- 交通指南 ------------------------------------------ -->
+        <h3Title>
+          <template v-slot:h3>
+            <h3>{{ $t("交通指南") }}</h3>
+          </template>
+        </h3Title>
+        <div class="map">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14468.996712784081!2d121.2250227!3d24.9576355!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x346823ea50c732a5%3A0x1b5e6ee66e9fec49!2z57ev6IKyVGliYU1l6ZmE6Kit5Lit5aOi6IG36KiT5Lit5b-D!5e0!3m2!1szh-TW!2stw!4v1690272123794!5m2!1szh-TW!2stw"
+            style="border: 0" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+          <div class="text">
+            <div class="address">
+              <span>地址</span>
+              <p>海洋市深海區珊瑚一街404號</p>
+            </div>
+            <div class="car">
+              <span>交通</span>
+              <div class="way" v-for="car in car" :key="car">
+                <p>{{ car.name }}</p>
+                <p>{{ car.content }}</p>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="deco">
-          <img src="../../public/all_images/deco/deco_fishes.png" alt="" />
-        </div>
-      </div>
-
-      <!-- 熱賣商品 ------------------------------------------ -->
-      <h3Title>
-        <template v-slot:h3>
-          <h3>熱賣商品</h3>
-        </template>
-      </h3Title>
-      <div class="product">
-        <div class="item" v-for="product in products" :key="product">
-          <div class="image">
-            <a href="#"><img :src="product.src" alt="product.alt" /></a>
-          </div>
-          <div class="content">
-            <div class="nub">{{ product.nub }}</div>
-            <a href="#">
-              <h4>{{ product.name }}</h4>
-              <div class="text">{{ product.text }}</div>
-            </a>
-            <span>{{ product.price }}</span>
+          <div class="deco">
+            <img src="../../public/all_images/deco/deco_fishes.png" alt="" />
           </div>
         </div>
-        <router-link to="/product"><button>更多商品</button></router-link>
-        <div class="deco star">
-          <img src="../../public/all_images/index/deco_index_star.png" alt="" />
-        </div>
-        <div class="deco shark">
-          <img src="../../public/all_images/index/deco_index_shark.png" alt="" />
-        </div>
-        <div class="deco whale">
-          <img src="../../public/all_images/index/deco_index_whale.png" alt="" />
-        </div>
-      </div>
 
-      <!-- 活動倒數 ------------------------------------------ -->
-      <h3Title>
-        <template v-slot:h3>
-          <h3>{{ $t("活動倒數") }}</h3>
-        </template>
-      </h3Title>
-      <div class="active">
-        <div class="card">
-          <div class="item">
+        <!-- 熱賣商品 ------------------------------------------ -->
+        <h3Title>
+          <template v-slot:h3>
+            <h3>熱賣商品</h3>
+          </template>
+        </h3Title>
+        <div class="product">
+          <div class="item" v-for="product in products" :key="product">
             <div class="image">
-              <img src="../assets/images/openActive.jpg" alt="" />
+              <a href="#"><img :src="product.src" alt="product.alt" /></a>
             </div>
-            <div class="text">
-              <span class="date">活動時間 : 9月1日至9月28日</span>
-              <p class="title">DIDADIDA水族館開幕慶</p>
-              <p class="self">票價限時優惠<span> 10% </span>off</p>
-            </div>
-          </div>
-          <div class="day">
-            <span>倒數</span>
-            <span>5</span>
-            <span>天</span>
-          </div>
-        </div>
-        <div class="card">
-          <div class="item">
-            <div class="image">
-              <img src="../assets/images/blueCloth.jpg" alt="" />
-            </div>
-            <div class="text">
-              <span class="date">活動時間 : 9月1日至9月28日</span>
-              <p class="title">海洋藍慶典</p>
-              <p class="self">入場穿藍色系服裝可享半價優惠</p>
+            <div class="content">
+              <div class="nub">{{ product.nub }}</div>
+              <a href="#">
+                <h4>{{ product.name }}</h4>
+                <div class="text">{{ product.text }}</div>
+              </a>
+              <span>{{ product.price }}</span>
             </div>
           </div>
-          <div class="day">
-            <span>倒數</span>
-            <span>5</span>
-            <span>天</span>
+          <router-link to="/product"><button>更多商品</button></router-link>
+          <div class="deco star">
+            <img src="../../public/all_images/index/deco_index_star.png" alt="" />
+          </div>
+          <div class="deco shark">
+            <img src="../../public/all_images/index/deco_index_shark.png" alt="" />
+          </div>
+          <div class="deco whale">
+            <img src="../../public/all_images/index/deco_index_whale.png" alt="" />
           </div>
         </div>
-      </div>
 
-      <!-- 視覺互動 ------------------------------------------ -->
-      <div class="game">
-        <visual></visual>
+        <!-- 活動倒數 ------------------------------------------ -->
+        <h3Title>
+          <template v-slot:h3>
+            <h3>{{ $t("活動倒數") }}</h3>
+          </template>
+        </h3Title>
+        <div class="active">
+          <div class="card">
+            <div class="item">
+              <div class="image">
+                <img src="../assets/images/openActive.jpg" alt="" />
+              </div>
+              <div class="text">
+                <span class="date">活動時間 : 9月1日至9月28日</span>
+                <p class="title">DIDADIDA水族館開幕慶</p>
+                <p class="self">票價限時優惠<span> 10% </span>off</p>
+              </div>
+            </div>
+            <div class="day">
+              <span>倒數</span>
+              <span>5</span>
+              <span>天</span>
+            </div>
+          </div>
+          <div class="card">
+            <div class="item">
+              <div class="image">
+                <img src="../assets/images/blueCloth.jpg" alt="" />
+              </div>
+              <div class="text">
+                <span class="date">活動時間 : 9月1日至9月28日</span>
+                <p class="title">海洋藍慶典</p>
+                <p class="self">入場穿藍色系服裝可享半價優惠</p>
+              </div>
+            </div>
+            <div class="day">
+              <span>倒數</span>
+              <span>5</span>
+              <span>天</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 視覺互動 ------------------------------------------ -->
+        <div class="game">
+          <visual></visual>
+        </div>
       </div>
     </div>
   </div>
-  <!-- </div> -->
 </template>
 
 <script>
@@ -178,6 +201,8 @@ import lightCircle from "../components/lightCircle.vue";
 import blingText from "../components/blingText.vue";
 import ticketPrice from "../components/ticketPrice.vue";
 import paoPao from "../components/paoPao.vue";
+// import carousel from 'vue-owl-carousel';
+
 export default {
   name: "HomeView",
   data() {
@@ -185,6 +210,7 @@ export default {
       resetVisual: false,
       loading: true,
       animationDuration: 4200,
+      value: 0,
       priceTitle: [{ name: "票種" }, { name: "價格" }, { name: "適用對象" }],
       ticket: [
         { name: "一般票", price: "NT 500", object: "限18歲(含)以上成人使用" },
@@ -254,6 +280,7 @@ export default {
     blingText,
     ticketPrice,
     paoPao,
+    // carousel,
   },
   mounted() {
     setTimeout(() => {
@@ -314,11 +341,16 @@ export default {
 
   // banner ---------------------------------------------
   .banner {
-    background-image: url(../../public/all_images/banner/index.png);
+    // background-image: url(../../public/all_images/banner/index_banner1.png);
     width: 100%;
     height: 90vh;
     background-size: cover;
     background-position: center;
+
+    img {
+      // max-width: 1920px;
+      width: 100%;
+    }
 
     p {
       font-size: 50px;
@@ -364,7 +396,7 @@ export default {
   .entrance {
     max-width: 1200px;
     width: 100%;
-    margin: 50px auto;
+    margin: -100px auto 0;
     position: relative;
 
     .drop {
