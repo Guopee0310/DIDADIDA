@@ -1,19 +1,24 @@
-
 <template>
   <main class="path_main">
     <div class="path_container">
       <h1>DIDA DIDA</h1>
-      <router-link to="/">
-        <div class="front">
+
+      <div class="front">
+        <router-link to="/" @click="this.$store.state.chooseFrontBack = true">
           <button>前台</button>
-        </div>
-      </router-link>
+        </router-link>
+      </div>
+
       <!-- 尚未建立 -->
-      <router-link to="/backHome">
-        <div class="back">
+
+      <div class="back">
+        <router-link
+          to="/backHome"
+          @click="this.$store.state.chooseFrontBack = true"
+        >
           <button>後台</button>
-        </div>
-      </router-link>
+        </router-link>
+      </div>
     </div>
   </main>
 </template>
@@ -37,15 +42,15 @@ main {
   background-size: cover;
   position: relative;
 }
-h1{
+h1 {
   font-size: map-get($fontSizes, "h1");
   text-align: center;
   padding-top: 50px;
 }
-.front button{
+.front button {
   font-size: 50px;
-  width:200px;
-  height:200px;
+  width: 200px;
+  height: 200px;
   font-weight: 600;
   text-align: center;
   line-height: 200px;
@@ -54,66 +59,62 @@ h1{
   border-radius: 50%;
   background-color: transparent;
   // background-color: map-get($colors, "mainColor");
-  color:map-get($colors, "mainColor");
+  color: map-get($colors, "mainColor");
   position: absolute;
-  top:30%;
-  left:30%;
+  top: 30%;
+  left: 30%;
   cursor: pointer;
 }
 
-.front button:hover , .back button:hover{
-  background-color: map-get($colors, "mainColor") ;
-  color:white;
-
+.front button:hover,
+.back button:hover {
+  background-color: map-get($colors, "mainColor");
+  color: white;
 }
 
-.back button{
-  width:200px;
-  height:200px;
+.back button {
+  width: 200px;
+  height: 200px;
   text-align: center;
   line-height: 200px;
   font-size: 50px;
   font-weight: 600;
   letter-spacing: 3px;
   border-radius: 50%;
-//   border: 0;
+  //   border: 0;
   background-color: transparent;
-  color:map-get($colors, "mainColor");
+  color: map-get($colors, "mainColor");
   border: 4px map-get($colors, "mainColor") solid;
-  color:map-get($colors, "mainColor");
-//   color:white;
+  color: map-get($colors, "mainColor");
+  //   color:white;
   position: absolute;
-  top:30%;
-  left:60%;
+  top: 30%;
+  left: 60%;
   cursor: pointer;
 }
 
-@media screen and (max-width:767px){
+@media screen and (max-width: 767px) {
   main {
     background-image: url("../../public/all_images/banner1.png");
- 
-}
-.front button{
-    width:80px;
-    height:80px;
+  }
+  .front button {
+    width: 80px;
+    height: 80px;
     border: 2px map-get($colors, "mainColor") solid;
     line-height: 80px;
     font-size: 25px;
-    left:20%;
+    left: 20%;
   }
 
-.back button{
-    width:80px;
-    height:80px;
+  .back button {
+    width: 80px;
+    height: 80px;
     border: 2px map-get($colors, "mainColor") solid;
     line-height: 80px;
     text-align: center;
     font-size: 25px;
 
-    left:60%;
+    left: 60%;
   }
-  
 }
 </style>
-
-  
