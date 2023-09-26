@@ -2,7 +2,7 @@
   <!-- 小幫手 -->
 
   <div class="helperAll">
-    <button class="noselect" @click="top()" ref="scrollTopButton"><svg xmlns="http://www.w3.org/2000/svg" width="24"
+    <button class="noselect" @click="top" ref="scrollTopButton"><svg xmlns="http://www.w3.org/2000/svg" width="24"
         height="24" viewBox="0 0 24 24">
         <path d="M0 16.67l2.829 2.83 9.175-9.339 9.167 9.339 2.829-2.83-11.996-12.17z" />
       </svg>
@@ -33,19 +33,19 @@
       <div @click="moveAddress">票價資訊</div>
 
     </div>
-  <div class="rspbox">
-    <div class="sayHelloTxt" v-if="!(showAddress || showWeatherMax || showMaxT || showClosed)">
-      {{ sayHelloTxt }}
+    <div class="rspbox">
+      <div class="sayHelloTxt" v-if="!(showAddress || showWeatherMax || showMaxT || showClosed)">
+        {{ sayHelloTxt }}
+      </div>
+      <div class="response" v-if="showAddress">地址 : {{ locationName }}</div>
+      <div class="response" v-if="showWeatherMax">
+        天氣現象 : {{ weatherWX }} 最高氣溫 : {{ weatherMaxT }}
+      </div>
+      <div class="response" v-if="showMaxT">降雨機率 : {{ weatherPop }}</div>
+      <div class="response" v-if="showClosed">{{ closedtime }}</div>
+
     </div>
-    <div class="response" v-if="showAddress">地址 : {{ locationName }}</div>
-    <div class="response" v-if="showWeatherMax">
-      天氣現象 : {{ weatherWX }} 最高氣溫 : {{ weatherMaxT }}
-    </div>
-    <div  class="response" v-if="showMaxT">降雨機率 : {{ weatherPop }}</div>
-    <div  class="response" v-if="showClosed">{{ closedtime }}</div>
-    
-  </div>
-  
+
   </div>
 </template>
 
@@ -62,7 +62,7 @@ export default {
       weatherMaxT: 0,
       //   降雨機率
       weatherPop: 0,
-      closedtime:"9/29~10/03 中秋假期休館",
+      closedtime: "9/29~10/03 中秋假期休館",
       showText: false,
       showAddress: false,
       showWeatherMax: false,
@@ -133,22 +133,21 @@ export default {
       this.showClosed = false;
     },
     top() {
-      // 获取按钮元素的引用
       const buttonElement = this.$refs.scrollTopButton;
-
-      // 使用 offsetTop 属性获取按钮距离页面顶部的距离
       const buttonOffsetTop = buttonElement.offsetTop;
-
-      // 使用 window.scrollTo 方法滚动到页面顶部
-      // 使用 { top: buttonOffsetTop, behavior: 'smooth' } 选项实现平滑滚动
-      window.scrollTo({ top: buttonOffsetTop, behavior: 'smooth' });
+      const delay = 300;
+      this.showText = false;
+      setTimeout(() => {
+        // 在延迟后执行滚动效果
+        window.scrollTo({ top: buttonOffsetTop, behavior: 'smooth' });
+      }, delay);
     },
-    moveClosed(){
+    moveClosed() {
       this.showWeatherMax = false;
       this.showMaxT = false;
       this.showAddress = false;
       this.showClosed = true;
-      
+
     }
   },
   computed: {},

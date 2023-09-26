@@ -2,7 +2,6 @@
   <div v-if="loading">
     <LoadingBox />
   </div>
-<<<<<<< HEAD
   <div v-else>
     <div>
       <div class="index">
@@ -72,30 +71,6 @@
         </div>
 
         <!-- 營業資訊 ------------------------------------------ -->
-=======
-  <!-- <div v-else> -->
-  <div>
-    <div class="index">
-      <!-- banner + open time ------------------------------------------ -->
-      <div class="banner">
-        <p>
-          <blingText></blingText>
-        </p>
-        <lightCircle>
-          <template v-slot:circle>
-            <div class="open">
-              <span>{{ $t("營業時間") }}</span>
-              <span>09:00-17:00</span>
-              <svg x="0px" y="0px" width="200px" height="15px" viewBox="0 0 399.6 15.9">
-                <polyline class="op_line" points="0.1,5.5 58,15.4 118.4,5.5 189.2,5.5 258.7,10.4 368.3,0.5 399.5,7.9 " />
-              </svg>
-              <span>{{ $t("最後入場") }}</span>
-              <span>16:00</span>
-            </div>
-          </template>
-        </lightCircle>
-      </div>
->>>>>>> host
 
         <h3Title>
           <template v-slot:h3>
