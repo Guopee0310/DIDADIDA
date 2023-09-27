@@ -62,22 +62,23 @@
 
   <p>選擇日期</p>
   <div class="dateTextAll">
-  <div class="dateAll">
-    <div class="calendar">
-      <VDatePicker
-        v-model="date"
-        borderless
-        expanded
-        :min-date="new Date()"
-        locale="tw"
-        :masks="{ title: 'YYYY MMM' }"
-        mode="date"
-      />
+    <div class="dateAll">
+            <div class="calendar">
+            <VDatePicker
+                v-model="date"
+                borderless
+                expanded
+                :min-date="new Date()"
+                locale="tw"
+                :masks="{ title: 'YYYY MMM' }"
+                mode="date"
+            />
+            </div>
     </div>
     <p>已選日期:</p>
     <radio type="radio">確定不開放</radio>
   </div>
-</div>
+
  </TabPane>
 </Tabs>
 </template>
@@ -195,10 +196,11 @@ export default {
   background-color: map-get($colors, "secondary");
   z-index: 2;
 }
-// :deep(.calendar) .vc-pane{
-//     width:250px;
-//     height:200px;
-// }
+.dateTextAll{
+    display: flex;
+   
+    border:2px solid black;
+}
 .dateAll {
   @include ticket;
 
@@ -208,6 +210,7 @@ export default {
 
   .dateTextAll {
     display: flex;
+    flex-direction: row;
     justify-content: space-between;
 
     .calendar {
@@ -295,6 +298,7 @@ li{
         margin: 20px 10px;
       }
     }
+
 }
 .add {
   margin-left: 130px;
