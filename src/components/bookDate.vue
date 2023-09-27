@@ -256,7 +256,8 @@ export default {
         padding: 20p;
         margin: 40px 10px;
         border: 0;
-        cursor:pointer ;
+        cursor: pointer;
+        
 
         button {
           width: 150px;
@@ -266,6 +267,7 @@ export default {
           font-size: map-get($fontSizes, "h4");
           background-color: map-get($colors, "secondary");
           color: map-get($colors, "light");
+          cursor: pointer;
         }
       }
 
