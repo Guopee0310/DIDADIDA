@@ -196,7 +196,7 @@ export default {
 </script>
 <style scoped lang="scss">
 .quizAll {
-  z-index: 49;
+  
   @include LQ;
   .showWrong {
     background-color: rgb(134, 83, 83, 0.5);

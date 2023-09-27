@@ -119,7 +119,7 @@ export default {
     }
   }
   .mainpart {
-    z-index: 100;
+    display: flex;
     background-color: #1D3D5B;
   }
   .deco {
