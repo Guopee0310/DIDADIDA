@@ -68,6 +68,7 @@ export default {
 <style lang="scss" scoped>
 *{
   background-color: #1D3D5B;
+ 
 }
 .interact {
   position: relative;
@@ -91,10 +92,12 @@ export default {
     z-index: 100;
   }
   .deco{
+    background-color:  #1D3D5B;
     z-index: 0;
-    width:85%;
+    width:100%;
     position: absolute;
-    top: 60%;
+    top: 70%;
+    left: 0;
   }
 }
 </style>

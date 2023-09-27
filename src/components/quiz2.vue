@@ -1,14 +1,15 @@
 <template>
   <div class="quizAll">
+    <div class="borderdeco">
     <div
       v-for="(i, index) in randomQuestions"
       :key="index"
       class="singelQuestion"
       :class="{ showWrong: i.isWrong }"
     >
-      <div class="questionTitle">第{{ indexPlus(index) }}題</div>
+      <div class="questionTitle">0{{ indexPlus(index) }}</div>
 
-      <div class="questionarrange">
+    <div class="questionarrange"> 
         <div class="questionPost">{{ i.question }}</div>
 
         <div>
@@ -47,6 +48,7 @@
     </div>
 
     <gameResult v-if="showResult"></gameResult>
+  </div>
   </div>
 </template>
 
@@ -190,26 +192,58 @@ export default {
 </script>
 <style scoped lang="scss">
 .quizAll {
+  z-index: 49;
   @include LQ;
   .showWrong {
     background-color: rgb(134, 83, 83, 0.5);
     border-radius: 5px;
+    padding: 10px;
+  }
+  .borderdeco{
+    border: 4px #DC564A dashed;
+    border-radius: 15px;
+    padding: 20px;
   }
   .singelQuestion {
     // border: 1px red solid;
     padding: 15px 0px;
     border-bottom: 2px dashed rgba(0, 0, 0, 0.16); 
+   
     
     div {
       .ansBtn {
         border: 1px black solid;
         cursor: pointer;
+        height: 30px;
       }
     }
+    .title{
+
+}
     .questionTitle {
       font-size: map-get($fontSizes, "h4");
       font-weight: bold;
+      border-radius: 50%;
+      background-color: #1FB0CB;
+      color: white;
+      text-align: center;
+      position: relative;
+      width: 40px;
+      height: 40px;
+      align-items: center;
+      line-height:  40px;
+      
     }
+//     .questionTitle:before {
+//   content: "";
+//   position: absolute;
+//   top: -90%;
+//   left: 50%;
+//   border: 20px solid transparent;
+//   border-bottom: 40px solid #1FB0CB;;
+//   transform: translateX(-50%);
+//   z-index: 49;
+// }
     .questionPost {
       font-size: 18px;
       letter-spacing: 2px;
@@ -228,10 +262,12 @@ export default {
   }
   .cmpBtn {
     @include selectBtn;
-    border: 1px black solid;
+    // border: 1px black solid;
     cursor: pointer;
+   
 
-    width: 200px;
+    width: 180px;
+    height: 40px;
     display: flex;
     justify-content: center;
     align-items: center;

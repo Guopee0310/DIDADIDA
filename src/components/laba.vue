@@ -229,6 +229,8 @@ export default {
     // clip-path: ellipse(50% 50% at 50% 40%);
     margin: 0 auto;
     overflow: hidden;
+    // transition: transform ease-in 0.1s, box-shadow ease-in 0.25s;
+    // box-shadow: 0 1px 10px #a7cbec;
 
     .resetImg {
       vertical-align: top;
@@ -343,6 +345,8 @@ export default {
   .rePlay {
     @include selectBtn;
     padding: 5px 35px;
+    transition: transform ease-in 0.1s, box-shadow ease-in 0.25s;
+    box-shadow: 0 0.5px 5px #a7cbec;
   }
 }
 
