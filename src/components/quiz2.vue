@@ -69,7 +69,7 @@ export default {
           isWrong: false,
         },
         {
-          question: "斑馬魚因为身体上的條紋而得名。",
+          question: "斑馬魚因為身体上的條紋而得名。",
           ans: "是",
           index: 2,
           isWrong: false,
@@ -141,6 +141,7 @@ export default {
         setTimeout(() => {
           this.moveSideKeyFrames = false;
         }, 500);
+        return;
       }
       for (let i = 0; i < this.finalAns.length; i++) {
         if (this.finalAns[i][1] == this.finalAns[i][2]) {
