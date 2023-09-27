@@ -1,14 +1,61 @@
 <template>
   <div class="content" id="app">
-    <div v-for="(item, index) in cardItems" :key="index" class="card" :id="'card'+index">
+    <div
+      v-for="(item, index) in cardItems"
+      :key="index"
+      class="card"
+      :id="'card' + index"
+    >
       <div class="carousel">
-        <Carousel v-model="item.value" arrow="never" dots="none" autoplay >
-          <CarouselItem v-for="(imgSrc, index) in item.imgSrc" :key="index" >
+        <!-- <Carousel v-model="item.value" arrow="never" dots="none" autoplay>
+          <CarouselItem v-for="(imgSrc, index) in item.imgSrc" :key="index">
             <transition name="fade">
-              <img :src="imgSrc" v-show="index === item.value"/>
+              <img :src="imgSrc" v-show="index === item.value" />
             </transition>
           </CarouselItem>
-        </Carousel>
+        </Carousel> -->
+        <div class="imgBox">
+          <div v-if="boxPic == 1" :key="1">
+            <img
+              :src="imgSrc"
+              alt=""
+              :key="index"
+              v-for="(imgSrc, index) in item.imgSrc"
+              :class="{
+                disappearOpacity: boxOpactiy == 1,
+                showOpacity: boxShowOpacity == 1,
+              }"
+            />
+          </div>
+
+          <div v-else-if="boxPic == 2" :key="2">
+            <img
+              :src="imgSrc"
+              alt=""
+              :key="index"
+              v-for="(imgSrc, index) in item.imgSrc2"
+              :style="{ opacity: fst }"
+              :class="{
+                disappearOpacity: boxOpactiy == 2,
+                showOpacity: boxShowOpacity == 2,
+              }"
+            />
+          </div>
+
+          <div v-else-if="boxPic == 3" :key="3">
+            <img
+              :src="imgSrc"
+              alt=""
+              :key="index"
+              v-for="(imgSrc, index) in item.imgSrc3"
+              :style="{ opacity: fst }"
+              :class="{
+                disappearOpacity: boxOpactiy == 3,
+                showOpacity: boxShowOpacity == 3,
+              }"
+            />
+          </div>
+        </div>
       </div>
       <div class="text">
         <h3>{{ item.title }}</h3>
@@ -31,10 +78,21 @@ export default {
   name: "AboutView",
   data() {
     return {
+      fst: true,
+      boxPic: 1,
+      boxOpactiy: 0,
+      boxShowOpacity: 1,
       cardItems: [
         {
+          currentImageIndex: 0,
           value: 0,
-          imgSrc: [require("../../public/all_images/about/about1.png"),require("../../public/all_images/about/about1-2.png"),require("../../public/all_images/about/about1-3.png")],
+          imgSrc: [
+            require("../../public/all_images/about/about1.png"),
+            // require("../../public/all_images/about/about1-2.png"),
+            // require("../../public/all_images/about/about1-3.png"),
+          ],
+          imgSrc2: [require("../../public/all_images/about/about1-2.png")],
+          imgSrc3: [require("../../public/all_images/about/about1-3.png")],
           altText: "關於我們第一張圖",
           title: "與海洋世界的美好相遇",
           description:
@@ -45,7 +103,13 @@ export default {
         },
         {
           value: 0,
-          imgSrc: [require("../../public/all_images/about/about2.png"),require("../../public/all_images/about/about2-2.png"),require("../../public/all_images/about/about2-3.png")],
+          imgSrc: [
+            require("../../public/all_images/about/about2.png"),
+            // require("../../public/all_images/about/about2-2.png"),
+            // require("../../public/all_images/about/about2-3.png"),
+          ],
+          imgSrc2: [require("../../public/all_images/about/about2-2.png")],
+          imgSrc3: [require("../../public/all_images/about/about2-3.png")],
           altText: "關於我們第二張圖",
           title: "跨域合作的研究活動",
           description:
@@ -55,8 +119,14 @@ export default {
           star: false,
         },
         {
-      value: 0,
-          imgSrc: [require("../../public/all_images/about/about3.png"),require("../../public/all_images/about/about3-2.png"),require("../../public/all_images/about/about3-3.png")],
+          value: 0,
+          imgSrc: [
+            require("../../public/all_images/about/about3.png"),
+            // require("../../public/all_images/about/about3-2.png"),
+            // require("../../public/all_images/about/about3-3.png"),
+          ],
+          imgSrc2: [require("../../public/all_images/about/about3-2.png")],
+          imgSrc3: [require("../../public/all_images/about/about3-3.png")],
           altText: "關於我們第三張圖",
           title: "參與海洋保育計畫",
           description:
@@ -68,16 +138,71 @@ export default {
       ],
     };
   },
-  methods:{
+  computed: {
+    currentImage() {
+      return this.cardItems[0].imgSrc[this.currentImageIndex];
+    },
+  },
+  mounted() {
+    setTimeout(() => {
+      this.boxOpactiy += 1;
+    }, 1000);
+    setInterval(() => {
+      if (this.boxPic >= 3) {
+        this.boxPic = 1;
+      }
+      this.boxPic += 1;
+      setTimeout(() => {
+        if (this.boxShowOpacity >= 3) {
+          this.boxShowOpacity = 1;
+        }
+        this.boxShowOpacity += 1;
+      }, 500);
+      setTimeout(() => {
+        if (this.boxOpactiy >= 3) {
+          this.boxOpactiy = 1;
+        }
+        this.boxOpactiy += 1;
+      }, 1500);
+    }, 3000);
+    // setInterval(() => {
+    //   if (this.boxShowOpacity >= 3) {
+    //     this.boxShowOpacity = 1;
+    //   }
+    //   this.boxShowOpacity += 1;
+    //   setTimeout(() => {
+    //     if (this.boxOpactiy >= 3) {
+    //       this.boxOpactiy = 1;
+    //     }
+    //     this.boxOpactiy += 1;
+    //   }, 2500);
+    // }, 1500);
+  },
+
+  methods: {
     changeLanguage() {
       // 使用i18n的setLocale方法来切换语言
       this.$i18n.locale = this.selectedLanguage;
     },
-  }
+  },
 };
 </script>
 
-<style scoped lang="scss" >
+<style scoped lang="scss">
+.imgBox {
+  div {
+    img {
+      transition: opacity 1.5s;
+      opacity: 0;
+    }
+    .disappearOpacity {
+      opacity: 0 !important;
+    }
+    .showOpacity {
+      opacity: 1;
+    }
+  }
+}
 .content {
   background-color: map-get($colors, "secondary");
   overflow: hidden;
@@ -89,9 +214,10 @@ export default {
   justify-content: center;
   align-items: center;
   padding: 20px;
+  margin-bottom: 10px;
 }
 
-.card h3{
+.card h3 {
   margin: 0 auto;
 }
 .card:nth-child(2) {
@@ -114,21 +240,25 @@ export default {
   // border:1px solid black;
 }
 .card .bubble img {
-    width: 50%;
-    animation:bubble-ani 8s linear both;
-    // transform: translate(20px, 30px); 
+  width: 50%;
+  animation: bubble-ani 8s linear both;
+  // transform: translate(20px, 30px);
+}
+@keyframes bubble-ani {
+  0% {
+    transform: translateY(0%);
   }
-  @keyframes bubble-ani{
-    0%{transform: translateY(0%);}
-    100%{transform: translateY(-100%);} 
+  100% {
+    transform: translateY(-100%);
   }
+}
 
 .card .text {
   color: white;
-  padding: 40px;
+  padding: 90px 0px;
   line-height: 2;
-  width:60%;
-
+  width: 60%;
+  margin: 0px 15px;
 }
 
 /* 泡泡 */
@@ -142,8 +272,8 @@ export default {
 
 .card p {
   font-size: map-get($fontSizes, "p");
-  max-width:500px;
-  margin:auto;
+  max-width: 500px;
+  margin: auto;
 }
 
 .card img {
@@ -167,8 +297,8 @@ export default {
     padding: 20px;
   }
   .card h3 {
-  font-size: map-get($fontSizes, "h4");
-}
+    font-size: map-get($fontSizes, "h4");
+  }
   .bubble {
     position: absolute;
     width: 5%;
@@ -194,10 +324,9 @@ export default {
   }
   .card p {
     font-size: map-get($fontSizes, "p");
-    width:100%;
-    margin:auto;
-    
-}
+    width: 100%;
+    margin: auto;
+  }
 
   .card:nth-child(2) {
     flex-direction: column;
@@ -229,7 +358,11 @@ export default {
       margin: 0;
     }
   }
+  .imgBox {
+    width: 100%;
+    img {
+      width: 100%;
+    }
+  }
 }
 </style>
-
-
