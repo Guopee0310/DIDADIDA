@@ -1,12 +1,12 @@
 <template>
   <div class="resultAll">
     <div class="imgDiv">
-      <img :src="require('../assets/images/dida_logo.png')" alt="" />
+      <img :src="require('../../public/all_images/dr.dolphin.png')" alt="" />
     </div>
     <div class="finalAnsAll">
-      <div class="ansTitle">恭喜完成問卷</div>
+      <div class="ansTitle">恭喜完成問卷!</div>
       <div class="getPoint" v-if="this.$store.state.userName">
-        您共獲得{{ this.$store.state.quizScore }}點紅利點數
+        您共獲得{{ this.$store.state.quizScore }}點紅利點數!
       </div>
       <div></div>
     </div>
@@ -31,17 +31,18 @@ export default {
 .resultAll {
   @include LQ;
   display: flex;
-  border: 1px solid #a7cbec;
+  border: 3px dashed #a7cbec;
+  // background-color: rgb(10,10,10,0.2);
   padding: 40px;
   border-radius: 5px;
   justify-content: center;
   align-items: center;
   position: relative;
   .imgDiv {
-    width: 150px;
-    height: 150px;
-    margin-right: 50px;
-    background-color: aqua;
+    width: 100px;
+    height: 100px;
+    margin-right: 20px;
+    // background-color: aqua;
     img {
       width: 100%;
     }

@@ -148,14 +148,19 @@
         <div class="product">
           <div class="item" v-for="product in products" :key="product">
             <div class="image">
-              <a href="#"><img :src="product.src" alt="product.alt" /></a>
+              <!-- <a href="#"><img :src="product.src" alt="product.alt" /></a> -->
+              <router-link to="/product"><img :src="product.src" alt="product.alt" /></router-link>
             </div>
             <div class="content">
               <div class="nub">{{ product.nub }}</div>
-              <a href="#">
+              <!-- <a href="#">
                 <h4>{{ product.name }}</h4>
                 <div class="text">{{ product.text }}</div>
-              </a>
+              </a> -->
+              <router-link to="/product">
+                <h4>{{ product.name }}</h4>
+                <div class="text">{{ product.text }}</div>
+              </router-link>
               <span>{{ product.price }}</span>
             </div>
           </div>
