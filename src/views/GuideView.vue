@@ -18,7 +18,7 @@
           <!-- 表層區 -->
           <g @click="scrollToSection(2)" id="section1">
             <rect x="7" y="16" width="15" height="6" rx="1" ry="1" style="fill:#67daf4a2;stroke-width:10;"></rect>
-            <text x="8.5" y="20"  fill="#fff" filter="url(#drop-shadow-filter)">淺層館</text>
+            <text x="8.5" y="20" fill="#fff" filter="url(#drop-shadow-filter)">淺層館</text>
           </g>
           <!-- 中層區 -->
           <g @click="scrollToSection(3)">
@@ -28,7 +28,7 @@
           <!-- 深層區 -->
           <g @click="scrollToSection(4)">
             <rect x="70" y="37" width="15" height="6" rx="1" ry="1" style="fill:#0016D8a2;stroke-width:10;"></rect>
-            <text x="72" y="41"  fill="#fff" filter="url(#drop-shadow-filter)">深層館</text>
+            <text x="72" y="41" fill="#fff" filter="url(#drop-shadow-filter)">深層館</text>
           </g>
         </svg>
       </div>
@@ -108,6 +108,7 @@
         </div>
       </div>
     </div>
+    <!-- svg晃動效果 -->
     <div class="sea_bg">
       <svg width="0" height="0" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="sea">
         <filter id="water">
@@ -118,7 +119,7 @@
           <feDisplacementMap xChannelSelector="R" yChannelSelector="G" scale="7" in="SourceGraphic" in2="noise2" />
         </filter>
       </svg>
-
+      <!-- 底圖(調整) -->
       <img src="../../public/all_images/guide/tyler-lastovich-6s2fFIsyyTc-unsplash.jpg"
         alt="Hawaiian water crashes against the rocks" class="ocean">
     </div>
@@ -191,7 +192,7 @@ export default {
         const tabSectionTop = tabSection.offsetTop;
 
         // 根据滚动位置和选项卡区域位置来控制按钮的显示和隐藏
-        if (scrollY >= tabSectionTop - 300 ) {
+        if (scrollY >= tabSectionTop - 300) {
           this.isClickScrollVisible = true;
         } else {
           this.isClickScrollVisible = false;
@@ -242,36 +243,40 @@ h3 {
   max-width: 1000px;
   margin: auto;
   position: relative;
-  img{
+
+  img {
     width: 100%;
     vertical-align: top;
   }
 }
+
 svg {
-    position: absolute;
-    inset: 0;
-    g {
-      cursor: pointer;
-      opacity: 1;
-      transition: opacity .3s;
+  position: absolute;
+  inset: 0;
 
-      text {
-        font-size: 3px;
-        pointer-events: none;
-      }
+  g {
+    cursor: pointer;
+    opacity: 1;
+    transition: opacity .3s;
 
-      &:hover {
-        opacity: 0.8;
-      }
+    text {
+      font-size: 3px;
+      pointer-events: none;
     }
 
-    .mask {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      top: 0;
+    &:hover {
+      opacity: 0.8;
     }
   }
+
+  .mask {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+  }
+}
+
 .tabs {
   display: flex;
   box-sizing: border-box;
@@ -302,7 +307,7 @@ svg {
     z-index: 3;
     pointer-events: none;
     color: map-get($colors, 'light');
-    font-size: map-get($fontSizes , 'div' );
+    font-size: map-get($fontSizes , 'div');
     text-shadow: black 0.1em 0.1em 0.1em;
 
 
@@ -419,7 +424,7 @@ svg {
         p {
           padding-top: 1rem;
           line-height: 1.5em;
-          font-size: map-get($fontSizes, "p" );
+          font-size: map-get($fontSizes, "p");
         }
       }
 
@@ -429,7 +434,7 @@ svg {
         margin-left: 1em;
         width: 60%;
         color: map-get($colors, 'light');
-        
+
         .fish {
           width: calc(100%/3);
           position: relative;
@@ -439,7 +444,7 @@ svg {
             width: 100%;
             text-align: center;
             margin-top: 1rem;
-            font-size: map-get($fontSizes, "p" );
+            font-size: map-get($fontSizes, "p");
             font-weight: 600;
             text-shadow: #000 0.1em 0.1em 0.1em;
           }
@@ -486,7 +491,7 @@ svg {
     animation: top .8s alternate infinite;
 
     span {
-      font-size: map-get($fontSizes, 'div' );
+      font-size: map-get($fontSizes, 'div');
       font-weight: 600;
       color: map-get($colors, 'light');
       text-shadow: #000 0.1em 0.1em 0.1em;
@@ -515,51 +520,56 @@ svg {
 @media screen and (max-width:992px) {
 
   .tabs {
-  height: 80vh;
-    h4{
-      font-size: map-get($fontSizes , 'span' );
+    height: 80vh;
+
+    h4 {
+      font-size: map-get($fontSizes , 'span');
       justify-content: start;
-      img{
+
+      img {
         width: 25px;
       }
     }
-  .content {
-    margin-top: 2rem;
-    width: 90%;
-    .wrap {
-      display: flex;
-      flex-direction: column;
-      color: map-get($colors, 'light');
-      line-height: 1.5em;
+
+    .content {
+      margin-top: 2rem;
+      width: 90%;
+
+      .wrap {
+        display: flex;
+        flex-direction: column;
+        color: map-get($colors, 'light');
+        line-height: 1.5em;
 
 
-      .about_pic {
-        width: 100%;
-
-        img {
+        .about_pic {
           width: 100%;
-          vertical-align: top;
+
+          img {
+            width: 100%;
+            vertical-align: top;
+          }
+
+          p {
+            padding-top: 1rem;
+          }
         }
 
-        p {
-          padding-top: 1rem;
-        }
-      }
+        .fish_wrap {
+          width: 100%;
+          margin: auto;
 
-      .fish_wrap {
-        width: 100%;
-        margin: auto;
-        
-        .fish {
-          width: calc(100%/2);
-          .name{
-          font-size: map-get($fontSizes, "span" );
-        }
+          .fish {
+            width: calc(100%/2);
+
+            .name {
+              font-size: map-get($fontSizes, "span");
+            }
+          }
         }
       }
     }
   }
-}
 
 }
 </style>

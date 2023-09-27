@@ -387,7 +387,10 @@ export default {
 
     .goldfish {
       cursor: pointer;
-      translate: 60em 8em;
+      // translate: 60em 8em;
+      display: flex;
+      
+
 
       img {
         visibility: top;
