@@ -1,7 +1,7 @@
 <template>
   <Tabs value="name1">
     <TabPane label="票種 / 票價管理" name="name1">
-      <button class="add">+ 新增項目</button>
+      <button class="add" @click="createNewOne">+ 新增項目</button>
       <li>
           <p calss="tickettype">票種</p>
           <p>價格</p>
@@ -18,6 +18,8 @@
             <button @click="updateQuestion(index, $event)">修改</button>
           </div>
         </li>
+
+
     <!-- //    <li>
     //       <p class="tickettype">一般票</p>
     //       <p>NT 500</p>
@@ -55,43 +57,48 @@
       </ul>
     </TabPane>
       
-  </Tabs>
-  <Tabs value="name2">
- <TabPane label="不開放時間管理" name="name2"> 
+    <TabPane label="不開放時間管理" name="name2"> 
       
 
-  <p>選擇日期</p>
-  <div class="dateTextAll">
-    <div class="dateAll">
-            <div class="calendar">
-            <VDatePicker
-                v-model="date"
-                borderless
-                expanded
-                :min-date="new Date()"
-                locale="tw"
-                :masks="{ title: 'YYYY MMM' }"
-                mode="date"
-            />
-            </div>
-    </div>
-    <p>已選日期:</p>
-    <radio type="radio">確定不開放</radio>
-  </div>
-
- </TabPane>
+      <p>選擇日期</p>
+      <div class="dateTextAll">
+        <div class="dateAll">
+                <div class="calendar">
+                <VDatePicker
+                    v-model="date"
+                    borderless
+                    expanded
+                    :min-date="new Date()"
+                    locale="tw"
+                    mode="date"
+                    :disabled="disableDateSelection"
+                    :events="eventDates"
+                />
+                </div>
+        </div>
+        <div class="select">
+            <p>已選日期: {{ formattedDate }}</p>
+            <input type="checkbox" @change="enableDateSelection">確定不開放
+        </div>
+      </div>
+    
+     </TabPane>
 </Tabs>
 </template>
 
 
 <script>
-import { Radio } from 'view-ui-plus';
+
 
 export default {
   name: "bookDate",
-  components: { Radio },
   data() {
     return {
+    date: null, // 选定的日期
+     // 初始化 selectedDates 以存储已选择的日期
+    selectedDates: [],
+    disableDateSelection: false, // 是否禁用日期选择的标志
+    eventDates: [], // 存储已选择的日期的数组
     ticket:[
         {
            ticketname:"一般票",
@@ -121,7 +128,7 @@ export default {
         {
            ticketname:"團體票",
            price:"NT 350",
-           content:" 最低人数要求：團隊人数必須超過 10 人，才能享受團體票折扣。",
+           content:" 最低人数要求：團隊人數必須超過 10 人，才能享受團體票折扣。",
            change:true
         }
     ]
@@ -137,8 +144,40 @@ export default {
         new Date(this.date).getMonth() + 1
       }.${new Date(this.date).getDate()}`;
     },
+  
+  // 日期格式
+  formattedDate() {
+      if (this.date) {
+        const dateObject = new Date(this.date);
+        const year = dateObject.getFullYear();
+        const month = String(dateObject.getMonth() + 1).padStart(2, '0');
+        const day = String(dateObject.getDate()).padStart(2, '0');
+        return `${year}/${month}/${day}`;
+      } else {
+        return '';
+      }
+    },
   },
+
   methods: {
+    createNewOne() {
+      this.ticket.push(["", "", true]);
+    },
+      onDateSelected() {
+      if (this.date) {
+        // 将选定的日期添加到已选择的日期数组
+        this.selectedDates.push(this.date);
+        // 将选定的日期添加到事件日期数组以便在日历中显示
+        this.eventDates.push({
+          start: this.date,
+          end: this.date,
+          color: 'primary', // 可以根据需要选择颜色
+        });
+        // 禁用日期选择
+        this.disableDateSelection = true;
+      }
+    },
+    
     updateQuestion(index, e) {
       if (e.target.innerText == "確認") {
         this.ticket[index][3] = true;
@@ -148,10 +187,25 @@ export default {
       this.ticket[index][3] = false;
       e.target.innerText = "確認";
     }
- }
+ },
+ enableDateSelection() {
+    this.disableDateSelection = false; // 启用日期选择
+    // 当重新启用日期选择时，将已确定不开放的日期清空
+    this.disabledDates = [];
+  },
+
+      // 添加此方法以禁用已选择的日期
+      disableSelectedDates(date) {
+      // 检查日期是否在已选择的日期数组中，如果在则返回 true，否则返回 false
+      return this.selectedDates.some(selectedDate => {
+        return (
+          selectedDate.getFullYear() === date.getFullYear() &&
+          selectedDate.getMonth() === date.getMonth() &&
+          selectedDate.getDate() === date.getDate()
+        );
+      });
+    }
 }
-
-
 
 </script>
 
@@ -198,8 +252,9 @@ export default {
 }
 .dateTextAll{
     display: flex;
+    justify-content: center; 
+    align-items: center; 
    
-    border:2px solid black;
 }
 .dateAll {
   @include ticket;
@@ -267,6 +322,11 @@ export default {
           color: map-get($colors, "secondary");
           font-size: map-get($fontSizes, "h4");
           font-weight: bold;
+        }
+
+        .select{
+            display: flex;
+            margin-top: 40px;
         }
       }
 
