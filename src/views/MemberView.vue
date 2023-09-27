@@ -1,97 +1,75 @@
 <template>
-  <div class="stickers">
-    <div class="photo_stickers">
-      <img src="../assets/images/member_nini.jpg" alt="" />
-    </div>
-  </div>
-
-  <div class="member_hello">
+  <div class="mem_main">
+    <!-- 裝飾圖 -->
     <div class="deco_fishes">
       <img src="../../public/all_images/deco/deco_fishes.png" alt="" />
     </div>
-    <p>{{ this.$store.state.userName }}，您好！</p>
-  </div>
-
-  <div class="bonuspoints">
-    <p>
-      我的紅利點數 : <span>{{ remainingTodos }}</span> 點
-    </p>
-  </div>
-
-  <div class="mem_main">
-    <div>
+    <!-- 左側選單 -->
+    <div class="member_nav">
+      <div class="stickers">
+        <div class="photo_stickers">
+          <img src="../assets/images/member_nini.jpg" alt="" />
+        </div>
+      </div>
+      <div class="member_hello">
+        <p>{{ this.$store.state.userName }}，您好！</p>
+      </div>
+      <div class="bonuspoints">
+        <p>
+          尚有紅利點數 : <span>{{ remainingTodos }}</span> 點
+        </p>
+      </div>
       <div class="verification">
         <div class="verification_google">
           <img src="../assets/images/google_icon.png" alt="" />
           <span>Google</span>
         </div>
         <label class="verification_label" for="verification_id">
-          已驗證<input
-            class="verification_input"
-            type="checkbox"
-            value=""
-            id="verification_id"
-            style="zoom: 160%"
-          />
+          已驗證<input class="verification_input" type="checkbox" value="" id="verification_id" style="zoom: 120%;"
+            checked />
         </label>
       </div>
-
-      <div class="member_nav">
+      <div class="btn_area">
         <button @click="memberSetting" :class="{ alreadyClick: memberClick }">
-          <span>{{ $t("會員帳號設定") }}</span>
+          {{ $t("會員帳號設定") }}
         </button>
         <button @click="prodOrder" :class="{ alreadyClick: prodOrderClick }">
-          <span>{{ $t("購物訂單查詢") }}</span>
+          {{ $t("購物訂單查詢") }}
         </button>
         <button @click="tickOrder" :class="{ alreadyClick: tickOrderClick }">
-          <span>{{ $t("購票訂單查詢") }}</span>
+          {{ $t("購票訂單查詢") }}
         </button>
         <button @click="favList" :class="{ alreadyClick: favListClick }">
-          <span>{{ $t("我的收藏清單") }}</span>
+          {{ $t("我的收藏清單") }}
         </button>
-        <div class="bubble group_r">
-          <img src="../../public/all_images/bubble1.png" alt="" />
-        </div>
-        <div class="bubble group_l">
-          <img src="../../public/all_images/bubble2.png" alt="" />
-        </div>
       </div>
-      <div class="mempic">
-        <img src="../../public/all_images/pipi.jpg" alt="" />
+      <div class="logOutBtn">
+        <button v-if="this.$store.state.userName" @click="logOutAPI()" :class="{ alreadyClick: logOutClick }">
+          {{ $t('登出') }}
+        </button>
       </div>
     </div>
-
-    <div
-      v-if="this.$store.state.memberBtn === 'mem_account_settings'"
-      class="mem_account_settings member_area"
-    >
+    <!-- 右側區塊 -->
+    <!-- 會員帳號設定 -->
+    <div v-if="this.$store.state.memberBtn === 'mem_account_settings'" class="mem_account_settings member_area">
       <h6>{{ $t("會員帳號設定") }}</h6>
       <memAccoutSettings></memAccoutSettings>
       <memAreaBG></memAreaBG>
     </div>
-
-    <div
-      v-else-if="this.$store.state.memberBtn === 'prod_order_inquiry'"
-      class="prod_order_inquiry member_area"
-    >
+    <!-- 購物訂單查詢 -->
+    <div v-else-if="this.$store.state.memberBtn === 'prod_order_inquiry'" class="prod_order_inquiry member_area">
       <h6>{{ $t("購物訂單查詢") }}</h6>
       <prodOrderInquiry id="showProdOrder"></prodOrderInquiry>
       <memAreaBG></memAreaBG>
     </div>
-
-    <div
-      v-else-if="this.$store.state.memberBtn === 'tick_order_inquiry'"
-      class="tick_order_inquiry member_area"
-    >
+    <!-- 購票訂單查詢 -->
+    <div v-else-if="this.$store.state.memberBtn === 'tick_order_inquiry'" class="tick_order_inquiry member_area">
       <h6 id="showtickOrder">{{ $t("購票訂單查詢") }}</h6>
       <tickOrderInquiry></tickOrderInquiry>
       <memAreaBG></memAreaBG>
     </div>
-
-    <div
-      v-else="this.$store.state.memberBtn === 'mem_bonuspoint'"
-      class="favorites_list member_area"
-    >
+    <!-- 我的收藏清單 -->
+    <div v-else="this.$store.state.memberBtn === 'mem_bonuspoint'" class="favorites_list member_area">
       <h6>{{ $t("我的收藏清單") }}</h6>
       <favoritesList></favoritesList>
       <memAreaBG></memAreaBG>
@@ -119,6 +97,7 @@ export default {
       prodOrderClick: false,
       tickOrderClick: false,
       favListClick: false,
+      logOutClick: false,
       btn: "mem_account_settings",
     };
   },
@@ -135,6 +114,7 @@ export default {
       this.memberClick = false;
       this.tickOrderClick = false;
       this.favListClick = true;
+      this.logOutClick = false;
     },
     tickOrder() {
       this.$store.state.memberBtn = "tick_order_inquiry";
@@ -142,6 +122,7 @@ export default {
       this.memberClick = false;
       this.tickOrderClick = true;
       this.favListClick = false;
+      this.logOutClick = false;
     },
     prodOrder() {
       this.$store.state.memberBtn = "prod_order_inquiry";
@@ -149,6 +130,7 @@ export default {
       this.memberClick = false;
       this.tickOrderClick = false;
       this.favListClick = false;
+      this.logOutClick = false;
     },
     memberSetting() {
       this.$store.state.memberBtn = "mem_account_settings";
@@ -156,181 +138,210 @@ export default {
       this.prodOrderClick = false;
       this.tickOrderClick = false;
       this.favListClick = false;
+      this.logOutClick = false;
+    },
+    logOutAPI() {
+      fetch("https://tibamef2e.com/cgd103/g1/api/postMemberLogout.php")
+        .then((res) => res.json())
+        .then((json) => console.log(json));
+      this.$store.state.userName = "";
+      this.$store.state.shoppingCart = [];
+      this.$store.state.favoList = [];
+      this.$store.state.ticketList = [];
+      this.$store.state.totalScorePoint = 0;
     },
   },
 };
 </script>
 <style scoped lang="scss">
-.stickers {
+.mem_main {
   width: 1200px;
-  height: 100px;
-  margin: 0 auto;
-  position: relative;
-
-  .photo_stickers {
-    display: inline-block;
-    width: 270px;
-    height: 270px;
-    border-radius: 50%;
-    overflow: hidden;
-    position: absolute;
-    top: -160px;
-    left: 65px;
-    z-index: 2;
-
-    img {
-      width: 100%;
-      height: 100%;
-    }
-  }
-}
-
-.member_hello {
-  width: 1200px;
-  padding: 30px 55px 0px 55px;
-  margin: 0 auto;
-  font-size: map-get($fontSizes, "h3");
+  margin: 200px auto 130px auto;
+  display: flex;
+  justify-content: center;
   position: relative;
 
   .deco_fishes {
     position: absolute;
-    top: -180px;
-    right: 230px;
-  }
-}
-
-.bonuspoints {
-  padding-left: 60px;
-  width: 1200px;
-  margin: 0 auto;
-
-  p {
-    font-size: 14px;
-
-    span {
-      font-size: 20px;
-    }
-  }
-}
-
-.mem_main {
-  width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-evenly;
-
-  .verification {
-    width: 400px;
-    height: 80px;
-    margin: 30px;
-    padding: 30px;
-    border: 0;
-    border-radius: 15px;
-    font-size: 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: map-get($colors, "bgc");
-
-    .verification_google {
-      width: 100px;
-      display: flex;
-      justify-content: space-evenly;
-      align-items: center;
-    }
-
-    .verification_label {
-      width: 100px;
-      display: flex;
-      justify-content: space-evenly;
-      align-items: center;
-    }
+    top: -280px;
+    right: 255px;
   }
 
   .member_nav {
     width: 400px;
-    height: 500px;
-    margin: 30px;
-    border-radius: 15px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-evenly;
+    height: 1000px;
+    border-radius: 10px 0 0 10px;
     background-color: map-get($colors, "secondary");
     position: relative;
 
-    .bubble {
-      position: absolute;
+    .stickers {
+      width: 1200px;
+      height: 100px;
+      margin: 0 auto;
+      position: relative;
+
+      .photo_stickers {
+        display: inline-block;
+        width: 270px;
+        height: 270px;
+        border-radius: 50%;
+        overflow: hidden;
+        position: absolute;
+        top: -180px;
+        left: 65px;
+        z-index: 2;
+
+        img {
+          width: 100%;
+          height: 100%;
+        }
+      }
     }
 
-    .group_r {
-      right: -30px;
-      bottom: -180px;
+    .member_hello {
+      width: fit-content;
+      margin: 20px auto 0 auto;
+      font-size: map-get($fontSizes, "h3");
+      color: map-get($colors, "light");
     }
 
-    .group_l {
-      left: -40px;
-      bottom: -415px;
+    .bonuspoints {
+      width: fit-content;
+      margin: 0 auto;
+      color: map-get($colors, "light");
+
+      p {
+        font-size: map-get($fontSizes, "p");
+        width: fit-content;
+        border-bottom: 1px solid map-get($colors, "light");
+        ;
+
+        span {
+          font-size: map-get($fontSizes, "h5");
+        }
+      }
     }
 
-    button {
-      width: 320px;
-      height: 60px;
+    .verification {
+      width: 340px;
+      height: 50px;
+      margin: 30px auto;
+      padding: 30px;
       border: 0;
-      border-radius: 15px;
-      cursor: pointer;
-      background-color: #fff;
-    }
-    .alreadyClick {
-      background-color: #1fb0cb;
-      color: white;
-    }
-    :hover {
-      // background-color: map-get($colors, "memBtn");
-      background-color: #1fb0cb;
-      color: white;
-    }
-    // .button:active {
-    //  background-color: #e74c3c; /* 按钮被点击时的颜色 */
-    // }
-    span {
-      font-size: map-get($fontSizes, "h4");
-      letter-spacing: 1px;
-    }
-  }
+      border-radius: 10px;
+      font-size: map-get($fontSizes , "p");
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: map-get($colors, "bgc");
 
-  h6 {
-    padding: 20px 55px;
-    font-size: map-get($fontSizes, "h3");
+      .verification_google {
+        width: 100px;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+
+        span {
+          font-size: map-get($fontSizes, "p");
+          letter-spacing: 1px;
+        }
+      }
+
+      .verification_label {
+        width: 80px;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+      }
+    }
+
+    .btn_area {
+      width: 340px;
+      height: 520px;
+      margin: 40px auto;
+      text-align: center;
+
+      button {
+        width: 200px;
+        height: 60px;
+        border: 0;
+        cursor: pointer;
+        background-color: map-get($colors, "secondary");
+        font-size: map-get($fontSizes, "p");
+        color: map-get($colors, "light");
+        letter-spacing: 1px;
+      }
+
+      :hover {
+        color: white;
+        border-bottom: 1px solid map-get($colors, "light");
+      }
+
+      .alreadyClick {
+        background-color: #1fb0cb;
+        color: white;
+      }
+    }
+
+    .logOutBtn {
+      width: 340px;
+      margin: 40px auto;
+      text-align: center;
+
+      button {
+        width: 200px;
+        height: 60px;
+        border: 0;
+        cursor: pointer;
+        background-color: map-get($colors, "secondary");
+        font-size: map-get($fontSizes, "p");
+        color: map-get($colors, "light");
+        letter-spacing: 1px;
+      }
+
+      :hover {
+        color: white;
+        border-bottom: 1px solid map-get($colors, "light");
+      }
+
+      .alreadyClick {
+        background-color: #1fb0cb;
+        color: white;
+      }
+    }
   }
 
   .member_area {
-    width: 600px;
+    width: 800px;
     height: 1000px;
-    margin: 30px;
     border: 0;
-    border-radius: 15px;
+    border-radius: 0 10px 10px 0;
     position: relative;
-    background-color: map-get($colors, "mainColor");
-    color: map-get($colors, "light");
+    background-color: map-get($colors, "bgc");
+    color: map-get($colors, "dark");
     overflow: hidden;
-  }
 
-  .mempic {
-    display: inline-block;
-    width: 370px;
-    height: 320px;
-    border-radius: 50% 65% 65% 50%;
-    overflow: hidden;
-    margin: 20px 35px;
-    position: relative;
-
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+    h6 {
+      text-align: center;
+      width: 500px;
+      margin: 40px auto 10px auto;
+      padding-bottom: 20px;
+      border-bottom: 1px solid map-get($colors, 'dark');
+      font-size: map-get($fontSizes, "h3");
     }
   }
+
+  .mem_account_settings {
+    background-color: map-get($colors, "mainColor");
+    color: map-get($colors, "light");
+
+    h6 {
+      border-bottom: 1px solid map-get($colors, 'light');
+      margin: 40px auto;
+    }
+  }
+
+
 }
 
 @media screen and (max-width: 768px) {

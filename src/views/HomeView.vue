@@ -510,17 +510,20 @@ export default {
 
       .way {
         margin: 20px 0;
-      }
 
-      .way p:first-child {
-        font-weight: 800;
-        border-bottom: 3px solid map-get($colors, "h2Blue");
-        width: 60px;
-        margin-bottom: 5px;
-      }
+        p {
+          width: fit-content;
 
-      .way p:last-child {
-        margin-bottom: 20px;
+          :first-child {
+            font-weight: 800;
+            border-bottom: 3px solid map-get($colors, "h2Blue");
+            margin-bottom: 5px;
+          }
+
+          :last-child {
+            margin-bottom: 20px;
+          }
+        }
       }
     }
 

@@ -132,7 +132,7 @@ export default {
     border: 0;
     border-radius: 15px;
     margin: 0 auto;
-    background-color: #eeee;
+    background-color: map-get($colors, 'memarea');
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -212,7 +212,7 @@ export default {
     .item_info p:first-child {
       width: 30%;
       text-align: center;
-      background-color: map-get($colors, "h2Blue");
+      background-color: map-get($colors, "bgc");
     }
 
     .item_info p:nth-child(2) {
