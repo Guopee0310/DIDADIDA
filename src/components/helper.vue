@@ -1,6 +1,5 @@
 <template>
   <!-- 小幫手 -->
-
   <div class="helperAll">
     <button class="noselect" @click="top" ref="scrollTopButton"><svg xmlns="http://www.w3.org/2000/svg" width="24"
         height="24" viewBox="0 0 24 24">
@@ -31,8 +30,8 @@
       <div @click="moveWeatherMax">獲得與紅利點數</div>
       <div @click="moveMaxT">目前館內人數</div>
       <div @click="moveAddress">票價資訊</div>
-
     </div>
+<<<<<<< HEAD
   <div class="rspbox">
     <div class="sayHelloTxt" v-if="!(showAddress || showWeatherMax || showMaxT || showClosed)">
       {{ sayHelloTxt }}
@@ -46,6 +45,19 @@
     
   </div>
   
+=======
+    <div class="rspbox">
+      <div class="sayHelloTxt" v-if="!(showAddress || showWeatherMax || showMaxT || showClosed)">
+        {{ sayHelloTxt }}
+      </div>
+      <div class="response" v-if="showAddress">地址 : {{ locationName }}</div>
+      <div class="response" v-if="showWeatherMax">
+        天氣現象 : {{ weatherWX }} 最高氣溫 : {{ weatherMaxT }}
+      </div>
+      <div class="response" v-if="showMaxT">降雨機率 : {{ weatherPop }}</div>
+      <div class="response" v-if="showClosed">{{ closedtime }}</div>
+    </div>
+>>>>>>> jasonhsu
   </div>
 </template>
 
@@ -106,14 +118,12 @@ export default {
       this.showClosed = false;
       let hello = ["您", "好", "今", "天", "想", "問", "點", "什", "麼", "?"];
       this.sayHelloTxt = ""; // 將文字重置為空字串
-
       this.intervalId = setInterval(() => {
         if (hello.length > 0) {
           this.sayHelloTxt += hello.shift();
         }
       }, 150);
     },
-
     moveAddress() {
       this.showWeatherMax = false;
       this.showMaxT = false;
@@ -138,19 +148,27 @@ export default {
       this.showAddress = false;
       this.showClosed = true;
     },
+<<<<<<< HEAD
+=======
+    // 回到上方按鈕 -----------------------
+>>>>>>> jasonhsu
     top() {
       const buttonElement = this.$refs.scrollTopButton;
       const buttonOffsetTop = buttonElement.offsetTop;
       const delay = 300;
       this.showText = false;
       setTimeout(() => {
-        // 在延迟后执行滚动效果
         window.scrollTo({ top: buttonOffsetTop, behavior: 'smooth' });
       }, delay);
     },
+<<<<<<< HEAD
  
 
     },
+=======
+    // ----------------------------------
+  },
+>>>>>>> jasonhsu
   computed: {},
 }
 </script>
@@ -188,11 +206,7 @@ export default {
       }
     }
   }
-
-
-
 }
-
 
 .showWindow {
   width: 300px;
@@ -275,7 +289,6 @@ button {
   background-image: linear-gradient(315deg, #5de6de 0%, #b58ecc 74%);
   border: none;
   border-radius: 50%;
-  // transition: 200ms;
   position: absolute;
   bottom: 85px;
   left: 10px;
@@ -285,55 +298,16 @@ button svg {
   fill: white;
   width: 15px;
   height: 15px;
-  // position: absolute;
-  // transform: translateX(-50%) translateY(-50%);
 }
 
 button:before {
   content: 'Back to Top';
   position: absolute;
-  // transform: translateX(-50%) translateY(45px);
   font-size: 15px;
   transition: 200ms;
   color: transparent;
   font-weight: bold;
 }
-
-// button:hover {
-//   box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
-//   width: 80px;
-//   height: 80px;
-// }
-
-// button:hover::before {
-//   color: #fff;
-// }
-
-// button:hover svg {
-//   animation: bounce 2s infinite linear;
-// }
-
-// @keyframes bounce {
-//   0% {
-//     transform: translateX(-50%) translateY(-50%)
-//   }
-
-//   25% {
-//     transform: translateX(-50%) translateY(-65%)
-//   }
-
-//   50% {
-//     transform: translateX(-50%) translateY(-50%)
-//   }
-
-//   75% {
-//     transform: translateX(-50%) translateY(-35%)
-//   }
-
-//   100% {
-//     transform: translateX(-50%) translateY(-50%)
-//   }
-// }
 
 button:focus {
   outline: none;

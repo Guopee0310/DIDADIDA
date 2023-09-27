@@ -13,11 +13,16 @@
 <style scoped lang="scss">
 .deco_img {
     position: absolute;
+    width: 170px;
+
+    img {
+        width: 100%;
+    }
 }
 
 .deco_shark {
     top: -10px;
-    right: 40px;
+    right: 25px;
 }
 
 .deco_seastar {

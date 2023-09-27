@@ -53,7 +53,7 @@ export default {
   border: 0;
   border-radius: 15px;
   margin: 0 auto;
-  background-color: #eeee;
+  background-color: map-get($colors, 'memarea');
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -102,14 +102,14 @@ export default {
   }
 
   h5 {
-    font-size: map-get($fontSizes, "h4");
+    font-size: map-get($fontSizes, "div");
     color: map-get($colors, "dark");
   }
 
   p {
     width: 90%;
     text-align: justify;
-    font-size: map-get($fontSizes, "span");
+    font-size: map-get($fontSizes, "mini");
     color: map-get($colors, "dark");
   }
 

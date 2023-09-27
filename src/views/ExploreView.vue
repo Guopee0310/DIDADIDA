@@ -90,13 +90,13 @@
       <div class="card" v-if="selectedAnimal">
         <div class="shadow" @click="closeCard"></div>
         <div class="card_content">
-          <div v-for="(introduce, index) in introduce">
-            <img :src="introduce.image" alt="" />
-            <h4>{{ introduce.name }}</h4>
-            <span>{{ introduce.enName }}</span>
-            <p>{{ introduce.p }}</p>
-            <ul v-for="(feature, index) in introduce.features">
-              <li>{{ feature }}</li>
+          <div>
+            <img :src="selectedAnimal.image" alt="" />
+            <h4>{{ selectedAnimal.name }}</h4>
+            <span>{{ selectedAnimal.enName }}</span>
+            <p>{{ selectedAnimal.p }}</p>
+            <ul>
+              <li v-for="str in selectedAnimal.features" :key="str">{{ str }}</li>
             </ul>
           </div>
           <div class="close" @click="closeCard">
@@ -117,16 +117,20 @@ export default {
   data() {
     return {
       parallaxValue: 30,
-      // showText: false,
       selectedAnimal: null,
       animals: [
         {
-          name: "黃高鰭刺尾魚",
-          image: require("../../public/all_images/animal/goldfish.png"),
-          depth: "0.2",
-          category: "goldfish",
+          name: '黃高鰭刺尾魚',
+          image: require('../../public/all_images/animal/goldfish.png'),
+          depth: '0.2',
+          category: 'goldfish',
+          p: '熱帶海洋的明亮黃色魚種，以其高背鰭和尾鰭上的骨刺而聞名。',
+          features: [
+            "— 外觀特徵 —",
+            "玳瑁的外殼呈現五角形的形狀，有許多彎曲的甲板，讓牠們在水中更靈活。這些甲板上通常有不規則的金黃色、紅棕色或綠色的斑紋，為牠們提供了極佳的保護色。",
+            "— 棲息地 —",
+            "玳瑁廣泛分佈於熱帶和亞熱帶海域，包括大西洋、印度洋和太平洋。牠們在珊瑚礁、海草床、潟湖等地找到適合的棲息地。"]
         },
-
         {
           name: "玳瑁",
           image: require("../../public/all_images/animal/turtle.png"),
@@ -316,32 +320,9 @@ export default {
           category: "flyfish",
         },
       ],
-      introduce: [
-        // { name: '黃金魚', image: require('../../public/all_images/animal/goldfish.png'), enName: '', p: 'goldfish' },
-        {
-          name: "玳瑁",
-          image: require("../../public/all_images/animal/turtle.png"),
-          enName: "Hawksbill Turtle",
-          p: "是一種海龜物種，屬於海洋爬行動物，被廣泛認為是美麗而又瀕危的物種。",
-          features: [
-            "— 外觀特徵 —",
-            "玳瑁的外殼呈現五角形的形狀，有許多彎曲的甲板，讓牠們在水中更靈活。這些甲板上通常有不規則的金黃色、紅棕色或綠色的斑紋，為牠們提供了極佳的保護色。",
-            "— 棲息地 —",
-            "玳瑁廣泛分佈於熱帶和亞熱帶海域，包括大西洋、印度洋和太平洋。牠們在珊瑚礁、海草床、潟湖等地找到適合的棲息地。",
-          ],
-        },
-      ],
     };
   },
-  mounted() {
-    this.animals.forEach((animal, index) => {
-      const scene = document.getElementById(`scene${index}`);
-      const parallaxInstance = new Parallax(scene, {
-        relativeInput: true,
-        pointerEvents: true,
-      });
-    });
-  },
+
   methods: {
     btnScroll(name) {
       if (name == "表層海洋帶") {
@@ -403,13 +384,9 @@ export default {
       }
     },
     showCard(animal) {
-      // if (name == "玳瑁") {
-      // this.showText = true;
       this.selectedAnimal = animal;
-      // }
     },
     closeCard() {
-      // this.showText = false;
       this.selectedAnimal = null;
     },
   },
