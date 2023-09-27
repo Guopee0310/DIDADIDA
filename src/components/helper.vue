@@ -31,21 +31,6 @@
       <div @click="moveMaxT">目前館內人數</div>
       <div @click="moveAddress">票價資訊</div>
     </div>
-<<<<<<< HEAD
-  <div class="rspbox">
-    <div class="sayHelloTxt" v-if="!(showAddress || showWeatherMax || showMaxT || showClosed)">
-      {{ sayHelloTxt }}
-    </div>
-    <div class="response" v-if="showAddress">地址 : {{ locationName }}</div>
-    <div class="response" v-if="showWeatherMax">
-      天氣現象 : {{ weatherWX }} 最高氣溫 : {{ weatherMaxT }}
-    </div>
-    <div  class="response" v-if="showMaxT">降雨機率 : {{ weatherPop }}</div>
-    <div  class="response" v-if="showClosed">{{ closedtime }}</div>
-    
-  </div>
-  
-=======
     <div class="rspbox">
       <div class="sayHelloTxt" v-if="!(showAddress || showWeatherMax || showMaxT || showClosed)">
         {{ sayHelloTxt }}
@@ -57,7 +42,6 @@
       <div class="response" v-if="showMaxT">降雨機率 : {{ weatherPop }}</div>
       <div class="response" v-if="showClosed">{{ closedtime }}</div>
     </div>
->>>>>>> jasonhsu
   </div>
 </template>
 
@@ -148,10 +132,7 @@ export default {
       this.showAddress = false;
       this.showClosed = true;
     },
-<<<<<<< HEAD
-=======
     // 回到上方按鈕 -----------------------
->>>>>>> jasonhsu
     top() {
       const buttonElement = this.$refs.scrollTopButton;
       const buttonOffsetTop = buttonElement.offsetTop;
@@ -161,14 +142,9 @@ export default {
         window.scrollTo({ top: buttonOffsetTop, behavior: 'smooth' });
       }, delay);
     },
-<<<<<<< HEAD
  
 
     },
-=======
-    // ----------------------------------
-  },
->>>>>>> jasonhsu
   computed: {},
 }
 </script>
