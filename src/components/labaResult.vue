@@ -1,7 +1,7 @@
 <template>
   <div class="controlResult" v-if="title1">
     <div class="resultPic">
-      <!-- <img :src="require(imgSrcGet)" alt="" /> -->
+      <img :src="imgSrc1" alt="" />
       <img
         :src="require('../assets/images/dolphin_pillow.jpg')"
         alt=""
@@ -38,7 +38,11 @@
       <div class="isOpacity postText" :class="{ notOpacity: finalShow1 }">
         {{ post1 }}
       </div>
-      <div class="isOpacity postPoint" :class="{ notOpacity: finalShow1 }">
+      <div
+        class="isOpacity postPoint"
+        :class="{ notOpacity: finalShow1 }"
+        v-if="this.$store.state.userName"
+      >
         您共獲得{{ point1 }}點紅利點數!
       </div>
     </div>
@@ -113,7 +117,6 @@ export default {
     transition: 1.5s;
   }
   .resultPic {
-    
     width: 200px;
     height: 200px;
     img {

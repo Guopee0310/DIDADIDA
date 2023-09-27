@@ -73,37 +73,37 @@ export default {
       ],
       introArr: [
         {
-          imgSrc: "../assets/images/dolphin_pillow.jpg",
+          imgSrc: require("../assets/images/dolphin_pillow.jpg"),
           title: "小丑魚1111111",
           post: "小丑魚生活在淺海珊瑚礁區域，以互利共生的方式與海葵相處，保護海葵免受掠食者，生活深度通常在3到15米之間。",
           point: "15",
         },
         {
-          imgSrc: "../assets/images/dolphin_pillow.jpg",
+          imgSrc: require("../assets/images/dolphin_pillow.jpg"),
           title: "小丑魚222222222",
           post: "小丑魚生活在淺海珊瑚礁區域，以互利共生的方式與海葵相處，保護海葵免受掠食者，生活深度通常在3到15米之間。",
           point: "30",
         },
         {
-          imgSrc: "../assets/images/dolphin_pillow.jpg",
+          imgSrc: require("../assets/images/dolphin_pillow.jpg"),
           title: "小丑魚33333333",
           post: "小丑魚生活在淺海珊瑚礁區域，以互利共生的方式與海葵相處，保護海葵免受掠食者，生活深度通常在3到15米之間。",
           point: "50",
         },
         {
-          imgSrc: "../assets/images/dolphin_pillow.jpg",
+          imgSrc: require("../assets/images/dolphin_pillow.jpg"),
           title: "小丑魚444444",
           post: "小丑魚生活在淺海珊瑚礁區域，以互利共生的方式與海葵相處，保護海葵免受掠食者，生活深度通常在3到15米之間。",
           point: "5",
         },
         {
-          imgSrc: "../assets/images/dolphin_pillow.jpg",
+          imgSrc: require("../assets/images/dolphin_pillow.jpg"),
           title: "小丑魚5555555",
           post: "小丑魚生活在淺海珊瑚礁區域，以互利共生的方式與海葵相處，保護海葵免受掠食者，生活深度通常在3到15米之間。",
           point: "5",
         },
         {
-          imgSrc: "../assets/images/dolphin_pillow.jpg",
+          imgSrc: require("../assets/images/dolphin_pillow.jpg"),
           title: "小丑魚66666666",
           post: "小丑魚生活在淺海珊瑚礁區域，以互利共生的方式與海葵相處，保護海葵免受掠食者，生活深度通常在3到15米之間。",
           point: "5",
@@ -133,42 +133,55 @@ export default {
           this.imgSrc = this.introArr[0].imgSrc;
           this.title = this.introArr[0].title;
           this.post = this.introArr[0].post;
-          this.point = this.introArr[0].point;
+          if (this.$store.state.userName) {
+            this.point = this.introArr[0].point;
+          }
+
           this.$store.state.labaScore = parseInt(this.introArr[0].point);
         } else if (randomNum == 2) {
           this.guessNum = 2;
           this.imgSrc = this.introArr[1].imgSrc;
           this.title = this.introArr[1].title;
           this.post = this.introArr[1].post;
-          this.point = this.introArr[1].point;
+          if (this.$store.state.userName) {
+            this.point = this.introArr[1].point;
+          }
           this.$store.state.labaScore = parseInt(this.introArr[0].point);
         } else if (randomNum == 3) {
           this.guessNum = 3;
           this.imgSrc = this.introArr[2].imgSrc;
           this.title = this.introArr[2].title;
           this.post = this.introArr[2].post;
-          this.point = this.introArr[2].point;
+          if (this.$store.state.userName) {
+            this.point = this.introArr[2].point;
+          }
           this.$store.state.labaScore = parseInt(this.introArr[0].point);
         } else if (randomNum == 4) {
           this.guessNum = 4;
           this.imgSrc = this.introArr[3].imgSrc;
           this.title = this.introArr[3].title;
           this.post = this.introArr[3].post;
-          this.point = this.introArr[3].point;
+          if (this.$store.state.userName) {
+            this.point = this.introArr[3].point;
+          }
           this.$store.state.labaScore = parseInt(this.introArr[0].point);
         } else if (randomNum == 5) {
           this.guessNum = 5;
           this.imgSrc = this.introArr[4].imgSrc;
           this.title = this.introArr[4].title;
           this.post = this.introArr[4].post;
-          this.point = this.introArr[4].point;
+          if (this.$store.state.userName) {
+            this.point = this.introArr[4].point;
+          }
           this.$store.state.labaScore = parseInt(this.introArr[0].point);
         } else if (randomNum == 6) {
           this.guessNum = 6;
           this.imgSrc = this.introArr[5].imgSrc;
           this.title = this.introArr[5].title;
           this.post = this.introArr[5].post;
-          this.point = this.introArr[5].point;
+          if (this.$store.state.userName) {
+            this.point = this.introArr[5].point;
+          }
           this.$store.state.labaScore = parseInt(this.introArr[0].point);
         }
         setTimeout(() => {
@@ -211,34 +224,37 @@ export default {
       vertical-align: top;
       translate: 0px -8058px;
     }
+
     .resetImg2 {
+      vertical-align: top;
+      translate: 0px -2370px;
+      transition: 3s;
+    }
+
+    .resetImg3 {
       vertical-align: top;
       translate: 0px -1896px;
       transition: 3s;
     }
-    .resetImg3 {
+    .resetImg4 {
       vertical-align: top;
       translate: 0px -1422px;
       transition: 3s;
     }
-    .resetImg4 {
+
+    .resetImg5 {
       vertical-align: top;
       translate: 0px -948px;
       transition: 3s;
     }
-    .resetImg5 {
+    .resetImg6 {
       vertical-align: top;
       translate: 0px -474px;
       transition: 3s;
     }
-    .resetImg6 {
-      vertical-align: top;
-      translate: 0px 0px;
-      transition: 3s;
-    }
     .resetImg7 {
       vertical-align: top;
-      translate: 0px 474px;
+      translate: 0px 0px;
       transition: 3s;
     }
   }

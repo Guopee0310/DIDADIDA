@@ -5,12 +5,14 @@
     </div>
     <div class="finalAnsAll">
       <div class="ansTitle">恭喜完成問卷</div>
-      <div class="getPoint">
+      <div class="getPoint" v-if="this.$store.state.userName">
         您共獲得{{ this.$store.state.quizScore }}點紅利點數
       </div>
       <div></div>
     </div>
-    <router-link to="/member" class="toPoint">我的紅利點數 > </router-link>
+    <router-link to="/member" class="toPoint" v-if="this.$store.state.userName"
+      >我的紅利點數 >
+    </router-link>
   </div>
 </template>
 

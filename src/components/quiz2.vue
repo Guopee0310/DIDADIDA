@@ -9,31 +9,31 @@
       <div class="questionTitle">第{{ indexPlus(index) }}題</div>
 
       <div class="questionarrange">
-      <div class="questionPost">{{ i.question }}</div>
+        <div class="questionPost">{{ i.question }}</div>
 
-      <div>
-        <label class="testPoition">
-          <input
-            type="radio"
-            :name="i.index"
-            @click="pushInArr(i.index, i.ans, '是')"
-            :disabled="isDisabled"
-          />
-          是
-        </label>
-        <label class="testPoition">
-          <input
-            type="radio"
-            :name="i.index"
-            @click="pushInArr(i.index, i.ans, '否')"
-            :disabled="isDisabled"
-          />
-          否
-        </label>
-        <!-- <div class="ansBtn" @click="pushInArr(i.index, i.ans, $event)">是</div>
+        <div>
+          <label class="testPoition">
+            <input
+              type="radio"
+              :name="i.index"
+              @click="pushInArr(i.index, i.ans, '是')"
+              :disabled="isDisabled"
+            />
+            是
+          </label>
+          <label class="testPoition">
+            <input
+              type="radio"
+              :name="i.index"
+              @click="pushInArr(i.index, i.ans, '否')"
+              :disabled="isDisabled"
+            />
+            否
+          </label>
+          <!-- <div class="ansBtn" @click="pushInArr(i.index, i.ans, $event)">是</div>
         <div class="ansBtn" @click="pushInArr(i.index, i.ans, $event)">否</div> -->
+        </div>
       </div>
-    </div>
     </div>
 
     <div @click="complete" class="cmpBtn" v-if="!showResult">完成問卷</div>
@@ -56,16 +56,66 @@ export default {
   data() {
     return {
       quesAndAns: [
-        { question: "海馬是一種會飛的海洋生物。 ", ans: "否", index: 0, isWrong: false },
-        { question: "海龜是海洋生物中的哺乳動物", ans: "否", index: 1, isWrong: false },
-        { question: "斑馬魚因为身体上的條紋而得名。", ans: "是", index: 2, isWrong: false },
-        { question: "海獅是海洋生物，也會在陸地上生活。", ans: "是", index: 3, isWrong: false },
-        { question: "海豚是魚類，因此牠們有魚鰭。", ans: "否", index: 4, isWrong: false },
-        { question: "毒刺水母的觸手可以引發劇痛，但通常不致命。", ans: "是", index: 5, isWrong: false },
-        { question: "鯊魚是世界上最小的魚類之一。 ", ans: "否", index: 6, isWrong: false },
-        { question: "海星通常有五個手臂，但有些品種有更多", ans: "是", index: 7, isWrong: false },
-        { question: "海葵是植物而不是動物。", ans: "否", index: 8, isWrong: false },
-        { question: "海龍是一種類似於海馬的生物，牠們通常隱藏在珊瑚中。", ans: "是", index: 9, isWrong: false },
+        {
+          question: "海馬是一種會飛的海洋生物。 ",
+          ans: "否",
+          index: 0,
+          isWrong: false,
+        },
+        {
+          question: "海龜是海洋生物中的哺乳動物",
+          ans: "否",
+          index: 1,
+          isWrong: false,
+        },
+        {
+          question: "斑馬魚因为身体上的條紋而得名。",
+          ans: "是",
+          index: 2,
+          isWrong: false,
+        },
+        {
+          question: "海獅是海洋生物，也會在陸地上生活。",
+          ans: "是",
+          index: 3,
+          isWrong: false,
+        },
+        {
+          question: "海豚是魚類，因此牠們有魚鰭。",
+          ans: "否",
+          index: 4,
+          isWrong: false,
+        },
+        {
+          question: "毒刺水母的觸手可以引發劇痛，但通常不致命。",
+          ans: "是",
+          index: 5,
+          isWrong: false,
+        },
+        {
+          question: "鯊魚是世界上最小的魚類之一。 ",
+          ans: "否",
+          index: 6,
+          isWrong: false,
+        },
+        {
+          question: "海星通常有五個手臂，但有些品種有更多",
+          ans: "是",
+          index: 7,
+          isWrong: false,
+        },
+        {
+          question: "海葵是植物而不是動物。",
+          ans: "否",
+          index: 8,
+          isWrong: false,
+        },
+        {
+          question: "海龍是一種類似於海馬的生物，牠們通常隱藏在珊瑚中。",
+          ans: "是",
+          index: 9,
+          isWrong: false,
+        },
       ],
       randomQuestions: [],
       finalAns: [],
@@ -99,7 +149,10 @@ export default {
           this.quesAndAns[i].isWrong = true;
         }
       }
-      this.$store.state.quizScore = this.totalPoint;
+      if (this.$store.state.userName) {
+        this.$store.state.quizScore = this.totalPoint;
+      }
+
       if (this.finalAns.length >= 5) {
         this.showResult = true;
 
@@ -138,7 +191,7 @@ export default {
 .quizAll {
   @include LQ;
   .showWrong {
-    background-color: rgb(134, 83, 83,0.5);
+    background-color: rgb(134, 83, 83, 0.5);
     border-radius: 5px;
   }
   .singelQuestion {
@@ -167,7 +220,7 @@ export default {
       }
     }
   }
-  .questionarrange{
+  .questionarrange {
     display: flex;
     justify-content: space-between;
   }

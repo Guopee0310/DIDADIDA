@@ -1,18 +1,25 @@
 <template>
   <div class="header">
-    <div class="wrap" :style="{
-      'background-color': headerColor,
-      top: 0,
-      left: 0,
-      'z-index': 8,
-      width: '100%',
-    }">
+    <div
+      class="wrap"
+      :style="{
+        'background-color': headerColor,
+        top: 0,
+        left: 0,
+        'z-index': 8,
+        width: '100%',
+      }"
+    >
       <!-- logo -->
 
       <!-- this.checkLogoPic = false; -->
       <div :class="{ logo: !checkLogoPic, logoChange: checkLogoPic }">
-        <router-link to="/" v-if="!checkLogoPic"><img src="../../public/all_images/logo_all.svg" /></router-link>
-        <router-link to="/" v-if="checkLogoPic"><img src="../../public/all_images/logo_half.svg" /></router-link>
+        <router-link to="/" v-if="!checkLogoPic"
+          ><img src="../../public/all_images/logo_all.svg"
+        /></router-link>
+        <router-link to="/" v-if="checkLogoPic"
+          ><img src="../../public/all_images/logo_half.svg"
+        /></router-link>
       </div>
 
       <nav class="main-nav">
@@ -38,8 +45,11 @@
           <router-link to="/explore">{{ $t(menuTitle.animal) }}</router-link>
           <ul class="sub-menu">
             <li v-for="animalSub in animalSub" key="animalSub">
-              <router-link :to="animalSub.link" @click="changePageMove(animalSub.name)">{{ $t(animalSub.name)
-              }}</router-link>
+              <router-link
+                :to="animalSub.link"
+                @click="changePageMove(animalSub.name)"
+                >{{ $t(animalSub.name) }}</router-link
+              >
             </li>
           </ul>
         </div>
@@ -57,17 +67,32 @@
         <!-- 會員登入 -->
         <div class="icons">
           <span>
-            <i @click="this.$store.state.storeShowLogin = true" v-if="!this.$store.state.userName"
-              class="fa-solid fa-user" style="color: #eee"></i>
-            <div v-if="this.$store.state.userName" @click="this.$router.push('./member')" style="color: #eee"
-              class="name">
+            <i
+              @click="this.$store.state.storeShowLogin = true"
+              v-if="!this.$store.state.userName"
+              class="fa-solid fa-user"
+              style="color: #eee"
+            ></i>
+            <div
+              v-if="this.$store.state.userName"
+              @click="this.$router.push('./member')"
+              style="color: #eee"
+              class="name"
+            >
               {{ this.$store.state.userName }}
             </div>
-            <span v-if="this.$store.state.userName" @click="logOutAPI()" class="logOutBtn">登出</span>
+            <span
+              v-if="this.$store.state.userName"
+              @click="logOutAPI()"
+              class="logOutBtn"
+              >登出</span
+            >
           </span>
 
           <!-- 購物車 -->
-          <router-link to="/shoppingcart"><i class="fa-solid fa-cart-shopping" style="color: #eee"></i></router-link>
+          <router-link to="/shoppingcart"
+            ><i class="fa-solid fa-cart-shopping" style="color: #eee"></i
+          ></router-link>
         </div>
         <!-- 語言切換 -->
         <div class="select">
@@ -76,36 +101,55 @@
             <option value="en">English</option>
             <!-- 添加其他支持的語言選項 -->
           </select>
-          <span><i class="fa-solid fa-chevron-down" style="color: #eeeeee"></i></span>
+          <span
+            ><i class="fa-solid fa-chevron-down" style="color: #eeeeee"></i
+          ></span>
         </div>
       </nav>
       <!-- 手機menu -->
       <div class="rwd_menu">
-
         <div class="navigation">
-          <input type="checkbox" class="navigation__checkbox" id="nav-toggle">
+          <input type="checkbox" class="navigation__checkbox" id="nav-toggle" />
           <label for="nav-toggle" class="navigation__button">
-            <span class="navigation__icon" aria-label="toggle navigation menu"></span>
+            <span
+              class="navigation__icon"
+              aria-label="toggle navigation menu"
+            ></span>
           </label>
           <div class="navigation__background"></div>
 
           <nav class="navigation__nav" role="navigation">
-
             <ul class="navigation__list">
               <div class="btn_wrap">
                 <div class="icons">
                   <span>
-                    <i @click="this.$store.state.storeShowLogin = true" v-if="!this.$store.state.userName"
-                      class="fa-solid fa-user" style="color: #eee"></i>
-                    <div v-if="this.$store.state.userName" @click="this.$router.push('./member')">
+                    <i
+                      @click="this.$store.state.storeShowLogin = true"
+                      v-if="!this.$store.state.userName"
+                      class="fa-solid fa-user"
+                      style="color: #eee"
+                    ></i>
+                    <div
+                      v-if="this.$store.state.userName"
+                      @click="this.$router.push('./member')"
+                    >
                       {{ this.$store.state.userName }}
                     </div>
-                    <span v-if="this.$store.state.userName" @click="logOutAPI()" class="logOutBtn">登出</span>
+                    <span
+                      v-if="this.$store.state.userName"
+                      @click="logOutAPI()"
+                      class="logOutBtn"
+                      >登出</span
+                    >
                   </span>
 
                   <!-- 購物車 -->
-                  <router-link to="/shoppingcart" @click="closeMobileMenu"><i class="fa-solid fa-cart-shopping"
-                      style="color: #eee"></i></router-link>
+                  <router-link to="/shoppingcart" @click="closeMobileMenu"
+                    ><i
+                      class="fa-solid fa-cart-shopping"
+                      style="color: #eee"
+                    ></i
+                  ></router-link>
                 </div>
                 <div class="select">
                   <select v-model="selectedLanguage" @change="changeLanguage">
@@ -113,12 +157,19 @@
                     <option value="en">English</option>
                     <!-- 添加其他支持的語言選項 -->
                   </select>
-                  <span><i class="fa-solid fa-chevron-down" style="color: #eeeeee"></i></span>
+                  <span
+                    ><i
+                      class="fa-solid fa-chevron-down"
+                      style="color: #eeeeee"
+                    ></i
+                  ></span>
                 </div>
               </div>
               <!-- 關於DIDA -->
               <li class="navigation__item">
-                <a @click="toggleDropdown('about')">{{ $t(menuTitle.about) }}</a>
+                <a @click="toggleDropdown('about')">{{
+                  $t(menuTitle.about)
+                }}</a>
                 <ul class="dropdown" v-if="showAboutDropdown">
                   <li v-for="aboutSub in aboutSub" key="aboutSub">
                     <router-link :to="aboutSub.link" @click="closeMobileMenu">{{
@@ -129,11 +180,15 @@
               </li>
               <!-- 最新消息 -->
               <li class="navigation__item">
-                <router-link to="/news" @click="closeMobileMenu">{{ $t(menuTitle.news) }}</router-link>
+                <router-link to="/news" @click="closeMobileMenu">{{
+                  $t(menuTitle.news)
+                }}</router-link>
               </li>
               <!-- 探索海洋 -->
               <li class="navigation__item">
-                <router-link to="/explore" @click="closeMobileMenu">{{ $t(menuTitle.animal) }}</router-link>
+                <router-link to="/explore" @click="closeMobileMenu">{{
+                  $t(menuTitle.animal)
+                }}</router-link>
               </li>
               <!-- 購物 -->
               <li class="navigation__item">
@@ -202,7 +257,6 @@ export default {
           imgSrc:
             '<i class="fa-solid fa-cart-shopping" style="color: #eeeeee;"></i>',
         },
-
       ],
       selectedLanguage: "zh-TW", // 默認語言
       // language: [
@@ -295,6 +349,9 @@ export default {
       this.$store.state.favoList = [];
       this.$store.state.ticketList = [];
       this.$store.state.totalScorePoint = 0;
+      if (this.$route.path == "/member") {
+        this.$router.push("/");
+      }
     },
     handleScroll(event) {
       console.log(event);
@@ -309,11 +366,11 @@ export default {
     },
     toggleDropdown(menuType) {
       // 根據不同的子選單類型來判斷是否展開或收起
-      if (menuType === 'about') {
+      if (menuType === "about") {
         this.showAboutDropdown = !this.showAboutDropdown;
         // 如果展開about子選單，則收起buy子選單
         this.showBuyDropdown = false;
-      } else if (menuType === 'buy') {
+      } else if (menuType === "buy") {
         this.showBuyDropdown = !this.showBuyDropdown;
         // 如果展開buy子選單，則收起about子選單
         this.showAboutDropdown = false;
@@ -340,7 +397,6 @@ export default {
 </script>
 <style scoped lang="scss">
 // @import "~@/assets/scss/base/reset.scss";
-
 
 .wrap {
   display: flex;
@@ -453,7 +509,6 @@ select {
 .icons {
   cursor: pointer;
 
-
   .name {
     display: inline-block;
     margin-right: 10px;
@@ -463,7 +518,6 @@ select {
   .name:hover {
     color: map-get($colors, "hoverColor");
     border-bottom: 1px solid map-get($colors, "hoverColor");
-
   }
 
   span {
@@ -509,8 +563,7 @@ option:checked {
   display: none;
 }
 
-@media screen and (max-width:768px) {
-
+@media screen and (max-width: 768px) {
   .wrap {
     .main-nav {
       display: none;
@@ -523,11 +576,11 @@ option:checked {
       justify-content: space-between;
 
       .icons {
-        font-size: map-get($fontSizes , 'div');
+        font-size: map-get($fontSizes, "div");
         width: 60px;
         display: flex;
         justify-content: space-between;
-        align-items: center
+        align-items: center;
       }
 
       select {
@@ -558,8 +611,6 @@ option:checked {
       align-items: center;
       justify-content: center;
 
-
-
       .navigation {
         width: 100%;
         height: 100%;
@@ -585,11 +636,10 @@ option:checked {
         }
 
         &:hover {
-          color: #C1D0D0;
+          color: #c1d0d0;
           transform: scale(1.1);
         }
       }
-
 
       .navigation__background {
         position: absolute;
@@ -598,9 +648,9 @@ option:checked {
         inset: 0;
         opacity: 0;
         border-radius: 50%;
-        background: map-get($colors , 'mainColor');
+        background: map-get($colors, "mainColor");
         z-index: 4;
-        transition: all .8s cubic-bezier(0.86, 0, 0.07, 1);
+        transition: all 0.8s cubic-bezier(0.86, 0, 0.07, 1);
       }
 
       .navigation__nav {
@@ -611,7 +661,7 @@ option:checked {
         opacity: 0;
         visibility: hidden;
         z-index: 4;
-        transition: all 1s cubic-bezier(0.68, -0.55, 0.265, 1.55) -.2s;
+        transition: all 1s cubic-bezier(0.68, -0.55, 0.265, 1.55) -0.2s;
       }
 
       .navigation__list {
@@ -629,13 +679,12 @@ option:checked {
         padding: 1rem;
         position: relative;
 
-
         a {
           display: inline-block;
           width: 100%;
           text-decoration: none;
-          color: map-get($colors , 'light');
-          font-size: map-get($fontSizes , 'h5');
+          color: map-get($colors, "light");
+          font-size: map-get($fontSizes, "h5");
           font-weight: 600;
         }
 
@@ -645,21 +694,21 @@ option:checked {
           top: 120%;
           left: 0;
           margin: auto;
-          background-color: map-get($colors , 'h2Blue');
+          background-color: map-get($colors, "h2Blue");
           border-radius: 2rem;
           transform: translateY(-1em);
           transition: all 0.3s ease-in-out 0s, visibility 0s linear 0.3s;
           z-index: 2;
 
-          >li {
+          > li {
             // margin: 1rem;
             padding: 1rem 0;
           }
 
           a {
             width: 100%;
-            font-size: map-get($fontSizes , 'div');
-            color: map-get($colors , 'dark');
+            font-size: map-get($fontSizes, "div");
+            color: map-get($colors, "dark");
           }
         }
       }
@@ -670,21 +719,20 @@ option:checked {
         display: inline-block;
         padding: 1rem 2rem;
         text-transform: uppercase;
-        color: map-get($colors , 'light');
+        color: map-get($colors, "light");
         font-size: 2.4rem;
         text-decoration: none;
-        transition: all .2s;
-
+        transition: all 0.2s;
       }
 
       // menu字
 
-      .navigation__checkbox:checked~.navigation__background {
+      .navigation__checkbox:checked ~ .navigation__background {
         transform: scale(80);
         opacity: 1;
       }
 
-      .navigation__checkbox:checked~.navigation__nav {
+      .navigation__checkbox:checked ~ .navigation__nav {
         width: 100%;
         visibility: visible;
         opacity: 1;
@@ -698,15 +746,13 @@ option:checked {
         margin: auto;
 
         &::before {
-          top: -.7rem;
+          top: -0.7rem;
         }
 
         &::after {
-          top: .7rem;
+          top: 0.7rem;
         }
       }
-
-
 
       .navigation__icon,
       .navigation__icon::before,
@@ -719,25 +765,28 @@ option:checked {
 
       .navigation__icon::before,
       .navigation__icon::after {
-        content: '';
+        content: "";
         position: absolute;
         left: 0;
         transition: all 200ms;
       }
 
-
       //menu叉叉
-      .navigation__checkbox:checked+.navigation__button .navigation__icon {
+      .navigation__checkbox:checked + .navigation__button .navigation__icon {
         background-color: transparent;
         box-shadow: none;
       }
 
-      .navigation__checkbox:checked+.navigation__button .navigation__icon::before {
+      .navigation__checkbox:checked
+        + .navigation__button
+        .navigation__icon::before {
         top: 0;
         transform: rotate(135deg);
       }
 
-      .navigation__checkbox:checked+.navigation__button .navigation__icon::after {
+      .navigation__checkbox:checked
+        + .navigation__button
+        .navigation__icon::after {
         top: 0;
         transform: rotate(-135deg);
       }
