@@ -1,28 +1,28 @@
 <template>
   <div v-if="loginCheck" class="loginFirst">
-    <div>
-      <label>
-        帳號
-        <input type="text" v-model="loginMail" ref="loginMail" />
-      </label>
-      <label>
-        密碼
-        <input type="password" v-model="loginPassword" ref="loginPassword" />
-      </label>
-      <div class="loginBtn" @click="checkLogin">登入</div>
+    <div class="login_bg">
+      <div class="logo">
+        <img src="../../../public/all_images/logo_all.svg" alt="">
+      </div>
+      <div class="input_area">
+        <label for="account">
+          <img src="../../../public/all_images/backStage/user.png" alt="">
+          <input id="account" type="text" placeholder="帳號" v-model="loginMail" ref="loginMail" />
+        </label>
+        <label for="psw">
+          <img src="../../../public/all_images/backStage/key.png" alt="">
+          <input id="psw" type="password" placeholder="密碼" v-model="loginPassword" ref="loginPassword" /></label>
+
+        <div class="loginBtn" @click="checkLogin">登入</div>
+      </div>
     </div>
   </div>
 
   <div class="slotAll" v-else>
     <div class="controlWidth">
       <div class="featureBox">
-        <router-link
-          :to="i[1]"
-          v-for="(i, index) in featureAll"
-          :key="index"
-          :class="['singleFeature', { active: isActive(i) }]"
-          @click="toggleFeature(i)"
-        >
+        <router-link :to="i[1]" v-for="(i, index) in featureAll" :key="index"
+          :class="['singleFeature', { active: isActive(i) }]" @click="toggleFeature(i)">
           {{ i[0] }}
         </router-link>
       </div>
@@ -90,24 +90,110 @@ export default {
   padding: 0;
   box-sizing: border-box;
 }
+
 .loginFirst {
   height: 100vh;
   display: flex;
   width: 100%;
-  align-items: center;
   justify-content: center;
-  div {
-    .loginBtn {
-      cursor: pointer;
-      border: 1px black solid;
-      padding: 3px;
+  align-items: center;
+  background-image: url(../../../public/all_images/backStage/back_loginBg.jpg);
+  background-size: cover;
+
+  .login_bg {
+    width: 60%;
+    height: 80vh;
+    padding: 1.5rem 0;
+    border-radius: 0.5rem;
+    background-color: #7e7878a8;
+
+    .logo {
+      width: 11%;
+      margin: auto;
+
+      img {
+        width: 100%;
+        vertical-align: top;
+      }
+    }
+
+    .input_area {
+      width: 50%;
+      // margin: auto;
+      display: flex;
+      flex-direction: column;
+      margin: 1rem auto;
+      position: relative;
+      padding: 15px 0 0;
+      margin-top: 10px;
+
+      label {
+        display: flex;
+        align-items: center;
+
+        img {
+          width: 10%;
+          padding: 0.5rem;
+          vertical-align: top;
+          text-align: center;
+          font-size: 20px;
+          background-color: #ddd5b7;
+          border-radius: 0.3em 0 0 0.3em;
+        }
+      }
+
+      input {
+        width: 90%;
+        padding: 0.5rem;
+        margin: 1rem 0;
+        background: rgba(170, 195, 228, 0.742);
+        border: 2px solid transparent;
+        border-radius: 4px;
+        box-shadow: rgb(0 0 0 / 12%) 0px 1px 3px, rgb(0 0 0 / 24%) 0px 1px 2px;
+        outline: none;
+        transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+
+        &:focus {
+          border-color: #e9ae66;
+          outline: 0;
+          -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(233, 174, 102, .6);
+          box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(233, 174, 102, .6)
+        }
+
+      }
+
+      .loginBtn {
+        text-align: center;
+        width: 100%;
+        margin-left: auto;
+        cursor: pointer;
+        outline: 0;
+        border: 0;
+        padding: 0.5rem;
+        border-radius: 3rem;
+        margin: 1rem 0;
+        font-weight: 600;
+        color: #ffffff;
+        box-shadow: rgb(116, 235, 213) -2px -2px 0px 2px, rgb(159, 172, 230) 0px 0px 0px 4px, rgba(0, 0, 0, 0.05) 0px 0px 2px 7px;
+        transition: all 0.2s;
+
+        &:hover {
+          box-shadow: rgb(159, 172, 230) -2px -2px 0px 2px, rgb(116, 235, 213) 0px 0px 0px 4px, rgba(0, 0, 0, 0.05) 0px 0px 2px 7px;
+          transform: scale(1.01);
+          color: #dbdbdb;
+        }
+      }
     }
   }
 }
+
 .slotAll {
-  max-width: 1200px;
+  max-width: 100vw;
+  height: 100vh;
   margin: auto;
   padding-top: 50px;
+  // background-image: url(../../../public/all_images/backStage/watercolor-bg.jpg);
+  // background-size: cover;
 
   .controlWidth {
     width: 90%;
@@ -135,6 +221,7 @@ export default {
         border-radius: 0.5rem;
         text-align: center;
       }
+
       .active {
         background-color: map-get($colors, "accent");
         color: map-get($colors, "light");
@@ -148,18 +235,21 @@ export default {
       width: 80%;
       border-radius: 0.3rem;
       box-shadow: black 0.1em 0.1em 0.1em;
+
       .userName {
         position: absolute;
         top: -30px;
         right: 50px;
         display: flex;
         align-items: center;
+
         .logoutBtn {
           border: 1px black solid;
           padding: 3px;
           cursor: pointer;
         }
       }
+
       .allTabs {
         position: absolute;
         display: flex;
