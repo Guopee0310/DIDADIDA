@@ -1,5 +1,6 @@
 <template>
   <div class="labaAll">
+    
     <div class="containerPic" v-if="this.$store.state.questionPic">
       <img
         :src="require('../../public/all_images/laba/question_mark.jpg')"
@@ -22,6 +23,7 @@
         }"
       />
     </div>
+      
     <labaBtn @click="movePic" v-if="randomStart"></labaBtn>
     <labaResult
       v-if="!randomStart"
@@ -38,6 +40,7 @@
 <script>
 import labaBtn from "../components/labaBtn.vue";
 import labaResult from "../components/labaResult.vue";
+
 export default {
   data() {
     return {
@@ -73,39 +76,39 @@ export default {
       ],
       introArr: [
         {
-          imgSrc: require("../assets/images/dolphin_pillow.jpg"),
-          title: "小丑魚1111111",
-          post: "小丑魚生活在淺海珊瑚礁區域，以互利共生的方式與海葵相處，保護海葵免受掠食者，生活深度通常在3到15米之間。",
+          imgSrc: require("../../public/all_images/laba/bluewhale.jpg"),
+          title: "藍鯨（Blue Whale）",
+          post: "地球上最大的哺乳動物，體型龐大，以浮游生物為食，是海洋中的巨無霸。",
           point: "15",
         },
         {
-          imgSrc: require("../assets/images/dolphin_pillow.jpg"),
-          title: "小丑魚222222222",
-          post: "小丑魚生活在淺海珊瑚礁區域，以互利共生的方式與海葵相處，保護海葵免受掠食者，生活深度通常在3到15米之間。",
+          imgSrc: require("../../public/all_images/laba/bluewhale.jpg"),
+          title: "藍鯨（Blue Whale）",
+          post: "地球上最大的哺乳動物，體型龐大，以浮游生物為食，是海洋中的巨無霸。",
           point: "30",
         },
         {
-          imgSrc: require("../assets/images/dolphin_pillow.jpg"),
-          title: "小丑魚33333333",
-          post: "小丑魚生活在淺海珊瑚礁區域，以互利共生的方式與海葵相處，保護海葵免受掠食者，生活深度通常在3到15米之間。",
+          imgSrc: require("../../public/all_images/laba/jellyfish.jpg"),
+          title: "水母（Jellyfish）",
+          post: "透明的海洋生物，觸手有毒性，具有優雅的漂浮方式，是海洋中的美麗生物。",
           point: "50",
         },
         {
-          imgSrc: require("../assets/images/dolphin_pillow.jpg"),
-          title: "小丑魚444444",
-          post: "小丑魚生活在淺海珊瑚礁區域，以互利共生的方式與海葵相處，保護海葵免受掠食者，生活深度通常在3到15米之間。",
+          imgSrc: require("../../public/all_images/laba/dolphin.jpg"),
+          title: "海豚（Dolphin）",
+          post: "聰明的哺乳動物，具有獨特的笑聲，以魚類為食，是海洋中的友善伴侶。",
           point: "5",
         },
         {
-          imgSrc: require("../assets/images/dolphin_pillow.jpg"),
-          title: "小丑魚5555555",
-          post: "小丑魚生活在淺海珊瑚礁區域，以互利共生的方式與海葵相處，保護海葵免受掠食者，生活深度通常在3到15米之間。",
+          imgSrc: require("../../public/all_images/laba/sailfish.jpg"),
+          title: "帆尾魚（Sailfish）",
+          post: "身材修長的魚類，背鰭形似帆，是速度飛快的追逐者，出現在溫暖的海域。",
           point: "5",
         },
         {
-          imgSrc: require("../assets/images/dolphin_pillow.jpg"),
-          title: "小丑魚66666666",
-          post: "小丑魚生活在淺海珊瑚礁區域，以互利共生的方式與海葵相處，保護海葵免受掠食者，生活深度通常在3到15米之間。",
+          imgSrc: require("../../public/all_images/laba/whiteshark.jpg"),
+          title: "大白鯊（Great White Shark）",
+          post: "世界上最大的食肉魚，擁有強大的咬合力，是海洋中的頂級掠食者。",
           point: "5",
         },
       ],
@@ -193,6 +196,7 @@ export default {
   components: {
     labaBtn,
     labaResult,
+    
   },
 };
 </script>
@@ -201,21 +205,21 @@ export default {
   box-sizing: border-box;
 }
 .labaAll {
-  @include LQ;
+  z-index: 100;
+  // @include LQ;
   padding: 50px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-image: url("../../public/all_images/laba_bg.gif");
+  background-color: transparent;
   /* 其他背景属性，如背景颜色、大小、重复方式等可以继续添加 */
-  background-color: #f0f0f0;
   background-size: cover;
   background-repeat: no-repeat;
   .containerPic {
     width: 474px;
     height: 474px;
-    border-radius: 20px;
+    border-radius: 5px;
     // border: 5px #172c40 solid;
     // clip-path: ellipse(50% 50% at 50% 40%);
     margin: 0 auto;

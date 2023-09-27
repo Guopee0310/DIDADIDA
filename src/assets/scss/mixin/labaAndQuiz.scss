@@ -2,9 +2,10 @@
   width: 80%;
   margin: 20px auto;
   // border: 1px red solid;
-  padding: 20px;
   background-color: white;
   color: black;
-  border: 10px #172c40 solid;
+  box-sizing: border-box;
+  padding: 20px;
+  border: 4px #DC564A dashed;
   border-radius: 15px;
 }

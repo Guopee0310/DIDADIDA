@@ -99,7 +99,7 @@ export default {
                 this.optionDetailArr[i][this.optionDetailArr[i].length - 1]
               );
               this.$store.state.ticketList.push({
-                tickImg: require("../assets/images/dolphin_pillow.jpg"),
+                tickImg: require("../../public/all_images/ticket_face.jpg"),
                 tickName: `${this.optionDetailArr[i][0]}票`,
                 tickCount: `1`,
                 tickDate: this.catchDate,

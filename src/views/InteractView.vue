@@ -14,16 +14,23 @@
       <!-- <span >問卷</span>
       <span >拉霸</span> -->
     </div>
-
+    <div class="mainpart">
     <quiz2 v-if="isQuiz"></quiz2>
     <laba v-if="isLaba"></laba>
-    <button @click="this.$route.path('../')"></button>
+    </div>
+    <!-- <button @click="this.$route.path('../')"></button> -->
+    <div class="deco">
+         <memAreaBG></memAreaBG>
+    </div>
+
   </div>
+ 
 </template>
 <script>
 import quiz2 from "../components/quiz2.vue";
 import laba from "../components/laba.vue";
 import interactBtn from "../components/interactBtn.vue";
+import memAreaBG from "../components/memAreaBG.vue";
 
 export default {
   name: "product",
@@ -40,6 +47,7 @@ export default {
     laba,
     quiz2,
     interactBtn,
+    memAreaBG,
   },
   computed: {},
   watch: {},
@@ -58,9 +66,15 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+*{
+  background-color: #1D3D5B;
+}
 .interact {
+  position: relative;
   .titleAll {
+    z-index: 50;
     // border: 1px red solid;
+    background-color: #1D3D5B;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -72,6 +86,15 @@ export default {
     .titleChangeBtn {
       margin: 15px;
     }
+  }
+  .mainpart{
+    z-index: 100;
+  }
+  .deco{
+    z-index: 0;
+    width:85%;
+    position: absolute;
+    top: 60%;
   }
 }
 </style>

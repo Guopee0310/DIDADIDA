@@ -3,28 +3,42 @@
     <div class="resultPic">
       <img :src="imgSrc1" alt="" />
       <img
-        :src="require('../assets/images/dolphin_pillow.jpg')"
+        :src="require('../../public/all_images/laba/bluewhale.jpg')"
         alt=""
         v-if="this.point1 == '15'"
         class="isOpacity"
         :class="{ notOpacity: finalShow1 }"
       />
       <img
-        :src="require('../assets/images/dolphin_pillow.jpg')"
+        :src="require('../../public/all_images/laba/bluewhale.jpg')"
         alt=""
         v-else-if="this.point1 == '30'"
         class="isOpacity"
         :class="{ notOpacity: finalShow1 }"
       />
       <img
-        :src="require('../assets/images/dolphin_pillow.jpg')"
+        :src="require('../../public/all_images/laba/jellyfish.jpg')"
         alt=""
         v-else-if="this.point1 == '50'"
         class="isOpacity"
         :class="{ notOpacity: finalShow1 }"
       />
       <img
-        :src="require('../assets/images/dolphin_pillow.jpg')"
+        :src="require('../../public/all_images/laba/dolphin.jpg')"
+        alt=""
+        v-else-if="this.point1 == '5'"
+        class="isOpacity"
+        :class="{ notOpacity: finalShow1 }"
+      />
+      <img
+        :src="require('../../public/all_images/laba/sailfish.jpg')"
+        alt=""
+        v-else-if="this.point1 == '5'"
+        class="isOpacity"
+        :class="{ notOpacity: finalShow1 }"
+      />
+      <img
+        :src="require('../../public/all_images/laba/whiteshark.jpg')"
         alt=""
         v-else-if="this.point1 == '5'"
         class="isOpacity"
@@ -55,10 +69,12 @@ export default {
     return {
       imgSrcGet: "",
       imgSrcArr: [
-        "../../public/all_images/laba/bluewhale.jpg",
-        "../assets/images/dolphin_pillow.jpg",
-        "../../public/all_images/laba/jellyfish.jpg",
-        "../assets/images/dolphin_pillow.jpg",
+      "../../public/all_images/laba/bluewhale.jpg",
+      "../../public/all_images/laba/bluewhale.jpg",
+      "../../public/all_images/laba/jellyfish.jpg",
+      "../../public/all_images/laba/dolphin.jpg",
+      "../../public/all_images/laba/sailfish.jpg",
+      "../../public/all_images/laba/whiteshark.jpg",
       ],
     };
   },
@@ -99,26 +115,27 @@ export default {
 <style scoped lang="scss">
 .controlResult {
   // background-color: #fff;
-  background-color: rgb(255, 255, 255, 0.4);
+  background: linear-gradient(#3F91AB, #1D3D5B);
+  width: 65%;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px white solid;
+  border: 1px #1FB0CB solid;
   border-radius: 10px;
-  color: black;
+  color: white;
   margin: 50px 0px;
   padding: 20px;
   .isOpacity {
     opacity: 0;
-    transition: 1.5s;
+    transition: 1s;
   }
   .notOpacity {
     opacity: 1;
-    transition: 1.5s;
+    transition: 1s;
   }
   .resultPic {
-    width: 200px;
-    height: 200px;
+    width: 150px;
+    height: 150px;
     img {
       border-radius: 50%;
       width: 100%;
@@ -126,7 +143,8 @@ export default {
   }
   .resultPost {
     // border: 1px red solid;
-    padding: 0 20px;
+    padding: 0 25px;
+
 
     .postTitle {
       font-size: map-get($fontSizes, "h4");

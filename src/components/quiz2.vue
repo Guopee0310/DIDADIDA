@@ -197,7 +197,8 @@ export default {
   .singelQuestion {
     // border: 1px red solid;
     padding: 15px 0px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.16);
+    border-bottom: 2px dashed rgba(0, 0, 0, 0.16); 
+    
     div {
       .ansBtn {
         border: 1px black solid;

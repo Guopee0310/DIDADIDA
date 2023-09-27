@@ -38,7 +38,7 @@ export default {
       return "rgba(70, 130, 191,0.7)";
     },
     waveColor3() {
-      return this.$route.path === "/about" ? "#68769a" : "#fff";
+      return this.$route.path === "/about" ? "#68769a" : (this.$route.path === "/interact" ? "#1D3D5B" : "#fff");
     },
     h1Name() {
       return this.$route.path == "/product"
