@@ -115,7 +115,7 @@ export default {
 <style scoped lang="scss">
 .controlResult {
   // background-color: #fff;
-  background: linear-gradient(#3F91AB, #1D3D5B);
+  background: linear-gradient(45deg,#1D3D5B ,#1D3D5B,#3F91AB,);
   width: 65%;
   display: flex;
   align-items: center;
