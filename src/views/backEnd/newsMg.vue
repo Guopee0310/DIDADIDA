@@ -25,18 +25,23 @@
                     <label class="check"><input type="checkbox" v-model="item.select" /></label>
                     <li>
                         <div class="img">
-                            <img class="image" :src="item.imageSrc" alt="" style="max-width: 520px; max-height: 400px;">
+                            <img class="image" :src="item.imageSrc" alt="">
+
+                            <div class="file_btn">
+                                <input type="file" @change="fileChange(index, $event,item)" ref="fileInput" :disabled="item[0]">
+                            </div>
                         </div>
-                        <div class="file_btn"><input type="file" @change="fileChange(index, $event)" ref="fileInput"
-                                :disabled="item[0]"><button>新增圖片<i class="fa-solid fa-images"
-                                    style="color: #5e7fb0;"></i></button></div>
+                        <p>{{ item.imageName }}</p>
+
                     </li>
                     <li>
                         <form action="test.aspx" method="get">
-                            <textarea name="" id="" placeholder="標題" class="news_name" :disabled="item[0]">{{item.title}}</textarea>
+                            <textarea name="" id="" placeholder="標題" class="news_name"
+                                :disabled="item[0]">{{ item.title }}</textarea>
                         </form>
                         <form action="test.aspx" method="get">
-                            <textarea name="" id="" placeholder="內容" class="news_txt" :disabled="item[0]">{{item.content}}</textarea>
+                            <textarea name="" id="" placeholder="內容" class="news_txt"
+                                :disabled="item[0]">{{ item.content }}</textarea>
                         </form>
                     </li>
                     <li>
@@ -53,7 +58,7 @@
                             <div class="radio_onOff">
                                 <label :for="'on_' + index">
                                     <input type="radio" :id="'on_' + index" :name="'select_onOff_' + index"
-                                        :disabled="item[0]"  checked/>
+                                        :disabled="item[0]" checked />
                                     上架
                                 </label>
                                 <label :for="'off_' + index">
@@ -86,8 +91,9 @@ export default {
                 {
                     change_txt: true,
                     imageSrc: require("../../../public/all_images/news/beach_concert.jpg"),
+                    imageName: "beach_concert.jpg",
                     title: "海灘跨年演唱會",
-                    content:  "來自海灘的呼喚！讓我們一同迎接新的一年，沐浴在星光下，享受音樂和激情的交織。2022年的跨年夜，我們將在沙灘上舉行一場獨一無二的演唱會，為這個特殊的時刻帶來音樂的饗宴。",
+                    content: "來自海灘的呼喚！讓我們一同迎接新的一年，沐浴在星光下，享受音樂和激情的交織。2022年的跨年夜，我們將在沙灘上舉行一場獨一無二的演唱會，為這個特殊的時刻帶來音樂的饗宴。",
                     date: "2022.12.31",
                     category: "活動",
                     isPublished: true,
@@ -103,6 +109,7 @@ export default {
             this.allBar.push({
                 change_txt: false,
                 imageSrc: "",      // 圖片路徑
+                imageName: "",
                 title: "",      // 標題
                 content: "",    // 内容
                 date: currentDate, // 上傳時間
@@ -123,16 +130,23 @@ export default {
             const day = today.getDate();
             return `${year}.${month.toString().padStart(2, '0')}.${day.toString().padStart(2, '0')}`;
         },
-        fileChange(index, event) {
+
+        fileChange(index, event, item) {
             const file = event.target.files[0];
-            const reader = new FileReader();
-            reader.addEventListener('load', () => {
-                this.allBar[index].imageSrc = reader.result; // 根据索引设置图像数据URL
-            });
             if (file) {
+                item.imageName = file.name;
+                // item.fileType = file.type;
+                // item.fileSize = file.size;
+                // item.lastModified = file.lastModified;
+
+                const reader = new FileReader();
+                reader.addEventListener('load', () => {
+                    this.allBar[index].imageSrc = reader.result;
+                });
                 reader.readAsDataURL(file);
             }
         },
+
         updateNews(index, e) {
             if (e.target.innerText == "確認") {
                 this.allBar[index][0] = true;
@@ -206,7 +220,9 @@ export default {
                 li {
                     &:nth-of-type(1) {
                         width: 30%;
-
+                        p{
+                            width: 60%;
+                        }
                     }
 
                     &:nth-of-type(2) {
@@ -228,7 +244,7 @@ export default {
                 }
 
                 textarea {
-                    resize: none;
+                    // resize: none;
                     width: 90%;
                     box-sizing: border-box;
                     overflow: auto;
@@ -244,19 +260,29 @@ export default {
                     border: 1px solid #000;
                     position: relative;
 
-                    .fa-solid {
-                        top: 50%;
-                        left: 50%;
-                        transform: translate(-50%, -50%);
-                        position: absolute;
-
-                    }
-
                     .image {
                         width: 100%;
                         height: 100%;
                         position: absolute;
                         inset: 0;
+
+                    }
+
+                    .file_btn {
+                        width: 100%;
+                        height: 100%;
+                        position: relative;
+
+                        input[type="file"] {
+                            width: 100%;
+                            height: 100%;
+                            position: absolute;
+                            inset: 0;
+                            opacity: 0;
+                            font-size: 0;
+                            cursor: pointer;
+                        }
+
                     }
                 }
 
@@ -272,18 +298,4 @@ export default {
         }
     }
 }
-
-.file_btn {
-    width: 60%;
-    position: relative;
-
-    input[type="file"] {
-        opacity: 0;
-    }
-
-    button {
-        pointer-events: none;
-        position: absolute;
-        inset: 0;
-    }
-}</style>
+</style>

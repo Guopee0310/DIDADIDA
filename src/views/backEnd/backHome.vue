@@ -158,7 +158,7 @@ export default {
 
         img {
           width: 11%;
-          padding: 0.5rem;
+          padding: 3%;
           vertical-align: top;
           text-align: center;
           background-color: rgb(78, 137, 126);
@@ -168,7 +168,7 @@ export default {
 
       input {
         width: 90%;
-        padding: 0.5rem;
+        padding: 2%;
         margin: 1rem 0;
         background: rgba(170, 195, 228, 0.742);
         border: 2px solid transparent;

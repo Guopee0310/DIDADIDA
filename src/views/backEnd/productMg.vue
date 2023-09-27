@@ -5,7 +5,7 @@
                 <button>+新增項目</button>
             </div>
             <div class="search">
-                <input type="searchbar" placeholder="商品查詢"><i class="fa-solid fa-magnifying-glass"></i>
+                <input type="searchbar" placeholder="商品查詢"><button>搜尋</button>
             </div>
         </div>
         <div class="prod_content">
@@ -24,10 +24,12 @@
                     <li>
                         <div class="img">
                             <img class="image" :src="item.imageSrc" alt="">
+
+                            <div class="file_btn">
+                                <input type="file" @change="fileChange(index, $event,item)" ref="fileInput" :disabled="item[0]">
+                            </div>
                         </div>
-                        <div class="file_btn"><input type="file" @change="fileChange(index, $event)" ref="fileInput"
-                                :disabled="item[0]"><button>新增圖片<i class="fa-solid fa-images"
-                                    style="color: #5e7fb0;"></i></button></div>
+                        <p>{{ item.imageName }}</p>
                     </li>
                     <!-- 種類 -->
                     <li>
@@ -48,11 +50,6 @@
                     </li>
                     <!-- 價格 -->
                     <li>
-                        <!-- <form action="test.aspx" method="get">
-                            <textarea name="" id="" placeholder="標題" class="prod_name"
-                                :disabled="item[0]">{{ item.price }}</textarea>
-                                NT
-                        </form> -->
                         <label for="price">
                             <input type="number" :disabled="item[0]" v-model="item.price">NT
                         </label>
@@ -86,6 +83,7 @@ export default {
                 {
                     select:false,
                     change_txt: true,
+                    imageName:"dolphin_doll.png",
                     imageSrc: require("../../../src/assets/images/dolphin_doll.png"),
                     category: "玩偶",
                     prod_name: "超可愛海豚寶寶玩偶",
@@ -102,6 +100,7 @@ export default {
             const currentDate = this.getCurrentDate();
             this.allBar.push({
                 change_txt: true,
+                imageName:"",
                 imageSrc: "",
                 category: "",
                 prod_name: "",
@@ -123,13 +122,18 @@ export default {
             return `${year}.${month.toString().padStart(2, '0')}.${day.toString().padStart(2, '0')}`;
         },
 
-        fileChange(index, event) {
+        fileChange(index, event, item) {
             const file = event.target.files[0];
-            const reader = new FileReader();
-            reader.addEventListener('load', () => {
-                this.allBar[index].imageSrc = reader.result; // 根據索引設置圖像數據URL
-            });
             if (file) {
+                item.imageName = file.name;
+                // item.fileType = file.type;
+                // item.fileSize = file.size;
+                // item.lastModified = file.lastModified;
+
+                const reader = new FileReader();
+                reader.addEventListener('load', () => {
+                    this.allBar[index].imageSrc = reader.result;
+                });
                 reader.readAsDataURL(file);
             }
         },
@@ -168,10 +172,17 @@ export default {
 .prod_all {
     .select {
         display: flex;
-
-        >div {
-            margin: 0 1em;
+        justify-content: space-between;
+        .search{
+            input[type="searchbar"]{
+                border-radius: 1rem;
+                outline: none;
+                border: 1px solid #b7b7b7;
+                padding: 3px;
+                margin-right: 10px;
+            }
         }
+
     }
 
     .prod_content {
@@ -205,12 +216,12 @@ export default {
 
                 li {
                     &:nth-of-type(1) {
-                        width: 18%;
+                        width: 15%;
 
                     }
 
                     &:nth-of-type(2) {
-                        width: 13%;
+                        width: 16%;
                         text-align: center;
                     }
 
@@ -236,7 +247,7 @@ export default {
                 }
 
                 textarea {
-                    resize: none;
+                    // resize: none;
                     width: 90%;
                     box-sizing: border-box;
                     overflow: auto;
@@ -244,24 +255,34 @@ export default {
 
 
                 .img {
-                    width: 100%;
+                    width: 80%;
                     height: 100px;
                     border: 1px solid #000;
                     position: relative;
-
-                    .fa-solid {
-                        top: 50%;
-                        left: 50%;
-                        transform: translate(-50%, -50%);
-                        position: absolute;
-
-                    }
 
                     .image {
                         width: 100%;
                         height: 100%;
                         position: absolute;
                         inset: 0;
+
+                    }
+
+                    .file_btn {
+                        width: 100%;
+                        height: 100%;
+                        position: relative;
+
+                        input[type="file"] {
+                            width: 100%;
+                            height: 100%;
+                            position: absolute;
+                            inset: 0;
+                            opacity: 0;
+                            font-size: 0;
+                            cursor: pointer;
+                        }
+
                     }
                 }
 
@@ -278,18 +299,5 @@ export default {
     }
 }
 
-.file_btn {
-    width: 100%;
-    position: relative;
 
-    input[type="file"] {
-        opacity: 0;
-    }
-
-    button {
-        pointer-events: none;
-        position: absolute;
-        inset: 0;
-    }
-}
 </style>
