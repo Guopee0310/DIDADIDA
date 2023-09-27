@@ -188,17 +188,17 @@ export default {
     filterNewsByTime(data) {
       this.timeOption = data;
       if (data === "由新到舊") {
-        this.filteredNews.sort((a, b) => new Date(b.time) - new Date(a.time));
+        this.filteredNews.sort((a, b) => new Date(b.time).getTime() - new Date(a.time).getTime());
         this.currentPage = 1;
       } else if (data === "由舊到新") {
-        this.filteredNews.sort((a, b) => new Date(a.time) - new Date(b.time));
+        this.filteredNews.sort((a, b) => new Date(a.time).getTime() - new Date(b.time).getTime());
         this.currentPage = 1;
       }
       this.showPage = false;
       setTimeout(() => {
         this.showPage = true;
       }, 100);
-      // 重置当前页为第一页
+      // 重置當前頁爲第一頁
       this.updatePage(1);
     },
     searchClick(data) {
@@ -288,7 +288,7 @@ export default {
 
     .info {
       width: 8rem;
-      height: 3.1rem;
+      height: 3.2rem;
       position: absolute;
       bottom: 0;
       right: -25px;
@@ -297,7 +297,7 @@ export default {
       background-repeat: no-repeat;
       background-position: right;
       color: #2d0c0c;
-      font-size: 0.9rem;
+      font-size: 0.8rem;
       text-align: center;
       padding-top: 1.5rem;
       z-index: 4;
