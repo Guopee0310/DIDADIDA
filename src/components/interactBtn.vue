@@ -28,7 +28,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 // $fuschia: #ff0081;
-$fuschia: #172c40;
+$fuschia: #1FB0CB;
 $button-bg: $fuschia;
 $button-text-color: #fff;
 $baby-blue: #f8faff;
@@ -55,7 +55,7 @@ body {
   cursor: pointer;
   position: relative;
   transition: transform ease-in 0.1s, box-shadow ease-in 0.25s;
-  box-shadow: 0 2px 25px #a7cbec;
+  box-shadow: transparent;
 
   &:focus {
     outline: 0;
