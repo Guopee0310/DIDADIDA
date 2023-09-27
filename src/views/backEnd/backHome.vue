@@ -6,11 +6,11 @@
       </div>
       <div class="input_area">
         <label for="account">
-          <img src="../../../public/all_images/backStage/user.png" alt="">
+          <img src="../../../public/all_images/backStage/user-icon.png" alt="">
           <input id="account" type="text" placeholder="帳號" v-model="loginMail" ref="loginMail" />
         </label>
         <label for="psw">
-          <img src="../../../public/all_images/backStage/key.png" alt="">
+          <img src="../../../public/all_images/backStage/psw-icon.png" alt="">
           <input id="psw" type="password" placeholder="密碼" v-model="loginPassword" ref="loginPassword" /></label>
 
         <div class="loginBtn" @click="checkLogin">登入</div>
@@ -19,19 +19,20 @@
   </div>
 
   <div class="slotAll" v-else>
-    <div class="controlWidth">
-      <div class="featureBox">
-        <router-link :to="i[1]" v-for="(i, index) in featureAll" :key="index"
-          :class="['singleFeature', { active: isActive(i) }]" @click="toggleFeature(i)">
-          {{ i[0] }}
-        </router-link>
-      </div>
-      <div class="differentBox">
-        <div class="userName">
+    <div class="userName">
           <div>User:Super</div>
           <div class="logoutBtn" @click="logoutToHome">登出</div>
         </div>
-        <router-view></router-view>
+    <div class="controlWidth">
+      <div class="featureBox">
+        <router-link :to="i[1]" v-for="(i, index) in featureAll" :key="index"
+          :class="['singleFeature', { active: isActive(index) }]" @click="toggleFeature(index)">
+          {{ i[0] }}
+        </router-link>
+      </div>
+      
+      <div class="differentBox">
+        <div><router-view></router-view></div>
       </div>
     </div>
   </div>
@@ -46,7 +47,7 @@ export default {
       loginPassword: 123,
       loginCheck: true,
       featureAll: [
-        ["首頁輪播圖片管理", "/backHome/homePicMg", false],
+        ["首頁輪播圖片管理", "/backHome/homePicMg", true],
         ["最新消息管理", "/backHome/newsMg", false],
         ["會員管理", "/backHome/memberMg", false],
         ["訂單管理", "/backHome/orderMg", false],
@@ -55,9 +56,10 @@ export default {
         ["智能小幫手", "/backHome/helperMg", false],
         ["互動", "/backHome/gamesMg", false],
       ],
-      activeIndex: -1,
+      activeIndex: 0,
     };
   },
+
   methods: {
     logoutToHome() {
       this.$router.push("/backHome");
@@ -69,16 +71,18 @@ export default {
         this.$refs.loginPassword.value == this.loginPassword
       ) {
         this.loginCheck = false;
+        this.$router.push({ name: 'homePicMg' });
       }
     },
     toggleFeature(index) {
       if (this.activeIndex === index) {
-        this.activeIndex = -1;
+        this.activeIndex = 0;
       } else {
         this.activeIndex = index;
       }
     },
     isActive(index) {
+      console.log(this.activeIndex);
       return this.activeIndex === index;
     },
   },
@@ -91,6 +95,7 @@ export default {
   box-sizing: border-box;
 }
 
+//後台登入頁面
 .loginFirst {
   height: 100vh;
   display: flex;
@@ -105,7 +110,7 @@ export default {
     height: 80vh;
     padding: 1.5rem 0;
     border-radius: 0.5rem;
-    background-color: #7e7878a8;
+    background-color: #878181a8;
 
     .logo {
       width: 11%;
@@ -132,12 +137,11 @@ export default {
         align-items: center;
 
         img {
-          width: 10%;
+          width: 11%;
           padding: 0.5rem;
           vertical-align: top;
           text-align: center;
-          font-size: 20px;
-          background-color: #ddd5b7;
+          background-color: rgb(78, 137, 126);
           border-radius: 0.3em 0 0 0.3em;
         }
       }
@@ -151,7 +155,7 @@ export default {
         border-radius: 4px;
         box-shadow: rgb(0 0 0 / 12%) 0px 1px 3px, rgb(0 0 0 / 24%) 0px 1px 2px;
         outline: none;
-        transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+        transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
 
         &:focus {
           border-color: #e9ae66;
@@ -187,68 +191,79 @@ export default {
   }
 }
 
+//後台頁面
 .slotAll {
   max-width: 100vw;
   height: 100vh;
   margin: auto;
-  padding-top: 50px;
-  // background-image: url(../../../public/all_images/backStage/watercolor-bg.jpg);
-  // background-size: cover;
+  padding-top: 10px;
+  background-image: url(../../../public/all_images/backStage/watercolor-4116932_1920.png);
+  background-size: cover;
 
   .controlWidth {
     width: 90%;
+    margin: 1rem auto;
     display: flex;
     justify-content: space-between;
-    margin: 0 auto;
 
     .featureBox {
       width: 15%;
       border-radius: 1rem;
-      background-color: map-get($colors, "h2Blue");
+      background-color: rgb(255, 255, 255);
       display: flex;
       flex-direction: column;
       height: fit-content;
-      padding: 20px;
       box-shadow: black 0.1em 0.1em 0.1em;
 
       .singleFeature {
-        background-color: map-get($colors, "mainColor");
         cursor: pointer;
-        color: map-get($colors, "light");
+        color: #000;
         font-weight: 600;
         padding: 10px 5px;
         margin: 5px 0;
-        border-radius: 0.5rem;
+        border-radius: 1rem;
         text-align: center;
       }
 
       .active {
-        background-color: map-get($colors, "accent");
-        color: map-get($colors, "light");
+        box-shadow: rgb(116, 235, 213) -2px -2px 0px 2px, rgb(159, 172, 230) 0px 0px 0px 4px, rgba(0, 0, 0, 0.05) 0px 0px 2px 7px;
+        transition: all 0.5s;
+        background-color: #37838fc9;
+        color: #fff5e9;
       }
     }
 
     .differentBox {
       padding: 2em;
-      position: relative;
-      background-color: map-get($colors, "bgc");
+      overflow: auto;
+      background-color: #ffffffc6;
       width: 80%;
+      height: 80vh;
       border-radius: 0.3rem;
-      box-shadow: black 0.1em 0.1em 0.1em;
+      box-shadow: 3px 3px 6px 0px #CCDBE8 inset, -3px -3px 6px 1px rgba(255, 255, 255, 0.5) inset;
 
-      .userName {
-        position: absolute;
-        top: -30px;
-        right: 50px;
-        display: flex;
-        align-items: center;
-
-        .logoutBtn {
-          border: 1px black solid;
-          padding: 3px;
-          cursor: pointer;
-        }
+      &::-webkit-scrollbar-track {
+        -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+        background-color: #F5F5F5;
+        border-radius: 10px;
       }
+
+      &::-webkit-scrollbar {
+        width: 10px;
+        background-color: #F5F5F5;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        background-image: -webkit-gradient(linear,
+            left bottom,
+            left top,
+            color-stop(0.44, rgb(122, 153, 217)),
+            color-stop(0.72, rgb(73, 125, 189)),
+            color-stop(0.86, rgb(28, 58, 148)));
+      }
+
+     
 
       .allTabs {
         position: absolute;
@@ -267,4 +282,32 @@ export default {
     }
   }
 }
+.userName {
+        width: 90%;
+        margin: auto;
+        display: flex;
+        align-items: center;
+        justify-content: end;
+
+
+        .logoutBtn {
+          margin-left: 1rem;
+          width: 8rem;
+          outline: none;
+          color: #616467;
+          border: 1px solid transparent;
+          background-color: transparent;
+          box-shadow: inset 0 0 0 2px #616467;
+          padding: 0.5rem;
+          border-radius: 5rem;
+          text-align: center;
+          cursor: pointer;
+          transition: all .3s;
+
+          &:hover {
+            color: #fff;
+            background-color: #616467;
+          }
+        }
+      }
 </style>
