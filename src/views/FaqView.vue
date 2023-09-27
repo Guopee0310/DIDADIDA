@@ -274,7 +274,7 @@ export default {
   margin-bottom: 50px;
   border-radius: 10px;
   border: 2px solid map-get($colors, "secondary");
-  cursor:pointer;
+  cursor: pointer;
 }
 
 .card-item-header a {
@@ -299,7 +299,7 @@ export default {
   padding: 0 50px;
   font-size: map-get($fontSizes, "a");
   line-height: 21px;
-  transition: 1s;
+
   opacity: 0;
   border: 2px solid map-get($colors, "secondary");
   // margin-bottom: 50px;
@@ -309,9 +309,9 @@ export default {
 }
 
 .showOpacity {
-  transition: 1s;
+  transition: opacity 0.8s;
   opacity: 1;
-  padding:20px 30px;
+  padding: 20px 30px;
 }
 
 .card-item-body p {
@@ -366,9 +366,9 @@ export default {
     margin-bottom: 30px;
   }
   .showOpacity {
-  transition: 1s;
-  opacity: 1;
-  padding:20px 30px;
-}
+    transition: 1s;
+    opacity: 1;
+    padding: 20px 30px;
+  }
 }
 </style>
