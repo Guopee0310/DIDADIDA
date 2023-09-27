@@ -256,6 +256,7 @@ export default {
         padding: 20p;
         margin: 40px 10px;
         border: 0;
+        cursor:pointer ;
 
         button {
           width: 150px;
