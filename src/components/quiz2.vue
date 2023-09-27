@@ -1,54 +1,58 @@
 <template>
   <div class="quizAll">
     <div class="borderdeco">
-    <div
-      v-for="(i, index) in randomQuestions"
-      :key="index"
-      class="singelQuestion"
-      :class="{ showWrong: i.isWrong }"
-    >
-      <div class="questionTitle">0{{ indexPlus(index) }}</div>
+      <div
+        v-for="(i, index) in randomQuestions"
+        :key="index"
+        class="singelQuestion"
+      >
+        <div
+          class="questionTitle"
+          :style="{ backgroundColor: i.isWrong ? '#ff0000' : '#1fb0cb' }"
+        >
+          0{{ indexPlus(index) }}
+        </div>
 
-    <div class="questionarrange"> 
-        <div class="questionPost">{{ i.question }}</div>
+        <div class="questionarrange">
+          <div class="questionPost">{{ i.question }}</div>
 
-        <div>
-          <label class="testPoition">
-            <input
-              type="radio"
-              :name="i.index"
-              @click="pushInArr(i.index, i.ans, '是')"
-              :disabled="isDisabled"
-            />
-            是
-          </label>
-          <label class="testPoition">
-            <input
-              type="radio"
-              :name="i.index"
-              @click="pushInArr(i.index, i.ans, '否')"
-              :disabled="isDisabled"
-            />
-            否
-          </label>
-          <!-- <div class="ansBtn" @click="pushInArr(i.index, i.ans, $event)">是</div>
+          <div>
+            <label class="testPoition">
+              <input
+                type="radio"
+                :name="i.index"
+                @click="pushInArr(i.index, i.ans, '是')"
+                :disabled="isDisabled"
+              />
+              是
+            </label>
+            <label class="testPoition">
+              <input
+                type="radio"
+                :name="i.index"
+                @click="pushInArr(i.index, i.ans, '否')"
+                :disabled="isDisabled"
+              />
+              否
+            </label>
+            <!-- <div class="ansBtn" @click="pushInArr(i.index, i.ans, $event)">是</div>
         <div class="ansBtn" @click="pushInArr(i.index, i.ans, $event)">否</div> -->
+          </div>
         </div>
       </div>
-    </div>
 
-    <div @click="complete" class="cmpBtn" v-if="!showResult">完成問卷</div>
-    <div
-      v-if="notComplete"
-      class="notCmpBtn"
-      :class="{ notCmpBtnFrames: moveSideKeyFrames }"
-    >
-      尚未完成
-      <!-- <span @click="notComplete = false">X</span> -->
-    </div>
+      <div @click="complete" class="cmpBtn" v-if="!showResult">完成問卷</div>
+      <div
+        v-if="notComplete"
+        class="notCmpBtn"
+        :class="{ notCmpBtnFrames: moveSideKeyFrames }"
+      >
+        尚未完成
+        <!-- <span @click="notComplete = false">X</span> -->
+      </div>
 
-    <gameResult v-if="showResult"></gameResult>
-  </div>
+      <gameResult v-if="showResult"></gameResult>
+    </div>
   </div>
 </template>
 
@@ -199,17 +203,16 @@ export default {
     border-radius: 5px;
     padding: 10px;
   }
-  .borderdeco{
-    border: 4px #DC564A dashed;
+  .borderdeco {
+    border: 4px #dc564a dashed;
     border-radius: 15px;
     padding: 20px;
   }
   .singelQuestion {
     // border: 1px red solid;
     padding: 15px 0px;
-    border-bottom: 2px dashed rgba(0, 0, 0, 0.16); 
-   
-    
+    border-bottom: 2px dashed rgba(0, 0, 0, 0.16);
+
     div {
       .ansBtn {
         border: 1px black solid;
@@ -217,33 +220,30 @@ export default {
         height: 30px;
       }
     }
-    .title{
 
-}
     .questionTitle {
       font-size: map-get($fontSizes, "h4");
       font-weight: bold;
       border-radius: 50%;
-      background-color: #1FB0CB;
+
       color: white;
       text-align: center;
       position: relative;
       width: 40px;
       height: 40px;
       align-items: center;
-      line-height:  40px;
-      
+      line-height: 40px;
     }
-//     .questionTitle:before {
-//   content: "";
-//   position: absolute;
-//   top: -90%;
-//   left: 50%;
-//   border: 20px solid transparent;
-//   border-bottom: 40px solid #1FB0CB;;
-//   transform: translateX(-50%);
-//   z-index: 49;
-// }
+    //     .questionTitle:before {
+    //   content: "";
+    //   position: absolute;
+    //   top: -90%;
+    //   left: 50%;
+    //   border: 20px solid transparent;
+    //   border-bottom: 40px solid #1FB0CB;;
+    //   transform: translateX(-50%);
+    //   z-index: 49;
+    // }
     .questionPost {
       font-size: 18px;
       letter-spacing: 2px;
@@ -264,7 +264,6 @@ export default {
     @include selectBtn;
     // border: 1px black solid;
     cursor: pointer;
-   
 
     width: 180px;
     height: 40px;

@@ -28,7 +28,8 @@ export default {
 </script>
 <style lang="scss" scoped>
 // $fuschia: #ff0081;
-$fuschia: #1FB0CB;
+// $fuschia: #1fb0cb;
+$fuschia: #707e81;
 $button-bg: $fuschia;
 $button-text-color: #fff;
 $baby-blue: #f8faff;
