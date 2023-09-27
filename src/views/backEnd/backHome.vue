@@ -6,12 +6,27 @@
       </div>
       <div class="input_area">
         <label for="account">
-          <img src="../../../public/all_images/backStage/user-icon.png" alt="">
-          <input id="account" type="text" placeholder="帳號" v-model="loginMail" ref="loginMail" />
+          <img
+            src="../../../public/all_images/backStage/user-icon.png"
+            alt=""
+          />
+          <input
+            id="account"
+            type="text"
+            placeholder="帳號"
+            v-model="loginMail"
+            ref="loginMail"
+          />
         </label>
         <label for="psw">
-          <img src="../../../public/all_images/backStage/psw-icon.png" alt="">
-          <input id="psw" type="password" placeholder="密碼" v-model="loginPassword" ref="loginPassword" /></label>
+          <img src="../../../public/all_images/backStage/psw-icon.png" alt="" />
+          <input
+            id="psw"
+            type="password"
+            placeholder="密碼"
+            v-model="loginPassword"
+            ref="loginPassword"
+        /></label>
 
         <div class="loginBtn" @click="checkLogin">登入</div>
       </div>
@@ -20,17 +35,22 @@
 
   <div class="slotAll" v-else>
     <div class="userName">
-          <div>User:Super</div>
-          <div class="logoutBtn" @click="logoutToHome">登出</div>
-        </div>
+      <div>User:Super</div>
+      <div class="logoutBtn" @click="logoutToHome">登出</div>
+    </div>
     <div class="controlWidth">
       <div class="featureBox">
-        <router-link :to="i[1]" v-for="(i, index) in featureAll" :key="index"
-          :class="['singleFeature', { active: isActive(index) }]" @click="toggleFeature(index)">
+        <router-link
+          :to="i[1]"
+          v-for="(i, index) in featureAll"
+          :key="index"
+          :class="['singleFeature', { active: $route.path === i[1] }]"
+          @click="toggleFeature(index)"
+        >
           {{ i[0] }}
         </router-link>
       </div>
-      
+
       <div class="differentBox">
         <div><router-view></router-view></div>
       </div>
@@ -71,7 +91,7 @@ export default {
         this.$refs.loginPassword.value == this.loginPassword
       ) {
         this.loginCheck = false;
-        this.$router.push({ name: 'homePicMg' });
+        this.$router.push({ name: "homePicMg" });
       }
     },
     toggleFeature(index) {
@@ -155,7 +175,7 @@ export default {
         border-radius: 4px;
         box-shadow: rgb(0 0 0 / 12%) 0px 1px 3px, rgb(0 0 0 / 24%) 0px 1px 2px;
         outline: none;
-        transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+        transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 
         &:focus {
           border-color: #e9ae66;
@@ -231,7 +251,9 @@ export default {
       }
 
       .active {
-        box-shadow: rgb(116, 235, 213) -2px -2px 0px 2px, rgb(159, 172, 230) 0px 0px 0px 4px, rgba(0, 0, 0, 0.05) 0px 0px 2px 7px;
+        box-shadow: rgb(116, 235, 213) -2px -2px 0px 2px,
+          rgb(159, 172, 230) 0px 0px 0px 4px,
+          rgba(0, 0, 0, 0.05) 0px 0px 2px 7px;
         transition: all 0.5s;
         background-color: #37838fc9;
         color: #fff5e9;
@@ -245,30 +267,31 @@ export default {
       width: 80%;
       height: 80vh;
       border-radius: 0.3rem;
-      box-shadow: 3px 3px 6px 0px #CCDBE8 inset, -3px -3px 6px 1px rgba(255, 255, 255, 0.5) inset;
+      box-shadow: 3px 3px 6px 0px #ccdbe8 inset,
+        -3px -3px 6px 1px rgba(255, 255, 255, 0.5) inset;
 
       &::-webkit-scrollbar-track {
         -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-        background-color: #F5F5F5;
+        background-color: #f5f5f5;
         border-radius: 10px;
       }
 
       &::-webkit-scrollbar {
         width: 10px;
-        background-color: #F5F5F5;
+        background-color: #f5f5f5;
       }
 
       &::-webkit-scrollbar-thumb {
         border-radius: 10px;
-        background-image: -webkit-gradient(linear,
-            left bottom,
-            left top,
-            color-stop(0.44, rgb(122, 153, 217)),
-            color-stop(0.72, rgb(73, 125, 189)),
-            color-stop(0.86, rgb(28, 58, 148)));
+        background-image: -webkit-gradient(
+          linear,
+          left bottom,
+          left top,
+          color-stop(0.44, rgb(122, 153, 217)),
+          color-stop(0.72, rgb(73, 125, 189)),
+          color-stop(0.86, rgb(28, 58, 148))
+        );
       }
-
-     
 
       .allTabs {
         position: absolute;
@@ -288,31 +311,30 @@ export default {
   }
 }
 .userName {
-        width: 90%;
-        margin: auto;
-        display: flex;
-        align-items: center;
-        justify-content: end;
+  width: 90%;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: end;
 
+  .logoutBtn {
+    margin-left: 1rem;
+    width: 8rem;
+    outline: none;
+    color: #616467;
+    border: 1px solid transparent;
+    background-color: transparent;
+    box-shadow: inset 0 0 0 2px #616467;
+    padding: 0.5rem;
+    border-radius: 5rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s;
 
-        .logoutBtn {
-          margin-left: 1rem;
-          width: 8rem;
-          outline: none;
-          color: #616467;
-          border: 1px solid transparent;
-          background-color: transparent;
-          box-shadow: inset 0 0 0 2px #616467;
-          padding: 0.5rem;
-          border-radius: 5rem;
-          text-align: center;
-          cursor: pointer;
-          transition: all .3s;
-
-          &:hover {
-            color: #fff;
-            background-color: #616467;
-          }
-        }
-      }
+    &:hover {
+      color: #fff;
+      background-color: #616467;
+    }
+  }
+}
 </style>
