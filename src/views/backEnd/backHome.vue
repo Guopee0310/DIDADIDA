@@ -2,16 +2,37 @@
   <div v-if="loginCheck" class="loginFirst">
     <div class="login_bg">
       <div class="logo">
-        <img src="../../../public/all_images/logo_all.svg" alt="">
+        <img src="../../../public/all_images/logo_all.svg" alt="" />
       </div>
       <div class="input_area">
         <label for="account">
+<<<<<<< HEAD
           <img src="../../../public/all_images/backStage/user-icon.png" alt="">
           <input id="account" type="text" placeholder="帳號" v-model="loginMail" ref="loginMail" />
         </label>
         <label for="psw">
           <img src="../../../public/all_images/backStage/psw-icon.png" alt="">
           <input id="psw" type="password" placeholder="密碼" v-model="loginPassword" ref="loginPassword" /></label>
+=======
+          <img src="../../../public/all_images/backStage/user.png" alt="" />
+          <input
+            id="account"
+            type="text"
+            placeholder="帳號"
+            v-model="loginMail"
+            ref="loginMail"
+          />
+        </label>
+        <label for="psw">
+          <img src="../../../public/all_images/backStage/key.png" alt="" />
+          <input
+            id="psw"
+            type="password"
+            placeholder="密碼"
+            v-model="loginPassword"
+            ref="loginPassword"
+        /></label>
+>>>>>>> host
 
         <div class="loginBtn" @click="checkLogin">登入</div>
       </div>
@@ -19,7 +40,24 @@
   </div>
 
   <div class="slotAll" v-else>
+<<<<<<< HEAD
     <div class="userName">
+=======
+    <div class="controlWidth">
+      <div class="featureBox">
+        <router-link
+          :to="i[1]"
+          v-for="(i, index) in featureAll"
+          :key="index"
+          :class="['singleFeature', { active: $route.path === i[1] }]"
+          @click="toggleFeature(i)"
+        >
+          {{ i[0] }}
+        </router-link>
+      </div>
+      <div class="differentBox">
+        <div class="userName">
+>>>>>>> host
           <div>User:Super</div>
           <div class="logoutBtn" @click="logoutToHome">登出</div>
         </div>
@@ -71,7 +109,11 @@ export default {
         this.$refs.loginPassword.value == this.loginPassword
       ) {
         this.loginCheck = false;
+<<<<<<< HEAD
         this.$router.push({ name: 'homePicMg' });
+=======
+        this.$router.push("/backHome/homePicMg");
+>>>>>>> host
       }
     },
     toggleFeature(index) {
@@ -155,15 +197,20 @@ export default {
         border-radius: 4px;
         box-shadow: rgb(0 0 0 / 12%) 0px 1px 3px, rgb(0 0 0 / 24%) 0px 1px 2px;
         outline: none;
+<<<<<<< HEAD
         transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+=======
+        transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+>>>>>>> host
 
         &:focus {
           border-color: #e9ae66;
           outline: 0;
-          -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(233, 174, 102, .6);
-          box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(233, 174, 102, .6)
+          -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075),
+            0 0 8px rgba(233, 174, 102, 0.6);
+          box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075),
+            0 0 8px rgba(233, 174, 102, 0.6);
         }
-
       }
 
       .loginBtn {
@@ -178,11 +225,15 @@ export default {
         margin: 1rem 0;
         font-weight: 600;
         color: #ffffff;
-        box-shadow: rgb(116, 235, 213) -2px -2px 0px 2px, rgb(159, 172, 230) 0px 0px 0px 4px, rgba(0, 0, 0, 0.05) 0px 0px 2px 7px;
+        box-shadow: rgb(116, 235, 213) -2px -2px 0px 2px,
+          rgb(159, 172, 230) 0px 0px 0px 4px,
+          rgba(0, 0, 0, 0.05) 0px 0px 2px 7px;
         transition: all 0.2s;
 
         &:hover {
-          box-shadow: rgb(159, 172, 230) -2px -2px 0px 2px, rgb(116, 235, 213) 0px 0px 0px 4px, rgba(0, 0, 0, 0.05) 0px 0px 2px 7px;
+          box-shadow: rgb(159, 172, 230) -2px -2px 0px 2px,
+            rgb(116, 235, 213) 0px 0px 0px 4px,
+            rgba(0, 0, 0, 0.05) 0px 0px 2px 7px;
           transform: scale(1.01);
           color: #dbdbdb;
         }
