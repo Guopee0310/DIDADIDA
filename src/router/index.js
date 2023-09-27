@@ -116,6 +116,12 @@ const routes = [
       import(/* webpackChunkName: "amountBtn" */ "../components/amountBtn.vue"),
   },
   {
+    path: "/replaytBtn",
+    name: "replayBtn",
+    component: () =>
+      import(/* webpackChunkName: "replayBtn" */ "../components/replayBtn.vue"),
+  },
+  {
     path: "/login",
     name: "login",
     component: () =>

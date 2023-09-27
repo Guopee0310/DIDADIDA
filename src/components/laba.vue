@@ -31,14 +31,18 @@
       :post1="post"
       :point1="point"
       :finalShow1="finalShow"
-    ></labaResult>
-    <div class="rePlay" v-if="!randomStart" @click="resetAll">再玩一次</div>
+    >
+  </labaResult>
+  <replayBtn  class="rePlay" v-if="!randomStart" @click="resetAll"></replayBtn>
+ 
+    <!-- <div class="rePlay" v-if="!randomStart" @click="resetAll">再玩一次</div> -->
   </div>
 </template>
 
 <script>
 import labaBtn from "../components/labaBtn.vue";
 import labaResult from "../components/labaResult.vue";
+import replayBtn from "../components/replayBtn.vue";
 
 export default {
   data() {
@@ -200,6 +204,7 @@ export default {
   components: {
     labaBtn,
     labaResult,
+    replayBtn,
   },
 };
 </script>
@@ -343,10 +348,10 @@ export default {
   }
 
   .rePlay {
-    @include selectBtn;
-    padding: 5px 35px;
-    transition: transform ease-in 0.1s, box-shadow ease-in 0.25s;
-    box-shadow: 0 0.5px 5px #a7cbec;
+    // @include selectBtn;
+    // padding: 5px 35px;
+    // transition: transform ease-in 0.1s, box-shadow ease-in 0.25s;
+    // box-shadow: 0 0.5px 5px #a7cbec;
   }
 }
 

@@ -91,8 +91,11 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-* {
-  background-color: #1d3d5b;
+*{
+  background-color: #1D3D5B;
+}
+.body{
+  background-color: #1D3D5B;
 }
 .interact {
   position: relative;
@@ -117,6 +120,7 @@ export default {
   }
   .mainpart {
     z-index: 100;
+    background-color: #1D3D5B;
   }
   .deco {
     background-color: #1d3d5b;
