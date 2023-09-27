@@ -243,7 +243,7 @@ export default {
   },
 };
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 .titleAll {
   display: flex;
   border-bottom: 1px black solid;

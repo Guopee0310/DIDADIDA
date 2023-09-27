@@ -6,9 +6,20 @@
       <h1 data="0m">0m</h1>
 
       <!-- 動物們 -->
-      <div v-for="(animal, index) in animals" :key="index" :ref="`parallaxScene${index}`" :id="`scene${index}`"
-        data-relative-input="true" :class="animal.category" @click="showCard(animal)">
-        <img :src="animal.image" :alt="animal.name" :data-depth="animal.depth" />
+      <div
+        v-for="(animal, index) in animals"
+        :key="index"
+        :ref="`parallaxScene${index}`"
+        :id="`scene${index}`"
+        data-relative-input="true"
+        :class="animal.category"
+        @click="showCard(animal)"
+      >
+        <img
+          :src="animal.image"
+          :alt="animal.name"
+          :data-depth="animal.depth"
+        />
         <h4 :data-depth="animal.depth">{{ animal.name }}</h4>
       </div>
 
@@ -33,28 +44,40 @@
         <h1 data="6000m">6000m</h1>
       </div>
 
-      <div class="ship"><img src="../../public/all_images/animal/ship.png" alt=""></div>
+      <div class="ship">
+        <img src="../../public/all_images/animal/ship.png" alt="" />
+      </div>
     </div>
 
     <div class="navBar">
       <ul>
-        <li><router-link to="#" @click.prevent="btnScroll('表層海洋帶')">0m
+        <li>
+          <router-link to="#" @click.prevent="btnScroll('表層海洋帶')"
+            >0m
             <div class="drop"></div>
           </router-link>
         </li>
-        <li><router-link to="#" @click.prevent="btnScroll('中層海洋帶')">200m
+        <li>
+          <router-link to="#" @click.prevent="btnScroll('中層海洋帶')"
+            >200m
             <div class="drop"></div>
           </router-link>
         </li>
-        <li><router-link to="#" @click.prevent="btnScroll('深層海洋帶')">1000m
+        <li>
+          <router-link to="#" @click.prevent="btnScroll('深層海洋帶')"
+            >1000m
             <div class="drop"></div>
           </router-link>
         </li>
-        <li><router-link to="#" @click.prevent="btnScroll('深淵層海洋帶')">4000m
+        <li>
+          <router-link to="#" @click.prevent="btnScroll('深淵層海洋帶')"
+            >4000m
             <div class="drop"></div>
           </router-link>
         </li>
-        <li><router-link to="#" @click.prevent="btnScroll('超深淵層海洋帶')">6000m
+        <li>
+          <router-link to="#" @click.prevent="btnScroll('超深淵層海洋帶')"
+            >6000m
             <div class="drop"></div>
           </router-link>
         </li>
@@ -97,50 +120,201 @@ export default {
       // showText: false,
       selectedAnimal: null,
       animals: [
-        { name: '黃高鰭刺尾魚', image: require('../../public/all_images/animal/goldfish.png'), depth: '0.2', category: 'goldfish' },
+        {
+          name: "黃高鰭刺尾魚",
+          image: require("../../public/all_images/animal/goldfish.png"),
+          depth: "0.2",
+          category: "goldfish",
+        },
 
         {
-          name: '玳瑁',
-          image: require('../../public/all_images/animal/turtle.png'),
-          depth: '0.5',
-          category: 'turtle',
-          enName: 'Hawksbill Turtle',
-          p: '是一種海龜物種，屬於海洋爬行動物，被廣泛認為是美麗而又瀕危的物種。',
+          name: "玳瑁",
+          image: require("../../public/all_images/animal/turtle.png"),
+          depth: "0.5",
+          category: "turtle",
+          enName: "Hawksbill Turtle",
+          p: "是一種海龜物種，屬於海洋爬行動物，被廣泛認為是美麗而又瀕危的物種。",
           features: [
             "— 外觀特徵 —",
             "玳瑁的外殼呈現五角形的形狀，有許多彎曲的甲板，讓牠們在水中更靈活。這些甲板上通常有不規則的金黃色、紅棕色或綠色的斑紋，為牠們提供了極佳的保護色。",
             "— 棲息地 —",
-            "玳瑁廣泛分佈於熱帶和亞熱帶海域，包括大西洋、印度洋和太平洋。牠們在珊瑚礁、海草床、潟湖等地找到適合的棲息地。"]
+            "玳瑁廣泛分佈於熱帶和亞熱帶海域，包括大西洋、印度洋和太平洋。牠們在珊瑚礁、海草床、潟湖等地找到適合的棲息地。",
+          ],
         },
-        { name: '藍藻魚', image: require('../../public/all_images/animal/dory.png'), depth: '0.4', category: 'dory' },
-        { name: '小丑魚', image: require('../../public/all_images/animal/nimo.png'), depth: '0.2', category: 'nimo' },
-        { name: '河豚', image: require('../../public/all_images/animal/angryfish.png'), depth: '0.3', category: 'angryfish' },
-        { name: '黃顱刺蓋魚', image: require('../../public/all_images/animal/blueyellow.png'), depth: '0.1', category: 'blueyellow' },
-        { name: '鯨鯊', image: require('../../public/all_images/animal/whale.png'), depth: '0.4', category: 'whale' },
-        { name: '海星', image: require('../../public/all_images/animal/star.png'), depth: '0.2', category: 'star' },
-        { name: '獅子魚', image: require('../../public/all_images/animal/leofish.png'), depth: '0.4', category: 'leofish' },
-        { name: '鑽嘴魚', image: require('../../public/all_images/animal/linefish.png'), depth: '0.4', category: 'linefish' },
-        { name: '鯊魚', image: require('../../public/all_images/animal/shark.png'), depth: '0.7', category: 'shark' },
-        { name: '白鯨', image: require('../../public/all_images/animal/white.png'), depth: '0.1', category: 'white' },
-        { name: '鋸鯊', image: require('../../public/all_images/animal/nosefish.png'), depth: '0.1', category: 'nosefish' },
-        { name: '儒艮', image: require('../../public/all_images/animal/manatee.png'), depth: '0.1', category: 'manatee' },
-        { name: '大王烏賊', image: require('../../public/all_images/animal/taco.png'), depth: '0.1', category: 'taco' },
-        { name: '藍鯨', image: require('../../public/all_images/animal/Blue whale.png'), depth: '0.1', category: 'blueWhale' },
-        { name: '水母', image: require('../../public/all_images/animal/jellyfish.png'), depth: '0.1', category: 'jellyfish' },
-        { name: '章魚', image: require('../../public/all_images/animal/cutefish.png'), depth: '0.1', category: 'cutefish' },
-        { name: '白斑烏賊', image: require('../../public/all_images/animal/ETfish.png'), depth: '0.1', category: 'ETfish' },
-        { name: '圓鱗四鰭旗魚', image: require('../../public/all_images/animal/harinose.png'), depth: '0.1', category: 'harinose' },
-        { name: '大白鯊', image: require('../../public/all_images/animal/great white shark.png'), depth: '0.1', category: 'greatwhiteshark' },
-        { name: '突角鼻魚', image: require('../../public/all_images/animal/longnose.png'), depth: '0.1', category: 'longnose' },
-        { name: '魟魚', image: require('../../public/all_images/animal/smile.png'), depth: '0.1', category: 'smile' },
-        { name: '翻車魚', image: require('../../public/all_images/animal/moonfish.png'), depth: '0.1', category: 'moonfish' },
-        { name: '抹香鯨', image: require('../../public/all_images/animal/sperm whale.png'), depth: '0.1', category: 'spermwhale' },
-        { name: '魟魚', image: require('../../public/all_images/animal/stingray.png'), depth: '0.1', category: 'stingray' },
-        { name: '翻車魚', image: require('../../public/all_images/animal/Sunfish.png'), depth: '0.1', category: 'sunfish' },
-        { name: '星魚扁鯊', image: require('../../public/all_images/animal/toad.png'), depth: '0.1', category: 'toad' },
-        { name: '燈籠魚', image: require('../../public/all_images/animal/monkfish.png'), depth: '0.1', category: 'monkfish' },
-        { name: '角高體金眼鯛', image: require('../../public/all_images/animal/ohpsfish.png'), depth: '0.1', category: 'ohpsfish' },
-        { name: '侏儒燈籠魚', image: require('../../public/all_images/animal/flyfish.png'), depth: '0.1', category: 'flyfish' },
+        {
+          name: "藍藻魚",
+          image: require("../../public/all_images/animal/dory.png"),
+          depth: "0.4",
+          category: "dory",
+        },
+        {
+          name: "小丑魚",
+          image: require("../../public/all_images/animal/nimo.png"),
+          depth: "0.2",
+          category: "nimo",
+        },
+        {
+          name: "河豚",
+          image: require("../../public/all_images/animal/angryfish.png"),
+          depth: "0.3",
+          category: "angryfish",
+        },
+        {
+          name: "黃顱刺蓋魚",
+          image: require("../../public/all_images/animal/blueyellow.png"),
+          depth: "0.1",
+          category: "blueyellow",
+        },
+        {
+          name: "鯨鯊",
+          image: require("../../public/all_images/animal/whale.png"),
+          depth: "0.4",
+          category: "whale",
+        },
+        {
+          name: "海星",
+          image: require("../../public/all_images/animal/star.png"),
+          depth: "0.2",
+          category: "star",
+        },
+        {
+          name: "獅子魚",
+          image: require("../../public/all_images/animal/leofish.png"),
+          depth: "0.4",
+          category: "leofish",
+        },
+        {
+          name: "鑽嘴魚",
+          image: require("../../public/all_images/animal/linefish.png"),
+          depth: "0.4",
+          category: "linefish",
+        },
+        {
+          name: "鯊魚",
+          image: require("../../public/all_images/animal/shark.png"),
+          depth: "0.7",
+          category: "shark",
+        },
+        {
+          name: "白鯨",
+          image: require("../../public/all_images/animal/white.png"),
+          depth: "0.1",
+          category: "white",
+        },
+        {
+          name: "鋸鯊",
+          image: require("../../public/all_images/animal/nosefish.png"),
+          depth: "0.1",
+          category: "nosefish",
+        },
+        {
+          name: "儒艮",
+          image: require("../../public/all_images/animal/manatee.png"),
+          depth: "0.1",
+          category: "manatee",
+        },
+        {
+          name: "大王烏賊",
+          image: require("../../public/all_images/animal/taco.png"),
+          depth: "0.1",
+          category: "taco",
+        },
+        {
+          name: "藍鯨",
+          image: require("../../public/all_images/animal/Blue whale.png"),
+          depth: "0.1",
+          category: "blueWhale",
+        },
+        {
+          name: "水母",
+          image: require("../../public/all_images/animal/jellyfish.png"),
+          depth: "0.1",
+          category: "jellyfish",
+        },
+        {
+          name: "章魚",
+          image: require("../../public/all_images/animal/cutefish.png"),
+          depth: "0.1",
+          category: "cutefish",
+        },
+        {
+          name: "白斑烏賊",
+          image: require("../../public/all_images/animal/ETfish.png"),
+          depth: "0.1",
+          category: "ETfish",
+        },
+        {
+          name: "圓鱗四鰭旗魚",
+          image: require("../../public/all_images/animal/harinose.png"),
+          depth: "0.1",
+          category: "harinose",
+        },
+        {
+          name: "大白鯊",
+          image: require("../../public/all_images/animal/great white shark.png"),
+          depth: "0.1",
+          category: "greatwhiteshark",
+        },
+        {
+          name: "突角鼻魚",
+          image: require("../../public/all_images/animal/longnose.png"),
+          depth: "0.1",
+          category: "longnose",
+        },
+        {
+          name: "魟魚",
+          image: require("../../public/all_images/animal/smile.png"),
+          depth: "0.1",
+          category: "smile",
+        },
+        {
+          name: "翻車魚",
+          image: require("../../public/all_images/animal/moonfish.png"),
+          depth: "0.1",
+          category: "moonfish",
+        },
+        {
+          name: "抹香鯨",
+          image: require("../../public/all_images/animal/sperm whale.png"),
+          depth: "0.1",
+          category: "spermwhale",
+        },
+        {
+          name: "魟魚",
+          image: require("../../public/all_images/animal/stingray.png"),
+          depth: "0.1",
+          category: "stingray",
+        },
+        {
+          name: "翻車魚",
+          image: require("../../public/all_images/animal/Sunfish.png"),
+          depth: "0.1",
+          category: "sunfish",
+        },
+        {
+          name: "星魚扁鯊",
+          image: require("../../public/all_images/animal/toad.png"),
+          depth: "0.1",
+          category: "toad",
+        },
+        {
+          name: "燈籠魚",
+          image: require("../../public/all_images/animal/monkfish.png"),
+          depth: "0.1",
+          category: "monkfish",
+        },
+        {
+          name: "角高體金眼鯛",
+          image: require("../../public/all_images/animal/ohpsfish.png"),
+          depth: "0.1",
+          category: "ohpsfish",
+        },
+        {
+          name: "侏儒燈籠魚",
+          image: require("../../public/all_images/animal/flyfish.png"),
+          depth: "0.1",
+          category: "flyfish",
+        },
       ],
       introduce: [
         // { name: '黃金魚', image: require('../../public/all_images/animal/goldfish.png'), enName: '', p: 'goldfish' },
@@ -244,7 +418,7 @@ export default {
       const scene = document.getElementById(`scene${index}`);
       const parallaxInstance = new Parallax(scene, {
         clipRelativeInput: true,
-        pointerEvents: true
+        pointerEvents: true,
       });
     });
   },
@@ -255,7 +429,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 // 導覽頁 ------------------------------------------------------------
 .navBar {
   position: fixed;
@@ -304,10 +478,15 @@ export default {
 .explore {
   width: 100%;
   height: 400em;
-  background-image: linear-gradient(to bottom, #93b4cd, #114166, #0b2f4a, #082033);
+  background-image: linear-gradient(
+    to bottom,
+    #93b4cd,
+    #114166,
+    #0b2f4a,
+    #082033
+  );
   position: relative;
   // #285f9d
-
 
   h1 {
     font-size: 75px;
@@ -323,7 +502,6 @@ export default {
     font-size: map-get($fontSizes, h4);
     color: map-get($colors, light);
     letter-spacing: 2px;
-
   }
 
   // 內容 ------------------------------------------------------------
@@ -337,7 +515,6 @@ export default {
     background-size: 100%;
     background-position: top center;
     overflow: hidden;
-
 
     .slot {
       width: 100%;
@@ -367,9 +544,6 @@ export default {
       top: 90%;
     }
 
-
-
-
     // 動物們 ------------------------------------------------------------
     .turtle {
       cursor: pointer;
@@ -389,8 +563,6 @@ export default {
       cursor: pointer;
       // translate: 60em 8em;
       display: flex;
-      
-
 
       img {
         visibility: top;
@@ -565,7 +737,6 @@ export default {
       }
     }
 
-
     .manatee {
       cursor: pointer;
       margin: -35px auto 0 530px;
@@ -706,7 +877,6 @@ export default {
       cursor: pointer;
       translate: -2em -38em;
 
-
       img {
         visibility: top;
         width: 500px;
@@ -778,7 +948,6 @@ export default {
       }
     }
 
-
     .toad {
       cursor: pointer;
       translate: 40em -30em;
@@ -793,7 +962,6 @@ export default {
         margin-top: -20px;
       }
     }
-
 
     .monkfish {
       cursor: pointer;
@@ -865,7 +1033,6 @@ export default {
         z-index: -2;
       }
     }
-
   }
 
   // 彈窗 ---------------------------------------------
@@ -891,7 +1058,12 @@ export default {
       left: 0;
       width: 100%;
       height: 100%;
-      background-image: linear-gradient(45deg, rgba(234, 153, 153, 0.3), rgba(11, 47, 74, 0.3), rgba(255, 217, 102, 0.3));
+      background-image: linear-gradient(
+        45deg,
+        rgba(234, 153, 153, 0.3),
+        rgba(11, 47, 74, 0.3),
+        rgba(255, 217, 102, 0.3)
+      );
       z-index: -1;
       /* 在蓋板下面 */
     }
@@ -918,7 +1090,6 @@ export default {
       width: 35%;
       margin: -50px auto 15px;
       display: block;
-
     }
 
     h4 {
@@ -930,14 +1101,13 @@ export default {
     }
 
     h4::after {
-      content: '';
+      content: "";
       position: absolute;
       width: 50px;
-      border-bottom: 3px solid #93B7CD;
+      border-bottom: 3px solid #93b7cd;
       bottom: -20%;
       left: 46.5%;
     }
-
 
     span {
       display: block;
@@ -970,7 +1140,7 @@ export default {
     .close {
       width: 45px;
       height: 45px;
-      background-color: #93B7CD;
+      background-color: #93b7cd;
       border-radius: 50%;
       text-align: center;
       margin-bottom: -20px;

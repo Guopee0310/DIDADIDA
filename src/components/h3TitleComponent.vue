@@ -8,12 +8,12 @@ export default {
   data() {
     return {};
   },
-  mounted() { },
+  mounted() {},
   methods: {},
   computed: {},
 };
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 h3 {
   width: fit-content;
   margin: 0px auto;
