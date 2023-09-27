@@ -6,33 +6,12 @@
       </div>
       <div class="input_area">
         <label for="account">
-<<<<<<< HEAD
           <img src="../../../public/all_images/backStage/user-icon.png" alt="">
           <input id="account" type="text" placeholder="帳號" v-model="loginMail" ref="loginMail" />
         </label>
         <label for="psw">
           <img src="../../../public/all_images/backStage/psw-icon.png" alt="">
           <input id="psw" type="password" placeholder="密碼" v-model="loginPassword" ref="loginPassword" /></label>
-=======
-          <img src="../../../public/all_images/backStage/user.png" alt="" />
-          <input
-            id="account"
-            type="text"
-            placeholder="帳號"
-            v-model="loginMail"
-            ref="loginMail"
-          />
-        </label>
-        <label for="psw">
-          <img src="../../../public/all_images/backStage/key.png" alt="" />
-          <input
-            id="psw"
-            type="password"
-            placeholder="密碼"
-            v-model="loginPassword"
-            ref="loginPassword"
-        /></label>
->>>>>>> host
 
         <div class="loginBtn" @click="checkLogin">登入</div>
       </div>
@@ -40,24 +19,7 @@
   </div>
 
   <div class="slotAll" v-else>
-<<<<<<< HEAD
     <div class="userName">
-=======
-    <div class="controlWidth">
-      <div class="featureBox">
-        <router-link
-          :to="i[1]"
-          v-for="(i, index) in featureAll"
-          :key="index"
-          :class="['singleFeature', { active: $route.path === i[1] }]"
-          @click="toggleFeature(i)"
-        >
-          {{ i[0] }}
-        </router-link>
-      </div>
-      <div class="differentBox">
-        <div class="userName">
->>>>>>> host
           <div>User:Super</div>
           <div class="logoutBtn" @click="logoutToHome">登出</div>
         </div>
@@ -109,11 +71,7 @@ export default {
         this.$refs.loginPassword.value == this.loginPassword
       ) {
         this.loginCheck = false;
-<<<<<<< HEAD
         this.$router.push({ name: 'homePicMg' });
-=======
-        this.$router.push("/backHome/homePicMg");
->>>>>>> host
       }
     },
     toggleFeature(index) {
@@ -197,11 +155,7 @@ export default {
         border-radius: 4px;
         box-shadow: rgb(0 0 0 / 12%) 0px 1px 3px, rgb(0 0 0 / 24%) 0px 1px 2px;
         outline: none;
-<<<<<<< HEAD
         transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
-=======
-        transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
->>>>>>> host
 
         &:focus {
           border-color: #e9ae66;
