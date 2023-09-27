@@ -15,7 +15,7 @@
             <div class="qrcode-info">
               <div style="height: 60px; border-left: 3px solid #333"></div>
               <div>
-                <p>DIDADIDA好時光全票</p>
+                <p>DIDADIDA好時光票券</p>
                 <p>{{ checkDate }}</p>
                 <p>請掃描電子票券入場</p>
               </div>
