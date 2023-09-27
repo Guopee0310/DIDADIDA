@@ -1,36 +1,23 @@
 <template>
   <div class="labaAll">
     <div class="containerPic" v-if="this.$store.state.questionPic">
-      <img
-        :src="require('../../public/all_images/laba/question_mark.jpg')"
-        alt=""
-      />
+      <img :src="require('../../public/all_images/laba/question_mark.jpg')" alt="" />
     </div>
 
     <div class="containerPic" v-else>
-      <img
-        :src="i"
-        v-for="i in labaPicALL"
-        :class="{
-          resetImg: randomStart,
-          resetImg2: guessNum == 1,
-          resetImg3: guessNum == 2,
-          resetImg4: guessNum == 3,
-          resetImg5: guessNum == 4,
-          resetImg6: guessNum == 5,
-          resetImg7: guessNum == 6,
-        }"
-      />
+      <img :src="i" v-for="i in labaPicALL" :class="{
+        resetImg: randomStart,
+        resetImg2: guessNum == 1,
+        resetImg3: guessNum == 2,
+        resetImg4: guessNum == 3,
+        resetImg5: guessNum == 4,
+        resetImg6: guessNum == 5,
+        resetImg7: guessNum == 6,
+      }" />
     </div>
     <labaBtn @click="movePic" v-if="randomStart"></labaBtn>
-    <labaResult
-      v-if="!randomStart"
-      :imgSrc1="imgSrc"
-      :title1="title"
-      :post1="post"
-      :point1="point"
-      :finalShow1="finalShow"
-    ></labaResult>
+    <labaResult v-if="!randomStart" :imgSrc1="imgSrc" :title1="title" :post1="post" :point1="point"
+      :finalShow1="finalShow"></labaResult>
     <div class="rePlay" v-if="!randomStart" @click="resetAll">再玩一次</div>
   </div>
 </template>
@@ -187,6 +174,7 @@ export default {
 * {
   box-sizing: border-box;
 }
+
 .labaAll {
   @include LQ;
   padding: 50px;
@@ -194,11 +182,12 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-image: url("../../public/all_images/laba_bg.gif");
+  // background-image: url("../../public/all_images/laba_bg.gif");
   /* 其他背景属性，如背景颜色、大小、重复方式等可以继续添加 */
   background-color: #f0f0f0;
   background-size: cover;
   background-repeat: no-repeat;
+
   .containerPic {
     width: 474px;
     height: 474px;
@@ -207,41 +196,49 @@ export default {
     // clip-path: ellipse(50% 50% at 50% 40%);
     margin: 0 auto;
     overflow: hidden;
+
     .resetImg {
       vertical-align: top;
       translate: 0px -8058px;
     }
+
     .resetImg2 {
       vertical-align: top;
       translate: 0px -1896px;
       transition: 3s;
     }
+
     .resetImg3 {
       vertical-align: top;
       translate: 0px -1422px;
       transition: 3s;
     }
+
     .resetImg4 {
       vertical-align: top;
       translate: 0px -948px;
       transition: 3s;
     }
+
     .resetImg5 {
       vertical-align: top;
       translate: 0px -474px;
       transition: 3s;
     }
+
     .resetImg6 {
       vertical-align: top;
       translate: 0px 0px;
       transition: 3s;
     }
+
     .resetImg7 {
       vertical-align: top;
       translate: 0px 474px;
       transition: 3s;
     }
   }
+
   a {
     position: relative;
     display: flex;
@@ -256,6 +253,7 @@ export default {
     transition: 0.5s;
     letter-spacing: 4px;
     margin-top: 50px;
+
     &:hover {
       background: #03e9f4;
       color: #fff;
@@ -263,9 +261,11 @@ export default {
       box-shadow: 0 0 5px #03e9f4, 0 0 25px #03e9f4, 0 0 50px #03e9f4,
         0 0 100px #03e9f4;
     }
+
     span {
       position: absolute;
       display: block;
+
       &:nth-child(1) {
         top: 0;
         left: -100%;
@@ -274,6 +274,7 @@ export default {
         background: linear-gradient(90deg, transparent, #03e9f4);
         animation: btn-anim1 1s linear infinite;
       }
+
       &:nth-child(2) {
         top: -100%;
         right: 0;
@@ -283,6 +284,7 @@ export default {
         animation: btn-anim2 1s linear infinite;
         animation-delay: 0.25s;
       }
+
       &:nth-child(3) {
         bottom: 0;
         right: -100%;
@@ -292,6 +294,7 @@ export default {
         animation: btn-anim3 1s linear infinite;
         animation-delay: 0.5s;
       }
+
       &:nth-child(4) {
         bottom: -100%;
         left: 0;
@@ -303,6 +306,7 @@ export default {
       }
     }
   }
+
   .rePlay {
     @include selectBtn;
     padding: 5px 35px;
@@ -313,36 +317,42 @@ export default {
   0% {
     left: -100%;
   }
+
   50%,
   100% {
     left: 100%;
   }
 }
+
 @keyframes btn-anim2 {
   0% {
     top: -100%;
   }
+
   50%,
   100% {
     top: 100%;
   }
 }
+
 @keyframes btn-anim3 {
   0% {
     right: -100%;
   }
+
   50%,
   100% {
     right: 100%;
   }
 }
+
 @keyframes btn-anim4 {
   0% {
     bottom: -100%;
   }
+
   50%,
   100% {
     bottom: 100%;
   }
-}
-</style>
+}</style>
