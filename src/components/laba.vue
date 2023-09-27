@@ -1,25 +1,37 @@
 <template>
   <div class="labaAll">
-    
     <div class="containerPic" v-if="this.$store.state.questionPic">
-      <img :src="require('../../public/all_images/laba/question_mark.jpg')" alt="" />
+      <img
+        :src="require('../../public/all_images/laba/question_mark.jpg')"
+        alt=""
+      />
     </div>
 
     <div class="containerPic" v-else>
-      <img :src="i" v-for="i in labaPicALL" :class="{
-        resetImg: randomStart,
-        resetImg2: guessNum == 1,
-        resetImg3: guessNum == 2,
-        resetImg4: guessNum == 3,
-        resetImg5: guessNum == 4,
-        resetImg6: guessNum == 5,
-        resetImg7: guessNum == 6,
-      }" />
+      <img
+        :src="i"
+        v-for="i in labaPicALL"
+        :class="{
+          resetImg: randomStart,
+          resetImg2: guessNum == 1,
+          resetImg3: guessNum == 2,
+          resetImg4: guessNum == 3,
+          resetImg5: guessNum == 4,
+          resetImg6: guessNum == 5,
+          resetImg7: guessNum == 6,
+        }"
+      />
     </div>
-      
+
     <labaBtn @click="movePic" v-if="randomStart"></labaBtn>
-    <labaResult v-if="!randomStart" :imgSrc1="imgSrc" :title1="title" :post1="post" :point1="point"
-      :finalShow1="finalShow"></labaResult>
+    <labaResult
+      v-if="!randomStart"
+      :imgSrc1="imgSrc"
+      :title1="title"
+      :post1="post"
+      :point1="point"
+      :finalShow1="finalShow"
+    ></labaResult>
     <div class="rePlay" v-if="!randomStart" @click="resetAll">再玩一次</div>
   </div>
 </template>
@@ -63,27 +75,9 @@ export default {
       ],
       introArr: [
         {
-          imgSrc: require("../../public/all_images/laba/bluewhale.jpg"),
-          title: "藍鯨（Blue Whale）",
-          post: "地球上最大的哺乳動物，體型龐大，以浮游生物為食，是海洋中的巨無霸。",
-          point: "15",
-        },
-        {
-          imgSrc: require("../../public/all_images/laba/bluewhale.jpg"),
-          title: "藍鯨（Blue Whale）",
-          post: "地球上最大的哺乳動物，體型龐大，以浮游生物為食，是海洋中的巨無霸。",
-          point: "30",
-        },
-        {
-          imgSrc: require("../../public/all_images/laba/jellyfish.jpg"),
-          title: "水母（Jellyfish）",
-          post: "透明的海洋生物，觸手有毒性，具有優雅的漂浮方式，是海洋中的美麗生物。",
-          point: "50",
-        },
-        {
-          imgSrc: require("../../public/all_images/laba/dolphin.jpg"),
-          title: "海豚（Dolphin）",
-          post: "聰明的哺乳動物，具有獨特的笑聲，以魚類為食，是海洋中的友善伴侶。",
+          imgSrc: require("../../public/all_images/laba/whiteshark.jpg"),
+          title: "大白鯊（Great White Shark）",
+          post: "世界上最大的食肉魚，擁有強大的咬合力，是海洋中的頂級掠食者。",
           point: "5",
         },
         {
@@ -92,11 +86,34 @@ export default {
           post: "身材修長的魚類，背鰭形似帆，是速度飛快的追逐者，出現在溫暖的海域。",
           point: "5",
         },
+
+        // 3是水母
         {
-          imgSrc: require("../../public/all_images/laba/whiteshark.jpg"),
-          title: "大白鯊（Great White Shark）",
-          post: "世界上最大的食肉魚，擁有強大的咬合力，是海洋中的頂級掠食者。",
+          imgSrc: require("../../public/all_images/laba/jellyfish.jpg"),
+          title: "水母（Jellyfish）",
+          post: "透明的海洋生物，觸手有毒性，具有優雅的漂浮方式，是海洋中的美麗生物。",
+          point: "50",
+        },
+        // 4 海豚
+        {
+          imgSrc: require("../../public/all_images/laba/dolphin.jpg"),
+          title: "海豚（Dolphin）",
+          post: "聰明的哺乳動物，具有獨特的笑聲，以魚類為食，是海洋中的友善伴侶。",
           point: "5",
+        },
+        // 5藍鯨
+        {
+          imgSrc: require("../../public/all_images/laba/bluewhale.jpg"),
+          title: "藍鯨（Blue Whale）",
+          post: "地球上最大的哺乳動物，體型龐大，以浮游生物為食，是海洋中的巨無霸。",
+          point: "30",
+        },
+
+        {
+          imgSrc: require("../../public/all_images/laba/bluewhale.jpg"),
+          title: "藍鯨（Blue Whale）",
+          post: "地球上最大的哺乳動物，體型龐大，以浮游生物為食，是海洋中的巨無霸。",
+          point: "15",
         },
       ],
     };
@@ -176,14 +193,13 @@ export default {
         }
         setTimeout(() => {
           this.finalShow = true;
-        }, 1000);
+        }, 3000);
       }, 50);
     },
   },
   components: {
     labaBtn,
     labaResult,
-    
   },
 };
 </script>
@@ -372,4 +388,5 @@ export default {
   100% {
     bottom: 100%;
   }
-}</style>
+}
+</style>
