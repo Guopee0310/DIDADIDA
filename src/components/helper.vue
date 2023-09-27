@@ -23,24 +23,25 @@
 
   <div class="showWindow" :style="{ transform: showText ? 'translateX(0px)' : 'translateX(1000px)' }">
     <div class="windowBtnAll">
-      <div @click="moveAddress">地址</div>
+      <div @click="moveAddress">園區地址</div>
       <div @click="moveWeatherMax">降雨機率</div>
       <div @click="moveMaxT">今日溫度</div>
       <div @click="moveClosed">休館資訊</div>
-      <div @click="moveWeatherMax">獲得與紅利點數</div>
-      <div @click="moveMaxT">目前館內人數</div>
-      <div @click="moveAddress">票價資訊</div>
+      <div @click="moveBonus">紅利點數</div>
+      <div @click="moveVisitors">館內人數</div>
     </div>
     <div class="rspbox">
-      <div class="sayHelloTxt" v-if="!(showAddress || showWeatherMax || showMaxT || showClosed)">
+      <div class="sayHelloTxt" v-if="!(showAddress || showWeatherMax || showMaxT || showClosed || showBonus || showVisitors)">
         {{ sayHelloTxt }}
       </div>
-      <div class="response" v-if="showAddress">地址 : {{ locationName }}</div>
+      <div class="response" v-if="showAddress">地址 : {{ locationName }}中壢區復興路46號9樓</div>
       <div class="response" v-if="showWeatherMax">
-        天氣現象 : {{ weatherWX }} 最高氣溫 : {{ weatherMaxT }}
+        天氣現象 : {{ weatherWX }} 最高氣溫 : {{ weatherMaxT }}度
       </div>
-      <div class="response" v-if="showMaxT">降雨機率 : {{ weatherPop }}</div>
+      <div class="response" v-if="showMaxT">降雨機率 : {{ weatherPop }}%</div>
       <div class="response" v-if="showClosed">{{ closedtime }}</div>
+      <div class="response" v-if="showBonus">{{ bonus }}</div>
+      <div class="response" v-if="showVisitors">{{ visitors }}</div>
     </div>
   </div>
 </template>
@@ -58,12 +59,16 @@ export default {
       weatherMaxT: 0,
       //   降雨機率
       weatherPop: 0,
-      closedtime: "9/29~10/03 中秋假期休館",
+      closedtime: "9/28館內維護日，員工將前往TibaMe聽取報告，休館一天，也可至購票頁面查看日曆喔!",
+      bonus:"可至互動頁面填寫問卷或是拉霸試試手氣喔!",
+      visitors:"目前共有30人喔~",
       showText: false,
       showAddress: false,
       showWeatherMax: false,
       showMaxT: false,
       showClosed: false,
+      showBonus:false,
+      showVisitors:false,
       sayHelloTxt: "",
       intervalId: "",
     };
@@ -113,24 +118,48 @@ export default {
       this.showMaxT = false;
       this.showAddress = true;
       this.showClosed = false;
+      this.showBonus = false;
+      this.showVisitors = false;
     },
     moveWeatherMax() {
       this.showWeatherMax = true;
       this.showMaxT = false;
       this.showAddress = false;
       this.showClosed = false;
+      this.showBonus = false;
+      this.showVisitors = false;
     },
     moveMaxT() {
       this.showWeatherMax = false;
       this.showMaxT = true;
       this.showAddress = false;
       this.showClosed = false;
+      this.showBonus = false;
+      this.showVisitors = false;
     },
     moveClosed() {
       this.showWeatherMax = false;
       this.showMaxT = false;
       this.showAddress = false;
       this.showClosed = true;
+      this.showBonus = false;
+      this.showVisitors = false;
+    },
+    moveBonus() {
+      this.showWeatherMax = false;
+      this.showMaxT = false;
+      this.showAddress = false;
+      this.showClosed = false;
+      this.showBonus = true;
+      this.showVisitors = false;
+    },
+    moveVisitors() {
+      this.showWeatherMax = false;
+      this.showMaxT = false;
+      this.showAddress = false;
+      this.showClosed = false;
+      this.showBonus = false;
+      this.showVisitors = true;
     },
     // 回到上方按鈕 -----------------------
     top() {

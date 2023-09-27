@@ -229,7 +229,7 @@ export default {
         buy: "DIDA商城",
       },
       aboutSub: [
-        { link: "/about", name: "關於我們" },
+        // { link: "/about", name: "關於我們" },
         { link: "/faq", name: "常見問答" },
         { link: "/guide", name: "園區導覽" },
         { link: "/interact", name: "互動遊戲" },

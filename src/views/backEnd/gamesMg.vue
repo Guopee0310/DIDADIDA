@@ -8,12 +8,24 @@
         <div>答對紅利點數</div>
       </div>
       <div class="singleQuestion" v-for="(i, index) in questionAll" :key="i[0]">
-        <input
+        <!-- <input
           type="text"
           v-model="cloneQusetion[index]"
           :disabled="i[4]"
           @blur="getQuestion(index)"
-        />
+        /> -->
+        <textarea
+          name=""
+          id=""
+          cols="20"
+          rows="2"
+          v-model="cloneQusetion[index]"
+          :disabled="i[4]"
+          @blur="getQuestion(index)"
+          class="questionarea"
+          >
+        </textarea>
+        
         <select
           name=""
           id=""
@@ -262,6 +274,11 @@ export default {
       margin: 3px;
       cursor: pointer;
     }
+  }
+  .questionarea{
+    overflow: auto; /* Add scrollbars when content overflows */
+  scrollbar-width: thin;
+  scrollbar-color: #03e9f4 transparent;
   }
 }
 .labaAll {
