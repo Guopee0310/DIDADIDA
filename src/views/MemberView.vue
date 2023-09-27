@@ -122,6 +122,15 @@ export default {
       btn: "mem_account_settings",
     };
   },
+  mounted() {
+    if (this.$route.query.section === "showProdOrder") {
+      this.prodOrderClick = true;
+      this.memberClick = false;
+    } else if (this.$route.query.section === "showtickOrder") {
+      this.memberClick = false;
+      this.tickOrderClick = true;
+    }
+  },
   computed: {
     score() {
       return this.$store.state.totalScorePoint;
