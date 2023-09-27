@@ -33,19 +33,19 @@
       <div @click="moveAddress">票價資訊</div>
 
     </div>
-    <div class="rspbox">
-      <div class="sayHelloTxt" v-if="!(showAddress || showWeatherMax || showMaxT || showClosed)">
-        {{ sayHelloTxt }}
-      </div>
-      <div class="response" v-if="showAddress">地址 : {{ locationName }}</div>
-      <div class="response" v-if="showWeatherMax">
-        天氣現象 : {{ weatherWX }} 最高氣溫 : {{ weatherMaxT }}
-      </div>
-      <div class="response" v-if="showMaxT">降雨機率 : {{ weatherPop }}</div>
-      <div class="response" v-if="showClosed">{{ closedtime }}</div>
-
+  <div class="rspbox">
+    <div class="sayHelloTxt" v-if="!(showAddress || showWeatherMax || showMaxT || showClosed)">
+      {{ sayHelloTxt }}
     </div>
-
+    <div class="response" v-if="showAddress">地址 : {{ locationName }}</div>
+    <div class="response" v-if="showWeatherMax">
+      天氣現象 : {{ weatherWX }} 最高氣溫 : {{ weatherMaxT }}
+    </div>
+    <div  class="response" v-if="showMaxT">降雨機率 : {{ weatherPop }}</div>
+    <div  class="response" v-if="showClosed">{{ closedtime }}</div>
+    
+  </div>
+  
   </div>
 </template>
 
@@ -132,6 +132,12 @@ export default {
       this.showAddress = false;
       this.showClosed = false;
     },
+    moveClosed() {
+      this.showWeatherMax = false;
+      this.showMaxT = false;
+      this.showAddress = false;
+      this.showClosed = true;
+    },
     top() {
       const buttonElement = this.$refs.scrollTopButton;
       const buttonOffsetTop = buttonElement.offsetTop;
@@ -142,16 +148,11 @@ export default {
         window.scrollTo({ top: buttonOffsetTop, behavior: 'smooth' });
       }, delay);
     },
-    moveClosed() {
-      this.showWeatherMax = false;
-      this.showMaxT = false;
-      this.showAddress = false;
-      this.showClosed = true;
+ 
 
-    }
-  },
+    },
   computed: {},
-};
+}
 </script>
 <style scoped lang="scss">
 .helperAll {
