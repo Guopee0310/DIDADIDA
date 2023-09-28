@@ -7,8 +7,8 @@
 
       <!-- 動物們 -->
       <div v-for="(animal, index) in animals" :key="index" :ref="`parallaxScene${index}`" :id="`scene${index}`"
-        data-relative-input="true" :class="animal.category" @click="showCard(animal)">
-        <img :src="animal.image" :alt="animal.name" :data-depth="animal.depth" />
+        data-relative-input="true" :class="animal.category">
+        <img :src="animal.image" :alt="animal.name" :data-depth="animal.depth" @click="showCard(animal)" />
         <h4 :data-depth="animal.depth">{{ animal.name }}</h4>
       </div>
 
