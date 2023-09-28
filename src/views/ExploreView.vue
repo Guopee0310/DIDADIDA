@@ -6,20 +6,9 @@
       <h1 data="0m">0m</h1>
 
       <!-- 動物們 -->
-      <div
-        v-for="(animal, index) in animals"
-        :key="index"
-        :ref="`parallaxScene${index}`"
-        :id="`scene${index}`"
-        data-relative-input="true"
-        :class="animal.category"
-        @click="showCard(animal)"
-      >
-        <img
-          :src="animal.image"
-          :alt="animal.name"
-          :data-depth="animal.depth"
-        />
+      <div v-for="(animal, index) in animals" :key="index" :ref="`parallaxScene${index}`" :id="`scene${index}`"
+        data-relative-input="true" :class="animal.category" @click="showCard(animal)">
+        <img :src="animal.image" :alt="animal.name" :data-depth="animal.depth" />
         <h4 :data-depth="animal.depth">{{ animal.name }}</h4>
       </div>
 
@@ -52,32 +41,27 @@
     <div class="navBar">
       <ul>
         <li>
-          <router-link to="#" @click.prevent="btnScroll('表層海洋帶')"
-            >0m
+          <router-link to="#" @click.prevent="btnScroll('表層海洋帶')">0m
             <div class="drop"></div>
           </router-link>
         </li>
         <li>
-          <router-link to="#" @click.prevent="btnScroll('中層海洋帶')"
-            >200m
+          <router-link to="#" @click.prevent="btnScroll('中層海洋帶')">200m
             <div class="drop"></div>
           </router-link>
         </li>
         <li>
-          <router-link to="#" @click.prevent="btnScroll('深層海洋帶')"
-            >1000m
+          <router-link to="#" @click.prevent="btnScroll('深層海洋帶')">1000m
             <div class="drop"></div>
           </router-link>
         </li>
         <li>
-          <router-link to="#" @click.prevent="btnScroll('深淵層海洋帶')"
-            >4000m
+          <router-link to="#" @click.prevent="btnScroll('深淵層海洋帶')">4000m
             <div class="drop"></div>
           </router-link>
         </li>
         <li>
-          <router-link to="#" @click.prevent="btnScroll('超深淵層海洋帶')"
-            >6000m
+          <router-link to="#" @click.prevent="btnScroll('超深淵層海洋帶')">6000m
             <div class="drop"></div>
           </router-link>
         </li>
@@ -455,13 +439,11 @@ export default {
 .explore {
   width: 100%;
   height: 400em;
-  background-image: linear-gradient(
-    to bottom,
-    #93b4cd,
-    #114166,
-    #0b2f4a,
-    #082033
-  );
+  background-image: linear-gradient(to bottom,
+      #93b4cd,
+      #114166,
+      #0b2f4a,
+      #082033);
   position: relative;
   // #285f9d
 
@@ -538,7 +520,7 @@ export default {
 
     .goldfish {
       cursor: pointer;
-      // translate: 60em 8em;
+      translate: 60% 120%;
       display: flex;
 
       img {
@@ -1035,12 +1017,10 @@ export default {
       left: 0;
       width: 100%;
       height: 100%;
-      background-image: linear-gradient(
-        45deg,
-        rgba(234, 153, 153, 0.3),
-        rgba(11, 47, 74, 0.3),
-        rgba(255, 217, 102, 0.3)
-      );
+      background-image: linear-gradient(45deg,
+          rgba(234, 153, 153, 0.3),
+          rgba(11, 47, 74, 0.3),
+          rgba(255, 217, 102, 0.3));
       z-index: -1;
       /* 在蓋板下面 */
     }
@@ -1101,17 +1081,17 @@ export default {
     }
 
     ul {
-      margin: 0 20px;
+      margin: 0 20px 30px;
     }
 
     li {
       font-size: 17px;
       text-align: center;
+      margin-bottom: 10px;
     }
 
     ul:nth-child(2n) li {
       text-align: left;
-      margin-bottom: 30px;
     }
 
     .close {
