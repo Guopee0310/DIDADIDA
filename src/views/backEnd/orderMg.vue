@@ -33,7 +33,7 @@
         </div>
       </div>
     </TabPane>
-    <TabPane label="購票訂單" name="name2">
+    <TabPane label="票卷訂單" name="name2">
       <div class="titleAll">
         <select name="" id="">
           <option value="">訂單編號</option>
@@ -60,6 +60,7 @@
             <div v-for="j in i.ticketCount">{{ j }}</div>
           </div>
           <div>{{ i.ticketDate }}</div>
+          <button>詳細資料</button>
         </div>
       </div>
     </TabPane>
@@ -152,7 +153,7 @@ export default {
     div {
       flex-grow: 1;
       &:last-child {
-        flex-grow: 3;
+        flex-grow: 2;
       }
     }
   }
@@ -161,6 +162,7 @@ export default {
     border-bottom: 1px black solid;
     padding-bottom: 10px;
     align-items: center;
+    justify-content: space-around;
   }
 }
 .orderTableAll {
