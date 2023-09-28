@@ -184,9 +184,7 @@ export default {
     position: relative;
 
     .stickers {
-      width: 1200px;
       height: 100px;
-      margin: 0 auto;
       position: relative;
 
       .photo_stickers {
@@ -396,28 +394,29 @@ export default {
 }
 
 @media screen and (max-width: 414px) {
-  .stickers {
-    height: 40px;
+  .mem_main {
+    .member_nav {
+      .stickers {
+        height: 40px;
 
-    .photo_stickers {
-      width: 120px;
-      height: 120px;
-      top: -75px;
+        .photo_stickers {
+          width: 230px;
+          height: 230px;
+          top: -180px;
+          left: 60px;
+        }
+      }
     }
+
   }
 
   .member_hello {
     width: 100%;
     font-size: map-get($fontSizes, "h5");
+  }
 
-    .deco_fishes {
-      right: -100px;
-      top: -80px;
-
-      img {
-        width: 60%;
-      }
-    }
+  .deco_fishes {
+    display: none;
   }
 
   .mem_main {
