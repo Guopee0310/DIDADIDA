@@ -190,6 +190,12 @@ export default {
           category: "white",
         },
         {
+          name: "水母",
+          image: require("../../public/all_images/animal/jellyfish.png"),
+          depth: "0.1",
+          category: "jellyfish",
+        },
+        {
           name: "鋸鯊",
           image: require("../../public/all_images/animal/nosefish.png"),
           depth: "0.1",
@@ -213,12 +219,7 @@ export default {
           depth: "0.1",
           category: "blueWhale",
         },
-        {
-          name: "水母",
-          image: require("../../public/all_images/animal/jellyfish.png"),
-          depth: "0.1",
-          category: "jellyfish",
-        },
+
         {
           name: "章魚",
           image: require("../../public/all_images/animal/cutefish.png"),
@@ -438,7 +439,7 @@ export default {
 // 探索動物 ------------------------------------------------------------
 .explore {
   width: 100%;
-  height: 400em;
+  height: 460em;
   background-image: linear-gradient(to bottom,
       #93b4cd,
       #114166,
@@ -745,7 +746,9 @@ export default {
 
     .jellyfish {
       cursor: pointer;
-      translate: 55em -95em;
+      // width: 130px;
+      translate: 50% -130%;
+      // border: 1px solid red;
 
       img {
         visibility: top;
@@ -761,6 +764,8 @@ export default {
     .cutefish {
       cursor: pointer;
       translate: 10em -45em;
+      // border: 1px solid red;
+
 
       img {
         visibility: top;
