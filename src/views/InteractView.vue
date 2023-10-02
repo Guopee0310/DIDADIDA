@@ -119,7 +119,7 @@ export default {
     }
   }
   .mainpart {
-    display: flex;
+    // display: flex;
     background-color: #1D3D5B;
   }
   .deco {
