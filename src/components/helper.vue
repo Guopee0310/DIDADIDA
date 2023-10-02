@@ -1,9 +1,16 @@
 <template>
   <!-- 小幫手 -->
   <div class="helperAll">
-    <button class="noselect" @click="top" ref="scrollTopButton"><svg xmlns="http://www.w3.org/2000/svg" width="24"
-        height="24" viewBox="0 0 24 24">
-        <path d="M0 16.67l2.829 2.83 9.175-9.339 9.167 9.339 2.829-2.83-11.996-12.17z" />
+    <button class="noselect" @click="top" ref="scrollTopButton">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="M0 16.67l2.829 2.83 9.175-9.339 9.167 9.339 2.829-2.83-11.996-12.17z"
+        />
       </svg>
     </button>
     <div class="item" @click="moveShowText">
@@ -11,9 +18,7 @@
         <svg viewBox="0 0 100 100">
           <path d="M 0,50 a 50,50 0 1,1 0,1 z" id="circle" />
           <text>
-            <textPath href="#circle">
-              DOCTER DIDA
-            </textPath>
+            <textPath href="#circle">DOCTER DIDA</textPath>
           </text>
         </svg>
       </div>
@@ -21,20 +26,40 @@
     </div>
   </div>
 
-  <div class="showWindow" :style="{ transform: showText ? 'translateX(0px)' : 'translateX(1000px)' }">
+  <div
+    class="showWindow"
+    :style="{ transform: showText ? 'translateX(0px)' : 'translateX(1000px)' }"
+  >
     <div class="windowBtnAll">
+      <!-- <div v-for="i in helperText">
+        <div>{{ i.smart_que }}</div>
+      </div> -->
       <div @click="moveAddress">園區地址</div>
       <div @click="moveWeatherMax">降雨機率</div>
       <div @click="moveMaxT">今日溫度</div>
-      <div @click="moveClosed">休館資訊</div>
-      <div @click="moveBonus">紅利點數</div>
-      <div @click="moveVisitors">館內人數</div>
+      <div @click="moveClosed">{{ helperAsk1 }}</div>
+      <div @click="moveBonus">{{ helperAsk2 }}</div>
+      <div @click="moveVisitors">{{ helperAsk3 }}</div>
     </div>
     <div class="rspbox">
-      <div class="sayHelloTxt" v-if="!(showAddress || showWeatherMax || showMaxT || showClosed || showBonus || showVisitors)">
+      <div
+        class="sayHelloTxt"
+        v-if="
+          !(
+            showAddress ||
+            showWeatherMax ||
+            showMaxT ||
+            showClosed ||
+            showBonus ||
+            showVisitors
+          )
+        "
+      >
         {{ sayHelloTxt }}
       </div>
-      <div class="response" v-if="showAddress">地址 : {{ locationName }}中壢區復興路46號9樓</div>
+      <div class="response" v-if="showAddress">
+        地址 : {{ locationName }}中壢區復興路46號9樓
+      </div>
       <div class="response" v-if="showWeatherMax">
         天氣現象 : {{ weatherWX }} 最高氣溫 : {{ weatherMaxT }}度
       </div>
@@ -59,21 +84,43 @@ export default {
       weatherMaxT: 0,
       //   降雨機率
       weatherPop: 0,
-      closedtime: "9/28館內維護日，員工將前往TibaMe聽取報告，休館一天，也可至購票頁面查看日曆喔!",
-      bonus:"可至互動頁面填寫問卷或是拉霸試試手氣喔!",
-      visitors:"目前共有30人喔~",
+      closedtime: "",
+      bonus: "",
+      visitors: "",
       showText: false,
       showAddress: false,
       showWeatherMax: false,
       showMaxT: false,
       showClosed: false,
-      showBonus:false,
-      showVisitors:false,
+      showBonus: false,
+      showVisitors: false,
       sayHelloTxt: "",
       intervalId: "",
+      helperAsk1: "",
+      helperAsk2: "",
+      helperAsk3: "",
     };
   },
+  created() {},
   mounted() {
+    // fetch("http://localhost/dida_project/public/php/helperMg.php").then(
+    //   async (rsp) => {
+    //     this.helperText = await rsp.json();
+    //   }
+    // );
+    fetch("http://localhost/dida_project/public/php/helperMg.php")
+      .then(function (response) {
+        return response.json();
+      })
+      .then((myJson) => {
+        this.helperAsk1 = myJson[0].smart_que;
+        this.helperAsk2 = myJson[1].smart_que;
+        this.helperAsk3 = myJson[2].smart_que;
+        this.closedtime = myJson[0].smart_ans;
+        this.bonus = myJson[1].smart_ans;
+        this.visitors = myJson[2].smart_ans;
+      });
+
     fetch(
       "https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-C0032-001?Authorization=CWB-AA300EC1-31BA-465E-B669-6CA2C320A195"
     )
@@ -168,14 +215,12 @@ export default {
       const delay = 300;
       this.showText = false;
       setTimeout(() => {
-        window.scrollTo({ top: buttonOffsetTop, behavior: 'smooth' });
+        window.scrollTo({ top: buttonOffsetTop, behavior: "smooth" });
       }, delay);
     },
- 
-
-    },
+  },
   computed: {},
-}
+};
 </script>
 <style scoped lang="scss">
 .helperAll {
@@ -219,8 +264,8 @@ export default {
   position: fixed;
   top: 50%;
   right: 110px;
-  border: 1.5px #232D47 solid;
-  background-color: #232D47;
+  border: 1.5px #232d47 solid;
+  background-color: #232d47;
   border-radius: 10px;
   z-index: 51;
   transition: 1s;
@@ -240,13 +285,11 @@ export default {
   .rspbox {
     border-radius: 0 0 10px 10px;
     border-top: 1px rgb(16, 16, 82) solid;
-    ;
     background-color: #fff;
     width: 100%;
     height: 50%;
     position: absolute;
     bottom: 0%;
-
   }
 
   .sayHelloTxt {
@@ -306,7 +349,7 @@ button svg {
 }
 
 button:before {
-  content: 'Back to Top';
+  content: "Back to Top";
   position: absolute;
   font-size: 15px;
   transition: 200ms;

@@ -257,7 +257,7 @@ export default {
       loading: true,
       animationDuration: 4200,
       value: 0,
-      helperText: [],
+
       priceTitle: [{ name: "票種" }, { name: "價格" }, { name: "適用對象" }],
       ticket: [
         { name: "一般票", price: "NT 500", object: "限18歲(含)以上成人使用" },
@@ -330,11 +330,6 @@ export default {
     // carousel,
   },
   mounted() {
-    fetch("http://localhost/dida_project/public/php/helperMg.php").then(
-      async (rsp) => {
-        this.helperText = await rsp.json();
-      }
-    );
     setTimeout(() => {
       this.loading = false;
       this.$store.state.showLoadingOnce = false;

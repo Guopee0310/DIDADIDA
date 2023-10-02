@@ -1,32 +1,35 @@
 <template>
   <div class="creatAndDel">
-    <div @click="createNewOne">新增</div>
+    <!-- <div @click="createNewOne">新增</div> -->
   </div>
   <div class="titleAll">
     <div>問題關鍵字</div>
     <div>回答內容</div>
   </div>
-  <div class="singleRow" v-for="(i, index) in helperAll" :key="index">
+  <div class="singleRow" v-for="(i, index) in helperAll2" :key="index">
     <div>
-      <input type="text" v-model="i[0]" :disabled="i[2]" />
+      <span>{{ i.smart_id }}</span>
+      <input type="text" v-model="i.smart_que" :disabled="i.dis" />
     </div>
+
     <div>
       <textarea
         name=""
         id=""
         cols="30"
         rows="3"
-        v-model="i[1]"
-        :disabled="i[2]"
+        v-model="i.smart_ans"
+        :disabled="i.dis"
       ></textarea>
     </div>
     <div class="updateBtnAll">
-      <div class="update" @click="updateQuestion(index, $event)">修改</div>
-      <div @click="delThisQuestion(index)">刪除</div>
+      <div class="update" @click="updateQuestion(index, $event, i)">修改</div>
+      <!-- <div @click="delThisQuestion(index)">刪除</div> -->
     </div>
   </div>
 </template>
 <script>
+import axios from "axios";
 export default {
   data() {
     return {
@@ -40,22 +43,42 @@ export default {
         ["天氣", "今日氣溫39度", true],
         ["降雨機率", "今日降雨機率為20%", true],
       ],
+      helperAll2: [],
     };
   },
+  mounted() {
+    fetch("http://localhost/dida_project/public/php/helperMg.php")
+      .then(function (response) {
+        return response.json();
+      })
+      .then((myJson) => {
+        for (let i = 0; i < myJson.length; i++) {
+          myJson[i].dis = true;
+          this.helperAll2 = myJson;
+        }
+      });
+  },
   methods: {
-    createNewOne() {
-      this.helperAll.push(["", "", true]);
-    },
-    delThisQuestion(index) {
-      this.helperAll.splice(index, 1);
-    },
-    updateQuestion(index, e) {
+    updateQuestion(index, e, i) {
       if (e.target.innerText == "確認") {
-        this.helperAll[index][2] = true;
+        this.helperAll2[index].dis = true;
         e.target.innerText = "修改";
+
+        const formData = new FormData();
+        let smart_id = i.smart_id;
+        let smart_que = this.helperAll2[index].smart_que;
+        let smart_ans = this.helperAll2[index].smart_ans;
+
+        formData.append("smart_id", smart_id);
+        formData.append("smart_que", smart_que);
+        formData.append("smart_ans", smart_ans);
+        fetch("http://localhost/dida_project/public/php/helperMg.php", {
+          method: "post",
+          body: formData,
+        }).then((res) => res.json());
         return;
       }
-      this.helperAll[index][2] = false;
+      this.helperAll2[index].dis = false;
       e.target.innerText = "確認";
     },
   },
