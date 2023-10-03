@@ -200,10 +200,8 @@ export default {
       .then((myJson) => {
         // 將整個 API 回傳的資料存入 labaAPI
         this.labaAPI = myJson;
-
         // 初始化 labaPicALL 為一個空陣列
         this.labaPicALL = [];
-
         // 複製圖片路徑到 labaPicALL 中，重複三次
         for (let i = 0; i < 3; i++) {
           this.labaPicALL = this.labaPicALL.concat(
