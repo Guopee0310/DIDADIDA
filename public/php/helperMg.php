@@ -13,7 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $smart_ans = $_POST["smart_ans"];
 
     // 直接執行更新操作
-    $update_sql = "UPDATE dida SET smart_que = :smart_que, smart_ans = :smart_ans WHERE smart_id = :smart_id";
+    $update_sql = "UPDATE helper SET smart_que = :smart_que, smart_ans = :smart_ans WHERE smart_id = :smart_id";
     $update_stmt = $pdo->prepare($update_sql);
     $update_stmt->bindValue(":smart_id", $smart_id, PDO::PARAM_INT);
     $update_stmt->bindValue(":smart_que", $smart_que);
@@ -40,7 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 try {
     
-    $sql = "SELECT * FROM dida";
+    $sql = "SELECT * FROM helper";
     $stmt = $pdo->query($sql);
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 

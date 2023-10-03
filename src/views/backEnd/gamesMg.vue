@@ -43,31 +43,31 @@
       </div>
     </TabPane>
     <TabPane label="拉霸管理" name="name2" class="labaAll">
-      <!-- <div class="labaTitle">
-        <div>新增項目</div>
+      <div class="labaTitle">
+        <div class="createBtn">新增項目</div>
       </div>
       <div class="labaDetailAll">
         <div>圖片</div>
         <div>內容</div>
         <div>紅利點數</div>
       </div>
-      <div class="singleRow" v-for="(i, index) in labaAll" :key="index">
+      <div class="singleRow" v-for="(i, index) in labaAPI" :key="index">
         <div>
           <div class="picBox">
-            <img :src="i[0]" alt="" />
+            <img :src="i.game_img" alt="" />
           </div>
           <input
             type="file"
             @change="pushImg($event, index)"
-            :disabled="i[2]"
+            :disabled="i.isDis"
           />
         </div>
         <div class="inputAll">
           <input
             type="text"
             placeholder="標題"
-            :disabled="i[2]"
-            v-model="cloneLabaTitle[index]"
+            :disabled="i.isDis"
+            v-model="i.game_title"
           />
           <textarea
             name=""
@@ -75,22 +75,23 @@
             cols="30"
             rows="5"
             placeholder="內容"
-            :disabled="i[2]"
-            v-model="cloneLabaText[index]"
+            :disabled="i.isDis"
+            v-model="i.game_text"
           ></textarea>
         </div>
         <select
           name=""
           id=""
-          :disabled="i[2]"
-          v-model="cloneLabaPoint[index]"
+          :disabled="i.isDis"
+          v-model="i.qa_bonus"
           @change="getLabaPoint(index)"
         >
-          <option value="3">3</option>
           <option value="5">5</option>
-          <option value="7">7</option>
+          <option value="15">15</option>
+          <option value="30">30</option>
+          <option value="50">50</option>
         </select>
-        <div class="chooseBtnAll">
+        <!-- <div class="chooseBtnAll">
           <label>
             <input
               v-model="cloneLabashelf[index]"
@@ -111,9 +112,9 @@
             />
             下架
           </label>
-        </div>
+        </div> -->
         <div class="startUpdate" @click="updateInput(index, $event)">修改</div>
-      </div> -->
+      </div>
     </TabPane>
   </Tabs>
 </template>
@@ -129,6 +130,7 @@ export default {
       cloneLabaText: [],
       cloneLabashelf: [],
       questionAPI: [],
+      labaAPI: [],
       questionAll: [
         [1, "請問海豚是不是深海動物", "否", 3, true],
         [2, "請問珊瑚是不是保育類海洋生物", "是", 5, true],
@@ -201,6 +203,21 @@ export default {
       this.cloneLabashelf.push(this.labaAll[i][5]);
       this.cloneLabaPoint.push(this.labaAll[i][1]);
     }
+    fetch("http://localhost/dida_project/public/php/labaSelect.php")
+      .then(function (response) {
+        return response.json();
+      })
+      .then((myJson) => {
+        // 修改API數據中的圖像路徑
+        for (let i = 0; i < myJson.length; i++) {
+          myJson[
+            i
+          ].game_img = require(`../../public/all_images/laba/${myJson[i].game_img}`);
+          myJson[i].isDis = true;
+        }
+        // 將修改後的數據賦值給Vue組件中的數據
+        this.labaAPI = myJson;
+      });
   },
   methods: {
     getLabaPoint(index) {
