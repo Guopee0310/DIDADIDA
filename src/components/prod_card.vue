@@ -649,13 +649,13 @@ export default {
 
   .heart {
     margin: 0 0 -50px auto;
-    padding: 0 5px;
+    padding: 0 15px;
     z-index: 2;
   }
 
   .pic {
-    width: 280px;
-    height: 280px;
+    width: 270px;
+    height: 270px;
     overflow: hidden;
     margin-bottom: 10px;
     box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.2);
@@ -676,6 +676,7 @@ export default {
   }
 
   .name {
+    padding: 0 10px;
     font-size: 17px;
     letter-spacing: 1px;
     margin-top: 10px;
@@ -697,6 +698,7 @@ export default {
 
   .info {
     width: 100%;
+    padding: 0 10px;
     display: flex;
     justify-content: space-between;
   }
