@@ -15,7 +15,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $qa_bonus = $_POST["qa_bonus"];
 
     // 直接執行更新操作
-    $update_sql = "UPDATE quiz SET qa_ans = :qa_ans, qa_que = :qa_que, qa_bonus = :qa_bonus WHERE qa_no = :qa_no";
+    $update_sql = "INSERT INTO quiz (qa_no, qa_que, qa_ans, qa_bonus) VALUES (:qa_no, :qa_que, :qa_ans, :qa_bonus)";
+
     $update_stmt = $pdo->prepare($update_sql);
     $update_stmt->bindValue(":qa_no", $qa_no, PDO::PARAM_INT);
     $update_stmt->bindValue(":qa_que", $qa_que);
