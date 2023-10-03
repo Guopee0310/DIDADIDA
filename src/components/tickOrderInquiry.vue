@@ -128,7 +128,7 @@ export default {
 
   .tick_area {
     width: 500px;
-    height: 880px;
+    height: 850px;
     border: 0;
     border-radius: 15px;
     margin: 0 auto;
