@@ -38,7 +38,7 @@
         </select>
         <div class="questionClick">
           <div @click="updateQuestion(index, $event, i)">修改</div>
-          <div @click="deleteRow(index)">刪除</div>
+          <div @click="deleteRow(i, index)">刪除</div>
         </div>
       </div>
     </TabPane>
@@ -243,15 +243,25 @@ export default {
         body: formData,
       }).then((res) => res.json());
     },
-    deleteRow(index) {
-      this.$nextTick(function () {
-        if (this.questionAll[index][4]) {
-          this.cloneQusetion.splice(index, 1);
-          this.cloneAns.splice(index, 1);
-          this.clonePoint.splice(index, 1);
-          this.questionAll.splice(index, 1);
-        }
-      });
+    deleteRow(item, index) {
+      // this.$nextTick(function () {
+      //   if (this.questionAll[index][4]) {
+      //     this.cloneQusetion.splice(index, 1);
+      //     this.cloneAns.splice(index, 1);
+      //     this.clonePoint.splice(index, 1);
+      //     this.questionAll.splice(index, 1);
+      //   }
+      // });
+      const formData = new FormData();
+      let qa_no = this.questionAPI[index].qa_no;
+
+      formData.append("qa_no", qa_no);
+
+      fetch("http://localhost/dida_project/public/php/quizDelete.php", {
+        method: "post",
+        body: formData,
+      }).then((res) => res.json());
+      this.questionAPI.splice(index, 1);
     },
     // getQuestion(index) {
     //   this.questionAll[index][1] = this.cloneQusetion[index];
