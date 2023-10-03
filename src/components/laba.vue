@@ -32,9 +32,9 @@
       :point1="point"
       :finalShow1="finalShow"
     >
-  </labaResult>
-  <replayBtn  class="rePlay" v-if="!randomStart" @click="resetAll"></replayBtn>
- 
+    </labaResult>
+    <replayBtn class="rePlay" v-if="!randomStart" @click="resetAll"></replayBtn>
+
     <!-- <div class="rePlay" v-if="!randomStart" @click="resetAll">再玩一次</div> -->
   </div>
 </template>
@@ -54,71 +54,48 @@ export default {
       post: "",
       point: "",
       finalShow: false,
-      labaPicALL: [
-        // 三組一樣的
-        require("../../public/all_images/laba/bluewhale.jpg"),
-        require("../../public/all_images/laba/bluewhale.jpg"),
-        require("../../public/all_images/laba/dolphin.jpg"),
-        require("../../public/all_images/laba/jellyfish.jpg"),
-        require("../../public/all_images/laba/sailfish.jpg"),
-        require("../../public/all_images/laba/whiteshark.jpg"),
-
-        require("../../public/all_images/laba/bluewhale.jpg"),
-        require("../../public/all_images/laba/bluewhale.jpg"),
-        require("../../public/all_images/laba/dolphin.jpg"),
-        require("../../public/all_images/laba/jellyfish.jpg"),
-        require("../../public/all_images/laba/sailfish.jpg"),
-        require("../../public/all_images/laba/whiteshark.jpg"),
-
-        require("../../public/all_images/laba/bluewhale.jpg"),
-        require("../../public/all_images/laba/bluewhale.jpg"),
-        require("../../public/all_images/laba/dolphin.jpg"),
-        require("../../public/all_images/laba/jellyfish.jpg"),
-        require("../../public/all_images/laba/sailfish.jpg"),
-        require("../../public/all_images/laba/whiteshark.jpg"),
-      ],
+      labaAPI: [],
+      labaPicALL: [],
       introArr: [
-        {
-          imgSrc: require("../../public/all_images/laba/whiteshark.jpg"),
-          title: "大白鯊（Great White Shark）",
-          post: "世界上最大的食肉魚，擁有強大的咬合力，是海洋中的頂級掠食者。",
-          point: "5",
-        },
-        {
-          imgSrc: require("../../public/all_images/laba/sailfish.jpg"),
-          title: "帆尾魚（Sailfish）",
-          post: "身材修長的魚類，背鰭形似帆，是速度飛快的追逐者，出現在溫暖的海域。",
-          point: "5",
-        },
-
-        // 3是水母
-        {
-          imgSrc: require("../../public/all_images/laba/jellyfish.jpg"),
-          title: "水母（Jellyfish）",
-          post: "透明的海洋生物，觸手有毒性，具有優雅的漂浮方式，是海洋中的美麗生物。",
-          point: "50",
-        },
-        // 4 海豚
-        {
-          imgSrc: require("../../public/all_images/laba/dolphin.jpg"),
-          title: "海豚（Dolphin）",
-          post: "聰明的哺乳動物，具有獨特的笑聲，以魚類為食，是海洋中的友善伴侶。",
-          point: "5",
-        },
-        // 5藍鯨
-        {
-          imgSrc: require("../../public/all_images/laba/bluewhale.jpg"),
-          title: "藍鯨（Blue Whale）",
-          post: "地球上最大的哺乳動物，體型龐大，以浮游生物為食，是海洋中的巨無霸。",
-          point: "30",
-        },
-
-        {
-          imgSrc: require("../../public/all_images/laba/bluewhale.jpg"),
-          title: "藍鯨（Blue Whale）",
-          post: "地球上最大的哺乳動物，體型龐大，以浮游生物為食，是海洋中的巨無霸。",
-          point: "15",
-        },
+        // {
+        //   imgSrc: require("../../public/all_images/laba/whiteshark.jpg"),
+        //   title: "大白鯊（Great White Shark）",
+        //   post: "世界上最大的食肉魚，擁有強大的咬合力，是海洋中的頂級掠食者。",
+        //   point: "5",
+        // },
+        // {
+        //   imgSrc: require("../../public/all_images/laba/sailfish.jpg"),
+        //   title: "帆尾魚（Sailfish）",
+        //   post: "身材修長的魚類，背鰭形似帆，是速度飛快的追逐者，出現在溫暖的海域。",
+        //   point: "5",
+        // },
+        // // 3是水母
+        // {
+        //   imgSrc: require("../../public/all_images/laba/jellyfish.jpg"),
+        //   title: "水母（Jellyfish）",
+        //   post: "透明的海洋生物，觸手有毒性，具有優雅的漂浮方式，是海洋中的美麗生物。",
+        //   point: "50",
+        // },
+        // // 4 海豚
+        // {
+        //   imgSrc: require("../../public/all_images/laba/dolphin.jpg"),
+        //   title: "海豚（Dolphin）",
+        //   post: "聰明的哺乳動物，具有獨特的笑聲，以魚類為食，是海洋中的友善伴侶。",
+        //   point: "5",
+        // },
+        // // 5藍鯨
+        // {
+        //   imgSrc: require("../../public/all_images/laba/bluewhale.jpg"),
+        //   title: "藍鯨（Blue Whale）",
+        //   post: "地球上最大的哺乳動物，體型龐大，以浮游生物為食，是海洋中的巨無霸。",
+        //   point: "30",
+        // },
+        // {
+        //   imgSrc: require("../../public/all_images/laba/bluewhale.jpg"),
+        //   title: "藍鯨（Blue Whale）",
+        //   post: "地球上最大的哺乳動物，體型龐大，以浮游生物為食，是海洋中的巨無霸。",
+        //   point: "15",
+        // },
       ],
     };
   },
@@ -139,67 +116,103 @@ export default {
 
         const randomNum = Math.floor(Math.random() * (max - min + 1)) + min;
         this.randomStart = false;
+        console.log("randomNum", randomNum);
+        // 4 水母 2藍鯨 1藍鯨 3海豚 6鯊魚 5帆尾魚
+        // 圖片路經 0鯊魚 1凡鮪魚 2水母 3海豚 4鯨魚 5鯨魚
         if (randomNum == 1) {
           this.guessNum = 1;
-          this.imgSrc = this.introArr[0].imgSrc;
-          this.title = this.introArr[0].title;
-          this.post = this.introArr[0].post;
+          this.imgSrc = require(`../../public/all_images/laba/${this.labaAPI[4].game_img}`);
+
+          this.title = this.labaAPI[4].game_title;
+          this.post = this.labaAPI[4].game_text;
           if (this.$store.state.userName) {
-            this.point = this.introArr[0].point;
+            this.point = this.labaAPI[4].qa_bonus;
           }
 
-          this.$store.state.labaScore = parseInt(this.introArr[0].point);
+          this.$store.state.labaScore = parseInt(this.labaAPI[4].qa_bonus);
         } else if (randomNum == 2) {
           this.guessNum = 2;
-          this.imgSrc = this.introArr[1].imgSrc;
-          this.title = this.introArr[1].title;
-          this.post = this.introArr[1].post;
+          this.imgSrc = require(`../../public/all_images/laba/${this.labaAPI[5].game_img}`);
+
+          this.title = this.labaAPI[5].game_title;
+          this.post = this.labaAPI[5].game_text;
           if (this.$store.state.userName) {
-            this.point = this.introArr[1].point;
+            this.point = this.labaAPI[5].qa_bonus;
           }
-          this.$store.state.labaScore = parseInt(this.introArr[0].point);
+
+          this.$store.state.labaScore = parseInt(this.labaAPI[5].qa_bonus);
         } else if (randomNum == 3) {
           this.guessNum = 3;
-          this.imgSrc = this.introArr[2].imgSrc;
-          this.title = this.introArr[2].title;
-          this.post = this.introArr[2].post;
+          this.imgSrc = require(`../../public/all_images/laba/${this.labaAPI[3].game_img}`);
+
+          this.title = this.labaAPI[3].game_title;
+          this.post = this.labaAPI[3].game_text;
           if (this.$store.state.userName) {
-            this.point = this.introArr[2].point;
+            this.point = this.labaAPI[3].qa_bonus;
           }
-          this.$store.state.labaScore = parseInt(this.introArr[0].point);
+
+          this.$store.state.labaScore = parseInt(this.labaAPI[3].qa_bonus);
         } else if (randomNum == 4) {
           this.guessNum = 4;
-          this.imgSrc = this.introArr[3].imgSrc;
-          this.title = this.introArr[3].title;
-          this.post = this.introArr[3].post;
+          this.imgSrc = require(`../../public/all_images/laba/${this.labaAPI[2].game_img}`);
+
+          this.title = this.labaAPI[2].game_title;
+          this.post = this.labaAPI[2].game_text;
           if (this.$store.state.userName) {
-            this.point = this.introArr[3].point;
+            this.point = this.labaAPI[2].qa_bonus;
           }
-          this.$store.state.labaScore = parseInt(this.introArr[0].point);
+
+          this.$store.state.labaScore = parseInt(this.labaAPI[2].qa_bonus);
         } else if (randomNum == 5) {
           this.guessNum = 5;
-          this.imgSrc = this.introArr[4].imgSrc;
-          this.title = this.introArr[4].title;
-          this.post = this.introArr[4].post;
+          this.imgSrc = require(`../../public/all_images/laba/${this.labaAPI[1].game_img}`);
+
+          this.title = this.labaAPI[1].game_title;
+          this.post = this.labaAPI[1].game_text;
           if (this.$store.state.userName) {
-            this.point = this.introArr[4].point;
+            this.point = this.labaAPI[1].qa_bonus;
           }
-          this.$store.state.labaScore = parseInt(this.introArr[0].point);
+
+          this.$store.state.labaScore = parseInt(this.labaAPI[1].qa_bonus);
         } else if (randomNum == 6) {
           this.guessNum = 6;
-          this.imgSrc = this.introArr[5].imgSrc;
-          this.title = this.introArr[5].title;
-          this.post = this.introArr[5].post;
+          this.imgSrc = require(`../../public/all_images/laba/${this.labaAPI[0].game_img}`);
+
+          this.title = this.labaAPI[0].game_title;
+          this.post = this.labaAPI[0].game_text;
           if (this.$store.state.userName) {
-            this.point = this.introArr[5].point;
+            this.point = this.labaAPI[0].qa_bonus;
           }
-          this.$store.state.labaScore = parseInt(this.introArr[0].point);
+
+          this.$store.state.labaScore = parseInt(this.labaAPI[0].qa_bonus);
         }
         setTimeout(() => {
           this.finalShow = true;
         }, 3000);
       }, 50);
     },
+  },
+  mounted() {
+    fetch("http://localhost/dida_project/public/php/labaSelect.php")
+      .then(function (response) {
+        return response.json();
+      })
+      .then((myJson) => {
+        // 將整個 API 回傳的資料存入 labaAPI
+        this.labaAPI = myJson;
+
+        // 初始化 labaPicALL 為一個空陣列
+        this.labaPicALL = [];
+
+        // 複製圖片路徑到 labaPicALL 中，重複三次
+        for (let i = 0; i < 3; i++) {
+          this.labaPicALL = this.labaPicALL.concat(
+            myJson.map((item) =>
+              require(`../../public/all_images/laba/${item.game_img}`)
+            )
+          );
+        }
+      });
   },
   components: {
     labaBtn,
