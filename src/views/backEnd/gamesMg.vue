@@ -119,7 +119,9 @@
             下架
           </label>
         </div> -->
-        <div class="startUpdate" @click="updateInput(index, $event)">修改</div>
+        <div class="startUpdate" @click.prevent="updateInput(index, $event)">
+          修改
+        </div>
       </div>
     </TabPane>
   </Tabs>
@@ -130,6 +132,7 @@ import axios from "axios";
 export default {
   data() {
     return {
+      changePic: "",
       cloneQusetion: [],
       cloneAns: [],
       clonePoint: [],
@@ -239,7 +242,8 @@ export default {
       // alert(e.target.files[0].name);
 
       let file = e.target.files[0];
-      console.log(file);
+      this.changePic = file;
+      console.log("file", file);
 
       let readFile = new FileReader();
       readFile.readAsDataURL(file);
@@ -252,19 +256,25 @@ export default {
         document.querySelectorAll(".picBox")[index].innerHTML = "";
         document.querySelectorAll(".picBox")[index].appendChild(image);
       });
-      // const formData = new FormData();
-      // let file = e.target.files[0];
-      // formData.append("image", file);
-      // // 使用fetch或axios將數據發送到PHP後端
-      // fetch(`${this.$store.state.APIurl}labaCreate.php`, {
-      //   method: "POST",
-      //   body: formData,
-      // });
     },
     updateInput(index, e) {
       if (e.target.innerText == "確認") {
         this.labaAPI[index].isDis = true;
         e.target.innerText = "修改";
+        const formData = new FormData();
+
+        formData.append("image", this.changePic);
+        formData.append("game_no", this.labaAPI[index].game_no);
+        formData.append("game_text", this.labaAPI[index].game_text);
+        formData.append("qa_bonus", this.labaAPI[index].qa_bonus);
+        formData.append("game_title", this.labaAPI[index].game_title);
+        // 使用fetch或axios將數據發送到PHP後端
+        fetch(`${this.$store.state.APIurl}labaCreate.php`, {
+          method: "POST",
+          body: formData,
+        })
+          .then((res) => res.json())
+          .then((result) => alert("圖片更新OK"));
         return;
       }
       this.labaAPI[index].isDis = false;
