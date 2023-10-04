@@ -54,12 +54,18 @@
       <div class="singleRow" v-for="(i, index) in labaAPI" :key="index">
         <div>
           <div class="picBox">
-            <img :src="i.game_img" alt="" />
+            <img
+              :src="i.game_img"
+              alt=""
+              :ref="'imagePreview' + index"
+              class="choosePic"
+            />
           </div>
           <input
             type="file"
             @change="pushImg($event, index)"
             :disabled="i.isDis"
+            :ref="'fileInput' + index"
           />
         </div>
         <div class="inputAll">
@@ -119,6 +125,8 @@
   </Tabs>
 </template>
 <script>
+import axios from "axios";
+
 export default {
   data() {
     return {
@@ -209,12 +217,12 @@ export default {
       })
       .then((myJson) => {
         // 修改API數據中的圖像路徑
-        // for (let i = 0; i < myJson.length; i++) {
-        //   myJson[
-        //     i
-        //   ].game_img = require(`../../public/all_images/laba/${myJson[i].game_img}`);
-        //   myJson[i].isDis = true;
-        // }
+        for (let i = 0; i < myJson.length; i++) {
+          myJson[
+            i
+          ].game_img = require(`../../../public/all_images/laba/${myJson[i].game_img}`);
+          myJson[i].isDis = true;
+        }
         // 將修改後的數據賦值給Vue組件中的數據
         this.labaAPI = myJson;
       });
@@ -224,17 +232,42 @@ export default {
       this.labaAll[index][1] = this.cloneLabaPoint[index];
     },
     pushImg(e, index) {
-      this.labaAll[
-        index
-      ][0] = require(`../../assets/images/${e.target.files[0].name}`);
+      // this.labaAPI[
+      //   index
+      // ].game_img = require(`../../assets/images/${e.target.files[0].name}`);
+      // alert(this.labaAPI[index].game_img);
+      // alert(e.target.files[0].name);
+
+      let file = e.target.files[0];
+      console.log(file);
+
+      let readFile = new FileReader();
+      readFile.readAsDataURL(file);
+      readFile.addEventListener("load", function () {
+        let image = new Image();
+        image.src = readFile.result;
+        console.log(image.src);
+        image.style.width = "100%";
+        image.style.height = "100%";
+        document.querySelectorAll(".picBox")[index].innerHTML = "";
+        document.querySelectorAll(".picBox")[index].appendChild(image);
+      });
+      // const formData = new FormData();
+      // let file = e.target.files[0];
+      // formData.append("image", file);
+      // // 使用fetch或axios將數據發送到PHP後端
+      // fetch(`${this.$store.state.APIurl}labaCreate.php`, {
+      //   method: "POST",
+      //   body: formData,
+      // });
     },
     updateInput(index, e) {
       if (e.target.innerText == "確認") {
-        this.labaAll[index][2] = true;
+        this.labaAPI[index].isDis = true;
         e.target.innerText = "修改";
         return;
       }
-      this.labaAll[index][2] = false;
+      this.labaAPI[index].isDis = false;
       e.target.innerText = "確認";
     },
     createNew() {

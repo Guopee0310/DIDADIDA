@@ -30,6 +30,7 @@ export default createStore({
     activeIndexes: [],
     questionPic: true,
     showLoadingOnce: true,
+    APIurl: "http://localhost/dida_project/public/php/",
   },
 
   // 類似vue檔裡面的computed
