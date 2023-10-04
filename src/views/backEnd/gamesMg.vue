@@ -44,7 +44,7 @@
     </TabPane>
     <TabPane label="拉霸管理" name="name2" class="labaAll">
       <div class="labaTitle">
-        <div class="createBtn">新增項目</div>
+        <div class="createBtn" @click="createLaba">新增項目</div>
       </div>
       <div class="labaDetailAll">
         <div>圖片</div>
@@ -85,13 +85,7 @@
             v-model="i.game_text"
           ></textarea>
         </div>
-        <select
-          name=""
-          id=""
-          :disabled="i.isDis"
-          v-model="i.qa_bonus"
-          @change="getLabaPoint(index)"
-        >
+        <select name="" id="" :disabled="i.isDis" v-model="i.qa_bonus">
           <option value="5">5</option>
           <option value="15">15</option>
           <option value="30">30</option>
@@ -230,9 +224,49 @@ export default {
         this.labaAPI = myJson;
       });
   },
+
   methods: {
+    createLaba() {
+      const formData = new FormData();
+
+      formData.append("image", "question_mark.jpg");
+
+      formData.append("game_text", "預設內容");
+      formData.append("qa_bonus", 5);
+      formData.append("game_title", "預設標題");
+      // 使用fetch或axios將數據發送到PHP後端
+      fetch(`${this.$store.state.APIurl}labaInsert.php`, {
+        method: "POST",
+        body: formData,
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          // this.labaAPI = [...data];
+          data[data.length - 1].isDis = true;
+          this.labaAPI.push(data[data.length - 1]);
+        });
+
+      // this.labaAPI.push({
+      //   game_img: require("../../../public/all_images/laba/question_mark.jpg"),
+      //   qa_bonus: "5",
+      //   isDis: true,
+      //   game_text: "預設內容",
+      //   game_title: "預設文字",
+      // });
+    },
     getLabaPoint(index) {
       this.labaAll[index][1] = this.cloneLabaPoint[index];
+    },
+    watch: {
+      labaAPI: function (newVal, oldVal) {
+        // 在这里执行数据变化时的操作
+        console.log("labaAPI 变化了", newVal, oldVal);
+        let x = [...this.labaAPI];
+        this.labaAPI = "";
+        setTimeout(() => {
+          this.labaAPI = x;
+        }, 1500);
+      },
     },
     pushImg(e, index) {
       // this.labaAPI[
