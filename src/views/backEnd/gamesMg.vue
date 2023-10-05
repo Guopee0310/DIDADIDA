@@ -283,6 +283,7 @@ export default {
       readFile.readAsDataURL(file);
       readFile.addEventListener("load", function () {
         let image = new Image();
+        //<img></img>
         image.src = readFile.result;
         console.log(image.src);
         image.style.width = "100%";

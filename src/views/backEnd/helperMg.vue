@@ -46,10 +46,13 @@ export default {
       helperAll2: [],
     };
   },
+  // created(){}, => 創建但未被掛載
+  // mounted(){}, => 掛載以後會去做的事
   mounted() {
     fetch("http://localhost/dida_project/public/php/helperMg.php") //第一步
       // fetch(`${this.$store.state.APIurl}helperMg.php`)
       //this.$store.state.APIurl
+      // axios
       .then(function (response) {
         //第二步
         //要先傳回來編譯成json檔
@@ -60,8 +63,9 @@ export default {
         for (let i = 0; i < myJson.length; i++) {
           myJson[i].dis = true;
         }
-        //第三步 裝在data陣列裡
+        //第三步 覆蓋掉 helperAll2:[]
         this.helperAll2 = myJson;
+        console.log(this.helperAll2);
       });
   },
   methods: {

@@ -52,6 +52,7 @@
           >
 
           <button @click.prevent="insertPerson">註冊</button>
+          <div style="color: red" v-if="APIEmailCheck">帳號已重複</div>
         </form>
       </div>
 
@@ -131,6 +132,7 @@ export default {
       testPassword: "123",
       showAllPage: true,
       checkApiRes: false,
+      APIEmailCheck: false,
     };
   },
   mounted() {
@@ -139,6 +141,7 @@ export default {
     this.signInEmail = localStorage.getItem("mem_account");
     this.signInPassword = localStorage.getItem("mem_psww");
   },
+
   methods: {
     insertPerson() {
       if (
@@ -151,7 +154,54 @@ export default {
       ) {
         alert("失敗");
       } else {
-        alert("成功");
+        const formData = new FormData();
+
+        let mem_email = this.email;
+
+        formData.append("mem_email", mem_email);
+        formData.append("checkEmail", 1);
+        fetch("http://localhost/dida_project/public/php/memberInsert.php", {
+          method: "post",
+          body: formData,
+        })
+          .then((res) => {
+            return res.json();
+          })
+          .then((data) => {
+            if (Array.isArray(data) && data.length === 0) {
+              // JSON 数组为空
+              this.APIEmailCheck = false;
+              console.log(this.APIEmailCheck);
+              console.log(JSON.stringify(data));
+
+              const formData = new FormData();
+              let mem_email = this.email;
+              let mem_name = this.name;
+              let mem_psw = this.password;
+
+              formData.append("mem_email", mem_email);
+              formData.append("mem_name", mem_name);
+              formData.append("mem_psw", mem_psw);
+
+              fetch(
+                "http://localhost/dida_project/public/php/memberInsert.php",
+                {
+                  method: "post",
+                  body: formData,
+                }
+              ).then((res) => {
+                return res.json();
+              });
+
+              alert("申請成功");
+              this.email = "";
+              this.name = "";
+              this.password = "";
+            } else {
+              // JSON 数组非空
+              this.APIEmailCheck = true;
+            }
+          });
       }
     },
     hideLogin() {

@@ -7,10 +7,10 @@ header("Content-Type: application/json");
 require_once("connect.php"); 
 
 
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
+if ($_SERVER["REQUEST_METHOD"] === "POST" ) {
     // 使用 $_POST 來訪問前端發送的數據
     $qa_no = $_POST["qa_no"];
-
+    
 
     // 直接執行更新操作
     $update_sql = "DELETE FROM quiz WHERE qa_no = :qa_no";
@@ -26,14 +26,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             "success" => true,
             "message" => "更新成功。",
         ];
-        echo json_encode($response);
+        // echo json_encode($response);
     } else {
         // 更新失敗，返回錯誤消息
         $response = [
             "error" => true,
             "message" => "更新失敗。",
         ];
-        echo json_encode($response);
+        // echo json_encode($response);
     }
 }
 
