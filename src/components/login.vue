@@ -133,13 +133,14 @@ export default {
       showAllPage: true,
       checkApiRes: false,
       APIEmailCheck: false,
+      signInAPI: "",
     };
   },
   mounted() {
-    localStorage.setItem("mem_account", "charmy101@gmail.com");
-    localStorage.setItem("mem_psww", "charmy101");
-    this.signInEmail = localStorage.getItem("mem_account");
-    this.signInPassword = localStorage.getItem("mem_psww");
+    // localStorage.setItem("mem_account", "charmy101@gmail.com");
+    // localStorage.setItem("mem_psww", "charmy101");
+    // this.signInEmail = localStorage.getItem("mem_account");
+    // this.signInPassword = localStorage.getItem("mem_psww");
   },
 
   methods: {
@@ -217,40 +218,57 @@ export default {
       this.signInNotCorrect = true;
     },
     signInMem() {
-      fetch(
-        `${this.$store.state.loginURL}/getConfirmMember.php`,
-        // "https://tibamef2e.com/cgd103/g1/api/getConfirmMember.php"
-        {
-          method: "POST",
-          // body: new URLSearchParams(input),
-          body: new URLSearchParams({
-            // 正確帳密
-            // mem_account: "charmy101@gmail.com",
-            // mem_psw: "charmy101",
-            mem_account: this.signInEmail,
-            mem_psw: this.signInPassword,
-          }),
-        }
-      )
+      const formData = new FormData();
+
+      let mem_email = this.signInEmail;
+      let mem_psw = this.signInPassword;
+      formData.append("mem_email", mem_email);
+      formData.append("mem_psw", mem_psw);
+      fetch(`${this.$store.state.APIurl}memberSelect.php`, {
+        method: "post",
+        body: formData,
+      })
         .then((res) => res.json())
-        .then((json) => {
-          console.log(json);
-          this.checkApiRes = json.code;
-          console.log(this.checkApiRes);
-          if (this.checkApiRes == 1) {
-            this.$store.state.userName = json.memInfo.mem_name;
-            console.log(this.$store.state.userName);
-          }
-        })
-        .then(() => {
-          if (this.checkApiRes == 0) {
-            this.signInNotCorrect = false;
-          } else if (this.checkApiRes == 1) {
-            this.signInNotCorrect = true;
-            this.$store.state.storeShowLogin =
-              !this.$store.state.storeShowLogin;
-          }
+        .then((data) => {
+          this.signInAPI = data;
+          this.$store.state.userName = this.signInAPI[0].mem_name;
+          console.log("this.$store.state.userName", this.$store.state.userName);
+          console.log(this.signInAPI);
+          this.$store.state.storeShowLogin = false;
         });
+      // fetch(
+      //   `${this.$store.state.loginURL}/getConfirmMember.php`,
+      //   // "https://tibamef2e.com/cgd103/g1/api/getConfirmMember.php"
+      //   {
+      //     method: "POST",
+      //     // body: new URLSearchParams(input),
+      //     body: new URLSearchParams({
+      //       // mem_account: "charmy101@gmail.com",
+      //       // mem_psw: "charmy101",
+      //       mem_account: this.signInEmail,
+      //       mem_psw: this.signInPassword,
+      //     }),
+      //   }
+      // )
+      //   .then((res) => res.json())
+      //   .then((json) => {
+      //     console.log(json);
+      //     this.checkApiRes = json.code;
+      //     console.log(this.checkApiRes);
+      //     if (this.checkApiRes == 1) {
+      //       this.$store.state.userName = json.memInfo.mem_name;
+      //       console.log(this.$store.state.userName);
+      //     }
+      //   })
+      //   .then(() => {
+      //     if (this.checkApiRes == 0) {
+      //       this.signInNotCorrect = false;
+      //     } else if (this.checkApiRes == 1) {
+      //       this.signInNotCorrect = true;
+      //       this.$store.state.storeShowLogin =
+      //         !this.$store.state.storeShowLogin;
+      //     }
+      //   });
     },
     testNameSignUp() {
       let regex = /^[\u4e00-\u9fa5]{2,4}$/;
