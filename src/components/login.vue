@@ -2,7 +2,11 @@
   <div v-if="this.$store.state.storeShowLogin">
     <div class="backplate" @click="hideLogin"></div>
 
-    <div class="container" :class="{ 'right-panel-active': isSignUp }" id="container">
+    <div
+      class="container"
+      :class="{ 'right-panel-active': isSignUp }"
+      id="container"
+    >
       <!-- signup固定填單 -->
       <div class="form-container sign-up-container">
         <form>
@@ -10,24 +14,44 @@
           <div class="social-container">
             <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
             <a href="#" class="social"><i class="fa-brands fa-google"></i></a>
-            <a href="#" class="social"><i class="fa-brands fa-instagram fa-lg"></i></a>
+            <a href="#" class="social"
+              ><i class="fa-brands fa-instagram fa-lg"></i
+            ></a>
           </div>
           <span>或使用電子郵件登入</span>
-          <input type="text" v-model="name" placeholder="姓名" @input="testNameSignUp"
-            :class="{ checkInput: !isValidName, correctInput: isValidName }" />
+          <input
+            type="text"
+            v-model="name"
+            placeholder="姓名"
+            @input="testNameSignUp"
+            :class="{ checkInput: !isValidName, correctInput: isValidName }"
+          />
           <span v-if="!isValidName" class="caution">請輸入有效姓名</span>
 
-          <input type="email" v-model="email" placeholder="電子信箱" @input="testMailSignUp"
-            :class="{ checkInput: !isValidEmail, correctInput: isValidEmail }" />
+          <input
+            type="email"
+            v-model="email"
+            placeholder="電子信箱"
+            @input="testMailSignUp"
+            :class="{ checkInput: !isValidEmail, correctInput: isValidEmail }"
+          />
           <span v-if="!isValidEmail" class="caution">請輸入有效的信箱</span>
 
-          <input type="password" v-model="password" placeholder="密碼" @input="testPassWordSignUp" :class="{
-            checkInput: !isValidPassword,
-            correctInput: isValidPassword,
-          }" />
-          <span v-if="!isValidPassword" class="caution">密碼長度需在8~12個字之間,至少含一個英文字母(不分大小寫)</span>
+          <input
+            type="password"
+            v-model="password"
+            placeholder="密碼"
+            @input="testPassWordSignUp"
+            :class="{
+              checkInput: !isValidPassword,
+              correctInput: isValidPassword,
+            }"
+          />
+          <span v-if="!isValidPassword" class="caution"
+            >密碼長度需在8~12個字之間,至少含一個英文字母(不分大小寫)</span
+          >
 
-          <button>註冊</button>
+          <button @click.prevent="insertPerson">註冊</button>
         </form>
       </div>
 
@@ -38,18 +62,30 @@
           <div class="social-container">
             <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
             <a href="#" class="social"><i class="fa-brands fa-google"></i></a>
-            <a href="#" class="social"><i class="fa-brands fa-instagram fa-lg"></i></a>
+            <a href="#" class="social"
+              ><i class="fa-brands fa-instagram fa-lg"></i
+            ></a>
           </div>
           <span>或使用您的帳號</span>
-          <input type="email" v-model="signInEmail" placeholder="電子信箱" :class="{
-            checkInput: !signInNotCorrect,
-            correctInput: signInNotCorrect,
-          }" />
+          <input
+            type="email"
+            v-model="signInEmail"
+            placeholder="電子信箱"
+            :class="{
+              checkInput: !signInNotCorrect,
+              correctInput: signInNotCorrect,
+            }"
+          />
           <span v-if="!signInNotCorrect" class="caution">信箱或密碼錯誤</span>
-          <input type="password" v-model="signInPassword" placeholder="密碼" :class="{
-            checkInput: !signInNotCorrect,
-            correctInput: signInNotCorrect,
-          }" />
+          <input
+            type="password"
+            v-model="signInPassword"
+            placeholder="密碼"
+            :class="{
+              checkInput: !signInNotCorrect,
+              correctInput: signInNotCorrect,
+            }"
+          />
           <span v-if="!signInNotCorrect" class="caution">信箱或密碼錯誤</span>
           <a href="#">忘記密碼?</a>
           <button @click="signInMem">登入</button>
@@ -104,6 +140,20 @@ export default {
     this.signInPassword = localStorage.getItem("mem_psww");
   },
   methods: {
+    insertPerson() {
+      if (
+        !this.isValidPassword ||
+        !this.isValidName ||
+        !this.isValidEmail ||
+        !this.name ||
+        !this.email ||
+        !this.password
+      ) {
+        alert("失敗");
+      } else {
+        alert("成功");
+      }
+    },
     hideLogin() {
       this.$store.state.storeShowLogin = !this.$store.state.storeShowLogin;
       this.name = "";
@@ -288,7 +338,7 @@ button {
   border-radius: 20px;
   border: 1px solid #fff;
   background-color: #a2d2d4;
-  color: map-get($colors , 'light');
+  color: map-get($colors, "light");
   font-size: 12px;
   font-weight: bold;
   padding: 12px 45px;
@@ -386,7 +436,6 @@ input:focus {
 }
 
 @keyframes show {
-
   0%,
   49.99% {
     opacity: 0;

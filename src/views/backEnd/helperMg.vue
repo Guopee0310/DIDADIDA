@@ -47,15 +47,21 @@ export default {
     };
   },
   mounted() {
-    fetch("http://localhost/dida_project/public/php/helperMg.php")
+    fetch("http://localhost/dida_project/public/php/helperMg.php") //第一步
+      // fetch(`${this.$store.state.APIurl}helperMg.php`)
+      //this.$store.state.APIurl
       .then(function (response) {
+        //第二步
+        //要先傳回來編譯成json檔
         return response.json();
       })
+
       .then((myJson) => {
         for (let i = 0; i < myJson.length; i++) {
           myJson[i].dis = true;
-          this.helperAll2 = myJson;
         }
+        //第三步 裝在data陣列裡
+        this.helperAll2 = myJson;
       });
   },
   methods: {
