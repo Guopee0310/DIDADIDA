@@ -7,45 +7,32 @@
       <div class="index">
         <!-- banner + open time ------------------------------------------ -->
         <div class="banner">
-          <Carousel
-            autoplay
-            autoplay-speed="4800"
-            dots="none"
-            v-model="value"
-            loop
-          >
-            <CarouselItem>
+          <Carousel autoplay autoplay-speed="4800" dots="none" v-model="value" loop>
+            <CarouselItem v-for="i in bannerAll">
               <div class="demo-carousel">
-                <img
-                  src="../../public/all_images/banner/index_banner1.png"
-                  alt=""
-                />
+                <img :src="i.banner_pic" alt="" />
+              </div>
+            </CarouselItem>
+            <!-- <CarouselItem>
+              <div class="demo-carousel">
+                <img src="../../public/all_images/banner/index_banner2.png" alt="" />
               </div>
             </CarouselItem>
             <CarouselItem>
               <div class="demo-carousel">
-                <img
-                  src="../../public/all_images/banner/index_banner2.png"
-                  alt=""
-                />
+                <img src="../../public/all_images/banner/index_banner3.png" alt="" />
               </div>
             </CarouselItem>
             <CarouselItem>
               <div class="demo-carousel">
-                <img
-                  src="../../public/all_images/banner/index_banner3.png"
-                  alt=""
-                />
+                <img src="../../public/all_images/banner/index_banner4.png" alt="" />
               </div>
             </CarouselItem>
             <CarouselItem>
               <div class="demo-carousel">
-                <img
-                  src="../../public/all_images/banner/index_banner4.png"
-                  alt=""
-                />
+                <img src="../../public/all_images/banner/index_banner4.png" alt="" />
               </div>
-            </CarouselItem>
+            </CarouselItem> -->
           </Carousel>
           <p>
             <blingText></blingText>
@@ -55,17 +42,9 @@
               <div class="open">
                 <span>{{ $t("營業時間") }}</span>
                 <span>09:00-17:00</span>
-                <svg
-                  x="0px"
-                  y="0px"
-                  width="200px"
-                  height="15px"
-                  viewBox="0 0 399.6 15.9"
-                >
-                  <polyline
-                    class="op_line"
-                    points="0.1,5.5 58,15.4 118.4,5.5 189.2,5.5 258.7,10.4 368.3,0.5 399.5,7.9 "
-                  />
+                <svg x="0px" y="0px" width="200px" height="15px" viewBox="0 0 399.6 15.9">
+                  <polyline class="op_line"
+                    points="0.1,5.5 58,15.4 118.4,5.5 189.2,5.5 258.7,10.4 368.3,0.5 399.5,7.9 " />
                 </svg>
                 <span>{{ $t("最後入場") }}</span>
                 <span>16:00</span>
@@ -115,11 +94,7 @@
         <div class="map">
           <iframe
             src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14468.996712784081!2d121.2250227!3d24.9576355!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x346823ea50c732a5%3A0x1b5e6ee66e9fec49!2z57ev6IKyVGliYU1l6ZmE6Kit5Lit5aOi6IG36KiT5Lit5b-D!5e0!3m2!1szh-TW!2stw!4v1690272123794!5m2!1szh-TW!2stw"
-            style="border: 0"
-            allowfullscreen=""
-            loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
-          >
+            style="border: 0" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
           </iframe>
           <div class="text">
             <div class="address">
@@ -152,9 +127,7 @@
           <div class="item" v-for="product in products" :key="product">
             <div class="image">
               <!-- <a href="#"><img :src="product.src" alt="product.alt" /></a> -->
-              <router-link to="/product"
-                ><img :src="product.src" alt="product.alt"
-              /></router-link>
+              <router-link to="/product"><img :src="product.src" alt="product.alt" /></router-link>
             </div>
             <div class="content">
               <div class="nub">{{ product.nub }}</div>
@@ -172,16 +145,10 @@
           <router-link to="/product"><button>更多商品</button></router-link>
 
           <div class="deco shark">
-            <img
-              src="../../public/all_images/index/deco_index_shark.png"
-              alt=""
-            />
+            <img src="../../public/all_images/index/deco_index_shark.png" alt="" />
           </div>
           <div class="deco whale">
-            <img
-              src="../../public/all_images/index/deco_index_whale.png"
-              alt=""
-            />
+            <img src="../../public/all_images/index/deco_index_whale.png" alt="" />
           </div>
         </div>
 
@@ -316,6 +283,7 @@ export default {
           content: "請搭乘海洋線，於滴答滴答站下車，2號出口",
         },
       ],
+      bannerAll: []
     };
   },
   methods: {},
@@ -337,6 +305,20 @@ export default {
     setTimeout(() => {
       this.resetVisual = true;
     }, this.animationDuration + 300);
+
+    fetch(`${this.$store.state.APIurl}homePicMg.php`)
+      .then(function (response) {
+        return response.json();
+      })
+
+      .then((myJson) => {
+        for (let i = 0; i < myJson.length; i++) {
+          myJson[i].banner_pic = require(`../../public/all_images/banner/${myJson[i].banner_pic}`);
+          myJson[i].isDis = true;
+        }
+        this.bannerAll = myJson;
+      });
+
   },
 };
 </script>
@@ -659,6 +641,7 @@ export default {
       position: absolute;
       z-index: 1;
     }
+
     .shark {
       top: 400px;
       left: -10%;
@@ -675,6 +658,7 @@ export default {
     position: absolute;
     top: 120rem;
     right: 0;
+
     img {
       position: relative;
       left: 50%;
@@ -769,11 +753,11 @@ export default {
       }
     }
 
-    .day > span:first-child {
+    .day>span:first-child {
       display: block;
     }
 
-    .day > span:nth-child(2) {
+    .day>span:nth-child(2) {
       font-size: 80px;
       font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
     }
@@ -783,7 +767,9 @@ export default {
   @media screen and (max-width: 768px) {
     .deco {
       display: none;
-    } //暫時拿掉
+    }
+
+    //暫時拿掉
     .ticket {
       max-width: 90%;
     }
@@ -825,7 +811,7 @@ export default {
         padding-right: 15px;
       }
 
-      .day > span:nth-child(2) {
+      .day>span:nth-child(2) {
         font-size: 60px;
       }
     }
