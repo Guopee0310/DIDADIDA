@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>表單欄位變數練習(前台)</title>
+	<style>
+		h2 {
+			text-align: center;
+			margin: 30px auto;
+		}
+
+		form {
+			margin: auto;
+			text-align: center;
+		}
+
+		input {
+			margin: 5px;
+			padding: 5px;
+			border: 0;
+			background-color: #ddd;
+			border-radius: 3px;
+			outline: none;
+		}
+
+		.btn {
+			width: 80px;
+			background-color: #a07b67;
+			color: #fff;
+		}
+	</style>
+</head>
+
+<body>
+	<h2>申請會員</h2>
+	<form method="get" action="login.php">
+		姓名:<input type="text" name="memName" size="15"><br>
+		帳號:<input type="text" name="memId" size="15" maxlength="6"><br>
+		密碼:<input type="password" name="memPsw" size="15" maxlength="6"><br>
+		e-mail:<input type="email" name="email" size="20"><br>
+
+		性別:<input type="radio" name="gender" size="8">男性
+		<input type="radio" name="gender" size="8">女性
+		<input type="radio" name="gender" size="8">不公開<br>
+
+		生日:<input type="date" name="birthday" size="15"><br>
+		聯絡電話:<input type="tel" name="tel" size="16" maxlength="10"><br>
+
+		<input class="btn" type="submit" value="新增">
+		<input class="btn" type="reset" value="重新設定">
+	</form>
+
+</body>
+
+</html>

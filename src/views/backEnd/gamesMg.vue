@@ -15,15 +15,7 @@
           :disabled="i[4]"
           @blur="getQuestion(index)"
         /> -->
-        <textarea
-          name=""
-          id=""
-          cols="20"
-          rows="2"
-          v-model="i.qa_que"
-          :disabled="i.isDis"
-          class="questionarea"
-        >
+        <textarea name="" id="" cols="20" rows="2" v-model="i.qa_que" :disabled="i.isDis" class="questionarea">
         </textarea>
 
         <select name="" id="" :disabled="i.isDis" v-model="i.qa_ans">
@@ -54,36 +46,14 @@
       <div class="singleRow" v-for="(i, index) in labaAPI" :key="index">
         <div>
           <div class="picBox">
-            <img
-              :src="i.game_img"
-              alt=""
-              :ref="'imagePreview' + index"
-              class="choosePic"
-            />
+            <img :src="i.game_img" alt="" :ref="'imagePreview' + index" class="choosePic" />
           </div>
-          <input
-            type="file"
-            @change="pushImg($event, index)"
-            :disabled="i.isDis"
-            :ref="'fileInput' + index"
-          />
+          <input type="file" @change="pushImg($event, index)" :disabled="i.isDis" :ref="'fileInput' + index" />
         </div>
         <div class="inputAll">
-          <input
-            type="text"
-            placeholder="標題"
-            :disabled="i.isDis"
-            v-model="i.game_title"
-          />
-          <textarea
-            name=""
-            id=""
-            cols="30"
-            rows="5"
-            placeholder="內容"
-            :disabled="i.isDis"
-            v-model="i.game_text"
-          ></textarea>
+          <input type="text" placeholder="標題" :disabled="i.isDis" v-model="i.game_title" />
+          <textarea name="" id="" cols="30" rows="5" placeholder="內容" :disabled="i.isDis"
+            v-model="i.game_text"></textarea>
         </div>
         <select name="" id="" :disabled="i.isDis" v-model="i.qa_bonus">
           <option value="5">5</option>
@@ -215,9 +185,7 @@ export default {
       .then((myJson) => {
         // 修改API數據中的圖像路徑
         for (let i = 0; i < myJson.length; i++) {
-          myJson[
-            i
-          ].game_img = require(`../../../public/all_images/laba/${myJson[i].game_img}`);
+          myJson[i].game_img = require(`../../../public/all_images/laba/${myJson[i].game_img}`);
           myJson[i].isDis = true;
         }
         // 將修改後的數據賦值給Vue組件中的數據
@@ -402,18 +370,22 @@ export default {
   justify-content: space-around;
   padding-bottom: 10px;
 }
+
 .createBtn {
   border: 1px black solid;
   width: 6rem;
   padding: 3px 10px;
   cursor: pointer;
 }
+
 .singleQuestion {
   display: flex;
   justify-content: space-around;
   margin: 20px 0px;
+
   .questionClick {
     display: flex;
+
     div {
       border: 1px black solid;
       padding: 5px;
@@ -421,48 +393,59 @@ export default {
       cursor: pointer;
     }
   }
+
   .questionarea {
-    overflow: auto; /* Add scrollbars when content overflows */
+    overflow: auto;
+    /* Add scrollbars when content overflows */
     scrollbar-width: thin;
     scrollbar-color: #03e9f4 transparent;
   }
 }
+
 .labaAll {
   .labaTitle {
     display: flex;
   }
+
   .labaDetailAll {
     display: flex;
     justify-content: space-around;
     padding-bottom: 10px;
     border-bottom: 1px black solid;
   }
+
   .singleRow {
     display: flex;
     align-items: center;
     justify-content: space-around;
+
     div {
       .picBox {
         width: 150px;
         height: 150px;
         border: 1px black solid;
+
         img {
           width: 100%;
           height: 100%;
         }
       }
     }
+
     .inputAll {
       display: flex;
       flex-direction: column;
+
       input {
         margin: 20px 0px;
       }
     }
+
     .chooseBtnAll {
       display: flex;
       flex-direction: column;
     }
+
     .startUpdate {
       border: 1px black solid;
       padding: 5px;
