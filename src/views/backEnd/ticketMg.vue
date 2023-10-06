@@ -2,21 +2,24 @@
   <Tabs value="name1">
     <TabPane label="票種 / 票價管理" name="name1">
       <button class="add" @click="createNewOne">+ 新增項目</button>
+      
       <li>
-        <p calss="tickettype">票種</p>
+        <p class="tickettype">票種</p>
         <p>價格</p>
         <p>條件</p>
+        
       </li>
-      <ul v-for="(item, index) in ticket" :key="index">
-
+      <ul v-for="(i, index) in helperAll2" :key="index">
+    
         <li>
 
-          <p class="tickettype" ><label for=""><input type="text" v-model="item.ticketname" :disabled="item[3]"></label>
+          <p class="tickettype" ><label for=""><input type="text" v-model="i.tic_name" :disabled="i.dis"></label>
           </p>
-          <p ><label for=""><input type="text" v-model="item.price" :disabled="item[3]"></label></p>
-          <p ><textarea name="" id="" cols="30" rows="5" v-model="item.content" :disabled="item[3]"></textarea></p>
+          <p ><label for=""><input type="text" v-model="i.tic_price" :disabled="i.dis"></label></p>
+          <p ><textarea name="" id="" cols="30" rows="5" v-model="i.tic_info" :disabled="i.dis"></textarea></p>
+          
           <div class="updateBtnAll">
-            <button @click="updateTicket(index, $event)">確認</button>
+            <button @click="updateTicket(index, $event, i)">確認</button>
           </div>
         </li>
 
@@ -123,13 +126,32 @@ export default {
           price: "NT 350",
           content: " 最低人数要求：團隊人數必須超過 10 人，才能享受團體票折扣。",
           change: true
-        }
-      ]
+        },
+      ],
+      helperAll2: []
 
     };
   },
 
-  mounted() { },
+  mounted() { 
+    fetch("http://localhost/dida_project/public/php/ticketMg.php") //第一步
+      // fetch(`${this.$store.state.APIurl}helperMg.php`)
+      //this.$store.state.APIurl
+      .then(function (response) {
+        //第二步
+        //要先傳回來編譯成json檔
+        return response.json();
+      })
+
+      .then((myJson) => {
+        for (let i = 0; i < myJson.length; i++) {
+          myJson[i].dis = true;
+        }
+        //第三步 裝在data陣列裡
+        this.helperAll2 = myJson;
+        console.log(this.helperAll2)
+      });
+  },
   beforeDestroy() { },
   computed: {
     catchDate() {
@@ -170,13 +192,29 @@ export default {
       }
     },
 
-    updateTicket(index, e) {
+    updateTicket(index, e, i) {
       if (e.target.innerText == "確認") {
-        this.ticket[index][3] = true;
+        this.helperAll2[index].dis = true;
         e.target.innerText = "修改";
+
+        const formData = new FormData();
+        let tictype_id = i.tictype_id;
+        let tic_name	 = this.helperAll2[index].tic_name;
+        let tic_info = this.helperAll2[index].tic_info;
+        let tic_price = this.helperAll2[index].tic_price;
+
+
+        formData.append("tictype_id", tictype_id);
+        formData.append("tic_name", tic_name);
+        formData.append("tic_info", tic_info);
+        formData.append("tic_price", tic_price);
+        fetch("http://localhost/dida_project/public/php/ticketUpdate.php", {
+          method: "post",
+          body: formData,
+        }).then((res) => res.json());
         return;
       }
-      this.ticket[index][3] = false;
+      this.helperAll2[index].dis = false;
       e.target.innerText = "確認";
     }
   },
