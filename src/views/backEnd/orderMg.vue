@@ -29,7 +29,14 @@
           <div>{{ i.prodCount }}</div>
           <div>{{ i.orderTime }}</div>
           <div>{{ i.orderState }}</div>
-          <button>修改</button>
+
+
+          <div class="updateOrderBtn">
+            <div class="update" @click="updateOrder(index, $event, i)">
+             <button>修改</button>
+            </div>
+           </div>
+         
         </div>
       </div>
     </TabPane>
@@ -120,12 +127,68 @@ export default {
           ticketDate: "2023.08.31",
         },
       ],
+      orderAll:[],
+      ticorderAll:[],
     };
   },
   computed: {},
-  mounted() {},
+  mounted() {
+    fetch("http://localhost/dida_project/public/php/orderMg.php") //第一步
+      // fetch(`${this.$store.state.APIurl}orderMg.php`)
+      //this.$store.state.APIurl
+      // axios
+      .then(function (response) {
+        //第二步
+        //要先傳回來編譯成json檔
+        return response.json();
+      })
 
-  methods: {},
+      .then((myJson) => {
+        for (let i = 0; i < myJson.length; i++) {
+          myJson[i].dis = true;
+        }
+        //第三步 覆蓋掉 orderAll:[]
+        this.helperAll2 = myJson;
+        console.log(this.orderAll);
+      });
+  },
+
+  methods: {updateOrder(index, e, i) {
+      if (e.target.innerText == "確認") {
+        this.orderAll[index].dis = true;
+        e.target.innerText = "修改";
+
+        const formData = new FormData();
+        let ord_id = i.ord_id;
+        let ord_date = this.orderAll[index].ord_date;
+        let ord_sum = this.orderAll[index].ord_sum;
+        let ord_ship = this.orderAll[index].ord_ship;
+        let ord_pay = this.orderAll[index].ord_pay;
+        let ord_person = this.orderAll[index].ord_person;
+        let ord_phone = this.orderAll[index].ord_phone;
+        let ord_add = this.orderAll[index].ord_add;
+        let ord_state = this.orderAll[index].ord_state;
+        let ord_redeem = this.orderAll[index].ord_redeem;
+
+        formData.append("ord_id", ord_id);
+        formData.append("ord_date", ord_date);
+        formData.append("ord_sum", ord_sum);
+        formData.append(" ord_ship ",  ord_ship );
+        formData.append("ord_pay", ord_pay);
+        formData.append("ord_person ", ord_person );
+        formData.append("ord_phone", ord_phone);
+        formData.append("ord_add", ord_add);
+        formData.append("ord_state", ord_state);
+        formData.append("ord_redeem", ord_redeem);
+        fetch("http://localhost/dida_project/public/php/orderMg.php", {
+          method: "post",
+          body: formData,
+        }).then((res) => res.json());
+        return;
+      }
+      this.orderAll[index].dis = false;
+      e.target.innerText = "確認";
+    },},
 };
 </script>
 <style lang="scss" scoped>
