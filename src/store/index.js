@@ -37,7 +37,8 @@ export default createStore({
   // 類似vue檔裡面的computed
   getters: {
     remainingTodos: (state) => {
-      return (state.totalScorePoint = state.quizScore + state.labaScore);
+      return (state.totalScorePoint =
+        state.quizScore + state.labaScore + state.totalScorePoint);
     },
   },
   mutations: {
