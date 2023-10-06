@@ -17,7 +17,7 @@
       </div>
 
       <div class="updateAndDel">
-        <div @click="updatePic(index, $event, i)">修改</div>
+        <div @click="updatePic(index, $event)">修改</div>
         <div @click="delRow(index)">刪除</div>
       </div>
     </div>
@@ -64,8 +64,13 @@ export default {
     delRow(index) {
       this.bannerAll.splice(index, 1);
     },
-    updatePic(index) {
+    updatePic(index, e) {
+      if (e.target.innerHTML == "確認") {
+        this.bannerAll[index].isDis = true;
+        e.target.innerHTML = "修改"
+      }
       this.bannerAll[index][1] = false;
+      e.target.innerHTML = "確認"
     },
     indexPlus(idx) {
       return (idx += 1);
