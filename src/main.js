@@ -75,7 +75,7 @@ const i18n = createI18n({
       總金額: 'Total',
       立即購票: 'Book Now',
       購票須知: 'Ticket Purchase Instructions',
-      '未滿4歲且有家長陪同的幼童可免費入場': 'Children under 4 years old are admitted free and must be accompanied by a parent.',
+      '未滿 4 歲的兒童可免費入場，需有家長陪同入場。': 'Children under 4 years old are admitted free and must be accompanied by a parent.',
       '下訂時請以「票券使用日」為主，下訂後即無法變更，敬請留意。': 'Please note that the "ticket expiration date" is the main one when placing an order. It cannot be changed after the order is placed.',
       '訂單一次最高訂購上限為 6 張，每日場次數量為限量販售，售完為止。': 'The maximum order limit for one order is 6, and the number of daily sessions is limited and sold while stocks last.',
       '訂單恕不接受部分變更，若需變更入場日及場次請整筆重新下訂。': 'Partial changes to orders will not be accepted. If you need to change the entry date and venue, please place a new order in full.',
