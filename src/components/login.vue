@@ -137,10 +137,10 @@ export default {
     };
   },
   mounted() {
-    // localStorage.setItem("mem_account", "charmy101@gmail.com");
-    // localStorage.setItem("mem_psww", "charmy101");
-    // this.signInEmail = localStorage.getItem("mem_account");
-    // this.signInPassword = localStorage.getItem("mem_psww");
+    localStorage.setItem("mem_account", "www@gmail.com");
+    localStorage.setItem("mem_psww", "123456789a");
+    this.signInEmail = localStorage.getItem("mem_account");
+    this.signInPassword = localStorage.getItem("mem_psww");
   },
 
   methods: {
