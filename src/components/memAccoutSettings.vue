@@ -22,28 +22,49 @@
     <div class="field__group">
       <div>
         <div class="field__label">性別</div>
-        <input type="text" class="field_input" />
+        <input
+          type="text"
+          class="field_input"
+          v-model="mem_gender"
+          placeholder="請輸入男或女或其他"
+          @blur="cheackGender"
+        />
       </div>
     </div>
     <!-- 出生日期 -->
     <div class="field__group">
       <div>
         <div class="field__label">出生日期</div>
-        <input type="date" class="field_input" v-model="mem_birth" />
+        <input
+          type="date"
+          class="field_input"
+          v-model="mem_birth"
+          @blur="checkbirth"
+        />
       </div>
     </div>
     <!-- 電話號碼 -->
     <div class="field__group">
       <div>
         <div class="field__label">電話號碼</div>
-        <input type="tel" class="field_input" v-model="mem_mob" />
+        <input
+          type="tel"
+          class="field_input"
+          v-model="mem_mob"
+          @blur="checkMob"
+        />
       </div>
     </div>
     <!-- Email -->
     <div class="field__group">
       <div>
         <div class="field__label">聯絡Email</div>
-        <input type="email" class="field_input mem_email" v-model="mem_email" />
+        <input
+          type="email"
+          class="field_input mem_email"
+          v-model="mem_email"
+          disabled
+        />
       </div>
     </div>
     <!-- 地址 -->
@@ -55,7 +76,7 @@
     </div>
   </section>
   <div class="field__action">
-    <button class="mem_btn">儲存</button>
+    <button class="mem_btn" @click="saveMem">儲存</button>
   </div>
 </template>
 <script>
@@ -88,13 +109,82 @@ export default {
         .then((data) => {
           this.mem_list = data;
           this.mem_address = this.mem_list[0].mem_address;
-          this.mem_mob = this.mem_list[0].mem_mob;
+
+          this.mem_mob += this.mem_list[0].mem_mob;
           this.mem_email = this.mem_list[0].mem_email;
           this.mem_birth = this.mem_list[0].mem_birth;
           this.mem_gender = this.mem_list[0].mem_gender;
           this.mem_name = this.mem_list[0].mem_name;
         });
     }
+  },
+  methods: {
+    saveMem() {
+      const formData = new FormData();
+      let mem_name = this.mem_name;
+      let mem_address = this.mem_address;
+      let mem_mob = this.mem_mob;
+      let mem_birth = this.mem_birth;
+      let mem_gender = this.mem_gender;
+      formData.append("mem_name", mem_name);
+      formData.append("mem_address", mem_address);
+      formData.append("mem_mob", mem_mob);
+      formData.append("mem_birth", mem_birth);
+      formData.append("mem_gender", mem_gender);
+
+      fetch(`${this.$store.state.APIurl}memAccoutUpdate.php`, {
+        method: "post",
+        body: formData,
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (Array.isArray(data) && data.length === 0) {
+            alert("更新失敗");
+          } else {
+            alert("更新成功");
+          }
+        });
+    },
+    checkMob() {
+      let pattern = /^09\d{8}$/;
+
+      if (!pattern.test(this.mem_mob)) {
+        alert("請確認手機號碼");
+        this.mem_mob = "";
+      }
+    },
+    checkbirth() {
+      const currentDate = new Date();
+      const year = currentDate.getFullYear();
+      const month = currentDate.getMonth() + 1;
+      const day = currentDate.getDate();
+
+      const enteredYear = parseInt(this.mem_birth.substring(0, 4), 10);
+      const enteredMonth = parseInt(this.mem_birth.substring(5, 7), 10);
+      const enteredDay = parseInt(this.mem_birth.substring(8, 10), 10);
+
+      if (
+        enteredYear > year ||
+        (enteredYear === year && enteredMonth > month) ||
+        (enteredYear === year && enteredMonth === month && enteredDay > day)
+      ) {
+        alert("請確認出生日期");
+        this.mem_birth = "";
+        return;
+      }
+    },
+
+    cheackGender() {
+      if (
+        this.mem_gender !== "男" &&
+        this.mem_gender !== "女" &&
+        this.mem_gender !== "其他"
+      ) {
+        this.mem_gender = "";
+        alert("請輸入男or女or其他");
+        return;
+      }
+    },
   },
 };
 </script>
