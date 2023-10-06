@@ -130,6 +130,35 @@ export default {
           }
 
           this.$store.state.labaScore = parseInt(this.labaAPI[4].qa_bonus);
+
+          if (this.$store.state.userName) {
+            const formData = new FormData();
+            let mem_name = this.$store.state.userName;
+            formData.append("mem_name", mem_name);
+            let catchOrignBonus = 0;
+            fetch(`${this.$store.state.APIurl}labaUpateBonus.php`, {
+              method: "post",
+              body: formData,
+            })
+              .then((res) => res.json())
+              .then((data) => {
+                catchOrignBonus = parseInt(data[0].mem_bonus);
+                return catchOrignBonus;
+              })
+              .then((orign) => {
+                const formData = new FormData();
+                let mem_name = this.$store.state.userName;
+                let mem_bonus = orign + parseInt(this.labaAPI[4].qa_bonus);
+                let updateBonus = "1";
+                formData.append("mem_name", mem_name);
+                formData.append("mem_bonus", mem_bonus);
+                formData.append("updateBonus", updateBonus);
+                fetch(`${this.$store.state.APIurl}labaUpdate2.php`, {
+                  method: "post",
+                  body: formData,
+                }).then((res) => res.json());
+              });
+          }
         } else if (randomNum == 2) {
           this.guessNum = 2;
           this.imgSrc = require(`../../public/all_images/laba/${this.labaAPI[5].game_img}`);
@@ -141,6 +170,35 @@ export default {
           }
 
           this.$store.state.labaScore = parseInt(this.labaAPI[5].qa_bonus);
+
+          if (this.$store.state.userName) {
+            const formData = new FormData();
+            let mem_name = this.$store.state.userName;
+            formData.append("mem_name", mem_name);
+            let catchOrignBonus = 0;
+            fetch(`${this.$store.state.APIurl}labaUpateBonus.php`, {
+              method: "post",
+              body: formData,
+            })
+              .then((res) => res.json())
+              .then((data) => {
+                catchOrignBonus = parseInt(data[0].mem_bonus);
+                return catchOrignBonus;
+              })
+              .then((orign) => {
+                const formData = new FormData();
+                let mem_name = this.$store.state.userName;
+                let mem_bonus = orign + parseInt(this.labaAPI[4].qa_bonus);
+                let updateBonus = "1";
+                formData.append("mem_name", mem_name);
+                formData.append("mem_bonus", mem_bonus);
+                formData.append("updateBonus", updateBonus);
+                fetch(`${this.$store.state.APIurl}labaUpdate2.php`, {
+                  method: "post",
+                  body: formData,
+                }).then((res) => res.json());
+              });
+          }
         } else if (randomNum == 3) {
           this.guessNum = 3;
           this.imgSrc = require(`../../public/all_images/laba/${this.labaAPI[3].game_img}`);
@@ -152,6 +210,35 @@ export default {
           }
 
           this.$store.state.labaScore = parseInt(this.labaAPI[3].qa_bonus);
+
+          if (this.$store.state.userName) {
+            const formData = new FormData();
+            let mem_name = this.$store.state.userName;
+            formData.append("mem_name", mem_name);
+            let catchOrignBonus = 0;
+            fetch(`${this.$store.state.APIurl}labaUpateBonus.php`, {
+              method: "post",
+              body: formData,
+            })
+              .then((res) => res.json())
+              .then((data) => {
+                catchOrignBonus = parseInt(data[0].mem_bonus);
+                return catchOrignBonus;
+              })
+              .then((orign) => {
+                const formData = new FormData();
+                let mem_name = this.$store.state.userName;
+                let mem_bonus = orign + parseInt(this.labaAPI[4].qa_bonus);
+                let updateBonus = "1";
+                formData.append("mem_name", mem_name);
+                formData.append("mem_bonus", mem_bonus);
+                formData.append("updateBonus", updateBonus);
+                fetch(`${this.$store.state.APIurl}labaUpdate2.php`, {
+                  method: "post",
+                  body: formData,
+                }).then((res) => res.json());
+              });
+          }
         } else if (randomNum == 4) {
           this.guessNum = 4;
           this.imgSrc = require(`../../public/all_images/laba/${this.labaAPI[2].game_img}`);
@@ -163,6 +250,35 @@ export default {
           }
 
           this.$store.state.labaScore = parseInt(this.labaAPI[2].qa_bonus);
+
+          if (this.$store.state.userName) {
+            const formData = new FormData();
+            let mem_name = this.$store.state.userName;
+            formData.append("mem_name", mem_name);
+            let catchOrignBonus = 0;
+            fetch(`${this.$store.state.APIurl}labaUpateBonus.php`, {
+              method: "post",
+              body: formData,
+            })
+              .then((res) => res.json())
+              .then((data) => {
+                catchOrignBonus = parseInt(data[0].mem_bonus);
+                return catchOrignBonus;
+              })
+              .then((orign) => {
+                const formData = new FormData();
+                let mem_name = this.$store.state.userName;
+                let mem_bonus = orign + parseInt(this.labaAPI[4].qa_bonus);
+                let updateBonus = "1";
+                formData.append("mem_name", mem_name);
+                formData.append("mem_bonus", mem_bonus);
+                formData.append("updateBonus", updateBonus);
+                fetch(`${this.$store.state.APIurl}labaUpdate2.php`, {
+                  method: "post",
+                  body: formData,
+                }).then((res) => res.json());
+              });
+          }
         } else if (randomNum == 5) {
           this.guessNum = 5;
           this.imgSrc = require(`../../public/all_images/laba/${this.labaAPI[1].game_img}`);
@@ -174,6 +290,35 @@ export default {
           }
 
           this.$store.state.labaScore = parseInt(this.labaAPI[1].qa_bonus);
+
+          if (this.$store.state.userName) {
+            const formData = new FormData();
+            let mem_name = this.$store.state.userName;
+            formData.append("mem_name", mem_name);
+            let catchOrignBonus = 0;
+            fetch(`${this.$store.state.APIurl}labaUpateBonus.php`, {
+              method: "post",
+              body: formData,
+            })
+              .then((res) => res.json())
+              .then((data) => {
+                catchOrignBonus = parseInt(data[0].mem_bonus);
+                return catchOrignBonus;
+              })
+              .then((orign) => {
+                const formData = new FormData();
+                let mem_name = this.$store.state.userName;
+                let mem_bonus = orign + parseInt(this.labaAPI[4].qa_bonus);
+                let updateBonus = "1";
+                formData.append("mem_name", mem_name);
+                formData.append("mem_bonus", mem_bonus);
+                formData.append("updateBonus", updateBonus);
+                fetch(`${this.$store.state.APIurl}labaUpdate2.php`, {
+                  method: "post",
+                  body: formData,
+                }).then((res) => res.json());
+              });
+          }
         } else if (randomNum == 6) {
           this.guessNum = 6;
           this.imgSrc = require(`../../public/all_images/laba/${this.labaAPI[0].game_img}`);
@@ -185,6 +330,35 @@ export default {
           }
 
           this.$store.state.labaScore = parseInt(this.labaAPI[0].qa_bonus);
+
+          if (this.$store.state.userName) {
+            const formData = new FormData();
+            let mem_name = this.$store.state.userName;
+            formData.append("mem_name", mem_name);
+            let catchOrignBonus = 0;
+            fetch(`${this.$store.state.APIurl}labaUpateBonus.php`, {
+              method: "post",
+              body: formData,
+            })
+              .then((res) => res.json())
+              .then((data) => {
+                catchOrignBonus = parseInt(data[0].mem_bonus);
+                return catchOrignBonus;
+              })
+              .then((orign) => {
+                const formData = new FormData();
+                let mem_name = this.$store.state.userName;
+                let mem_bonus = orign + parseInt(this.labaAPI[4].qa_bonus);
+                let updateBonus = "1";
+                formData.append("mem_name", mem_name);
+                formData.append("mem_bonus", mem_bonus);
+                formData.append("updateBonus", updateBonus);
+                fetch(`${this.$store.state.APIurl}labaUpdate2.php`, {
+                  method: "post",
+                  body: formData,
+                }).then((res) => res.json());
+              });
+          }
         }
         setTimeout(() => {
           this.finalShow = true;

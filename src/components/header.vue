@@ -354,8 +354,8 @@ export default {
       }
     },
     handleScroll(event) {
-      console.log(event);
-      console.log(window.scrollY);
+      // console.log(event);
+      // console.log(window.scrollY);
       if (window.scrollY == 0) {
         this.headerColor = "rgba(35, 45, 71, 0)";
         this.checkLogoPic = false;
