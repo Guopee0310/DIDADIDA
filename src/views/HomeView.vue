@@ -302,6 +302,7 @@ export default {
       this.loading = false;
       this.$store.state.showLoadingOnce = false;
     }, this.animationDuration);
+    
     setTimeout(() => {
       this.resetVisual = true;
     }, this.animationDuration + 300);
