@@ -134,15 +134,8 @@ const routes = [
       import(/* webpackChunkName: "member" */ "../views/ShoppingCart.vue"),
     meta: {
       title: "Cart",
+      check: false,
     },
-    // beforeEnter: (to, from, next) => {
-    //   if (!store.state.userName) {
-    //     alert('需先登入會員');
-    //     next('/login'); // 未登录时跳转到登录页面
-    //   } else {
-    //     next();
-    //   }
-    // },
   },
   {
     path: "/cartpop",
@@ -239,11 +232,24 @@ const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
 });
-
-router.beforeEach(async (to, from) => {
+router.beforeEach((to, from) => {
   if (to.meta && to.meta.title) {
     document.title = to.meta.title;
   }
 });
+
+// router.beforeEach(async (to, from) => {
+//   if (to.meta && to.meta.title) {
+//     document.title = to.meta.title;
+//   }
+//   if (to.path === "/shoppingcart") {
+//     // 在这里进行用户是否已登录的验证
+//     if (this.$store.state.checkLogin) {
+//       alert("需先登入會員");
+//       return false; // 取消路由导航，用户未登录时不允许进入购物车页面
+//     }
+//   }
+//   return true; // 允许路由导航继续
+// });
 
 export default router;

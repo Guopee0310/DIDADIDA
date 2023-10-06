@@ -230,10 +230,16 @@ export default {
       })
         .then((res) => res.json())
         .then((data) => {
+          if (Array.isArray(data) && data.length === 0) {
+            alert("帳號或密碼錯誤");
+            return;
+          }
           this.signInAPI = data;
-          this.$store.state.userName = this.signInAPI[0].mem_name;
+          // this.$store.state.userName = this.signInAPI[0].mem_name;
+          this.$store.commit("setUserName", data[0].mem_name);
           console.log("this.$store.state.userName", this.$store.state.userName);
           console.log(this.signInAPI);
+
           this.$store.state.storeShowLogin = false;
         });
       // fetch(

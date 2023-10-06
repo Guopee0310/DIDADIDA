@@ -31,6 +31,7 @@ export default createStore({
     questionPic: true,
     showLoadingOnce: true,
     APIurl: "http://localhost/dida_project/public/php/",
+    checkLogin: false,
   },
 
   // 類似vue檔裡面的computed
@@ -40,6 +41,9 @@ export default createStore({
     },
   },
   mutations: {
+    setUserName(state, userName) {
+      state.userName = userName;
+    },
     removeFavoItem(state, idx) {
       // 通过索引删除 favoList 中的项
       state.favoList.splice(idx, 1);
