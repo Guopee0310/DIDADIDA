@@ -4,7 +4,14 @@
     <div class="field__group mem_name">
       <div class="name">
         <div class="field__label">姓名</div>
-        <input type="text" class="field_input" maxlength="50" />
+
+        <input
+          type="text"
+          class="field_input"
+          maxlength="50"
+          v-model="mem_name"
+          disabled
+        />
       </div>
       <!-- <div class="surname">
                 <div class="field__label">姓</div>
@@ -22,28 +29,28 @@
     <div class="field__group">
       <div>
         <div class="field__label">出生日期</div>
-        <input type="date" class="field_input" />
+        <input type="date" class="field_input" v-model="mem_birth" />
       </div>
     </div>
     <!-- 電話號碼 -->
     <div class="field__group">
       <div>
         <div class="field__label">電話號碼</div>
-        <input type="tel" class="field_input" />
+        <input type="tel" class="field_input" v-model="mem_mob" />
       </div>
     </div>
     <!-- Email -->
     <div class="field__group">
       <div>
         <div class="field__label">聯絡Email</div>
-        <input type="email" class="field_input mem_email" />
+        <input type="email" class="field_input mem_email" v-model="mem_email" />
       </div>
     </div>
     <!-- 地址 -->
     <div class="field__group">
       <div>
         <div class="field__label">地址</div>
-        <input type="text" class="field_input mem_addr" />
+        <input type="text" class="field_input mem_addr" v-model="mem_address" />
       </div>
     </div>
   </section>
@@ -55,7 +62,39 @@
 export default {
   name: "memAccoutSettings",
   data() {
-    return {};
+    return {
+      mem_list: [],
+      mem_address: "",
+      mem_mob: "",
+      mem_email: "",
+      mem_birth: "",
+      mem_gender: "",
+      mem_name: "",
+    };
+  },
+  mounted() {
+    if (this.$store.state.userName) {
+      const formData = new FormData();
+
+      let mem_name = this.$store.state.userName;
+
+      formData.append("mem_name", mem_name);
+
+      fetch(`${this.$store.state.APIurl}memAccoutSetting.php`, {
+        method: "post",
+        body: formData,
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          this.mem_list = data;
+          this.mem_address = this.mem_list[0].mem_address;
+          this.mem_mob = this.mem_list[0].mem_mob;
+          this.mem_email = this.mem_list[0].mem_email;
+          this.mem_birth = this.mem_list[0].mem_birth;
+          this.mem_gender = this.mem_list[0].mem_gender;
+          this.mem_name = this.mem_list[0].mem_name;
+        });
+    }
   },
 };
 </script>
