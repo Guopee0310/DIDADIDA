@@ -112,19 +112,33 @@ export default {
       }
       if (this.$store.state.userName) {
         this.$store.state.quizScore += this.totalPoint;
-        let totalScore =
-          this.$store.state.totalScorePoint +
-          this.$store.state.quizScore +
-          this.$store.state.labaScore;
+
         const formData = new FormData();
         let mem_name = this.$store.state.userName;
         formData.append("mem_name", mem_name);
-        formData.append("mem_bonus", totalScore);
-        formData.append("updateBonus", "1");
-        fetch(`${this.$store.state.APIurl}memUpdateBonus.php`, {
+        let catchOrignBonus = 0;
+        fetch(`${this.$store.state.APIurl}labaUpateBonus.php`, {
           method: "post",
           body: formData,
-        }).then((res) => res.json());
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            catchOrignBonus = parseInt(data[0].mem_bonus);
+            return catchOrignBonus;
+          })
+          .then((orign) => {
+            const formData = new FormData();
+            let mem_name = this.$store.state.userName;
+            let mem_bonus = orign + this.$store.state.quizScore;
+            let updateBonus = "1";
+            formData.append("mem_name", mem_name);
+            formData.append("mem_bonus", mem_bonus);
+            formData.append("updateBonus", updateBonus);
+            fetch(`${this.$store.state.APIurl}labaUpdate2.php`, {
+              method: "post",
+              body: formData,
+            }).then((res) => res.json());
+          });
       }
 
       if (this.finalAns.length >= 5) {
