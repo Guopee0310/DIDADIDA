@@ -188,7 +188,7 @@ export default {
               .then((orign) => {
                 const formData = new FormData();
                 let mem_name = this.$store.state.userName;
-                let mem_bonus = orign + parseInt(this.labaAPI[4].qa_bonus);
+                let mem_bonus = orign + parseInt(this.point);
                 let updateBonus = "1";
                 formData.append("mem_name", mem_name);
                 formData.append("mem_bonus", mem_bonus);
@@ -228,7 +228,7 @@ export default {
               .then((orign) => {
                 const formData = new FormData();
                 let mem_name = this.$store.state.userName;
-                let mem_bonus = orign + parseInt(this.labaAPI[4].qa_bonus);
+                let mem_bonus = orign + parseInt(this.point);
                 let updateBonus = "1";
                 formData.append("mem_name", mem_name);
                 formData.append("mem_bonus", mem_bonus);

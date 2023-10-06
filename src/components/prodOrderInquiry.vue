@@ -1,7 +1,11 @@
 <template>
   <div class="prod_order_main">
     <div class="order_area">
-      <div class="prod_order_group" v-for="prod in prodOrder" :key="prod.prodImg">
+      <div
+        class="prod_order_group"
+        v-for="prod in prodOrder"
+        :key="prod.prodImg"
+      >
         <div class="prod_img">
           <img :src="prod.prodImg" alt="" />
         </div>
@@ -41,8 +45,7 @@ export default {
   name: "prodOrderInquiry",
   data() {
     return {
-      prodOrder: [
-      ],
+      prodOrder: [],
     };
   },
   created() {
@@ -63,7 +66,7 @@ export default {
     border: 0;
     border-radius: 15px;
     margin: 0 auto;
-    background-color: map-get($colors, 'memarea');
+    background-color: map-get($colors, "memarea");
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -98,10 +101,9 @@ export default {
       border-radius: 4px;
     }
 
-
     .prod_order_group {
       width: 460px;
-      border-bottom: 1px solid map-get($colors, 'h2Blue');
+      border-bottom: 1px solid map-get($colors, "h2Blue");
       display: flex;
       justify-content: space-evenly;
       z-index: 2;
@@ -142,7 +144,7 @@ export default {
     .item_info p:first-child {
       width: 30%;
       text-align: center;
-      background-color: map-get($colors, 'bgc');
+      background-color: map-get($colors, "bgc");
     }
 
     .item_info p:nth-child(2) {
@@ -166,12 +168,11 @@ export default {
         color: #eee;
         border: 0;
         border-radius: 5px;
-        background-color: #73A8D7;
+        background-color: #73a8d7;
       }
     }
   }
 }
-
 
 @media screen and (max-width: 414px) {
   .prod_order_main {
