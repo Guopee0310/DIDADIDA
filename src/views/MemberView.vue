@@ -16,7 +16,7 @@
       </div>
       <div class="bonuspoints">
         <p>
-          尚有紅利點數 : <span>{{ remainingTodos }}</span> 點
+          尚有紅利點數 : <span>{{ mem_bonus }}</span> 點
         </p>
       </div>
       <div class="verification">
@@ -25,8 +25,14 @@
           <span>Google</span>
         </div>
         <label class="verification_label" for="verification_id">
-          已驗證<input class="verification_input" type="checkbox" value="" id="verification_id" style="zoom: 120%;"
-            checked />
+          已驗證<input
+            class="verification_input"
+            type="checkbox"
+            value=""
+            id="verification_id"
+            style="zoom: 120%"
+            checked
+          />
         </label>
       </div>
       <div class="btn_area">
@@ -44,32 +50,48 @@
         </button>
       </div>
       <div class="logOutBtn">
-        <button v-if="this.$store.state.userName" @click="logOutAPI()" :class="{ alreadyClick: logOutClick }">
-          {{ $t('登出') }}
+        <button
+          v-if="this.$store.state.userName"
+          @click="logOutAPI()"
+          :class="{ alreadyClick: logOutClick }"
+        >
+          {{ $t("登出") }}
         </button>
       </div>
     </div>
     <!-- 右側區塊 -->
     <!-- 會員帳號設定 -->
-    <div v-if="this.$store.state.memberBtn === 'mem_account_settings'" class="mem_account_settings member_area">
+    <div
+      v-if="this.$store.state.memberBtn === 'mem_account_settings'"
+      class="mem_account_settings member_area"
+    >
       <h6>{{ $t("會員帳號設定") }}</h6>
       <memAccoutSettings></memAccoutSettings>
       <memAreaBG></memAreaBG>
     </div>
     <!-- 購物訂單查詢 -->
-    <div v-else-if="this.$store.state.memberBtn === 'prod_order_inquiry'" class="prod_order_inquiry member_area">
+    <div
+      v-else-if="this.$store.state.memberBtn === 'prod_order_inquiry'"
+      class="prod_order_inquiry member_area"
+    >
       <h6>{{ $t("購物訂單查詢") }}</h6>
       <prodOrderInquiry id="showProdOrder"></prodOrderInquiry>
       <memAreaBG></memAreaBG>
     </div>
     <!-- 購票訂單查詢 -->
-    <div v-else-if="this.$store.state.memberBtn === 'tick_order_inquiry'" class="tick_order_inquiry member_area">
+    <div
+      v-else-if="this.$store.state.memberBtn === 'tick_order_inquiry'"
+      class="tick_order_inquiry member_area"
+    >
       <h6 id="showtickOrder">{{ $t("購票訂單查詢") }}</h6>
       <tickOrderInquiry></tickOrderInquiry>
       <memAreaBG></memAreaBG>
     </div>
     <!-- 我的收藏清單 -->
-    <div v-else="this.$store.state.memberBtn === 'mem_bonuspoint'" class="favorites_list member_area">
+    <div
+      v-else="this.$store.state.memberBtn === 'mem_bonuspoint'"
+      class="favorites_list member_area"
+    >
       <h6>{{ $t("我的收藏清單") }}</h6>
       <favoritesList></favoritesList>
       <memAreaBG></memAreaBG>
@@ -99,9 +121,26 @@ export default {
       favListClick: false,
       logOutClick: false,
       btn: "mem_account_settings",
+      mem_bonus: 0,
     };
   },
   mounted() {
+    if (this.$store.state.userName) {
+      const formData = new FormData();
+      let mem_name = this.$store.state.userName;
+      formData.append("mem_name", mem_name);
+      let catchOrignBonus = 0;
+      fetch(`${this.$store.state.APIurl}labaUpateBonus.php`, {
+        method: "post",
+        body: formData,
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          catchOrignBonus = parseInt(data[0].mem_bonus);
+          this.mem_bonus = catchOrignBonus;
+        });
+    }
+
     if (this.$route.query.section === "showProdOrder") {
       this.prodOrderClick = true;
       this.memberClick = false;
@@ -221,8 +260,6 @@ export default {
         font-size: map-get($fontSizes, "p");
         width: fit-content;
         border-bottom: 1px solid map-get($colors, "light");
-        ;
-
         span {
           font-size: map-get($fontSizes, "h5");
         }
@@ -236,7 +273,7 @@ export default {
       padding: 30px;
       border: 0;
       border-radius: 10px;
-      font-size: map-get($fontSizes , "p");
+      font-size: map-get($fontSizes, "p");
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -333,7 +370,7 @@ export default {
       width: 500px;
       margin: 40px auto 10px auto;
       padding-bottom: 20px;
-      border-bottom: 1px solid map-get($colors, 'dark');
+      border-bottom: 1px solid map-get($colors, "dark");
       font-size: map-get($fontSizes, "h3");
     }
   }
@@ -343,12 +380,10 @@ export default {
     color: map-get($colors, "light");
 
     h6 {
-      border-bottom: 1px solid map-get($colors, 'light');
+      border-bottom: 1px solid map-get($colors, "light");
       margin: 40px auto;
     }
   }
-
-
 }
 
 @media screen and (max-width: 768px) {
@@ -407,7 +442,6 @@ export default {
         }
       }
     }
-
   }
 
   .member_hello {
