@@ -110,8 +110,9 @@ export default {
         .then((data) => {
           this.mem_list = data;
           this.mem_address = this.mem_list[0].mem_address;
-          this.mem_bonus = this.$store.state.totalScorePoint =
-            this.mem_list[0].mem_bonus;
+          this.mem_bonus = this.$store.state.totalScorePoint = parseInt(
+            this.mem_list[0].mem_bonus
+          );
           this.mem_mob += this.mem_list[0].mem_mob;
           this.mem_email = this.mem_list[0].mem_email;
           this.mem_birth = this.mem_list[0].mem_birth;

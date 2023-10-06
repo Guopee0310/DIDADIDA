@@ -111,7 +111,20 @@ export default {
         }
       }
       if (this.$store.state.userName) {
-        this.$store.state.quizScore = this.totalPoint;
+        this.$store.state.quizScore += this.totalPoint;
+        let totalScore =
+          this.$store.state.totalScorePoint +
+          this.$store.state.quizScore +
+          this.$store.state.labaScore;
+        const formData = new FormData();
+        let mem_name = this.$store.state.userName;
+        formData.append("mem_name", mem_name);
+        formData.append("mem_bonus", totalScore);
+        formData.append("updateBonus", "1");
+        fetch(`${this.$store.state.APIurl}memUpdateBonus.php`, {
+          method: "post",
+          body: formData,
+        }).then((res) => res.json());
       }
 
       if (this.finalAns.length >= 5) {
