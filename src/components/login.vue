@@ -233,6 +233,9 @@ export default {
           if (Array.isArray(data) && data.length === 0) {
             alert("帳號或密碼錯誤");
             return;
+          } else if (data[0].mem_state == 1) {
+            alert("此帳號已遭封鎖");
+            return;
           }
           this.signInAPI = data;
           // this.$store.state.userName = this.signInAPI[0].mem_name;
