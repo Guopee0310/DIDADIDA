@@ -6,7 +6,7 @@
           <option value="">訂單編號</option>
           <option value="">會員帳號</option>
         </select>
-        <input type="text" placeholder="請輸入訂單編號" />
+        <input type="text" placeholder="請輸入訂單編號" @input="resetArr" />
         <div>搜尋</div>
       </div>
       <div class="orderTableAll">
@@ -40,12 +40,12 @@
     </TabPane>
     <TabPane label="票卷訂單" name="name2">
       <div class="titleAll">
-        <select name="" id="">
-          <option value="">訂單編號</option>
-          <option value="">會員姓名</option>
+        <select name="" v-model="chooseName">
+          <option value="訂單編號">訂單編號</option>
+          <option value="會員信箱">會員信箱</option>
         </select>
-        <input type="text" placeholder="請輸入訂單編號" />
-        <div>搜尋</div>
+        <input type="text" placeholder="請輸入訂單編號" v-model="chooseOrder" />
+        <div @click="chooseNameOrOrder">搜尋</div>
       </div>
       <div class="ticketTableAll">
         <div class="ticketTableTitleAll">
@@ -56,7 +56,7 @@
           <div>票卷日期</div>
         </div>
         <div
-          v-for="(i, index) in ticketOrder"
+          v-for="(i, index) in ticketOrderSlice"
           class="singleTicketBar"
           :key="index"
         >
@@ -92,6 +92,8 @@ export default {
   name: "orderMg",
   data() {
     return {
+      chooseName: "訂單編號",
+      chooseOrder: "",
       prodOrder: [
         {
           orderNumber: "abc12345",
@@ -143,6 +145,7 @@ export default {
       ],
       orderAll: [],
       ticorderAll: [],
+      ticketOrderSlice: [],
     };
   },
   computed: {},
@@ -158,11 +161,36 @@ export default {
       })
 
       .then((myJson) => {
-        this.ticketOrder = myJson;
+        this.ticketOrderSlice = this.ticketOrder = myJson;
       });
   },
 
   methods: {
+    resetArr() {
+      if (this.chooseOrder == "") {
+        this.ticketOrderSlice = this.ticketOrder;
+      }
+    },
+    chooseNameOrOrder() {
+      if (this.chooseName == "訂單編號") {
+        this.chooseOrder = this.chooseOrder.toUpperCase();
+        let res = this.ticketOrder.filter((item) => {
+          let ans = item.tic_id;
+          return ans.includes(this.chooseOrder);
+        });
+        this.ticketOrderSlice = res;
+      } else if (this.chooseName == "會員信箱") {
+        this.chooseOrder = this.chooseOrder.toUpperCase();
+        let res = this.ticketOrder.filter((item) => {
+          let ans = item.mem_email.toUpperCase();
+          return ans.includes(this.chooseOrder);
+        });
+        this.ticketOrderSlice = res;
+      } else {
+        this.ticketOrderSlice = this.ticketOrder;
+      }
+    },
+
     updateOrder(index, e, i) {
       if (e.target.innerText == "確認") {
         this.orderAll[index].dis = true;
