@@ -20,13 +20,15 @@
             <p>票種</p>
             <p>
               {{
-                tick.pay == 150
+                tick.tic_pay == 150
                   ? "老年票"
-                  : tick.pay == 250
+                  : tick.tic_pay == 250
                   ? "兒童票"
-                  : tick.pay == 400
+                  : tick.tic_pay == 400
                   ? "學生票"
-                  : (tick.pay = 500 ? "成人票" : "其他")
+                  : tick.tic_pay == 500
+                  ? "成人票"
+                  : "其他"
               }}
             </p>
           </div>
