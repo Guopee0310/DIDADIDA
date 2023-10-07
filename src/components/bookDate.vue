@@ -3,8 +3,15 @@
     <div class="dateTitle">{{ $t("選擇日期與票數") }}</div>
     <div class="dateTextAll">
       <div class="calendar">
-        <VDatePicker v-model="date" borderless expanded :min-date="new Date()" locale="tw" :masks="{ title: 'YYYY MMM' }"
-          mode="date" />
+        <VDatePicker
+          v-model="date"
+          borderless
+          expanded
+          :min-date="new Date()"
+          locale="tw"
+          :masks="{ title: 'YYYY MMM' }"
+          mode="date"
+        />
       </div>
       <div class="calendarOptionAll">
         <div class="optionTitle">
@@ -15,7 +22,11 @@
             }}
           </div>
         </div>
-        <div v-for="(i, index) in optionDetailArr" class="optionAll" :key="index">
+        <div
+          v-for="(i, index) in optionDetailArr"
+          class="optionAll"
+          :key="index"
+        >
           <div class="ticketType">
             <div>{{ $t(i[0]) }}</div>
             <div>{{ $t(i[1]) }}</div>
@@ -54,7 +65,7 @@ export default {
         ["成人", "(18~64歲)", "500", 0],
         ["兒童", "(4~11歲)", "250", 0],
         ["學生", "(12歲以上(含)持學生證者)", "400", 0],
-        ["長者", "(65歲以上(含))", "250", 0],
+        ["長者", "(65歲以上(含))", "150", 0],
       ],
       totalPrice: 0,
     };
@@ -70,18 +81,20 @@ export default {
       this.totalPrice = 0;
     },
   },
-  mounted() { },
-  beforeDestroy() { },
+  mounted() {},
+  beforeDestroy() {},
   computed: {
     catchDate() {
-      return `${new Date(this.date).getFullYear()}.${new Date(this.date).getMonth() + 1
-        }.${new Date(this.date).getDate()}`;
+      return `${new Date(this.date).getFullYear()}.${
+        new Date(this.date).getMonth() + 1
+      }.${new Date(this.date).getDate()}`;
     },
   },
   methods: {
     bookTickets() {
       if (!this.$store.state.userName) {
         alert("需先登入會員");
+        return;
       } else {
         for (let i = 0; i < this.optionDetailArr.length; i++) {
           const lastElement =
@@ -98,6 +111,7 @@ export default {
               console.log(
                 this.optionDetailArr[i][this.optionDetailArr[i].length - 1]
               );
+
               this.$store.state.ticketList.push({
                 tickImg: require("../../public/all_images/ticket_face.jpg"),
                 tickName: `${this.optionDetailArr[i][0]}票`,
@@ -105,6 +119,40 @@ export default {
                 tickDate: this.catchDate,
                 tickPrice: `${this.optionDetailArr[i][2]}`,
               });
+              const formData = new FormData();
+
+              let mem_name = this.$store.state.userName;
+              formData.append("mem_name", mem_name);
+              fetch(`${this.$store.state.APIurl}bookDateFront.php`, {
+                method: "post",
+                body: formData,
+              })
+                .then((res) => res.json())
+                .then((data) => {
+                  let catchMemEmail = "";
+                  catchMemEmail = data[0].mem_email;
+                  let mem_id = data[0].mem_id;
+                  const formData = new FormData();
+
+                  // let mem_id = this.$store.state.userName;
+                  let tic_date = this.catchDate;
+                  let tic_pay = this.optionDetailArr[i][2];
+                  let tic_state = "可使用";
+                  formData.append("mem_id", mem_id);
+                  formData.append("mem_email", catchMemEmail);
+                  formData.append("tic_date", tic_date);
+                  formData.append("tic_pay", tic_pay);
+                  formData.append("tic_state", tic_state);
+                  fetch(`${this.$store.state.APIurl}bookDatePush.php`, {
+                    method: "post",
+                    body: formData,
+                  }).then((res) => res.json());
+                });
+              // console.log(
+              //   this.$store.state.ticketList[
+              //     this.$store.state.ticketList.length - 1
+              //   ]
+              // );
             }
           }
         }
@@ -151,12 +199,12 @@ export default {
         idx == 0
           ? (this.totalPrice -= 500)
           : idx == 1
-            ? (this.totalPrice -= 250)
-            : idx == 2
-              ? (this.totalPrice -= 400)
-              : idx == 3
-                ? (this.totalPrice -= 250)
-                : "";
+          ? (this.totalPrice -= 250)
+          : idx == 2
+          ? (this.totalPrice -= 400)
+          : idx == 3
+          ? (this.totalPrice -= 250)
+          : "";
       }
     },
     ticketPlus(idx) {
@@ -164,12 +212,12 @@ export default {
       idx == 0
         ? (this.totalPrice += 500)
         : idx == 1
-          ? (this.totalPrice += 250)
-          : idx == 2
-            ? (this.totalPrice += 400)
-            : idx == 3
-              ? (this.totalPrice += 250)
-              : "";
+        ? (this.totalPrice += 250)
+        : idx == 2
+        ? (this.totalPrice += 400)
+        : idx == 3
+        ? (this.totalPrice += 250)
+        : "";
     },
   },
 };
@@ -257,7 +305,6 @@ export default {
         margin: 40px 10px;
         border: 0;
         cursor: pointer;
-        
 
         button {
           width: 150px;

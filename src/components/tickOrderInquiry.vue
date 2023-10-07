@@ -18,23 +18,34 @@
         <div class="tick_info">
           <div class="item_info tick_item">
             <p>票種</p>
-            <p>{{ tick.tickName }}</p>
+            <p>
+              {{
+                tick.pay == 150
+                  ? "老年票"
+                  : tick.pay == 250
+                  ? "兒童票"
+                  : tick.pay == 400
+                  ? "學生票"
+                  : (tick.pay = 500 ? "成人票" : "其他")
+              }}
+            </p>
           </div>
           <div class="item_info tick_count">
             <p>數量</p>
-            <p>{{ tick.tickName }}</p>
+            <!-- <p>{{ tick.tickName }}</p> -->
+            <p>1</p>
           </div>
           <div class="item_info tick_date">
             <p>時間</p>
-            <p>{{ tick.tickDate }}</p>
+            <p>{{ tick.tic_date }}</p>
           </div>
           <div class="item_info tick_price">
             <p>金額</p>
-            <p>NT {{ tick.tickPrice }}</p>
+            <p>NT {{ tick.pay }}</p>
           </div>
           <div>
             <QRCode
-              :checkDate="tick.tickDate"
+              :checkDate="tick.tic_date"
               :ticketIndex="index"
               @click="activateGrayBkc(index)"
               @checkTicket="getCheck"
@@ -92,7 +103,22 @@ export default {
     };
   },
   mounted() {
-    this.tickOrder = this.$store.state.ticketList;
+    const formData = new FormData();
+
+    let mem_email = this.$store.state.memberEmail;
+    formData.append("mem_email", mem_email);
+    fetch(`${this.$store.state.APIurl}tickOrderPrint.php`, {
+      method: "post",
+      body: formData,
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        for (let i = 0; i < data.length; i++) {
+          data[i].tickImg = require("../../public/all_images/ticket_face.jpg");
+        }
+        this.tickOrder = data;
+      });
+    // this.tickOrder = this.$store.state.ticketList;
   },
   computed: {
     activeList(idx) {
@@ -132,7 +158,7 @@ export default {
     border: 0;
     border-radius: 15px;
     margin: 0 auto;
-    background-color: map-get($colors, 'memarea');
+    background-color: map-get($colors, "memarea");
     display: flex;
     flex-direction: column;
     align-items: center;
