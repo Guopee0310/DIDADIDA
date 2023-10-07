@@ -10,12 +10,34 @@
         <ul>
           <li>Email / 帳號</li>
           <li>姓名</li>
-
           <li>會員狀態</li>
         </ul>
       </div>
       <div class="mem_info">
-        <div class="mem_email">
+        <div v-for="(i, index) in memberAPI" :key="index">
+          <p>{{ i.mem_email }}</p>
+          <p>{{ i.mem_name }}</p>
+
+          <label>
+            <input
+              type="radio"
+              :name="index"
+              :checked="i.mem_state == 0"
+              @change="radioPush(i.mem_name, i.mem_email, 0)"
+            />
+            正常
+          </label>
+          <label>
+            <input
+              type="radio"
+              :name="index"
+              :checked="i.mem_state == 1"
+              @change="radioPush(i.mem_name, i.mem_email, 1)"
+            />
+            黑名單
+          </label>
+        </div>
+        <!-- <div class="mem_email">
           <p>nini0218@gmail.com</p>
         </div>
         <div class="mem_name">
@@ -24,7 +46,7 @@
 
         <div class="mem_state">
           <p>黑名單</p>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
@@ -35,6 +57,7 @@ export default {
   data() {
     return {
       imageSrc: "",
+      memberAPI: [],
       allBar: [
         {
           select: false,
@@ -52,6 +75,35 @@ export default {
     };
   },
   methods: {
+    radioPush(name, email, item) {
+      if (item == 0) {
+        alert(`${name}的權限已改為正常`);
+
+        const formData = new FormData();
+        let mem_email = email;
+        let mem_state = 0;
+        formData.append("mem_email", mem_email);
+        formData.append("mem_state", mem_state);
+
+        fetch(`${this.$store.state.APIurl}memberMgChangeState.php`, {
+          method: "post",
+          body: formData,
+        }).then((res) => res.json());
+      } else if (item == 1) {
+        alert(`${name}的權限已改為黑名單`);
+
+        const formData = new FormData();
+        let mem_email = email;
+        let mem_state = 1;
+        formData.append("mem_email", mem_email);
+        formData.append("mem_state", mem_state);
+
+        fetch(`${this.$store.state.APIurl}memberMgChangeState.php`, {
+          method: "post",
+          body: formData,
+        }).then((res) => res.json());
+      }
+    },
     createNew() {
       const currentDate = this.getCurrentDate();
       this.allBar.push({
@@ -104,6 +156,21 @@ export default {
       this.allBar[index][0] = false;
       e.target.innerText = "確認";
     },
+  },
+  mounted() {
+    fetch("http://localhost/dida_project/public/php/memberMgSelect.php") //第一步
+      // fetch(`${this.$store.state.APIurl}helperMg.php`)
+      //this.$store.state.APIurl
+      // axios
+      .then(function (response) {
+        //第二步
+        //要先傳回來編譯成json檔
+        return response.json();
+      })
+      .then((data) => {
+        // console.log(data);
+        this.memberAPI = data;
+      });
   },
   computed: {
     selectedCount() {
@@ -197,8 +264,15 @@ export default {
     }
     .mem_info {
       width: 100%;
-      display: flex;
-      justify-content: space-around;
+      //   display: flex;
+      //   justify-content: space-around;
+      div {
+        display: flex;
+
+        p {
+          width: calc(100% / 3);
+        }
+      }
     }
   }
 }
