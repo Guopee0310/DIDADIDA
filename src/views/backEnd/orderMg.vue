@@ -4,7 +4,7 @@
       <div class="titleAll">
         <select name="" id="">
           <option value="">訂單編號</option>
-          <option value="">會員姓名</option>
+          <option value="">會員帳號</option>
         </select>
         <input type="text" placeholder="請輸入訂單編號" />
         <div>搜尋</div>
@@ -30,13 +30,11 @@
           <div>{{ i.orderTime }}</div>
           <div>{{ i.orderState }}</div>
 
-
           <div class="updateOrderBtn">
             <div class="update" @click="updateOrder(index, $event, i)">
-             <button>修改</button>
+              <button>修改</button>
             </div>
-           </div>
-         
+          </div>
         </div>
       </div>
     </TabPane>
@@ -57,16 +55,30 @@
           <div>數量</div>
           <div>票卷日期</div>
         </div>
-        <div v-for="i in ticketOrder" class="singleTicketBar">
-          <div>{{ i.orderNumber }}</div>
-          <div>{{ i.memberAccount }}</div>
+        <div
+          v-for="(i, index) in ticketOrder"
+          class="singleTicketBar"
+          :key="index"
+        >
+          <div>{{ i.tic_id }}</div>
+          <div>{{ i.mem_email }}</div>
           <div>
-            <div v-for="j in i.ticketType">{{ j }}</div>
+            <!-- <div v-for="j in i.ticketType">{{ j }}</div> -->
+            {{
+              i.tic_pay == 150
+                ? "老年票"
+                : i.tic_pay == 250
+                ? "兒童票"
+                : i.tic_pay == 400
+                ? "學生票"
+                : (i.tic_pay = 500 ? "成人票" : "其他")
+            }}
           </div>
           <div>
-            <div v-for="j in i.ticketCount">{{ j }}</div>
+            <!-- <div v-for="j in i.ticketCount">{{ j }}</div> -->
+            {{ i.tic_pay }}
           </div>
-          <div>{{ i.ticketDate }}</div>
+          <div>{{ i.tic_date }}</div>
           <button>詳細資料</button>
         </div>
       </div>
@@ -105,35 +117,35 @@ export default {
         },
       ],
       ticketOrder: [
-        {
-          orderNumber: "a123456",
-          memberAccount: "asv3567878",
-          ticketType: ["成人票"],
-          ticketCount: [1],
-          ticketDate: "2023.08.31",
-        },
-        {
-          orderNumber: "a123456",
-          memberAccount: "asv3567878",
-          ticketType: ["學生票", "兒童票", "成人票"],
-          ticketCount: [2, 1, 3],
-          ticketDate: "2023.08.31",
-        },
-        {
-          orderNumber: "a123456",
-          memberAccount: "asv3567878",
-          ticketType: ["成人票"],
-          ticketCount: [1],
-          ticketDate: "2023.08.31",
-        },
+        // {
+        //   orderNumber: "a123456",
+        //   memberAccount: "asv3567878",
+        //   ticketType: ["成人票"],
+        //   ticketCount: [1],
+        //   ticketDate: "2023.08.31",
+        // },
+        // {
+        //   orderNumber: "a123456",
+        //   memberAccount: "asv3567878",
+        //   ticketType: ["學生票", "兒童票", "成人票"],
+        //   ticketCount: [2, 1, 3],
+        //   ticketDate: "2023.08.31",
+        // },
+        // {
+        //   orderNumber: "a123456",
+        //   memberAccount: "asv3567878",
+        //   ticketType: ["成人票"],
+        //   ticketCount: [1],
+        //   ticketDate: "2023.08.31",
+        // },
       ],
-      orderAll:[],
-      ticorderAll:[],
+      orderAll: [],
+      ticorderAll: [],
     };
   },
   computed: {},
   mounted() {
-    fetch("http://localhost/dida_project/public/php/orderMg.php") //第一步
+    fetch("http://localhost/dida_project/public/php/tickOrderMg.php") //第一步
       // fetch(`${this.$store.state.APIurl}orderMg.php`)
       //this.$store.state.APIurl
       // axios
@@ -144,16 +156,12 @@ export default {
       })
 
       .then((myJson) => {
-        for (let i = 0; i < myJson.length; i++) {
-          myJson[i].dis = true;
-        }
-        //第三步 覆蓋掉 orderAll:[]
-        this.helperAll2 = myJson;
-        console.log(this.orderAll);
+        this.ticketOrder = myJson;
       });
   },
 
-  methods: {updateOrder(index, e, i) {
+  methods: {
+    updateOrder(index, e, i) {
       if (e.target.innerText == "確認") {
         this.orderAll[index].dis = true;
         e.target.innerText = "修改";
@@ -173,9 +181,9 @@ export default {
         formData.append("ord_id", ord_id);
         formData.append("ord_date", ord_date);
         formData.append("ord_sum", ord_sum);
-        formData.append(" ord_ship ",  ord_ship );
+        formData.append(" ord_ship ", ord_ship);
         formData.append("ord_pay", ord_pay);
-        formData.append("ord_person ", ord_person );
+        formData.append("ord_person ", ord_person);
         formData.append("ord_phone", ord_phone);
         formData.append("ord_add", ord_add);
         formData.append("ord_state", ord_state);
@@ -188,7 +196,8 @@ export default {
       }
       this.orderAll[index].dis = false;
       e.target.innerText = "確認";
-    },},
+    },
+  },
 };
 </script>
 <style lang="scss" scoped>
