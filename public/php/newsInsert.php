@@ -13,14 +13,22 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $news_category = $_POST["news_category"];
     $news_state = $_POST["news_state"];
     $news_img = $_FILES["image"]["name"];
-    
+    $fileName = uniqid();
+    $fileExt = pathinfo($news_img, PATHINFO_EXTENSION); //副檔名
+
+    $targetDirectory = "../all_images/news/";
+    if (!file_exists($targetDirectory)) {
+        mkdir($targetDirectory);
+    }
+    $targetFile = "{$fileName}.{$fileExt}";
+    $result = ["fileName" => "$targetFile"];
     
     // 執行更新操作
     $update_sql = "INSERT INTO news (news_id, news_img, news_title, news_content, news_date, news_category, news_state) VALUES (:news_id, :news_img, :news_title, :news_content, :news_date, :news_category, :news_state)";
 
     $update_stmt = $pdo->prepare($update_sql);
     $update_stmt->bindValue(":news_id", $news_id, PDO::PARAM_INT);
-    $update_stmt->bindValue(":news_img", $news_img);
+    $update_stmt->bindValue(":news_img", $targetFile);
     $update_stmt->bindValue(":news_title", $news_title);
     $update_stmt->bindValue(":news_content", $news_content);
     $update_stmt->bindValue(":news_date", $news_date);

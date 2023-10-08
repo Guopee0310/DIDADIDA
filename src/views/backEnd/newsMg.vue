@@ -34,7 +34,7 @@
                                     :disabled="item.disabled" name="image">
                             </div>
                         </div>
-                        <p>{{ item.imageName }}</p>
+                        <p>{{ item.news_img }}</p>
 
                     </li>
                     <li>
