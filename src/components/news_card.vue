@@ -178,25 +178,25 @@ export default {
     applyFilters() {
       let filteredNews = this.news_content;
 
-      // 根据标签筛选
+  
       if (this.tagOption !== "所有主題") {
         filteredNews = filteredNews.filter(
           (item) => item.news_category === this.tagOption
         );
       }
 
-      // 根据时间排序
+
       if (this.timeOption === "由新到舊") {
         filteredNews.sort((a, b) =>
-          new Date(b.time).getTime() - new Date(a.time).getTime()
+          new Date(b.news_date).getTime() - new Date(a.news_date).getTime()
         );
       } else if (this.timeOption === "由舊到新") {
         filteredNews.sort((a, b) =>
-          new Date(a.time).getTime() - new Date(b.time).getTime()
+          new Date(a.news_date).getTime() - new Date(b.news_date).getTime()
         );
       }
 
-      // 根据搜索关键词过滤
+
       const searchInput = this.searchInput.toUpperCase();
       if (searchInput.trim() !== "") {
         filteredNews = filteredNews.filter((item) => {
@@ -208,25 +208,24 @@ export default {
 
       // 更新 filteredNews 数组
       this.filteredNews = filteredNews;
-
-      // 更新分页信息
-      this.currentPage = 1;
-      this.updatePage(1);
     },
 
     filterNewsByTag(data) {
       this.tagOption = data;
       this.applyFilters();
+      this.updatePage(1);
     },
 
     filterNewsByTime(data) {
       this.timeOption = data;
       this.applyFilters();
+      this.updatePage(1);
     },
 
     searchClick(data) {
       this.searchInput = data;
       this.applyFilters();
+      this.updatePage(1);
     },
 
   },
