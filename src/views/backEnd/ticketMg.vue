@@ -87,13 +87,20 @@
               mode="date"
               :disabled="disableDateSelection"
               :events="eventDates"
-              :disabled-dates="disabledDateRanges"
             />
           </div>
         </div>
         <div class="select">
-          <p>已選日期: {{ formattedDate }}</p>
+          <p>
+            <span :style="{ color: computedTextColor }"
+              >已選日期: {{ formattedDate }}</span
+            >
+          </p>
           <input type="checkbox" @change="enableDateSelection" />確定不開放
+          <div>
+            目前狀態 :
+            <span :style="{ color: computedTextColor }">{{ nowState }}</span>
+          </div>
         </div>
       </div>
     </TabPane>
@@ -105,6 +112,7 @@ export default {
   name: "bookDate",
   data() {
     return {
+      state: "",
       date: null, // 选定的日期
       // 初始化 selectedDates 以存储已选择的日期
       selectedDates: [],
@@ -165,6 +173,7 @@ export default {
           data[i].close_date = new Date(`${data[i].close_date}`);
           this.disabledDateRanges.push(data[i].close_date);
         }
+        console.log(String(this.disabledDateRanges[0]));
       });
     fetch("http://localhost/dida_project/public/php/ticketMg.php") //第一步
       // fetch(`${this.$store.state.APIurl}helperMg.php`)
@@ -186,6 +195,41 @@ export default {
   },
   beforeDestroy() {},
   computed: {
+    nowState() {
+      let isOpen = true; // 默认状态为开放
+
+      for (let i = 0; i < this.disabledDateRanges.length; i++) {
+        // console.log(this.disabledDateRanges[i]);
+        // console.log(new Date(this.date));
+        if (
+          this.disabledDateRanges[i].getDate() ===
+            new Date(this.date).getDate() &&
+          this.disabledDateRanges[i].getMonth() ===
+            new Date(this.date).getMonth() &&
+          this.disabledDateRanges[i].getFullYear() ===
+            new Date(this.date).getFullYear()
+        ) {
+          isOpen = false;
+          break;
+        }
+        if (!isOpen) {
+          break; // 如果状态为关闭，跳出外部循环
+        }
+      }
+
+      return isOpen ? "開放" : "關閉";
+    },
+    computedTextColor() {
+      // 在这里使用计算属性来返回文本颜色
+      return this.nowState == "關閉" ? "red" : "blue";
+    },
+    containerStyles() {
+      // 在这里返回一个包含自定义样式的对象
+      return {
+        backgroundColor: "lightblue",
+        /* 添加其他自定义样式，如文本颜色、边框等 */
+      };
+    },
     catchDate() {
       return `${new Date(this.date).getFullYear()}.${
         new Date(this.date).getMonth() + 1
@@ -199,7 +243,8 @@ export default {
         const year = dateObject.getFullYear();
         const month = String(dateObject.getMonth() + 1).padStart(2, "0");
         const day = String(dateObject.getDate()).padStart(2, "0");
-        return `${year}/${month}/${day}`;
+
+        return `${year}-${month}-${day}`;
       } else {
         return "";
       }
@@ -276,6 +321,11 @@ export default {
 //     width: 60%;
 //     height: 60%;
 // }
+.calendar .vc-container {
+  /* 使用computed中的样式属性 */
+  background-color: var(--container-background-color);
+  /* 添加其他样式规则，如果需要的话 */
+}
 .name2 p {
   margin-left: 30px;
   border: 2px black solid;
