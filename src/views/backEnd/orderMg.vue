@@ -64,17 +64,7 @@
           <div>{{ i.mem_email }}</div>
           <div>
             <!-- <div v-for="j in i.ticketType">{{ j }}</div> -->
-            {{
-              i.tic_pay == 150
-                ? "老年票"
-                : i.tic_pay == 250
-                ? "兒童票"
-                : i.tic_pay == 400
-                ? "學生票"
-                : i.tic_pay == 500
-                ? "成人票"
-                : "其他"
-            }}
+            {{ i.tic_name }}
           </div>
           <div>
             <!-- <div v-for="j in i.ticketCount">{{ j }}</div> -->

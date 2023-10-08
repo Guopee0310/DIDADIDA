@@ -87,6 +87,7 @@
               mode="date"
               :disabled="disableDateSelection"
               :events="eventDates"
+              :disabled-dates="disabledDateRanges"
             />
           </div>
         </div>
@@ -107,6 +108,13 @@ export default {
       date: null, // 选定的日期
       // 初始化 selectedDates 以存储已选择的日期
       selectedDates: [],
+      disabledDateRanges: [
+        // // 禁用 2023 年 10 月 15 日到 2023 年 10 月 20 日
+        // [new Date("2023-10-15"), new Date("2023-10-20")],
+        // [new Date("2023-10-28")],
+        // // 禁用 2023 年 11 月 1 日到 2023 年 11 月 5 日
+        // [new Date("2023-11-01"), new Date("2023-11-05")],
+      ],
       disableDateSelection: false, // 是否禁用日期选择的标志
       eventDates: [], // 存储已选择的日期的数组
       ticket: [
@@ -148,6 +156,16 @@ export default {
   },
 
   mounted() {
+    fetch("http://localhost/dida_project/public/php/closeDateSelect.php")
+      .then(function (response) {
+        return response.json();
+      })
+      .then((data) => {
+        for (let i = 0; i < data.length; i++) {
+          data[i].close_date = new Date(`${data[i].close_date}`);
+          this.disabledDateRanges.push(data[i].close_date);
+        }
+      });
     fetch("http://localhost/dida_project/public/php/ticketMg.php") //第一步
       // fetch(`${this.$store.state.APIurl}helperMg.php`)
       //this.$store.state.APIurl

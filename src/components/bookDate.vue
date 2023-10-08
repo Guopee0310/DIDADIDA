@@ -11,6 +11,7 @@
           locale="tw"
           :masks="{ title: 'YYYY MMM' }"
           mode="date"
+          :disabled-dates="disabledDateRanges"
         />
       </div>
       <div class="calendarOptionAll">
@@ -61,6 +62,13 @@ export default {
   data() {
     return {
       date: "",
+      disabledDateRanges: [
+        // // 禁用 2023 年 10 月 15 日到 2023 年 10 月 20 日
+        // [new Date("2023-10-15"), new Date("2023-10-20")],
+        // [new Date("2023-10-28")],
+        // // 禁用 2023 年 11 月 1 日到 2023 年 11 月 5 日
+        // [new Date("2023-11-01"), new Date("2023-11-05")],
+      ],
       optionDetailArr: [
         ["成人", "(18~64歲)", "500", 0],
         ["兒童", "(4~11歲)", "250", 0],
@@ -82,6 +90,16 @@ export default {
     },
   },
   mounted() {
+    fetch("http://localhost/dida_project/public/php/closeDateSelect.php")
+      .then(function (response) {
+        return response.json();
+      })
+      .then((data) => {
+        for (let i = 0; i < data.length; i++) {
+          data[i].close_date = new Date(`${data[i].close_date}`);
+          this.disabledDateRanges.push(data[i].close_date);
+        }
+      });
     fetch("http://localhost/dida_project/public/php/ticketMg.php") //第一步
       // fetch(`${this.$store.state.APIurl}helperMg.php`)
       //this.$store.state.APIurl
