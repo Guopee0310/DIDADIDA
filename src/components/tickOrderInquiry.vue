@@ -19,17 +19,7 @@
           <div class="item_info tick_item">
             <p>票種</p>
             <p>
-              {{
-                tick.tic_pay == 150
-                  ? "老年票"
-                  : tick.tic_pay == 250
-                  ? "兒童票"
-                  : tick.tic_pay == 400
-                  ? "學生票"
-                  : tick.tic_pay == 500
-                  ? "成人票"
-                  : "其他"
-              }}
+              {{ tick.tic_name }}
             </p>
           </div>
           <div class="item_info tick_count">
@@ -43,7 +33,7 @@
           </div>
           <div class="item_info tick_price">
             <p>金額</p>
-            <p>NT {{ tick.pay }}</p>
+            <p>NT {{ tick.tic_pay }}</p>
           </div>
           <div>
             <QRCode

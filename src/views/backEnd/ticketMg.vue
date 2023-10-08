@@ -2,27 +2,39 @@
   <Tabs value="name1">
     <TabPane label="票種 / 票價管理" name="name1">
       <button class="add" @click="createNewOne">+ 新增項目</button>
-      
+
       <li>
         <p class="tickettype">票種</p>
         <p>價格</p>
         <p>條件</p>
-        
       </li>
       <ul v-for="(i, index) in helperAll2" :key="index">
-    
         <li>
-
-          <p class="tickettype" ><label for=""><input type="text" v-model="i.tic_name" :disabled="i.dis"></label>
+          <p class="tickettype">
+            <label for=""
+              ><input type="text" v-model="i.tic_name" :disabled="i.dis"
+            /></label>
           </p>
-          <p ><label for=""><input type="text" v-model="i.tic_price" :disabled="i.dis"></label></p>
-          <p ><textarea name="" id="" cols="30" rows="5" v-model="i.tic_info" :disabled="i.dis"></textarea></p>
-          
+          <p>
+            <label for=""
+              ><input type="text" v-model="i.tic_price" :disabled="i.dis"
+            /></label>
+          </p>
+          <p>
+            <textarea
+              name=""
+              id=""
+              cols="30"
+              rows="5"
+              v-model="i.tic_info"
+              :disabled="i.dis"
+            ></textarea>
+          </p>
+
           <div class="updateBtnAll">
-            <button @click="updateTicket(index, $event, i)">確認</button>
+            <button @click="updateTicket(index, $event, i)">修改</button>
           </div>
         </li>
-
 
         <!-- //    <li>
     //       <p class="tickettype">一般票</p>
@@ -62,30 +74,32 @@
     </TabPane>
 
     <TabPane label="不開放時間管理" name="name2">
-
-
       <p>選擇日期</p>
       <div class="dateTextAll">
         <div class="dateAll">
           <div class="calendar">
-            <VDatePicker v-model="date" borderless expanded :min-date="new Date()" locale="tw" mode="date"
-              :disabled="disableDateSelection" :events="eventDates" />
+            <VDatePicker
+              v-model="date"
+              borderless
+              expanded
+              :min-date="new Date()"
+              locale="tw"
+              mode="date"
+              :disabled="disableDateSelection"
+              :events="eventDates"
+            />
           </div>
         </div>
         <div class="select">
           <p>已選日期: {{ formattedDate }}</p>
-          <input type="checkbox" @change="enableDateSelection">確定不開放
+          <input type="checkbox" @change="enableDateSelection" />確定不開放
         </div>
       </div>
-
     </TabPane>
   </Tabs>
 </template>
 
-
 <script>
-
-
 export default {
   name: "bookDate",
   data() {
@@ -100,40 +114,40 @@ export default {
           ticketname: "一般票",
           price: "NT 500",
           content: "限18歲(含)以上成人使用",
-          change: true
-
+          change: true,
         },
         {
           ticketname: "學生票",
           price: "NT 300",
           content: "限12歲(含)以上持學生證之學生適用",
-          change: true
+          change: true,
         },
         {
           ticketname: "孩童票",
           price: "NT 200",
           content: "限4歲(含)以上及未滿12歲兒童適用",
-          change: true
+          change: true,
         },
         {
           ticketname: "優待票",
           price: "NT 150",
-          content: "限持有身心障礙證明者、身心障礙者的1位陪同者、孕婦、滿65歲以上長者適用",
-          change: true
+          content:
+            "限持有身心障礙證明者、身心障礙者的1位陪同者、孕婦、滿65歲以上長者適用",
+          change: true,
         },
         {
           ticketname: "團體票",
           price: "NT 350",
-          content: " 最低人数要求：團隊人數必須超過 10 人，才能享受團體票折扣。",
-          change: true
+          content:
+            " 最低人数要求：團隊人數必須超過 10 人，才能享受團體票折扣。",
+          change: true,
         },
       ],
-      helperAll2: []
-
+      helperAll2: [],
     };
   },
 
-  mounted() { 
+  mounted() {
     fetch("http://localhost/dida_project/public/php/ticketMg.php") //第一步
       // fetch(`${this.$store.state.APIurl}helperMg.php`)
       //this.$store.state.APIurl
@@ -149,14 +163,15 @@ export default {
         }
         //第三步 裝在data陣列裡
         this.helperAll2 = myJson;
-        console.log(this.helperAll2)
+        console.log(this.helperAll2);
       });
   },
-  beforeDestroy() { },
+  beforeDestroy() {},
   computed: {
     catchDate() {
-      return `${new Date(this.date).getFullYear()}.${new Date(this.date).getMonth() + 1
-        }.${new Date(this.date).getDate()}`;
+      return `${new Date(this.date).getFullYear()}.${
+        new Date(this.date).getMonth() + 1
+      }.${new Date(this.date).getDate()}`;
     },
 
     // 日期格式
@@ -164,11 +179,11 @@ export default {
       if (this.date) {
         const dateObject = new Date(this.date);
         const year = dateObject.getFullYear();
-        const month = String(dateObject.getMonth() + 1).padStart(2, '0');
-        const day = String(dateObject.getDate()).padStart(2, '0');
+        const month = String(dateObject.getMonth() + 1).padStart(2, "0");
+        const day = String(dateObject.getDate()).padStart(2, "0");
         return `${year}/${month}/${day}`;
       } else {
-        return '';
+        return "";
       }
     },
   },
@@ -185,7 +200,7 @@ export default {
         this.eventDates.push({
           start: this.date,
           end: this.date,
-          color: 'primary', // 可以根据需要选择颜色
+          color: "primary", // 可以根据需要选择颜色
         });
         // 禁用日期选择
         this.disableDateSelection = true;
@@ -199,10 +214,9 @@ export default {
 
         const formData = new FormData();
         let tictype_id = i.tictype_id;
-        let tic_name	 = this.helperAll2[index].tic_name;
+        let tic_name = this.helperAll2[index].tic_name;
         let tic_info = this.helperAll2[index].tic_info;
         let tic_price = this.helperAll2[index].tic_price;
-
 
         formData.append("tictype_id", tictype_id);
         formData.append("tic_name", tic_name);
@@ -212,11 +226,12 @@ export default {
           method: "post",
           body: formData,
         }).then((res) => res.json());
+        alert("修改成功");
         return;
       }
       this.helperAll2[index].dis = false;
       e.target.innerText = "確認";
-    }
+    },
   },
   enableDateSelection() {
     this.disableDateSelection = false; // 启用日期选择
@@ -227,16 +242,15 @@ export default {
   // 添加此方法以禁用已选择的日期
   disableSelectedDates(date) {
     // 检查日期是否在已选择的日期数组中，如果在则返回 true，否则返回 false
-    return this.selectedDates.some(selectedDate => {
+    return this.selectedDates.some((selectedDate) => {
       return (
         selectedDate.getFullYear() === date.getFullYear() &&
         selectedDate.getMonth() === date.getMonth() &&
         selectedDate.getDate() === date.getDate()
       );
     });
-  }
-}
-
+  },
+};
 </script>
 
 <style lang="scss" scoped>
@@ -285,7 +299,6 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-
 }
 
 .dateAll {
@@ -304,7 +317,6 @@ export default {
       width: 40%;
       height: 80%;
       border: 1px #68769a solid;
-
     }
 
     .calendarOptionAll {
@@ -391,7 +403,6 @@ li {
       margin: 20px 10px;
     }
   }
-
 }
 
 .add {

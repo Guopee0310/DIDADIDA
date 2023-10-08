@@ -81,7 +81,22 @@ export default {
       this.totalPrice = 0;
     },
   },
-  mounted() {},
+  mounted() {
+    fetch("http://localhost/dida_project/public/php/ticketMg.php") //第一步
+      // fetch(`${this.$store.state.APIurl}helperMg.php`)
+      //this.$store.state.APIurl
+      .then(function (response) {
+        //第二步
+        //要先傳回來編譯成json檔
+        return response.json();
+      })
+      .then((data) => {
+        for (let i = 0; i < this.optionDetailArr.length; i++) {
+          this.optionDetailArr[i][0] = data[i].tic_name;
+          this.optionDetailArr[i][2] = data[i].tic_price;
+        }
+      });
+  },
   beforeDestroy() {},
   computed: {
     catchDate() {
@@ -137,10 +152,12 @@ export default {
                   // let mem_id = this.$store.state.userName;
                   let tic_date = this.catchDate;
                   let tic_pay = this.optionDetailArr[i][2];
+                  let tic_name = this.optionDetailArr[i][0];
                   let tic_state = "可使用";
                   formData.append("mem_id", mem_id);
                   formData.append("mem_email", catchMemEmail);
                   formData.append("tic_date", tic_date);
+                  formData.append("tic_name", tic_name);
                   formData.append("tic_pay", tic_pay);
                   formData.append("tic_state", tic_state);
                   fetch(`${this.$store.state.APIurl}bookDatePush.php`, {
@@ -197,26 +214,26 @@ export default {
       if (this.optionDetailArr[idx][3] > 0) {
         this.optionDetailArr[idx][3]--;
         idx == 0
-          ? (this.totalPrice -= 500)
+          ? (this.totalPrice -= parseInt(this.optionDetailArr[idx][2]))
           : idx == 1
-          ? (this.totalPrice -= 250)
+          ? (this.totalPrice -= parseInt(this.optionDetailArr[idx][2]))
           : idx == 2
-          ? (this.totalPrice -= 400)
+          ? (this.totalPrice -= parseInt(this.optionDetailArr[idx][2]))
           : idx == 3
-          ? (this.totalPrice -= 250)
+          ? (this.totalPrice -= parseInt(this.optionDetailArr[idx][2]))
           : "";
       }
     },
     ticketPlus(idx) {
       this.optionDetailArr[idx][3]++;
       idx == 0
-        ? (this.totalPrice += 500)
+        ? (this.totalPrice += parseInt(this.optionDetailArr[idx][2]))
         : idx == 1
-        ? (this.totalPrice += 250)
+        ? (this.totalPrice += parseInt(this.optionDetailArr[idx][2]))
         : idx == 2
-        ? (this.totalPrice += 400)
+        ? (this.totalPrice += parseInt(this.optionDetailArr[idx][2]))
         : idx == 3
-        ? (this.totalPrice += 250)
+        ? (this.totalPrice += parseInt(this.optionDetailArr[idx][2]))
         : "";
     },
   },
