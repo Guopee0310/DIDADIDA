@@ -96,7 +96,11 @@
               >已選日期: {{ formattedDate }}</span
             >
           </p>
-          <input type="checkbox" @change="enableDateSelection" />確定不開放
+          <input
+            type="checkbox"
+            @change="enableDateSelection"
+            :checked="computedTextColor == 'red'"
+          />確定不開放
           <div>
             目前狀態 :
             <span :style="{ color: computedTextColor }">{{ nowState }}</span>
@@ -219,6 +223,7 @@ export default {
 
       return isOpen ? "開放" : "關閉";
     },
+
     computedTextColor() {
       // 在这里使用计算属性来返回文本颜色
       return this.nowState == "關閉" ? "red" : "blue";
