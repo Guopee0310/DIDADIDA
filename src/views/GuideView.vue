@@ -6,32 +6,58 @@
       </template>
     </h3Title>
     <div class="guide_map">
-      <img src="../../public/all_images/guide/guide_map.jpg" alt="">
-      <div class="mask">
-        <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 100 100">
-          <!-- 線性漸層 -->
-          <defs>
-            <filter id="drop-shadow-filter" x="0" y="0" width="150%" height="150%">
-              <feDropShadow dx="0.1em" dy="0.2em" stdDeviation="0.1em" flood-color="rgba(0,0,0,0.5)" />
-            </filter>
-          </defs>
-          <!-- 表層區 -->
-          <g @click="scrollToSection(2)" id="section1">
-            <rect x="7" y="16" width="15" height="6" rx="1" ry="1" style="fill:#67daf4a2;stroke-width:10;"></rect>
-            <text x="8.5" y="20" fill="#fff" filter="url(#drop-shadow-filter)">淺層館</text>
-          </g>
-          <!-- 中層區 -->
-          <g @click="scrollToSection(3)">
-            <rect x="50" y="10" width="15" height="6" rx="1" ry="1" style="fill:#4B88FFa2;stroke-width:10;"></rect>
-            <text x="51.5" y="14.2" fill="#fff" filter="url(#drop-shadow-filter)">中層館</text>
-          </g>
-          <!-- 深層區 -->
-          <g @click="scrollToSection(4)">
-            <rect x="70" y="37" width="15" height="6" rx="1" ry="1" style="fill:#0016D8a2;stroke-width:10;"></rect>
-            <text x="72" y="41" fill="#fff" filter="url(#drop-shadow-filter)">深層館</text>
-          </g>
-        </svg>
+      <button @click="toggleBook" class="flip-btn">{{ isOpen ? '點擊關閉地圖' : '點擊查看地圖' }}</button>
+      <div id="book">
+        <div id="top">
+          <img src="https://i.imgur.com/RBBeLsB.jpg" alt="" />
+
+          <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 100 100">
+            <!-- 線性漸層 -->
+            <defs>
+              <filter id="drop-shadow-filter" x="0" y="0" width="150%" height="150%">
+                <feDropShadow dx="0.1em" dy="0.2em" stdDeviation="0.1em" flood-color="rgba(0,0,0,0.5)" />
+              </filter>
+            </defs>
+            <!-- 中層區 -->
+            <g @click="scrollToSection(3)">
+              <rect x="78" y="9" width="20" height="8" rx="1" ry="1" style="fill:#4B88FFa2;stroke-width:10;"></rect>
+              <text x="79" y="15" fill="#fff" filter="url(#drop-shadow-filter)">中層館</text>
+              <polyline points="0,0 85,0 85,9" style="fill:none; stroke:#000; stroke-width:0.5" />
+            </g>
+            <!-- 深層區 -->
+            <g @click="scrollToSection(4)">
+              <rect x="78" y="36" width="20" height="8" rx="1" ry="1" style="fill:#0016D8a2;stroke-width:10;"></rect>
+              <text x="79" y="41.5" fill="#fff" filter="url(#drop-shadow-filter)">深層館</text>
+              <polyline points="32,40 78,40" style="fill:none; stroke:#000; stroke-width:0.5" />
+            </g>
+          </svg>
+        </div>
       </div>
+
+      <div :class="{ 'open': isOpen, 'closed': !isOpen }" id="flip">
+        <div id="front">
+          <img src="https://i.imgur.com/0m2DG2m.jpg" alt="" />
+
+        </div>
+        <div id="back">
+          <img src="https://i.imgur.com/R7DBOwP.jpg" alt="" />
+          <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 100 100">
+            <!-- 線性漸層 -->
+            <defs>
+              <filter id="drop-shadow-filter" x="0" y="0" width="150%" height="150%">
+                <feDropShadow dx="0.1em" dy="0.2em" stdDeviation="0.1em" flood-color="rgba(0,0,0,0.5)" />
+              </filter>
+            </defs>
+            <!-- 表層區 -->
+            <g @click="scrollToSection(2)" id="section1">
+              <rect x="6" y="16" width="20" height="8" rx="1" ry="1" style="fill:#67daf4a2;stroke-width:10;"></rect>
+              <text x="7" y="21.8" fill="#fff" filter="url(#drop-shadow-filter)">淺層館</text>
+              <polyline points="15,15 15,10 50,10" style="fill:none; stroke:#000; stroke-width:0.5" />
+            </g>
+          </svg>
+        </div>
+      </div>
+
     </div>
   </div>
   <h3Title>
@@ -40,95 +66,15 @@
     </template>
   </h3Title>
 
-  <!-- 改版後 ------------------------------------------- -->
-  <div class="tour">
-    <div class="btn">
-      <button @click="face()">淺層館</button>
-      <button @click="middle()">中層館</button>
-      <button @click="deep()">深層館</button>
-    </div>
 
-    <!-- <transition> -->
-    <div class="content one" v-if="faceshow" value="tab2" id="section2">
-      <div class="wrap">
-        <div class="text">
-          <h4>淺層館</h4>
-          <p>
-            海洋表層區是指地球上的海洋中的最上層部分，通常指的是水面以下的相對較薄的水層，它包括了海洋中最頂部的數百米到一千米的水深範圍。這個區域在海洋學和生態學中非常重要，因為它直接受到陽光照射、風浪、潮汐和季節變化的影響，同時也是眾多海洋生物的居住地。
-          </p>
-        </div>
-        <div class="fish_wrap">
-
-          <div class="fish" v-for="(item, index) in shallow_pic" :key="index">
-            <div class="num">{{ index + 1 }}</div>
-            <div class="pic_shape" :style="{ backgroundImage: `url(${item.pic})` }">
-            </div>
-            <div class="name">{{ item.name }}</div>
-          </div>
-
-        </div>
-      </div>
-
-
-    </div>
-
-    <div class="content two" v-else-if="middleshow" value="tab3" id="section3">
-      <div class="wrap">
-        <div class="text">
-          <h4>中層館</h4>
-          <p>
-            這個區域在海洋生態系統中非常重要，因為它承載著各種生物和生態過程。海洋中層區的深度通常位於海平面以下約200米到1000米之間。這個區域的深度可以因地理位置而異，但大致處於此範圍內。隨著深度的增加，光線變得越來越有限，所以這個區域被稱為"光線不足層"。此外，水溫也隨著深度的增加而下降。這個區域通常有一個稱為"增溫層"的區域，水溫在這個區域內會有一個較大的變化。海洋中層區擁有豐富的生物多樣性，包括各種魚類、烏賊、燈籠魚等生物。這些生物通常會遷徙到這個區域，以覓食或避開掠食者。
-          </p>
-        </div>
-        <div class="fish_wrap">
-          <div class="fish" v-for="(item, index) in middle_pic" :key="index">
-            <div class="num">{{ index + 1 }}</div>
-            <div class="pic_shape" :style="{ backgroundImage: `url(${item.pic})` }">
-            </div>
-            <div class="name">{{ item.name }}</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="content three" v-else-if="deepshow" value="tab4" id="section4">
-      <div class="wrap">
-        <div class="text">
-          <h4>深層館</h4>
-          <p>深海區，是地球上最神祕和未被完全探索的地方之一，隱藏着無數令人驚奇的祕密。這片深不可測的海域位於陸地架的邊緣，通常從水面下200米（656英尺）深處開始，一直延伸到世界各個海洋的深部。</p>
-        </div>
-        <div class="fish_wrap">
-          <div class="fish" v-for="(item, index) in deep_pic" :key="index">
-            <div class="num">{{ index + 1 }}</div>
-            <div class="pic_shape" :style="{ backgroundImage: `url(${item.pic})` }">
-            </div>
-            <div class="name">{{ item.name }}</div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- </transition> -->
-  </div>
-
-
-
-  <!-- 改版前 ------------------------------------------- -->
-  <!-- <transition name="fade">
-    <div class="click_scroll" v-if="isClickScrollVisible">
-      <div class="click_top" @click="scrollToSection(1)">
-        <i class="fa-solid fa-angles-up" style="color: #ffffff;"></i><br>
-        <span>Scroll<br>Top</span>
-      </div>
-    </div>
-  </transition> -->
-  <!-- <div class="tabs">
-    <h4><img v-if="selectedTab == 'tab2'" src="../../public/all_images/guide/lighthouse.png" alt="">淺層館</h4>
+  <div class="tabs">
+    <h4>淺層館</h4>
     <input type="radio" name="name" v-model="selectedTab" value="tab2" id="section2" />
 
     <div class="content">
       <div class="wrap">
-        <div class="about_pic">
-          <img src="../../public/all_images/guide/shallow.png" alt="">
+        <div class="about_content">
+
           <p>
             海洋表層區是指地球上的海洋中的最上層部分，通常指的是水面以下的相對較薄的水層，它包括了海洋中最頂部的數百米到一千米的水深範圍。這個區域在海洋學和生態學中非常重要，因為它直接受到陽光照射、風浪、潮汐和季節變化的影響，同時也是眾多海洋生物的居住地。
           </p>
@@ -143,32 +89,30 @@
         </div>
       </div>
     </div>
-    <h4><img v-if="selectedTab == 'tab3'" src="../../public/all_images/guide/lighthouse.png" alt="">中層館</h4>
+    <h4>中層館</h4>
     <input type="radio" name="name" v-model="selectedTab" value="tab3" id="section3" />
     <div class="content">
       <div class="wrap">
-        <div class="about_pic">
-          <img src="../../public/all_images/guide/middle.jpg" alt="">
+        <div class="about_content">
           <p>
             這個區域在海洋生態系統中非常重要，因為它承載著各種生物和生態過程。海洋中層區的深度通常位於海平面以下約200米到1000米之間。這個區域的深度可以因地理位置而異，但大致處於此範圍內。隨著深度的增加，光線變得越來越有限，所以這個區域被稱為"光線不足層"。此外，水溫也隨著深度的增加而下降。這個區域通常有一個稱為"增溫層"的區域，水溫在這個區域內會有一個較大的變化。海洋中層區擁有豐富的生物多樣性，包括各種魚類、烏賊、燈籠魚等生物。這些生物通常會遷徙到這個區域，以覓食或避開掠食者。
           </p>
         </div>
         <div class="fish_wrap">
           <div class="fish" v-for="(item, index) in middle_pic" :key="index">
-            <div class="num">{{ index + 1 }}</div>
+            <div class="num">{{ index + 1 }}</div> 
+            <div class="name">{{ item.name }}</div>
             <div class="pic_shape" :style="{ backgroundImage: `url(${item.pic})` }">
             </div>
-            <div class="name">{{ item.name }}</div>
           </div>
         </div>
       </div>
     </div>
-    <h4><img v-if="selectedTab == 'tab4'" src="../../public/all_images/guide/lighthouse.png" alt="">深層館</h4>
+    <h4>深層館</h4>
     <input type="radio" name="name" v-model="selectedTab" value="tab4" id="section4" />
     <div class="content">
       <div class="wrap">
-        <div class="about_pic">
-          <img src="../../public/all_images/guide/nature-2575575_1920.jpg" alt="">
+        <div class="about_content">
           <p>深海區，是地球上最神祕和未被完全探索的地方之一，隱藏着無數令人驚奇的祕密。這片深不可測的海域位於陸地架的邊緣，通常從水面下200米（656英尺）深處開始，一直延伸到世界各個海洋的深部。</p>
         </div>
         <div class="fish_wrap">
@@ -181,20 +125,7 @@
         </div>
       </div>
     </div>
-    <div class="sea_bg">
-      <svg width="0" height="0" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="sea">
-        <filter id="water">
-          <feTurbulence type="fractalNoise" baseFrequency=".05 .05" numOctaves="1" result="noise1"></feTurbulence>
-          <feColorMatrix in="noise1" type="hueRotate" values="0" result="noise2">
-            <animate attributeName="values" from="0" to="360" dur="1s" repeatCount="indefinite" />
-          </feColorMatrix>
-          <feDisplacementMap xChannelSelector="R" yChannelSelector="G" scale="7" in="SourceGraphic" in2="noise2" />
-        </filter>
-      </svg>
-      <img src="../../public/all_images/guide/tyler-lastovich-6s2fFIsyyTc-unsplash.jpg"
-        alt="Hawaiian water crashes against the rocks" class="ocean">
-    </div>
-  </div> -->
+  </div>
 </template>
 
 
@@ -207,9 +138,7 @@ export default {
       selectedTab: "tab2", // 默认选中的选项卡
       isClickScrollVisible: false,
       currentSection: 1,
-      faceshow: "true",
-      middleshow: "false",
-      deepshow: "false",
+      isOpen: true,
       shallow_pic: [
         { pic: `${this.$store.state.chooseImgSrc}/all_images/guide/pexels-francesco-ungaro-2289411.jpg`, name: '海星' },
         { pic: `${this.$store.state.chooseImgSrc}/all_images/guide/Mark_Rosenstein,iNaturalist.org.CC_BY-NC-SA.©Sea_Cucumbers.jpg`, name: '海參' },
@@ -254,50 +183,19 @@ export default {
       if (sectionElement) {
         sectionElement.scrollIntoView({
           behavior: "smooth",
-          block: "center",
+          block: "start",
           inline: "nearest",
         });
       }
       this.selectedTab = "tab" + sectionIndex;
     },
 
-    handleScroll() {
-      const scrollY = window.scrollY;
-      const tabSection = document.querySelector(".tabs");
+  
+    toggleBook() {
+      this.isOpen = !this.isOpen;
+    },
+  },
 
-      if (tabSection) {
-        const tabSectionTop = tabSection.offsetTop;
-
-        // 根据滚动位置和选项卡区域位置来控制按钮的显示和隐藏
-        if (scrollY >= tabSectionTop - 300) {
-          this.isClickScrollVisible = true;
-        } else {
-          this.isClickScrollVisible = false;
-        }
-      }
-    },
-    face() {
-      this.faceshow = true;
-      this.middleshow = false;
-      this.deepshow = false;
-    },
-    middle() {
-      this.faceshow = false;
-      this.middleshow = true;
-      this.deepshow = false;
-    },
-    deep() {
-      this.faceshow = false;
-      this.middleshow = false;
-      this.deepshow = true;
-    },
-  },
-  mounted() {
-    window.addEventListener("scroll", this.handleScroll);
-  },
-  beforeDestroy() {
-    window.removeEventListener("scroll", this.handleScroll);
-  },
 };
 </script>
 
@@ -335,10 +233,98 @@ h3 {
   margin-bottom: 100px;
 }
 
+// 地圖css
 .guide_map {
-  max-width: 1000px;
-  margin: auto;
   position: relative;
+  max-width: 1200px;
+  height: 80vh;
+  // border:2px solid red;
+  margin: auto;
+
+  .flip-btn {
+    outline: none;
+    border: none;
+  }
+}
+
+/* 翻頁效果 */
+#flip {
+  max-width: 1200px;
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translateZ(-10px);
+  transform-style: preserve-3d;
+}
+
+
+/* 打開 */
+@keyframes wrapper-closed {
+  0% {
+    transform: rotateY(-180deg);
+  }
+
+  100% {
+    transform: rotateY(0deg);
+  }
+}
+
+@keyframes wrapper-open {
+  0% {
+    transform: rotateY(0deg);
+  }
+
+  100% {
+    transform: rotateY(-180deg);
+  }
+}
+
+/* 初始狀態合起 */
+#flip.closed {
+  animation: wrapper-closed 3s linear forwards;
+}
+
+/* 打開狀態 */
+#flip.open {
+  animation: wrapper-open 3s linear forwards;
+}
+
+#flip>div {
+  position: absolute;
+  left: 0;
+  transform-origin: 0 100%;
+  transform-style: preserve-3d;
+}
+
+/* 左內頁 */
+#back {
+  position: relative;
+  width: 30vw;
+  transform: rotateY(.4deg);
+  transform-origin: -100% 0;
+
+  img {
+    width: 100%;
+    vertical-align: top;
+  }
+
+  svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: rotateY(-180deg);
+    cursor: pointer;
+
+    text {
+      font-size: 5px;
+      pointer-events: none;
+    }
+  }
+}
+
+
+#front {
+  width: 30vw;
 
   img {
     width: 100%;
@@ -346,51 +332,50 @@ h3 {
   }
 }
 
-svg {
+
+#book {
+  max-width: 1200px;
   position: absolute;
-  inset: 0;
+  left: 50%;
+  top: 0;
+  transform: translate3d(0px, 0px, -10px) rotateX(0deg) rotateZ(0deg);
+  transform-style: preserve-3d;
+}
 
-  g {
-    cursor: pointer;
-    opacity: 1;
-    transition: opacity .3s;
+/* 內右頁 */
+#book #top {
+  transform: rotateX('180deg');
+  width: 30vw;
+  position: absolute;
+  left: 0;
+  top: 0;
 
-    text {
-      font-size: 3px;
-      pointer-events: none;
-    }
-
-    &:hover {
-      opacity: 0.8;
-    }
+  img {
+    width: 100%;
+    vertical-align: top;
   }
 
-  .mask {
+  svg {
     position: absolute;
-    width: 100%;
-    height: 100%;
     top: 0;
+    right: 0;
+    cursor: pointer;
+
+    text {
+      font-size: 5px;
+      pointer-events: none;
+    }
   }
 }
 
+// 地圖css結束
 .tabs {
   display: flex;
   box-sizing: border-box;
   position: relative;
   max-width: 100%;
-  height: 100vh;
-  overflow: hidden;
+  padding-top: 5rem;
 
-  .sea+img {
-    width: 110vw;
-    height: 100%;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    z-index: 1;
-    object-fit: cover;
-    filter: url(#water);
-  }
 
   h4 {
     position: absolute;
@@ -398,25 +383,25 @@ svg {
     justify-content: center;
     align-items: center;
     left: 5px;
-    width: 19%;
-    height: 5.3rem;
-    z-index: 3;
+    width: 8%;
+    height: 2.5rem;
+    z-index: 2;
     pointer-events: none;
-    color: map-get($colors, 'light');
-    font-size: map-get($fontSizes , 'div');
-    text-shadow: black 0.1em 0.1em 0.1em;
-
+    font-size: 1rem;
 
     &:nth-of-type(1) {
-      top: 10%;
+      top: 10px;
+      left: 32%;
     }
 
     &:nth-of-type(2) {
-      top: 22%;
+      top: 10px;
+      left: 46%;
     }
 
     &:nth-of-type(3) {
-      top: 35%;
+      top: 10px;
+      left: 60%;
     }
 
     img {
@@ -432,411 +417,118 @@ svg {
 
   input[type="radio"] {
     position: absolute;
-    width: 20%;
-    height: 5.3rem;
+    width: 8%;
+    height: 2.5rem;
     appearance: none;
     cursor: pointer;
-    z-index: 5;
-    opacity: 1;
+    z-index: 1;
+    box-shadow: #9FACE6 -2px -2px 0px 2px, #74EBD5 0px 0px 0px 4px, rgba(0, 0, 0, 0.05) 0px 0px 2px 7px;
+    transition: all 0.2s;
+    border-radius: 40px;
+    &:hover{
+      box-shadow: #74EBD5 -2px -2px 0px 2px, #9FACE6 0px 0px 0px 4px, rgba(0, 0, 0, 0.05) 0px 0px 2px 7px;
+      transform: scale(1.01);
+    }
+    &:checked{
+      background-color: #cbefc3;
+    }
 
 
     &:nth-of-type(1) {
-      top: 10%;
+      top: 10px;
+      left: 32%;
+      
     }
 
     &:nth-of-type(2) {
-      top: 22%;
+      top: 10px;
+      left: 46%;
+      
     }
 
     &:nth-of-type(3) {
-      top: 35%;
+      top: 10px;
+      left: 60%;
     }
-
-    &:checked {
-      transition: .5s;
-      overflow: hidden;
-
-    }
-
     &:checked+.content {
-      transform: translateX(0%);
-      transition: transform .5s ease 0.1s;
-    }
-  }
-
-  @keyframes animate {
-    0% {
-      transform: translate(0%, -15%) rotate(-5deg);
-    }
-
-    100% {
-      transform: translate(0%, 0%)rotate(4deg);
-    }
-  }
-
-  // .content {
-  //   width: 75%;
-  //   height: 80%;
-  //   overflow-y: scroll;
-  //   padding: 1.5rem;
-  //   border-radius: 2rem;
-  //   position: absolute;
-  //   z-index: 2;
-  //   right: 1rem;
-  //   transition: transform 0.2s ease-in-out;
-  //   margin-top: 2rem;
-  //   margin-bottom: 2rem;
-
-  //   &:nth-of-type(1) {
-  //     transform: translateX(150%);
-  //     background-color: #828ca6b9;
-  //   }
-
-  //   &:nth-of-type(2) {
-  //     transform: translateX(250%);
-  //     background-color: #666e7ebe;
-  //   }
-
-  //   &:nth-of-type(3) {
-  //     transform: translateX(300%);
-  //     background-color: #40465dcd;
-  //   }
-
-  //   .wrap {
-  //     display: flex;
-  //     align-items: start;
-  //     color: map-get($colors, 'light');
-  //     line-height: 1.5em;
-
-  //     .about_pic {
-  //       width: 40%;
-  //       height: 100%;
-
-  //       img {
-  //         width: 100%;
-  //         vertical-align: top;
-  //       }
-
-  //       p {
-  //         padding-top: 1rem;
-  //         line-height: 1.5em;
-  //         font-size: map-get($fontSizes, "p");
-  //       }
-  //     }
-
-  //     .fish_wrap {
-  //       display: flex;
-  //       flex-wrap: wrap;
-  //       margin-left: 1em;
-  //       width: 60%;
-  //       color: map-get($colors, 'light');
-
-  //       .fish {
-  //         width: calc(100%/3);
-  //         position: relative;
-  //         padding: 1rem;
-
-  //         .name {
-  //           width: 100%;
-  //           text-align: center;
-  //           margin-top: 1rem;
-  //           font-size: map-get($fontSizes, "p");
-  //           font-weight: 600;
-  //           text-shadow: #000 0.1em 0.1em 0.1em;
-  //         }
-
-  //         .num {
-  //           aspect-ratio: 1/1;
-  //           width: 1.2rem;
-  //           height: 1.2rem;
-  //           border-radius: 50%;
-  //           background-color: rgb(30, 35, 35);
-  //           text-align: center;
-  //           color: map-get($colors, 'light');
-  //         }
-
-  //         .pic_shape {
-  //           width: 80%;
-  //           margin: auto;
-  //           aspect-ratio: 1/1;
-  //           border-radius: 10rem;
-  //           background-size: cover;
-  //           background-repeat: no-repeat;
-  //           background-position: center;
-
-  //         }
-  //       }
-  //     }
-  //   }
-  // }
-}
-
-
-
-
-.click_scroll {
-  position: fixed;
-  bottom: 25%;
-  right: 30px;
-  z-index: 4;
-  cursor: pointer;
-
-
-  .click_top {
-    text-align: center;
-    animation: top .8s alternate infinite;
-
-    span {
-      font-size: map-get($fontSizes, 'div');
-      font-weight: 600;
-      color: map-get($colors, 'light');
-      text-shadow: #000 0.1em 0.1em 0.1em;
-
-      img {
-        width: 2.5rem;
-        vertical-align: top;
-        position: absolute;
-        right: 80px;
-      }
-    }
-  }
-}
-
-@keyframes top {
-  0% {
-    transform: translateY(10px);
-  }
-
-  100% {
-    transform: translateY(0px);
-  }
-
-}
-
-// 改版後CSS------------------------------------------------------------------
-
-.tour {
-  max-width: 100%;
-  color: map-get($colors, 'light');
-
-  .btn {
-    max-width: 396px;
-    width: 100%;
-    margin: 1.5rem auto;
-
-    button {
-      background-color: map-get($colors, 'lightgreen');
-      color: map-get($colors, 'light');
-      border: none;
-      width: 7rem;
-      height: 2rem;
-      border-radius: 1rem;
-      cursor: pointer;
-      margin: 0 10px;
+      display: block;
     }
   }
 
   .content {
-    background-repeat: no-repeat;
+    width: 100vw;
+    position: relative;
     background-size: 100%;
-    background-position: center center;
-    overflow: hidden;
-    height: 45rem;
-  }
-
-  .content.one {
-    background-image: url(../../public/all_images/guide/shallow.png);
-  }
-
-  .content.two {
-    background-image: url(../../public/all_images/guide/middle.jpg);
-  }
-
-  .content.three {
-    background-image: url(../../public/all_images/guide/nature-2575575_1920.jpg);
-  }
-
-  .wrap {
-    display: flex;
-    justify-content: space-between;
-  }
-
-  .text {
-    margin: 5rem;
-
-    h4 {
-      font-size: map-get($fontSizes, h4);
-      font-weight: 400;
-      margin-bottom: 20px;
+    
+    &:nth-of-type(1) {
+      display: none;
+      background-image: url(../../public/all_images/guide/sharks-gudie_pic.jpg);
     }
 
-    p {
-      width: 30rem;
-      text-align: justify;
-    }
-  }
-
-  .fish_wrap {
-    display: flex;
-    flex-wrap: wrap;
-    width: 40%;
-    height: 45rem;
-    margin-left: auto;
-    background-color: rgba(225, 225, 225, 0.3);
-    overflow-y: auto;
-    overflow-x: hidden;
-
-    &::-webkit-scrollbar {
-      widows: 10px;
+    &:nth-of-type(2) {
+      display: none;
+      background-image: url(../../public/all_images/guide/fish-guide_pic.jpg);
     }
 
-    &::-webkit-scrollbar-thumb {
-      border-radius: 4px;
-      background-color: rgba(0, 0, 0, 0.2);
+    &:nth-of-type(3) {
+      display: none;
+      background-image: url(../../public/all_images/guide/mikita-GdkuJ6tyciU-unsplash.jpg);
     }
 
-    &::-webkit-scrollbar-track {
-      box-shadow: transparent;
-    }
-
-    &::-webkit-scrollbar-button {
-      height: 5px;
-      background: transparent;
-      border-radius: 4px;
-    }
-
-    // background-color: linear-gradient(#e66465, #9198e5);
-
-
-    .fish {
-      width: 100%;
-      height: 50%;
-      position: relative;
-      padding: 3rem;
-      // border: 1px solid red;
-      // margin-bottom: -15rem;
-
-      .name {
-        width: 100%;
-        position: absolute;
-        top: 70%;
-        font-size: map-get($fontSizes, "p");
-        font-weight: 600;
+    .wrap {
+      display: flex;
+      align-items: center;
+      color: map-get($colors, 'light');
+      line-height: 1.5em;
+      .about_content{
+          width: 60%;
+          padding: 4rem;
+          line-height: 1.5em;
+          font-size: map-get($fontSizes, "p");
       }
 
-      .num {
-        position: absolute;
-        top: 60%;
-        width: 1.2rem;
-        height: 1.2rem;
-        font-size: map-get($fontSizes , 'h4');
-      }
-
-      .num::after {
-        content: '';
-        display: block;
-        width: 8rem;
-        border: 1px solid #eee;
-        margin: 3px -5px;
-      }
-
-      .pic_shape {
-        width: 80%;
-        height: 100%;
+      .fish_wrap {
+        background-color: rgba(116, 125, 134, 0.603);
+        padding: 1rem;
+        max-height: 700px;
+        overflow-y: scroll;
         margin: auto;
-        aspect-ratio: 1/1;
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-position: center;
-      }
-    }
-  }
-}
-
-.scrollbar {
-  margin-left: 30px;
-  float: left;
-  height: 300px;
-  width: 65px;
-  background: #F5F5F5;
-  overflow-y: scroll;
-  margin-bottom: 25px;
-}
-
-.force-overflow {
-  min-height: 450px;
-}
-
-#style-1::-webkit-scrollbar-track {
-  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-  border-radius: 10px;
-  background-color: #F5F5F5;
-}
-
-#style-1::-webkit-scrollbar {
-  width: 12px;
-  background-color: #F5F5F5;
-}
-
-#style-1::-webkit-scrollbar-thumb {
-  border-radius: 10px;
-  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
-  background-color: #555;
-}
-
-@media screen and (max-width:992px) {
-
-  .tabs {
-    height: 80vh;
-
-    h4 {
-      font-size: map-get($fontSizes , 'span');
-      justify-content: start;
-
-      img {
-        width: 25px;
-      }
-    }
-
-    .content {
-      margin-top: 2rem;
-      width: 90%;
-
-      .wrap {
-        display: flex;
-        flex-direction: column;
+        width: 40%;
         color: map-get($colors, 'light');
-        line-height: 1.5em;
 
-
-        .about_pic {
+        .fish {
           width: 100%;
+          position: relative;
+          margin: 1rem 0;
 
-          img {
-            width: 100%;
-            vertical-align: top;
+          .name {
+            position: absolute;
+            font-size: map-get($fontSizes, "p");
+            top: 20%;
           }
 
-          p {
-            padding-top: 1rem;
+          .num {
+            width: 30%;
+            position: absolute;
+            font-size: 1.5rem;
+            border-bottom: #fff solid 1px;
+            color: map-get($colors, 'light');
           }
-        }
 
-        .fish_wrap {
-          width: 100%;
-          margin: auto;
+          .pic_shape {
+            width: 60%;
+            margin: auto;
+            aspect-ratio: 1/1;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
 
-          .fish {
-            width: calc(100%/2);
-
-            .name {
-              font-size: map-get($fontSizes, "span");
-            }
           }
         }
       }
     }
   }
-
 }
-</style>
+
+
+ </style>
