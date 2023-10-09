@@ -20,8 +20,18 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if (!file_exists($targetDirectory)) {
         mkdir($targetDirectory);
     }
+    $targetFile = $fileName . "." . $fileExt;
     $targetFile = "{$fileName}.{$fileExt}";
     $result = ["fileName" => "$targetFile"];
+    if (move_uploaded_file($_FILES["image"]["tmp_name"], "{$targetDirectory}{$targetFile}")) {
+        $response = [
+          "success" => true,
+          "message" => "文件上傳成功。",
+          "file_path" => $targetFile,
+          "fileName" => $targetFile
+        ];
+        // echo json_encode($response);
+    }
     
     // 執行更新操作
     $update_sql = "INSERT INTO news (news_id, news_img, news_title, news_content, news_date, news_category, news_state) VALUES (:news_id, :news_img, :news_title, :news_content, :news_date, :news_category, :news_state)";
