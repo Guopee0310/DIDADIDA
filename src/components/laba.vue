@@ -2,6 +2,7 @@
   <div class="labaAll">
     <div class="containerPic" v-if="this.$store.state.questionPic">
       <img
+        class="questionMark"
         :src="require('../../public/all_images/laba/question_mark.jpg')"
         alt=""
       />
@@ -413,7 +414,7 @@ export default {
 
   .containerPic {
     width: 474px;
-    height: 474px;
+    //height: 474px;
     border-radius: 5px;
     // border: 5px #172c40 solid;
     // clip-path: ellipse(50% 50% at 50% 40%);
@@ -421,6 +422,12 @@ export default {
     overflow: hidden;
     // transition: transform ease-in 0.1s, box-shadow ease-in 0.25s;
     // box-shadow: 0 1px 10px #a7cbec;
+
+    position: relative;
+    z-index: 2;
+
+    max-width: 100%;
+    aspect-ratio: 1/1;
 
     .resetImg {
       vertical-align: top;
@@ -469,7 +476,8 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 10px 200px;
+    //padding: 10px 200px;
+    padding: 10px 0px;
     color: #03e9f4;
     font-size: 16px;
     text-decoration: none;
@@ -478,6 +486,8 @@ export default {
     transition: 0.5s;
     letter-spacing: 4px;
     margin-top: 50px;
+    width: 100%;
+    max-width: 474px;
 
     &:hover {
       background: #03e9f4;
@@ -530,6 +540,10 @@ export default {
         animation-delay: 0.75s;
       }
     }
+  }
+
+  .questionMark {
+    width: 100%;
   }
 
   .rePlay {

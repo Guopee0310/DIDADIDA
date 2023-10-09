@@ -99,6 +99,7 @@ export default {
 }
 .interact {
   position: relative;
+  overflow: hidden;
   .titleAll {
     z-index: 50;
     // border: 1px red solid;
@@ -131,4 +132,5 @@ export default {
     left: 0;
   }
 }
+
 </style>

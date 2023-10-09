@@ -6,7 +6,7 @@
         alt=""
         class="isOpacity"
         :class="{ notOpacity: finalShow1 }"
-      />
+      /> 
     </div>
     <div class="resultPost">
       <div class="isOpacity postTitle" :class="{ notOpacity: finalShow1 }">
@@ -102,6 +102,11 @@ export default {
     img {
       border-radius: 50%;
       width: 100%;
+    }
+
+    // === rwd === //
+    @media screen and (max-width: 768px) {
+      display: none;
     }
   }
   .resultPost {

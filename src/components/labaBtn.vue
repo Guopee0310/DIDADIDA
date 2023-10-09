@@ -1,5 +1,5 @@
 <template>
-  <a href="#" @click.prevent="" >
+  <a href="#" @click.prevent="" class="btn" >
     <span></span>
     <span></span>
     <span></span>
@@ -76,6 +76,11 @@ a {
       animation-delay: 0.75s;
     }
   }
+}
+
+.btn {
+  position: relative;
+  z-index: 2;
 }
 
 @keyframes btn-anim1 {
