@@ -318,7 +318,12 @@ export default {
       }
     },
     createNewOne() {
-      this.ticket.push(["", "", true]);
+      this.helperAll2.push({
+        tic_name: "",
+        dis: true,
+        tic_price: 0,
+        tic_info: "",
+      });
     },
     onDateSelected() {
       if (this.date) {
