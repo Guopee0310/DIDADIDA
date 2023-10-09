@@ -98,8 +98,8 @@
           </p>
           <input
             type="checkbox"
-            @change="enableDateSelection"
-            :checked="computedTextColor == 'red'"
+            @change="changeDate"
+            v-model="checkDateBtn"
           />確定不開放
           <div>
             目前狀態 :
@@ -112,10 +112,13 @@
 </template>
 
 <script>
+import { resolveTransitionHooks } from "vue";
+
 export default {
   name: "bookDate",
   data() {
     return {
+      checkDateBtn: false,
       state: "",
       date: null, // 选定的日期
       // 初始化 selectedDates 以存储已选择的日期
@@ -177,7 +180,6 @@ export default {
           data[i].close_date = new Date(`${data[i].close_date}`);
           this.disabledDateRanges.push(data[i].close_date);
         }
-        console.log(String(this.disabledDateRanges[0]));
       });
     fetch("http://localhost/dida_project/public/php/ticketMg.php") //第一步
       // fetch(`${this.$store.state.APIurl}helperMg.php`)
@@ -199,6 +201,20 @@ export default {
   },
   beforeDestroy() {},
   computed: {
+    checkArr() {
+      for (let i = 0; i < this.disabledDateRanges.length; i++) {
+        if (
+          this.disabledDateRanges[i].getDate() ===
+            new Date(this.date).getDate() &&
+          this.disabledDateRanges[i].getMonth() ===
+            new Date(this.date).getMonth()
+        ) {
+          return true;
+        } else {
+          return false;
+        }
+      }
+    },
     nowState() {
       let isOpen = true; // 默认状态为开放
 
@@ -226,6 +242,11 @@ export default {
 
     computedTextColor() {
       // 在这里使用计算属性来返回文本颜色
+      if (this.nowState == "關閉") {
+        this.checkDateBtn = true;
+      } else {
+        this.checkDateBtn = false;
+      }
       return this.nowState == "關閉" ? "red" : "blue";
     },
     containerStyles() {
@@ -257,6 +278,45 @@ export default {
   },
 
   methods: {
+    changeDate() {
+      // alert(this.checkDateBtn);
+      if (this.checkDateBtn) {
+        const formData = new FormData();
+
+        let close_date = this.formattedDate;
+        formData.append("close_date", close_date);
+        fetch(`${this.$store.state.APIurl}ticketMgInsert.php`, {
+          method: "post",
+          body: formData,
+        }).then((res) => res.json());
+
+        alert("已被設定為不開放");
+        this.disabledDateRanges.push(new Date(`${this.formattedDate}`));
+      } else if (!this.checkDateBtn) {
+        const formData = new FormData();
+
+        let close_date = this.formattedDate;
+        formData.append("close_date", close_date);
+        fetch(`${this.$store.state.APIurl}ticketMgDel.php`, {
+          method: "post",
+          body: formData,
+        }).then((res) => res.json());
+        for (let i = 0; i < this.disabledDateRanges.length; i++) {
+          if (
+            this.disabledDateRanges[i].getDate() ===
+              new Date(this.date).getDate() &&
+            this.disabledDateRanges[i].getMonth() ===
+              new Date(this.date).getMonth() &&
+            this.disabledDateRanges[i].getFullYear() ===
+              new Date(this.date).getFullYear()
+          ) {
+            this.disabledDateRanges.splice(i, 1);
+            this.checkDateBtn = false;
+          }
+        }
+        alert("已被設定為開放");
+      }
+    },
     createNewOne() {
       this.ticket.push(["", "", true]);
     },
@@ -300,11 +360,6 @@ export default {
       this.helperAll2[index].dis = false;
       e.target.innerText = "確認";
     },
-  },
-  enableDateSelection() {
-    this.disableDateSelection = false; // 启用日期选择
-    // 当重新启用日期选择时，将已确定不开放的日期清空
-    this.disabledDates = [];
   },
 
   // 添加此方法以禁用已选择的日期
