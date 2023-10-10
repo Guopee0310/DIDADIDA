@@ -6,27 +6,12 @@
       </div>
       <div class="input_area">
         <label for="account">
-          <img
-            src="../../../public/all_images/backStage/user-icon.png"
-            alt=""
-          />
-          <input
-            id="account"
-            type="text"
-            placeholder="帳號"
-            v-model="loginMail"
-            ref="loginMail"
-          />
+          <img src="../../../public/all_images/backStage/user-icon.png" alt="" />
+          <input id="account" type="text" placeholder="帳號" v-model="loginMail" ref="loginMail" />
         </label>
         <label for="psw">
           <img src="../../../public/all_images/backStage/psw-icon.png" alt="" />
-          <input
-            id="psw"
-            type="password"
-            placeholder="密碼"
-            v-model="loginPassword"
-            ref="loginPassword"
-        /></label>
+          <input id="psw" type="password" placeholder="密碼" v-model="loginPassword" ref="loginPassword" /></label>
 
         <div class="loginBtn" @click="checkLogin">登入</div>
       </div>
@@ -40,13 +25,8 @@
     </div>
     <div class="controlWidth">
       <div class="featureBox">
-        <router-link
-          :to="i[1]"
-          v-for="(i, index) in featureAll"
-          :key="index"
-          :class="['singleFeature', { active: $route.path === i[1] }]"
-          @click="toggleFeature(index)"
-        >
+        <router-link :to="i[1]" v-for="(i, index) in featureAll" :key="index"
+          :class="['singleFeature', { active: $route.path === i[1] }]" @click="toggleFeature(index)">
           {{ i[0] }}
         </router-link>
       </div>
@@ -69,6 +49,7 @@ export default {
       featureAll: [
         ["首頁輪播圖片管理", "/backHome/homePicMg", true],
         ["最新消息管理", "/backHome/newsMg", false],
+        ["活動倒數管理", "/backHome/activeMg", false],
         ["會員管理", "/backHome/memberMg", false],
         ["訂單管理", "/backHome/orderMg", false],
         ["商品管理", "/backHome/productMg", false],
@@ -283,14 +264,12 @@ export default {
 
       &::-webkit-scrollbar-thumb {
         border-radius: 10px;
-        background-image: -webkit-gradient(
-          linear,
-          left bottom,
-          left top,
-          color-stop(0.44, rgb(122, 153, 217)),
-          color-stop(0.72, rgb(73, 125, 189)),
-          color-stop(0.86, rgb(28, 58, 148))
-        );
+        background-image: -webkit-gradient(linear,
+            left bottom,
+            left top,
+            color-stop(0.44, rgb(122, 153, 217)),
+            color-stop(0.72, rgb(73, 125, 189)),
+            color-stop(0.86, rgb(28, 58, 148)));
       }
 
       .allTabs {
@@ -310,6 +289,7 @@ export default {
     }
   }
 }
+
 .userName {
   width: 90%;
   margin: auto;

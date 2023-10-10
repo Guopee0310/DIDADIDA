@@ -224,6 +224,14 @@ const routes = [
             /* webpackChunkName: "ticketMg" */ "../views/backEnd/ticketMg.vue"
           ),
       },
+      {
+        path: "/backHome/activeMg",
+        name: "activeMg",
+        component: () =>
+          import(
+            /* webpackChunkName: "activeMg" */ "../views/backEnd/activeMg.vue"
+          ),
+      },
     ],
   },
 ];

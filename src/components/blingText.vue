@@ -55,7 +55,8 @@ p {
 
 @media screen and (max-width:415px) {
   p {
-    font-size: 0.5em;
+    letter-spacing: normal;
+    top: -17%;
   }
 }
 </style>

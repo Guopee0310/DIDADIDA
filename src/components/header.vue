@@ -739,5 +739,17 @@ option:checked {
       }
     }
   }
+
+  @media screen and (max-width: 415px) {
+    .wrap .logo {
+      transition: 1s;
+
+      img {
+        width: 60%;
+      }
+    }
+
+  }
+
 }
 </style>
