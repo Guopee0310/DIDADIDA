@@ -124,6 +124,12 @@ export default {
       mem_bonus: 0,
     };
   },
+  created() {
+    if (!this.$store.state.userName) {
+      alert("需先登入!!");
+      this.$router.push("/");
+    }
+  },
   mounted() {
     if (this.$store.state.userName) {
       const formData = new FormData();
@@ -189,6 +195,7 @@ export default {
       this.logOutClick = false;
     },
     logOutAPI() {
+      this.$router.push("/", { replace: true });
       fetch("https://tibamef2e.com/cgd103/g1/api/postMemberLogout.php")
         .then((res) => res.json())
         .then((json) => console.log(json));
