@@ -18,7 +18,7 @@
 
       <div class="updateAndDel">
         <div @click="updatePic(index, $event)">修改</div>
-        <div @click="delRow(index)">刪除</div>
+        <div @click="delRow(i, index)">刪除</div>
       </div>
     </div>
   </div>
@@ -61,13 +61,37 @@ export default {
         this.bannerAll.push(["", true]);
       }
     },
-    delRow(index) {
+    delRow(item, index) {
+      const formData = new FormData();
+      let banner_id = this.bannerAll[index].banner_id;
+
+      formData.append("banner_id", banner_id);
+
+      fetch(`${this.$store.state.APIurl}homePicMg.php`, {
+        method: "POST",
+        body: formData,
+      }).then((res) => res.json());
       this.bannerAll.splice(index, 1);
     },
     updatePic(index, e) {
       if (e.target.innerText == "確認") {
         this.bannerAll[index].isDis = true;
         e.target.innerText = "修改";
+
+        const formData = new FormData();
+        let banner_id = this.bannerAll[index].banner_id;
+        let banner_pic = this.bannerAll[index].banner_pic;
+
+        formData.append("banner_id", banner_id);
+        formData.append("banner_pic", banner_pic);
+        // 使用fetch或axios將數據發送到PHP後端
+        fetch(`${this.$store.state.APIurl}homePicMg.php`, {
+          method: "post",
+          body: formData,
+        })
+          .then((res) => res.json())
+          .then((result) => alert("圖片更新OK"));
+        return;
       }
       this.bannerAll[index].isDis = false;
       e.target.innerText = "確認"
@@ -113,8 +137,17 @@ export default {
     display: flex;
     border-bottom: 1px black solid;
     padding-bottom: 10px;
-    justify-content: space-around;
+    // justify-content: space-around;
+
+    & div:nth-of-type(2) {
+      margin-left: 20px;
+    }
+
+    & div:last-child {
+      margin-left: 29%;
+    }
   }
+
 
   .singleBar {
     display: flex;

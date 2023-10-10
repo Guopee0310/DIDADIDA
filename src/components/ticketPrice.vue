@@ -10,7 +10,7 @@
         <td>{{ $t(ticket.tic_info) }}</td>
       </tr>
       <tr>
-        <td colspan="2">※{{ $t("未滿4歲且有家長陪同的幼童可免費入場") }}</td>
+        <td colspan="3">※{{ $t("未滿4歲且有家長陪同的幼童可免費入場") }}</td>
       </tr>
     </table>
   </div>

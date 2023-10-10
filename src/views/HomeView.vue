@@ -13,26 +13,6 @@
                 <img :src="i.banner_pic" alt="" />
               </div>
             </CarouselItem>
-            <!-- <CarouselItem>
-              <div class="demo-carousel">
-                <img src="../../public/all_images/banner/index_banner2.png" alt="" />
-              </div>
-            </CarouselItem>
-            <CarouselItem>
-              <div class="demo-carousel">
-                <img src="../../public/all_images/banner/index_banner3.png" alt="" />
-              </div>
-            </CarouselItem>
-            <CarouselItem>
-              <div class="demo-carousel">
-                <img src="../../public/all_images/banner/index_banner4.png" alt="" />
-              </div>
-            </CarouselItem>
-            <CarouselItem>
-              <div class="demo-carousel">
-                <img src="../../public/all_images/banner/index_banner4.png" alt="" />
-              </div>
-            </CarouselItem> -->
           </Carousel>
           <p>
             <blingText></blingText>
@@ -200,6 +180,12 @@
         <div class="game">
           <visual></visual>
         </div>
+
+        <div class="gamePhone">
+          <input type="range" v-model="lightChang" min="0" max="100">
+          <div class="square" :style="{ 'background-color': `hsl(0, 100%, ${lightChang}%)` }"></div>
+
+        </div>
       </div>
     </div>
   </div>
@@ -302,7 +288,7 @@ export default {
       this.loading = false;
       this.$store.state.showLoadingOnce = false;
     }, this.animationDuration);
-    
+
     setTimeout(() => {
       this.resetVisual = true;
     }, this.animationDuration + 300);
@@ -331,6 +317,10 @@ export default {
 
   h3 {
     @include h3Title();
+  }
+
+  .gamePhone {
+    display: none;
   }
 
   button {
@@ -372,14 +362,11 @@ export default {
 
   // banner ---------------------------------------------
   .banner {
-    // background-image: url(../../public/all_images/banner/index_banner1.png);
     width: 100%;
     height: 90vh;
-    background-size: cover;
-    background-position: center;
 
     img {
-      // max-width: 1920px;
+      max-width: 1920px;
       width: 100%;
     }
 
@@ -573,7 +560,6 @@ export default {
 
   // 熱銷商品 ---------------------------------------------
   .product {
-    // max-width: 960px;
     max-width: 1920px;
     margin: 0 auto 100px;
     position: relative;
@@ -612,7 +598,7 @@ export default {
           border-bottom: 1px solid map-get($colors, "mainColor");
           font-size: 50px;
           line-height: 1.2;
-          width: 50px;
+          width: 55px;
         }
 
         a {
@@ -791,13 +777,6 @@ export default {
       }
     }
 
-    // .map::after {
-    //   content: '';
-    //   width: 100%;
-    //   border-bottom: 2px solid #68769a;
-    //   border-radius: 5px;
-    // }
-
     .active {
       max-width: 90%;
 
@@ -819,9 +798,129 @@ export default {
   }
 
   @media screen and (max-width: 415px) {
-    .deco {
+
+    .deco,
+    .all-circle {
       display: none;
     }
+
+    .banner {
+      height: 40vh;
+      overflow: hidden;
+
+      img {
+        width: 300%;
+      }
+    }
+
+    .entrance {
+      margin: 0px auto;
+    }
+
+    .product {
+      padding: 1px;
+      margin: 0 auto;
+      // border: 1px solid rgb(26, 16, 97);
+
+      .item:nth-child(2) {
+        text-align: left;
+      }
+
+      .item {
+        flex-wrap: wrap;
+
+        .image {
+          width: 100%;
+
+          img {
+            width: 100%;
+          }
+        }
+
+        .content {
+          width: 80%;
+          margin: 10px auto 35px;
+          text-align: center;
+
+          .nub {
+            // margin: auto;
+            position: absolute;
+            top: 0;
+            left: 50px;
+          }
+
+          span {
+            line-height: 2.5;
+          }
+        }
+      }
+
+      button {
+        margin: 0 auto 50px;
+      }
+    }
+
+    .active {
+      width: 90%;
+
+      .item {
+        height: auto;
+        flex-wrap: wrap;
+
+
+        .image {
+          width: 100%;
+          height: 20vh;
+        }
+
+        .image::after {
+          border: 0;
+        }
+
+        .text {
+          width: 90%;
+          margin-bottom: 25px;
+
+          .date {
+            padding: 15px;
+          }
+
+          .title {
+            font-size: 25px;
+          }
+
+          .self {
+            font-size: 15px;
+
+            span {
+              font-size: 25px;
+            }
+          }
+        }
+      }
+
+      .day {
+        top: -25px;
+        right: -15px;
+        width: 90px;
+        height: 90px;
+      }
+    }
+
+    .game {
+      display: none;
+    }
+
+    .gamePhone {
+      display: flex;
+      background-image: url();
+
+      input {
+        transform: rotate(90deg);
+        margin-left: auto;
+      }
+    }
+
   }
 }
 </style>

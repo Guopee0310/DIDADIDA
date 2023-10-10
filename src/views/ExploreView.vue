@@ -760,7 +760,7 @@ export default {
     // 動物們 ------------------------------------------------------------
     .turtle {
       translate: 20% 50%;
-      // width: 400px;
+      width: 400px;
 
       img {
         cursor: pointer;
