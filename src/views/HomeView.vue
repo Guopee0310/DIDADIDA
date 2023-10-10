@@ -7,7 +7,13 @@
       <div class="index">
         <!-- banner + open time ------------------------------------------ -->
         <div class="banner">
-          <Carousel autoplay autoplay-speed="4800" dots="none" v-model="value" loop>
+          <Carousel
+            autoplay
+            autoplay-speed="4800"
+            dots="none"
+            v-model="value"
+            loop
+          >
             <CarouselItem v-for="i in bannerAll">
               <div class="demo-carousel">
                 <img :src="i.banner_pic" alt="" />
@@ -42,9 +48,17 @@
               <div class="open">
                 <span>{{ $t("營業時間") }}</span>
                 <span>09:00-17:00</span>
-                <svg x="0px" y="0px" width="200px" height="15px" viewBox="0 0 399.6 15.9">
-                  <polyline class="op_line"
-                    points="0.1,5.5 58,15.4 118.4,5.5 189.2,5.5 258.7,10.4 368.3,0.5 399.5,7.9 " />
+                <svg
+                  x="0px"
+                  y="0px"
+                  width="200px"
+                  height="15px"
+                  viewBox="0 0 399.6 15.9"
+                >
+                  <polyline
+                    class="op_line"
+                    points="0.1,5.5 58,15.4 118.4,5.5 189.2,5.5 258.7,10.4 368.3,0.5 399.5,7.9 "
+                  />
                 </svg>
                 <span>{{ $t("最後入場") }}</span>
                 <span>16:00</span>
@@ -64,7 +78,7 @@
             <div class="wave water"></div>
             <div class="wave water"></div>
           </div>
-          <p>{{ this.$store.state.visitCount }}人</p>
+          <p>{{ visitorCount }}人</p>
           <div class="deco turtle">
             <img src="../../public/all_images/deco/deco_turtle.png" alt="" />
           </div>
@@ -94,7 +108,11 @@
         <div class="map">
           <iframe
             src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14468.996712784081!2d121.2250227!3d24.9576355!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x346823ea50c732a5%3A0x1b5e6ee66e9fec49!2z57ev6IKyVGliYU1l6ZmE6Kit5Lit5aOi6IG36KiT5Lit5b-D!5e0!3m2!1szh-TW!2stw!4v1690272123794!5m2!1szh-TW!2stw"
-            style="border: 0" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+            style="border: 0"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+          >
           </iframe>
           <div class="text">
             <div class="address">
@@ -127,7 +145,9 @@
           <div class="item" v-for="product in products" :key="product">
             <div class="image">
               <!-- <a href="#"><img :src="product.src" alt="product.alt" /></a> -->
-              <router-link to="/product"><img :src="product.src" alt="product.alt" /></router-link>
+              <router-link to="/product"
+                ><img :src="product.src" alt="product.alt"
+              /></router-link>
             </div>
             <div class="content">
               <div class="nub">{{ product.nub }}</div>
@@ -145,10 +165,16 @@
           <router-link to="/product"><button>更多商品</button></router-link>
 
           <div class="deco shark">
-            <img src="../../public/all_images/index/deco_index_shark.png" alt="" />
+            <img
+              src="../../public/all_images/index/deco_index_shark.png"
+              alt=""
+            />
           </div>
           <div class="deco whale">
-            <img src="../../public/all_images/index/deco_index_whale.png" alt="" />
+            <img
+              src="../../public/all_images/index/deco_index_whale.png"
+              alt=""
+            />
           </div>
         </div>
 
@@ -283,7 +309,8 @@ export default {
           content: "請搭乘海洋線，於滴答滴答站下車，2號出口",
         },
       ],
-      bannerAll: []
+      bannerAll: [],
+      visitorCount: 0,
     };
   },
   methods: {},
@@ -302,7 +329,7 @@ export default {
       this.loading = false;
       this.$store.state.showLoadingOnce = false;
     }, this.animationDuration);
-    
+
     setTimeout(() => {
       this.resetVisual = true;
     }, this.animationDuration + 300);
@@ -314,12 +341,30 @@ export default {
 
       .then((myJson) => {
         for (let i = 0; i < myJson.length; i++) {
-          myJson[i].banner_pic = require(`../../public/all_images/banner/${myJson[i].banner_pic}`);
+          myJson[
+            i
+          ].banner_pic = require(`../../public/all_images/banner/${myJson[i].banner_pic}`);
           myJson[i].isDis = true;
         }
         this.bannerAll = myJson;
       });
-
+    fetch(`${this.$store.state.APIurl}visitorCount.php`)
+      .then(function (response) {
+        return response.json();
+      })
+      .then((data) => {
+        const currentDate = new Date();
+        console.log(data);
+        for (let i = 0; i < data.length; i++) {
+          const ticDate = new Date(data[i].tic_date);
+          if (
+            ticDate.toDateString() === currentDate.toDateString() &&
+            data[i].tic_state == "已使用"
+          ) {
+            this.visitorCount++;
+          }
+        }
+      });
   },
 };
 </script>
@@ -754,11 +799,11 @@ export default {
       }
     }
 
-    .day>span:first-child {
+    .day > span:first-child {
       display: block;
     }
 
-    .day>span:nth-child(2) {
+    .day > span:nth-child(2) {
       font-size: 80px;
       font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
     }
@@ -812,7 +857,7 @@ export default {
         padding-right: 15px;
       }
 
-      .day>span:nth-child(2) {
+      .day > span:nth-child(2) {
         font-size: 60px;
       }
     }
