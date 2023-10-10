@@ -118,6 +118,20 @@ export default {
           this.optionDetailArr[i][0] = data[i].tic_name;
           this.optionDetailArr[i][2] = data[i].tic_price;
         }
+        const extraData = data.slice(this.optionDetailArr.length);
+
+        // 将 extraData 数组中的元素添加到 this.optionDetailArr 末尾
+        // ["長者", "(65歲以上(含))", "150", 0],
+        for (let i = 0; i < extraData.length; i++) {
+          this.optionDetailArr.push([
+            extraData[i].tic_name,
+            extraData[i].tic_info,
+            extraData[i].tic_price,
+            0,
+          ]);
+        }
+        console.log(this.optionDetailArr);
+        // this.optionDetailArr.push(...extraData);
       });
   },
   beforeDestroy() {},
@@ -236,28 +250,30 @@ export default {
     ticketdown(idx) {
       if (this.optionDetailArr[idx][3] > 0) {
         this.optionDetailArr[idx][3]--;
-        idx == 0
-          ? (this.totalPrice -= parseInt(this.optionDetailArr[idx][2]))
-          : idx == 1
-          ? (this.totalPrice -= parseInt(this.optionDetailArr[idx][2]))
-          : idx == 2
-          ? (this.totalPrice -= parseInt(this.optionDetailArr[idx][2]))
-          : idx == 3
-          ? (this.totalPrice -= parseInt(this.optionDetailArr[idx][2]))
-          : "";
+        this.totalPrice -= parseInt(this.optionDetailArr[idx][2]);
+        // idx == 0
+        //   ? (this.totalPrice -= parseInt(this.optionDetailArr[idx][2]))
+        //   : idx == 1
+        //   ? (this.totalPrice -= parseInt(this.optionDetailArr[idx][2]))
+        //   : idx == 2
+        //   ? (this.totalPrice -= parseInt(this.optionDetailArr[idx][2]))
+        //   : idx == 3
+        //   ? (this.totalPrice -= parseInt(this.optionDetailArr[idx][2]))
+        //   : "";
       }
     },
     ticketPlus(idx) {
       this.optionDetailArr[idx][3]++;
-      idx == 0
-        ? (this.totalPrice += parseInt(this.optionDetailArr[idx][2]))
-        : idx == 1
-        ? (this.totalPrice += parseInt(this.optionDetailArr[idx][2]))
-        : idx == 2
-        ? (this.totalPrice += parseInt(this.optionDetailArr[idx][2]))
-        : idx == 3
-        ? (this.totalPrice += parseInt(this.optionDetailArr[idx][2]))
-        : "";
+      this.totalPrice += parseInt(this.optionDetailArr[idx][2]);
+      // idx == 0
+      //   ? (this.totalPrice += parseInt(this.optionDetailArr[idx][2]))
+      //   : idx == 1
+      //   ? (this.totalPrice += parseInt(this.optionDetailArr[idx][2]))
+      //   : idx == 2
+      //   ? (this.totalPrice += parseInt(this.optionDetailArr[idx][2]))
+      //   : idx == 3
+      //   ? (this.totalPrice += parseInt(this.optionDetailArr[idx][2]))
+      //   : "";
     },
   },
 };
