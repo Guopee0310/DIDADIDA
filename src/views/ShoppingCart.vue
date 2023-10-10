@@ -14,22 +14,42 @@
         <li v-for="(prod, index) in shopCartData" :key="index">
           <div class="card">
             <div class="product_name">
-
-              <label class="check"><input type="checkbox" v-model="prod.select" /></label>
+              <label class="check"
+                ><input type="checkbox" v-model="prod.select"
+              /></label>
               <img :src="prod.imgURL" alt="" />
 
               <span class="prodname">{{ prod.name }}</span>
             </div>
             <div class="price">NTD{{ prod.price }}</div>
             <div class="count">
-              <input type="button" value="-" class="btn minus" @click="minusBtn(prod)" />
-              <input type="text" v-model="prod.count" @input="handleCountInput(prod)" />
-              <input type="button" value="+" class="btn plus" @click="plusBtn(prod)" />
+              <input
+                type="button"
+                value="-"
+                class="btn minus"
+                @click="minusBtn(prod)"
+              />
+              <input
+                type="text"
+                v-model="prod.count"
+                @input="handleCountInput(prod)"
+              />
+              <input
+                type="button"
+                value="+"
+                class="btn plus"
+                @click="plusBtn(prod)"
+              />
             </div>
             <div class="product_price">NTD{{ calculatePrice[index] }}</div>
             <div class="icons">
-              <heart class="heart" @click="pushInFav(prod)" :is-active="favList.findIndex((v) => v.favoName === prod.name) > -1
-                " />
+              <heart
+                class="heart"
+                @click="pushInFav(prod)"
+                :is-active="
+                  favList.findIndex((v) => v.favoName === prod.name) > -1
+                "
+              />
               <div class="cancel_icon" @click="deleteProduct(index)">
                 <i class="fa-solid fa-trash-can"></i>
               </div>
@@ -37,9 +57,11 @@
           </div>
         </li>
       </ul>
-      <label><input type="checkbox" v-model="selectAll" class="selectAll" />全選({{
-        selectedCount
-      }})</label>
+      <label
+        ><input type="checkbox" v-model="selectAll" class="selectAll" />全選({{
+          selectedCount
+        }})</label
+      >
       <span @click="deleteSelected" class="deleteSelect">刪除已選物品</span>
     </div>
 
@@ -48,11 +70,23 @@
         <div class="test">
           <h2>選擇運送方式</h2>
           <div class="item">
-            <input name="transport" id="7-11" type="radio" value="60" v-model="picked" />
+            <input
+              name="transport"
+              id="7-11"
+              type="radio"
+              value="60"
+              v-model="picked"
+            />
             <label for="7-11">711 店到店 + 60元</label>
           </div>
           <div class="item">
-            <input name="transport" id="free" type="radio" value="0" v-model="picked" />
+            <input
+              name="transport"
+              id="free"
+              type="radio"
+              value="0"
+              v-model="picked"
+            />
             <label for="free">到園領取 FREE</label>
           </div>
         </div>
@@ -62,17 +96,16 @@
           <div class="input_group" id="receive_info">
             <div class="name">
               <div class="field__label">收件人姓名</div>
-              <input type="text" class="field_input" maxlength="50">
+              <input type="text" class="field_input" maxlength="50" />
             </div>
             <div class="surname">
               <div class="field__label">收件人手機</div>
-              <input type="text" class="field_input" maxlength="50">
+              <input type="text" class="field_input" maxlength="50" />
             </div>
             <div>
               <div class="field__label">收件地址</div>
-              <input type="text" class="field_input">
+              <input type="text" class="field_input" />
             </div>
-
           </div>
         </div>
       </div>
@@ -132,6 +165,10 @@ export default {
     };
   },
   created() {
+    if (!this.$store.state.userName) {
+      alert("需先登入");
+      this.$router.push("/");
+    }
     this.shopCartData = this.$store.state.shoppingCart;
   },
   mounted() {
@@ -283,7 +320,7 @@ input[type="checkbox"] {
   border-bottom: 1px solid rgba(0, 0, 0, 0.6);
 }
 
-.sort_name>li {
+.sort_name > li {
   width: 20%;
   text-align: center;
 }
@@ -299,7 +336,7 @@ input[type="checkbox"] {
   align-items: center;
 }
 
-.card>div {
+.card > div {
   width: 20%;
   display: flex;
   justify-content: center;
@@ -449,7 +486,7 @@ h2 {
   margin-bottom: 10px;
 }
 
-.test2 .item>* {
+.test2 .item > * {
   margin: 10px 0;
 }
 
@@ -466,7 +503,6 @@ h2 {
 
   h1 {
     border-bottom: 1px solid rgba(0, 0, 0, 0.16);
-    ;
   }
 
   .sort_name {
@@ -522,7 +558,6 @@ h2 {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-
   }
 
   .test2 .item {
