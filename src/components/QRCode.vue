@@ -3,7 +3,7 @@
     <button
       class="qr_btn"
       @click="showModal = true"
-      v-if="!usedTicket && !tic_late"
+      v-if="!usedTicket && !tic_late && tic_state == '可使用'"
     >
       顯示電子票券
     </button>
@@ -26,6 +26,7 @@
             </div>
             <div class="qr-confirm-btn" @click="visitPlus">
               <button @click="sendUsed">確認</button>
+              <!-- 按確認要核對日期 -->
             </div>
           </div>
           <div class="deco_fishes">
@@ -56,6 +57,27 @@ export default {
       this.$store.state.visitCount++;
     },
     sendUsed() {
+      const checkDateObject = new Date(this.checkDate);
+      const currentDate = new Date();
+
+      if (checkDateObject > currentDate) {
+        alert("日期不符!!");
+        return;
+      } else if (checkDateObject <= currentDate) {
+        const formData = new FormData();
+
+        let tic_id = this.tic_id;
+        formData.append("tic_id", tic_id);
+        fetch(`${this.$store.state.APIurl}QRCodeCount.php`, {
+          method: "post",
+          body: formData,
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+          });
+      }
+
       this.usedTicket = true;
       this.$emit("checkTicket", true, this.ticketIndex);
       this.$store.state.activeIndexes.push({
@@ -64,7 +86,7 @@ export default {
       });
     },
   },
-  props: ["checkDate", "ticketIndex", "tic_late"],
+  props: ["checkDate", "ticketIndex", "tic_late", "tic_id", "tic_state"],
 };
 </script>
 

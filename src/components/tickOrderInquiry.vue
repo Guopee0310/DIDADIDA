@@ -9,7 +9,9 @@
           tick_order_group_used:
             this.$store.state.activeIndexes.findIndex(
               (v) => v.tickIdx === index
-            ) > -1 || tick.tic_late,
+            ) > -1 ||
+            tick.tic_late ||
+            tick.tic_state === '已使用',
         }"
       >
         <div class="tick_img">
@@ -37,6 +39,8 @@
           </div>
           <div>
             <QRCode
+              :tic_state="tick.tic_state"
+              :tic_id="tick.tic_id"
               :tic_late="tick.tic_late"
               :checkDate="tick.tic_date"
               :ticketIndex="index"
