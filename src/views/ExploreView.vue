@@ -17,6 +17,7 @@
         <div class="slot" id="two"></div>
         <h1 data="200m">200m</h1>
       </div>
+
       <!-- 深層海洋帶 -->
       <div class="line deep">
         <div class="slot" id="three"></div>
@@ -758,10 +759,11 @@ export default {
 
     // 動物們 ------------------------------------------------------------
     .turtle {
-      cursor: pointer;
-      translate: 15em 12em;
+      translate: 20% 50%;
+      // width: 400px;
 
       img {
+        cursor: pointer;
         visibility: top;
         width: 400px;
       }
@@ -772,11 +774,11 @@ export default {
     }
 
     .goldfish {
-      cursor: pointer;
-      translate: 60% 120%;
-      display: flex;
+      translate: 60% 0%;
+      // width: 170px;
 
       img {
+        cursor: pointer;
         visibility: top;
         width: 100px;
       }
@@ -789,7 +791,7 @@ export default {
 
     .dory {
       cursor: pointer;
-      translate: 53em 10em;
+      translate: 55% 200%;
 
       img {
         visibility: top;
@@ -804,7 +806,7 @@ export default {
 
     .nimo {
       cursor: pointer;
-      translate: 45em 7em;
+      translate: -180% 320%;
       // margin: -40px auto 0 730px;
 
       img {
@@ -813,13 +815,13 @@ export default {
       }
 
       h4 {
-        margin: -30px 10px;
+        margin: 50px 10px;
       }
     }
 
     .angryfish {
       cursor: pointer;
-      translate: 25em 10em;
+      translate: 23% 250%;
 
       img {
         visibility: top;
@@ -833,7 +835,7 @@ export default {
 
     .blueyellow {
       cursor: pointer;
-      translate: 40em 15em;
+      translate: 70% 270%;
       // margin: 50px 0 80px 350px;
 
       img {
@@ -848,12 +850,12 @@ export default {
 
     .whale {
       cursor: pointer;
-      translate: 30em 20em;
+      translate: 15% 30%;
       // margin: -50px 10px 0 auto;
 
       img {
         visibility: top;
-        width: 700px;
+        width: 1200px;
       }
 
       h4 {
@@ -1240,7 +1242,7 @@ export default {
     }
 
     .ship {
-      translate: 0 -10em;
+      translate: 0% -50%;
       z-index: -2;
 
       img {
