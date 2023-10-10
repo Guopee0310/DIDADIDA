@@ -119,7 +119,14 @@ export default {
         const currentDate = new Date();
         this.tickOrder.forEach((item) => {
           const ticDate = new Date(item.tic_date);
-          let late_date = currentDate > ticDate;
+          // let late_date = currentDate > ticDate;
+
+          // 移除日期和时间部分
+          const currentDateWithoutTime = new Date(currentDate.toDateString());
+          const ticDateWithoutTime = new Date(ticDate.toDateString());
+
+          // 检查日期是否在未来
+          let late_date = currentDateWithoutTime > ticDateWithoutTime;
           if (late_date) {
             const formData = new FormData();
 

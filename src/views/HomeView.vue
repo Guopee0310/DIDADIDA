@@ -325,6 +325,23 @@ export default {
     // carousel,
   },
   mounted() {
+    fetch(`${this.$store.state.APIurl}visitorCount.php`)
+      .then(function (response) {
+        return response.json();
+      })
+      .then((data) => {
+        const currentDate = new Date();
+        console.log(data);
+        for (let i = 0; i < data.length; i++) {
+          const ticDate = new Date(data[i].tic_date);
+          if (
+            ticDate.toDateString() === currentDate.toDateString() &&
+            data[i].tic_state == "已使用"
+          ) {
+            this.visitorCount++;
+          }
+        }
+      });
     setTimeout(() => {
       this.loading = false;
       this.$store.state.showLoadingOnce = false;
@@ -347,23 +364,6 @@ export default {
           myJson[i].isDis = true;
         }
         this.bannerAll = myJson;
-      });
-    fetch(`${this.$store.state.APIurl}visitorCount.php`)
-      .then(function (response) {
-        return response.json();
-      })
-      .then((data) => {
-        const currentDate = new Date();
-        console.log(data);
-        for (let i = 0; i < data.length; i++) {
-          const ticDate = new Date(data[i].tic_date);
-          if (
-            ticDate.toDateString() === currentDate.toDateString() &&
-            data[i].tic_state == "已使用"
-          ) {
-            this.visitorCount++;
-          }
-        }
       });
   },
 };
