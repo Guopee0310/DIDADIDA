@@ -319,6 +319,7 @@ export default {
     },
     createNewOne() {
       this.helperAll2.push({
+        tictype_id: 0,
         tic_name: "",
         dis: true,
         tic_price: 0,
@@ -341,6 +342,30 @@ export default {
     },
 
     updateTicket(index, e, i) {
+      if (i.tictype_id == 0) {
+        if (e.target.innerText == "確認") {
+          this.helperAll2[index].dis = true;
+          e.target.innerText = "修改";
+
+          const formData = new FormData();
+
+          let tic_name = this.helperAll2[index].tic_name;
+          let tic_info = this.helperAll2[index].tic_info;
+          let tic_price = this.helperAll2[index].tic_price;
+
+          formData.append("tic_name", tic_name);
+          formData.append("tic_info", tic_info);
+          formData.append("tic_price", tic_price);
+          fetch(`${this.$store.state.APIurl}ticketMgInsertTicType.php`, {
+            method: "post",
+            body: formData,
+          }).then((res) => res.json());
+          return;
+        }
+        this.helperAll2[index].dis = false;
+        e.target.innerText = "確認";
+        return;
+      }
       if (e.target.innerText == "確認") {
         this.helperAll2[index].dis = true;
         e.target.innerText = "修改";

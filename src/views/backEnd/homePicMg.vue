@@ -12,7 +12,11 @@
         <img :src="i.banner_pic" alt="" />
       </div>
       <div>
-        <input type="file" @change="pushImg($event, index)" :disabled="i.isDis" />
+        <input
+          type="file"
+          @change="pushImg($event, index)"
+          :disabled="i.isDis"
+        />
         <div>尺寸 1920 X 200px</div>
       </div>
 
@@ -46,7 +50,9 @@ export default {
 
       .then((myJson) => {
         for (let i = 0; i < myJson.length; i++) {
-          myJson[i].banner_pic = require(`../../../public/all_images/banner/${myJson[i].banner_pic}`);
+          myJson[
+            i
+          ].banner_pic = require(`../../../public/all_images/banner/${myJson[i].banner_pic}`);
           myJson[i].isDis = true;
         }
         this.bannerAll = myJson;
@@ -68,9 +74,10 @@ export default {
       if (e.target.innerText == "確認") {
         this.bannerAll[index].isDis = true;
         e.target.innerText = "修改";
+        return;
       }
       this.bannerAll[index].isDis = false;
-      e.target.innerText = "確認"
+      e.target.innerText = "確認";
     },
     indexPlus(idx) {
       return (idx += 1);
