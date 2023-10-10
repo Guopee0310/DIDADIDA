@@ -9,7 +9,7 @@
           tick_order_group_used:
             this.$store.state.activeIndexes.findIndex(
               (v) => v.tickIdx === index
-            ) > -1,
+            ) > -1 || tick.tic_late,
         }"
       >
         <div class="tick_img">
@@ -37,6 +37,7 @@
           </div>
           <div>
             <QRCode
+              :tic_late="tick.tic_late"
               :checkDate="tick.tic_date"
               :ticketIndex="index"
               @click="activateGrayBkc(index)"
@@ -105,12 +106,38 @@ export default {
     })
       .then((res) => res.json())
       .then((data) => {
+        // 处理数据，添加 tickImg 和 tic_late 属性
         for (let i = 0; i < data.length; i++) {
           data[i].tickImg = require("../../public/all_images/ticket_face.jpg");
+          data[i].tic_late = false;
         }
+
+        // 将处理后的数据保存到组件的 tickOrder 属性
         this.tickOrder = data;
+
+        // 继续处理数据，设置 tic_late 属性
+        const currentDate = new Date();
+        this.tickOrder.forEach((item) => {
+          const ticDate = new Date(item.tic_date);
+          let late_date = currentDate > ticDate;
+          if (late_date) {
+            const formData = new FormData();
+
+            let tic_date = item.tic_date;
+            let tic_state = "已過期";
+            formData.append("tic_date", tic_date);
+            formData.append("tic_state", tic_state);
+            fetch(`${this.$store.state.APIurl}tickOrderInquiryLate.php`, {
+              method: "post",
+              body: formData,
+            }).then((res) => res.json());
+          }
+          item.tic_late = late_date;
+        });
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
       });
-    // this.tickOrder = this.$store.state.ticketList;
   },
   computed: {
     activeList(idx) {
@@ -188,6 +215,10 @@ export default {
       justify-content: space-evenly;
 
       // z-index: 2;
+    }
+    .tick_late {
+      background-color: gray;
+      color: rgb(147, 144, 144);
     }
     .tick_order_group_used {
       background-color: gray;

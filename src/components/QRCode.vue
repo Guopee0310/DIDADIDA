@@ -1,6 +1,10 @@
 <template>
   <div>
-    <button class="qr_btn" @click="showModal = true" v-if="!usedTicket">
+    <button
+      class="qr_btn"
+      @click="showModal = true"
+      v-if="!usedTicket && !tic_late"
+    >
       顯示電子票券
     </button>
     <transition name="fade">
@@ -60,7 +64,7 @@ export default {
       });
     },
   },
-  props: ["checkDate", "ticketIndex"],
+  props: ["checkDate", "ticketIndex", "tic_late"],
 };
 </script>
 
