@@ -1,8 +1,10 @@
 <template>
+    <!-- 右邊 -->
     <div class="test1"></div>
     <div class="test2"></div>
     <div class="test3"></div>
 
+    <!-- 左邊 -->
     <div class="test4"></div>
     <div class="test5"></div>
     <div class="test6"></div>
@@ -84,6 +86,10 @@
 @keyframes paoPao {
     0% {
         translate: 0;
+        opacity: 0;
+    }
+
+    20% {
         opacity: 1;
     }
 
@@ -96,7 +102,6 @@
 @keyframes paoPao1 {
     0% {
         transform: translateX(0px);
-        opacity: 1;
     }
 
     25% {
@@ -113,14 +118,12 @@
 
     100% {
         transform: translateX(5px);
-        opacity: 0;
     }
 }
 
 @keyframes paoPao2 {
     0% {
         transform: translateX(0px);
-        opacity: 1;
     }
 
     25% {
@@ -137,7 +140,6 @@
 
     100% {
         transform: translateX(-3px);
-        opacity: 0;
     }
 }
 </style>

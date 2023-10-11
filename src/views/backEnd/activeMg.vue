@@ -14,112 +14,298 @@
         </tr>
         <tr>
             <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td><input type="text" name="" id=""> <input type="text"></td>
+            <td><input type="date"></td>
+            <td>
+                <button>修改</button>
+            </td>
         </tr>
     </table>
 </template>
+<!-- <template>
+    <div class="news_all">
+        <div class="select">
+            <div class="add" @click="news_content">
+                <button>+新增項目</button>
+            </div>
+            <div class="on_off">
+                <select name="" id="">
+                    <option value="">篩選</option>
+                    <option value="on">上架</option>
+                    <option value="off">下架</option>
+                </select>
+            </div>
+        </div>
+        <div class="news_content">
+            <div class="title">
+                <ul>
+                    <li>圖片</li>
+                    <li>內容</li>
+                    <li>上傳時間</li>
+                </ul>
+            </div>
+            <div class="content">
+                <ul v-for="(item, index) in allactive" :key="index">
+                    <label class="check"><input type="checkbox" v-model="item.select" /></label>
+                    <li>
+                        <div class="img">
+                            <div class="picBox">
+                                <img :src="'../all_images/news/' + item.news_img" alt="未選擇圖片">
+                            </div>
+
+                            <div class="file_btn">
+                                <input type="file" @change="fileChange($event, index)" ref="fileInput"
+                                    :disabled="item.disabled" name="news_img" :title="item.news_img">
+                                <i class="fa-regular fa-trash-can" style="color: #ffffff;" @click="deleteImage(index)"
+                                    v-if="!item.disabled && item.news_img"></i>
+                            </div>
+                        </div>
+                        <p class="file_name">{{ item.news_img }}</p>
+
+                    </li>
+                    <li>
+                        <form action="test.aspx" method="post">
+                            <textarea name="news_title" id="" placeholder="標題" class="news_name" :disabled="item.disabled"
+                                v-model="item.news_title"></textarea>
+                        </form>
+                        <form action="test.aspx" method="post">
+                            <textarea name="news_conteny" id="" placeholder="內容" class="news_txt" :disabled="item.disabled"
+                                v-model="item.news_content"></textarea>
+                        </form>
+                    </li>
+                    <li>
+                        <div class="time" name="news_date">{{ item.news_date }}</div>
+                    </li>
+                    <li>
+                        <div class="state">
+                            <select name="news_state" id="" v-model="item.news_category" :disabled="item.disabled">
+                                <option value="">選擇分類</option>
+                                <option value="表演">表演</option>
+                                <option value="優惠">優惠</option>
+                                <option value="活動">活動</option>
+                            </select>
+                            <div class="radio_onOff">
+                                <label :for="'on_' + index">
+                                    <input type="radio" :id="'on_' + index" :name="'select_onOff_' + index"
+                                        :disabled="item.disabled" v-model="item.news_state" value="0" />
+                                    上架
+                                </label>
+                                <label :for="'off_' + index">
+                                    <input type="radio" :id="'off_' + index" :name="'select_onOff_' + index"
+                                        :disabled="item.disabled" v-model="item.news_state" value="1" />
+                                    下架
+                                </label>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <button class="update" @click="updateNews(index, $event, item)" v-if="item.exist">{{ item.disabled ?
+                            '修改' : '確認'
+                        }}</button>
+
+                        <button class="insert" @click="createNew(index, $event, item)" v-if="!item.exist">新增</button>
+                        <button class="insert" @click="deleteNews(index)" v-if="!item.exist">刪除</button>
+                    </li>
+                </ul>
+                <label><input type="checkbox" v-model="selectAll" class="selectAll" />全選({{
+                    selectedCount
+                }})</label>
+                <span @click="delete" class="deleteSelect">刪除已選物品</span>
+            </div>
+        </div>
+    </div>
+</template> -->
 <script>
 export default {
     data() {
         return {
-
-        };
+            allactive: [],
+        }
     },
-    computed: {},
     mounted() {
-        fetch(`${this.$store.state.APIurl}activeMg.php`)
-            .then(function (response) {
-                return response.json();
-            })
 
-            .then((myJson) => {
-                for (let i = 0; i < myJson.length; i++) {
-                    myJson[i].banner_pic = require(`../../../public/all_images/banner/${myJson[i].banner_pic}`);
-                    myJson[i].isDis = true;
-                }
-                this.bannerAll = myJson;
-            });
     },
     methods: {
-        createNew() {
-            if (this.bannerAll.length >= 5) {
-                alert("已達上限");
-                return;
-            } else {
-                this.bannerAll.push(["", true]);
-            }
-        },
-        delRow(item, index) {
-            const formData = new FormData();
-            let banner_id = this.bannerAll[index].banner_id;
 
-            formData.append("banner_id", banner_id);
-
-            fetch(`${this.$store.state.APIurl}activeMg.php`, {
-                method: "POST",
-                body: formData,
-            }).then((res) => res.json());
-            this.bannerAll.splice(index, 1);
-        },
-        updatePic(index, e) {
-            if (e.target.innerText == "確認") {
-                this.bannerAll[index].isDis = true;
-                e.target.innerText = "修改";
-
-                const formData = new FormData();
-                let banner_id = this.bannerAll[index].banner_id;
-                let banner_pic = this.bannerAll[index].banner_pic;
-
-                formData.append("banner_id", banner_id);
-                formData.append("banner_pic", banner_pic);
-                // 使用fetch或axios將數據發送到PHP後端
-                fetch(`${this.$store.state.APIurl}activeMg.php`, {
-                    method: "post",
-                    body: formData,
-                })
-                    .then((res) => res.json())
-                    .then((result) => alert("圖片更新OK"));
-                return;
-            }
-            this.bannerAll[index].isDis = false;
-            e.target.innerText = "確認"
-        },
-        indexPlus(idx) {
-            return (idx += 1);
-        },
-        getImagePath(index) {
-            // 使用 require 导入图片，确保路径正确
-            return require(`@/assets/images/bannerAll[${index}]`);
-        },
-        pushImg(e, index) {
-            // console.log(e.target.files[0].name);
-            // console.log(index);
-            // this.bannerAll[
-            //   index
-            // ][0] = require(`../../assets/images/${e.target.files[0].name}`);
-            // this.bannerAll[index][1] = true;
-
-            let file = e.target.files[0];
-            this.changePic = file;
-            console.log("file", file);
-
-            let readFile = new FileReader();
-            readFile.readAsDataURL(file);
-            readFile.addEventListener("load", function () {
-                let image = new Image();
-                image.src = readFile.result;
-                console.log(image.src);
-                image.style.width = "100%";
-                image.style.height = "100%";
-                document.querySelectorAll(".imgBox")[index].innerHTML = "";
-                document.querySelectorAll(".imgBox")[index].appendChild(image);
-            });
-        },
     },
-};
+
+
+    computed: {
+
+
+    },
+}
 </script>
   
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.news_all {
+    .select {
+        display: flex;
+
+        >div {
+            margin: 0 1em;
+        }
+    }
+
+    .news_content {
+        .title {
+            width: 100%;
+            border-bottom: 1px solid #000;
+            margin: 1em 0;
+
+            ul {
+                width: 90%;
+                margin: auto;
+                display: flex;
+                justify-content: center;
+
+                li {
+                    width: 33.333333%;
+                }
+            }
+        }
+
+        .content {
+            ul {
+                width: 100%;
+                display: flex;
+                align-items: center;
+                margin: 1rem 0;
+
+                .check {
+                    width: 5%;
+                }
+
+                li {
+                    &:nth-of-type(1) {
+                        width: 30%;
+
+                        p {
+                            width: 80%;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                        }
+                    }
+
+                    &:nth-of-type(2) {
+                        width: 30%;
+                        margin: auto;
+                    }
+
+                    &:nth-of-type(3) {
+                        width: 15%;
+                    }
+
+                    &:nth-of-type(4) {
+                        width: 15%;
+                    }
+
+                    &:nth-of-type(5) {
+                        width: 5%;
+                    }
+                }
+
+                textarea {
+                    width: 90%;
+                    box-sizing: border-box;
+                    overflow: auto;
+                }
+
+                .news_name {
+                    max-height: 30px;
+                }
+
+                .img {
+                    width: 80%;
+                    aspect-ratio: 1/0.7;
+                    position: relative;
+
+
+                    .picBox {
+                        position: absolute;
+                        width: 100%;
+                        height: 100%;
+
+                        img {
+                            width: 100%;
+                            height: 100%;
+
+
+                            &::after {
+                                width: 100%;
+                                height: 100%;
+                                content: "\e09a\A" attr(alt);
+                                font-size: 1rem;
+                                font-family: FontAwesome;
+                                color: rgb(100, 100, 100);
+                                background-color: #c2baba;
+                                position: absolute;
+                                inset: 0;
+                                z-index: 2;
+                                pointer-events: none;
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                                white-space: pre;
+                                text-align: center;
+                            }
+                        }
+                    }
+
+
+                    .file_btn {
+                        width: 100%;
+                        height: 100%;
+                        position: relative;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+
+                        i {
+                            width: 100%;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            position: absolute;
+                            inset: 0;
+                            opacity: 0;
+                            z-index: 4;
+                            font-size: 1.5rem;
+
+                            &:hover {
+                                opacity: 1;
+                                background-color: rgba(0, 0, 0, 0.4);
+                                transition: all .3s;
+
+                            }
+                        }
+
+
+
+                        input[type="file"] {
+                            width: 100%;
+                            height: 100%;
+                            position: absolute;
+                            inset: 0;
+                            opacity: 0;
+                            font-size: 0;
+                            cursor: pointer;
+                        }
+
+                    }
+                }
+
+                .radio_onOff {
+                    width: 100%;
+
+                    label {
+                        display: block;
+                        width: 100%;
+                    }
+                }
+            }
+        }
+    }
+}
+</style>
   

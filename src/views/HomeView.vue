@@ -91,6 +91,9 @@
           <div class="deco">
             <img src="../../public/all_images/deco/deco_fishes.png" alt="" />
           </div>
+          <div class="paopao">
+            <paoPao_n></paoPao_n>
+          </div>
         </div>
         <div class="deco star">
           <img src="../../public/all_images/index/deco_index_star.png" alt="" />
@@ -120,8 +123,10 @@
               </router-link>
               <span>{{ product.price }}</span>
             </div>
+            <div class="paopao">
+              <paoPao_n></paoPao_n>
+            </div>
           </div>
-          <router-link to="/product"><button>更多商品</button></router-link>
 
           <div class="deco shark">
             <img src="../../public/all_images/index/deco_index_shark.png" alt="" />
@@ -130,6 +135,8 @@
             <img src="../../public/all_images/index/deco_index_whale.png" alt="" />
           </div>
         </div>
+        <router-link to="/product"><button>更多商品</button></router-link>
+
 
         <!-- 活動倒數 ------------------------------------------ -->
         <h3Title>
@@ -200,6 +207,7 @@ import lightCircle from "../components/lightCircle.vue";
 import blingText from "../components/blingText.vue";
 import ticketPrice from "../components/ticketPrice.vue";
 import paoPao from "../components/paoPao.vue";
+import paoPao_n from "../components/paoPao_normal.vue";
 import axios from "axios";
 // import carousel from 'vue-owl-carousel';
 
@@ -284,6 +292,7 @@ export default {
     blingText,
     ticketPrice,
     paoPao,
+    paoPao_n,
     // carousel,
   },
   mounted() {
@@ -342,6 +351,7 @@ export default {
 <style lang="scss" scoped>
 .index {
   background-color: map-get($colors, "bgc");
+  // background-color: #9fabb1;
   width: 100%;
 
   h3 {
@@ -355,7 +365,7 @@ export default {
 
   button {
     display: block;
-    margin: 50px auto;
+    margin: 30px auto 80px;
     width: 100px;
     height: 100px;
     border-radius: 50%;
@@ -366,7 +376,7 @@ export default {
     cursor: pointer;
 
     box-shadow: 0 0 0 0 rgba(map-get($colors, "h2Blue"), 0.5);
-    -webkit-animation: pulse 1.5s infinite;
+    animation: pulse 1.5s infinite;
   }
 
   @keyframes pulse {
@@ -453,6 +463,7 @@ export default {
       height: 250px;
       border-radius: 50%;
       border: 10px solid #68769a;
+      background-color: #eee;
       border-top-right-radius: 0;
       transform: rotate(-45deg);
 
@@ -586,12 +597,13 @@ export default {
         transform: scaleX(-1);
       }
     }
+
   }
 
   // 熱銷商品 ---------------------------------------------
   .product {
     max-width: 1920px;
-    margin: 0 auto 100px;
+    margin: auto;
     position: relative;
     overflow: clip;
 
@@ -651,6 +663,11 @@ export default {
           line-height: 4;
         }
       }
+
+      .paopao {
+        margin-left: 100px;
+        margin-right: 100px;
+      }
     }
 
     .deco {
@@ -665,7 +682,7 @@ export default {
     }
 
     .whale {
-      bottom: -10px;
+      bottom: -250px;
       right: -20%;
     }
   }
@@ -673,7 +690,7 @@ export default {
   .deco.star {
     overflow: clip;
     position: absolute;
-    top: 120rem;
+    top: 110rem;
     right: 0;
 
     img {
@@ -686,7 +703,7 @@ export default {
   .active {
     max-width: 1200px;
     width: 100%;
-    margin: 20px auto 100px;
+    margin: 0px auto 100px;
 
     .item {
       width: 100%;
