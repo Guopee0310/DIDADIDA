@@ -31,7 +31,7 @@
 
                             <div class="file_btn">
                                 <input type="file" @change="fileChange($event, index)" ref="fileInput"
-                                    :disabled="item.disabled" name="image" :title="item.news_img">
+                                    :disabled="item.disabled" name="news_img" :title="item.news_img">
                                 <i class="fa-regular fa-trash-can" style="color: #ffffff;" @click="deleteImage(index)"
                                     v-if="!item.disabled && item.news_img"></i>
                             </div>
@@ -42,11 +42,11 @@
                     <li>
                         <form action="test.aspx" method="post">
                             <textarea name="news_title" id="" placeholder="標題" class="news_name" :disabled="item.disabled"
-                                v-model="item.news_title" required></textarea>
+                                v-model="item.news_title"></textarea>
                         </form>
                         <form action="test.aspx" method="post">
                             <textarea name="news_conteny" id="" placeholder="內容" class="news_txt" :disabled="item.disabled"
-                                v-model="item.news_content" required></textarea>
+                                v-model="item.news_content"></textarea>
                         </form>
                     </li>
                     <li>
@@ -144,6 +144,9 @@ export default {
             const item = this.allnews[index];
 
             if (confirm("確定刪除圖片嗎？")) {
+               
+                document.querySelectorAll(".picBox img")[index].src = "";
+
                 // Update the property directly
                 item.news_img = ''; // 清除图像路径
                 alert("圖片已成功刪除");
@@ -153,14 +156,9 @@ export default {
                 if (fileInput) {
                     fileInput.value = '';
                 }
-
-                // 更新<img>标签的src属性
-                const imageElement = document.querySelector(`#image_${index}`);
-                if (imageElement) {
-                    imageElement.src = ''; // 将图像源设置为空
-                }
             }
         },
+
 
 
 
@@ -205,11 +203,12 @@ export default {
 
                 const formData = new FormData();
                 let news_id = item.news_id;
-                let news_title = this.allnews[index].news_title;
-                let news_content = this.allnews[index].news_content;
-                let news_date = this.allnews[index].news_date;
-                let news_category = this.allnews[index].news_category;
-                let news_state = this.allnews[index].news_state;
+                let news_title = item.news_title;
+                let news_content = item.news_content;
+                let news_date = item.news_date;
+                let news_category = item.news_category;
+                let news_state = item.news_state;
+
 
                 formData.append("news_id", news_id);
                 formData.append("news_title", news_title);
@@ -217,7 +216,8 @@ export default {
                 formData.append("news_date", news_date);
                 formData.append("news_category", news_category);
                 formData.append("news_state", news_state);
-                formData.append("image", this.imageSrc);
+                formData.append("news_img", item.news_img);
+
 
                 fetch(`${this.$store.state.APIurl}news.php`, {
                     method: "POST",
@@ -228,7 +228,7 @@ export default {
                         alert("更新成功");
                         // 重新取資料
                         this.refreshNewsData();
-                        this.imageSrc = '';
+
                     });
             } else {
                 this.allnews[index].disabled = false;
@@ -449,7 +449,7 @@ export default {
                             &::after {
                                 width: 100%;
                                 height: 100%;
-                                content:  "\e09a\A" attr(alt);
+                                content: "\e09a\A" attr(alt);
                                 font-size: 1rem;
                                 font-family: FontAwesome;
                                 color: rgb(100, 100, 100);
