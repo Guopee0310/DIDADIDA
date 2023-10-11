@@ -9,8 +9,8 @@
     width: 15px;
     height: 15px;
     border-radius: 50%;
-    border: 1.3px #79ddef solid;
-    transition: 3s;
+    border: 1.5px #1e4974 solid;
+    // transition: 3s;
     animation: 5s paoPao1 infinite, 5s paoPao2 infinite linear;
     position: absolute;
     top: 50%;
@@ -50,4 +50,5 @@
         transform: translateX(0px);
         opacity: 0;
     }
-}</style>
+}
+</style>

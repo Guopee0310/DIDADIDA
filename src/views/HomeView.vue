@@ -51,8 +51,7 @@
           <div class="deco fishes">
             <img src="../../public/all_images/deco/deco_fishes.png" alt="" />
           </div>
-          <div class="paopao"></div>
-          <!-- <paoPao></paoPao> -->
+          <paoPao></paoPao>
         </div>
 
         <!-- 營業資訊 ------------------------------------------ -->
@@ -322,9 +321,7 @@ export default {
 
       .then((myJson) => {
         for (let i = 0; i < myJson.length; i++) {
-          myJson[
-            i
-          ].banner_pic = require(`../../public/all_images/banner/${myJson[i].banner_pic}`);
+          myJson[i].banner_pic = require(`../../public/all_images/banner/${myJson[i].banner_pic}`);
           myJson[i].isDis = true;
         }
         this.bannerAll = myJson;
@@ -351,7 +348,8 @@ export default {
     @include h3Title();
   }
 
-  .gamePhone {
+  .gamePhone,
+  .gameBar {
     display: none;
   }
 
@@ -943,6 +941,7 @@ export default {
     }
 
     .gameBar {
+      display: flex;
       margin: auto;
       position: relative;
 
@@ -989,7 +988,7 @@ export default {
 
       label {
         position: absolute;
-        top: -50px;
+        top: -30px;
         left: 193px;
         padding: 5px;
         border-radius: 5px;
