@@ -133,4 +133,9 @@ export default {
   }
 }
 
+@media screen and (max-width: 414px){
+  .deco{
+    display: none;
+  }
+}
 </style>

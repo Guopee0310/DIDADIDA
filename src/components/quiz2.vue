@@ -281,4 +281,11 @@ export default {
     }
   }
 }
+
+@media screen and (max-width: 414px){
+  .questionarrange{
+    flex-direction: column;
+  }
+
+}
 </style>

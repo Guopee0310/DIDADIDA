@@ -128,4 +128,9 @@ export default {
     }
   }
 }
+@media screen and (max-width: 414px){
+  .controlResult{
+    width: 100%;
+  }
+}
 </style>
