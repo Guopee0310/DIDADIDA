@@ -1,13 +1,14 @@
 <template>
   <Tabs value="name1">
+    <!-- 訂單頁籤 -->
     <TabPane label="購物訂單" name="name1">
       <div class="titleAll">
         <select name="" id="">
           <option value="">訂單編號</option>
           <option value="">會員帳號</option>
         </select>
-        <input type="text" placeholder="請輸入訂單編號" @input="resetArr" />
-        <div>搜尋</div>
+        <input type="text" placeholder="請輸入訂單編號" v-model="prodChooseOrder" />
+        <div @click="prodChooseNameOrOrder">搜尋</div>
       </div>
       <div class="orderTableAll">
         <div class="tableTitleAll">
@@ -18,12 +19,13 @@
           <div>時間</div>
           <div>狀態</div>
         </div>
-        <div v-for="i in prodOrder" class="singleOrderTable">
+        <div v-for="(i, index) in prodOrder" class="singleOrderTable">
           <div>{{ i.orderNumber }}</div>
           <div></div>
           <div>{{ i.memberAccount }}</div>
           <div>
-            <div v-for="j in i.prodName">{{ j }}</div>
+            <!-- <div v-for="j in i.prodName">{{ j }}</div> -->
+            {{ i.prodName }}
           </div>
 
           <div>{{ i.prodCount }}</div>
@@ -38,14 +40,15 @@
         </div>
       </div>
     </TabPane>
+    <!-- 購票訂單頁籤 -->
     <TabPane label="票卷訂單" name="name2">
       <div class="titleAll">
         <select name="" v-model="chooseName">
           <option value="訂單編號">訂單編號</option>
           <option value="會員信箱">會員信箱</option>
         </select>
-        <input type="text" placeholder="請輸入訂單編號" v-model="chooseOrder" />
-        <div @click="chooseNameOrOrder">搜尋</div>
+        <input type="text" placeholder="請輸入訂單編號" v-model="ChooseOrder" />
+        <div @click="ChooseNameOrOrder">搜尋</div>
       </div>
       <div class="ticketTableAll">
         <div class="ticketTableTitleAll">
@@ -84,31 +87,33 @@ export default {
     return {
       chooseName: "訂單編號",
       chooseOrder: "",
+      prodChooseName: "訂單編號",
+      prodChooseOrder: "",
       prodOrder: [
-        {
-          orderNumber: "abc12345",
-          memberAccount: "asv3567878",
-          prodName: ["海豚抱枕"],
-          prodCount: 1,
-          orderTime: "2023.08.31",
-          orderState: "問題訂單",
-        },
-        {
-          orderNumber: "abc12345",
-          memberAccount: "asv3567878",
-          prodName: ["海豚抱枕"],
-          prodCount: 1,
-          orderTime: "2023.08.31",
-          orderState: "確認訂單",
-        },
-        {
-          orderNumber: "abc12345",
-          memberAccount: "asv3567878",
-          prodName: ["海豚抱枕", "海星吊飾", "海星吊飾"],
-          prodCount: 1,
-          orderTime: "2023.08.31",
-          orderState: "問題訂單",
-        },
+        // {
+        //   orderNumber: "abc12345",
+        //   memberAccount: "asv3567878",
+        //   prodName: ["海豚抱枕"],
+        //   prodCount: 1,
+        //   orderTime: "2023.08.31",
+        //   orderState: "問題訂單",
+        // },
+        // {
+        //   orderNumber: "abc12345",
+        //   memberAccount: "asv3567878",
+        //   prodName: ["海豚抱枕"],
+        //   prodCount: 1,
+        //   orderTime: "2023.08.31",
+        //   orderState: "確認訂單",
+        // },
+        // {
+        //   orderNumber: "abc12345",
+        //   memberAccount: "asv3567878",
+        //   prodName: ["海豚抱枕", "海星吊飾", "海星吊飾"],
+        //   prodCount: 1,
+        //   orderTime: "2023.08.31",
+        //   orderState: "問題訂單",
+        // },
       ],
       ticketOrder: [
         // {
@@ -134,12 +139,29 @@ export default {
         // },
       ],
       orderAll: [],
+      orderSlice: [],
       ticorderAll: [],
       ticketOrderSlice: [],
     };
   },
   computed: {},
   mounted() {
+    ////fetch ordrMg.php
+    fetch("http://localhost/dida_project/public/php/orderMg.php") //第一步
+      // fetch(`${this.$store.state.APIurl}orderMg.php`)
+      //this.$store.state.APIurl
+      // axios
+      .then(function (response) {
+        //第二步
+        //要先傳回來編譯成json檔
+        return response.json();
+      })
+
+      .then((myJson) => {
+        this.ticketOrderSlice = this.ticketOrder = myJson;
+      });
+
+    ////fetch tickMg.php
     fetch("http://localhost/dida_project/public/php/tickOrderMg.php") //第一步
       // fetch(`${this.$store.state.APIurl}orderMg.php`)
       //this.$store.state.APIurl
@@ -156,6 +178,33 @@ export default {
   },
 
   methods: {
+    ////購物訂單
+    prodResetArr() {
+      if (this.prodChooseOrder == "") {
+        this.orderSlice = this.prodOrder;
+      }
+    },
+    prodChooseNameOrOrder() {
+      if (this.prodChooseName == "訂單編號") {
+        this.prodChooseOrder = this.prodChooseOrder.toUpperCase();
+        let pres = this.prodOrder.filter((item) => {
+          let ans = item.tic_id;
+          return ans.includes(this.prodChooseOrder);
+        });
+        this.prodOrderSlice = pres;
+      } else if (this.prodChooseName == "會員信箱") {
+        this.prodChooseOrder = this.prodChooseOrder.toUpperCase();
+        let pres = this.prodOrder.filter((item) => {
+          let ans = item.mem_email.toUpperCase();
+          return ans.includes(this.prodChooseOrder);
+        });
+        this.orderSlice = pres;
+      } else {
+        this.orderSlice = this.prodOrder;
+      }
+    },
+
+    ////購票訂單
     resetArr() {
       if (this.chooseOrder == "") {
         this.ticketOrderSlice = this.ticketOrder;
@@ -180,6 +229,7 @@ export default {
         this.ticketOrderSlice = this.ticketOrder;
       }
     },
+   
 
     updateOrder(index, e, i) {
       if (e.target.innerText == "確認") {
