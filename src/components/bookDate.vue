@@ -76,7 +76,6 @@ export default {
         ["長者", "(65歲以上(含))", "150", 0],
       ],
       totalPrice: 0,
-      mixTicId: [],
     };
   },
   watch: {
@@ -127,9 +126,13 @@ export default {
         for (let i = 0; i < extraData.length; i++) {
           this.optionDetailArr.push([
             extraData[i].tic_name,
+            // 票種名稱
             extraData[i].tic_info,
+            // 票種資訊
             extraData[i].tic_price,
+            // 票的單價
             0,
+            // 數量
             extraData[i].tictype_id,
           ]);
         }
@@ -151,14 +154,16 @@ export default {
         alert("需先登入會員");
         return;
       } else {
-        //   optionDetailArr: [
-        //   ["成人", "(18~64歲)", "500", 0],
-        //   ["兒童", "(4~11歲)", "250", 0],
-        //   ["學生", "(12歲以上(含)持學生證者)", "400", 0],
-        //   ["長者", "(65歲以上(含))", "150", 0],
-        // ],
         let countTicAndType = [];
         for (let i = 0; i < this.optionDetailArr.length; i++) {
+          // extraData[i].tic_name,
+          //   // 票種名稱
+          //   extraData[i].tic_info,
+          //   // 票種資訊
+          //   extraData[i].tic_price,
+          //   // 票的單價
+          //   0,
+          // 數量
           if (this.optionDetailArr[i][3] > 0) {
             countTicAndType.push({
               tictype_id: this.optionDetailArr[i][4],
@@ -167,22 +172,21 @@ export default {
             });
           }
         }
-
+        console.log(countTicAndType);
+        let formData = new FormData();
+        formData.append("datas", JSON.stringify(countTicAndType));
         fetch(`${this.$store.state.APIurl}bookDateNumRecord.php`, {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(countTicAndType),
+
+          body: formData,
         })
           .then((res) => res.json())
           .then((data) => {
-            console.log(data);
+            this.uniqid_num = data["訂單編號"];
           });
-        // console.log(countTicAndType);
         for (let i = 0; i < this.optionDetailArr.length; i++) {
           const lastElement =
-            this.optionDetailArr[i][this.optionDetailArr[i].length - 1];
+            this.optionDetailArr[i][this.optionDetailArr[i].length - 2];
           if (lastElement === 0) {
             continue; // 如果最後一個元素是零，則跳過這個子陣列
           } else {
@@ -193,7 +197,7 @@ export default {
               //     tickDate: "2023.08.31",
               //     tickPrice: "250",
               console.log(
-                this.optionDetailArr[i][this.optionDetailArr[i].length - 1]
+                this.optionDetailArr[i][this.optionDetailArr[i].length - 2]
               );
 
               this.$store.state.ticketList.push({
@@ -282,7 +286,6 @@ export default {
     ticketdown(idx) {
       if (this.optionDetailArr[idx][3] > 0) {
         this.optionDetailArr[idx][3]--;
-
         this.totalPrice -= parseInt(this.optionDetailArr[idx][2]);
         // idx == 0
         //   ? (this.totalPrice -= parseInt(this.optionDetailArr[idx][2]))
