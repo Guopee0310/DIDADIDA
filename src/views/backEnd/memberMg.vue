@@ -10,33 +10,34 @@
         <ul>
           <li>Email / 帳號</li>
           <li>姓名</li>
+          <li>性別</li>
+          <li>生日</li>
+          <li>手機</li>
+          <li>地址</li>
           <li>會員狀態</li>
         </ul>
       </div>
       <div class="mem_info">
-        <div v-for="(i, index) in memberAPI" :key="index">
-          <p>{{ i.mem_email }}</p>
-          <p>{{ i.mem_name }}</p>
-
-          <label>
-            <input
-              type="radio"
-              :name="index"
-              :checked="i.mem_state == 0"
-              @change="radioPush(i.mem_name, i.mem_email, 0)"
-            />
-            正常
-          </label>
-          <label>
-            <input
-              type="radio"
-              :name="index"
-              :checked="i.mem_state == 1"
-              @change="radioPush(i.mem_name, i.mem_email, 1)"
-            />
-            黑名單
-          </label>
-        </div>
+        <ul v-for="(i, index) in memberAPI" :key="index">
+          <li>{{ i.mem_email }}</li>
+          <li>{{ i.mem_name }}</li>
+          <li>{{ i.mem_gender }}</li>
+          <li>{{ i.mem_birth }}</li>
+          <li>{{ i.mem_mob }}</li>
+          <li>{{ i.mem_address }}</li>
+          <li>
+            <label>
+              <input type="radio" :name="index" :checked="i.mem_state == 0"
+                @change="radioPush(i.mem_name, i.mem_email, 0)" />
+              正常
+            </label>
+            <label>
+              <input type="radio" :name="index" :checked="i.mem_state == 1"
+                @change="radioPush(i.mem_name, i.mem_email, 1)" />
+              黑名單
+            </label>
+          </li>
+        </ul>
         <!-- <div class="mem_email">
           <p>nini0218@gmail.com</p>
         </div>
@@ -217,60 +218,100 @@ export default {
   }
 
   .mem_content {
+    margin-top: 10px;
     .title {
       width: 100%;
       border-bottom: 1px solid #000;
-      margin: 1em 0;
       padding-bottom: 5px;
 
       ul {
         width: 100%;
-        margin: auto;
         display: flex;
         text-align: center;
         justify-content: space-around;
+        align-items: center;
+
         li {
+          padding: 0 5px;
+
           &:nth-of-type(1) {
-            width: 30%;
+            width: 25%;
           }
 
           &:nth-of-type(2) {
-            width: 16%;
-            text-align: center;
+            width: 10%;
           }
 
           &:nth-of-type(3) {
-            width: 20%;
+            width: 5%;
           }
 
           &:nth-of-type(4) {
-            width: 17%;
-
-            input[type="number"] {
-              width: 70%;
-            }
+            width: 13%;
           }
 
           &:nth-of-type(5) {
-            width: 20%;
+            width: 12%;
           }
 
           &:nth-of-type(6) {
+            width: 25%;
+          }
+
+          &:nth-of-type(7) {
             width: 10%;
-            text-align: center;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
           }
         }
       }
     }
+
     .mem_info {
       width: 100%;
-      //   display: flex;
-      //   justify-content: space-around;
-      div {
-        display: flex;
+      border-bottom: 1px solid #000;
 
-        p {
-          width: calc(100% / 3);
+      ul {
+        width: 100%;
+        margin: 5px 0;
+        display: flex;
+        text-align: center;
+        justify-content: space-around;
+        align-items: center;
+
+        li {
+          padding: 0 5px;
+
+          &:nth-of-type(1) {
+            width: 25%;
+          }
+
+          &:nth-of-type(2) {
+            width: 10%;
+          }
+
+          &:nth-of-type(3) {
+            width: 5%;
+          }
+
+          &:nth-of-type(4) {
+            width: 13%;
+          }
+
+          &:nth-of-type(5) {
+            width: 12%;
+          }
+
+          &:nth-of-type(6) {
+            width: 25%;
+          }
+
+          &:nth-of-type(7) {
+            width: 10%;
+            display: flex;
+            flex-wrap: wrap;
+          }
         }
       }
     }
