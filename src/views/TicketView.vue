@@ -1,7 +1,7 @@
 <template>
   <div class="ticketAll">
     <div class="topIntro">
-      <div class="topTitle">{{ $t('票價資訊') }}</div>
+      <div class="topTitle">{{ $t("票價資訊") }}</div>
       <ticketPrice></ticketPrice>
       <!-- <div class="ticketRow" v-for="(i, index) in ticketRowArr" :key="index">
         <div>{{ $t(i[0]) }}</div>
@@ -12,7 +12,7 @@
     </div>
     <bookDate></bookDate>
     <div class="bottomIntro">
-      <div class="bottomTitle">{{ $t('購票須知') }}</div>
+      <div class="bottomTitle">{{ $t("購票須知") }}</div>
       <div>
         <div v-for="(i, index) in warningArr" :key="index" class="singleNotice">
           <span> ◆ </span>{{ $t(i) }}
@@ -106,11 +106,11 @@ export default {
       ],
     };
   },
-  watch: {
-    "$route.query"(nVal, oVal) {
-      //   console.log(nVal);
-    },
-  },
+  // watch: {
+  //   "$route.query"(nVal, oVal) {
+  //     //   console.log(nVal);
+  //   },
+  // },
   mounted() {
     window.addEventListener("scroll", this.handleScroll);
   },
@@ -126,8 +126,8 @@ export default {
       this.$router.push({ path: "/", query: { section: "hide" } });
     },
     handleScroll(event) {
-      console.log(event);
-      console.log(window.scrollY);
+      // console.log(event);
+      // console.log(window.scrollY);
       if (window.scrollY == 0) {
         this.headerColor = "rgba(35, 45, 71, 0)";
         this.checkLogoPic = false;
@@ -152,13 +152,11 @@ export default {
     @include h3Title;
   }
 
-
   // .ticketRow {
   //   height: 61px;
   //   display: flex;
   //   align-items: center;
   //   letter-spacing: 1px;
-
 
   //   &:nth-child(2),
   //   &:last-child {
@@ -175,7 +173,6 @@ export default {
   //     background-color: map-get($colors, "bgc");
   //     color: map-get($colors, "dark");
   //   }
-
 
   //   div {
   //     width: 150px;

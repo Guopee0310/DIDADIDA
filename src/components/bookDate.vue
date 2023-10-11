@@ -76,6 +76,7 @@ export default {
         ["長者", "(65歲以上(含))", "150", 0],
       ],
       totalPrice: 0,
+      mixTicId: [],
     };
   },
   watch: {
@@ -117,6 +118,7 @@ export default {
         for (let i = 0; i < this.optionDetailArr.length; i++) {
           this.optionDetailArr[i][0] = data[i].tic_name;
           this.optionDetailArr[i][2] = data[i].tic_price;
+          this.optionDetailArr[i][4] = data[i].tictype_id;
         }
         const extraData = data.slice(this.optionDetailArr.length);
 
@@ -128,6 +130,7 @@ export default {
             extraData[i].tic_info,
             extraData[i].tic_price,
             0,
+            extraData[i].tictype_id,
           ]);
         }
         console.log(this.optionDetailArr);
@@ -148,6 +151,35 @@ export default {
         alert("需先登入會員");
         return;
       } else {
+        //   optionDetailArr: [
+        //   ["成人", "(18~64歲)", "500", 0],
+        //   ["兒童", "(4~11歲)", "250", 0],
+        //   ["學生", "(12歲以上(含)持學生證者)", "400", 0],
+        //   ["長者", "(65歲以上(含))", "150", 0],
+        // ],
+        let countTicAndType = [];
+        for (let i = 0; i < this.optionDetailArr.length; i++) {
+          if (this.optionDetailArr[i][3] > 0) {
+            countTicAndType.push({
+              tictype_id: this.optionDetailArr[i][4],
+              ticPrice: this.optionDetailArr[i][2],
+              ticQty: this.optionDetailArr[i][3],
+            });
+          }
+        }
+
+        fetch(`${this.$store.state.APIurl}bookDateNumRecord.php`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(countTicAndType),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+          });
+        // console.log(countTicAndType);
         for (let i = 0; i < this.optionDetailArr.length; i++) {
           const lastElement =
             this.optionDetailArr[i][this.optionDetailArr[i].length - 1];
@@ -250,6 +282,7 @@ export default {
     ticketdown(idx) {
       if (this.optionDetailArr[idx][3] > 0) {
         this.optionDetailArr[idx][3]--;
+
         this.totalPrice -= parseInt(this.optionDetailArr[idx][2]);
         // idx == 0
         //   ? (this.totalPrice -= parseInt(this.optionDetailArr[idx][2]))
