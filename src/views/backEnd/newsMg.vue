@@ -26,12 +26,12 @@
                     <li>
                         <div class="img">
                             <div class="picBox">
-                                <img :src="'../all_images/news/' + item.news_img" alt="未選擇圖片">
+                                <img :src="'../all_images/news/' + item.news_img" :alt="item.news_img?item.news_img:'未選圖片'">
                             </div>
 
                             <div class="file_btn">
-                                <input type="file" @change="fileChange($event, index)" ref="fileInput"
-                                    :disabled="item.disabled" name="news_img" :title="item.news_img">
+                                <input type="file" @change="fileChange($event, index)" :ref="'fileInput' + index"
+                                    :disabled="item.disabled" name="image" :title="item.news_img">
                                 <i class="fa-regular fa-trash-can" style="color: #ffffff;" @click="deleteImage(index)"
                                     v-if="!item.disabled && item.news_img"></i>
                             </div>
@@ -144,18 +144,14 @@ export default {
             const item = this.allnews[index];
 
             if (confirm("確定刪除圖片嗎？")) {
-               
+
                 document.querySelectorAll(".picBox img")[index].src = "";
 
                 // Update the property directly
                 item.news_img = ''; // 清除图像路径
                 alert("圖片已成功刪除");
 
-                // 清除文件输入的值
-                const fileInput = this.$refs.fileInput[index];
-                if (fileInput) {
-                    fileInput.value = '';
-                }
+               
             }
         },
 
@@ -165,76 +161,125 @@ export default {
 
 
         fileChange(e, index) {
-            let file = e.target.files[0];
-            this.imageSrc = file;
-            console.log("file", file);
+    let file = e.target.files[0];
+    this.changePic = file;
+    console.log("file", file);
 
-            let self = this; // 保存 Vue 组件的上下文
+    let readFile = new FileReader();
+    readFile.readAsDataURL(file);
+    readFile.addEventListener("load", () => {
+        let image = new Image();
+        image.src = readFile.result;
+        console.log(image.src);
+        image.style.width = "100%";
+        image.style.height = "100%";
+        document.querySelectorAll(".picBox")[index].innerHTML= "";
+        document.querySelectorAll(".picBox")[index].appendChild(image);
+        
+        // 检查Base64图像数据是否有效
+        this.checkBase64Image(image.src, index);
+    });
+},
 
-            let readFile = new FileReader();
-            readFile.readAsDataURL(file);
-            readFile.addEventListener("load", function () {
-                let image = new Image();
-                image.src = readFile.result;
-                image.style.width = "100%";
-                image.style.height = "100%";
-                document.querySelectorAll(".picBox")[index].innerHTML = "";
-                document.querySelectorAll(".picBox")[index].appendChild(image);
 
-                // 使用保存的上下文访问 this.allnews
-                self.allnews[index].news_img = image.src;
-            });
+        checkBase64Image(src, index) {
+            const img = new Image();
+            img.src = src;
+
+            img.onload = () => {
+                // Base64图像数据有效
+                alert("圖片新增成功");
+
+                this.allnews[index].news_img = src;
+            };
+
+            img.onerror = () => {
+                // Base64图像数据无效
+                alert("圖片新增失敗");
+
+                // 清除图像显示
+                document.querySelectorAll(".picBox img")[index].src = "";
+
+                // 清除文件输入的值
+                const fileInput = this.$refs['fileInput' + index];
+                if (fileInput) {
+                    fileInput.value = '';
+                }
+            };
         },
+
+
 
 
         updateNews(index, e, item) {
-            if (e.target.innerText === "確認") {
-                if (!item.news_title || !item.news_content) {
-                    alert("請將標題和內容填滿");
-                    return;
-                } else if (!item.news_category) {
-                    alert("請選擇分類");
-                    return;
-                }
-                else if (!item.news_img) {
-                    alert("請選擇圖片");
-                    return;
-                }
+    if (e.target.innerText === "確認") {
+        if (!item.news_title || !item.news_content) {
+            alert("請將標題和內容填滿");
+            return;
+        } else if (!item.news_category) {
+            alert("請選擇分類");
+            return;
+        } else if (this.changePic) { // 检查是否选择了新图片
+            const formData = new FormData();
+            let news_id = item.news_id;
+            let news_title = item.news_title;
+            let news_content = item.news_content;
+            let news_date = item.news_date;
+            let news_category = item.news_category;
+            let news_state = item.news_state;
 
-                const formData = new FormData();
-                let news_id = item.news_id;
-                let news_title = item.news_title;
-                let news_content = item.news_content;
-                let news_date = item.news_date;
-                let news_category = item.news_category;
-                let news_state = item.news_state;
+            formData.append("news_id", news_id);
+            formData.append("news_title", news_title);
+            formData.append("news_content", news_content);
+            formData.append("news_date", news_date);
+            formData.append("news_category", news_category);
+            formData.append("news_state", news_state);
+            formData.append("image", this.changePic);
 
+            fetch(`${this.$store.state.APIurl}news.php`, {
+                method: "POST",
+                body: formData,
+            })
+                .then((res) => res.json())
+                .then((result) => {
+                    alert("更新成功");
+                    // 重新取資料
+                    this.refreshNewsData();
+                });
+        } else {
+            // 如果没有选择新图片，只更新其他信息
+            const formData = new FormData();
+            let news_id = item.news_id;
+            let news_title = item.news_title;
+            let news_content = item.news_content;
+            let news_date = item.news_date;
+            let news_category = item.news_category;
+            let news_state = item.news_state;
 
-                formData.append("news_id", news_id);
-                formData.append("news_title", news_title);
-                formData.append("news_content", news_content);
-                formData.append("news_date", news_date);
-                formData.append("news_category", news_category);
-                formData.append("news_state", news_state);
-                formData.append("news_img", item.news_img);
+            formData.append("news_id", news_id);
+            formData.append("news_title", news_title);
+            formData.append("news_content", news_content);
+            formData.append("news_date", news_date);
+            formData.append("news_category", news_category);
+            formData.append("news_state", news_state);
 
+            fetch(`${this.$store.state.APIurl}news.php`, {
+                method: "POST",
+                body: formData,
+            })
+                .then((res) => res.json())
+                .then((result) => {
+                    alert("更新成功");
+                    // 重新取資料
+                    this.refreshNewsData();
+                });
+        }
+    } else {
+        this.allnews[index].disabled = false;
+        e.target.innerText = "確認";
+    }
+},
 
-                fetch(`${this.$store.state.APIurl}news.php`, {
-                    method: "POST",
-                    body: formData,
-                })
-                    .then((res) => res.json())
-                    .then((result) => {
-                        alert("更新成功");
-                        // 重新取資料
-                        this.refreshNewsData();
-
-                    });
-            } else {
-                this.allnews[index].disabled = false;
-                e.target.innerText = "確認";
-            }
-        },
 
         news_content() {
             //上傳時間
@@ -262,7 +307,7 @@ export default {
                     alert("請將標題和內容填滿");
                     return;
                 }
-                else if (!this.imageSrc) {
+                else if (!this.changePic) {
                     alert("請選擇圖片");
                     return;
                 }
@@ -287,7 +332,7 @@ export default {
                 formData.append("news_date", news_date);
                 formData.append("news_category", news_category);
                 formData.append("news_state", news_state);
-                formData.append("image", this.imageSrc);
+                formData.append("image", this.changePic);
 
                 this.allnews[index].disabled = true;
 
