@@ -8,7 +8,11 @@
     <div class="member_nav">
       <div class="stickers">
         <div class="photo_stickers">
-          <img src="../assets/images/member_nini.jpg" alt="" />
+          <img :src="mem_pic" alt="" />
+          <input type="file" @change="handleFileChange" />
+          <button @click="uploadAvatar">上傳</button>
+          <!-- <input type="file">
+          <img src="../assets/images/member_nini.jpg" alt="" /> -->
         </div>
       </div>
       <div class="member_hello">
@@ -25,14 +29,7 @@
           <span>Google</span>
         </div>
         <label class="verification_label" for="verification_id">
-          已驗證<input
-            class="verification_input"
-            type="checkbox"
-            value=""
-            id="verification_id"
-            style="zoom: 120%"
-            checked
-          />
+          已驗證<input class="verification_input" type="checkbox" value="" id="verification_id" style="zoom: 120%" checked />
         </label>
       </div>
       <div class="btn_area">
@@ -50,48 +47,32 @@
         </button>
       </div>
       <div class="logOutBtn">
-        <button
-          v-if="this.$store.state.userName"
-          @click="logOutAPI()"
-          :class="{ alreadyClick: logOutClick }"
-        >
+        <button v-if="this.$store.state.userName" @click="logOutAPI()" :class="{ alreadyClick: logOutClick }">
           {{ $t("登出") }}
         </button>
       </div>
     </div>
     <!-- 右側區塊 -->
     <!-- 會員帳號設定 -->
-    <div
-      v-if="this.$store.state.memberBtn === 'mem_account_settings'"
-      class="mem_account_settings member_area"
-    >
+    <div v-if="this.$store.state.memberBtn === 'mem_account_settings'" class="mem_account_settings member_area">
       <h6>{{ $t("會員帳號設定") }}</h6>
       <memAccoutSettings></memAccoutSettings>
       <memAreaBG></memAreaBG>
     </div>
     <!-- 購物訂單查詢 -->
-    <div
-      v-else-if="this.$store.state.memberBtn === 'prod_order_inquiry'"
-      class="prod_order_inquiry member_area"
-    >
+    <div v-else-if="this.$store.state.memberBtn === 'prod_order_inquiry'" class="prod_order_inquiry member_area">
       <h6>{{ $t("購物訂單查詢") }}</h6>
       <prodOrderInquiry id="showProdOrder"></prodOrderInquiry>
       <memAreaBG></memAreaBG>
     </div>
     <!-- 購票訂單查詢 -->
-    <div
-      v-else-if="this.$store.state.memberBtn === 'tick_order_inquiry'"
-      class="tick_order_inquiry member_area"
-    >
+    <div v-else-if="this.$store.state.memberBtn === 'tick_order_inquiry'" class="tick_order_inquiry member_area">
       <h6 id="showtickOrder">{{ $t("購票訂單查詢") }}</h6>
       <tickOrderInquiry></tickOrderInquiry>
       <memAreaBG></memAreaBG>
     </div>
     <!-- 我的收藏清單 -->
-    <div
-      v-else="this.$store.state.memberBtn === 'mem_bonuspoint'"
-      class="favorites_list member_area"
-    >
+    <div v-else="this.$store.state.memberBtn === 'mem_bonuspoint'" class="favorites_list member_area">
       <h6>{{ $t("我的收藏清單") }}</h6>
       <favoritesList></favoritesList>
       <memAreaBG></memAreaBG>
@@ -122,6 +103,8 @@ export default {
       logOutClick: false,
       btn: "mem_account_settings",
       mem_bonus: 0,
+      mem_pic: '',
+      selectedFile: null,
     };
   },
   created() {
@@ -205,6 +188,33 @@ export default {
       this.$store.state.ticketList = [];
       this.$store.state.totalScorePoint = 0;
     },
+    handleFileChange(e) {
+      this.selectedFile = e.target.files[0];
+    },
+    async uploadAvatar() {
+      const formData = new FormData();
+      formData.append('file', this.selectedFile);
+
+      try {
+        const response = await fetch(`${this.$store.state.APIurl}memAvatar.php`, {
+          method: 'POST',
+          body: formData,
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          if (data.success) {
+            this.mem_pic = data.mem_pic;
+          } else {
+            console.error(data.message);
+          }
+        } else {
+          console.error('Upload failed.');
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    },
   },
 };
 </script>
@@ -267,6 +277,7 @@ export default {
         font-size: map-get($fontSizes, "p");
         width: fit-content;
         border-bottom: 1px solid map-get($colors, "light");
+
         span {
           font-size: map-get($fontSizes, "h5");
         }
