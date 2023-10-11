@@ -117,6 +117,7 @@ export default {
         for (let i = 0; i < this.optionDetailArr.length; i++) {
           this.optionDetailArr[i][0] = data[i].tic_name;
           this.optionDetailArr[i][2] = data[i].tic_price;
+          this.optionDetailArr[i][4] = data[i].tictype_id;
         }
         const extraData = data.slice(this.optionDetailArr.length);
 
@@ -125,9 +126,14 @@ export default {
         for (let i = 0; i < extraData.length; i++) {
           this.optionDetailArr.push([
             extraData[i].tic_name,
+            // 票種名稱
             extraData[i].tic_info,
+            // 票種資訊
             extraData[i].tic_price,
+            // 票的單價
             0,
+            // 數量
+            extraData[i].tictype_id,
           ]);
         }
         console.log(this.optionDetailArr);
@@ -148,68 +154,103 @@ export default {
         alert("需先登入會員");
         return;
       } else {
+        let countTicAndType = [];
         for (let i = 0; i < this.optionDetailArr.length; i++) {
-          const lastElement =
-            this.optionDetailArr[i][this.optionDetailArr[i].length - 1];
-          if (lastElement === 0) {
-            continue; // 如果最後一個元素是零，則跳過這個子陣列
-          } else {
-            for (let j = 0; j < lastElement; j++) {
-              //     tickImg: require("../assets/images/dolphin_pillow.jpg"),
-              //     tickName: "一般全票",
-              //     tickCount: "2",
-              //     tickDate: "2023.08.31",
-              //     tickPrice: "250",
-              console.log(
-                this.optionDetailArr[i][this.optionDetailArr[i].length - 1]
-              );
-
-              this.$store.state.ticketList.push({
-                tickImg: require("../../public/all_images/ticket_face.jpg"),
-                tickName: `${this.optionDetailArr[i][0]}票`,
-                tickCount: `1`,
-                tickDate: this.catchDate,
-                tickPrice: `${this.optionDetailArr[i][2]}`,
-              });
-              const formData = new FormData();
-
-              let mem_name = this.$store.state.userName;
-              formData.append("mem_name", mem_name);
-              fetch(`${this.$store.state.APIurl}bookDateFront.php`, {
-                method: "post",
-                body: formData,
-              })
-                .then((res) => res.json())
-                .then((data) => {
-                  let catchMemEmail = "";
-                  catchMemEmail = data[0].mem_email;
-                  let mem_id = data[0].mem_id;
-                  const formData = new FormData();
-
-                  // let mem_id = this.$store.state.userName;
-                  let tic_date = this.catchDate;
-                  let tic_pay = this.optionDetailArr[i][2];
-                  let tic_name = this.optionDetailArr[i][0];
-                  let tic_state = "可使用";
-                  formData.append("mem_id", mem_id);
-                  formData.append("mem_email", catchMemEmail);
-                  formData.append("tic_date", tic_date);
-                  formData.append("tic_name", tic_name);
-                  formData.append("tic_pay", tic_pay);
-                  formData.append("tic_state", tic_state);
-                  fetch(`${this.$store.state.APIurl}bookDatePush.php`, {
-                    method: "post",
-                    body: formData,
-                  }).then((res) => res.json());
-                });
-              // console.log(
-              //   this.$store.state.ticketList[
-              //     this.$store.state.ticketList.length - 1
-              //   ]
-              // );
-            }
+          // extraData[i].tic_name,
+          //   // 票種名稱
+          //   extraData[i].tic_info,
+          //   // 票種資訊
+          //   extraData[i].tic_price,
+          //   // 票的單價
+          //   0,
+          // 數量
+          if (this.optionDetailArr[i][3] > 0) {
+            countTicAndType.push({
+              tictype_id: this.optionDetailArr[i][4],
+              ticPrice: this.optionDetailArr[i][2],
+              ticQty: this.optionDetailArr[i][3],
+            });
           }
         }
+        console.log(countTicAndType);
+        let formData = new FormData();
+        formData.append("datas", JSON.stringify(countTicAndType));
+        fetch(`${this.$store.state.APIurl}bookDateNumRecord.php`, {
+          method: "POST",
+
+          body: formData,
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            this.uniqid_num = data["訂單編號"];
+            return this.uniqid_num;
+          })
+          .then((result) => {
+            for (let i = 0; i < this.optionDetailArr.length; i++) {
+              const lastElement =
+                this.optionDetailArr[i][this.optionDetailArr[i].length - 2];
+              if (lastElement === 0) {
+                continue; // 如果最後一個元素是零，則跳過這個子陣列
+              } else {
+                for (let j = 0; j < lastElement; j++) {
+                  //     tickImg: require("../assets/images/dolphin_pillow.jpg"),
+                  //     tickName: "一般全票",
+                  //     tickCount: "2",
+                  //     tickDate: "2023.08.31",
+                  //     tickPrice: "250",
+                  console.log(
+                    this.optionDetailArr[i][this.optionDetailArr[i].length - 2]
+                  );
+
+                  this.$store.state.ticketList.push({
+                    tickImg: require("../../public/all_images/ticket_face.jpg"),
+                    tickName: `${this.optionDetailArr[i][0]}票`,
+                    tickCount: `1`,
+                    tickDate: this.catchDate,
+                    tickPrice: `${this.optionDetailArr[i][2]}`,
+                  });
+                  const formData = new FormData();
+
+                  let mem_name = this.$store.state.userName;
+                  formData.append("mem_name", mem_name);
+                  fetch(`${this.$store.state.APIurl}bookDateFront.php`, {
+                    method: "post",
+                    body: formData,
+                  })
+                    .then((res) => res.json())
+                    .then((data) => {
+                      let catchMemEmail = "";
+                      catchMemEmail = data[0].mem_email;
+                      let mem_id = data[0].mem_id;
+                      const formData = new FormData();
+
+                      // let mem_id = this.$store.state.userName;
+                      let tic_date = this.catchDate;
+                      let tic_pay = this.optionDetailArr[i][2];
+                      let tic_name = this.optionDetailArr[i][0];
+                      let tic_state = "可使用";
+                      formData.append("mem_id", mem_id);
+                      formData.append("mem_email", catchMemEmail);
+                      formData.append("tic_date", tic_date);
+                      formData.append("tic_name", tic_name);
+                      formData.append("tic_pay", tic_pay);
+                      formData.append("tic_state", tic_state);
+                      formData.append("uniqid_num", result);
+
+                      fetch(`${this.$store.state.APIurl}bookDatePush.php`, {
+                        method: "post",
+                        body: formData,
+                      }).then((res) => res.json());
+                    });
+                  // console.log(
+                  //   this.$store.state.ticketList[
+                  //     this.$store.state.ticketList.length - 1
+                  //   ]
+                  // );
+                }
+              }
+            }
+          });
       }
       this.checkAndNavigate();
     },
