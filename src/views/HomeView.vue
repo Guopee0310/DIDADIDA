@@ -7,13 +7,7 @@
       <div class="index">
         <!-- banner + open time ------------------------------------------ -->
         <div class="banner">
-          <Carousel
-            autoplay
-            autoplay-speed="4800"
-            dots="none"
-            v-model="value"
-            loop
-          >
+          <Carousel autoplay autoplay-speed="4800" dots="none" v-model="value" loop>
             <CarouselItem v-for="i in bannerAll">
               <div class="demo-carousel">
                 <img :src="i.banner_pic" alt="" />
@@ -28,17 +22,9 @@
               <div class="open">
                 <span>{{ $t("營業時間") }}</span>
                 <span>09:00-17:00</span>
-                <svg
-                  x="0px"
-                  y="0px"
-                  width="200px"
-                  height="15px"
-                  viewBox="0 0 399.6 15.9"
-                >
-                  <polyline
-                    class="op_line"
-                    points="0.1,5.5 58,15.4 118.4,5.5 189.2,5.5 258.7,10.4 368.3,0.5 399.5,7.9 "
-                  />
+                <svg x="0px" y="0px" width="200px" height="15px" viewBox="0 0 399.6 15.9">
+                  <polyline class="op_line"
+                    points="0.1,5.5 58,15.4 118.4,5.5 189.2,5.5 258.7,10.4 368.3,0.5 399.5,7.9 " />
                 </svg>
                 <span>{{ $t("最後入場") }}</span>
                 <span>16:00</span>
@@ -88,11 +74,7 @@
         <div class="map">
           <iframe
             src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14468.996712784081!2d121.2250227!3d24.9576355!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x346823ea50c732a5%3A0x1b5e6ee66e9fec49!2z57ev6IKyVGliYU1l6ZmE6Kit5Lit5aOi6IG36KiT5Lit5b-D!5e0!3m2!1szh-TW!2stw!4v1690272123794!5m2!1szh-TW!2stw"
-            style="border: 0"
-            allowfullscreen=""
-            loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
-          >
+            style="border: 0" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
           </iframe>
           <div class="text">
             <div class="address">
@@ -125,9 +107,7 @@
           <div class="item" v-for="product in products" :key="product">
             <div class="image">
               <!-- <a href="#"><img :src="product.src" alt="product.alt" /></a> -->
-              <router-link to="/product"
-                ><img :src="product.src" alt="product.alt"
-              /></router-link>
+              <router-link to="/product"><img :src="product.src" alt="product.alt" /></router-link>
             </div>
             <div class="content">
               <div class="nub">{{ product.nub }}</div>
@@ -145,16 +125,10 @@
           <router-link to="/product"><button>更多商品</button></router-link>
 
           <div class="deco shark">
-            <img
-              src="../../public/all_images/index/deco_index_shark.png"
-              alt=""
-            />
+            <img src="../../public/all_images/index/deco_index_shark.png" alt="" />
           </div>
           <div class="deco whale">
-            <img
-              src="../../public/all_images/index/deco_index_whale.png"
-              alt=""
-            />
+            <img src="../../public/all_images/index/deco_index_whale.png" alt="" />
           </div>
         </div>
 
@@ -207,10 +181,12 @@
           <visual></visual>
         </div>
 
+        <div class="gameBar">
+          <input type="range" v-model="lightChang" min="0" max="100" class="slider">
+          <label for="range" id="display">\ 亮度調整{{ lightChang }}% /</label>
+        </div>
         <div class="gamePhone">
-          <input type="range" v-model="lightChang" min="0" max="100">
-          <div class="square" :style="{ 'background-color': `hsl(0, 100%, ${lightChang}%)` }"></div>
-
+          <div class="square" :style="{ 'opacity': `${lightChang}%` }"></div>
         </div>
       </div>
     </div>
@@ -236,6 +212,7 @@ export default {
       loading: true,
       animationDuration: 4200,
       value: 0,
+      lightChang: 80,
 
       priceTitle: [{ name: "票種" }, { name: "價格" }, { name: "適用對象" }],
       ticket: [
@@ -352,6 +329,15 @@ export default {
         this.bannerAll = myJson;
       });
   },
+  watch: {
+    lightChang(newlightChang) {
+      let range = document.querySelector('input[type="range"]');
+      let display = document.getElementById('display');
+      let rangeWidth = range.clientWidth;
+      let rangeValue = (newlightChang / 100) * rangeWidth;
+      display.style.left = `${rangeValue}px`;
+    }
+  }
 };
 </script>
 
@@ -785,11 +771,11 @@ export default {
       }
     }
 
-    .day > span:first-child {
+    .day>span:first-child {
       display: block;
     }
 
-    .day > span:nth-child(2) {
+    .day>span:nth-child(2) {
       font-size: 80px;
       font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
     }
@@ -836,7 +822,7 @@ export default {
         padding-right: 15px;
       }
 
-      .day > span:nth-child(2) {
+      .day>span:nth-child(2) {
         font-size: 60px;
       }
     }
@@ -956,13 +942,85 @@ export default {
       display: none;
     }
 
-    .gamePhone {
-      display: flex;
-      background-image: url();
+    .gameBar {
+      margin: auto;
+      position: relative;
 
       input {
-        transform: rotate(90deg);
-        margin-left: auto;
+        position: relative;
+        display: flex;
+        margin: 20px auto;
+        background-color: map-get($colors , "h2Blue");
+
+        &::before {
+          position: absolute;
+          content: 'Light';
+          font-size: 5px;
+          top: -8px;
+          left: -40px;
+        }
+
+        &::after {
+          position: absolute;
+          content: 'Dark';
+          font-size: 5px;
+          top: -8px;
+          right: -40px;
+        }
+
+      }
+
+      input[type="range"]::-webkit-slider-thumb {
+        appearance: none;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background-color: map-get($colors , "mainColor");
+        box-shadow: map-get($colors , "hoverColor") 0 0 10px;
+      }
+
+      .slider {
+        appearance: none;
+        width: 10rem;
+        height: .25rem;
+        outline: none;
+        border-radius: .25rem;
+      }
+
+      label {
+        position: absolute;
+        top: -50px;
+        left: 193px;
+        padding: 5px;
+        border-radius: 5px;
+        color: #68769a;
+        background-color: map-get($colors , 'light');
+
+        &::after {
+          position: absolute;
+          bottom: -20px;
+          left: 40%;
+          content: '';
+          border-top: 10px solid #eee;
+          border-right: 10px solid transparent;
+          border-bottom: 10px solid transparent;
+          border-left: 10px solid transparent;
+        }
+      }
+    }
+
+    .gamePhone {
+      display: flex;
+      flex-wrap: wrap;
+      height: 50vh;
+      background-image: url(../../public/all_images/index/gamePhone.jpg);
+      background-size: cover;
+      background-position: center;
+
+      .square {
+        width: 100%;
+        height: 100%;
+        background-color: rgb(0, 0, 0);
       }
     }
 
