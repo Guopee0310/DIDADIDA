@@ -2,13 +2,13 @@
   <div class="tick_order_main">
     <div class="tick_area">
       <select v-model="selectOrder">
-        <option value="">請選擇</option>
+        <option value="請選擇">請選擇</option>
         <option
           :value="i.uniqid_num"
           v-for="(i, index) in ticketOrderSlice"
           class="orderNumTitle"
         >
-          {{ i.uniqid_num }}
+          {{ i.tic_date }}
         </option>
       </select>
 
@@ -177,7 +177,7 @@ export default {
   },
   computed: {
     filteredTickOrder() {
-      if (!this.selectOrder) {
+      if (!this.selectOrder || this.selectOrder == "請選擇") {
         return this.tickOrder; // 当 selectOrder 为空时返回所有 tickOrder
       } else {
         return this.tickOrder.filter(
