@@ -183,69 +183,74 @@ export default {
           .then((res) => res.json())
           .then((data) => {
             this.uniqid_num = data["訂單編號"];
-          });
-        for (let i = 0; i < this.optionDetailArr.length; i++) {
-          const lastElement =
-            this.optionDetailArr[i][this.optionDetailArr[i].length - 2];
-          if (lastElement === 0) {
-            continue; // 如果最後一個元素是零，則跳過這個子陣列
-          } else {
-            for (let j = 0; j < lastElement; j++) {
-              //     tickImg: require("../assets/images/dolphin_pillow.jpg"),
-              //     tickName: "一般全票",
-              //     tickCount: "2",
-              //     tickDate: "2023.08.31",
-              //     tickPrice: "250",
-              console.log(
-                this.optionDetailArr[i][this.optionDetailArr[i].length - 2]
-              );
+            return this.uniqid_num;
+          })
+          .then((result) => {
+            for (let i = 0; i < this.optionDetailArr.length; i++) {
+              const lastElement =
+                this.optionDetailArr[i][this.optionDetailArr[i].length - 2];
+              if (lastElement === 0) {
+                continue; // 如果最後一個元素是零，則跳過這個子陣列
+              } else {
+                for (let j = 0; j < lastElement; j++) {
+                  //     tickImg: require("../assets/images/dolphin_pillow.jpg"),
+                  //     tickName: "一般全票",
+                  //     tickCount: "2",
+                  //     tickDate: "2023.08.31",
+                  //     tickPrice: "250",
+                  console.log(
+                    this.optionDetailArr[i][this.optionDetailArr[i].length - 2]
+                  );
 
-              this.$store.state.ticketList.push({
-                tickImg: require("../../public/all_images/ticket_face.jpg"),
-                tickName: `${this.optionDetailArr[i][0]}票`,
-                tickCount: `1`,
-                tickDate: this.catchDate,
-                tickPrice: `${this.optionDetailArr[i][2]}`,
-              });
-              const formData = new FormData();
-
-              let mem_name = this.$store.state.userName;
-              formData.append("mem_name", mem_name);
-              fetch(`${this.$store.state.APIurl}bookDateFront.php`, {
-                method: "post",
-                body: formData,
-              })
-                .then((res) => res.json())
-                .then((data) => {
-                  let catchMemEmail = "";
-                  catchMemEmail = data[0].mem_email;
-                  let mem_id = data[0].mem_id;
+                  this.$store.state.ticketList.push({
+                    tickImg: require("../../public/all_images/ticket_face.jpg"),
+                    tickName: `${this.optionDetailArr[i][0]}票`,
+                    tickCount: `1`,
+                    tickDate: this.catchDate,
+                    tickPrice: `${this.optionDetailArr[i][2]}`,
+                  });
                   const formData = new FormData();
 
-                  // let mem_id = this.$store.state.userName;
-                  let tic_date = this.catchDate;
-                  let tic_pay = this.optionDetailArr[i][2];
-                  let tic_name = this.optionDetailArr[i][0];
-                  let tic_state = "可使用";
-                  formData.append("mem_id", mem_id);
-                  formData.append("mem_email", catchMemEmail);
-                  formData.append("tic_date", tic_date);
-                  formData.append("tic_name", tic_name);
-                  formData.append("tic_pay", tic_pay);
-                  formData.append("tic_state", tic_state);
-                  fetch(`${this.$store.state.APIurl}bookDatePush.php`, {
+                  let mem_name = this.$store.state.userName;
+                  formData.append("mem_name", mem_name);
+                  fetch(`${this.$store.state.APIurl}bookDateFront.php`, {
                     method: "post",
                     body: formData,
-                  }).then((res) => res.json());
-                });
-              // console.log(
-              //   this.$store.state.ticketList[
-              //     this.$store.state.ticketList.length - 1
-              //   ]
-              // );
+                  })
+                    .then((res) => res.json())
+                    .then((data) => {
+                      let catchMemEmail = "";
+                      catchMemEmail = data[0].mem_email;
+                      let mem_id = data[0].mem_id;
+                      const formData = new FormData();
+
+                      // let mem_id = this.$store.state.userName;
+                      let tic_date = this.catchDate;
+                      let tic_pay = this.optionDetailArr[i][2];
+                      let tic_name = this.optionDetailArr[i][0];
+                      let tic_state = "可使用";
+                      formData.append("mem_id", mem_id);
+                      formData.append("mem_email", catchMemEmail);
+                      formData.append("tic_date", tic_date);
+                      formData.append("tic_name", tic_name);
+                      formData.append("tic_pay", tic_pay);
+                      formData.append("tic_state", tic_state);
+                      formData.append("uniqid_num", result);
+
+                      fetch(`${this.$store.state.APIurl}bookDatePush.php`, {
+                        method: "post",
+                        body: formData,
+                      }).then((res) => res.json());
+                    });
+                  // console.log(
+                  //   this.$store.state.ticketList[
+                  //     this.$store.state.ticketList.length - 1
+                  //   ]
+                  // );
+                }
+              }
             }
-          }
-        }
+          });
       }
       this.checkAndNavigate();
     },
