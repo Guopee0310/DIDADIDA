@@ -139,7 +139,7 @@ export default {
       // 非同步請求數據
       const response = await fetch("http://localhost/dida_project/public/php/newsSelect.php");
       const myJson = await response.json();
-      this.news_content = myJson.filter(item => item.news_state !== '1');
+      this.news_content = myJson.filter(item => item.news_state !== '0');
 
       // 数据加载完成后进行筛选操作
       this.filterNewsByTag(this.tagOption);

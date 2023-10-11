@@ -63,12 +63,12 @@
                             <div class="radio_onOff">
                                 <label :for="'on_' + index">
                                     <input type="radio" :id="'on_' + index" :name="'select_onOff_' + index"
-                                        :disabled="item.disabled" v-model="item.news_state" value="0" />
+                                        :disabled="item.disabled" v-model="item.news_state" value="1" />
                                     上架
                                 </label>
                                 <label :for="'off_' + index">
                                     <input type="radio" :id="'off_' + index" :name="'select_onOff_' + index"
-                                        :disabled="item.disabled" v-model="item.news_state" value="1" />
+                                        :disabled="item.disabled" v-model="item.news_state" value="0" />
                                     下架
                                 </label>
                             </div>
