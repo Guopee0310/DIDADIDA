@@ -5,7 +5,7 @@
   <div class="card" v-for="(i, index) in chooseItem" :key="i.imageSrc">
     <div class="heart">
       <heart @change-heart="changeHeart($event, i, index)" :keepLove="keepHeartArr[index]"
-        :is-active="favList.findIndex((v) => v.favoName === i.titleName) > -1"></heart>
+        :is-active="favList.findIndex((v) => v.favoName === i.prod_name) > -1"></heart>
     </div>
     <div class="pic">
       <a href="#" @click.prevent="showProductDetails(i)"><img :src="'../all_images/product/' + i.prod_img"
@@ -486,16 +486,16 @@ export default {
       console.log(isFav, i, index);
 
       const favListIndex = this.favList.findIndex(
-        (v) => v.favoName === i.titleName
+        (v) => v.favoName === i.prod_name
       );
       if (favListIndex > -1) {
         this.$store.state.favoList.splice(favListIndex, 1);
       } else {
         this.$store.state.favoList.push({
-          favoImg: i.imageSrc,
-          favoName: i.titleName,
-          favoPrice: i.prodPrice,
-          favoIntroduction: i.info,
+          favoImg: i.prod_img,
+          favoName: i.prod_name,
+          favoPrice: i.prod_price,
+          favoIntroduction: i.prod_info,
           favIndex: index,
         });
       }
@@ -641,9 +641,9 @@ export default {
     //   }
     // },
     ...mapMutations(["toggleCartPopup"]),
-    pushAndTogglePopup(imageSrc, titleName, count, prodPrice) {
+    pushAndTogglePopup(prod_img, prod_name, count, prod_price) {
       // 添加商品到购物车
-      this.pushInShoppingCart(imageSrc, titleName, count, prodPrice);
+      this.pushInShoppingCart(prod_img, prod_name, count, prod_price);
 
       // 切换购物车弹出视图的显示状态
       if (this.$store.state.userName) {
