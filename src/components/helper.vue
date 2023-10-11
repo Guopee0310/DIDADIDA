@@ -66,7 +66,9 @@
       <div class="response" v-if="showMaxT">降雨機率 : {{ weatherPop }}%</div>
       <div class="response" v-if="showClosed">{{ closedtime }}</div>
       <div class="response" v-if="showBonus">{{ bonus }}</div>
-      <div class="response" v-if="showVisitors">{{ visitors }}</div>
+      <div class="response" v-if="showVisitors">
+        {{ visitors }}{{ this.$store.state.visitCount }}人
+      </div>
     </div>
   </div>
 </template>

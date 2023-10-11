@@ -208,9 +208,11 @@
         </div>
 
         <div class="gamePhone">
-          <input type="range" v-model="lightChang" min="0" max="100">
-          <div class="square" :style="{ 'background-color': `hsl(0, 100%, ${lightChang}%)` }"></div>
-
+          <input type="range" v-model="lightChang" min="0" max="100" />
+          <div
+            class="square"
+            :style="{ 'background-color': `hsl(0, 100%, ${lightChang}%)` }"
+          ></div>
         </div>
       </div>
     </div>
@@ -325,6 +327,7 @@ export default {
             data[i].tic_state == "已使用"
           ) {
             this.visitorCount++;
+            this.$store.state.visitCount = this.visitorCount;
           }
         }
       });
@@ -843,7 +846,6 @@ export default {
   }
 
   @media screen and (max-width: 415px) {
-
     .deco,
     .all-circle {
       display: none;
@@ -912,7 +914,6 @@ export default {
         height: auto;
         flex-wrap: wrap;
 
-
         .image {
           width: 100%;
           height: 20vh;
@@ -965,7 +966,6 @@ export default {
         margin-left: auto;
       }
     }
-
   }
 }
 </style>
