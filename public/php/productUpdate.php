@@ -5,14 +5,15 @@ header("Content-Type: application/json");
 require_once("connect.php");
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $news_title = $_POST["news_title"];
-    $news_content = $_POST["news_content"];
-    $news_date = $_POST["news_date"];
-    $news_category = $_POST["news_category"];
-    $news_state = $_POST["news_state"];
-    $news_id = $_POST["news_id"];
+      $prod_id = $_POST["prod_id"];
+    $prod_name = $_POST["prod_name"];
+    $prod_price = $_POST["prod_price"];
+    $prod_info = $_POST["prod_info"];
+    $prod_listed = $_POST["prod_listed"];
+    $prod_category = $_POST["prod_category"];
+    $prod_date = $_POST["prod_date"];
 
-    $update_sql = "UPDATE news SET news_category = :news_category, news_content = :news_content, news_title = :news_title, news_state = :news_state, news_date = :news_date";
+   $update_sql = "UPDATE product SET prod_name = :prod_name, prod_price = :prod_price, prod_info = :prod_info, prod_listed = :prod_listed, prod_category = :prod_category, prod_date = :prod_date";
 
     // 如果有新图像上传，更新图像字段
     if (!empty($_FILES["image"]["name"])) {
@@ -20,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $fileName = uniqid();
         $fileExt = pathinfo($uploadedFile, PATHINFO_EXTENSION); // 获取文件扩展名
 
-        $targetDirectory = "../all_images/news/";
+        $targetDirectory = "../all_images/product/";
 
         if (!file_exists($targetDirectory)) {
             mkdir($targetDirectory);
@@ -38,7 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 "fileName" => $targetFile
             ];
 
-            $update_sql .= ", news_img = :news_img";
+            $update_sql .= ", prod_img = :prod_img";
         } else {
             // 图像上传失败
             $response = [
@@ -51,19 +52,20 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
     }
 
-    $update_sql .= " WHERE news_id = :news_id";
+    $update_sql .= " WHERE prod_id = :prod_id";
     $update_stmt = $pdo->prepare($update_sql);
 
-    $update_stmt->bindValue(":news_id", $news_id, PDO::PARAM_INT);
-    $update_stmt->bindValue(":news_title", $news_title);
-    $update_stmt->bindValue(":news_content", $news_content);
-    $update_stmt->bindValue(":news_date", $news_date);
-    $update_stmt->bindValue(":news_category", $news_category);
-    $update_stmt->bindValue(":news_state", $news_state);
+    $update_stmt->bindValue(":prod_id", $prod_id, PDO::PARAM_INT);
+    $update_stmt->bindValue(":prod_name", $prod_name);
+    $update_stmt->bindValue(":prod_info", $prod_info);
+    $update_stmt->bindValue(":prod_date", $prod_date);
+    $update_stmt->bindValue(":prod_price", $prod_price);
+    $update_stmt->bindValue(":prod_listed", $prod_listed);
+    $update_stmt->bindValue(":prod_category", $prod_category);
 
     // 如果有新图像上传，绑定图像参数
     if (!empty($_FILES["image"]["name"])) {
-        $update_stmt->bindValue(":news_img", $targetFile);
+        $update_stmt->bindValue(":prod_img", $targetFile);
     }
 
     // 执行更新操作
@@ -85,7 +87,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 }
 
 try {
-    $sql = "SELECT * FROM news";
+    $sql = "SELECT * FROM product";
     $stmt = $pdo->query($sql);
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -94,6 +96,7 @@ try {
     $response = array('error' => true, 'msg' => '获取管理员数据失败: ' . $e->getMessage());
     // echo json_encode($response);
 }
+
 
 // 關閉連接
 $pdo = null;

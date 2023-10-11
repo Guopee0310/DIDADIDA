@@ -8,15 +8,16 @@
         :is-active="favList.findIndex((v) => v.favoName === i.titleName) > -1"></heart>
     </div>
     <div class="pic">
-      <a href="#" @click.prevent="showProductDetails(i)"><img :src="i.imageSrc" alt="" /></a>
+      <a href="#" @click.prevent="showProductDetails(i)"><img :src="'../all_images/product/' + i.prod_img"
+          :alt="i.prod_img" /></a>
     </div>
 
     <div class="name">
-      <a href="">{{ i.titleName }}</a>
+      <a href="">{{ i.prod_name }}</a>
     </div>
     <div class="info">
       <div class="cost">
-        <span>NT {{ i.prodPrice }}</span>
+        <span>NT {{ i.prod_price }}</span>
       </div>
       <div class="prod_btn">
         <div class="num">
@@ -47,14 +48,14 @@
       <div class="modal-content">
         <div class="prod-content">
           <div class="prod-img">
-            <img :src="selectedProduct.imageSrc" />
+            <img :src="'../all_images/product/' + selectedProduct.prod_img" />
           </div>
           <div class="prod-info">
             <div>
-              <h5>{{ $t(selectedProduct.titleName) }}</h5>
-              <p>NT {{ $t(selectedProduct.prodPrice) }}</p>
+              <h5>{{ $t(selectedProduct.prod_name) }}</h5>
+              <p>NT {{ $t(selectedProduct.prod_price) }}</p>
             </div>
-            <p>{{ $t(selectedProduct.info) }}</p>
+            <p>{{ $t(selectedProduct.prod_info) }}</p>
           </div>
         </div>
         <div class="close" @click="closeModal">
@@ -77,168 +78,168 @@ export default {
   data() {
     return {
       cardsAll: [
-        {
-          imageSrc: require("../assets/images/dolphin_pillow.jpg"),
-          titleName: "極舒適海豚抱枕",
-          select: '極舒適海豚',
-          prodPrice: "380",
-          tag: "抱枕",
-          count: 1,
-          info: "「極舒適海豚抱枕」是您夢寐以求的抱枕。其柔軟的材質和海豚形狀設計讓您享受極致舒適，既可擁抱入眠，又可成為可愛的房間裝飾品。",
-        },
-        {
-          imageSrc: require("../assets/images/whaleshark_doll.png"),
-          titleName: "Q版鯨鯊玩偶",
-          select: 'Q版鯨鯊',
-          prodPrice: "499",
-          tag: "玩偶",
-          count: 1,
-          info: "「Q版鯨鯊玩偶」是一個極簡、迷你的鯨鯊玩偶，以可愛的卡通風格設計。這款迷你玩偶具有小巧的尺寸，適合放在口袋或書包中，成為您的愉快小夥伴。",
-        },
-        {
-          imageSrc: require("../assets/images/dolphin_doll.png"),
-          titleName: "超可愛海豚寶寶玩偶",
-          select: '超可愛海豚寶寶',
-          prodPrice: "399",
-          tag: "玩偶",
-          count: 1,
-          info: "「超可愛海豚寶寶玩偶」是一個迷人的玩偶，以小海豚寶寶的形象設計。它擁有極簡潔的設計，給人一種無比的可愛感。這款玩偶是孩子們的絕佳伴侶，也是精緻的收藏品。",
-        },
-        {
-          imageSrc: require("../assets/images/shark_doll.jpg"),
-          titleName: "愛睏a鯊鯊玩偶",
-          select: '愛睏a鯊鯊',
-          prodPrice: "499",
-          tag: "玩偶",
-          count: 1,
-          info: "「愛睏a鯊鯊玩偶」是一個可愛的鯊魚玩偶，具有獨特的睡眼設計，這使它看起來非常愛睏。這款玩偶適合成為可愛的伴侶，也是小朋友的最愛。",
-        },
-        {
-          imageSrc: require("../assets/images/shark_keyring.jpg"),
-          titleName: "QQ的鯊鯊鑰匙圈",
-          select: 'QQ的鯊鯊鑰匙圈',
-          prodPrice: "160",
-          tag: "配飾",
-          count: 1,
-          info: "「鯊鯊鑰匙圈」是一款可愛的小配件，以鯊魚形狀設計，用於保管鑰匙或裝飾包包，為日常生活增添樂趣和風格。",
-        },
-        {
-          imageSrc: require("../assets/images/Nemo_doll.jpg"),
-          titleName: "Nemo玩偶",
-          select: 'Nemo',
-          prodPrice: "299",
-          tag: "玩偶",
-          count: 1,
-          info: "「Nemo玩偶」 是根據迪士尼電影《海底總動員》中的角色Nemo而設計的玩偶。它具有明亮的橙色和黑色斑點，是一款受歡迎的玩偶，適合孩子們和電影粉絲收藏。",
-        },
-        {
-          imageSrc: require("../assets/images/sealion_doll.png"),
-          titleName: "Q版海獅玩偶",
-          select: 'Q版海獅',
-          prodPrice: "499",
-          tag: "玩偶",
-          count: 1,
-          info: "「Q版海獅玩偶」是一款迷人的迷你玩偶，以可愛的海獅形象設計。它小巧精致，適合攜帶。這個玩偶的卡通風格和生動表情使它成為收藏或贈送的理想選擇，带來快樂和活力。",
-        },
-        {
-          imageSrc: require("../assets/images/shark_doll_2.png"),
-          titleName: "Q版鯊鯊玩偶",
-          select: 'Q版鯊鯊',
-          prodPrice: "499",
-          tag: "玩偶",
-          count: 1,
-          info: "「Q版鯊鯊玩偶」是一款迷人的小型鯊鯊玩偶，以簡約卡通風格設計。這個可愛的玩偶適合作為收藏品或擺設，為您的空間增添一抹活潑和趣味。無論您是鯊魚愛好者還是尋找可愛禮物的人，都會喜歡它。",
-        },
-        {
-          imageSrc: require("../assets/images/loveing_garden_eel.png"),
-          titleName: "戀愛ing花園鰻玩偶",
-          select: '戀愛ing花園鰻',
-          prodPrice: "399",
-          tag: "玩偶",
-          count: 1,
-          info: "「戀愛ing花園鰻玩偶」是一款可愛的玩偶，呈現花園鰻魚的形象。它的簡約和迷人風格使其成為心愛者的絕佳禮物。無論是擺放在房間還是擁抱入眠，都能帶來愉悅和溫馨。",
-        },
-        {
-          imageSrc: require("../assets/images/whale_doll.jpg"),
-          titleName: "勾錐a小鯨魚玩偶",
-          select: '勾錐a小鯨魚',
-          prodPrice: "350",
-          tag: "玩偶",
-          count: 1,
-          info: "「勾錐a小鯨魚玩偶」是一款迷人的鯨魚玩偶，以卡通風格設計，擁有可愛的外觀。這款小巧玩偶適合作為伴侶或房間裝飾，為您的空間增添一份愉快和輕鬆。",
-        },
-        {
-          imageSrc: require("../assets/images/lantern_fish_doll.jpg"),
-          titleName: "貪吃燈籠魚玩偶",
-          select: '貪吃燈籠魚',
-          prodPrice: "499",
-          tag: "玩偶",
-          count: 1,
-          info: "「貪吃燈籠魚玩偶」是一款有趣的玩偶，以燈籠魚的形象製作，帶有食量大的特點。這款玩偶設計簡潔，常常以卡通風格呈現，適合作為愉快的房間裝飾品或有趣的禮物，為您帶來歡笑和輕鬆。",
-        },
-        {
-          imageSrc: require("../assets/images/pufferfish_doll.jpg"),
-          titleName: "愛睏a河豚玩偶",
-          select: '愛睏a河豚',
-          prodPrice: "499",
-          tag: "玩偶",
-          count: 1,
-          info: "「愛睏a河豚玩偶」是一個可愛的小河豚玩偶，以愛睏的表情設計而成。這款玩偶非常迷人，適合成為抱枕或可愛的房間裝飾品，為您帶來放鬆和愉快的時刻。",
-        },
-        {
-          imageSrc: require("../assets/images/octopus_doll.jpg"),
-          titleName: "老爺爺章魚玩偶",
-          select: '老爺爺章魚',
-          prodPrice: "399",
-          tag: "玩偶",
-          count: 1,
-          info: "「老爺爺章魚玩偶」是一款富有特色的章魚造型玩偶，展現了老爺爺的風度。這個玩偶帶有幽默感，適合收藏或當作獨特的禮物。其搞笑的外表和老爺爺形象為您帶來歡樂和溫馨。",
-        },
-        {
-          imageSrc: require("../assets/images/sea_turtle_doll.jpg"),
-          titleName: "勾錐a海龜玩偶",
-          select: '勾錐a海龜',
-          prodPrice: "399",
-          tag: "玩偶",
-          count: 1,
-          info: "「勾錐a海龜玩偶」是一個迷人的海龜玩偶，以簡約風格呈現。這個小巧而可愛的玩偶適合成為伴侶或可愛的房間裝飾，為您帶來愉悅和寧靜的感覺。",
-        },
-        {
-          imageSrc: require("../assets/images/killer_whale_doll.jpg"),
-          titleName: "帥氣a虎鯨玩偶",
-          select: '帥氣a虎鯨',
-          prodPrice: "499",
-          tag: "玩偶",
-          count: 1,
-          info: "「帥氣a虎鯨玩偶」是一款迷人的虎鯨造型玩偶，擁有帥氣風格。這個玩偶以卡通風格呈現，適合作為有趣的房間裝飾品或送給虎鯨愛好者的完美禮物，充滿個性和魅力。",
-        },
-        {
-          imageSrc: require("../assets/images/stingray_pillow.jpg"),
-          titleName: "極舒適魟魚抱枕",
-          select: '極舒適魟魚',
-          prodPrice: "380",
-          tag: "抱枕",
-          count: 1,
-          info: "「極舒適魟魚抱枕」，是一款柔軟舒適的抱枕，呈現出迷人的魟魚造型。它擁有絨毛材質，帶來極致的觸感和舒適度。這個抱枕不僅適合擁抱入眠，還可以成為可愛的房間裝飾，為您帶來寧靜和溫馨。",
-        },
-        {
-          imageSrc: require("../assets/images/shark_pillow2.jpg"),
-          titleName: "滿出來鯊鯊抱枕",
-          select: '滿出來鯊鯊',
-          prodPrice: "660",
-          tag: "抱枕",
-          count: 1,
-          info: "「滿出來鯊鯊抱枕」是一款極其可愛的鯊鯊造型抱枕，擁有豐滿的外觀。這個抱枕以柔軟的絨毛材質設計，為您帶來絕佳的抱擁感受，同時也是愉快的房間裝飾品，讓您感受到無盡的溫馨和歡樂。",
-        },
-        {
-          imageSrc: require("../assets/images/shark_pillow.jpg"),
-          titleName: "極舒適鯊魚抱枕",
-          select: '極舒適鯊魚',
-          prodPrice: "499",
-          tag: "抱枕",
-          count: 1,
-          info: "「極舒適鯊魚抱枕」是一款柔軟舒適的抱枕，呈現鯊魚的可愛造型。它以豐富的絨毛材質製成，提供極佳的抱擁感受。這款抱枕不僅適合擁抱入眠，還是愉快的房間裝飾品，為您帶來舒適和歡樂。",
-        },
+        // {
+        //   imageSrc: require("../assets/images/dolphin_pillow.jpg"),
+        //   titleName: "極舒適海豚抱枕",
+        //   select: '極舒適海豚',
+        //   prodPrice: "380",
+        //   tag: "抱枕",
+        //   count: 1,
+        //   info: "「極舒適海豚抱枕」是您夢寐以求的抱枕。其柔軟的材質和海豚形狀設計讓您享受極致舒適，既可擁抱入眠，又可成為可愛的房間裝飾品。",
+        // },
+        // {
+        //   imageSrc: require("../assets/images/whaleshark_doll.png"),
+        //   titleName: "Q版鯨鯊玩偶",
+        //   select: 'Q版鯨鯊',
+        //   prodPrice: "499",
+        //   tag: "玩偶",
+        //   count: 1,
+        //   info: "「Q版鯨鯊玩偶」是一個極簡、迷你的鯨鯊玩偶，以可愛的卡通風格設計。這款迷你玩偶具有小巧的尺寸，適合放在口袋或書包中，成為您的愉快小夥伴。",
+        // },
+        // {
+        //   imageSrc: require("../assets/images/dolphin_doll.png"),
+        //   titleName: "超可愛海豚寶寶玩偶",
+        //   select: '超可愛海豚寶寶',
+        //   prodPrice: "399",
+        //   tag: "玩偶",
+        //   count: 1,
+        //   info: "「超可愛海豚寶寶玩偶」是一個迷人的玩偶，以小海豚寶寶的形象設計。它擁有極簡潔的設計，給人一種無比的可愛感。這款玩偶是孩子們的絕佳伴侶，也是精緻的收藏品。",
+        // },
+        // {
+        //   imageSrc: require("../assets/images/shark_doll.jpg"),
+        //   titleName: "愛睏a鯊鯊玩偶",
+        //   select: '愛睏a鯊鯊',
+        //   prodPrice: "499",
+        //   tag: "玩偶",
+        //   count: 1,
+        //   info: "「愛睏a鯊鯊玩偶」是一個可愛的鯊魚玩偶，具有獨特的睡眼設計，這使它看起來非常愛睏。這款玩偶適合成為可愛的伴侶，也是小朋友的最愛。",
+        // },
+        // {
+        //   imageSrc: require("../assets/images/shark_keyring.jpg"),
+        //   titleName: "QQ的鯊鯊鑰匙圈",
+        //   select: 'QQ的鯊鯊鑰匙圈',
+        //   prodPrice: "160",
+        //   tag: "配飾",
+        //   count: 1,
+        //   info: "「鯊鯊鑰匙圈」是一款可愛的小配件，以鯊魚形狀設計，用於保管鑰匙或裝飾包包，為日常生活增添樂趣和風格。",
+        // },
+        // {
+        //   imageSrc: require("../assets/images/Nemo_doll.jpg"),
+        //   titleName: "Nemo玩偶",
+        //   select: 'Nemo',
+        //   prodPrice: "299",
+        //   tag: "玩偶",
+        //   count: 1,
+        //   info: "「Nemo玩偶」 是根據迪士尼電影《海底總動員》中的角色Nemo而設計的玩偶。它具有明亮的橙色和黑色斑點，是一款受歡迎的玩偶，適合孩子們和電影粉絲收藏。",
+        // },
+        // {
+        //   imageSrc: require("../assets/images/sealion_doll.png"),
+        //   titleName: "Q版海獅玩偶",
+        //   select: 'Q版海獅',
+        //   prodPrice: "499",
+        //   tag: "玩偶",
+        //   count: 1,
+        //   info: "「Q版海獅玩偶」是一款迷人的迷你玩偶，以可愛的海獅形象設計。它小巧精致，適合攜帶。這個玩偶的卡通風格和生動表情使它成為收藏或贈送的理想選擇，带來快樂和活力。",
+        // },
+        // {
+        //   imageSrc: require("../assets/images/shark_doll_2.png"),
+        //   titleName: "Q版鯊鯊玩偶",
+        //   select: 'Q版鯊鯊',
+        //   prodPrice: "499",
+        //   tag: "玩偶",
+        //   count: 1,
+        //   info: "「Q版鯊鯊玩偶」是一款迷人的小型鯊鯊玩偶，以簡約卡通風格設計。這個可愛的玩偶適合作為收藏品或擺設，為您的空間增添一抹活潑和趣味。無論您是鯊魚愛好者還是尋找可愛禮物的人，都會喜歡它。",
+        // },
+        // {
+        //   imageSrc: require("../assets/images/loveing_garden_eel.png"),
+        //   titleName: "戀愛ing花園鰻玩偶",
+        //   select: '戀愛ing花園鰻',
+        //   prodPrice: "399",
+        //   tag: "玩偶",
+        //   count: 1,
+        //   info: "「戀愛ing花園鰻玩偶」是一款可愛的玩偶，呈現花園鰻魚的形象。它的簡約和迷人風格使其成為心愛者的絕佳禮物。無論是擺放在房間還是擁抱入眠，都能帶來愉悅和溫馨。",
+        // },
+        // {
+        //   imageSrc: require("../assets/images/whale_doll.jpg"),
+        //   titleName: "勾錐a小鯨魚玩偶",
+        //   select: '勾錐a小鯨魚',
+        //   prodPrice: "350",
+        //   tag: "玩偶",
+        //   count: 1,
+        //   info: "「勾錐a小鯨魚玩偶」是一款迷人的鯨魚玩偶，以卡通風格設計，擁有可愛的外觀。這款小巧玩偶適合作為伴侶或房間裝飾，為您的空間增添一份愉快和輕鬆。",
+        // },
+        // {
+        //   imageSrc: require("../assets/images/lantern_fish_doll.jpg"),
+        //   titleName: "貪吃燈籠魚玩偶",
+        //   select: '貪吃燈籠魚',
+        //   prodPrice: "499",
+        //   tag: "玩偶",
+        //   count: 1,
+        //   info: "「貪吃燈籠魚玩偶」是一款有趣的玩偶，以燈籠魚的形象製作，帶有食量大的特點。這款玩偶設計簡潔，常常以卡通風格呈現，適合作為愉快的房間裝飾品或有趣的禮物，為您帶來歡笑和輕鬆。",
+        // },
+        // {
+        //   imageSrc: require("../assets/images/pufferfish_doll.jpg"),
+        //   titleName: "愛睏a河豚玩偶",
+        //   select: '愛睏a河豚',
+        //   prodPrice: "499",
+        //   tag: "玩偶",
+        //   count: 1,
+        //   info: "「愛睏a河豚玩偶」是一個可愛的小河豚玩偶，以愛睏的表情設計而成。這款玩偶非常迷人，適合成為抱枕或可愛的房間裝飾品，為您帶來放鬆和愉快的時刻。",
+        // },
+        // {
+        //   imageSrc: require("../assets/images/octopus_doll.jpg"),
+        //   titleName: "老爺爺章魚玩偶",
+        //   select: '老爺爺章魚',
+        //   prodPrice: "399",
+        //   tag: "玩偶",
+        //   count: 1,
+        //   info: "「老爺爺章魚玩偶」是一款富有特色的章魚造型玩偶，展現了老爺爺的風度。這個玩偶帶有幽默感，適合收藏或當作獨特的禮物。其搞笑的外表和老爺爺形象為您帶來歡樂和溫馨。",
+        // },
+        // {
+        //   imageSrc: require("../assets/images/sea_turtle_doll.jpg"),
+        //   titleName: "勾錐a海龜玩偶",
+        //   select: '勾錐a海龜',
+        //   prodPrice: "399",
+        //   tag: "玩偶",
+        //   count: 1,
+        //   info: "「勾錐a海龜玩偶」是一個迷人的海龜玩偶，以簡約風格呈現。這個小巧而可愛的玩偶適合成為伴侶或可愛的房間裝飾，為您帶來愉悅和寧靜的感覺。",
+        // },
+        // {
+        //   imageSrc: require("../assets/images/killer_whale_doll.jpg"),
+        //   titleName: "帥氣a虎鯨玩偶",
+        //   select: '帥氣a虎鯨',
+        //   prodPrice: "499",
+        //   tag: "玩偶",
+        //   count: 1,
+        //   info: "「帥氣a虎鯨玩偶」是一款迷人的虎鯨造型玩偶，擁有帥氣風格。這個玩偶以卡通風格呈現，適合作為有趣的房間裝飾品或送給虎鯨愛好者的完美禮物，充滿個性和魅力。",
+        // },
+        // {
+        //   imageSrc: require("../assets/images/stingray_pillow.jpg"),
+        //   titleName: "極舒適魟魚抱枕",
+        //   select: '極舒適魟魚',
+        //   prodPrice: "380",
+        //   tag: "抱枕",
+        //   count: 1,
+        //   info: "「極舒適魟魚抱枕」，是一款柔軟舒適的抱枕，呈現出迷人的魟魚造型。它擁有絨毛材質，帶來極致的觸感和舒適度。這個抱枕不僅適合擁抱入眠，還可以成為可愛的房間裝飾，為您帶來寧靜和溫馨。",
+        // },
+        // {
+        //   imageSrc: require("../assets/images/shark_pillow2.jpg"),
+        //   titleName: "滿出來鯊鯊抱枕",
+        //   select: '滿出來鯊鯊',
+        //   prodPrice: "660",
+        //   tag: "抱枕",
+        //   count: 1,
+        //   info: "「滿出來鯊鯊抱枕」是一款極其可愛的鯊鯊造型抱枕，擁有豐滿的外觀。這個抱枕以柔軟的絨毛材質設計，為您帶來絕佳的抱擁感受，同時也是愉快的房間裝飾品，讓您感受到無盡的溫馨和歡樂。",
+        // },
+        // {
+        //   imageSrc: require("../assets/images/shark_pillow.jpg"),
+        //   titleName: "極舒適鯊魚抱枕",
+        //   select: '極舒適鯊魚',
+        //   prodPrice: "499",
+        //   tag: "抱枕",
+        //   count: 1,
+        //   info: "「極舒適鯊魚抱枕」是一款柔軟舒適的抱枕，呈現鯊魚的可愛造型。它以豐富的絨毛材質製成，提供極佳的抱擁感受。這款抱枕不僅適合擁抱入眠，還是愉快的房間裝飾品，為您帶來舒適和歡樂。",
+        // },
       ],
       chooseItem: [],
       pageSize: 8,
@@ -255,21 +256,35 @@ export default {
       showPage: true,
     };
   },
-  mounted() {
-    this.chooseItem = [...this.cardsAll];
-    this.cardsAll.sort((a, b) => {
-      return parseInt(a.prodPrice) - parseInt(b.prodPrice);
-    });
-    this.chooseItem2 = this.cardsAll;
-    this.chooseItem = this.chooseItem2.slice(0, this.pageSize);
-    for (let i = 0; i < this.chooseItem2.length; i++) {
-      this.keepHeartArr.push(true);
+  async mounted() {
+    try {
+      // 非同步請求數據
+      const response = await fetch("http://localhost/dida_project/public/php/productSelect.php");
+      const myJson = await response.json();
+      for (let i = 0; i < myJson.length; i++) {
+        myJson[i].count = 1;
+      }
+      this.cardsAll = myJson.filter(item => item.prod_listed !== '0');
+
+      //加載後
+      this.chooseItem = [...this.cardsAll];
+      this.cardsAll.sort((a, b) => {
+        return parseInt(a.prodPrice) - parseInt(b.prodPrice);
+      });
+      this.chooseItem2 = this.cardsAll;
+      this.chooseItem = this.chooseItem2.slice(0, this.pageSize);
+      for (let i = 0; i < this.chooseItem2.length; i++) {
+        this.keepHeartArr.push(true);
+      }
+      for (let i = 0; i < this.$store.state.favoList.length; i++) {
+        this.keepHeartArr[this.$store.state.favoList[i].favIndex] = false;
+      }
+      this.getClass(this.selectOption);
+      this.getPrice(this.getPriceOption);
     }
-    for (let i = 0; i < this.$store.state.favoList.length; i++) {
-      this.keepHeartArr[this.$store.state.favoList[i].favIndex] = false;
+    catch (error) {
+      console.error("数据加载失败：", error);
     }
-    this.getClass(this.selectOption);
-    this.getPrice(this.getPriceOption);
   },
   props: {
     msg1: [String, Number],
@@ -422,7 +437,7 @@ export default {
         this.chooseItem2 = this.cardsAll;
       } else {
         this.chooseItem2 = this.cardsAll.filter(
-          (item) => item.tag === data
+          (item) => item.prod_category === data
         );
       }
       this.showPage = false;
@@ -436,10 +451,10 @@ export default {
     getPrice(data) {
       this.getPriceOption = data;
       if (data === "由低到高") {
-        this.chooseItem2.sort((a, b) => parseInt(a.prodPrice) - parseInt(b.prodPrice));
+        this.chooseItem2.sort((a, b) => parseInt(a.prod_price) - parseInt(b.prod_price));
         this.currentPage = 1;
       } else if (data === "由高到低") {
-        this.chooseItem2.sort((a, b) => parseInt(b.prodPrice) - parseInt(a.prodPrice));
+        this.chooseItem2.sort((a, b) => parseInt(b.prod_price) - parseInt(a.prod_price));
         this.getPage = 1;
       }
       this.showPage = false;
@@ -452,7 +467,7 @@ export default {
     searchClick(data) {
       const searchInput = data.toUpperCase();
       const res = this.cardsAll.filter((i) => {
-        const search_content = i.titleName.toUpperCase();
+        const search_content = i.prod_name.toUpperCase();
         return search_content.includes(searchInput);
       });
       this.chooseItem2 = res;
