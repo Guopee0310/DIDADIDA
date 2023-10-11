@@ -20,17 +20,17 @@
           <div>狀態</div>
         </div>
         <div v-for="(i, index) in prodOrder" class="singleOrderTable">
-          <div>{{ i.orderNumber }}</div>
+          <div>{{ i.ord_id }}</div>
           <div></div>
-          <div>{{ i.memberAccount }}</div>
+          <div>{{ i.mem_id }}</div>
           <div>
             <!-- <div v-for="j in i.prodName">{{ j }}</div> -->
             {{ i.prodName }}
           </div>
 
           <div>{{ i.prodCount }}</div>
-          <div>{{ i.orderTime }}</div>
-          <div>{{ i.orderState }}</div>
+          <div>{{ i.ord_date }}</div>
+          <div>{{ i.ord_state }}</div>
 
           <div class="updateOrderBtn">
             <div class="update" @click="updateOrder(index, $event, i)">
@@ -47,8 +47,8 @@
           <option value="訂單編號">訂單編號</option>
           <option value="會員信箱">會員信箱</option>
         </select>
-        <input type="text" placeholder="請輸入訂單編號" v-model="ChooseOrder" />
-        <div @click="ChooseNameOrOrder">搜尋</div>
+        <input type="text" placeholder="請輸入訂單編號" v-model="chooseOrder" />
+        <div @click="chooseNameOrOrder">搜尋</div>
       </div>
       <div class="ticketTableAll">
         <div class="ticketTableTitleAll">
@@ -158,7 +158,7 @@ export default {
       })
 
       .then((myJson) => {
-        this.ticketOrderSlice = this.ticketOrder = myJson;
+        this.orderSlice = this.prodOrder = myJson;
       });
 
     ////fetch tickMg.php
@@ -188,14 +188,14 @@ export default {
       if (this.prodChooseName == "訂單編號") {
         this.prodChooseOrder = this.prodChooseOrder.toUpperCase();
         let pres = this.prodOrder.filter((item) => {
-          let ans = item.tic_id;
+          let ans = item.ord_id;
           return ans.includes(this.prodChooseOrder);
         });
         this.prodOrderSlice = pres;
-      } else if (this.prodChooseName == "會員信箱") {
+      } else if (this.prodChooseName == "會員帳號") {
         this.prodChooseOrder = this.prodChooseOrder.toUpperCase();
         let pres = this.prodOrder.filter((item) => {
-          let ans = item.mem_email.toUpperCase();
+          let ans = item.mem_id.toUpperCase();
           return ans.includes(this.prodChooseOrder);
         });
         this.orderSlice = pres;
