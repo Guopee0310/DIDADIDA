@@ -1,9 +1,20 @@
 <template>
   <div class="tick_order_main">
     <div class="tick_area">
+      <select v-model="selectOrder">
+        <option value="">請選擇</option>
+        <option
+          :value="i.uniqid_num"
+          v-for="(i, index) in ticketOrderSlice"
+          class="orderNumTitle"
+        >
+          {{ i.uniqid_num }}
+        </option>
+      </select>
+
       <div
         class="tick_order_group"
-        v-for="(tick, index) in tickOrder"
+        v-for="(tick, index) in filteredTickOrder"
         :key="tick.tickImg"
         :class="{
           tick_order_group_used:
@@ -65,8 +76,10 @@ export default {
   },
   data() {
     return {
+      selectOrder: "請選擇",
       grayBkc: false,
       activeIndexes: [],
+      ticketOrderSlice: "",
       tickOrder: [
         // {
         //     tickImg: require("../assets/images/dolphin_pillow.jpg"),
@@ -118,7 +131,19 @@ export default {
 
         // 将处理后的数据保存到组件的 tickOrder 属性
         this.tickOrder = data;
+        this.ticketOrderSlice = [...this.tickOrder]; // 复制原始数组
 
+        for (let i = 0; i < this.ticketOrderSlice.length; i++) {
+          for (let j = i + 1; j < this.ticketOrderSlice.length; j++) {
+            if (
+              this.ticketOrderSlice[i].uniqid_num ===
+              this.ticketOrderSlice[j].uniqid_num
+            ) {
+              this.ticketOrderSlice.splice(j, 1); // 如果找到重复项，则删除
+              j--; // 减少索引以补偿删除元素
+            }
+          }
+        }
         // 继续处理数据，设置 tic_late 属性
         const currentDate = new Date();
         this.tickOrder.forEach((item) => {
@@ -151,6 +176,16 @@ export default {
       });
   },
   computed: {
+    filteredTickOrder() {
+      if (!this.selectOrder) {
+        return this.tickOrder; // 当 selectOrder 为空时返回所有 tickOrder
+      } else {
+        return this.tickOrder.filter(
+          (tick) => tick.uniqid_num === this.selectOrder
+        );
+      }
+    },
+
     activeList(idx) {
       return this.$store.state.activeIndexes[idx];
     },
@@ -194,6 +229,18 @@ export default {
     align-items: center;
     justify-content: flex-start;
     overflow-y: auto;
+
+    .orderNumBox {
+      display: flex;
+      justify-content: space-around;
+      flex-direction: row;
+      background-color: gold;
+      width: 100%;
+      .orderNumTitle {
+        border: 1px black solid;
+        cursor: pointer;
+      }
+    }
 
     &::-webkit-scrollbar {
       width: 10px;
