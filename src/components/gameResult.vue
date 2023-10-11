@@ -63,4 +63,33 @@ export default {
     right: 20px;
   }
 }
+@media screen and (max-width: 414px) {
+    .resultAll {
+      flex-direction: row; /* 在小屏幕下保持横向排列 */
+      
+      width: 100%;
+    }
+
+    .imgDiv {
+      display: none;
+    }
+
+    .finalAnsAll {
+      margin:auto  0;
+      flex-direction: row;
+    .ansTitle{
+      width: 180px;
+    }
+    .getPoint{
+      width: 200px;
+      margin-right: 20px;
+    }
+    .toPoint {
+      position: static; /* 在小屏幕下取消绝对定位 */
+      margin-top: 10px;
+      margin: auto;
+    }
+  }
+  }
+  
 </style>
