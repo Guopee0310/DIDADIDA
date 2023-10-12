@@ -33,6 +33,7 @@ export default createStore({
     APIurl: "http://localhost/dida_project/public/php/",
     checkLogin: false,
     memberEmail: "",
+    memberId: "",
   },
 
   // 類似vue檔裡面的computed

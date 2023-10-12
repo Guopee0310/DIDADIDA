@@ -1,18 +1,22 @@
 <template>
   <div class="favorites_list_main">
     <div class="favorites_list_area">
-      <div class="favorites_list_group" v-for="(favo, index) in favoList" :key="favo.favoImg">
-        <span class="close" @click="delSingleItem(index)">&times;</span>
+      <div
+        class="favorites_list_group"
+        v-for="(favo, index) in favAPI"
+        :key="favo.prod_img"
+      >
+        <span class="close" @click="delSingleItem(favo, index)">&times;</span>
         <div class="favorites_list_img">
-          <img :src="favo.favoImg" alt="" />
+          <img :src="'../all_images/product/' + favo.prod_img" alt="" />
         </div>
         <div class="favorites_list_info">
           <div>
-            <h5>{{ favo.favoName }}</h5>
-            <p>NT {{ favo.favoPrice }}</p>
+            <h5>{{ favo.prod_name }}</h5>
+            <p>NT {{ favo.prod_price }}</p>
           </div>
           <div>
-            <p>{{ favo.favoIntroduction }}</p>
+            <p>{{ favo.prod_info }}</p>
           </div>
         </div>
       </div>
@@ -29,17 +33,40 @@ export default {
   },
   data() {
     return {
-      favoList: [
-      ],
+      favoList: [],
+      favAPI: [],
     };
   },
   mounted() {
-    this.favoList = this.$store.state.favoList;
-    console.log(this.favoList);
+    fetch(`${this.$store.state.APIurl}prod_cardFavSelect.php`)
+      .then(function (response) {
+        return response.json();
+      })
+      .then((data) => {
+        this.favAPI = [];
+        if (!this.$store.state.userName) {
+          return;
+        }
+        for (let i = 0; i < data.length; i++) {
+          if (this.$store.state.memberId == data[i].mem_id) {
+            this.favAPI.push(data[i]);
+          }
+        }
+        console.log(this.favAPI);
+      });
   },
   methods: {
-    delSingleItem(idx) {
-      this.favoList.splice(idx, 1);
+    delSingleItem(favo, idx) {
+      this.favAPI.splice(idx, 1);
+      let formData = new FormData();
+      let prod_id = favo.prod_id;
+      formData.append("mem_id", this.$store.state.memberId);
+      formData.append("prod_id", prod_id);
+      fetch(`${this.$store.state.APIurl}prod_cardFavDelete.php`, {
+        method: "POST",
+
+        body: formData,
+      });
       this.$store.commit("removeFavoItem", idx);
     },
   },
@@ -53,7 +80,7 @@ export default {
   border: 0;
   border-radius: 15px;
   margin: 0 auto;
-  background-color: map-get($colors, 'memarea');
+  background-color: map-get($colors, "memarea");
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -137,7 +164,6 @@ export default {
 }
 
 @media screen and (max-width: 414px) {
-
   .favorites_list_area {
     width: 330px;
     height: 720px;

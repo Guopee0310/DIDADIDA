@@ -240,6 +240,7 @@ export default {
           this.signInAPI = data;
           // this.$store.state.userName = this.signInAPI[0].mem_name;
           this.$store.commit("setUserName", data[0].mem_name);
+          this.$store.state.memberId = data[0].mem_id;
           this.$store.state.memberEmail = this.signInEmail;
           console.log("this.$store.state.userName", this.$store.state.userName);
           console.log(this.signInAPI);

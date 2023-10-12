@@ -1,15 +1,23 @@
 <template>
   <div class="select_btn">
-    <prodSelect @transferClass="getClass" @transferPrice="getPrice" @transferSearch="searchClick"></prodSelect>
+    <prodSelect
+      @transferClass="getClass"
+      @transferPrice="getPrice"
+      @transferSearch="searchClick"
+    ></prodSelect>
   </div>
   <div class="card" v-for="(i, index) in chooseItem" :key="i.imageSrc">
     <div class="heart">
-      <heart @change-heart="changeHeart($event, i, index)" :keepLove="keepHeartArr[index]"
-        :is-active="favList.findIndex((v) => v.favoName === i.prod_name) > -1"></heart>
+      <heart
+        @change-heart="changeHeart($event, i, index)"
+        :keepLove="keepHeartArr[index]"
+        :is-active="favList.findIndex((v) => v.favoName === i.prod_name) > -1"
+      ></heart>
     </div>
     <div class="pic">
-      <a href="#" @click.prevent="showProductDetails(i)"><img :src="'../all_images/product/' + i.prod_img"
-          :alt="i.prod_img" /></a>
+      <a href="#" @click.prevent="showProductDetails(i)"
+        ><img :src="'../all_images/product/' + i.prod_img" :alt="i.prod_img"
+      /></a>
     </div>
 
     <div class="name">
@@ -26,9 +34,13 @@
           <input type="button" value="+" @click="i.count++" />
         </div>
         <div class="buy">
-          <i class="fa-solid fa-cart-shopping" style="color: #9fbdce" @click.prevent="
-            pushAndTogglePopup(i.imageSrc, i.titleName, i.count, i.prodPrice)
-            "></i>
+          <i
+            class="fa-solid fa-cart-shopping"
+            style="color: #9fbdce"
+            @click.prevent="
+              pushAndTogglePopup(i.imageSrc, i.titleName, i.count, i.prodPrice)
+            "
+          ></i>
           <!-- pushInShoppingCart(
                   i.imageSrc,
                   i.titleName,
@@ -65,7 +77,12 @@
     </div>
   </transition>
   <!-- ↑↑↑ 商品彈窗 ↑↑↑ -->
-  <Page :total="chooseItem2.length" @on-change="updatePage" class="changepage" v-if="showPage" />
+  <Page
+    :total="chooseItem2.length"
+    @on-change="updatePage"
+    class="changepage"
+    v-if="showPage"
+  />
 </template>
 
 <script>
@@ -77,6 +94,7 @@ export default {
   name: "son",
   data() {
     return {
+      mountedShowLove: [],
       cardsAll: [
         // {
         //   imageSrc: require("../assets/images/dolphin_pillow.jpg"),
@@ -256,15 +274,35 @@ export default {
       showPage: true,
     };
   },
+  created() {
+    this.mountedShowLove = [];
+    fetch(`${this.$store.state.APIurl}prod_cardFavSelect.php`)
+      .then(function (response) {
+        return response.json();
+      })
+      .then((data) => {
+        if (!this.$store.state.userName) {
+          return;
+        }
+
+        for (let i = 0; i < data.length; i++) {
+          if (this.$store.state.memberId == data[i].mem_id) {
+            this.mountedShowLove.push(data[i].prod_id);
+          }
+        }
+      });
+  },
   async mounted() {
     try {
       // 非同步請求數據
-      const response = await fetch("http://localhost/dida_project/public/php/productSelect.php");
+      const response = await fetch(
+        "http://localhost/dida_project/public/php/productSelect.php"
+      );
       const myJson = await response.json();
       for (let i = 0; i < myJson.length; i++) {
         myJson[i].count = 1;
       }
-      this.cardsAll = myJson.filter(item => item.prod_listed !== '0');
+      this.cardsAll = myJson.filter((item) => item.prod_listed !== "0");
 
       //加載後
       this.chooseItem = [...this.cardsAll];
@@ -281,8 +319,7 @@ export default {
       }
       this.getClass(this.selectOption);
       this.getPrice(this.getPriceOption);
-    }
-    catch (error) {
+    } catch (error) {
       console.error("数据加载失败：", error);
     }
   },
@@ -451,10 +488,14 @@ export default {
     getPrice(data) {
       this.getPriceOption = data;
       if (data === "由低到高") {
-        this.chooseItem2.sort((a, b) => parseInt(a.prod_price) - parseInt(b.prod_price));
+        this.chooseItem2.sort(
+          (a, b) => parseInt(a.prod_price) - parseInt(b.prod_price)
+        );
         this.currentPage = 1;
       } else if (data === "由高到低") {
-        this.chooseItem2.sort((a, b) => parseInt(b.prod_price) - parseInt(a.prod_price));
+        this.chooseItem2.sort(
+          (a, b) => parseInt(b.prod_price) - parseInt(a.prod_price)
+        );
         this.getPage = 1;
       }
       this.showPage = false;
@@ -488,8 +529,19 @@ export default {
       const favListIndex = this.favList.findIndex(
         (v) => v.favoName === i.prod_name
       );
+
       if (favListIndex > -1) {
         this.$store.state.favoList.splice(favListIndex, 1);
+        this.mountedShowLove();
+        let formData = new FormData();
+        let prod_id = i.prod_id;
+        formData.append("mem_id", this.$store.state.memberId);
+        formData.append("prod_id", prod_id);
+        fetch(`${this.$store.state.APIurl}prod_cardFavDelete.php`, {
+          method: "POST",
+
+          body: formData,
+        });
       } else {
         this.$store.state.favoList.push({
           favoImg: i.prod_img,
@@ -498,6 +550,16 @@ export default {
           favoIntroduction: i.prod_info,
           favIndex: index,
         });
+        let formData = new FormData();
+        let prod_id = i.prod_id;
+        formData.append("mem_id", this.$store.state.memberId);
+        formData.append("prod_id", prod_id);
+        fetch(`${this.$store.state.APIurl}prod_cardFavInsert.php`, {
+          method: "POST",
+
+          body: formData,
+        });
+        // this.$store.state.memberId
       }
 
       // for (let j = 0; j < this.$store.state.favoList.length; j++) {
@@ -794,8 +856,6 @@ export default {
   margin-bottom: 20px;
 }
 
-
-
 .modal {
   position: fixed;
   top: 0;
@@ -836,7 +896,7 @@ export default {
   .close {
     width: 45px;
     height: 45px;
-    background-color: #93B7CD;
+    background-color: #93b7cd;
     border-radius: 50%;
     text-align: center;
     cursor: pointer;
@@ -894,7 +954,7 @@ export default {
       font-size: map-get($fontSizes, "p");
     }
 
-    >p {
+    > p {
       margin-top: 30px;
       line-height: 30px;
     }
@@ -978,7 +1038,7 @@ export default {
       width: 80%;
       margin-top: 10px;
 
-      >p {
+      > p {
         margin-top: 10px;
         line-height: 30px;
       }
