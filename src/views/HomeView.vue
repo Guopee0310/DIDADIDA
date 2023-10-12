@@ -19,9 +19,11 @@
           </p>
           <lightCircle>
             <template v-slot:circle>
-              <div class="open">
+              <div class="open"> 
+               
                 <span>{{ $t("營業時間") }}</span>
-                <span>09:00-17:00</span>
+                <span id="dropdrop">09:00-17:00</span>
+                 <!-- 這個id是為了換頁滑動 -->
                 <svg x="0px" y="0px" width="200px" height="15px" viewBox="0 0 399.6 15.9">
                   <polyline class="op_line"
                     points="0.1,5.5 58,15.4 118.4,5.5 189.2,5.5 258.7,10.4 368.3,0.5 399.5,7.9 " />
@@ -34,7 +36,7 @@
         </div>
 
         <!-- 今日入園人數 ------------------------------------------ -->
-        <div class="entrance">
+        <div class="entrance" >
           <h3Title>
             <template v-slot:h3>
               <h3>{{ $t("今日入園人數") }}</h3>

@@ -610,4 +610,11 @@ input:focus {
   height: 40px;
   width: 40px;
 }
+
+@media screen and (max-width: 414px){
+
+  .container{
+    width: 90%;
+  }
+}
 </style>
