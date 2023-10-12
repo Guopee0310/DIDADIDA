@@ -29,14 +29,14 @@
         </div>
       </div>
       <div class="ord_info">
-        <p>下單金額 : NT 1,800</p>
+        <!-- <p>下單金額 : NT 1,800</p>
         <p>運費 : NT 60</p>
         <p>使用紅利點數 : 0 點</p>
-        <p>總金額 : NT 1860</p>
+        <p>總金額 : NT 1860</p> -->
       </div>
-      <div class="close_btn">
+      <!-- <div class="close_btn">
         <button>關閉</button>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>

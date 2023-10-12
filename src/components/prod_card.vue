@@ -38,7 +38,7 @@
             class="fa-solid fa-cart-shopping"
             style="color: #9fbdce"
             @click.prevent="
-              pushAndTogglePopup(i.imageSrc, i.titleName, i.count, i.prodPrice)
+              pushAndTogglePopup(i.prod_img, i.prod_name, i.count, i.prod_price)
             "
           ></i>
           <!-- pushInShoppingCart(
