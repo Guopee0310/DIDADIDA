@@ -15,7 +15,15 @@
           :disabled="i[4]"
           @blur="getQuestion(index)"
         /> -->
-        <textarea name="" id="" cols="20" rows="2" v-model="i.qa_que" :disabled="i.isDis" class="questionarea">
+        <textarea
+          name=""
+          id=""
+          cols="20"
+          rows="2"
+          v-model="i.qa_que"
+          :disabled="i.isDis"
+          class="questionarea"
+        >
         </textarea>
 
         <select name="" id="" :disabled="i.isDis" v-model="i.qa_ans">
@@ -46,14 +54,36 @@
       <div class="singleRow" v-for="(i, index) in labaAPI" :key="index">
         <div>
           <div class="picBox">
-            <img :src="i.game_img" alt="" :ref="'imagePreview' + index" class="choosePic" />
+            <img
+              :src="i.game_img"
+              alt=""
+              :ref="'imagePreview' + index"
+              class="choosePic"
+            />
           </div>
-          <input type="file" @change="pushImg($event, index)" :disabled="i.isDis" :ref="'fileInput' + index" />
+          <input
+            type="file"
+            @change="pushImg($event, index)"
+            :disabled="i.isDis"
+            :ref="'fileInput' + index"
+          />
         </div>
         <div class="inputAll">
-          <input type="text" placeholder="標題" :disabled="i.isDis" v-model="i.game_title" />
-          <textarea name="" id="" cols="30" rows="5" placeholder="內容" :disabled="i.isDis"
-            v-model="i.game_text"></textarea>
+          <input
+            type="text"
+            placeholder="標題"
+            :disabled="i.isDis"
+            v-model="i.game_title"
+          />
+          <textarea
+            name=""
+            id=""
+            cols="30"
+            rows="5"
+            placeholder="內容"
+            :disabled="i.isDis"
+            v-model="i.game_text"
+          ></textarea>
         </div>
         <select name="" id="" :disabled="i.isDis" v-model="i.qa_bonus">
           <option value="5">5</option>
@@ -157,7 +187,7 @@ export default {
   },
   computed: {},
   mounted() {
-    fetch("http://localhost/dida_project/public/php/quiz.php")
+    fetch(`${this.$store.state.APIurl}quiz.php`)
       .then(function (response) {
         return response.json();
       })
@@ -178,14 +208,16 @@ export default {
       this.cloneLabashelf.push(this.labaAll[i][5]);
       this.cloneLabaPoint.push(this.labaAll[i][1]);
     }
-    fetch("http://localhost/dida_project/public/php/labaSelect.php")
+    fetch(`${this.$store.state.APIurl}labaSelect.php`)
       .then(function (response) {
         return response.json();
       })
       .then((myJson) => {
         // 修改API數據中的圖像路徑
         for (let i = 0; i < myJson.length; i++) {
-          myJson[i].game_img = require(`../../../public/all_images/laba/${myJson[i].game_img}`);
+          myJson[
+            i
+          ].game_img = require(`../../../public/all_images/laba/${myJson[i].game_img}`);
           myJson[i].isDis = true;
         }
         // 將修改後的數據賦值給Vue組件中的數據
@@ -301,7 +333,7 @@ export default {
       formData.append("qa_que", qa_que);
       formData.append("qa_ans", qa_ans);
       formData.append("qa_bonus", qa_bonus);
-      fetch("http://localhost/dida_project/public/php/quizInsert.php", {
+      fetch(`${this.$store.state.APIurl}quizInsert.php`, {
         method: "post",
         body: formData,
       }).then((res) => res.json());
@@ -320,7 +352,7 @@ export default {
 
       formData.append("qa_no", qa_no);
 
-      fetch("http://localhost/dida_project/public/php/quizDelete.php", {
+      fetch(`${this.$store.state.APIurl}quizDelete.php`, {
         method: "post",
         body: formData,
       }).then((res) => res.json());
@@ -351,7 +383,7 @@ export default {
         formData.append("qa_que", qa_que);
         formData.append("qa_ans", qa_ans);
         formData.append("qa_bonus", qa_bonus);
-        fetch("http://localhost/dida_project/public/php/quiz.php", {
+        fetch(`${this.$store.state.APIurl}quiz.php`, {
           method: "post",
           body: formData,
         }).then((res) => res.json());

@@ -161,7 +161,8 @@ export default {
 
         formData.append("mem_email", mem_email);
         formData.append("checkEmail", 1);
-        fetch("http://localhost/dida_project/public/php/memberInsert.php", {
+        // fetch(`${this.$store.state.APIurl}labaSelect.php`);
+        fetch(`${this.$store.state.APIurl}memberInsert.php`, {
           method: "post",
           body: formData,
         })
@@ -184,13 +185,10 @@ export default {
               formData.append("mem_name", mem_name);
               formData.append("mem_psw", mem_psw);
 
-              fetch(
-                "http://localhost/dida_project/public/php/memberInsert.php",
-                {
-                  method: "post",
-                  body: formData,
-                }
-              ).then((res) => {
+              fetch(`${this.$store.state.APIurl}memberInsert.php`, {
+                method: "post",
+                body: formData,
+              }).then((res) => {
                 return res.json();
               });
 

@@ -171,7 +171,7 @@ export default {
   },
 
   mounted() {
-    fetch("http://localhost/dida_project/public/php/closeDateSelect.php")
+    fetch(`${this.$store.state.APIurl}closeDateSelect.php`)
       .then(function (response) {
         return response.json();
       })
@@ -181,7 +181,7 @@ export default {
           this.disabledDateRanges.push(data[i].close_date);
         }
       });
-    fetch("http://localhost/dida_project/public/php/ticketMg.php") //第一步
+    fetch(`${this.$store.state.APIurl}ticketMg.php`) //第一步
       // fetch(`${this.$store.state.APIurl}helperMg.php`)
       //this.$store.state.APIurl
       .then(function (response) {
@@ -380,7 +380,7 @@ export default {
         formData.append("tic_name", tic_name);
         formData.append("tic_info", tic_info);
         formData.append("tic_price", tic_price);
-        fetch("http://localhost/dida_project/public/php/ticketUpdate.php", {
+        fetch(`${this.$store.state.APIurl}ticketUpdate.php`, {
           method: "post",
           body: formData,
         }).then((res) => res.json());

@@ -116,7 +116,8 @@ export default {
     //     this.helperText = await rsp.json();
     //   }
     // );
-    fetch("http://localhost/dida_project/public/php/helperMg.php")
+    fetch(`${this.$store.state.APIurl}helperMg.php`)
+      // fetch("http://localhost/dida_project/public/php/helperMg.php")
       .then(function (response) {
         return response.json();
       })

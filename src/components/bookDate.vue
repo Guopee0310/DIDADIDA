@@ -90,7 +90,8 @@ export default {
     },
   },
   mounted() {
-    fetch("http://localhost/dida_project/public/php/closeDateSelect.php")
+    fetch(`${this.$store.state.APIurl}closeDateSelect.php`)
+      // fetch("http://localhost/dida_project/public/php/closeDateSelect.php")
       .then(function (response) {
         return response.json();
       })
@@ -105,7 +106,8 @@ export default {
         }
         console.log(this.disabledDateRanges);
       });
-    fetch("http://localhost/dida_project/public/php/ticketMg.php") //第一步
+    fetch(`${this.$store.state.APIurl}ticketMg.php`)
+      // fetch("http://localhost/dida_project/public/php/ticketMg.php") //第一步
       // fetch(`${this.$store.state.APIurl}helperMg.php`)
       //this.$store.state.APIurl
       .then(function (response) {
