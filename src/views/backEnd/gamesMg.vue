@@ -215,9 +215,7 @@ export default {
       .then((myJson) => {
         // 修改API數據中的圖像路徑
         for (let i = 0; i < myJson.length; i++) {
-          myJson[
-            i
-          ].game_img = require(`../../../public/all_images/laba/${myJson[i].game_img}`);
+          myJson[i].game_img = `/all_images/laba/${myJson[i].game_img}`;
           myJson[i].isDis = true;
         }
         // 將修改後的數據賦值給Vue組件中的數據
