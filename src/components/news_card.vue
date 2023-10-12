@@ -1,6 +1,10 @@
 <template>
   <div class="select_btn">
-    <newsSelect @transferClass="filterNewsByTag" @transfertime="filterNewsByTime" @transferSearch="searchClick">
+    <newsSelect
+      @transferClass="filterNewsByTag"
+      @transfertime="filterNewsByTime"
+      @transferSearch="searchClick"
+    >
     </newsSelect>
   </div>
   <div class="card" v-for="(item, index) in displayedNews" :key="index">
@@ -21,7 +25,12 @@
       </div>
     </a>
   </div>
-  <Page class="page" :total="filteredNews.length" @on-change="updatePage" v-if="showPage" />
+  <Page
+    class="page"
+    :total="filteredNews.length"
+    @on-change="updatePage"
+    v-if="showPage"
+  />
 </template>
 
 <script>
@@ -137,15 +146,15 @@ export default {
   async mounted() {
     try {
       // 非同步請求數據
-      const response = await fetch("http://localhost/dida_project/public/php/newsSelect.php");
+      const response = await fetch(`${this.$store.state.APIurl}newsSelect.php`);
       const myJson = await response.json();
-      this.news_content = myJson.filter(item => item.news_state !== '0');
+      this.news_content = myJson.filter((item) => item.news_state !== "0");
 
       // 数据加载完成后进行筛选操作
       this.filterNewsByTag(this.tagOption);
       this.filterNewsByTime(this.timeOption);
       this.updatePage(1); // 触发一次分页更新，显示第一页的数据
-      window.addEventListener('resize', this.handleWindowSize);
+      window.addEventListener("resize", this.handleWindowSize);
       this.handleWindowSize();
     } catch (error) {
       console.error("数据加载失败：", error);
@@ -159,11 +168,9 @@ export default {
       const windowWidth = window.innerWidth;
       if (windowWidth > 992) {
         this.pageSize = 9;
-      }
-      else if (windowWidth > 767 && windowWidth <= 992) {
+      } else if (windowWidth > 767 && windowWidth <= 992) {
         this.pageSize = 8;
-      }
-      else {
+      } else {
         this.pageSize = 6;
       }
       this.updatePage(this.currentPage);
@@ -178,24 +185,23 @@ export default {
     applyFilters() {
       let filteredNews = this.news_content;
 
-  
       if (this.tagOption !== "所有主題") {
         filteredNews = filteredNews.filter(
           (item) => item.news_category === this.tagOption
         );
       }
 
-
       if (this.timeOption === "由新到舊") {
-        filteredNews.sort((a, b) =>
-          new Date(b.news_date).getTime() - new Date(a.news_date).getTime()
+        filteredNews.sort(
+          (a, b) =>
+            new Date(b.news_date).getTime() - new Date(a.news_date).getTime()
         );
       } else if (this.timeOption === "由舊到新") {
-        filteredNews.sort((a, b) =>
-          new Date(a.news_date).getTime() - new Date(b.news_date).getTime()
+        filteredNews.sort(
+          (a, b) =>
+            new Date(a.news_date).getTime() - new Date(b.news_date).getTime()
         );
       }
-
 
       const searchInput = this.searchInput.toUpperCase();
       if (searchInput.trim() !== "") {
@@ -227,11 +233,10 @@ export default {
       this.applyFilters();
       this.updatePage(1);
     },
-
   },
   beforeDestroy() {
     // 移除窗口宽度监听器，以防止内存泄漏
-    window.removeEventListener('resize', this.handleWindowSize);
+    window.removeEventListener("resize", this.handleWindowSize);
   },
 };
 </script>
@@ -327,7 +332,6 @@ export default {
     color: #333;
     transition: 0.3s;
     margin-top: 0.5em;
-
   }
 }
 
@@ -337,10 +341,9 @@ export default {
   margin-bottom: 1rem;
 }
 
-
 @media screen and (max-width: 992px) {
   .card {
-    max-width: calc(100%/2);
+    max-width: calc(100% / 2);
 
     .news_content {
       display: -webkit-box;
@@ -353,7 +356,7 @@ export default {
 
 @media screen and (max-width: 767px) {
   .card {
-    max-width: 100%
+    max-width: 100%;
   }
 }
 </style>

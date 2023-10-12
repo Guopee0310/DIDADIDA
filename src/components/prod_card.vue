@@ -296,7 +296,7 @@ export default {
     try {
       // 非同步請求數據
       const response = await fetch(
-        "http://localhost/dida_project/public/php/productSelect.php"
+        `${this.$store.state.APIurl}productSelect.php`
       );
       const myJson = await response.json();
       for (let i = 0; i < myJson.length; i++) {

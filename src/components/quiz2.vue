@@ -72,7 +72,7 @@ export default {
     };
   },
   mounted() {
-    fetch("http://localhost/dida_project/public/php/quiz.php")
+    fetch(`${this.$store.state.APIurl}quiz.php`)
       .then(function (response) {
         return response.json();
       })
@@ -282,10 +282,9 @@ export default {
   }
 }
 
-@media screen and (max-width: 414px){
-  .questionarrange{
+@media screen and (max-width: 414px) {
+  .questionarrange {
     flex-direction: column;
   }
-
 }
 </style>

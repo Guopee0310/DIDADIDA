@@ -7,7 +7,11 @@
           <option value="">訂單編號</option>
           <option value="">會員帳號</option>
         </select>
-        <input type="text" placeholder="請輸入訂單編號" v-model="prodChooseOrder" />
+        <input
+          type="text"
+          placeholder="請輸入訂單編號"
+          v-model="prodChooseOrder"
+        />
         <div @click="prodChooseNameOrOrder">搜尋</div>
       </div>
       <div class="orderTableAll">
@@ -147,7 +151,7 @@ export default {
   computed: {},
   mounted() {
     ////fetch ordrMg.php
-    fetch("http://localhost/dida_project/public/php/orderMg.php") //第一步
+    fetch(`${this.$store.state.APIurl}orderMg.php`) //第一步
       // fetch(`${this.$store.state.APIurl}orderMg.php`)
       //this.$store.state.APIurl
       // axios
@@ -162,7 +166,7 @@ export default {
       });
 
     ////fetch tickMg.php
-    fetch("http://localhost/dida_project/public/php/tickOrderMg.php") //第一步
+    fetch(`${this.$store.state.APIurl}tickOrderMg.php`) //第一步
       // fetch(`${this.$store.state.APIurl}orderMg.php`)
       //this.$store.state.APIurl
       // axios
@@ -229,7 +233,6 @@ export default {
         this.ticketOrderSlice = this.ticketOrder;
       }
     },
-   
 
     updateOrder(index, e, i) {
       if (e.target.innerText == "確認") {
@@ -258,7 +261,7 @@ export default {
         formData.append("ord_add", ord_add);
         formData.append("ord_state", ord_state);
         formData.append("ord_redeem", ord_redeem);
-        fetch("http://localhost/dida_project/public/php/orderMg.php", {
+        fetch(`${this.$store.state.APIurl}orderMg.php`, {
           method: "post",
           body: formData,
         }).then((res) => res.json());

@@ -368,7 +368,8 @@ export default {
     },
   },
   mounted() {
-    fetch("http://localhost/dida_project/public/php/labaSelect.php")
+    fetch(`${this.$store.state.APIurl}labaSelect.php`)
+      // fetch("http://localhost/dida_project/public/php/labaSelect.php")
       .then(function (response) {
         return response.json();
       })

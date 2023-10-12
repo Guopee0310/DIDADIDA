@@ -49,7 +49,7 @@ export default {
   // created(){}, => 創建但未被掛載
   // mounted(){}, => 掛載以後會去做的事
   mounted() {
-    fetch("http://localhost/dida_project/public/php/helperMg.php") //第一步
+    fetch(`${this.$store.state.APIurl}helperMg.php`) //第一步
       // fetch(`${this.$store.state.APIurl}helperMg.php`)
       //this.$store.state.APIurl
       // axios
@@ -82,7 +82,7 @@ export default {
         formData.append("smart_id", smart_id);
         formData.append("smart_que", smart_que);
         formData.append("smart_ans", smart_ans);
-        fetch("http://localhost/dida_project/public/php/helperMg.php", {
+        fetch(`${this.$store.state.APIurl}helperMg.php`, {
           method: "post",
           body: formData,
         }).then((res) => res.json());
