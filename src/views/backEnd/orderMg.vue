@@ -21,6 +21,7 @@
           <div>商品名稱</div>
           <div>數量</div>
           <div>時間</div>
+      
           <div>狀態</div>
         </div>
         <div v-for="(i, index) in prodOrder" class="singleOrderTable">
@@ -34,13 +35,18 @@
 
           <div>{{ i.prodCount }}</div>
           <div>{{ i.ord_date }}</div>
-          <div>{{ i.ord_state }}</div>
+          <!-- <div>{{ i.ord_state }}</div> -->
 
-          <div class="updateOrderBtn">
+          <select>
+                 <option>{{ i.ord_state }}</option>
+          </select>
+    
+
+          <!-- <div class="updateOrderBtn">
             <div class="update" @click="updateOrder(index, $event, i)">
               <button>修改</button>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
     </TabPane>
@@ -59,8 +65,9 @@
           <div>訂單編號</div>
           <div>會員帳號</div>
           <div>票種</div>
-          <div>數量</div>
+          <div>單價</div>
           <div>票卷日期</div>
+          <div>票卷狀態</div>
         </div>
         <div
           v-for="(i, index) in ticketOrderSlice"
@@ -78,9 +85,14 @@
             {{ i.tic_pay }}
           </div>
           <div>{{ i.tic_date }}</div>
-          <button>詳細資料</button>
+          <div>{{ i.tic_state }}</div>
+          <!-- <button>詳細資料</button> -->
+          <!-- <button @click="toggleDetails(index, 'ticketOrder')">票券狀態</button>
+         <div v-if="i.showDetails" class="details"> -->
+          <!-- 這裡放置詳細資料欄位 -->
+        
         </div>
-      </div>
+        </div>
     </TabPane>
   </Tabs>
 </template>
@@ -205,6 +217,13 @@ export default {
         this.orderSlice = pres;
       } else {
         this.orderSlice = this.prodOrder;
+      }
+    },
+      toggleDetails(index, dataType) {
+      if (dataType === 'prodOrder') {
+        this.prodOrder[index].showDetails = !this.prodOrder[index].showDetails;
+      } else if (dataType === 'ticketOrder') {
+        this.ticketOrderSlice[index].showDetails = !this.ticketOrderSlice[index].showDetails;
       }
     },
 
