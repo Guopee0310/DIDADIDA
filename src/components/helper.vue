@@ -35,8 +35,8 @@
         <div>{{ i.smart_que }}</div>
       </div> -->
       <div @click="moveAddress">園區地址</div>
-      <div @click="moveWeatherMax">降雨機率</div>
-      <div @click="moveMaxT">今日溫度</div>
+      <div @click="moveWeatherMax">今日溫度</div>
+      <div @click="moveMaxT">降雨機率</div>
       <div @click="moveClosed">{{ helperAsk1 }}</div>
       <div @click="moveBonus">{{ helperAsk2 }}</div>
       <div @click="moveVisitors">{{ helperAsk3 }}</div>
