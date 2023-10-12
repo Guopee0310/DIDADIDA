@@ -17,7 +17,7 @@
               <label class="check"
                 ><input type="checkbox" v-model="prod.select"
               /></label>
-              <img :src="prod.imgURL" alt="" />
+              <img :src="'../all_images/product/' + prod.imgURL" alt="" />
 
               <span class="prodname">{{ prod.name }}</span>
             </div>
@@ -96,15 +96,29 @@
           <div class="input_group" id="receive_info">
             <div class="name">
               <div class="field__label">收件人姓名</div>
-              <input type="text" class="field_input" maxlength="50" />
+              <input
+                type="text"
+                class="field_input"
+                maxlength="50"
+                v-model="receiverName"
+              />
             </div>
             <div class="surname">
               <div class="field__label">收件人手機</div>
-              <input type="text" class="field_input" maxlength="50" />
+              <input
+                type="text"
+                class="field_input"
+                maxlength="50"
+                v-model="receiverPhone"
+              />
             </div>
             <div>
               <div class="field__label">收件地址</div>
-              <input type="text" class="field_input" />
+              <input
+                type="text"
+                class="field_input"
+                v-model="receiverAddress"
+              />
             </div>
           </div>
         </div>
@@ -119,7 +133,7 @@
             總計:<span>{{ allProduct_Price + parseInt(picked) }}</span>
           </p>
         </div>
-        <button @click="clearShopping">前往結帳</button>
+        <button @click.prevent="clearShopping">前往結帳</button>
       </div>
     </div>
   </div>
@@ -130,7 +144,11 @@ import heart from "@/components/heart.vue";
 export default {
   data() {
     return {
+      receiverName: "",
+      receiverPhone: "",
+      receiverAddress: "",
       activeHeart: true,
+      getOrd_id: 0,
       shopCartData: [
         // {
         //   imgURL: './image/dolphin_doll.png',
@@ -213,35 +231,184 @@ export default {
     //   count: 1,
     //   select: false
     clearShopping() {
-      for (let i = 0; i < this.shopCartData.length; i++) {
-        this.$store.state.prodOrderArr.push({
-          prodImg: this.shopCartData[i].imgURL,
-          prodName: this.shopCartData[i].name,
-          prodCount: this.shopCartData[i].count,
-          prodPrice: this.shopCartData[i].price,
-          prodDate: `${new Date().getFullYear()}.${new Date().getMonth()}.${new Date().getDate()}`,
-        });
-      }
-      this.shopCartData = [];
-      setTimeout(() => {
-        this.$store.state.shoppingCart = [];
-      }, 100);
-      setTimeout(() => {
-        this.$store.state.memberBtn = "prod_order_inquiry";
-        this.$router.push({
-          path: "/member",
-          query: { section: "showProdOrder" },
-        });
-        setTimeout(() => {
-          // 获取滚动目标元素
-          const target = document.getElementById("showProdOrder");
+      if (!this.receiverName || !this.receiverPhone || !this.receiverAddress) {
+        alert("收件資料不可為空");
 
-          // 滚动到目标元素
-          if (target) {
-            target.scrollIntoView({ behavior: "smooth" });
-          }
-        }, 400);
-      }, 300);
+        return;
+      } else {
+        let mem_id = this.$store.state.memberId;
+        let ord_date = `${new Date().getFullYear()}.${new Date().getMonth()}.${new Date().getDate()}`;
+        let ord_sum = this.allProduct_Price;
+        let ord_ship;
+        if (this.picked == 60) {
+          ord_ship = "60元";
+        } else if (this.picked == 0) {
+          ord_ship = "0元";
+        }
+        let ord_pay = this.allProduct_Price + parseInt(this.picked);
+        let ord_person = this.receiverName;
+        let ord_phone = this.receiverPhone;
+        let ord_add = this.receiverAddress;
+        let ord_state = "待出貨";
+        const formData = new FormData();
+        formData.append("mem_id", mem_id);
+        formData.append("ord_date", ord_date);
+        formData.append("ord_sum", ord_sum);
+        formData.append("ord_ship", ord_ship);
+        formData.append("ord_pay", ord_pay);
+        formData.append("ord_person", ord_person);
+        formData.append("ord_phone", ord_phone);
+        formData.append("ord_add", ord_add);
+        formData.append("ord_state", ord_state);
+
+        fetch(`${this.$store.state.APIurl}shoppingInsertFirst.php`, {
+          method: "POST",
+          body: formData,
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            this.getOrd_id = data[0];
+            console.log(this.getOrd_id);
+          })
+          .then(() => {
+            fetch(`${this.$store.state.APIurl}productSelect.php`)
+              .then((res2) => {
+                console.log(res2);
+                return res2.json();
+              })
+              .then((data) => {
+                console.log(data);
+                const matchingProducts = [];
+
+                for (const product of data) {
+                  for (const cartItem of this.shopCartData) {
+                    if (product.prod_name === cartItem.name) {
+                      const matchingProduct = { ...product }; // 创建产品的副本
+                      matchingProduct.count = cartItem.count; // 将 cartItem 的 count 存储在匹配的产品对象中
+                      matchingProducts.push(matchingProduct);
+                    }
+                  }
+                }
+                console.log(matchingProducts);
+                return matchingProducts;
+              })
+              .then((data) => {
+                console.log(data);
+                const formData = new FormData();
+
+                formData.append("ord_id", this.getOrd_id);
+                formData.append("matchingProduct", JSON.stringify(data));
+                fetch(`${this.$store.state.APIurl}shoppingCartInsert.php`, {
+                  method: "POST",
+                  body: formData,
+                })
+                  .then((res) => res.json())
+                  .then((data) => {
+                    console.log(data);
+                  });
+              })
+              .then(() => {
+                for (let i = 0; i < this.shopCartData.length; i++) {
+                  this.$store.state.prodOrderArr.push({
+                    prodImg: this.shopCartData[i].imgURL,
+                    prodName: this.shopCartData[i].name,
+                    prodCount: this.shopCartData[i].count,
+                    prodPrice: this.shopCartData[i].price,
+                    prodDate: `${new Date().getFullYear()}.${new Date().getMonth()}.${new Date().getDate()}`,
+                  });
+                }
+                this.shopCartData = [];
+                setTimeout(() => {
+                  this.$store.state.shoppingCart = [];
+                }, 100);
+
+                setTimeout(() => {
+                  this.$store.state.memberBtn = "prod_order_inquiry";
+                  this.$router.push({
+                    path: "/member",
+                    query: { section: "showProdOrder" },
+                  });
+                  setTimeout(() => {
+                    // 获取滚动目标元素
+                    const target = document.getElementById("showProdOrder");
+
+                    // 滚动到目标元素
+                    if (target) {
+                      target.scrollIntoView({ behavior: "smooth" });
+                    }
+                  }, 400);
+                }, 300);
+              });
+          });
+        // .then((res) => {
+        //   console.log(res);
+        //   console.log(res.json());
+        //   return res.json();
+        // })
+        // .then((data) => {
+        //   console.log(data);
+        //   const matchingProducts = [];
+
+        //   for (const product of data) {
+        //     for (const cartItem of this.shopCartData) {
+        //       if (product.prod_name === cartItem.name) {
+        //         const matchingProduct = { ...product }; // 创建产品的副本
+        //         matchingProduct.count = cartItem.count; // 将 cartItem 的 count 存储在匹配的产品对象中
+        //         matchingProducts.push(matchingProduct);
+        //       }
+        //     }
+        //   }
+        //   console.log(matchingProducts);
+        //   return matchingProducts;
+        // })
+        // .then((data) => {
+        //   console.log(data);
+        //   const formData = new FormData();
+
+        //   formData.append("ord_id", this.getOrd_id);
+        //   formData.append("matchingProduct", JSON.stringify(data));
+        //   fetch(`${this.$store.state.APIurl}shoppingCartInsert.php`, {
+        //     method: "POST",
+        //     body: formData,
+        //   })
+        //     .then((res) => res.json())
+        //     .then((data) => {
+        //       console.log(data);
+        //     });
+        // })
+        // .then(() => {
+        //   for (let i = 0; i < this.shopCartData.length; i++) {
+        //     this.$store.state.prodOrderArr.push({
+        //       prodImg: this.shopCartData[i].imgURL,
+        //       prodName: this.shopCartData[i].name,
+        //       prodCount: this.shopCartData[i].count,
+        //       prodPrice: this.shopCartData[i].price,
+        //       prodDate: `${new Date().getFullYear()}.${new Date().getMonth()}.${new Date().getDate()}`,
+        //     });
+        //   }
+        //   this.shopCartData = [];
+        //   setTimeout(() => {
+        //     this.$store.state.shoppingCart = [];
+        //   }, 100);
+
+        //   setTimeout(() => {
+        //     this.$store.state.memberBtn = "prod_order_inquiry";
+        //     this.$router.push({
+        //       path: "/member",
+        //       query: { section: "showProdOrder" },
+        //     });
+        //     setTimeout(() => {
+        //       // 获取滚动目标元素
+        //       const target = document.getElementById("showProdOrder");
+
+        //       // 滚动到目标元素
+        //       if (target) {
+        //         target.scrollIntoView({ behavior: "smooth" });
+        //       }
+        //     }, 400);
+        //   }, 300);
+        // });
+      }
     },
     pushInFav(i) {
       const favListIndex = this.favList.findIndex((v) => v.favoName === i.name);
