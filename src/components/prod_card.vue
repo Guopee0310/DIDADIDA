@@ -11,7 +11,7 @@
       <heart
         @change-heart="changeHeart($event, i, index)"
         :keepLove="keepHeartArr[index]"
-        :is-active="favList.findIndex((v) => v.favoName === i.prod_name) > -1"
+        :is-active="mountedShowLove.findIndex((v) => v == i.prod_id) > -1"
       ></heart>
     </div>
     <div class="pic">
@@ -524,15 +524,13 @@ export default {
       this.chooseItem = this.chooseItem2.slice(optionStartIdx, optionEndIdx);
     },
     changeHeart(isFav, i, index) {
-      console.log(isFav, i, index);
-
-      const favListIndex = this.favList.findIndex(
-        (v) => v.favoName === i.prod_name
+      const mountedShowLoveIndex = this.mountedShowLove.findIndex(
+        (v) => v == i.prod_id
       );
 
-      if (favListIndex > -1) {
-        this.$store.state.favoList.splice(favListIndex, 1);
-        this.mountedShowLove();
+      if (mountedShowLoveIndex > -1) {
+        this.mountedShowLove.splice(mountedShowLoveIndex, 1);
+
         let formData = new FormData();
         let prod_id = i.prod_id;
         formData.append("mem_id", this.$store.state.memberId);
@@ -543,6 +541,7 @@ export default {
           body: formData,
         });
       } else {
+        this.mountedShowLove.push(i.prod_id);
         this.$store.state.favoList.push({
           favoImg: i.prod_img,
           favoName: i.prod_name,
@@ -559,34 +558,47 @@ export default {
 
           body: formData,
         });
-        // this.$store.state.memberId
       }
-
-      // for (let j = 0; j < this.$store.state.favoList.length; j++) {
-      //   if (i.imageSrc == this.$store.state.favoList[j].favoImg) {
-      //     return;
-      //   }
-      // }
-      // if (!isFav && this.$store.state.userName) {
-      //   this.$store.state.favoList.push({
-      //     favoImg: i.imageSrc,
-      //     favoName: i.titleName,
-      //     favoPrice: i.prodPrice,
-      //     favoIntroduction: i.info,
-      //     favIndex: index,
-      //   });
-      // }
-      console.log(this.$store.state.favoList);
-      // TODO　ＣＡＬＬ　ＡＰＩ
-      // if (isFav) {
-      //   this.$store.state.favoList.push({
-      //     favoImg: `require(${i.imageSrc})`,
-      //     favoName: i.titleName,
-      //     favoPrice: i.prodPrice,
-      //     favoIntroduction: "",
-      //   });
-      // }
     },
+    // changeHeart(isFav, i, index) {
+    //   console.log(isFav, i, index);
+
+    //   const favListIndex = this.favList.findIndex(
+    //     (v) => v.favoName === i.prod_name
+    //   );
+
+    //   if (favListIndex > -1) {
+    //     this.$store.state.favoList.splice(favListIndex, 1);
+    //     this.mountedShowLove();
+    //     let formData = new FormData();
+    //     let prod_id = i.prod_id;
+    //     formData.append("mem_id", this.$store.state.memberId);
+    //     formData.append("prod_id", prod_id);
+    //     fetch(`${this.$store.state.APIurl}prod_cardFavDelete.php`, {
+    //       method: "POST",
+
+    //       body: formData,
+    //     });
+    //   } else {
+    //     this.$store.state.favoList.push({
+    //       favoImg: i.prod_img,
+    //       favoName: i.prod_name,
+    //       favoPrice: i.prod_price,
+    //       favoIntroduction: i.prod_info,
+    //       favIndex: index,
+    //     });
+    //     let formData = new FormData();
+    //     let prod_id = i.prod_id;
+    //     formData.append("mem_id", this.$store.state.memberId);
+    //     formData.append("prod_id", prod_id);
+    //     fetch(`${this.$store.state.APIurl}prod_cardFavInsert.php`, {
+    //       method: "POST",
+
+    //       body: formData,
+    //     });
+    //     // this.$store.state.memberId
+    //   }
+    // },
     closeCartPopup() {
       // 延迟一秒后关闭购物车弹出视图
       setTimeout(() => {
