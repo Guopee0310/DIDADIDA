@@ -237,7 +237,9 @@ export default {
         return;
       } else {
         let mem_id = this.$store.state.memberId;
-        let ord_date = `${new Date().getFullYear()}.${new Date().getMonth()}.${new Date().getDate()}`;
+        let ord_date = `${new Date().getFullYear()}.${
+          parseInt(new Date().getMonth()) + 1
+        }.${new Date().getDate()}`;
         let ord_sum = this.allProduct_Price;
         let ord_ship;
         if (this.picked == 60) {
@@ -314,7 +316,9 @@ export default {
                     prodName: this.shopCartData[i].name,
                     prodCount: this.shopCartData[i].count,
                     prodPrice: this.shopCartData[i].price,
-                    prodDate: `${new Date().getFullYear()}.${new Date().getMonth()}.${new Date().getDate()}`,
+                    prodDate: `${new Date().getFullYear()}.${
+                      parseInt(new Date().getMonth()) + 1
+                    }.${new Date().getDate()}`,
                   });
                 }
                 this.shopCartData = [];
