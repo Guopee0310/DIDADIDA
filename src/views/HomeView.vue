@@ -20,8 +20,10 @@
           <lightCircle>
             <template v-slot:circle>
               <div class="open">
+
                 <span>{{ $t("營業時間") }}</span>
-                <span>09:00-17:00</span>
+                <span id="dropdrop">09:00-17:00</span>
+                <!-- 這個id是為了換頁滑動 -->
                 <svg x="0px" y="0px" width="200px" height="15px" viewBox="0 0 399.6 15.9">
                   <polyline class="op_line"
                     points="0.1,5.5 58,15.4 118.4,5.5 189.2,5.5 258.7,10.4 368.3,0.5 399.5,7.9 " />
@@ -325,14 +327,17 @@ export default {
 
     fetch(`${this.$store.state.APIurl}homePicMg.php`)
       .then(function (response) {
+        console.log(response)
         return response.json();
       })
 
       .then((myJson) => {
+        console.log(myJson)
         for (let i = 0; i < myJson.length; i++) {
           myJson[i].banner_pic = require(`../../public/all_images/banner/${myJson[i].banner_pic}`);
           myJson[i].isDis = true;
         }
+        console.log(myJson)
         this.bannerAll = myJson;
       });
   },

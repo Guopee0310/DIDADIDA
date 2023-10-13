@@ -31,7 +31,7 @@
                     <li>
                         <div class="img">
                             <div class="picBox">
-                                <img :src="'../all_images/news/' + item.news_img"
+                                <img :src="`/all_images/news/${item.news_img}`"
                                     :alt="item.news_img ? item.news_img : '未選圖片'">
                             </div>
 
@@ -94,7 +94,7 @@ export default {
         switchBtn,
     },
     mounted() {
-        fetch("http://localhost/dida_project/public/php/newsSelect.php")
+        fetch(`${this.$store.state.APIurl}newsSelect.php`)
             .then((response) => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
@@ -333,7 +333,7 @@ export default {
             }
         },
         refreshNewsData() {
-            fetch("http://localhost/dida_project/public/php/newsSelect.php")
+            fetch(`${this.$store.state.APIurl}newsSelect.php`)
                 .then((response) => {
                     if (!response.ok) {
                         throw new Error('Network response was not ok');

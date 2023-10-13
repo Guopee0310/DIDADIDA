@@ -14,7 +14,7 @@
                     <li>
                         <div class="img">
                             <div class="picBox">
-                                <img :src="'../all_images/product/' + item.prod_img"
+                                <img :src="`/all_images/product/${item.prod_img}`"
                                     :alt="item.prod_img ? item.prod_img : '未選擇圖片'">
                             </div>
 
@@ -51,8 +51,8 @@
                             v-model="item.prod_info"></textarea>
                     </li>
                     <li>
-                        <switchBtn :item="item.prod_listed" :index="index" v-model="item.prod_listed"  :onText="'上架'" :offText="'下架'"
-                            @toggle="updateNewsState" :disabled="item.disabled"></switchBtn>
+                        <switchBtn :item="item.prod_listed" :index="index" v-model="item.prod_listed" :onText="'上架'"
+                            :offText="'下架'" @toggle="updateNewsState" :disabled="item.disabled"></switchBtn>
 
                     </li>
                     <li>
@@ -68,8 +68,8 @@
             </div>
 
             <div class="prod_count">總共有{{ prodCount }}件商品</div>
-            <Page :total="this.filteredProducts.length" @on-change="updatePage" :page-size="pageSize" 
-                v-model="this.currentPage" class="page"/>
+            <Page :total="this.filteredProducts.length" @on-change="updatePage" :page-size="pageSize"
+                v-model="this.currentPage" class="page" />
         </div>
     </div>
 </template>
@@ -97,7 +97,7 @@ export default {
         filterProduct
     },
     async mounted() {
-        await fetch("http://localhost/dida_project/public/php/productSelect.php")
+        await fetch(`${this.$store.state.APIurl}productSelect.php`)
             .then((response) => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
@@ -167,10 +167,12 @@ export default {
                     alert("請選擇分類");
                     return;
                 }
-                else if (item.prod_price < 100) {
+                else if (item.prod_price<100) {
                     alert("價錢為必填且需大於100");
                     return;
                 }
+
+
 
                 const formData = new FormData();
                 let prod_id = item.prod_id;
@@ -191,6 +193,7 @@ export default {
                 formData.append("image", this.changePic);
 
                 this.displayedProducts[index].disabled = true;
+                this.displayedProducts[index].exist = true;
 
                 fetch(`${this.$store.state.APIurl}productInsert.php`, {
                     method: "POST",
@@ -200,6 +203,7 @@ export default {
                     .then((result) => {
                         alert("新增成功");
                         // 重新獲取資料
+
                         this.refreshNewsData();
                     })
                 return;
@@ -208,7 +212,7 @@ export default {
             }
         },
         refreshNewsData() {
-            fetch("http://localhost/dida_project/public/php/productSelect.php")
+            fetch(`${this.$store.state.APIurl}productSelect.php`)
                 .then((response) => {
                     if (!response.ok) {
                         throw new Error('Network response was not ok');
@@ -220,7 +224,8 @@ export default {
                         myJson[i].disabled = true;
                         myJson[i].exist = true;
                     }
-                    this.allProduct = myJson;
+                    this.filteredProducts = myJson;
+                    this.updatePage(1);
                     console.log(this.allProduct);
                 })
                 .catch((error) => {
@@ -609,8 +614,9 @@ export default {
         text-align: right;
         font-size: 14px;
     }
+
     //分頁
-    .page{
+    .page {
         width: 100%;
         text-align: center;
     }

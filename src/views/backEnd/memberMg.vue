@@ -27,13 +27,21 @@
           <li>{{ i.mem_address }}</li>
           <li>
             <label>
-              <input type="radio" :name="index" :checked="i.mem_state == 0"
-                @change="radioPush(i.mem_name, i.mem_email, 0)" />
+              <input
+                type="radio"
+                :name="index"
+                :checked="i.mem_state == 0"
+                @change="radioPush(i.mem_name, i.mem_email, 0)"
+              />
               正常
             </label>
             <label>
-              <input type="radio" :name="index" :checked="i.mem_state == 1"
-                @change="radioPush(i.mem_name, i.mem_email, 1)" />
+              <input
+                type="radio"
+                :name="index"
+                :checked="i.mem_state == 1"
+                @change="radioPush(i.mem_name, i.mem_email, 1)"
+              />
               黑名單
             </label>
           </li>
@@ -159,7 +167,7 @@ export default {
     },
   },
   mounted() {
-    fetch("http://localhost/dida_project/public/php/memberMgSelect.php") //第一步
+    fetch(`${this.$store.state.APIurl}memberMgSelect.php`) //第一步
       // fetch(`${this.$store.state.APIurl}helperMg.php`)
       //this.$store.state.APIurl
       // axios

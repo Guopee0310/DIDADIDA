@@ -1,6 +1,8 @@
 <template>
   <div class="homePicAll">
-    <!-- <div @click="createNew">新增項目</div> -->
+    <div @click="createNew">
+      <button>+新增項目</button>
+    </div>
     <div class="bannerTitle">
       <div>順序</div>
       <div>圖片</div>
@@ -17,7 +19,7 @@
       </div>
 
       <div class="updateAndDel">
-        <div @click="updatePic(index, $event)">修改</div>
+        <div @click="updatePic(index, $event, i)">修改</div>
         <div @click="delRow(i, index)">刪除</div>
       </div>
     </div>
@@ -27,19 +29,14 @@
 export default {
   data() {
     return {
-      allBar: [
-        [require("../../assets/images/index_p1.png"), true],
-        [require("../../assets/images/index_p2.png"), true],
-        [require("../../assets/images/index_p3.png"), true],
-        [require("../../assets/images/blueCloth.jpg"), true],
-        [require("../../assets/images/index_p3.png"), true],
-      ],
+      allBar: [],
       bannerAll: [],
+      changePic: ""
     };
   },
   computed: {},
   mounted() {
-    fetch(`${this.$store.state.APIurl}homePicMg.php`)
+    fetch("http://localhost/dida_project/public/php/homeMgSelect.php")
       .then(function (response) {
         return response.json();
       })
@@ -75,25 +72,52 @@ export default {
       }).then((res) => res.json());
       this.bannerAll.splice(index, 1);
     },
-    updatePic(index, e) {
+    updatePic(index, e, i) {
       if (e.target.innerText == "確認") {
         this.bannerAll[index].isDis = true;
         e.target.innerText = "修改";
+
+        console.log(this.changePic);
 
         const formData = new FormData();
         let banner_id = this.bannerAll[index].banner_id;
         let banner_pic = this.bannerAll[index].banner_pic;
 
         formData.append("banner_id", banner_id);
-        formData.append("banner_pic", banner_pic);
+        formData.append("image", this.changePic);
         // 使用fetch或axios將數據發送到PHP後端
-        fetch(`${this.$store.state.APIurl}homePicMg.php`, {
-          method: "post",
-          body: formData,
-        })
-          .then((res) => res.json())
-          .then((result) => alert("圖片更新OK"));
-        return;
+
+        // 修改 ----------------------------
+        if (i.banner_id) {
+          let banner_id = i.banner_id;
+          let formData = new FormData();
+          formData.append("banner_id", banner_id);
+          formData.append("image", this.changePic);
+
+          alert(banner_id);
+
+          fetch(`${this.$store.state.APIurl}homePicMg.php`, {
+            method: "post",
+            body: formData,
+          })
+            .then((res) => res.json())
+            .then((result) => {
+              alert("圖片更新OK");
+              console.log(result);
+            });
+          return;
+        } else {
+          fetch(`${this.$store.state.APIurl}homeMgInsert.php`, {
+            method: "post",
+            body: formData,
+          })
+            .then((res) => res.json())
+            .then((result) => {
+              alert("圖片更新OK");
+              console.log(result);
+            });
+          return;
+        }
       }
       this.bannerAll[index].isDis = false;
       e.target.innerText = "確認";

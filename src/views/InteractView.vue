@@ -1,5 +1,6 @@
 <template>
-  <div class="interact">
+  <div class="interact" id="mainpart">
+    <!-- 這個id是為了換頁滑動 -->
     <div class="titleAll">
       <interactBtn
         @click="showQuiz"
@@ -20,7 +21,7 @@
       <!-- <span >問卷</span>
       <span >拉霸</span> -->
     </div>
-    <div class="mainpart">
+    <div class="mainpart" >
       <quiz2 v-if="isQuiz"></quiz2>
       <laba v-if="isLaba"></laba>
     </div>

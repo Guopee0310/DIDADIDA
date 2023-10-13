@@ -17,7 +17,7 @@
               <label class="check"
                 ><input type="checkbox" v-model="prod.select"
               /></label>
-              <img :src="prod.imgURL" alt="" />
+              <img :src="'../all_images/product/' + prod.imgURL" alt="" />
 
               <span class="prodname">{{ prod.name }}</span>
             </div>
@@ -96,16 +96,43 @@
           <div class="input_group" id="receive_info">
             <div class="name">
               <div class="field__label">收件人姓名</div>
-              <input type="text" class="field_input" maxlength="50" />
+              <input
+                type="text"
+                class="field_input"
+                maxlength="50"
+                v-model="receiverName"
+                placeholder="收件人姓名"
+                @input="testName"
+                :class="{ checkInput: !isValidName, correctInput: isValidName }"
+              />
             </div>
+            <span v-if="!isValidName" class="caution">請輸入有效姓名</span>
+
             <div class="surname">
               <div class="field__label">收件人手機</div>
-              <input type="text" class="field_input" maxlength="50" />
+              <input
+                type="text"
+                class="field_input"
+                maxlength="50"
+                v-model="receiverPhone"
+                placeholder="收件人手機"
+                @input="testPhone"
+                :class="{ checkInput: !isValidPhone, correctInput: isValidPhone }"
+              />
             </div>
+            <span v-if="!isValidPhone" class="caution">請輸入有效手機號碼</span>
             <div>
               <div class="field__label">收件地址</div>
-              <input type="text" class="field_input" />
+              <input
+                type="text"
+                class="field_input"
+                v-model="receiverAddress"
+                placeholder="收件人地址"
+                @input="testAddr"
+                :class="{ checkInput: !isValidAddr, correctInput: isValidAddr }"
+              />
             </div>
+            <span v-if="!isValidAddr" class="caution">請輸入有效地址</span>
           </div>
         </div>
       </div>
@@ -119,7 +146,7 @@
             總計:<span>{{ allProduct_Price + parseInt(picked) }}</span>
           </p>
         </div>
-        <button @click="clearShopping">前往結帳</button>
+        <button @click.prevent="clearShopping">前往結帳</button>
       </div>
     </div>
   </div>
@@ -130,7 +157,11 @@ import heart from "@/components/heart.vue";
 export default {
   data() {
     return {
+      receiverName: "",
+      receiverPhone: "",
+      receiverAddress: "",
       activeHeart: true,
+      getOrd_id: 0,
       shopCartData: [
         // {
         //   imgURL: './image/dolphin_doll.png',
@@ -162,6 +193,9 @@ export default {
         // }
       ],
       picked: 0,
+      isValidName: true,
+      isValidPhone: true,
+      isValidAddr: true,
     };
   },
   created() {
@@ -213,35 +247,188 @@ export default {
     //   count: 1,
     //   select: false
     clearShopping() {
-      for (let i = 0; i < this.shopCartData.length; i++) {
-        this.$store.state.prodOrderArr.push({
-          prodImg: this.shopCartData[i].imgURL,
-          prodName: this.shopCartData[i].name,
-          prodCount: this.shopCartData[i].count,
-          prodPrice: this.shopCartData[i].price,
-          prodDate: `${new Date().getFullYear()}.${new Date().getMonth()}.${new Date().getDate()}`,
-        });
-      }
-      this.shopCartData = [];
-      setTimeout(() => {
-        this.$store.state.shoppingCart = [];
-      }, 100);
-      setTimeout(() => {
-        this.$store.state.memberBtn = "prod_order_inquiry";
-        this.$router.push({
-          path: "/member",
-          query: { section: "showProdOrder" },
-        });
-        setTimeout(() => {
-          // 获取滚动目标元素
-          const target = document.getElementById("showProdOrder");
+      if (!this.receiverName || !this.receiverPhone || !this.receiverAddress) {
+        alert("收件資料不可為空");
 
-          // 滚动到目标元素
-          if (target) {
-            target.scrollIntoView({ behavior: "smooth" });
-          }
-        }, 400);
-      }, 300);
+        return;
+      } else {
+        let mem_id = this.$store.state.memberId;
+        let ord_date = `${new Date().getFullYear()}.${
+          parseInt(new Date().getMonth()) + 1
+        }.${new Date().getDate()}`;
+        let ord_sum = this.allProduct_Price;
+        let ord_ship;
+        if (this.picked == 60) {
+          ord_ship = "60元";
+        } else if (this.picked == 0) {
+          ord_ship = "0元";
+        }
+        let ord_pay = this.allProduct_Price + parseInt(this.picked);
+        let ord_person = this.receiverName;
+        let ord_phone = this.receiverPhone;
+        let ord_add = this.receiverAddress;
+        let ord_state = "待出貨";
+        const formData = new FormData();
+        formData.append("mem_id", mem_id);
+        formData.append("ord_date", ord_date);
+        formData.append("ord_sum", ord_sum);
+        formData.append("ord_ship", ord_ship);
+        formData.append("ord_pay", ord_pay);
+        formData.append("ord_person", ord_person);
+        formData.append("ord_phone", ord_phone);
+        formData.append("ord_add", ord_add);
+        formData.append("ord_state", ord_state);
+
+        fetch(`${this.$store.state.APIurl}shoppingInsertFirst.php`, {
+          method: "POST",
+          body: formData,
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            this.getOrd_id = data[0];
+            console.log(this.getOrd_id);
+          })
+          .then(() => {
+            fetch(`${this.$store.state.APIurl}productSelect.php`)
+              .then((res2) => {
+                console.log(res2);
+                return res2.json();
+              })
+              .then((data) => {
+                console.log(data);
+                const matchingProducts = [];
+
+                for (const product of data) {
+                  for (const cartItem of this.shopCartData) {
+                    if (product.prod_name === cartItem.name) {
+                      const matchingProduct = { ...product }; // 创建产品的副本
+                      matchingProduct.count = cartItem.count; // 将 cartItem 的 count 存储在匹配的产品对象中
+                      matchingProducts.push(matchingProduct);
+                    }
+                  }
+                }
+                console.log(matchingProducts);
+                return matchingProducts;
+              })
+              .then((data) => {
+                console.log(data);
+                const formData = new FormData();
+
+                formData.append("ord_id", this.getOrd_id);
+                formData.append("matchingProduct", JSON.stringify(data));
+                fetch(`${this.$store.state.APIurl}shoppingCartInsert.php`, {
+                  method: "POST",
+                  body: formData,
+                })
+                  .then((res) => res.json())
+                  .then((data) => {
+                    console.log(data);
+                  });
+              })
+              .then(() => {
+                for (let i = 0; i < this.shopCartData.length; i++) {
+                  this.$store.state.prodOrderArr.push({
+                    prodImg: this.shopCartData[i].imgURL,
+                    prodName: this.shopCartData[i].name,
+                    prodCount: this.shopCartData[i].count,
+                    prodPrice: this.shopCartData[i].price,
+                    prodDate: `${new Date().getFullYear()}.${
+                      parseInt(new Date().getMonth()) + 1
+                    }.${new Date().getDate()}`,
+                  });
+                }
+                this.shopCartData = [];
+                setTimeout(() => {
+                  this.$store.state.shoppingCart = [];
+                }, 100);
+
+                setTimeout(() => {
+                  this.$store.state.memberBtn = "prod_order_inquiry";
+                  this.$router.push({
+                    path: "/member",
+                    query: { section: "showProdOrder" },
+                  });
+                  setTimeout(() => {
+                    // 获取滚动目标元素
+                    const target = document.getElementById("showProdOrder");
+
+                    // 滚动到目标元素
+                    if (target) {
+                      target.scrollIntoView({ behavior: "smooth" });
+                    }
+                  }, 400);
+                }, 300);
+              });
+          });
+        // .then((res) => {
+        //   console.log(res);
+        //   console.log(res.json());
+        //   return res.json();
+        // })
+        // .then((data) => {
+        //   console.log(data);
+        //   const matchingProducts = [];
+
+        //   for (const product of data) {
+        //     for (const cartItem of this.shopCartData) {
+        //       if (product.prod_name === cartItem.name) {
+        //         const matchingProduct = { ...product }; // 创建产品的副本
+        //         matchingProduct.count = cartItem.count; // 将 cartItem 的 count 存储在匹配的产品对象中
+        //         matchingProducts.push(matchingProduct);
+        //       }
+        //     }
+        //   }
+        //   console.log(matchingProducts);
+        //   return matchingProducts;
+        // })
+        // .then((data) => {
+        //   console.log(data);
+        //   const formData = new FormData();
+
+        //   formData.append("ord_id", this.getOrd_id);
+        //   formData.append("matchingProduct", JSON.stringify(data));
+        //   fetch(`${this.$store.state.APIurl}shoppingCartInsert.php`, {
+        //     method: "POST",
+        //     body: formData,
+        //   })
+        //     .then((res) => res.json())
+        //     .then((data) => {
+        //       console.log(data);
+        //     });
+        // })
+        // .then(() => {
+        //   for (let i = 0; i < this.shopCartData.length; i++) {
+        //     this.$store.state.prodOrderArr.push({
+        //       prodImg: this.shopCartData[i].imgURL,
+        //       prodName: this.shopCartData[i].name,
+        //       prodCount: this.shopCartData[i].count,
+        //       prodPrice: this.shopCartData[i].price,
+        //       prodDate: `${new Date().getFullYear()}.${new Date().getMonth()}.${new Date().getDate()}`,
+        //     });
+        //   }
+        //   this.shopCartData = [];
+        //   setTimeout(() => {
+        //     this.$store.state.shoppingCart = [];
+        //   }, 100);
+
+        //   setTimeout(() => {
+        //     this.$store.state.memberBtn = "prod_order_inquiry";
+        //     this.$router.push({
+        //       path: "/member",
+        //       query: { section: "showProdOrder" },
+        //     });
+        //     setTimeout(() => {
+        //       // 获取滚动目标元素
+        //       const target = document.getElementById("showProdOrder");
+
+        //       // 滚动到目标元素
+        //       if (target) {
+        //         target.scrollIntoView({ behavior: "smooth" });
+        //       }
+        //     }, 400);
+        //   }, 300);
+        // });
+      }
     },
     pushInFav(i) {
       const favListIndex = this.favList.findIndex((v) => v.favoName === i.name);
@@ -276,6 +463,33 @@ export default {
     },
     deleteSelected() {
       this.shopCartData = this.shopCartData.filter((prod) => !prod.select);
+    },
+    testName() {
+      let regex = /^[\u4e00-\u9fa5]{2,4}$/;
+      this.isValidName = regex.test(this.receiverName);
+    },
+    testPhone() {
+      let regex = /^09\d{8}$/;
+      this.isValidPhone = regex.test(this.receiverPhone);
+    },
+    testAddr() {
+      let regex = /^[\u4e00-\u9fa5A-Za-z0-9\s,.-]+$/;
+      this.isValidAddr = regex.test(this.receiverAddress);
+    },
+    validateName() {
+      // 正则表达式示例：姓名
+      var regex = /^[\u4e00-\u9fa5]{2,4}$/;;
+      this.isValidName = regex.test(this.receiverName);
+    },
+    validatePhone() {
+      // 正则表达式示例：验证手機
+      var regex = /^09\d{8}$/;
+      this.isValidPhone = regex.test(this.receiverPhone);
+    },
+    validateAddr() {
+      // 正则表达式示例：地址
+      var regex = /^(?=.*[a-zA-Z]).{8,12}$/;
+      this.isValidAddr = regex.test(this.receiverAddress);
     },
   },
 };
@@ -493,6 +707,14 @@ h2 {
 .freight {
   border-bottom: 1.5px solid #666;
 }
+input::placeholder {
+  color: rgb(103, 98, 98,0.5); /* 修改占位文字的颜色 */
+  font-size: 12px;
+}
+.caution{
+  color: red;
+  font-size: 12px;
+}
 
 //rwd
 @media (max-width: 414px) {
@@ -572,5 +794,6 @@ h2 {
   .test2 {
     margin: 20px;
   }
+ 
 }
 </style>

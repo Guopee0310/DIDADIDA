@@ -1,16 +1,9 @@
 <template>
   <!-- 小幫手 -->
   <div class="helperAll">
-    <button class="noselect" @click="top" ref="scrollTopButton">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-      >
-        <path
-          d="M0 16.67l2.829 2.83 9.175-9.339 9.167 9.339 2.829-2.83-11.996-12.17z"
-        />
+    <button class="noselect" @click="top" ref="scrollTopButton" v-if="show">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+        <path d="M0 16.67l2.829 2.83 9.175-9.339 9.167 9.339 2.829-2.83-11.996-12.17z" />
       </svg>
     </button>
     <div class="item" @click="moveShowText">
@@ -26,35 +19,28 @@
     </div>
   </div>
 
-  <div
-    class="showWindow"
-    :style="{ transform: showText ? 'translateX(0px)' : 'translateX(1000px)' }"
-  >
+  <div class="showWindow" :style="{ transform: showText ? 'translateX(0px)' : 'translateX(1000px)' }">
     <div class="windowBtnAll">
       <!-- <div v-for="i in helperText">
         <div>{{ i.smart_que }}</div>
       </div> -->
       <div @click="moveAddress">園區地址</div>
-      <div @click="moveWeatherMax">降雨機率</div>
-      <div @click="moveMaxT">今日溫度</div>
+      <div @click="moveWeatherMax">今日溫度</div>
+      <div @click="moveMaxT">降雨機率</div>
       <div @click="moveClosed">{{ helperAsk1 }}</div>
       <div @click="moveBonus">{{ helperAsk2 }}</div>
       <div @click="moveVisitors">{{ helperAsk3 }}</div>
     </div>
     <div class="rspbox">
-      <div
-        class="sayHelloTxt"
-        v-if="
-          !(
-            showAddress ||
-            showWeatherMax ||
-            showMaxT ||
-            showClosed ||
-            showBonus ||
-            showVisitors
-          )
-        "
-      >
+      <div class="sayHelloTxt" v-if="!(
+        showAddress ||
+        showWeatherMax ||
+        showMaxT ||
+        showClosed ||
+        showBonus ||
+        showVisitors
+      )
+        ">
         {{ sayHelloTxt }}
       </div>
       <div class="response" v-if="showAddress">
@@ -64,10 +50,13 @@
         天氣現象 : {{ weatherWX }} 最高氣溫 : {{ weatherMaxT }}度
       </div>
       <div class="response" v-if="showMaxT">降雨機率 : {{ weatherPop }}%</div>
-      <div class="response" v-if="showClosed">{{ closedtime }}</div>
-      <div class="response" v-if="showBonus">{{ bonus }}</div>
+      <div class="response" v-if="showClosed">{{ closedtime }}也可至<router-link :to="checkdate.link"
+          @click="changePageMove(checkdate.name)">購票頁面</router-link>查看日曆喔!</div>
+      <div class="response" v-if="showBonus">可至<router-link :to="interact.link"
+          @click="changePageMove(interact.name)">互動頁面</router-link>{{ bonus }}</div>
       <div class="response" v-if="showVisitors">
-        {{ visitors }}{{ this.$store.state.visitCount }}人
+        參考<router-link :to="droper.link" @click="changePageMove(droper.name)">首頁水滴</router-link>{{ visitors }}{{
+          this.$store.state.visitCount }}人喔~
       </div>
     </div>
   </div>
@@ -101,16 +90,21 @@ export default {
       helperAsk1: "",
       helperAsk2: "",
       helperAsk3: "",
+      droper: { link: "/", name: "首頁水滴" },
+      interact: { link: "/interact", name: "互動頁面" },
+      checkdate: { link: "/ticket", name: "購票頁面" },
+      show: false,
     };
   },
-  created() {},
+  created() { },
   mounted() {
     // fetch("http://localhost/dida_project/public/php/helperMg.php").then(
     //   async (rsp) => {
     //     this.helperText = await rsp.json();
     //   }
     // );
-    fetch("http://localhost/dida_project/public/php/helperMg.php")
+    fetch(`${this.$store.state.APIurl}helperMg.php`)
+      // fetch("http://localhost/dida_project/public/php/helperMg.php")
       .then(function (response) {
         return response.json();
       })
@@ -142,6 +136,11 @@ export default {
           myJson.records.location[13].weatherElement[0].time[2].parameter.parameterName;
         this.locationName = myJson.records.location[13].locationName;
       });
+
+    window.addEventListener("scroll", this.scrollShow);
+  },
+  beforeDestroy() {
+    window.removeEventListener("scroll", this.scrollShow);
   },
   methods: {
     moveShowText() {
@@ -219,6 +218,49 @@ export default {
       setTimeout(() => {
         window.scrollTo({ top: buttonOffsetTop, behavior: "smooth" });
       }, delay);
+    },
+    changePageMove(name) {
+      if (name == "首頁水滴") {
+        this.$router.push({ path: "/", query: { id: "dropdrop" } });
+        setTimeout(() => {
+          // 获取滚动目标元素
+          const target = document.getElementById("dropdrop");
+
+          // 滚动到目标元素
+          if (target) {
+            target.scrollIntoView({ behavior: "smooth" });
+          }
+        }, 100);
+      } else if (name == "互動頁面") {
+        this.$router.push({ path: "/interact", query: { id: "mainpart" } });
+        setTimeout(() => {
+          // 获取滚动目标元素
+          const target = document.getElementById("mainpart");
+
+          // 滚动到目标元素
+          if (target) {
+            target.scrollIntoView({ behavior: "smooth" });
+          }
+        }, 100);
+      } else if (name == "購票頁面") {
+        this.$router.push({ path: "/ticket", query: { id: "checkdate" } });
+        setTimeout(() => {
+          // 获取滚动目标元素
+          const target = document.getElementById("checkdate");
+
+          // 滚动到目标元素
+          if (target) {
+            target.scrollIntoView({ behavior: "smooth" });
+          }
+        }, 100);
+      }
+    },
+    scrollShow(event) {
+      if (window.scrollY < 500) {
+        this.show = false;
+      } else {
+        this.show = true;
+      }
     },
   },
   computed: {},

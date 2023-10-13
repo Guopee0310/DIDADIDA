@@ -48,7 +48,7 @@
           </div>
         </div>
         <div class="bookbtn">
-          <button @click="bookTickets">{{ $t("立即購票") }}</button>
+          <button @click="bookTickets" class="bookbtnbtn">{{ $t("立即購票") }}</button>
         </div>
       </div>
     </div>
@@ -90,7 +90,8 @@ export default {
     },
   },
   mounted() {
-    fetch("http://localhost/dida_project/public/php/closeDateSelect.php")
+    fetch(`${this.$store.state.APIurl}closeDateSelect.php`)
+      // fetch("http://localhost/dida_project/public/php/closeDateSelect.php")
       .then(function (response) {
         return response.json();
       })
@@ -105,7 +106,8 @@ export default {
         }
         console.log(this.disabledDateRanges);
       });
-    fetch("http://localhost/dida_project/public/php/ticketMg.php") //第一步
+    fetch(`${this.$store.state.APIurl}ticketMg.php`)
+      // fetch("http://localhost/dida_project/public/php/ticketMg.php") //第一步
       // fetch(`${this.$store.state.APIurl}helperMg.php`)
       //this.$store.state.APIurl
       .then(function (response) {
@@ -328,6 +330,9 @@ export default {
 :deep(.calendar) .vc-week {
   padding: 10px;
 }
+// :deep(.calendar) .vc-day-content {
+//   background-color: red;
+// }
 
 :deep(.calendar) .vc-weekdays {
   padding: 10px;
@@ -360,6 +365,7 @@ export default {
   }
 
   .dateTextAll {
+    width: 100%;
     display: flex;
     justify-content: space-between;
 
@@ -427,7 +433,8 @@ export default {
         .ticketType {
           display: flex;
           flex-wrap: wrap;
-          align-items: center;
+          flex-direction: column;
+          // align-items: center;
 
           div {
             &:first-child {
@@ -496,4 +503,129 @@ export default {
     }
   }
 }
+
+@media screen and (max-width: 414px){
+  :deep(.calendar) .vc-disabled {
+  cursor: not-allowed;
+  text-decoration: line-through;
+}
+
+:deep(.calendar) .vc-week {
+  padding: 5px;
+}
+
+:deep(.calendar) .vc-weekdays {
+  padding: 5px;
+}
+
+:deep(.calendar) .vc-weeks {
+  margin: 5px;
+}
+
+:deep(.calendar) .vc-header {
+  height: 40px;
+  background-color: map-get($colors, "secondary");
+  margin: 0;
+  padding-left: 100px;
+  padding-right: 120px;
+}
+
+:deep(.calendar) .vc-arrow{
+  font: 12px;
+  color: map-get($colors, "light");
+  background-color: map-get($colors, "secondary");
+  margin-left:-15px;
+  margin-right:-15px;
+  z-index: 4;
+
+}
+:deep(.calendar) .vc-title {
+  color: map-get($colors, "light");
+  background-color: map-get($colors, "secondary");
+  z-index: 3;
+}
+:deep(.calendar) .vc-container {
+  border: 1px #68769a solid;
+}
+.dateTextAll {
+  flex-direction: column;
+  width: 335px;
+    .calendarOptionAll {
+      width: 335px;
+      // width: 100%;
+      // height: 80%;
+      display: flex;
+      flex-direction: column;
+
+      .optionAll {
+        width: 335px;
+        display: flex;
+        align-items: center;
+        padding: 15px 0;
+        justify-content: space-between;
+        border-bottom: 1px #979595 solid;
+        font-weight: bold;
+        letter-spacing: 1px;
+      }
+      .optionTitle {
+        // display: flex;
+        // justify-content: space-between;
+        padding-top: 15px;
+        width: 335px;
+        padding-bottom: 5px;
+        border-bottom: 1px #979595 solid;
+        font-size: map-get($fontSizes, "h4");
+
+        div {
+          &:last-child {
+            cursor: pointer;
+
+            img {
+              margin-right: 10px;
+              margin-bottom: -5px;
+            }
+          }
+        }
+      }
+      .totalNum{
+        width: 335px;
+        padding-top: 15px;
+        padding-right: 0px; 
+        // display: flex;
+       justify-content: space-between;
+        // align-items: baseline;
+        div {
+            &:first-child {
+             margin: 0;
+            }
+          }
+      }
+     
+      
+    }
+  }
+  .bookbtnbtn {
+        display: block;
+        // justify-content: flex-end;
+        // padding: 20px;
+        // margin: 20px -100px;
+        border: red 1px solid;
+        cursor: pointer;
+
+
+        button {
+
+          width: 150px;
+          height: 50px;
+          border: 0;
+          border-radius: 5px;
+          font-size: map-get($fontSizes, "h4");
+          background-color: map-get($colors, "secondary");
+          color: map-get($colors, "light");
+          cursor: pointer;
+        }
+      }
+ 
+}
+  
 </style>

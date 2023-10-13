@@ -10,14 +10,29 @@
             <th>圖片</th>
             <th>標題/內容</th>
             <th>上傳時間</th>
+            <th>開始/結束時間</th>
             <th>編輯</th>
         </tr>
-        <tr>
-            <td></td>
-            <td><input type="text" name="" id=""> <input type="text"></td>
-            <td><input type="date"></td>
+        <tr v-for="(item, index) in allactive" :key="index">
             <td>
-                <button>修改</button>
+                <div class="picBox">
+                    <img :src="'../all_images/news/' + item.active_img" :alt="item.active_img ? item.active_img : '未選圖片'">
+                </div>
+                <input type="file" accept="image/*,.jpg" @change="fileChange($event, index)" :ref="'fileInput' + index"
+                    :disabled="item.disabled" name="image" :title="item.active_img">
+            </td>
+            <td>
+                標題:<input type="text" v-model="item.actvie_title"><br>
+                內容:<input type="text" v-model="item.active_content">
+            </td>
+            <td>{{ item.active_date }}</td>
+            <td>
+                開始時間:<input type="date"><br>
+                結束時間:<input type="date">
+            </td>
+            <td>
+                <button>修改</button><br>
+                <button>刪除</button>
             </td>
         </tr>
     </table>
@@ -126,7 +141,48 @@ export default {
 
     },
     methods: {
+        news_content() {
+            //上傳時間
+            const currentDate = new Date();
+            const year = currentDate.getFullYear();
+            const month = (currentDate.getMonth() + 1).toString().padStart(2, '0');
+            const day = currentDate.getDate().toString().padStart(2, '0');
+            const formattedDateTime = `${year}-${month}-${day}`;
 
+            this.allactive.push({
+                active_id: this.allactive.length + 1,
+                active_title: "",
+                active_img: "",
+                active_content: "",
+                active_date: formattedDateTime,
+                active_category: "",
+                active_state: "",
+                active_star: "",
+                active_end: "",
+                disabled: false,
+                exist: false,
+            });
+        },
+        fileChange(e, index) {
+            let file = e.target.files[0];
+            this.changePic = file;
+            console.log("file", file);
+
+            let readFile = new FileReader();
+            readFile.readAsDataURL(file);
+            readFile.addEventListener("load", () => {
+                let image = new Image();
+                image.src = readFile.result;
+                console.log(image.src);
+                image.style.width = "100%";
+                image.style.height = "100%";
+                document.querySelectorAll(".picBox")[index].innerHTML = "";
+                document.querySelectorAll(".picBox")[index].appendChild(image);
+
+                // 检查Base64图像数据是否有效
+                // this.checkBase64Image(image.src, index);
+            });
+        },
     },
 
 
@@ -138,174 +194,21 @@ export default {
 </script>
   
 <style scoped lang="scss">
-.news_all {
-    .select {
-        display: flex;
+table {
+    width: 100%;
+    margin: 10px 0;
 
-        >div {
-            margin: 0 1em;
+    tr {
+        border-bottom: 1px solid black;
+        text-align: left;
+
+        td {
+            padding: 15px 0;
+            line-height: 3;
         }
     }
 
-    .news_content {
-        .title {
-            width: 100%;
-            border-bottom: 1px solid #000;
-            margin: 1em 0;
 
-            ul {
-                width: 90%;
-                margin: auto;
-                display: flex;
-                justify-content: center;
-
-                li {
-                    width: 33.333333%;
-                }
-            }
-        }
-
-        .content {
-            ul {
-                width: 100%;
-                display: flex;
-                align-items: center;
-                margin: 1rem 0;
-
-                .check {
-                    width: 5%;
-                }
-
-                li {
-                    &:nth-of-type(1) {
-                        width: 30%;
-
-                        p {
-                            width: 80%;
-                            overflow: hidden;
-                            text-overflow: ellipsis;
-                        }
-                    }
-
-                    &:nth-of-type(2) {
-                        width: 30%;
-                        margin: auto;
-                    }
-
-                    &:nth-of-type(3) {
-                        width: 15%;
-                    }
-
-                    &:nth-of-type(4) {
-                        width: 15%;
-                    }
-
-                    &:nth-of-type(5) {
-                        width: 5%;
-                    }
-                }
-
-                textarea {
-                    width: 90%;
-                    box-sizing: border-box;
-                    overflow: auto;
-                }
-
-                .news_name {
-                    max-height: 30px;
-                }
-
-                .img {
-                    width: 80%;
-                    aspect-ratio: 1/0.7;
-                    position: relative;
-
-
-                    .picBox {
-                        position: absolute;
-                        width: 100%;
-                        height: 100%;
-
-                        img {
-                            width: 100%;
-                            height: 100%;
-
-
-                            &::after {
-                                width: 100%;
-                                height: 100%;
-                                content: "\e09a\A" attr(alt);
-                                font-size: 1rem;
-                                font-family: FontAwesome;
-                                color: rgb(100, 100, 100);
-                                background-color: #c2baba;
-                                position: absolute;
-                                inset: 0;
-                                z-index: 2;
-                                pointer-events: none;
-                                display: flex;
-                                justify-content: center;
-                                align-items: center;
-                                white-space: pre;
-                                text-align: center;
-                            }
-                        }
-                    }
-
-
-                    .file_btn {
-                        width: 100%;
-                        height: 100%;
-                        position: relative;
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-
-                        i {
-                            width: 100%;
-                            display: flex;
-                            justify-content: center;
-                            align-items: center;
-                            position: absolute;
-                            inset: 0;
-                            opacity: 0;
-                            z-index: 4;
-                            font-size: 1.5rem;
-
-                            &:hover {
-                                opacity: 1;
-                                background-color: rgba(0, 0, 0, 0.4);
-                                transition: all .3s;
-
-                            }
-                        }
-
-
-
-                        input[type="file"] {
-                            width: 100%;
-                            height: 100%;
-                            position: absolute;
-                            inset: 0;
-                            opacity: 0;
-                            font-size: 0;
-                            cursor: pointer;
-                        }
-
-                    }
-                }
-
-                .radio_onOff {
-                    width: 100%;
-
-                    label {
-                        display: block;
-                        width: 100%;
-                    }
-                }
-            }
-        }
-    }
 }
 </style>
   

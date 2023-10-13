@@ -4,6 +4,21 @@ const publicURL =
   process.env.NODE_ENV === "development"
     ? ""
     : "https://tibamef2e.com/chd103/g4/DIDA";
+
+// const publicpath =
+//   process.env.NODE_ENV === "development"
+//     ? "http://localhost/musesmuseum/public/phps/"
+//     : "https://tibamef2e.com/chd103/g1/phps/";
+
+const publicpath =
+  process.env.NODE_ENV === "development"
+    ? "http://localhost/dida_project/public/php/"
+    : "https://tibamef2e.com/chd103/g4/DIDA/php/";
+
+// const imgpublicpath =
+//   process.env.NODE_ENV === "development"
+//     ? process.env.BASE_URL
+//     : "https://tibamef2e.com/chd103/g1/";
 // 中央狀態管理
 export default createStore({
   // 類似vue檔裡面的data
@@ -30,7 +45,7 @@ export default createStore({
     activeIndexes: [],
     questionPic: true,
     showLoadingOnce: true,
-    APIurl: "http://localhost/dida_project/public/php/",
+    APIurl: publicpath,
     checkLogin: false,
     memberEmail: "",
     memberId: "",

@@ -44,7 +44,7 @@ export default {
     };
   },
   mounted() {
-    fetch("http://localhost/dida_project/public/php/ticketMg.php")
+    fetch(`${this.$store.state.APIurl}ticketMg.php`)
       .then(function (response) {
         return response.json();
       })

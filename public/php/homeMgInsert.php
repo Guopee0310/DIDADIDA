@@ -1,36 +1,13 @@
+<!-- 可複製圖片 / 新增 / 修改 -->
 <?php
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json");
 
 require_once("connect.php"); 
 
-// get
-try {
-    
-    $sql = "SELECT * FROM banner";
-    $stmt = $pdo->query($sql);
-    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-    echo json_encode($result);
-} catch (PDOException $e) {
-    $response = array('error' => true, 'msg' => '获取管理员数据失败: ' . $e->getMessage());
-    echo json_encode($response);
-}
-
-
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
   $uploadedFile = $_FILES["image"]["name"];
   $banner_id = $_POST["banner_id"];
-
-  // 檢查文件是否成功上傳
-  if ($_FILES["image"]["error"] !== UPLOAD_ERR_OK) {
-    $response = [
-      "error" => true,
-      "message" => "文件上傳失敗。"
-    ];
-    echo json_encode($response);
-    exit;
-  }
 
   $fileName = uniqid();
   $fileExt = pathinfo($uploadedFile, PATHINFO_EXTENSION);
@@ -44,34 +21,47 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
   $targetFile = $fileName . "." . $fileExt;
 
   if (move_uploaded_file($_FILES["image"]["tmp_name"], $targetDirectory . $targetFile)) {
-    // 文件上傳成功，接下來更新數據庫
-    $update_sql = "UPDATE banner SET banner_pic = :banner_pic WHERE banner_id = :banner_id";
+    $response = [
+      "success" => true,
+      "message" => "文件上傳成功。",
+      "file_path" => $targetFile,
+      "fileName" => $targetFile
+    ];
+    echo json_encode($response);
+  } else {
+    $response = [
+      "error" => true,
+      "message" => "文件上傳失敗。"
+    ];
+    echo json_encode($_FILES["image"]["tmp_name"]);
+  }
+
+  $update_sql = "INSERT INTO banner (banner_id, banner_pic) VALUES (:banner_id, :banner_pic)";
+ 
     $update_stmt = $pdo->prepare($update_sql);
     $update_stmt->bindValue(":banner_id", $banner_id, PDO::PARAM_INT);
     $update_stmt->bindValue(":banner_pic", $targetFile);
 
     if ($update_stmt->execute()) {
+        // 返回成功消息或其他適當的響應
         $response = [
             "success" => true,
             "message" => "更新成功。",
         ];
+        // echo json_encode($response);
     } else {
+        // 更新失敗，返回錯誤消息
         $errorInfo = $update_stmt->errorInfo();
         $response = [
             "error" => true,
-            "message" => "更新失敗：" . $errorInfo[2],
+            "message" => "更新失敗：" . $errorInfo[2], // 將錯誤信息包括在消息中
         ];
+        // echo json_encode($response);
     }
-  } else {
-    $response = [
-      "error" => true,
-      "message" => "文件複製失敗。"
-    ];
-  }
-
-  echo json_encode($response);
 }
 
 // 用於數據庫操作的其餘代碼，取消註釋並正確處理
+
+
 
 ?>

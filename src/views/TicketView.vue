@@ -10,8 +10,10 @@
       </div>
       <div class="warning">※{{ $t('未滿4歲且有家長陪同的幼童可免費入場') }}</div> -->
     </div>
+    <div id="checkdate">
     <bookDate></bookDate>
-    <div class="bottomIntro">
+   </div>
+    <div class="bottomIntro"  >
       <div class="bottomTitle">{{ $t("購票須知") }}</div>
       <div>
         <div v-for="(i, index) in warningArr" :key="index" class="singleNotice">

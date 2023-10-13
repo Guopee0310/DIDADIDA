@@ -8,7 +8,7 @@
         :is-active="mountedShowLove.findIndex((v) => v == i.prod_id) > -1"></heart>
     </div>
     <div class="pic">
-      <a href="#" @click.prevent="showProductDetails(i)"><img :src="'../all_images/product/' + i.prod_img"
+      <a href="#" @click.prevent="showProductDetails(i)"><img :src="`/all_images/product/${i.prod_img}`"
           :alt="i.prod_img" /></a>
     </div>
 
@@ -26,9 +26,13 @@
           <input type="button" value="+" @click="i.count++" />
         </div>
         <div class="buy">
-          <i class="fa-solid fa-cart-shopping" style="color: #9fbdce" @click.prevent="
-            pushAndTogglePopup(i.imageSrc, i.titleName, i.count, i.prodPrice)
-            "></i>
+          <i
+            class="fa-solid fa-cart-shopping"
+            style="color: #9fbdce"
+            @click.prevent="
+              pushAndTogglePopup(i.prod_img, i.prod_name, i.count, i.prod_price)
+            "
+          ></i>
           <!-- pushInShoppingCart(
                   i.imageSrc,
                   i.titleName,
@@ -48,7 +52,7 @@
       <div class="modal-content">
         <div class="prod-content">
           <div class="prod-img">
-            <img :src="'../all_images/product/' + selectedProduct.prod_img" />
+            <img :src="`/all_images/product/${selectedProduct.prod_img}`" />
           </div>
           <div class="prod-info">
             <div>
@@ -279,7 +283,7 @@ export default {
     try {
       // 非同步請求數據
       const response = await fetch(
-        "http://localhost/dida_project/public/php/productSelect.php"
+        `${this.$store.state.APIurl}productSelect.php`
       );
       const myJson = await response.json();
       for (let i = 0; i < myJson.length; i++) {

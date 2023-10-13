@@ -7,7 +7,11 @@
           <option value="">訂單編號</option>
           <option value="">會員帳號</option>
         </select>
-        <input type="text" placeholder="請輸入訂單編號" v-model="prodChooseOrder" />
+        <input
+          type="text"
+          placeholder="請輸入訂單編號"
+          v-model="prodChooseOrder"
+        />
         <div @click="prodChooseNameOrOrder">搜尋</div>
       </div>
       <div class="orderTableAll">
@@ -17,6 +21,7 @@
           <div>商品名稱</div>
           <div>數量</div>
           <div>時間</div>
+      
           <div>狀態</div>
         </div>
         <div v-for="(i, index) in prodOrder" class="singleOrderTable">
@@ -30,13 +35,18 @@
 
           <div>{{ i.prodCount }}</div>
           <div>{{ i.ord_date }}</div>
-          <div>{{ i.ord_state }}</div>
+          <!-- <div>{{ i.ord_state }}</div> -->
 
-          <div class="updateOrderBtn">
+          <select>
+                 <option>{{ i.ord_state }}</option>
+          </select>
+    
+
+          <!-- <div class="updateOrderBtn">
             <div class="update" @click="updateOrder(index, $event, i)">
               <button>修改</button>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
     </TabPane>
@@ -55,8 +65,9 @@
           <div>訂單編號</div>
           <div>會員帳號</div>
           <div>票種</div>
-          <div>數量</div>
+          <div>單價</div>
           <div>票卷日期</div>
+          <div>票卷狀態</div>
         </div>
         <div
           v-for="(i, index) in ticketOrderSlice"
@@ -74,9 +85,14 @@
             {{ i.tic_pay }}
           </div>
           <div>{{ i.tic_date }}</div>
-          <button>詳細資料</button>
+          <div>{{ i.tic_state }}</div>
+          <!-- <button>詳細資料</button> -->
+          <!-- <button @click="toggleDetails(index, 'ticketOrder')">票券狀態</button>
+         <div v-if="i.showDetails" class="details"> -->
+          <!-- 這裡放置詳細資料欄位 -->
+        
         </div>
-      </div>
+        </div>
     </TabPane>
   </Tabs>
 </template>
@@ -147,7 +163,7 @@ export default {
   computed: {},
   mounted() {
     ////fetch ordrMg.php
-    fetch("http://localhost/dida_project/public/php/orderMg.php") //第一步
+    fetch(`${this.$store.state.APIurl}orderMg.php`) //第一步
       // fetch(`${this.$store.state.APIurl}orderMg.php`)
       //this.$store.state.APIurl
       // axios
@@ -162,7 +178,7 @@ export default {
       });
 
     ////fetch tickMg.php
-    fetch("http://localhost/dida_project/public/php/tickOrderMg.php") //第一步
+    fetch(`${this.$store.state.APIurl}tickOrderMg.php`) //第一步
       // fetch(`${this.$store.state.APIurl}orderMg.php`)
       //this.$store.state.APIurl
       // axios
@@ -203,6 +219,13 @@ export default {
         this.orderSlice = this.prodOrder;
       }
     },
+      toggleDetails(index, dataType) {
+      if (dataType === 'prodOrder') {
+        this.prodOrder[index].showDetails = !this.prodOrder[index].showDetails;
+      } else if (dataType === 'ticketOrder') {
+        this.ticketOrderSlice[index].showDetails = !this.ticketOrderSlice[index].showDetails;
+      }
+    },
 
     ////購票訂單
     resetArr() {
@@ -229,7 +252,6 @@ export default {
         this.ticketOrderSlice = this.ticketOrder;
       }
     },
-   
 
     updateOrder(index, e, i) {
       if (e.target.innerText == "確認") {
@@ -258,7 +280,7 @@ export default {
         formData.append("ord_add", ord_add);
         formData.append("ord_state", ord_state);
         formData.append("ord_redeem", ord_redeem);
-        fetch("http://localhost/dida_project/public/php/orderMg.php", {
+        fetch(`${this.$store.state.APIurl}orderMg.php`, {
           method: "post",
           body: formData,
         }).then((res) => res.json());
