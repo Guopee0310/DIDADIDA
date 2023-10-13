@@ -1,28 +1,21 @@
 <template>
   <div class="header">
-    <div
-      class="wrap"
-      :style="{
-        'background-color': headerColor,
-        top: 0,
-        left: 0,
-        'z-index': 8,
-        width: '100%',
-      }"
-    >
+    <div class="wrap" :style="{
+      'background-color': headerColor,
+      top: 0,
+      left: 0,
+      'z-index': 8,
+      width: '100%',
+    }">
       <!-- logo -->
 
       <!-- this.checkLogoPic = false; -->
       <div :class="{ logo: !checkLogoPic, logoChange: checkLogoPic }">
-        <router-link to="/" v-if="!checkLogoPic"
-          ><img src="../../public/all_images/logo_all.svg"
-        /></router-link>
-        <router-link to="/" v-if="checkLogoPic"
-          ><img src="../../public/all_images/logo_half.svg"
-        /></router-link>
+        <router-link to="/" v-if="!checkLogoPic"><img src="/all_images/logo_all.svg" /></router-link>
+        <router-link to="/" v-if="checkLogoPic"><img src="/all_images/logo_half.svg" /></router-link>
       </div>
 
-      <nav class="main-nav">
+      <nav class="main-nav" :style="{ 'color': markColor }">
         <!-- 關於我們 -->
         <div class="main-menu">
           <router-link to="/about">{{ $t(menuTitle.about) }}</router-link>
@@ -44,12 +37,9 @@
         <div class="main-menu">
           <router-link to="/explore">{{ $t(menuTitle.animal) }}</router-link>
           <ul class="sub-menu">
-            <li v-for="animalSub in animalSub" key="animalSub">
-              <router-link
-                :to="animalSub.link"
-                @click="changePageMove(animalSub.name)"
-                >{{ $t(animalSub.name) }}</router-link
-              >
+            <li v-for="  animalSub   in   animalSub  " key="animalSub">
+              <router-link :to="animalSub.link" @click="changePageMove(animalSub.name)">{{ $t(animalSub.name)
+              }}</router-link>
             </li>
           </ul>
         </div>
@@ -58,7 +48,7 @@
         <div class="main-menu">
           <a>{{ $t(menuTitle.buy) }}</a>
           <ul class="sub-menu">
-            <li v-for="buySub in buySub" key="buySub">
+            <li v-for="  buySub in buySub " key="buySub">
               <router-link :to="buySub.link">{{ $t(buySub.name) }}</router-link>
             </li>
           </ul>
@@ -67,32 +57,17 @@
         <!-- 會員登入 -->
         <div class="icons">
           <span>
-            <i
-              @click="this.$store.state.storeShowLogin = true"
-              v-if="!this.$store.state.userName"
-              class="fa-solid fa-user"
-              style="color: #eee"
-            ></i>
-            <div
-              v-if="this.$store.state.userName"
-              @click="this.$router.push('./member')"
-              style="color: #eee"
-              class="name"
-            >
+            <i @click="this.$store.state.storeShowLogin = true" v-if="!this.$store.state.userName"
+              class="fa-solid fa-user" style="color: #eee"></i>
+            <div v-if="this.$store.state.userName" @click="this.$router.push('./member')" style="color: #eee"
+              class="name">
               {{ this.$store.state.userName }}
             </div>
-            <span
-              v-if="this.$store.state.userName"
-              @click="logOutAPI()"
-              class="logOutBtn"
-              >登出</span
-            >
+            <span v-if="this.$store.state.userName" @click="logOutAPI()" class="logOutBtn">登出</span>
           </span>
 
           <!-- 購物車 -->
-          <router-link to="/shoppingcart"
-            ><i class="fa-solid fa-cart-shopping" style="color: #eee"></i
-          ></router-link>
+          <router-link to="/shoppingcart"><i class="fa-solid fa-cart-shopping" style="color: #eee"></i></router-link>
         </div>
         <!-- 語言切換 -->
         <div class="select">
@@ -101,9 +76,7 @@
             <option value="en">English</option>
             <!-- 添加其他支持的語言選項 -->
           </select>
-          <span
-            ><i class="fa-solid fa-chevron-down" style="color: #eeeeee"></i
-          ></span>
+          <span><i class="fa-solid fa-chevron-down" style="color: #eeeeee"></i></span>
         </div>
       </nav>
       <!-- 手機menu -->
@@ -111,10 +84,7 @@
         <div class="navigation">
           <input type="checkbox" class="navigation__checkbox" id="nav-toggle" />
           <label for="nav-toggle" class="navigation__button">
-            <span
-              class="navigation__icon"
-              aria-label="toggle navigation menu"
-            ></span>
+            <span class="navigation__icon" aria-label="toggle navigation menu"></span>
           </label>
           <div class="navigation__background"></div>
 
@@ -123,33 +93,17 @@
               <div class="btn_wrap">
                 <div class="icons">
                   <span>
-                    <i
-                      @click="this.$store.state.storeShowLogin = true"
-                      v-if="!this.$store.state.userName"
-                      class="fa-solid fa-user"
-                      style="color: #eee"
-                    ></i>
-                    <div
-                      v-if="this.$store.state.userName"
-                      @click="this.$router.push('./member')"
-                    >
+                    <i @click="this.$store.state.storeShowLogin = true" v-if="!this.$store.state.userName"
+                      class="fa-solid fa-user" style="color: #eee"></i>
+                    <div v-if="this.$store.state.userName" @click="this.$router.push('./member')">
                       {{ this.$store.state.userName }}
                     </div>
-                    <span
-                      v-if="this.$store.state.userName"
-                      @click="logOutAPI()"
-                      class="logOutBtn"
-                      >登出</span
-                    >
+                    <span v-if="this.$store.state.userName" @click="logOutAPI()" class="logOutBtn">登出</span>
                   </span>
 
                   <!-- 購物車 -->
-                  <router-link to="/shoppingcart" @click="closeMobileMenu"
-                    ><i
-                      class="fa-solid fa-cart-shopping"
-                      style="color: #eee"
-                    ></i
-                  ></router-link>
+                  <router-link to="/shoppingcart" @click="closeMobileMenu"><i class="fa-solid fa-cart-shopping"
+                      style="color: #eee"></i></router-link>
                 </div>
                 <div class="select">
                   <select v-model="selectedLanguage" @change="changeLanguage">
@@ -157,12 +111,7 @@
                     <option value="en">English</option>
                     <!-- 添加其他支持的語言選項 -->
                   </select>
-                  <span
-                    ><i
-                      class="fa-solid fa-chevron-down"
-                      style="color: #eeeeee"
-                    ></i
-                  ></span>
+                  <span><i class="fa-solid fa-chevron-down" style="color: #eeeeee"></i></span>
                 </div>
               </div>
               <!-- 關於DIDA -->
@@ -171,7 +120,7 @@
                   $t(menuTitle.about)
                 }}</a>
                 <ul class="dropdown" v-if="showAboutDropdown">
-                  <li v-for="aboutSub in aboutSub" key="aboutSub">
+                  <li v-for="  aboutSub   in   aboutSub  " key="aboutSub">
                     <router-link :to="aboutSub.link" @click="closeMobileMenu">{{
                       $t(aboutSub.name)
                     }}</router-link>
@@ -194,7 +143,7 @@
               <li class="navigation__item">
                 <a @click="toggleDropdown('buy')">{{ $t(menuTitle.buy) }}</a>
                 <ul class="dropdown" v-if="showBuyDropdown">
-                  <li v-for="buySub in buySub" key="buySub">
+                  <li v-for="  buySub   in   buySub  " key="buySub">
                     <router-link :to="buySub.link" @click="closeMobileMenu">{{
                       $t(buySub.name)
                     }}</router-link>
@@ -217,11 +166,13 @@ export default {
   components: {},
   data() {
     return {
+      markColor: "#eee",
       checkLogoPic: false,
       headerColor: "rgba(35, 45, 71, 0)",
       headerPosition: "relative",
       showAboutDropdown: false,
       showBuyDropdown: false,
+      // markColor: '#333',
       menuTitle: {
         about: "關於DIDA",
         news: "最新消息",
@@ -281,6 +232,13 @@ export default {
     window.removeEventListener("scroll", this.handleScroll);
   },
   methods: {
+    haederMark(name) {
+      if (name == "最新消息") {
+        this.markColor = "#57a3f3";
+      } else {
+        this.markColor = "#eee"
+      }
+    },
     changePageMove(name) {
       if (name == "表層海洋帶") {
         // this.$router.push({ path: '/product', query: { article: 'footer' } });
@@ -455,6 +413,10 @@ export default {
     margin: 0 10px;
     display: flex;
     justify-content: center;
+  }
+
+  .main-menu a.router-link-exact-active {
+    color: #B6E3D8;
   }
 
   // 子選單樣式
@@ -700,7 +662,7 @@ option:checked {
           transition: all 0.3s ease-in-out 0s, visibility 0s linear 0.3s;
           z-index: 2;
 
-          > li {
+          >li {
             // margin: 1rem;
             padding: 1rem 0;
           }
@@ -727,12 +689,12 @@ option:checked {
 
       // menu字
 
-      .navigation__checkbox:checked ~ .navigation__background {
+      .navigation__checkbox:checked~.navigation__background {
         transform: scale(80);
         opacity: 1;
       }
 
-      .navigation__checkbox:checked ~ .navigation__nav {
+      .navigation__checkbox:checked~.navigation__nav {
         width: 100%;
         visibility: visible;
         opacity: 1;
@@ -772,21 +734,17 @@ option:checked {
       }
 
       //menu叉叉
-      .navigation__checkbox:checked + .navigation__button .navigation__icon {
+      .navigation__checkbox:checked+.navigation__button .navigation__icon {
         background-color: transparent;
         box-shadow: none;
       }
 
-      .navigation__checkbox:checked
-        + .navigation__button
-        .navigation__icon::before {
+      .navigation__checkbox:checked+.navigation__button .navigation__icon::before {
         top: 0;
         transform: rotate(135deg);
       }
 
-      .navigation__checkbox:checked
-        + .navigation__button
-        .navigation__icon::after {
+      .navigation__checkbox:checked+.navigation__button .navigation__icon::after {
         top: 0;
         transform: rotate(-135deg);
       }

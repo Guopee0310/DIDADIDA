@@ -39,7 +39,7 @@
       </div>
     </div>
 
-    <div class="navBar">
+    <div class="navBar" v-if="show">
       <ul>
         <li>
           <router-link to="#" @click.prevent="btnScroll('表層海洋帶')">0m
@@ -109,6 +109,7 @@ export default {
     return {
       parallaxValue: 30,
       selectedAnimal: null,
+      show: false,
       animals: [
         {
           name: '黃高鰭刺尾魚',
@@ -627,6 +628,13 @@ export default {
     closeCard() {
       this.selectedAnimal = null;
     },
+    scrollShow(event) {
+      if (window.scrollY < 500) {
+        this.show = false;
+      } else {
+        this.show = true;
+      }
+    },
   },
   mounted() {
     this.animals.forEach((animal, index) => {
@@ -636,6 +644,11 @@ export default {
         pointerEvents: true,
       });
     });
+
+    window.addEventListener("scroll", this.scrollShow);
+  },
+  beforeDestroy() {
+    window.removeEventListener("scroll", this.scrollShow);
   },
   components: {
     VueParallax,
@@ -774,8 +787,9 @@ export default {
     }
 
     .goldfish {
-      translate: 60% 0%;
-      // width: 170px;
+      margin: 0 350px 0 auto;
+      // translate: 600%  0%;
+      width: 170px;
 
       img {
         cursor: pointer;
@@ -791,7 +805,9 @@ export default {
 
     .dory {
       cursor: pointer;
-      translate: 55% 200%;
+      translate: 450% 200%;
+      width: 150px;
+
 
       img {
         visibility: top;
@@ -806,8 +822,8 @@ export default {
 
     .nimo {
       cursor: pointer;
-      translate: -180% 320%;
-      // margin: -40px auto 0 730px;
+      // translate: -180% 320%;
+      width: 100px;
 
       img {
         visibility: top;
@@ -822,6 +838,7 @@ export default {
     .angryfish {
       cursor: pointer;
       translate: 23% 250%;
+      width: 100px;
 
       img {
         visibility: top;
@@ -836,7 +853,7 @@ export default {
     .blueyellow {
       cursor: pointer;
       translate: 70% 270%;
-      // margin: 50px 0 80px 350px;
+      width: 130px;
 
       img {
         visibility: top;
@@ -851,6 +868,7 @@ export default {
     .whale {
       cursor: pointer;
       translate: 15% 30%;
+      width: 1200px;
       // margin: -50px 10px 0 auto;
 
       img {
@@ -866,6 +884,7 @@ export default {
     .star {
       cursor: pointer;
       translate: 40em 20em;
+      width: 130px;
       // margin: 30px 0 0 350px;
 
       img {
@@ -881,6 +900,7 @@ export default {
     .leofish {
       cursor: pointer;
       translate: 12em 7em;
+      width: 150px;
       // margin: 0 530px 0 auto;
 
       img {
@@ -897,6 +917,7 @@ export default {
     .shark {
       cursor: pointer;
       translate: 3em 5em;
+      width: 450px;
 
       img {
         visibility: top;
@@ -923,6 +944,7 @@ export default {
     .linefish {
       cursor: pointer;
       translate: 10em -15em;
+      width: 150px;
 
       img {
         visibility: top;
@@ -938,6 +960,7 @@ export default {
     .jokfish {
       cursor: pointer;
       translate: 65em 3em;
+      width: 130px;
       // margin: 0 550px 80px auto;
 
       img {
@@ -954,6 +977,7 @@ export default {
     .manatee {
       cursor: pointer;
       margin: -35px auto 0 530px;
+      width: 450px;
 
       img {
         visibility: top;
@@ -969,6 +993,7 @@ export default {
     .nosefish {
       cursor: pointer;
       margin: -140px auto 0 210px;
+      width: 350px;
 
       img {
         visibility: top;
@@ -984,6 +1009,7 @@ export default {
     .taco {
       cursor: pointer;
       translate: 30em 75em;
+      width: 750px;
       // margin: 0 280px 0 auto;
 
       img {
@@ -1000,7 +1026,7 @@ export default {
 
     .jellyfish {
       cursor: pointer;
-      // width: 130px;
+      width: 130px;
       translate: 50% -130%;
       // border: 1px solid red;
 
@@ -1018,6 +1044,7 @@ export default {
     .cutefish {
       cursor: pointer;
       translate: 10em -45em;
+      width: 220px;
       // border: 1px solid red;
 
 
@@ -1035,6 +1062,7 @@ export default {
     .ETfish {
       cursor: pointer;
       translate: 60em -60em;
+      width: 200px;
 
       img {
         visibility: top;
@@ -1050,6 +1078,7 @@ export default {
     .greatwhiteshark {
       cursor: pointer;
       translate: 45em -30em;
+      width: 450px;
 
       img {
         visibility: top;
@@ -1065,6 +1094,7 @@ export default {
     .harinose {
       cursor: pointer;
       translate: 3em -75em;
+      width: 250px;
 
       img {
         visibility: top;
@@ -1079,6 +1109,7 @@ export default {
     .longnose {
       cursor: pointer;
       translate: 41em -74em;
+      width: 150px;
 
       img {
         visibility: top;
@@ -1094,6 +1125,7 @@ export default {
     .smile {
       cursor: pointer;
       translate: -2em -38em;
+      width: 500px;
 
       img {
         visibility: top;
@@ -1109,6 +1141,7 @@ export default {
     .moonfish {
       cursor: pointer;
       translate: 10em -17em;
+      width: 215px;
 
       img {
         visibility: top;
@@ -1124,6 +1157,7 @@ export default {
     .spermwhale {
       cursor: pointer;
       translate: 40em -20em;
+      width: 950px;
 
       img {
         visibility: top;
@@ -1139,6 +1173,7 @@ export default {
     .stingray {
       cursor: pointer;
       translate: 52em -20em;
+      width: 500px;
 
       img {
         visibility: top;
@@ -1154,6 +1189,7 @@ export default {
     .sunfish {
       cursor: pointer;
       translate: 10em -30em;
+      width: 200px;
 
       img {
         visibility: top;
@@ -1169,6 +1205,7 @@ export default {
     .toad {
       cursor: pointer;
       translate: 40em -30em;
+      width: 200px;
 
       img {
         visibility: top;
@@ -1184,6 +1221,7 @@ export default {
     .monkfish {
       cursor: pointer;
       translate: 34em -2em;
+      width: 200px;
 
       img {
         visibility: top;
@@ -1199,6 +1237,7 @@ export default {
     .flyfish {
       cursor: pointer;
       translate: 20em -40em;
+      width: 200px;
 
       img {
         visibility: top;
@@ -1213,6 +1252,7 @@ export default {
     .ohpsfish {
       cursor: pointer;
       translate: 45em -30em;
+      width: 230px;
 
       img {
         visibility: top;
@@ -1228,6 +1268,7 @@ export default {
     .blueWhale {
       cursor: pointer;
       margin: 30px auto 60px 0;
+      width: 900px;
       // translate: 10em 10em;
 
       img {

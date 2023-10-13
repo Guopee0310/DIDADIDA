@@ -1,16 +1,9 @@
 <template>
   <!-- 小幫手 -->
   <div class="helperAll">
-    <button class="noselect" @click="top" ref="scrollTopButton">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-      >
-        <path
-          d="M0 16.67l2.829 2.83 9.175-9.339 9.167 9.339 2.829-2.83-11.996-12.17z"
-        />
+    <button class="noselect" @click="top" ref="scrollTopButton" v-if="show">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+        <path d="M0 16.67l2.829 2.83 9.175-9.339 9.167 9.339 2.829-2.83-11.996-12.17z" />
       </svg>
     </button>
     <div class="item" @click="moveShowText">
@@ -26,10 +19,7 @@
     </div>
   </div>
 
-  <div
-    class="showWindow"
-    :style="{ transform: showText ? 'translateX(0px)' : 'translateX(1000px)' }"
-  >
+  <div class="showWindow" :style="{ transform: showText ? 'translateX(0px)' : 'translateX(1000px)' }">
     <div class="windowBtnAll">
       <!-- <div v-for="i in helperText">
         <div>{{ i.smart_que }}</div>
@@ -42,19 +32,15 @@
       <div @click="moveVisitors">{{ helperAsk3 }}</div>
     </div>
     <div class="rspbox">
-      <div
-        class="sayHelloTxt"
-        v-if="
-          !(
-            showAddress ||
-            showWeatherMax ||
-            showMaxT ||
-            showClosed ||
-            showBonus ||
-            showVisitors
-          )
-        "
-      >
+      <div class="sayHelloTxt" v-if="!(
+        showAddress ||
+        showWeatherMax ||
+        showMaxT ||
+        showClosed ||
+        showBonus ||
+        showVisitors
+      )
+        ">
         {{ sayHelloTxt }}
       </div>
       <div class="response" v-if="showAddress">
@@ -65,12 +51,12 @@
       </div>
       <div class="response" v-if="showMaxT">降雨機率 : {{ weatherPop }}%</div>
       <div class="response" v-if="showClosed">{{ closedtime }}也可至<router-link :to="checkdate.link"
-                @click="changePageMove(checkdate.name)">購票頁面</router-link>查看日曆喔!</div>
+          @click="changePageMove(checkdate.name)">購票頁面</router-link>查看日曆喔!</div>
       <div class="response" v-if="showBonus">可至<router-link :to="interact.link"
-                @click="changePageMove(interact.name)">互動頁面</router-link>{{ bonus }}</div>
+          @click="changePageMove(interact.name)">互動頁面</router-link>{{ bonus }}</div>
       <div class="response" v-if="showVisitors">
-       參考<router-link :to="droper.link"
-                @click="changePageMove(droper.name)">首頁水滴</router-link>{{ visitors }}{{ this.$store.state.visitCount }}人喔~
+        參考<router-link :to="droper.link" @click="changePageMove(droper.name)">首頁水滴</router-link>{{ visitors }}{{
+          this.$store.state.visitCount }}人喔~
       </div>
     </div>
   </div>
@@ -104,12 +90,13 @@ export default {
       helperAsk1: "",
       helperAsk2: "",
       helperAsk3: "",
-      droper:  { link: "/", name: "首頁水滴" },
-      interact:  { link: "/interact", name: "互動頁面" },
-      checkdate:  { link: "/ticket", name: "購票頁面" },
+      droper: { link: "/", name: "首頁水滴" },
+      interact: { link: "/interact", name: "互動頁面" },
+      checkdate: { link: "/ticket", name: "購票頁面" },
+      show: false,
     };
   },
-  created() {},
+  created() { },
   mounted() {
     // fetch("http://localhost/dida_project/public/php/helperMg.php").then(
     //   async (rsp) => {
@@ -149,6 +136,11 @@ export default {
           myJson.records.location[13].weatherElement[0].time[2].parameter.parameterName;
         this.locationName = myJson.records.location[13].locationName;
       });
+
+    window.addEventListener("scroll", this.scrollShow);
+  },
+  beforeDestroy() {
+    window.removeEventListener("scroll", this.scrollShow);
   },
   methods: {
     moveShowText() {
@@ -262,7 +254,14 @@ export default {
           }
         }, 100);
       }
-      } 
+    },
+    scrollShow(event) {
+      if (window.scrollY < 500) {
+        this.show = false;
+      } else {
+        this.show = true;
+      }
+    },
   },
   computed: {},
 };

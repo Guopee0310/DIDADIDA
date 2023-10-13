@@ -92,6 +92,7 @@ export default {
           let banner_id = i.banner_id;
           let formData = new FormData();
           formData.append("banner_id", banner_id);
+          formData.append("image", this.changePic);
 
           alert(banner_id);
 
