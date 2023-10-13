@@ -1,39 +1,45 @@
 <template>
   <div class="prod_order_main">
     <div class="order_area">
+      <select v-model="selectOrder">
+        <option value="請選擇">請選擇</option>
+        <option :value="i" v-for="i in orderNumAll">訂單編號{{ i }}</option>
+      </select>
+
       <div
         class="prod_order_group"
-        v-for="prod in prodOrder"
-        :key="prod.prodImg"
+        v-for="prod in filteredProdOrder"
+        :key="prod.prod_img"
       >
         <div class="prod_img">
-          <img :src="prod.prodImg" alt="" />
+          <img :src="'../all_images/product/' + prod.prod_img" alt="" />
         </div>
         <div class="prod_info">
           <div class="item_info prod_item">
             <p>品項</p>
-            <p>{{ prod.prodName }}</p>
+            <p>{{ prod.prod_name }}</p>
           </div>
           <div class="item_info prod_count">
             <p>數量</p>
-            <p>{{ prod.prodCount }}</p>
+            <p>{{ prod.ord_qty }}</p>
           </div>
           <div class="item_info prod_date">
-            <p>時間</p>
-            <p>{{ prod.prodDate }}</p>
+            <p>訂購日</p>
+            <p>{{ prod.ord_date }}</p>
           </div>
           <div class="item_info prod_price">
             <p>金額</p>
-            <p>NT {{ prod.prodPrice }}</p>
+            <p>NT {{ prod.ord_sum }}</p>
           </div>
         </div>
       </div>
-      <div class="ord_info">
-        <!-- <p>下單金額 : NT 1,800</p>
-        <p>運費 : NT 60</p>
-        <p>使用紅利點數 : 0 點</p>
-        <p>總金額 : NT 1860</p> -->
+      <div v-if="selectOrder !== '請選擇'" class="ord_info">
+        <p>收件人:{{ filteredProdOrder[0].ord_person }}</p>
+        <p>下單金額 :{{ filteredProdOrder[0].ord_sum }}</p>
+        <p>運費 : NT {{ filteredProdOrder[0].ord_ship }}</p>
+        <p>總金額 : NT {{ filteredProdOrder[0].ord_pay }}</p>
       </div>
+
       <!-- <div class="close_btn">
         <button>關閉</button>
       </div> -->
@@ -45,11 +51,53 @@ export default {
   name: "prodOrderInquiry",
   data() {
     return {
+      selectOrder: "請選擇",
       prodOrder: [],
+      orderNumAll: [],
     };
   },
   created() {
-    this.prodOrder = this.$store.state.prodOrderArr;
+    fetch(`${this.$store.state.APIurl}prodOrderSelect.php`)
+      .then(function (response) {
+        return response.json();
+      })
+      .then((data) => {
+        this.prodOrder = data;
+        return this.prodOrder;
+      })
+      .then((res) => {
+        // 使用 filter 方法过滤数据
+        const filteredData = res.filter(
+          (item) => item.mem_id == this.$store.state.memberId
+        );
+        this.prodOrder = filteredData;
+        const uniqueOrderIds = new Set();
+        for (let i = 0; i < this.prodOrder.length; i++) {
+          uniqueOrderIds.add(this.prodOrder[i].ord_id);
+        }
+
+        // 将 Set 转换为数组
+        this.orderNumAll = Array.from(uniqueOrderIds);
+        console.log(this.prodOrder); // 这里将打印过滤后的数据
+      });
+
+    // this.prodOrder = this.$store.state.prodOrderArr;
+  },
+  computed: {
+    // filteredOrderNums() {
+    //   // 根据您的逻辑过滤并返回需要显示的订单编号列表
+    //   return this.orderNumAll.filter((i) => {
+    //     // 添加适当的条件，以确定是否包含在列表中
+    //     return i === this.selectOrder;
+    //   });
+    // },
+    filteredProdOrder() {
+      // 根据您的逻辑过滤并返回需要显示的订单信息列表
+      return this.prodOrder.filter((prod) => {
+        // 添加适当的条件，以确定是否包含在列表中
+        return prod.ord_id === this.selectOrder;
+      });
+    },
   },
 };
 </script>

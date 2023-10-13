@@ -5,6 +5,91 @@ import visual from "../components/visualGame.vue";
 import helper from "../components/helper.vue";
 const routes = [
   {
+    path: "/backHome",
+    name: "backHome",
+    meta: {
+      hideApp: true, // 需要隐藏App.vue中的组件
+    },
+    component: () =>
+      import(
+        /* webpackChunkName: "backHome" */ "../views/backEnd/backHome.vue"
+      ),
+    children: [
+      {
+        path: "/backHome/homePicMg",
+        name: "homePicMg",
+        component: () =>
+          import(
+            /* webpackChunkName: "homePicMg" */ "../views/backEnd/homePicMg.vue"
+          ),
+      },
+      {
+        path: "/backHome/gamesMg",
+        name: "gamesMg",
+        component: () =>
+          import(
+            /* webpackChunkName: "gamesMg" */ "../views/backEnd/gamesMg.vue"
+          ),
+      },
+      {
+        path: "/backHome/helperMg",
+        name: "helperMg",
+        component: () =>
+          import(
+            /* webpackChunkName: "helperMg" */ "../views/backEnd/helperMg.vue"
+          ),
+      },
+      {
+        path: "/backHome/memberMg",
+        name: "memberMg",
+        component: () =>
+          import(
+            /* webpackChunkName: "memberMg" */ "../views/backEnd/memberMg.vue"
+          ),
+      },
+      {
+        path: "/backHome/newsMg",
+        name: "newsMg",
+        component: () =>
+          import(
+            /* webpackChunkName: "newsMg" */ "../views/backEnd/newsMg.vue"
+          ),
+      },
+      {
+        path: "/backHome/orderMg",
+        name: "orderMg",
+        component: () =>
+          import(
+            /* webpackChunkName: "orderMg" */ "../views/backEnd/orderMg.vue"
+          ),
+      },
+      {
+        path: "/backHome/productMg",
+        name: "productMg",
+        component: () =>
+          import(
+            /* webpackChunkName: "productMg" */ "../views/backEnd/productMg.vue"
+          ),
+      },
+      {
+        path: "/backHome/ticketMg",
+        name: "ticketMg",
+        component: () =>
+          import(
+            /* webpackChunkName: "ticketMg" */ "../views/backEnd/ticketMg.vue"
+          ),
+      },
+      {
+        path: "/backHome/activeMg",
+        name: "activeMg",
+        component: () =>
+          import(
+            /* webpackChunkName: "activeMg" */ "../views/backEnd/activeMg.vue"
+          ),
+      },
+    ],
+  },
+  {
     path: "/",
     name: "home",
     component: HomeView,
@@ -147,92 +232,6 @@ const routes = [
     path: "/helper",
     name: "helper",
     component: helper,
-  },
-
-  {
-    path: "/backHome",
-    name: "backHome",
-    meta: {
-      hideApp: true, // 需要隐藏App.vue中的组件
-    },
-    component: () =>
-      import(
-        /* webpackChunkName: "backHome" */ "../views/backEnd/backHome.vue"
-      ),
-    children: [
-      {
-        path: "/backHome/homePicMg",
-        name: "homePicMg",
-        component: () =>
-          import(
-            /* webpackChunkName: "homePicMg" */ "../views/backEnd/homePicMg.vue"
-          ),
-      },
-      {
-        path: "/backHome/gamesMg",
-        name: "gamesMg",
-        component: () =>
-          import(
-            /* webpackChunkName: "gamesMg" */ "../views/backEnd/gamesMg.vue"
-          ),
-      },
-      {
-        path: "/backHome/helperMg",
-        name: "helperMg",
-        component: () =>
-          import(
-            /* webpackChunkName: "helperMg" */ "../views/backEnd/helperMg.vue"
-          ),
-      },
-      {
-        path: "/backHome/memberMg",
-        name: "memberMg",
-        component: () =>
-          import(
-            /* webpackChunkName: "memberMg" */ "../views/backEnd/memberMg.vue"
-          ),
-      },
-      {
-        path: "/backHome/newsMg",
-        name: "newsMg",
-        component: () =>
-          import(
-            /* webpackChunkName: "newsMg" */ "../views/backEnd/newsMg.vue"
-          ),
-      },
-      {
-        path: "/backHome/orderMg",
-        name: "orderMg",
-        component: () =>
-          import(
-            /* webpackChunkName: "orderMg" */ "../views/backEnd/orderMg.vue"
-          ),
-      },
-      {
-        path: "/backHome/productMg",
-        name: "productMg",
-        component: () =>
-          import(
-            /* webpackChunkName: "productMg" */ "../views/backEnd/productMg.vue"
-          ),
-      },
-      {
-        path: "/backHome/ticketMg",
-        name: "ticketMg",
-        component: () =>
-          import(
-            /* webpackChunkName: "ticketMg" */ "../views/backEnd/ticketMg.vue"
-          ),
-      },
-      {
-        path: "/backHome/activeMg",
-        name: "activeMg",
-        component: () =>
-          import(
-            /* webpackChunkName: "activeMg" */ "../views/backEnd/activeMg.vue"
-          ),
-      },
-    ],
   },
 ];
 

@@ -3,7 +3,7 @@
   <header1
     v-if="
       !$route.meta.hideApp &&
-      this.$store.state.chooseFrontBack &&
+      $store.state.chooseFrontBack &&
       $route.path !== '/path'
     "
   ></header1>
@@ -12,19 +12,17 @@
       !$route.meta.hideApp &&
       !$route.meta.hideWave &&
       $route.path !== '/path' &&
-      this.$store.state.chooseFrontBack
+      $store.state.chooseFrontBack
     "
   ></wave>
   <helper
     v-if="
       !$route.meta.hideApp &&
-      this.$store.state.chooseFrontBack &&
+      $store.state.chooseFrontBack &&
       $route.path !== '/path'
     "
   ></helper>
-  <login
-    v-if="!$route.meta.hideApp && this.$store.state.chooseFrontBack"
-  ></login>
+  <login v-if="!$route.meta.hideApp && $store.state.chooseFrontBack"></login>
 
   <!-- 
   <nav>

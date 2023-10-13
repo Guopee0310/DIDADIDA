@@ -4,7 +4,9 @@ header("Content-Type: application/json");
 
 
 
-require_once("connect.php"); 
+require_once("connect.php");
+echo 123;
+print_r($_FILES["image"]);
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
   $uploadedFile = $_FILES["image"]['name'];
@@ -23,8 +25,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
   $targetFile = $fileName . "." . $fileExt;
   $targetFile = "{$fileName}.{$fileExt}";
   $result = ["fileName" => "$targetFile"];
-//   echo json_encode($result);
-  
+  echo $_FILES["image"]["tmp_name"];
+move_uploaded_file($_FILES["image"]["tmp_name"], "{$targetDirectory}{$targetFile}");
   if (move_uploaded_file($_FILES["image"]["tmp_name"], "{$targetDirectory}{$targetFile}")) {
     $response = [
       "success" => true,
@@ -32,7 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
       "file_path" => $targetFile,
       "fileName" => $targetFile
     ];
-    // echo json_encode($response);
+    echo json_encode($response);
 }
 $update_sql = "UPDATE laba SET game_text = :game_text, qa_bonus = :qa_bonus, game_title = :game_title, game_img = :game_img WHERE game_no = :game_no";
 $update_stmt = $pdo->prepare($update_sql);
