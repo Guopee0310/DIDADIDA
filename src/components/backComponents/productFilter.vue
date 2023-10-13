@@ -1,8 +1,5 @@
 <template>
   <div class="title">
-    <div class="search">
-      <input type="search" placeholder="商品查詢" v-model="searchInput"><button>搜尋</button>
-    </div>
     <ul>
       <li>商品編號/商品圖片</li>
       <li>
@@ -40,40 +37,18 @@ export default {
       selectedItem: "",
       selectedPrice: "價格",
       selectedState: "",
-      searchInput: ""
     };
-  },
-  methods: {
-    handleSearch(e) {
-      console.log(e.target.value)
-      this.searchInput = e.target.value
-    },
   },
   emits: ["category", "price","state"],
   watch: {
     selectedItem(newValue, oldValue) {
-      // 在这里可以处理选项变化的逻辑
-      console.log("新选项：", newValue);
-      console.log("this.selectedItem", this.selectedItem);
       this.$emit("category", this.selectedItem);
     },
     selectedPrice(newValue, oldValue) {
-      // 在这里可以处理选项变化的逻辑
-      console.log("新选项：", newValue);
-      console.log("selectedPrice", this.selectedPrice);
       this.$emit("price", this.selectedPrice);
     },
     selectedState(newValue, oldValue) {
-      // 在这里可以处理选项变化的逻辑
-      console.log("新选项：", newValue);
-      console.log("selectedState", this.selectedState);
       this.$emit("state", this.selectedState);
-    },
-    searchInput(newValue, oldValue) {
-      // 在这里可以处理选项变化的逻辑
-      console.log("新选项：", newValue);
-      console.log("this.searchInput", this.searchInput);
-      this.$emit("transferSearch", this.searchInput);
     },
   },
 };

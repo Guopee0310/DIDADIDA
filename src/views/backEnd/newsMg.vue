@@ -3,13 +3,7 @@
         <div class="select">
             <div class="add" @click="news_content">
                 <button>+新增項目</button>
-            </div>
-            <div class="on_off">
-                <select name="" id="">
-                    <option value="">篩選</option>
-                    <option value="on">上架</option>
-                    <option value="off">下架</option>
-                </select>
+                <search @transferSearch="searchClick" :txt="'搜尋標題或內容'"></search>
             </div>
         </div>
         <div class="news_content">
@@ -18,11 +12,15 @@
                     <li>消息編號/消息圖片</li>
                     <li>標題/內容</li>
                     <li>上傳時間</li>
-                    <li>狀態</li>
+                    <li>
+                        <filterCategory @category="filterCategory">
+                        </filterCategory>
+                        <filterState @state="filterState" />
+                    </li>
                 </ul>
             </div>
             <div class="content">
-                <ul v-for="(item, index) in allnews" :key="index">
+                <ul v-for="(item, index) in displayednews" :key="index">
                     <li>
                         <div class="news_id">
                             {{ item.news_id }}
@@ -32,7 +30,7 @@
                         <div class="img">
                             <div class="picBox">
                                 <img :src="`/all_images/news/${item.news_img}`"
-                                    :alt="item.news_img ? item.news_img : '未選圖片'">
+                                    :alt="item.news_img ? item.news_img : '圖片大小需小於2MB'">
                             </div>
 
                             <div class="file_btn">
@@ -42,7 +40,8 @@
                                     v-if="!item.disabled && item.news_img"></i>
                             </div>
                         </div>
-                        <p class="file_name">{{ item.news_img }}</p>
+                        <div>{{ item.news_img }}</div>
+                        <p class="file_name"></p>
 
                     </li>
                     <li>
@@ -63,8 +62,8 @@
                                 <option value="活動">活動</option>
                             </select>
                         </div>
-                        <switchBtn :item="item.news_state" :index="index" v-model="item.news_state" :onText="'上架'" :offText="'下架'"
-                            @toggle="updateNewsState" :disabled="item.disabled"></switchBtn>
+                        <switchBtn :item="item.news_state" :index="index" v-model="item.news_state" :onText="'上架'"
+                            :offText="'下架'" @toggle="updateNewsState" :disabled="item.disabled"></switchBtn>
 
                     </li>
                     <li>
@@ -78,23 +77,40 @@
                 </ul>
             </div>
             <div class="news_count">總共有{{ newsCount }}件消息</div>
+            <Page :total="this.filterednews.length" @on-change="updatePage" :page-size="pageSize" v-model="this.currentPage"
+                class="page" />
         </div>
     </div>
 </template>
 
 <script>
 import switchBtn from '../../components/backComponents/toggleBtn.vue'
+import filterState from '../../components/backComponents/stateFilter.vue'
+import search from '../../components/backComponents/search.vue'
+import filterCategory from '../../components/backComponents/category.vue'
+
 export default {
     data() {
         return {
             allnews: [],
+            filterednews: [],
+            displayednews: [],
+            pageSize: 3,
+            currentPage: 1,
+            selectedState: "狀態",
+            selectedCategory: "",
+            searchInput: "",
         }
     },
+
     components: {
         switchBtn,
+        filterState,
+        search,
+        filterCategory
     },
-    mounted() {
-        fetch(`${this.$store.state.APIurl}newsSelect.php`)
+    async mounted() {
+        await fetch(`${this.$store.state.APIurl}newsSelect.php`)
             .then((response) => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
@@ -112,35 +128,98 @@ export default {
             .catch((error) => {
                 console.error('Fetch error:', error);
             });
+        this.filterCategory(this.selectedCategory);
+        this.filterState(this.selectedState);
+        this.updatePage(1);
     },
     methods: {
+        //篩選
+        applyFilters() {
+            let filterednews = this.allnews;
+
+            if (this.selectedCategory !== "") {
+                filterednews = filterednews.filter(
+                    (item) => item.news_category === this.selectedCategory
+                );
+            }
+            if (this.selectedState === "0" || this.selectedState === "1") {
+                filterednews = filterednews.filter(
+                    (item) => item.news_state === this.selectedState
+                );
+            }
+
+            const searchInput = this.searchInput.toUpperCase();
+            if (searchInput.trim() !== "") {
+                filterednews = filterednews.filter((item) => {
+                    const search_content =
+                        item.news_title.toUpperCase() + item.news_content.toUpperCase();
+                    return search_content.includes(searchInput);
+                });
+            }
+
+            // 更新 filterednews 数组
+            this.filterednews = filterednews;
+            this.$nextTick(() => {
+                this.updatePage(1);
+            });
+        },
+        filterCategory(data) {
+            this.updatePage(1);
+            this.selectedCategory = data;
+            this.applyFilters();
+        },
+
+        filterState(data) {
+            this.updatePage(1);
+            this.selectedState = data;
+            this.applyFilters();
+        },
+        searchClick(data) {
+            this.updatePage(1);
+            this.searchInput = data;
+            this.applyFilters();
+        },
+        updatePage(page) {
+            this.currentPage = page
+            this.displayednews = this.filterednews
+            const startIdx = (this.currentPage - 1) * this.pageSize
+            const endIdx = startIdx + this.pageSize
+            this.displayednews = this.filterednews.slice(startIdx, endIdx);
+        },
         //上下架
         updateNewsState(index, state) {
-            this.allnews[index].news_state = state;
+            this.displayednews[index].news_state = state;
         },
 
         deleteNews(index) {
             if (confirm("取消此筆新增嗎?")) {
-                this.allnews.splice(index, 1);
+                this.displayednews.splice(index, 1);
             }
         },
         deleteImage(index) {
-            const item = this.allnews[index];
+            const item = this.displayednews[index];
 
             if (confirm("確定刪除圖片嗎？")) {
 
                 document.querySelectorAll(".picBox img")[index].src = "";
-                item.news_img = ''; 
+                item.news_img = '';
                 alert("圖片已成功刪除");
 
 
             }
         },
 
-
         fileChange(e, index) {
             this.changePic = "";
+            const file_name = document.querySelectorAll(".file_name")[index];
             let file = e.target.files[0];
+
+            // 檢查檔案大小是否超過2MB
+            if (file.size > 2 * 1024 * 1024) {
+                alert("請選擇一個小於2MB的圖片");
+                return;
+            }
+
             this.changePic = file;
             console.log("file", file);
 
@@ -152,39 +231,24 @@ export default {
                 console.log(image.src);
                 image.style.width = "100%";
                 image.style.height = "100%";
-                document.querySelectorAll(".picBox")[index].innerHTML = "";
-                document.querySelectorAll(".picBox")[index].appendChild(image);
 
-                // 检查Base64图像数据是否有效
-                this.checkBase64Image(image.src, index);
+                // 在圖片容器中添加圖片
+                let picBox = document.querySelectorAll(".picBox")[index];
+                picBox.innerHTML = "";
+                picBox.appendChild(image);
+
+                // 顯示圖片名稱和檔案大小
+                file_name.innerText = `檔案: ${file.name} | 大小: ${this.formatFileSize(file.size)}`;
+                let fileInfo = document.createElement("p");
+                file_name.appendChild(fileInfo);
             });
         },
-
-
-        checkBase64Image(src, index) {
-            const img = new Image();
-            img.src = src;
-
-            img.onload = () => {
-                // Base64图像数据有效
-                alert("圖片新增成功");
-
-                this.allnews[index].news_img = src;
-            };
-
-            img.onerror = () => {
-                // Base64图像数据无效
-                alert("圖片新增失敗");
-
-                // 清除图像显示
-                document.querySelectorAll(".picBox img")[index].src = "";
-
-                // 清除文件输入的值
-                const fileInput = this.$refs['fileInput' + index];
-                if (fileInput) {
-                    fileInput.value = '';
-                }
-            };
+        formatFileSize(bytes) {
+            if (bytes === 0) return "0 Bytes";
+            const k = 1024;
+            const sizes = ["Bytes", "KB", "MB", "GB", "TB"];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + " " + sizes[i];
         },
 
 
@@ -199,6 +263,9 @@ export default {
                     alert("請選擇分類");
                     return;
                 } else if (this.changePic) { // 检查是否选择了新图片
+                    this.displayednews[index].disabled = true;
+                    e.target.innerText = "修改";
+
                     const formData = new FormData();
                     let news_id = item.news_id;
                     let news_title = item.news_title;
@@ -229,6 +296,9 @@ export default {
                 } else {
                     // 如果没有选择新图片，只更新其他信息
                     const formData = new FormData();
+                    this.displayednews[index].disabled = true;
+                    e.target.innerText = "修改";
+
                     let news_id = item.news_id;
                     let news_title = item.news_title;
                     let news_content = item.news_content;
@@ -256,7 +326,7 @@ export default {
                         });
                 }
             } else {
-                this.allnews[index].disabled = false;
+                this.displayednews[index].disabled = false;
                 e.target.innerText = "確認";
             }
         },
@@ -270,7 +340,7 @@ export default {
             const day = currentDate.getDate().toString().padStart(2, '0');
             const formattedDateTime = `${year}-${month}-${day}`;
 
-            this.allnews.push({
+            this.displayednews.push({
                 news_id: this.allnews.length + 1,
                 news_title: "",
                 news_img: "",
@@ -315,7 +385,7 @@ export default {
                 formData.append("news_state", news_state);
                 formData.append("image", this.changePic);
 
-                this.allnews[index].disabled = true;
+                this.displayednews[index].disabled = true;
 
                 fetch(`${this.$store.state.APIurl}newsInsert.php`, {
                     method: "POST",
@@ -345,7 +415,8 @@ export default {
                         myJson[i].disabled = true;
                         myJson[i].exist = true;
                     }
-                    this.allnews = myJson;
+                    this.filterednews = myJson;
+                    this.updatePage(1);
                     console.log(this.allnews);
                 })
                 .catch((error) => {
@@ -361,7 +432,7 @@ export default {
     computed: {
 
         newsCount() {
-            return this.allnews.length;
+            return this.filterednews.length;
         },
 
     },
@@ -369,12 +440,9 @@ export default {
 </script>
 <style scoped lang="scss">
 .news_all {
-    .select {
+    .add {
         display: flex;
-
-        >div {
-            margin: 0 1em;
-        }
+        justify-content: space-between;
     }
 
     .news_content {
@@ -406,7 +474,9 @@ export default {
 
                     &:nth-of-type(4) {
                         width: 25%;
-                        padding-left: 2.6rem;
+                        padding-left: 1rem;
+                        display: flex;
+                        text-align: left;
                     }
                 }
             }
@@ -570,6 +640,11 @@ export default {
         border-top: 1px solid #3f3636;
         text-align: right;
         font-size: 14px;
+    }
+
+    //分頁
+    .page {
+        text-align: center;
     }
 }
 </style>

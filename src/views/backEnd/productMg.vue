@@ -3,9 +3,9 @@
         <div class="select">
             <div class="add" @click="news_content">
                 <button>+新增項目</button>
+                <search  @transferSearch="searchClick" :txt="'搜尋商品名稱或描述'"></search>
             </div>
-            <filterProduct @category="filterCategory" @price="filterPrice" @state="filterState"
-                @transferSearch="searchClick" />
+            <filterProduct @category="filterCategory" @price="filterPrice" @state="filterState" />
         </div>
         <div class="prod_content">
             <div class="content">
@@ -23,7 +23,8 @@
                                     :disabled="item.disabled" name="image" :title="item.prod_img">
                             </div>
                         </div>
-                        <p>{{ item.prod_img }}</p>
+                        <div>{{ item.prod_img }}</div>
+                        <p class="file_name"></p>
                     </li>
 
 
@@ -76,7 +77,8 @@
 
 <script>
 import switchBtn from '../../components/backComponents/toggleBtn.vue'
-import filterProduct from '../../components/backComponents/filter.vue'
+import filterProduct from '../../components/backComponents/productFilter.vue'
+import search from '../../components/backComponents/search.vue'
 
 export default {
     data() {
@@ -94,7 +96,8 @@ export default {
     },
     components: {
         switchBtn,
-        filterProduct
+        filterProduct,
+        search
     },
     async mounted() {
         await fetch(`${this.$store.state.APIurl}productSelect.php`)
@@ -235,7 +238,15 @@ export default {
         },
         fileChange(e, index) {
             this.changePic = "";
+            const file_name = document.querySelectorAll(".file_name")[index];
             let file = e.target.files[0];
+
+            // 檢查檔案大小是否超過2MB
+            if (file.size > 2 * 1024 * 1024) {
+                alert("請選擇一個小於2MB的圖片");
+                return;
+            }
+
             this.changePic = file;
             console.log("file", file);
 
@@ -247,39 +258,24 @@ export default {
                 console.log(image.src);
                 image.style.width = "100%";
                 image.style.height = "100%";
-                document.querySelectorAll(".picBox")[index].innerHTML = "";
-                document.querySelectorAll(".picBox")[index].appendChild(image);
 
-                // 检查Base64图像数据是否有效
-                this.checkBase64Image(image.src, index);
+                // 在圖片容器中添加圖片
+                let picBox = document.querySelectorAll(".picBox")[index];
+                picBox.innerHTML = "";
+                picBox.appendChild(image);
+
+                // 顯示圖片名稱和檔案大小
+                file_name.innerText = `檔案: ${file.name} | 大小: ${this.formatFileSize(file.size)}`;
+                let fileInfo = document.createElement("p");
+                file_name.appendChild(fileInfo);
             });
         },
-
-
-        checkBase64Image(src, index) {
-            const img = new Image();
-            img.src = src;
-
-            img.onload = () => {
-                // Base64图像数据有效
-                alert("圖片新增成功");
-
-                this.displayedProducts[index].prod_img = src;
-            };
-
-            img.onerror = () => {
-                // Base64图像数据无效
-                alert("圖片新增失敗");
-
-                // 清除图像显示
-                document.querySelectorAll(".picBox img")[index].src = "";
-
-                // 清除文件输入的值
-                const fileInput = this.$refs['fileInput' + index];
-                if (fileInput) {
-                    fileInput.value = '';
-                }
-            };
+        formatFileSize(bytes) {
+            if (bytes === 0) return "0 Bytes";
+            const k = 1024;
+            const sizes = ["Bytes", "KB", "MB", "GB", "TB"];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + " " + sizes[i];
         },
 
 
@@ -333,6 +329,8 @@ export default {
                     // 如果没有选择新图片，只更新其他信息
                     this.displayedProducts[index].disabled = true;
                     e.target.innerText = "修改";
+
+
                     const formData = new FormData();
                     let prod_id = item.prod_id;
                     let prod_name = item.prod_name;
@@ -431,13 +429,11 @@ export default {
             this.applyFilters();
         },
         updatePage(page) {
-
             this.currentPage = page
             this.displayedProducts = this.filteredProducts
             const startIdx = (this.currentPage - 1) * this.pageSize
             const endIdx = startIdx + this.pageSize
             this.displayedProducts = this.filteredProducts.slice(startIdx, endIdx);
-            console.log("更新displayedProducts", this.displayedProducts);
         },
 
     },
@@ -450,6 +446,11 @@ export default {
 </script>
 <style scoped lang="scss">
 .prod_all {
+
+        .add{
+            display: flex;
+            justify-content: space-between;
+        }
 
     .prod_content {
 

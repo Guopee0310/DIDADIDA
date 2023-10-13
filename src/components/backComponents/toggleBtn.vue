@@ -30,7 +30,6 @@ export default {
     methods: {
         updateItem() {
             this.localItem = this.localItem === '1' ? '0' : '1';
-            
             this.$emit('toggle', this.index, this.localItem);
             console.log('localItem', this.localItem);
             console.log('index', this.index);
