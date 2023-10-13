@@ -1,23 +1,15 @@
 <template>
   <div class="select_btn">
-    <prodSelect
-      @transferClass="getClass"
-      @transferPrice="getPrice"
-      @transferSearch="searchClick"
-    ></prodSelect>
+    <prodSelect @transferClass="getClass" @transferPrice="getPrice" @transferSearch="searchClick"></prodSelect>
   </div>
   <div class="card" v-for="(i, index) in chooseItem" :key="i.imageSrc">
     <div class="heart">
-      <heart
-        @change-heart="changeHeart($event, i, index)"
-        :keepLove="keepHeartArr[index]"
-        :is-active="mountedShowLove.findIndex((v) => v == i.prod_id) > -1"
-      ></heart>
+      <heart @change-heart="changeHeart($event, i, index)" :keepLove="keepHeartArr[index]"
+        :is-active="mountedShowLove.findIndex((v) => v == i.prod_id) > -1"></heart>
     </div>
     <div class="pic">
-      <a href="#" @click.prevent="showProductDetails(i)"
-        ><img :src="'../all_images/product/' + i.prod_img" :alt="i.prod_img"
-      /></a>
+      <a href="#" @click.prevent="showProductDetails(i)"><img :src="'../all_images/product/' + i.prod_img"
+          :alt="i.prod_img" /></a>
     </div>
 
     <div class="name">
@@ -34,13 +26,9 @@
           <input type="button" value="+" @click="i.count++" />
         </div>
         <div class="buy">
-          <i
-            class="fa-solid fa-cart-shopping"
-            style="color: #9fbdce"
-            @click.prevent="
-              pushAndTogglePopup(i.imageSrc, i.titleName, i.count, i.prodPrice)
-            "
-          ></i>
+          <i class="fa-solid fa-cart-shopping" style="color: #9fbdce" @click.prevent="
+            pushAndTogglePopup(i.imageSrc, i.titleName, i.count, i.prodPrice)
+            "></i>
           <!-- pushInShoppingCart(
                   i.imageSrc,
                   i.titleName,
@@ -77,12 +65,8 @@
     </div>
   </transition>
   <!-- ↑↑↑ 商品彈窗 ↑↑↑ -->
-  <Page
-    :total="chooseItem2.length"
-    @on-change="updatePage"
-    class="changepage"
-    v-if="showPage"
-  />
+  <Page :total="chooseItem2.length" @on-change="updatePage" class="changepage" :page-size="pageSize"
+    v-model="this.getPage" />
 </template>
 
 <script>
@@ -271,7 +255,6 @@ export default {
       searchInput: "",
       showModal: false,
       selectedProduct: null,
-      showPage: true,
     };
   },
   created() {
@@ -468,50 +451,58 @@ export default {
     //     }
     //   }
     // },
-    getClass(data) {
-      this.selectOption = data;
-      if (data === "所有商品") {
-        this.chooseItem2 = this.cardsAll;
-      } else {
-        this.chooseItem2 = this.cardsAll.filter(
-          (item) => item.prod_category === data
+    allSelect() {
+      let chooseItem2 = this.cardsAll;
+      // if (this.selectOption === "所有商品") {
+      //   this.chooseItem2 = this.cardsAll;
+      // } else {
+      //   this.chooseItem2 = this.cardsAll.filter(
+      //     (item) => item.prod_category === this.selectOption
+      //   );
+      // }
+      if (this.selectOption !== "所有商品") {
+        chooseItem2 = chooseItem2.filter(
+          (item) => item.prod_category === this.selectOption
         );
       }
-      this.showPage = false;
-      setTimeout(() => {
-        this.showPage = true;
-      }, 100);
-      this.getPage = 1;
-      this.getPrice(this.getPriceOption);
+
+      if (this.getPriceOption === "由低到高") {
+        chooseItem2.sort(
+          (a, b) => parseInt(a.prod_price) - parseInt(b.prod_price)
+        );
+      } else if (this.getPriceOption === "由高到低") {
+        chooseItem2.sort(
+          (a, b) => parseInt(b.prod_price) - parseInt(a.prod_price)
+        );
+      }
+      const searchInput = this.searchInput.toUpperCase();
+      if (searchInput.trim() !== "") {
+        chooseItem2 = chooseItem2.filter((i) => {
+          const search_content = i.prod_name.toUpperCase();
+          return search_content.includes(searchInput);
+
+        });
+      }
+
+      this.chooseItem2 = chooseItem2;
+      this.$nextTick(() => {
+        this.updatePage(1);
+      });
+    },
+    getClass(data) {
+      this.selectOption = data;
+      this.allSelect();
       this.updatePage(1);
     },
     getPrice(data) {
       this.getPriceOption = data;
-      if (data === "由低到高") {
-        this.chooseItem2.sort(
-          (a, b) => parseInt(a.prod_price) - parseInt(b.prod_price)
-        );
-        this.currentPage = 1;
-      } else if (data === "由高到低") {
-        this.chooseItem2.sort(
-          (a, b) => parseInt(b.prod_price) - parseInt(a.prod_price)
-        );
-        this.getPage = 1;
-      }
-      this.showPage = false;
-      setTimeout(() => {
-        this.showPage = true;
-      }, 100);
+      this.allSelect();
       this.updatePage(1);
     },
 
     searchClick(data) {
-      const searchInput = data.toUpperCase();
-      const res = this.cardsAll.filter((i) => {
-        const search_content = i.prod_name.toUpperCase();
-        return search_content.includes(searchInput);
-      });
-      this.chooseItem2 = res;
+      this.searchInput = data;
+      this.allSelect();
       this.updatePage(1);
     },
     updatePage(data) {
@@ -966,7 +957,7 @@ export default {
       font-size: map-get($fontSizes, "p");
     }
 
-    > p {
+    >p {
       margin-top: 30px;
       line-height: 30px;
     }
@@ -1050,7 +1041,7 @@ export default {
       width: 80%;
       margin-top: 10px;
 
-      > p {
+      >p {
         margin-top: 10px;
         line-height: 30px;
       }

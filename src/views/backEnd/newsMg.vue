@@ -15,13 +15,19 @@
         <div class="news_content">
             <div class="title">
                 <ul>
-                    <li>圖片</li>
-                    <li>內容</li>
+                    <li>消息編號/消息圖片</li>
+                    <li>標題/內容</li>
                     <li>上傳時間</li>
+                    <li>狀態</li>
                 </ul>
             </div>
             <div class="content">
                 <ul v-for="(item, index) in allnews" :key="index">
+                    <li>
+                        <div class="news_id">
+                            {{ item.news_id }}
+                        </div>
+                    </li>
                     <li>
                         <div class="img">
                             <div class="picBox">
@@ -40,14 +46,10 @@
 
                     </li>
                     <li>
-                        <form action="test.aspx" method="post">
-                            <textarea name="news_title" id="" placeholder="標題" class="news_name" :disabled="item.disabled"
-                                v-model="item.news_title"></textarea>
-                        </form>
-                        <form action="test.aspx" method="post">
-                            <textarea name="news_conteny" id="" placeholder="內容" class="news_txt" :disabled="item.disabled"
-                                v-model="item.news_content"></textarea>
-                        </form>
+                        <textarea name="news_title" id="" placeholder="標題" class="news_name" :disabled="item.disabled"
+                            v-model="item.news_title"></textarea>
+                        <textarea name="news_conteny" id="" placeholder="內容" class="news_txt" :disabled="item.disabled"
+                            v-model="item.news_content"></textarea>
                     </li>
                     <li>
                         <div class="time" name="news_date">{{ item.news_date }}</div>
@@ -60,19 +62,10 @@
                                 <option value="優惠">優惠</option>
                                 <option value="活動">活動</option>
                             </select>
-                            <div class="radio_onOff">
-                                <label :for="'on_' + index">
-                                    <input type="radio" :id="'on_' + index" :name="'select_onOff_' + index"
-                                        :disabled="item.disabled" v-model="item.news_state" value="1" />
-                                    上架
-                                </label>
-                                <label :for="'off_' + index">
-                                    <input type="radio" :id="'off_' + index" :name="'select_onOff_' + index"
-                                        :disabled="item.disabled" v-model="item.news_state" value="0" />
-                                    下架
-                                </label>
-                            </div>
                         </div>
+                        <switchBtn :item="item.news_state" :index="index" v-model="item.news_state" :onText="'上架'" :offText="'下架'"
+                            @toggle="updateNewsState" :disabled="item.disabled"></switchBtn>
+
                     </li>
                     <li>
                         <button class="update" @click="updateNews(index, $event, item)" v-if="item.exist">{{ item.disabled ?
@@ -80,7 +73,7 @@
                         }}</button>
 
                         <button class="insert" @click="createNew(index, $event, item)" v-if="!item.exist">新增</button>
-                        <button class="insert" @click="deleteNews(index)" v-if="!item.exist">刪除</button>
+                        <button class="insert" @click="deleteNews(index)" v-if="!item.exist">取消</button>
                     </li>
                 </ul>
             </div>
@@ -90,25 +83,15 @@
 </template>
 
 <script>
+import switchBtn from '../../components/backComponents/toggleBtn.vue'
 export default {
     data() {
         return {
             allnews: [],
-            allBar: [
-                {
-                    change_txt: true,
-                    imageSrc: require("../../../public/all_images/news/beach_concert.jpg"),
-                    imageName: "beach_concert.jpg",
-                    title: "海灘跨年演唱會",
-                    content: "來自海灘的呼喚！讓我們一同迎接新的一年，沐浴在星光下，享受音樂和激情的交織。2022年的跨年夜，我們將在沙灘上舉行一場獨一無二的演唱會，為這個特殊的時刻帶來音樂的饗宴。",
-                    date: "2022.12.31",
-                    category: "活動",
-                    isPublished: true,
-                    select: false,
-                }
-            ],
-
         }
+    },
+    components: {
+        switchBtn,
     },
     mounted() {
         fetch("http://localhost/dida_project/public/php/newsSelect.php")
@@ -128,10 +111,14 @@ export default {
             })
             .catch((error) => {
                 console.error('Fetch error:', error);
-                // 在这里可以添加适当的错误处理逻辑，例如显示错误消息给用户
             });
     },
     methods: {
+        //上下架
+        updateNewsState(index, state) {
+            this.allnews[index].news_state = state;
+        },
+
         deleteNews(index) {
             if (confirm("取消此筆新增嗎?")) {
                 this.allnews.splice(index, 1);
@@ -143,9 +130,7 @@ export default {
             if (confirm("確定刪除圖片嗎？")) {
 
                 document.querySelectorAll(".picBox img")[index].src = "";
-
-                // Update the property directly
-                item.news_img = ''; // 清除图像路径
+                item.news_img = ''; 
                 alert("圖片已成功刪除");
 
 
@@ -154,7 +139,7 @@ export default {
 
 
         fileChange(e, index) {
-            this.changePic="";
+            this.changePic = "";
             let file = e.target.files[0];
             this.changePic = file;
             console.log("file", file);
@@ -292,7 +277,7 @@ export default {
                 news_content: "",
                 news_date: formattedDateTime,
                 news_category: "",
-                news_state: "",
+                news_state: "1",
                 disabled: false,
                 exist: false,
             });
@@ -399,13 +384,30 @@ export default {
             margin: 1em 0;
 
             ul {
-                width: 90%;
+                width: 100%;
                 margin: auto;
                 display: flex;
-                justify-content: center;
 
                 li {
-                    width: 33.333333%;
+                    &:nth-of-type(1) {
+                        width: 35%;
+                        text-align: center;
+                    }
+
+                    &:nth-of-type(2) {
+                        width: 30%;
+                        text-align: center;
+                    }
+
+                    &:nth-of-type(3) {
+                        width: 10%;
+                        text-align: center;
+                    }
+
+                    &:nth-of-type(4) {
+                        width: 25%;
+                        padding-left: 2.6rem;
+                    }
                 }
             }
         }
@@ -417,43 +419,61 @@ export default {
                 align-items: center;
                 margin: 1rem 0;
 
-                .check {
-                    width: 5%;
-                }
-
                 li {
                     &:nth-of-type(1) {
+                        width: 5%;
+                        text-align: center;
+                    }
+
+                    &:nth-of-type(2) {
                         width: 30%;
 
                         p {
-                            width: 80%;
+                            width: 100%;
                             overflow: hidden;
                             text-overflow: ellipsis;
                         }
                     }
 
-                    &:nth-of-type(2) {
-                        width: 30%;
-                        margin: auto;
-                    }
-
                     &:nth-of-type(3) {
-                        width: 15%;
+                        text-align: center;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: space-evenly;
+                        width: 30%;
+                        height: 12rem;
                     }
 
                     &:nth-of-type(4) {
-                        width: 15%;
+                        width: 10%;
                     }
 
                     &:nth-of-type(5) {
-                        width: 5%;
+                        width: 15%;
+                        height: 10rem;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: space-evenly;
+
+                        select {
+                            width: 100%;
+                        }
+                    }
+
+                    &:nth-of-type(6) {
+                        width: 10%;
+                        text-align: center;
                     }
                 }
 
                 textarea {
                     width: 90%;
+                    height: 8rem;
+                    margin: auto;
                     box-sizing: border-box;
                     overflow: auto;
+                    padding: 0.2rem 0.5rem;
+                    line-height: 1.5rem;
                 }
 
                 .news_name {
@@ -461,7 +481,7 @@ export default {
                 }
 
                 .img {
-                    width: 80%;
+                    width: 90%;
                     aspect-ratio: 1/0.7;
                     position: relative;
 
@@ -540,14 +560,6 @@ export default {
                     }
                 }
 
-                .radio_onOff {
-                    width: 100%;
-
-                    label {
-                        display: block;
-                        width: 100%;
-                    }
-                }
             }
         }
     }
@@ -559,4 +571,5 @@ export default {
         text-align: right;
         font-size: 14px;
     }
-}</style>
+}
+</style>

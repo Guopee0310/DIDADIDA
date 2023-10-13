@@ -4,22 +4,12 @@
             <div class="add" @click="news_content">
                 <button>+新增項目</button>
             </div>
-            <div class="search">
-                <input type="search" placeholder="商品查詢"><button>搜尋</button>
-            </div>
+            <filterProduct @category="filterCategory" @price="filterPrice" @state="filterState"
+                @transferSearch="searchClick" />
         </div>
         <div class="prod_content">
-            <div class="title">
-                <ul>
-                    <li>商品編號/商品圖片</li>
-                    <li>種類/商品名稱</li>
-                    <li>價格</li>
-                    <li>商品描述</li>
-                    <li>狀態</li>
-                </ul>
-            </div>
             <div class="content">
-                <ul v-for="(item, index) in allProduct" :key="index">
+                <ul v-for="(item, index) in displayedProducts" :key="index">
                     <li>{{ item.prod_id }}</li>
                     <li>
                         <div class="img">
@@ -35,8 +25,8 @@
                         </div>
                         <p>{{ item.prod_img }}</p>
                     </li>
-     
-            
+
+
                     <!-- 商品名稱/種類 -->
                     <li>
                         <select name="" id="" v-model="item.prod_category" :disabled="item.disabled">
@@ -51,7 +41,8 @@
                     <!-- 價格 -->
                     <li>
                         <label for="price">
-                            <input type="number" :disabled="item.disabled" v-model="item.prod_price" min="100" placeholder="價錢">NT
+                            <input type="number" :disabled="item.disabled" v-model="item.prod_price" min="100"
+                                placeholder="價錢">NT
                         </label>
                     </li>
                     <!-- 商品描述 -->
@@ -60,19 +51,10 @@
                             v-model="item.prod_info"></textarea>
                     </li>
                     <li>
-                        <div class="radio_onOff">
-                        <label :for="'on_' + index">
-                            <input type="radio" :id="'on_' + index" :name="'select_onOff_' + index"
-                                :disabled="item.disabled" v-model="item.prod_listed" value="1" />
-                            上架
-                        </label>
-                        <label :for="'off_' + index">
-                            <input type="radio" :id="'off_' + index" :name="'select_onOff_' + index"
-                                :disabled="item.disabled" v-model="item.prod_listed" value="0" />
-                            下架
-                        </label>
-                    </div>
-                </li>
+                        <switchBtn :item="item.prod_listed" :index="index" v-model="item.prod_listed"  :onText="'上架'" :offText="'下架'"
+                            @toggle="updateNewsState" :disabled="item.disabled"></switchBtn>
+
+                    </li>
                     <li>
                         <button class="update" @click="updateNews(index, $event, item)" v-if="item.exist">{{ item.disabled ?
                             '修改' : '確認'
@@ -84,34 +66,38 @@
 
                 </ul>
             </div>
-            <div class="prod_count">總共有{{ prodCount}}件商品</div>
+
+            <div class="prod_count">總共有{{ prodCount }}件商品</div>
+            <Page :total="this.filteredProducts.length" @on-change="updatePage" :page-size="pageSize" 
+                v-model="this.currentPage" class="page"/>
         </div>
     </div>
 </template>
 
 <script>
+import switchBtn from '../../components/backComponents/toggleBtn.vue'
+import filterProduct from '../../components/backComponents/filter.vue'
+
 export default {
     data() {
         return {
             allProduct: [],
-            allBar: [
-                {
-                    // select: false,
-                    // change_txt: true,
-                    // imageName: "dolphin_doll.png",
-                    // imageSrc: require("../../../src/assets/images/dolphin_doll.png"),
-                    // category: "玩偶",
-                    // prod_name: "超可愛海豚寶寶玩偶",
-                    // price: "399",
-                    // category: "活動",
-                    // prod_detail: "超可愛海豚寶寶玩偶的介紹超可愛海豚寶寶玩偶的介紹超可愛海豚寶寶玩偶的介紹超可愛海豚寶寶玩偶的介紹",
-                }
-            ],
-
+            filteredProducts: [], // 篩選後的商品
+            displayedProducts: [],
+            selectedItem: "",
+            selectedPrice: "價格",
+            selectedState: "狀態",
+            searchInput: "",
+            pageSize: 3,
+            currentPage: 1,
         }
     },
-    mounted() {
-        fetch("http://localhost/dida_project/public/php/productSelect.php")
+    components: {
+        switchBtn,
+        filterProduct
+    },
+    async mounted() {
+        await fetch("http://localhost/dida_project/public/php/productSelect.php")
             .then((response) => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
@@ -122,7 +108,6 @@ export default {
                 for (let i = 0; i < myJson.length; i++) {
                     myJson[i].disabled = true;
                     myJson[i].exist = true;
-                    
                 }
                 this.allProduct = myJson;
                 console.log(this.allProduct);
@@ -131,11 +116,20 @@ export default {
                 console.error('Fetch error:', error);
                 // 在这里可以添加适当的错误处理逻辑，例如显示错误消息给用户
             });
+
+        this.filterCategory(this.selectedItem);
+        this.filterPrice(this.selectedPrice);
+        this.filterState(this.selectedState);
+        this.updatePage(1);
     },
     methods: {
+        updateNewsState(index, state) {
+            this.displayedProducts[index].prod_listed = state;
+        },
+
         deleteNews(index) {
             if (confirm("取消此筆新增嗎?")) {
-                this.allProduct.splice(index, 1);
+                this.displayedProducts.splice(index, 1);
             }
         },
         news_content() {
@@ -146,8 +140,8 @@ export default {
             const day = currentDate.getDate().toString().padStart(2, '0');
             const formattedDateTime = `${year}-${month}-${day}`;
 
-            this.allProduct.push({
-                prod_id: this.allProduct.length + 1,
+            this.displayedProducts.push({
+                prod_id: this.filteredProducts.length + 1,
                 prod_name: "",
                 prod_price: "",
                 prod_info: "",
@@ -173,12 +167,10 @@ export default {
                     alert("請選擇分類");
                     return;
                 }
-                else if (!item.prod_price&&item.prod_price<=0) {
+                else if (item.prod_price < 100) {
                     alert("價錢為必填且需大於100");
                     return;
                 }
-
-
 
                 const formData = new FormData();
                 let prod_id = item.prod_id;
@@ -198,7 +190,7 @@ export default {
                 formData.append("prod_date", prod_date);
                 formData.append("image", this.changePic);
 
-                this.allProduct[index].disabled = true;
+                this.displayedProducts[index].disabled = true;
 
                 fetch(`${this.$store.state.APIurl}productInsert.php`, {
                     method: "POST",
@@ -237,7 +229,7 @@ export default {
                 });
         },
         fileChange(e, index) {
-            this.changePic="";
+            this.changePic = "";
             let file = e.target.files[0];
             this.changePic = file;
             console.log("file", file);
@@ -267,7 +259,7 @@ export default {
                 // Base64图像数据有效
                 alert("圖片新增成功");
 
-                this.allProduct[index].prod_img = src;
+                this.displayedProducts[index].prod_img = src;
             };
 
             img.onerror = () => {
@@ -284,7 +276,7 @@ export default {
                 }
             };
         },
-       
+
 
 
         updateNews(index, e, item) {
@@ -297,11 +289,13 @@ export default {
                     alert("請選擇分類");
                     return;
                 }
-                else if (!item.prod_price&&item.prod_price<=0) {
-                    alert("價錢為必填且需大於0");
+                else if (item.prod_price < 100) {
+                    alert("價錢為必填且需大於100");
                     return;
                 } else if (this.changePic) { // 检查是否选择了新图片
                     const formData = new FormData();
+                    this.displayedProducts[index].disabled = true;
+                    e.target.innerText = "修改";
                     let prod_id = item.prod_id;
                     let prod_name = item.prod_name;
                     let prod_price = item.prod_price;
@@ -328,10 +322,12 @@ export default {
                             alert("更新成功");
                             // 重新取資料
                             this.refreshNewsData();
-                            this.changePic="";
+                            this.changePic = "";
                         });
                 } else {
                     // 如果没有选择新图片，只更新其他信息
+                    this.displayedProducts[index].disabled = true;
+                    e.target.innerText = "修改";
                     const formData = new FormData();
                     let prod_id = item.prod_id;
                     let prod_name = item.prod_name;
@@ -359,82 +355,98 @@ export default {
                             alert("更新成功");
                             // 重新取資料
                             this.refreshNewsData();
-                            this.changePic="";
+                            this.changePic = "";
                         });
                 }
             } else {
-                this.allProduct[index].disabled = false;
+                this.displayedProducts[index].disabled = false;
                 e.target.innerText = "確認";
             }
         },
 
+        //篩選
+        applyFilters() {
+            let filteredProducts = this.allProduct;
+            if (this.selectedItem !== "") {
+                filteredProducts = filteredProducts.filter(
+                    (item) => item.prod_category === this.selectedItem
+                );
+            }
 
+
+            if (this.selectedPrice === '低到高') {
+                filteredProducts.sort((a, b) => a.prod_price - b.prod_price);
+            } else if (this.selectedPrice === '高到低') {
+                filteredProducts.sort((a, b) => b.prod_price - a.prod_price);
+            }
+
+
+            if (this.selectedState === "0" || this.selectedState === "1") {
+                filteredProducts = filteredProducts.filter(
+                    (item) => item.prod_listed === this.selectedState
+                );
+            }
+
+            const searchInput = this.searchInput.toUpperCase();
+            if (searchInput.trim() !== "") {
+                filteredProducts = filteredProducts.filter((item) => {
+                    const search_content =
+                        item.prod_name.toUpperCase() + item.prod_info.toUpperCase();
+                    return search_content.includes(searchInput);
+                });
+            }
+
+            // 更新 filteredProducts 数组
+            this.filteredProducts = filteredProducts;
+            this.$nextTick(() => {
+                this.updatePage(1);
+            });
+        },
+
+        filterCategory(data) {
+            this.updatePage(1);
+            this.selectedItem = data;
+            this.applyFilters();
+        },
+
+        filterPrice(data) {
+            this.updatePage(1);
+            this.selectedPrice = data;
+            this.applyFilters();
+        },
+
+        filterState(data) {
+            this.updatePage(1);
+            this.selectedState = data;
+            this.applyFilters();
+        },
+        searchClick(data) {
+            this.updatePage(1);
+            this.searchInput = data;
+            this.applyFilters();
+        },
+        updatePage(page) {
+
+            this.currentPage = page
+            this.displayedProducts = this.filteredProducts
+            const startIdx = (this.currentPage - 1) * this.pageSize
+            const endIdx = startIdx + this.pageSize
+            this.displayedProducts = this.filteredProducts.slice(startIdx, endIdx);
+            console.log("更新displayedProducts", this.displayedProducts);
+        },
 
     },
     computed: {
         prodCount() {
-            return this.allProduct.length;
+            return this.filteredProducts.length;
         },
     },
 }
 </script>
 <style scoped lang="scss">
 .prod_all {
-    .select {
-        display: flex;
-        justify-content: space-between;
-
-        .search {
-            input[type="searchbar"] {
-                border-radius: 1rem;
-                outline: none;
-                border: 1px solid #b7b7b7;
-                padding: 3px;
-                margin-right: 10px;
-            }
-        }
-
-    }
 
     .prod_content {
-        .title {
-            width: 100%;
-            border-bottom: 1px solid #000;
-            margin: 1em 0;
-
-            ul {
-                width: 100%;
-                margin: auto;
-                display: flex;
-                text-align: center;
-                
-
-                li {
-                    &:nth-of-type(1) {
-                        width: 25%;
-
-                    }
-
-                    &:nth-of-type(2) {
-                        width: 20%;
-                    }
-
-                    &:nth-of-type(3) {
-                        width: 15%;
-            
-                    }
-
-                    &:nth-of-type(4) {
-                        width: 20%;
-                    }
-
-                    &:nth-of-type(5) {
-                        width: 10%;
-                        
-                    }
-                }
-            }
-        }
 
         .content {
             ul {
@@ -464,11 +476,11 @@ export default {
                         flex-direction: column;
                         justify-content: space-evenly;
                         padding: 1rem;
-            
+
                     }
 
                     &:nth-of-type(4) {
-                        width: 15%;
+                        width: 10%;
                         text-align: center;
 
                         input[type="number"] {
@@ -479,14 +491,16 @@ export default {
                     &:nth-of-type(5) {
                         width: 20%;
                         height: 10rem;
-                        textarea{
+
+                        textarea {
                             height: 90%;
                         }
                     }
 
                     &:nth-of-type(6) {
-                        width: 10%;
+                        width: 15%;
                     }
+
                     &:nth-of-type(7) {
                         width: 10%;
                         text-align: center;
@@ -583,22 +597,22 @@ export default {
                     }
                 }
 
-                .radio_onOff {
-                    text-align: center;
 
-                    label {
-                        display: block;
-                        width: 100%;
-                    }
-                }
             }
         }
-    }//商品內容end
-    .prod_count{
+    }
+
+    //商品內容end
+    .prod_count {
 
         border-top: 1px solid #3f3636;
         text-align: right;
         font-size: 14px;
+    }
+    //分頁
+    .page{
+        width: 100%;
+        text-align: center;
     }
 }
 </style>
