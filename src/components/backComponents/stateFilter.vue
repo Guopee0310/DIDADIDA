@@ -24,6 +24,13 @@ export default {
 </script>
     
 <style scoped lang="scss">
-
+ select{
+      border: none;
+      outline: none;
+      font-size: 14px;
+      cursor: pointer;
+      background-color: transparent;
+      color: #515a6e;
+    }
 </style>
     

@@ -5,8 +5,8 @@
       <li>
         <select name="" id="" v-model="selectedItem">
           <option v-for="(item,index) in categorySelect" :key="index" :value="item.value">{{ item.option}}</option>
-        
         </select>
+        /商品名稱
       </li>
       <li><select name="" id="" v-model="selectedPrice">
         <option v-for="(item,index) in priceSelect" :key="index">{{ item.option}}</option>
@@ -27,7 +27,7 @@ export default {
   data() {
     return {
       categorySelect: [
-        { option: "商品種類/商品名稱", value:"" },
+        { option: "商品分類", value:"" },
         { option: "抱枕", value:"抱枕" },
         { option: "玩偶", value:"玩偶" },
         { option: "配飾", value:"配飾" }
@@ -58,23 +58,22 @@ export default {
 .title {
   width: 100%;
   border-bottom: 1px solid #000;
-  margin: 1em 0;
-
-  .search {
-    width: 100%;
-    text-align: right;
-    margin: 1rem 0;
-
-    input[type="search"] {
-      outline: none;
-      padding: 0.1rem;
-    }
-  }
+  margin: 1.5rem 0;
 
   ul {
     width: 100%;
     margin: auto;
     display: flex;
+    justify-content: center;
+    
+    select{
+      border: none;
+      outline: none;
+      font-size: 14px;
+      cursor: pointer;
+      background-color: transparent;
+      color: #515a6e;
+    }
 
     li {
       &:nth-of-type(1) {
@@ -88,7 +87,7 @@ export default {
       }
 
       &:nth-of-type(3) {
-        width: 10%;
+        width: 15%;
         text-align: center;
       }
 

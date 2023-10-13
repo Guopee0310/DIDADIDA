@@ -45,6 +45,9 @@ export default {
     position: relative;
     width: 6rem;
     margin: auto;
+    input:disabled{
+        cursor: not-allowed;
+    }
 }
 
 .switch {

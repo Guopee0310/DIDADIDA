@@ -1,9 +1,9 @@
 <template>
     <div class="prod_all">
         <div class="select">
-            <div class="add" @click="news_content">
-                <button>+新增項目</button>
-                <search  @transferSearch="searchClick" :txt="'搜尋商品名稱或描述'"></search>
+            <div class="add">
+                <button @click="news_content">+新增項目</button>
+                <search @transferSearch="searchClick" :txt="'搜尋商品名稱或描述'"></search>
             </div>
             <filterProduct @category="filterCategory" @price="filterPrice" @state="filterState" />
         </div>
@@ -15,7 +15,7 @@
                         <div class="img">
                             <div class="picBox">
                                 <img :src="`/all_images/product/${item.prod_img}`"
-                                    :alt="item.prod_img ? item.prod_img : '未選擇圖片'">
+                                    :alt="item.prod_img ? item.prod_img : '圖片需小於2MB'">
                             </div>
 
                             <div class="file_btn">
@@ -170,7 +170,7 @@ export default {
                     alert("請選擇分類");
                     return;
                 }
-                else if (item.prod_price<100) {
+                else if (item.prod_price < 100) {
                     alert("價錢為必填且需大於100");
                     return;
                 }
@@ -447,10 +447,10 @@ export default {
 <style scoped lang="scss">
 .prod_all {
 
-        .add{
-            display: flex;
-            justify-content: space-between;
-        }
+    .add {
+        display: flex;
+        justify-content: space-between;
+    }
 
     .prod_content {
 
@@ -461,21 +461,26 @@ export default {
                 align-items: center;
                 margin: 1rem 0;
 
+                input:disabled,
+                textarea:disabled,
+                select:disabled {
+                    cursor: not-allowed;
+                }
 
                 li {
                     &:nth-of-type(1) {
-                        width: 7%;
+                        width: 5%;
                         text-align: center;
 
                     }
 
                     &:nth-of-type(2) {
-                        width: 18%;
+                        width: 17%;
                         text-align: center;
                     }
 
                     &:nth-of-type(3) {
-                        width: 20%;
+                        width: 23%;
                         height: 10rem;
                         text-align: center;
                         display: flex;
@@ -486,7 +491,7 @@ export default {
                     }
 
                     &:nth-of-type(4) {
-                        width: 10%;
+                        width: 12%;
                         text-align: center;
 
                         input[type="number"] {
@@ -508,7 +513,7 @@ export default {
                     }
 
                     &:nth-of-type(7) {
-                        width: 10%;
+                        width: 8%;
                         text-align: center;
                     }
                 }
@@ -518,7 +523,7 @@ export default {
                     width: 100%;
                     box-sizing: border-box;
                     overflow: auto;
-                    padding: 0.1rem;
+                    padding: 0.2rem 0.5rem;
                     line-height: 1.5rem;
                 }
 
@@ -598,6 +603,10 @@ export default {
                             opacity: 0;
                             font-size: 0;
                             cursor: pointer;
+
+                            &:disabled {
+                                cursor: not-allowed;
+                            }
                         }
 
                     }
@@ -621,5 +630,4 @@ export default {
         width: 100%;
         text-align: center;
     }
-}
-</style>
+}</style>

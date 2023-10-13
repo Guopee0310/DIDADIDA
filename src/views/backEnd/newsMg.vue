@@ -1,8 +1,8 @@
 <template>
     <div class="news_all">
         <div class="select">
-            <div class="add" @click="news_content">
-                <button>+新增項目</button>
+            <div class="add">
+                <button @click="news_content">+新增項目</button>
                 <search @transferSearch="searchClick" :txt="'搜尋標題或內容'"></search>
             </div>
         </div>
@@ -440,21 +440,25 @@ export default {
 </script>
 <style scoped lang="scss">
 .news_all {
-    .add {
-        display: flex;
-        justify-content: space-between;
+    .select {
+        .add {
+            display: flex;
+            justify-content: space-between;
+        }
+
     }
 
     .news_content {
         .title {
             width: 100%;
             border-bottom: 1px solid #000;
-            margin: 1em 0;
+            margin: 2rem 0;
 
             ul {
                 width: 100%;
                 margin: auto;
                 display: flex;
+
 
                 li {
                     &:nth-of-type(1) {
@@ -488,6 +492,12 @@ export default {
                 display: flex;
                 align-items: center;
                 margin: 1rem 0;
+
+                input:disabled,
+                textarea:disabled,
+                select:disabled {
+                    cursor: not-allowed;
+                }
 
                 li {
                     &:nth-of-type(1) {
@@ -625,6 +635,10 @@ export default {
                             opacity: 0;
                             font-size: 0;
                             cursor: pointer;
+
+                            &:disabled {
+                                cursor: not-allowed;
+                            }
                         }
 
                     }
