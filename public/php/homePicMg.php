@@ -4,6 +4,20 @@ header("Content-Type: application/json");
 
 require_once("connect.php"); 
 
+// get
+try {
+    
+    $sql = "SELECT * FROM banner";
+    $stmt = $pdo->query($sql);
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    echo json_encode($result);
+} catch (PDOException $e) {
+    $response = array('error' => true, 'msg' => '获取管理员数据失败: ' . $e->getMessage());
+    echo json_encode($response);
+}
+
+
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
   $uploadedFile = $_FILES["image"]["name"];
   $banner_id = $_POST["banner_id"];
