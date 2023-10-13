@@ -101,8 +101,13 @@
                 class="field_input"
                 maxlength="50"
                 v-model="receiverName"
+                placeholder="收件人姓名"
+                @input="testName"
+                :class="{ checkInput: !isValidName, correctInput: isValidName }"
               />
             </div>
+            <span v-if="!isValidName" class="caution">請輸入有效姓名</span>
+
             <div class="surname">
               <div class="field__label">收件人手機</div>
               <input
@@ -110,16 +115,24 @@
                 class="field_input"
                 maxlength="50"
                 v-model="receiverPhone"
+                placeholder="收件人手機"
+                @input="testPhone"
+                :class="{ checkInput: !isValidPhone, correctInput: isValidPhone }"
               />
             </div>
+            <span v-if="!isValidPhone" class="caution">請輸入有效手機號碼</span>
             <div>
               <div class="field__label">收件地址</div>
               <input
                 type="text"
                 class="field_input"
                 v-model="receiverAddress"
+                placeholder="收件人地址"
+                @input="testAddr"
+                :class="{ checkInput: !isValidAddr, correctInput: isValidAddr }"
               />
             </div>
+            <span v-if="!isValidAddr" class="caution">請輸入有效地址</span>
           </div>
         </div>
       </div>
@@ -180,6 +193,9 @@ export default {
         // }
       ],
       picked: 0,
+      isValidName: true,
+      isValidPhone: true,
+      isValidAddr: true,
     };
   },
   created() {
@@ -448,6 +464,33 @@ export default {
     deleteSelected() {
       this.shopCartData = this.shopCartData.filter((prod) => !prod.select);
     },
+    testName() {
+      let regex = /^[\u4e00-\u9fa5]{2,4}$/;
+      this.isValidName = regex.test(this.receiverName);
+    },
+    testPhone() {
+      let regex = /^09\d{8}$/;
+      this.isValidPhone = regex.test(this.receiverPhone);
+    },
+    testAddr() {
+      let regex = /^[\u4e00-\u9fa5A-Za-z0-9\s,.-]+$/;
+      this.isValidAddr = regex.test(this.receiverAddress);
+    },
+    validateName() {
+      // 正则表达式示例：姓名
+      var regex = /^[\u4e00-\u9fa5]{2,4}$/;;
+      this.isValidName = regex.test(this.receiverName);
+    },
+    validatePhone() {
+      // 正则表达式示例：验证手機
+      var regex = /^09\d{8}$/;
+      this.isValidPhone = regex.test(this.receiverPhone);
+    },
+    validateAddr() {
+      // 正则表达式示例：地址
+      var regex = /^(?=.*[a-zA-Z]).{8,12}$/;
+      this.isValidAddr = regex.test(this.receiverAddress);
+    },
   },
 };
 </script>
@@ -664,6 +707,14 @@ h2 {
 .freight {
   border-bottom: 1.5px solid #666;
 }
+input::placeholder {
+  color: rgb(103, 98, 98,0.5); /* 修改占位文字的颜色 */
+  font-size: 12px;
+}
+.caution{
+  color: red;
+  font-size: 12px;
+}
 
 //rwd
 @media (max-width: 414px) {
@@ -743,5 +794,6 @@ h2 {
   .test2 {
     margin: 20px;
   }
+ 
 }
 </style>
