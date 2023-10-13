@@ -46,7 +46,7 @@ export default {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   opacity: 1;
   /* 初始不透明 */
-  transition: opacity 0.25s;
+  transition: opacity 0.1s;
   /* 添加过渡效果 */
   color: map-get($colors, "light");
 }
