@@ -21,26 +21,28 @@
           <div>商品名稱</div>
           <div>數量</div>
           <div>時間</div>
-      
+
           <div>狀態</div>
         </div>
         <div v-for="(i, index) in prodOrder" class="singleOrderTable">
           <div>{{ i.ord_id }}</div>
-          <div></div>
-          <div>{{ i.mem_id }}</div>
-          <div>
-            <!-- <div v-for="j in i.prodName">{{ j }}</div> -->
-            {{ i.prodName }}
-          </div>
+          <div>{{ i.mem_email }}</div>
+          <div>{{ i.prod_name }}</div>
+          <div>{{ i.ord_qty }}</div>
 
           <div>{{ i.prodCount }}</div>
           <div>{{ i.ord_date }}</div>
           <!-- <div>{{ i.ord_state }}</div> -->
-
-          <select>
-                 <option>{{ i.ord_state }}</option>
-          </select>
-    
+          <switchBtn
+            :onText="'待出貨'"
+            :off-text="'已出貨'"
+            :disabled="i.ord_state == '已出貨'"
+            :item="i.state"
+            @toggle="updateMemberState(i)"
+          ></switchBtn>
+          <!-- <select>
+            <option :value="i.ord_state">{{ i.ord_state }}</option>
+          </select> -->
 
           <!-- <div class="updateOrderBtn">
             <div class="update" @click="updateOrder(index, $event, i)">
@@ -90,13 +92,13 @@
           <!-- <button @click="toggleDetails(index, 'ticketOrder')">票券狀態</button>
          <div v-if="i.showDetails" class="details"> -->
           <!-- 這裡放置詳細資料欄位 -->
-        
         </div>
-        </div>
+      </div>
     </TabPane>
   </Tabs>
 </template>
 <script>
+import switchBtn from "../../components/backComponents/toggleBtn.vue";
 export default {
   name: "orderMg",
   data() {
@@ -160,10 +162,13 @@ export default {
       ticketOrderSlice: [],
     };
   },
+  components: {
+    switchBtn,
+  },
   computed: {},
   mounted() {
     ////fetch ordrMg.php
-    fetch(`${this.$store.state.APIurl}orderMg.php`) //第一步
+    fetch(`${this.$store.state.APIurl}prodOrderSelect.php`) //第一步
       // fetch(`${this.$store.state.APIurl}orderMg.php`)
       //this.$store.state.APIurl
       // axios
@@ -174,7 +179,15 @@ export default {
       })
 
       .then((myJson) => {
-        this.orderSlice = this.prodOrder = myJson;
+        this.prodOrder = myJson;
+        for (let i = 0; i < this.prodOrder.length; i++) {
+          if (this.prodOrder[i].ord_state == "已出貨") {
+            this.prodOrder[i].state = "0";
+          } else {
+            this.prodOrder[i].state = "1";
+          }
+        }
+        console.log(this.prodOrder);
       });
 
     ////fetch tickMg.php
@@ -194,6 +207,26 @@ export default {
   },
 
   methods: {
+    // 商品狀態 (待出貨 已出貨)
+    updateMemberState(i) {
+      const formData = new FormData();
+      let ord_id = i.ord_id;
+      let ord_state = "已出貨";
+      formData.append("ord_id", ord_id);
+      formData.append("ord_state", ord_state);
+      fetch(`${this.$store.state.APIurl}orderMgUpdate.php`, {
+        method: "post",
+        body: formData,
+      });
+      for (let j = 0; j < this.prodOrder.length; j++) {
+        if (this.prodOrder[j].ord_id == i.ord_id) {
+          this.prodOrder[j].state = "0";
+          // alert(this.prodOrder[i].ord_id);
+        }
+        // console.log(this.prodOrder[j].ord_id == i.ord_id);
+      }
+      i.state = "0";
+    },
     ////購物訂單
     prodResetArr() {
       if (this.prodChooseOrder == "") {
@@ -219,11 +252,12 @@ export default {
         this.orderSlice = this.prodOrder;
       }
     },
-      toggleDetails(index, dataType) {
-      if (dataType === 'prodOrder') {
+    toggleDetails(index, dataType) {
+      if (dataType === "prodOrder") {
         this.prodOrder[index].showDetails = !this.prodOrder[index].showDetails;
-      } else if (dataType === 'ticketOrder') {
-        this.ticketOrderSlice[index].showDetails = !this.ticketOrderSlice[index].showDetails;
+      } else if (dataType === "ticketOrder") {
+        this.ticketOrderSlice[index].showDetails =
+          !this.ticketOrderSlice[index].showDetails;
       }
     },
 

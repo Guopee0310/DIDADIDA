@@ -225,6 +225,13 @@ export default {
 
   methods: {
     createLaba() {
+      this.labaAPI.push({
+        game_img: "/all_images/laba/question_mark.jpg",
+        isDis: true,
+        game_title: "預設標題",
+        gmae_text: "預設內容",
+        qa_bonus: 5,
+      });
       const formData = new FormData();
 
       formData.append("image", "question_mark.jpg");
