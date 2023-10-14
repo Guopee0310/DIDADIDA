@@ -26,7 +26,14 @@
           <li>{{ i.mem_mob }}</li>
           <li>{{ i.mem_address }}</li>
           <li>
-            <label>
+            <switchBtn
+              :onText="'正常'"
+              :off-text="'黑名單'"
+              :disabled="false"
+              :item="i.mem_state == 0 ? '1' : '0'"
+              @toggle="updateMemberState(i)"
+            ></switchBtn>
+            <!-- <label>
               <input
                 type="radio"
                 :name="index"
@@ -43,9 +50,10 @@
                 @change="radioPush(i.mem_name, i.mem_email, 1)"
               />
               黑名單
-            </label>
+            </label> -->
           </li>
         </ul>
+
         <!-- <div class="mem_email">
           <p>nini0218@gmail.com</p>
         </div>
@@ -62,6 +70,7 @@
 </template>
 
 <script>
+import switchBtn from "../../components/backComponents/toggleBtn.vue";
 export default {
   data() {
     return {
@@ -84,6 +93,35 @@ export default {
     };
   },
   methods: {
+    updateMemberState(item) {
+      if (item.mem_state == 0) {
+        item.mem_state = 1;
+
+        const formData = new FormData();
+        let mem_email = item.mem_email;
+        let mem_state = 1;
+        formData.append("mem_email", mem_email);
+        formData.append("mem_state", mem_state);
+
+        fetch(`${this.$store.state.APIurl}memberMgChangeState.php`, {
+          method: "post",
+          body: formData,
+        }).then((res) => res.json());
+      } else {
+        item.mem_state = 0;
+
+        const formData = new FormData();
+        let mem_email = item.mem_email;
+        let mem_state = 0;
+        formData.append("mem_email", mem_email);
+        formData.append("mem_state", mem_state);
+
+        fetch(`${this.$store.state.APIurl}memberMgChangeState.php`, {
+          method: "post",
+          body: formData,
+        }).then((res) => res.json());
+      }
+    },
     radioPush(name, email, item) {
       if (item == 0) {
         alert(`${name}的權限已改為正常`);
@@ -179,7 +217,13 @@ export default {
       .then((data) => {
         // console.log(data);
         this.memberAPI = data;
+        for (let i = 0; i < this.memberAPI.length; i++) {
+          this.memberAPI[i].state = "1";
+        }
       });
+  },
+  components: {
+    switchBtn,
   },
   computed: {
     selectedCount() {
