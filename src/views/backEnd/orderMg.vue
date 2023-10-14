@@ -34,8 +34,8 @@
           <div>{{ i.ord_date }}</div>
           <!-- <div>{{ i.ord_state }}</div> -->
           <switchBtn
-            :onText="'待出貨'"
-            :off-text="'已出貨'"
+            :onText="'已出貨'"
+            :off-text="'待出貨'"
             :disabled="i.ord_state == '已出貨'"
             :item="i.state"
             @toggle="updateMemberState(i)"
