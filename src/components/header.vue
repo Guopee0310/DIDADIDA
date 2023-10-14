@@ -67,7 +67,8 @@
           </span>
 
           <!-- 購物車 -->
-          <router-link to="/shoppingcart"><i class="fa-solid fa-cart-shopping" style="color: #eee"></i></router-link>
+          <router-link to="/shoppingcart" class="cart"><i class="fa-solid fa-cart-shopping"
+              style="color: #eee"></i></router-link>
         </div>
         <!-- 語言切換 -->
         <div class="select">
@@ -80,7 +81,16 @@
         </div>
       </nav>
       <!-- 手機menu -->
+
       <div class="rwd_menu">
+        <span class="rwd_member">
+          <i @click="this.$store.state.storeShowLogin = true" v-if="!this.$store.state.userName" class="fa-solid fa-user"
+            style="color: #eee"></i>
+          <div v-if="this.$store.state.userName" @click="this.$router.push('./member')" style="color: #eee" class="name">
+            {{ this.$store.state.userName }}
+          </div>
+          <span v-if="this.$store.state.userName" @click="logOutAPI()" class="logOutBtn">登出</span>
+        </span>
         <div class="navigation">
           <input type="checkbox" class="navigation__checkbox" id="nav-toggle" />
           <label for="nav-toggle" class="navigation__button">
@@ -92,14 +102,6 @@
             <ul class="navigation__list">
               <div class="btn_wrap">
                 <div class="icons">
-                  <span>
-                    <i @click="this.$store.state.storeShowLogin = true" v-if="!this.$store.state.userName"
-                      class="fa-solid fa-user" style="color: #eee"></i>
-                    <div v-if="this.$store.state.userName" @click="this.$router.push('./member')">
-                      {{ this.$store.state.userName }}
-                    </div>
-                    <span v-if="this.$store.state.userName" @click="logOutAPI()" class="logOutBtn">登出</span>
-                  </span>
 
                   <!-- 購物車 -->
                   <router-link to="/shoppingcart" @click="closeMobileMenu"><i class="fa-solid fa-cart-shopping"
@@ -525,24 +527,27 @@ option:checked {
   display: none;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 767px) {
   .wrap {
     .main-nav {
       display: none;
     }
 
     .btn_wrap {
-      width: 80%;
+      width: 75%;
       margin: auto;
       display: flex;
       justify-content: space-between;
+      align-items: center;
+      flex-direction: row-reverse;
+      margin-bottom: 2rem;
 
       .icons {
         font-size: map-get($fontSizes, "div");
-        width: 60px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+        width: 20%;
+        i{
+          font-size: 1.4rem;
+        }
       }
 
       select {
@@ -569,12 +574,32 @@ option:checked {
     }
 
     .rwd_menu {
+      width: 80%;
       display: flex;
-      align-items: center;
-      justify-content: center;
+      align-items: start;
+      justify-content: end;
 
+      .rwd_member{
+        height: 100%;
+        display: flex;
+        align-items: center;
+        margin-right: 1rem;
+        cursor: pointer;
+        .name{
+          margin: 0 1rem;
+          border-bottom: 1px solid #fff;
+        }
+        .logOutBtn{
+          color: #fdfdfd;
+          margin-right: 0.5rem;
+        }
+        i{
+          width: 100%;
+          font-size: 1.3rem;
+          margin-right: 1.3rem;
+        }
+      }
       .navigation {
-        width: 100%;
         height: 100%;
         display: flex;
         position: relative;
@@ -587,19 +612,16 @@ option:checked {
 
       .navigation__button {
         position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         text-align: center;
         border-radius: 50%;
         z-index: 8;
         cursor: pointer;
 
         span {
-          margin-right: 1.5rem;
           display: inline-block;
-        }
-
-        &:hover {
-          color: #c1d0d0;
-          transform: scale(1.1);
         }
       }
 
@@ -618,8 +640,8 @@ option:checked {
       .navigation__nav {
         position: fixed;
         inset: 0;
-        max-width: 100vw;
-        max-height: 100vh;
+        max-width: 100%;
+        max-height: 100%;
         opacity: 0;
         visibility: hidden;
         z-index: 4;
@@ -627,18 +649,16 @@ option:checked {
       }
 
       .navigation__list {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
+        position: relative;
         text-align: center;
+        top: 15%;
         width: 100%;
-        height: 70%;
+        height: 85%;
       }
 
       .navigation__item {
-        margin: 2rem;
-        padding: 1rem;
+        margin: 1.5rem 0;
+        padding: 0.5rem 0;
         position: relative;
 
         a {
@@ -652,9 +672,9 @@ option:checked {
 
         .dropdown {
           position: absolute;
-          width: 100%;
-          top: 120%;
-          left: 0;
+          width: 90%;
+          top:120%;
+          left: 5%;
           margin: auto;
           background-color: map-get($colors, "h2Blue");
           border-radius: 2rem;
@@ -663,8 +683,7 @@ option:checked {
           z-index: 2;
 
           >li {
-            // margin: 1rem;
-            padding: 1rem 0;
+            margin: 1rem 0;
           }
 
           a {
@@ -701,9 +720,6 @@ option:checked {
       }
 
       .navigation__icon {
-        left: 50%;
-        top: 30%;
-        transform: translate(-50%, -30%);
         position: relative;
         margin: auto;
 
