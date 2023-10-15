@@ -2,7 +2,8 @@
   <div class="mem_all">
     <div class="select">
       <div class="search">
-        <input type="searchbar" placeholder="帳號或姓名" /><button>搜尋</button>
+        <input type="searchbar" v-model="search" placeholder="帳號或姓名" />
+        <button>搜尋</button>
       </div>
     </div>
     <div class="mem_content">
@@ -26,13 +27,8 @@
           <li>{{ i.mem_mob }}</li>
           <li>{{ i.mem_address }}</li>
           <li>
-            <switchBtn
-              :onText="'正常'"
-              :off-text="'黑名單'"
-              :disabled="false"
-              :item="i.mem_state == 0 ? '1' : '0'"
-              @toggle="updateMemberState(i)"
-            ></switchBtn>
+            <switchBtn :onText="'正常'" :off-text="'黑名單'" :disabled="false" :item="i.mem_state == 0 ? '1' : '0'"
+              @toggle="updateMemberState(i)"></switchBtn>
             <!-- <label>
               <input
                 type="radio"
@@ -75,6 +71,7 @@ export default {
   data() {
     return {
       imageSrc: "",
+      search: "",
       memberAPI: [],
       allBar: [
         {
@@ -242,6 +239,18 @@ export default {
         });
       },
     },
+    // 模糊篩選
+    memberAPI() {
+      return this.memberAPI.filter(i => {
+        const searchText = this.search.toLowerCase();
+        return (   // 可以進行模糊篩選的欄位
+          i.mem_name.toLowerCase().includes(searchText) ||
+          i.mem_email.toLowerCase().includes(searchText) ||
+          i.mem_mob.includes(this.search) || 
+          i.mem_address.toLowerCase().includes(searchText)
+        );
+      });
+    }
   },
 };
 </script>
@@ -271,6 +280,7 @@ export default {
 
   .mem_content {
     margin-top: 10px;
+
     .title {
       width: 100%;
       border-bottom: 1px solid #000;
