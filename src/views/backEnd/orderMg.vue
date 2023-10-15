@@ -36,7 +36,7 @@
           <switchBtn
             :onText="'已出貨'"
             :off-text="'待出貨'"
-            :disabled="i.ord_state == '已出貨'"
+            :disabled="false"
             :item="i.state"
             @toggle="updateMemberState(i)"
           ></switchBtn>
@@ -209,23 +209,43 @@ export default {
   methods: {
     // 商品狀態 (待出貨 已出貨)
     updateMemberState(i) {
-      const formData = new FormData();
-      let ord_id = i.ord_id;
-      let ord_state = "已出貨";
-      formData.append("ord_id", ord_id);
-      formData.append("ord_state", ord_state);
-      fetch(`${this.$store.state.APIurl}orderMgUpdate.php`, {
-        method: "post",
-        body: formData,
-      });
-      for (let j = 0; j < this.prodOrder.length; j++) {
-        if (this.prodOrder[j].ord_id == i.ord_id) {
-          this.prodOrder[j].state = "0";
-          // alert(this.prodOrder[i].ord_id);
+      if (i.state == "1") {
+        const formData = new FormData();
+        let ord_id = i.ord_id;
+        let ord_state = "已出貨";
+        formData.append("ord_id", ord_id);
+        formData.append("ord_state", ord_state);
+        fetch(`${this.$store.state.APIurl}orderMgUpdate.php`, {
+          method: "post",
+          body: formData,
+        });
+        for (let j = 0; j < this.prodOrder.length; j++) {
+          if (this.prodOrder[j].ord_id == i.ord_id) {
+            this.prodOrder[j].state = "0";
+            // alert(this.prodOrder[i].ord_id);
+          }
+          // console.log(this.prodOrder[j].ord_id == i.ord_id);
         }
-        // console.log(this.prodOrder[j].ord_id == i.ord_id);
+        i.state = "0";
+      } else {
+        const formData = new FormData();
+        let ord_id = i.ord_id;
+        let ord_state = "待出貨";
+        formData.append("ord_id", ord_id);
+        formData.append("ord_state", ord_state);
+        fetch(`${this.$store.state.APIurl}orderMgUpdate.php`, {
+          method: "post",
+          body: formData,
+        });
+        for (let j = 0; j < this.prodOrder.length; j++) {
+          if (this.prodOrder[j].ord_id == i.ord_id) {
+            this.prodOrder[j].state = "1";
+            // alert(this.prodOrder[i].ord_id);
+          }
+          // console.log(this.prodOrder[j].ord_id == i.ord_id);
+        }
+        i.state = "1";
       }
-      i.state = "0";
     },
     ////購物訂單
     prodResetArr() {
