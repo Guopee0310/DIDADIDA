@@ -49,7 +49,7 @@ export default {
         return response.json();
       })
       .then((data) => {
-        this.ticket = data;
+        this.ticket = data.filter((item) => item.tick_state == "1");
       });
   },
 };
