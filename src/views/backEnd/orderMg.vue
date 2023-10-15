@@ -3,13 +3,17 @@
     <!-- 訂單頁籤 -->
     <TabPane label="購物訂單" name="name1">
       <div class="titleAll">
-        <select name="" id="">
-          <option value="">訂單編號</option>
-          <option value="">會員帳號</option>
+        <select v-model="chooseProductOption">
+          <option value="訂單編號">訂單編號</option>
+          <option value="會員信箱">會員信箱</option>
         </select>
         <input
           type="text"
-          placeholder="請輸入訂單編號"
+          :placeholder="
+            chooseProductOption == '訂單編號'
+              ? '請輸入訂單編號'
+              : '請輸入會員信箱'
+          "
           v-model="prodChooseOrder"
         />
         <div @click="prodChooseNameOrOrder">搜尋</div>
@@ -24,7 +28,7 @@
 
           <div>狀態</div>
         </div>
-        <div v-for="(i, index) in prodOrder" class="singleOrderTable">
+        <div v-for="(i, index) in prodOrderSlice" class="singleOrderTable">
           <div>{{ i.ord_id }}</div>
           <div>{{ i.mem_email }}</div>
           <div>{{ i.prod_name }}</div>
@@ -59,7 +63,13 @@
           <option value="訂單編號">訂單編號</option>
           <option value="會員信箱">會員信箱</option>
         </select>
-        <input type="text" placeholder="請輸入訂單編號" v-model="chooseOrder" />
+        <input
+          type="text"
+          :placeholder="
+            chooseName == '訂單編號' ? '請輸入訂單編號' : '請輸入會員信箱'
+          "
+          v-model="chooseOrder"
+        />
         <div @click="chooseNameOrOrder">搜尋</div>
       </div>
       <div class="ticketTableAll">
@@ -103,6 +113,7 @@ export default {
   name: "orderMg",
   data() {
     return {
+      chooseProductOption: "訂單編號",
       chooseName: "訂單編號",
       chooseOrder: "",
       prodChooseName: "訂單編號",
@@ -133,6 +144,7 @@ export default {
         //   orderState: "問題訂單",
         // },
       ],
+      prodOrderSlice: [],
       ticketOrder: [
         // {
         //   orderNumber: "a123456",
@@ -179,7 +191,7 @@ export default {
       })
 
       .then((myJson) => {
-        this.prodOrder = myJson;
+        this.prodOrderSlice = this.prodOrder = myJson;
         for (let i = 0; i < this.prodOrder.length; i++) {
           if (this.prodOrder[i].ord_state == "已出貨") {
             this.prodOrder[i].state = "0";
@@ -254,22 +266,22 @@ export default {
       }
     },
     prodChooseNameOrOrder() {
-      if (this.prodChooseName == "訂單編號") {
+      if (this.chooseProductOption == "訂單編號") {
         this.prodChooseOrder = this.prodChooseOrder.toUpperCase();
-        let pres = this.prodOrder.filter((item) => {
+        let res = this.prodOrder.filter((item) => {
           let ans = item.ord_id;
           return ans.includes(this.prodChooseOrder);
         });
-        this.prodOrderSlice = pres;
-      } else if (this.prodChooseName == "會員帳號") {
+        this.prodOrderSlice = res;
+      } else if (this.chooseProductOption == "會員信箱") {
         this.prodChooseOrder = this.prodChooseOrder.toUpperCase();
-        let pres = this.prodOrder.filter((item) => {
-          let ans = item.mem_id.toUpperCase();
+        let res = this.prodOrder.filter((item) => {
+          let ans = item.mem_email.toUpperCase();
           return ans.includes(this.prodChooseOrder);
         });
-        this.orderSlice = pres;
+        this.prodOrderSlice = res;
       } else {
-        this.orderSlice = this.prodOrder;
+        this.prodOrderSlice = this.prodOrder;
       }
     },
     toggleDetails(index, dataType) {
