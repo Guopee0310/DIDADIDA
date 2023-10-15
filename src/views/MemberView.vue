@@ -8,13 +8,23 @@
     <div class="member_nav">
       <div class="stickers">
         <div class="photo_stickers">
-          <img :src="mem_pic" alt="" />
-          <input type="file" @change="handleFileChange" />
-          <button @click="uploadAvatar">上傳</button>
-          <!-- <input type="file">
-          <img src="../assets/images/member_nini.jpg" alt="" /> -->
+          <div class="imgBox">
+            <img :src="changePic" alt="" />
+          </div>
+          <input type="file" @change="pushImg($event, index)" id="fileInput" />
+          <label for="fileInput" id="cameraIconLabel">
+            <img src="../../public/all_images/115759_camera_icon.png" alt="">
+          </label>
         </div>
+        <!-- <form action="../../public/php/memAvatar.php" method="post" enctype="multipart/form-data">
+            <label for="image"><b>Upload file : </b></label>
+            <input type="file" name="image" accept="image/*" id="image"><br>
+            <input type="submit" value="Upload">
+          </form> -->
+        <!-- <input type="file">
+          <img src="../assets/images/member_nini.jpg" alt="" /> -->
       </div>
+
       <div class="member_hello">
         <p>{{ this.$store.state.userName }}，您好！</p>
       </div>
@@ -52,6 +62,8 @@
         </button>
       </div>
     </div>
+
+
     <!-- 右側區塊 -->
     <!-- 會員帳號設定 -->
     <div v-if="this.$store.state.memberBtn === 'mem_account_settings'" class="mem_account_settings member_area">
@@ -103,8 +115,9 @@ export default {
       logOutClick: false,
       btn: "mem_account_settings",
       mem_bonus: 0,
-      mem_pic: '',
-      selectedFile: null,
+      allBar: [],
+      avatarAll: [],
+      changePic: "",
     };
   },
   created() {
@@ -144,6 +157,21 @@ export default {
     },
     ...mapGetters(["remainingTodos"]),
   },
+  // mounted() {
+  //   fetch(`${this.$store.state.APIurl}memAvatar.php`)
+  //     .then(function (response) {
+  //       return response.json();
+  //     })
+
+  //     .then((myJson) => {
+  //       for (let i = 0; i < myJson.length; i++) {
+  //         myJson[
+  //           i
+  //         ].mem_pic = require(`../../public/all_images/memAvatar/${myJson[i].mem_pic}`);
+  //       }
+  //       this.avatarAll = myJson;
+  //     });
+  // },
   methods: {
     favList() {
       this.$store.state.memberBtn = "favorites_list";
@@ -188,32 +216,62 @@ export default {
       this.$store.state.ticketList = [];
       this.$store.state.totalScorePoint = 0;
     },
-    handleFileChange(e) {
-      this.selectedFile = e.target.files[0];
-    },
-    async uploadAvatar() {
+    updatePic(index, e, i) {
+      console.log(this.changePic);
       const formData = new FormData();
-      formData.append('file', this.selectedFile);
+      let mem_id = this.avatarAll[index].mem_id;
 
-      try {
-        const response = await fetch(`${this.$store.state.APIurl}memAvatar.php`, {
-          method: 'POST',
+      formData.append("mem_id", mem_id);
+      formData.append("image", this.changePic);
+      // 使用fetch或axios將數據發送到PHP後端
+
+      // 修改 ----------------------------
+      if (i.mem_id) {
+        let mem_id = i.mem_id;
+        let formData = new FormData();
+        formData.append("mem_id", mem_id);
+        formData.append("image", this.changePic);
+
+        fetch(`${this.$store.state.APIurl}memAvatar.php`, {
+          method: "post",
           body: formData,
-        });
-
-        if (response.ok) {
-          const data = await response.json();
-          if (data.success) {
-            this.mem_pic = data.mem_pic;
-          } else {
-            console.error(data.message);
-          }
-        } else {
-          console.error('Upload failed.');
-        }
-      } catch (error) {
-        console.error(error);
+        })
+          .then((res) => res.json())
+          .then((result) => {
+            alert("圖片更新OK");
+            console.log(result);
+          });
+        return;
+      } else {
+        fetch(`${this.$store.state.APIurl}memAvatarInsert.php`, {
+          method: "post",
+          body: formData,
+        })
+          .then((res) => res.json())
+          .then((result) => {
+            alert("圖片更新OK");
+            console.log(result);
+          });
+        return;
       }
+
+    },
+    pushImg(e, index) {
+      let file = e.target.files[0];
+      this.changePic = file;
+      console.log("file", file);
+
+      let readFile = new FileReader();
+      readFile.readAsDataURL(file);
+      readFile.addEventListener("load", function () {
+        let image = new Image();
+        image.src = readFile.result;
+        console.log(image.src);
+        image.style.width = "100%";
+        image.style.height = "100%";
+        document.querySelectorAll(".imgBox")[0].innerHTML = "";
+        document.querySelectorAll(".imgBox")[0].appendChild(image);
+      });
     },
   },
 };
@@ -244,19 +302,44 @@ export default {
       position: relative;
 
       .photo_stickers {
-        display: inline-block;
-        width: 270px;
-        height: 270px;
-        border-radius: 50%;
-        overflow: hidden;
-        position: absolute;
-        top: -180px;
-        left: 65px;
-        z-index: 2;
+        // position: relative;
 
-        img {
-          width: 100%;
-          height: 100%;
+        .imgBox {
+          display: inline-block;
+          width: 270px;
+          height: 270px;
+          border-radius: 50%;
+          overflow: hidden;
+          position: absolute;
+          top: -180px;
+          left: 65px;
+          z-index: 2;
+
+          img {
+            width: 100%;
+            height: 100%;
+          }
+        }
+
+        input[type=file] {
+          display: none;
+        }
+
+        #cameraIconLabel {
+          cursor: pointer;
+          display: inline-block;
+          padding: 10px;
+          background-color: transparent;
+          border: 0;
+          position: absolute;
+          top: 40px;
+          left: 175px;
+          z-index: 3;
+
+          img {
+            width: 25px;
+            height: 25px;
+          }
         }
       }
     }
