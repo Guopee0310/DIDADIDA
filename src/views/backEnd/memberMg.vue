@@ -2,8 +2,16 @@
   <div class="mem_all">
     <div class="select">
       <div class="search">
-        <input type="searchbar" v-model="search" placeholder="帳號或姓名" />
-        <button>搜尋</button>
+        <select v-model="chooseAccOrName">
+          <option value="帳號">帳號</option>
+          <option value="姓名">姓名</option>
+        </select>
+        <input
+          type="searchbar"
+          v-model="search"
+          :placeholder="chooseAccOrName == '帳號' ? '請輸入帳號' : '請輸入姓名'"
+        />
+        <button @click="searchAccOrName">搜尋</button>
       </div>
     </div>
     <div class="mem_content">
@@ -19,7 +27,7 @@
         </ul>
       </div>
       <div class="mem_info">
-        <ul v-for="(i, index) in memberAPI" :key="index">
+        <ul v-for="(i, index) in memberAPISlice" :key="index">
           <li>{{ i.mem_email }}</li>
           <li>{{ i.mem_name }}</li>
           <li>{{ i.mem_gender }}</li>
@@ -27,8 +35,13 @@
           <li>{{ i.mem_mob }}</li>
           <li>{{ i.mem_address }}</li>
           <li>
-            <switchBtn :onText="'正常'" :off-text="'黑名單'" :disabled="false" :item="i.mem_state == 0 ? '1' : '0'"
-              @toggle="updateMemberState(i)"></switchBtn>
+            <switchBtn
+              :onText="'正常'"
+              :off-text="'黑名單'"
+              :disabled="false"
+              :item="i.mem_state == 0 ? '1' : '0'"
+              @toggle="updateMemberState(i)"
+            ></switchBtn>
             <!-- <label>
               <input
                 type="radio"
@@ -70,8 +83,10 @@ import switchBtn from "../../components/backComponents/toggleBtn.vue";
 export default {
   data() {
     return {
+      chooseAccOrName: "帳號",
       imageSrc: "",
       search: "",
+      memberAPISlice: [],
       memberAPI: [],
       allBar: [
         {
@@ -90,6 +105,23 @@ export default {
     };
   },
   methods: {
+    searchAccOrName() {
+      if (this.chooseAccOrName == "帳號") {
+        this.search = this.search.toUpperCase();
+        let res = this.memberAPI.filter((item) => {
+          let ans = item.mem_email.toUpperCase();
+          return ans.includes(this.search);
+        });
+        this.memberAPISlice = res;
+      } else if (this.chooseAccOrName == "姓名") {
+        this.search = this.search.toUpperCase();
+        let res = this.memberAPI.filter((item) => {
+          let ans = item.mem_name;
+          return ans.includes(this.search);
+        });
+        this.memberAPISlice = res;
+      }
+    },
     updateMemberState(item) {
       if (item.mem_state == 0) {
         item.mem_state = 1;
@@ -217,6 +249,7 @@ export default {
         for (let i = 0; i < this.memberAPI.length; i++) {
           this.memberAPI[i].state = "1";
         }
+        this.memberAPISlice = this.memberAPI;
       });
   },
   components: {
@@ -241,16 +274,17 @@ export default {
     },
     // 模糊篩選
     memberAPI() {
-      return this.memberAPI.filter(i => {
+      return this.memberAPI.filter((i) => {
         const searchText = this.search.toLowerCase();
-        return (   // 可以進行模糊篩選的欄位
+        return (
+          // 可以進行模糊篩選的欄位
           i.mem_name.toLowerCase().includes(searchText) ||
           i.mem_email.toLowerCase().includes(searchText) ||
-          i.mem_mob.includes(this.search) || 
+          i.mem_mob.includes(this.search) ||
           i.mem_address.toLowerCase().includes(searchText)
         );
       });
-    }
+    },
   },
 };
 </script>
