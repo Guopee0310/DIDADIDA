@@ -6,8 +6,9 @@
       </template>
     </h3Title>
     <div class="guide_map">
-      <button @click="toggleBook" class="flip-btn">{{ isOpen ? '點擊關閉地圖' : '點擊查看地圖' }}</button>
-      <div class="cover"><img src="../../public/all_images/guide/whale.jpg" alt=""></div>
+      <button @click="toggleBook" class="flip-btn">點我翻頁</button>
+      <div class="cover"><img :src="`${this.$store.state.chooseImgSrc}/all_images/guide/cover-left.jpg`" alt="">
+      </div>
       <div id="book">
         <div id="top">
           <img src="https://i.imgur.com/RBBeLsB.jpg" alt="" />
@@ -23,13 +24,13 @@
             <g @click="scrollToSection(3)">
               <rect x="78" y="9" width="20" height="8" rx="1" ry="1" style="fill:#4B88FFa2;stroke-width:10;"></rect>
               <text x="79" y="15" fill="#fff" filter="url(#drop-shadow-filter)">中層館</text>
-              <polyline points="0,0 85,0 85,9" style="fill:none; stroke:#000; stroke-width:0.5" />
+              <polyline points="0,0 85,0 85,9" style="fill:none; stroke:#786969; stroke-width:0.3" />
             </g>
             <!-- 深層區 -->
             <g @click="scrollToSection(4)">
               <rect x="78" y="36" width="20" height="8" rx="1" ry="1" style="fill:#0016D8a2;stroke-width:10;"></rect>
               <text x="79" y="41.5" fill="#fff" filter="url(#drop-shadow-filter)">深層館</text>
-              <polyline points="32,40 78,40" style="fill:none; stroke:#000; stroke-width:0.5" />
+              <polyline points="33,40 78,40" style="fill:none; stroke:#786969; stroke-width:0.3" />
             </g>
           </svg>
         </div>
@@ -37,7 +38,8 @@
 
       <div :class="{ 'open': isOpen, 'closed': !isOpen }" id="flip">
         <div id="front">
-          <img src="https://i.imgur.com/0m2DG2m.jpg" alt="" />
+          <img :src="`${this.$store.state.chooseImgSrc}/all_images/guide/cover-right.jpg`" alt="">
+
 
         </div>
         <div id="back">
@@ -53,7 +55,7 @@
             <g @click="scrollToSection(2)" id="section1">
               <rect x="6" y="16" width="20" height="8" rx="1" ry="1" style="fill:#67daf4a2;stroke-width:10;"></rect>
               <text x="7" y="21.8" fill="#fff" filter="url(#drop-shadow-filter)">淺層館</text>
-              <polyline points="15,15 15,10 50,10" style="fill:none; stroke:#000; stroke-width:0.5" />
+              <polyline points="15,15 15,10 50,10" style="fill:none; stroke:#786969; stroke-width:0.3" />
             </g>
           </svg>
         </div>
@@ -96,7 +98,7 @@
       <div class="wrap">
         <div class="about_content">
           <p>
-            這個區域在海洋生態系統中非常重要，因為它承載著各種生物和生態過程。海洋中層區的深度通常位於海平面以下約200米到1000米之間。這個區域的深度可以因地理位置而異，但大致處於此範圍內。隨著深度的增加，光線變得越來越有限，所以這個區域被稱為"光線不足層"。此外，水溫也隨著深度的增加而下降。這個區域通常有一個稱為"增溫層"的區域，水溫在這個區域內會有一個較大的變化。海洋中層區擁有豐富的生物多樣性，包括各種魚類、烏賊、燈籠魚等生物。這些生物通常會遷徙到這個區域，以覓食或避開掠食者。
+            海洋中層區的深度通常位於海平面以下約200米到1000米之間。隨著深度的增加，光線變得越來越有限，所以這個區域被稱為"光線不足層"。海洋中層區擁有豐富的生物多樣性，包括各種魚類、烏賊、燈籠魚等生物。這些生物通常會遷徙到這個區域，以覓食或避開掠食者。
           </p>
         </div>
         <div class="fish_wrap">
@@ -229,20 +231,31 @@ h3 {
 // 地圖css
 .guide_map {
   position: relative;
-  max-width: 1200px;
+  max-width: 90vw;
   margin: auto;
 
   .flip-btn {
     outline: none;
     border: none;
+    background-color: rgb(175, 34, 100);
+    color: #fff;
+    padding: 1em 2em;
     position: absolute;
+    border-radius: 12px 12px 0 0;
+    font-size: 1em;
+    top: -49px;
+    left: 3em;
+    z-index: 1;
+    cursor: pointer;
   }
-  .cover{
-    width: 40vw;
+
+  .cover {
+    width: 45vw;
     position: relative;
-    left: 10%;
-    border: 2px solid red;
-    img{
+    left: 0;
+    box-shadow: 0 0.2em 0.3em 0 #666;
+
+    img {
       width: 100%;
       vertical-align: top;
     }
@@ -301,7 +314,7 @@ h3 {
 /* 左內頁 */
 #back {
   position: relative;
-  width: 40vw;
+  width: 45vw;
   transform: rotateY(.4deg);
   transform-origin: -100% 0;
 
@@ -315,7 +328,8 @@ h3 {
     top: 0;
     left: 0;
     transform: rotateY(-180deg);
-    rect{
+
+    rect {
       cursor: pointer;
     }
 
@@ -328,7 +342,7 @@ h3 {
 
 
 #front {
-  width: 40vw;
+  width: 45vw;
 
   img {
     width: 100%;
@@ -344,16 +358,18 @@ h3 {
   top: 0;
   transform: translate3d(0px, 0px, -10px) rotateX(0deg) rotateZ(0deg);
   transform-style: preserve-3d;
+  box-shadow: 0.2em 0.2em 0.2em 0 #666;
 
 }
 
 /* 內右頁 */
 #book #top {
   transform: rotateX('180deg');
-  width: 40vw;
+  width: 45vw;
   position: relative;
   left: 0;
   top: 0;
+
 
   img {
     width: 100%;
@@ -364,7 +380,8 @@ h3 {
     position: absolute;
     top: 0;
     right: 0;
-    rect{
+
+    rect {
       cursor: pointer;
     }
 
@@ -462,17 +479,17 @@ h3 {
 
     &:nth-of-type(1) {
       display: none;
-      background-image: url(../../public/all_images/guide/sharks-gudie_pic.jpg);
+      background-image: url(../../public/all_images/guide/middle.jpg);
     }
 
     &:nth-of-type(2) {
       display: none;
-      background-image: url(../../public/all_images/guide/fish-guide_pic.jpg);
+      background-image: url(../../public/all_images/guide/mikita-GdkuJ6tyciU-unsplash.jpg);
     }
 
     &:nth-of-type(3) {
       display: none;
-      background-image: url(../../public/all_images/guide/mikita-GdkuJ6tyciU-unsplash.jpg);
+      background-image: url(../../public/all_images/guide/shallow.jpg);
     }
 
     .wrap {
@@ -486,7 +503,7 @@ h3 {
         width: 60%;
         padding: 4rem;
         line-height: 1.5em;
-        font-size: map-get($fontSizes, "p");
+        font-size: 1.2rem;
       }
 
       .fish_wrap {
@@ -534,6 +551,14 @@ h3 {
 
 @media screen and (max-width: 768px) {
 
+  .guide_map {
+    .flip-btn {
+      font-size: 0.7em;
+      top: -28px;
+      padding: 0.7em 1em;
+    }
+  }
+
   .tabs {
 
     h4 {
@@ -575,9 +600,11 @@ h3 {
 
         .about_content {
           padding: 1rem;
+          width: 50%;
         }
 
         .fish_wrap {
+          width: 50%;
           height: 100%;
 
           .fish {
@@ -593,7 +620,7 @@ h3 {
             }
 
             .pic_shape {
-              width: 80%;
+              width: 100%;
             }
           }
         }

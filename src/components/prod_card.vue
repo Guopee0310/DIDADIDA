@@ -8,7 +8,7 @@
         :is-active="mountedShowLove.findIndex((v) => v == i.prod_id) > -1"></heart>
     </div>
     <div class="pic">
-      <a href="#" @click.prevent="showProductDetails(i)"><img :src="`/all_images/product/${i.prod_img}`"
+      <a href="#" @click.prevent="showProductDetails(i)"><img :src="`${this.$store.state.chooseImgSrc}/all_images/product/${i.prod_img}`"
           :alt="i.prod_img" /></a>
     </div>
 
@@ -52,7 +52,7 @@
       <div class="modal-content">
         <div class="prod-content">
           <div class="prod-img">
-            <img :src="`/all_images/product/${selectedProduct.prod_img}`" />
+            <img :src="`${this.$store.state.chooseImgSrc}/all_images/product/${selectedProduct.prod_img}`" />
           </div>
           <div class="prod-info">
             <div>

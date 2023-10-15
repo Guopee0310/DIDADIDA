@@ -29,7 +29,7 @@
                     <li>
                         <div class="img">
                             <div class="picBox">
-                                <img :src="`/all_images/news/${item.news_img}`"
+                                <img :src="`${this.$store.state.chooseImgSrc}/all_images/news/${item.news_img}`"
                                     :alt="item.news_img ? item.news_img : '圖片大小需小於2MB'">
                             </div>
 
@@ -339,6 +339,8 @@ export default {
             const month = (currentDate.getMonth() + 1).toString().padStart(2, '0');
             const day = currentDate.getDate().toString().padStart(2, '0');
             const formattedDateTime = `${year}-${month}-${day}`;
+
+            this.updatePage(Math.ceil(this.filterednews.length / this.pageSize));
 
             this.displayednews.push({
                 news_id: this.allnews.length + 1,

@@ -10,7 +10,7 @@
   <div class="card" v-for="(item, index) in displayedNews" :key="index">
     <a href="#">
       <div class="pic">
-        <img :src="`/all_images/news/${item.news_img}`" alt="" />
+        <img :src="`${this.$store.state.chooseImgSrc}/all_images/news/${item.news_img}`" alt="" />
       </div>
       <div class="tag">{{ item.news_category }}</div>
       <div class="news_title">

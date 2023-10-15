@@ -14,7 +14,7 @@
                     <li>
                         <div class="img">
                             <div class="picBox">
-                                <img :src="`/all_images/product/${item.prod_img}`"
+                                <img :src="`${this.$store.state.chooseImgSrc}/all_images/product/${item.prod_img}`"
                                     :alt="item.prod_img ? item.prod_img : '圖片需小於2MB'">
                             </div>
 
@@ -142,6 +142,7 @@ export default {
             const month = (currentDate.getMonth() + 1).toString().padStart(2, '0');
             const day = currentDate.getDate().toString().padStart(2, '0');
             const formattedDateTime = `${year}-${month}-${day}`;
+            this.updatePage(Math.ceil(this.filteredProducts.length / this.pageSize));
 
             this.displayedProducts.push({
                 prod_id: this.filteredProducts.length + 1,
@@ -197,6 +198,7 @@ export default {
 
                 this.displayedProducts[index].disabled = true;
                 this.displayedProducts[index].exist = true;
+                this.applyFilters();
 
                 fetch(`${this.$store.state.APIurl}productInsert.php`, {
                     method: "POST",
@@ -206,8 +208,8 @@ export default {
                     .then((result) => {
                         alert("新增成功");
                         // 重新獲取資料
-
                         this.refreshNewsData();
+                        this.applyFilters();
                     })
                 return;
 
@@ -228,7 +230,8 @@ export default {
                         myJson[i].exist = true;
                     }
                     this.filteredProducts = myJson;
-                    this.updatePage(1);
+                    // this.updatePage(1);
+                    this.applyFilters();
                     console.log(this.allProduct);
                 })
                 .catch((error) => {
@@ -297,6 +300,7 @@ export default {
                     const formData = new FormData();
                     this.displayedProducts[index].disabled = true;
                     e.target.innerText = "修改";
+
                     let prod_id = item.prod_id;
                     let prod_name = item.prod_name;
                     let prod_price = item.prod_price;
@@ -323,6 +327,7 @@ export default {
                             alert("更新成功");
                             // 重新取資料
                             this.refreshNewsData();
+                            this.applyFilters();
                             this.changePic = "";
                         });
                 } else {
@@ -358,6 +363,7 @@ export default {
                             alert("更新成功");
                             // 重新取資料
                             this.refreshNewsData();
+                            this.applyFilters();
                             this.changePic = "";
                         });
                 }
@@ -630,4 +636,5 @@ export default {
         width: 100%;
         text-align: center;
     }
-}</style>
+}
+</style>
