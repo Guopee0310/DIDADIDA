@@ -7,6 +7,7 @@
     </h3Title>
     <div class="guide_map">
       <button @click="toggleBook" class="flip-btn">{{ isOpen ? '點擊關閉地圖' : '點擊查看地圖' }}</button>
+      <div class="cover"><img src="../../public/all_images/guide/whale.jpg" alt=""></div>
       <div id="book">
         <div id="top">
           <img src="https://i.imgur.com/RBBeLsB.jpg" alt="" />
@@ -100,7 +101,7 @@
         </div>
         <div class="fish_wrap">
           <div class="fish" v-for="(item, index) in middle_pic" :key="index">
-            <div class="num">{{ index + 1 }}</div> 
+            <div class="num">{{ index + 1 }}</div>
             <div class="name">{{ item.name }}</div>
             <div class="pic_shape" :style="{ backgroundImage: `url(${item.pic})` }">
             </div>
@@ -190,7 +191,7 @@ export default {
       this.selectedTab = "tab" + sectionIndex;
     },
 
-  
+
     toggleBook() {
       this.isOpen = !this.isOpen;
     },
@@ -204,46 +205,47 @@ h3 {
   @include h3Title();
 }
 
-/* 網頁捲軸【寬度】 */
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: #f5f5f5;
+  border-radius: 10px;
+}
+
 ::-webkit-scrollbar {
   width: 10px;
-
+  background-color: #f5f5f5;
 }
 
-/* 網頁捲軸【背景】顏色 */
-::-webkit-scrollbar-track {
-  background: #9cbae0;
-  margin: 5rem 25px;
-  border-radius: 10px;
-
-}
-
-/* 網頁捲軸【把手】顏色 */
 ::-webkit-scrollbar-thumb {
-  background: #2972b5;
   border-radius: 10px;
-}
-
-/* 網頁捲軸【滑過時】把手的顏色 */
-::-webkit-scrollbar-thumb:hover {
-  background: #747d86;
-}
-
-.guide {
-  margin-bottom: 100px;
+  background-image: -webkit-gradient(linear,
+      left bottom,
+      left top,
+      color-stop(0.44, rgb(122, 153, 217)),
+      color-stop(0.72, rgb(73, 125, 189)),
+      color-stop(0.86, rgb(28, 58, 148)));
 }
 
 // 地圖css
 .guide_map {
   position: relative;
   max-width: 1200px;
-  height: 80vh;
-  // border:2px solid red;
   margin: auto;
 
   .flip-btn {
     outline: none;
     border: none;
+    position: absolute;
+  }
+  .cover{
+    width: 40vw;
+    position: relative;
+    left: 10%;
+    border: 2px solid red;
+    img{
+      width: 100%;
+      vertical-align: top;
+    }
   }
 }
 
@@ -281,12 +283,12 @@ h3 {
 
 /* 初始狀態合起 */
 #flip.closed {
-  animation: wrapper-closed 3s linear forwards;
+  animation: wrapper-closed 2s linear forwards;
 }
 
 /* 打開狀態 */
 #flip.open {
-  animation: wrapper-open 3s linear forwards;
+  animation: wrapper-open 2s linear forwards;
 }
 
 #flip>div {
@@ -299,7 +301,7 @@ h3 {
 /* 左內頁 */
 #back {
   position: relative;
-  width: 30vw;
+  width: 40vw;
   transform: rotateY(.4deg);
   transform-origin: -100% 0;
 
@@ -313,7 +315,9 @@ h3 {
     top: 0;
     left: 0;
     transform: rotateY(-180deg);
-    cursor: pointer;
+    rect{
+      cursor: pointer;
+    }
 
     text {
       font-size: 5px;
@@ -324,7 +328,7 @@ h3 {
 
 
 #front {
-  width: 30vw;
+  width: 40vw;
 
   img {
     width: 100%;
@@ -334,19 +338,20 @@ h3 {
 
 
 #book {
-  max-width: 1200px;
+  max-width: 50%;
   position: absolute;
   left: 50%;
   top: 0;
   transform: translate3d(0px, 0px, -10px) rotateX(0deg) rotateZ(0deg);
   transform-style: preserve-3d;
+
 }
 
 /* 內右頁 */
 #book #top {
   transform: rotateX('180deg');
-  width: 30vw;
-  position: absolute;
+  width: 40vw;
+  position: relative;
   left: 0;
   top: 0;
 
@@ -359,7 +364,9 @@ h3 {
     position: absolute;
     top: 0;
     right: 0;
-    cursor: pointer;
+    rect{
+      cursor: pointer;
+    }
 
     text {
       font-size: 5px;
@@ -403,16 +410,6 @@ h3 {
       top: 10px;
       left: 60%;
     }
-
-    img {
-      position: absolute;
-      vertical-align: top;
-      z-index: 10;
-      top: 25%;
-      width: 40px;
-      left: 70%;
-      animation: animate 2s alternate-reverse infinite;
-    }
   }
 
   input[type="radio"] {
@@ -425,11 +422,13 @@ h3 {
     box-shadow: #9FACE6 -2px -2px 0px 2px, #74EBD5 0px 0px 0px 4px, rgba(0, 0, 0, 0.05) 0px 0px 2px 7px;
     transition: all 0.2s;
     border-radius: 40px;
-    &:hover{
+
+    &:hover {
       box-shadow: #74EBD5 -2px -2px 0px 2px, #9FACE6 0px 0px 0px 4px, rgba(0, 0, 0, 0.05) 0px 0px 2px 7px;
       transform: scale(1.01);
     }
-    &:checked{
+
+    &:checked {
       background-color: #cbefc3;
     }
 
@@ -437,19 +436,20 @@ h3 {
     &:nth-of-type(1) {
       top: 10px;
       left: 32%;
-      
+
     }
 
     &:nth-of-type(2) {
       top: 10px;
       left: 46%;
-      
+
     }
 
     &:nth-of-type(3) {
       top: 10px;
       left: 60%;
     }
+
     &:checked+.content {
       display: block;
     }
@@ -458,8 +458,8 @@ h3 {
   .content {
     width: 100vw;
     position: relative;
-    background-size: 100%;
-    
+    background-size: cover;
+
     &:nth-of-type(1) {
       display: none;
       background-image: url(../../public/all_images/guide/sharks-gudie_pic.jpg);
@@ -479,12 +479,14 @@ h3 {
       display: flex;
       align-items: center;
       color: map-get($colors, 'light');
+      text-shadow: black 0.1em 0.1em 0.2em;
       line-height: 1.5em;
-      .about_content{
-          width: 60%;
-          padding: 4rem;
-          line-height: 1.5em;
-          font-size: map-get($fontSizes, "p");
+
+      .about_content {
+        width: 60%;
+        padding: 4rem;
+        line-height: 1.5em;
+        font-size: map-get($fontSizes, "p");
       }
 
       .fish_wrap {
@@ -504,7 +506,7 @@ h3 {
           .name {
             position: absolute;
             font-size: map-get($fontSizes, "p");
-            top: 20%;
+            top: 45px;
           }
 
           .num {
@@ -530,5 +532,73 @@ h3 {
   }
 }
 
+@media screen and (max-width: 768px) {
 
- </style>
+  .tabs {
+
+    h4 {
+
+      width: 20%;
+
+      &:nth-of-type(1) {
+        left: 10%;
+      }
+
+      &:nth-of-type(2) {
+        left: 40%;
+      }
+
+      &:nth-of-type(3) {
+        left: 70%;
+      }
+    }
+
+    input[type="radio"] {
+      width: 20%;
+
+      &:nth-of-type(1) {
+        left: 10%;
+      }
+
+      &:nth-of-type(2) {
+        left: 40%;
+      }
+
+      &:nth-of-type(3) {
+        left: 70%;
+      }
+    }
+
+    .content {
+
+      .wrap {
+
+        .about_content {
+          padding: 1rem;
+        }
+
+        .fish_wrap {
+          height: 100%;
+
+          .fish {
+            margin: 3rem 0;
+
+            .name {
+              top: 15px;
+            }
+
+            .num {
+              left: -10px;
+              top: -25px;
+            }
+
+            .pic_shape {
+              width: 80%;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+</style>
