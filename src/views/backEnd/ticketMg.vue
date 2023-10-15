@@ -33,6 +33,13 @@
 
           <div class="updateBtnAll">
             <button @click="updateTicket(index, $event, i)">修改</button>
+            <switchBtn
+              :onText="'上架'"
+              :off-text="'下架'"
+              :disabled="i.dis"
+              :item="i.tick_state == '1' ? '1' : '0'"
+              @toggle="updateTickState(i)"
+            ></switchBtn>
           </div>
         </li>
 
@@ -113,11 +120,12 @@
 
 <script>
 import { resolveTransitionHooks } from "vue";
-
+import switchBtn from "../../components/backComponents/toggleBtn.vue";
 export default {
   name: "bookDate",
   data() {
     return {
+      upOrDown: "1",
       checkDateBtn: false,
       state: "",
       date: null, // 选定的日期
@@ -276,8 +284,33 @@ export default {
       }
     },
   },
-
+  components: {
+    switchBtn,
+  },
   methods: {
+    updateTickState(i) {
+      if (i.tick_state == "1") {
+        const formData = new FormData();
+        let tictype_id = i.tictype_id;
+        i.tick_state = "0";
+        formData.append("tictype_id", tictype_id);
+        formData.append("tick_state", i.tick_state);
+        fetch(`${this.$store.state.APIurl}ticketMgUpdateState.php`, {
+          method: "post",
+          body: formData,
+        }).then((res) => res.json());
+      } else {
+        const formData = new FormData();
+        let tictype_id = i.tictype_id;
+        i.tick_state = "1";
+        formData.append("tictype_id", tictype_id);
+        formData.append("tick_state", i.tick_state);
+        fetch(`${this.$store.state.APIurl}ticketMgUpdateState.php`, {
+          method: "post",
+          body: formData,
+        }).then((res) => res.json());
+      }
+    },
     changeDate() {
       // alert(this.checkDateBtn);
       if (this.checkDateBtn) {
