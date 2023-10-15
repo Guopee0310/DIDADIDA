@@ -48,7 +48,9 @@
           </div>
         </div>
         <div class="bookbtn">
-          <button @click="bookTickets" class="bookbtnbtn">{{ $t("立即購票") }}</button>
+          <button @click="bookTickets" class="bookbtnbtn">
+            {{ $t("立即購票") }}
+          </button>
         </div>
       </div>
     </div>
@@ -116,6 +118,7 @@ export default {
         return response.json();
       })
       .then((data) => {
+        data = data.filter((item) => item.tick_state == "1");
         for (let i = 0; i < this.optionDetailArr.length; i++) {
           this.optionDetailArr[i][0] = data[i].tic_name;
           this.optionDetailArr[i][2] = data[i].tic_price;
@@ -139,6 +142,7 @@ export default {
           ]);
         }
         console.log(this.optionDetailArr);
+
         // this.optionDetailArr.push(...extraData);
       });
   },
@@ -504,52 +508,51 @@ export default {
   }
 }
 
-@media screen and (max-width: 414px){
+@media screen and (max-width: 414px) {
   :deep(.calendar) .vc-disabled {
-  cursor: not-allowed;
-  text-decoration: line-through;
-}
+    cursor: not-allowed;
+    text-decoration: line-through;
+  }
 
-:deep(.calendar) .vc-week {
-  padding: 5px;
-}
+  :deep(.calendar) .vc-week {
+    padding: 5px;
+  }
 
-:deep(.calendar) .vc-weekdays {
-  padding: 5px;
-}
+  :deep(.calendar) .vc-weekdays {
+    padding: 5px;
+  }
 
-:deep(.calendar) .vc-weeks {
-  margin: 5px;
-}
+  :deep(.calendar) .vc-weeks {
+    margin: 5px;
+  }
 
-:deep(.calendar) .vc-header {
-  height: 40px;
-  background-color: map-get($colors, "secondary");
-  margin: 0;
-  padding-left: 100px;
-  padding-right: 120px;
-}
+  :deep(.calendar) .vc-header {
+    height: 40px;
+    background-color: map-get($colors, "secondary");
+    margin: 0;
+    padding-left: 100px;
+    padding-right: 120px;
+  }
 
-:deep(.calendar) .vc-arrow{
-  font: 12px;
-  color: map-get($colors, "light");
-  background-color: map-get($colors, "secondary");
-  margin-left:-15px;
-  margin-right:-15px;
-  z-index: 4;
-
-}
-:deep(.calendar) .vc-title {
-  color: map-get($colors, "light");
-  background-color: map-get($colors, "secondary");
-  z-index: 3;
-}
-:deep(.calendar) .vc-container {
-  border: 1px #68769a solid;
-}
-.dateTextAll {
-  flex-direction: column;
-  width: 335px;
+  :deep(.calendar) .vc-arrow {
+    font: 12px;
+    color: map-get($colors, "light");
+    background-color: map-get($colors, "secondary");
+    margin-left: -15px;
+    margin-right: -15px;
+    z-index: 4;
+  }
+  :deep(.calendar) .vc-title {
+    color: map-get($colors, "light");
+    background-color: map-get($colors, "secondary");
+    z-index: 3;
+  }
+  :deep(.calendar) .vc-container {
+    border: 1px #68769a solid;
+  }
+  .dateTextAll {
+    flex-direction: column;
+    width: 335px;
     .calendarOptionAll {
       width: 335px;
       // width: 100%;
@@ -587,45 +590,39 @@ export default {
           }
         }
       }
-      .totalNum{
+      .totalNum {
         width: 335px;
         padding-top: 15px;
-        padding-right: 0px; 
+        padding-right: 0px;
         // display: flex;
-       justify-content: space-between;
+        justify-content: space-between;
         // align-items: baseline;
         div {
-            &:first-child {
-             margin: 0;
-            }
+          &:first-child {
+            margin: 0;
           }
+        }
       }
-     
-      
     }
   }
   .bookbtnbtn {
-        display: block;
-        // justify-content: flex-end;
-        // padding: 20px;
-        // margin: 20px -100px;
-        border: red 1px solid;
-        cursor: pointer;
+    display: block;
+    // justify-content: flex-end;
+    // padding: 20px;
+    // margin: 20px -100px;
+    border: red 1px solid;
+    cursor: pointer;
 
-
-        button {
-
-          width: 150px;
-          height: 50px;
-          border: 0;
-          border-radius: 5px;
-          font-size: map-get($fontSizes, "h4");
-          background-color: map-get($colors, "secondary");
-          color: map-get($colors, "light");
-          cursor: pointer;
-        }
-      }
- 
+    button {
+      width: 150px;
+      height: 50px;
+      border: 0;
+      border-radius: 5px;
+      font-size: map-get($fontSizes, "h4");
+      background-color: map-get($colors, "secondary");
+      color: map-get($colors, "light");
+      cursor: pointer;
+    }
+  }
 }
-  
 </style>
