@@ -204,35 +204,4 @@ export default {
     }
   }
 }
-
-// @keyframes paoPao1 {
-//   0% {
-//     translate: 0;
-//     opacity: 1;
-//   }
-
-//   100% {
-//     translate: 0 -100px;
-//     opacity: 0;
-//   }
-// }
-// @keyframes paoPao2 {
-//   0% {
-//     transform: translateX(0px);
-//     opacity: 1;
-//   }
-//   25% {
-//     transform: translateX(15px);
-//   }
-//   50% {
-//     transform: translateX(0px);
-//   }
-//   75% {
-//     transform: translateX(-10px);
-//   }
-//   100% {
-//     transform: translateX(0px);
-//     opacity: 0;
-//   }
-// }
 </style>

@@ -147,37 +147,20 @@
           </template>
         </h3Title>
         <div class="active">
-          <div class="card">
+          <div class="card" v-for="(i, index) in activeAll">
             <div class="item">
               <div class="image">
-                <img src="../assets/images/openActive.jpg" alt="" />
+                <img :src="i.active_img" alt="" />
               </div>
               <div class="text">
-                <span class="date">活動時間 : 9月1日至9月28日</span>
-                <p class="title">DIDADIDA水族館開幕慶</p>
-                <p class="self">票價限時優惠<span> 10% </span>off</p>
+                <span class="date">活動時間 : {{ i.active_star }}至{{ i.active_end }}</span>
+                <p class="title">{{ i.active_title }}</p>
+                <p class="self">{{ i.active_content }}</p>
               </div>
             </div>
             <div class="day">
               <span>倒數</span>
-              <span>5</span>
-              <span>天</span>
-            </div>
-          </div>
-          <div class="card">
-            <div class="item">
-              <div class="image">
-                <img src="../assets/images/blueCloth.jpg" alt="" />
-              </div>
-              <div class="text">
-                <span class="date">活動時間 : 9月1日至9月28日</span>
-                <p class="title">海洋藍慶典</p>
-                <p class="self">入場穿藍色系服裝可享半價優惠</p>
-              </div>
-            </div>
-            <div class="day">
-              <span>倒數</span>
-              <span>5</span>
+              <span>{{ i.countDown }}</span>
               <span>天</span>
             </div>
           </div>
@@ -217,33 +200,12 @@ export default {
   name: "HomeView",
   data() {
     return {
+
       resetVisual: false,
       loading: true,
       animationDuration: 4200,
       value: 0,
       lightChang: 80,
-
-      priceTitle: [{ name: "票種" }, { name: "價格" }, { name: "適用對象" }],
-      ticket: [
-        { name: "一般票", price: "NT 500", object: "限18歲(含)以上成人使用" },
-        {
-          name: "學生票",
-          price: "NT 300",
-          object: "限12歲(含)以上持學生證之學生適用",
-        },
-        {
-          name: "孩童票",
-          price: "NT 200",
-          object: "限4歲(含)以上及未滿12歲兒童適用",
-        },
-        {
-          name: "愛心票",
-          price: "NT 200",
-          object:
-            "限持有身心障礙證明者、身心障礙者的1位陪同者、孕婦、滿65歲以上長者適用",
-        },
-        { name: "團體票", price: "NT 350", object: "15人以上適用" },
-      ],
       products: [
         {
           src: require("../assets/images/index_p1.png"),
@@ -282,8 +244,12 @@ export default {
         },
       ],
       bannerAll: [],
+      activeAll: [],
       visitorCount: 0,
     };
+  },
+  computed: {
+
   },
   methods: {},
   components: {
@@ -325,6 +291,7 @@ export default {
       this.resetVisual = true;
     }, this.animationDuration + 300);
 
+    // banner接後台
     fetch(`${this.$store.state.APIurl}homePicMg.php`)
       .then(function (response) {
         console.log(response)
@@ -339,6 +306,31 @@ export default {
         }
         console.log(myJson)
         this.bannerAll = myJson;
+      });
+
+    // active接後台
+    fetch(`${this.$store.state.APIurl}activeSelectFront.php`)
+      .then(function (response) {
+        console.log(response)
+        return response.json();
+      })
+
+      .then((myJson) => {
+
+        for (let i = 0; i < myJson.length; i++) {
+          myJson[i].active_img = `${this.$store.state.chooseImgSrc}/all_images/active/${myJson[i].active_img}`;
+          const today = new Date();
+          const targetDate = new Date(myJson[i].active_star);
+
+          // 计算日期差异的毫秒数
+          const timeDiff = targetDate - today;
+
+          // 计算剩余天数（将毫秒数转换为天数）
+          myJson[i].countDown = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+
+        }
+        // console.log(myJson)
+        this.activeAll = myJson;
       });
   },
   watch: {
