@@ -58,8 +58,8 @@
         </div>
       </div>
       <div class="text">
-        <h3>{{ item.title }}</h3>
-        <p>{{ item.description }}</p>
+        <h3>{{ $t(item.title) }}</h3>
+        <p>{{ $t(item.description) }}</p>
       </div>
       <div class="bubble" v-if="item.bubble">
         <img src="../../public/all_images/about/bubble.png" alt="泡泡圖" />
@@ -113,7 +113,7 @@ export default {
           altText: "關於我們第二張圖",
           title: "跨域合作的研究活動",
           description:
-            "在這裡可以近距離觀察到令人驚嘆的海洋生物，探索海洋的奧秘。只有真正了解海洋的價值和重要性，才能夠更好的保護它。因此我們通過生動的展覽、互動體驗和教育活動，將海洋科學帶入您的生活中。您可以在這裡探索各種海洋生物、觸摸海洋的心跳，並參與各種互動體驗",
+            "在這裡可以近距離觀察到令人驚嘆的海洋生物，探索海洋的奧秘。只有真正了解海洋的價值和重要性，才能夠更好的保護它。因此我們通過生動的展覽、互動體驗和教育活動，將海洋科學帶入您的生活中。您可以在這裡探索各種海洋生物、觸摸海洋的心跳，並參與各種互動體驗。",
           bubble: false,
           whale: true,
           star: false,

@@ -64,7 +64,7 @@
           </template>
         </h3Title>
         <ticketPrice></ticketPrice>
-        <router-link to="/ticket"><button>立即購票</button></router-link>
+        <router-link to="/ticket"><button>{{$t("立即購票")}}</button></router-link>
 
         <!-- 交通指南 ------------------------------------------ -->
         <h3Title>
@@ -135,7 +135,7 @@
             <img src="../../public/all_images/index/deco_index_whale.png" alt="" />
           </div>
         </div>
-        <router-link to="/product"><button>更多商品</button></router-link>
+        <router-link to="/product"><button>{{$t("更多商品")}}</button></router-link>
 
 
         
