@@ -108,23 +108,21 @@
           </template>
         </h3Title>
         <div class="product">
-          <div class="item" v-for="product in products" :key="product">
+            <div class="item" v-for="(i, index) in prodHomeSlice" :key="index">
             <div class="image">
-              <!-- <a href="#"><img :src="product.src" alt="product.alt" /></a> -->
-              <router-link to="/product"><img :src="product.src" alt="product.alt" /></router-link>
+              <router-link to="/product"> <img :src="`${this.$store.state.chooseImgSrc}/all_images/product/${i.prod_img}`" alt="" /></router-link>
             </div>
             <div class="content">
-              <div class="nub">{{ product.nub }}</div>
-              <!-- <a href="#">
-                <h4>{{ product.name }}</h4>
-                <div class="text">{{ product.text }}</div>
-              </a> -->
+              <div class="nub">{{ index + 1 }}</div>
+           
               <router-link to="/product">
-                <h4>{{ product.name }}</h4>
-                <div class="text">{{ product.text }}</div>
+                <h4>{{ i.prod_name}}</h4>
+                <div class="text">{{ i.prod_info }}</div>
               </router-link>
-              <span>{{ product.price }}</span>
+              <span>NT {{ i.prod_price }}</span>
             </div>
+          
+
             <div class="paopao">
               <paoPao_n></paoPao_n>
             </div>
@@ -138,6 +136,31 @@
           </div>
         </div>
         <router-link to="/product"><button>更多商品</button></router-link>
+
+
+        
+        <!-- <h3Title>
+          <template v-slot:h3>
+            <h3>熱賣商品</h3>
+          </template>
+        </h3Title>
+        <div class="product">
+            <div class="item" v-for="(i, index) in prodHomeSlice" :key="index">
+            <div class="image">
+              <router-link to="/product"> <img :src="`${this.$store.state.chooseImgSrc}/all_images/product/${i.prod_img}`" alt="" /></router-link>
+            </div>
+            <div class="content">
+              <div class="nub">{{ index + 1 }}</div>
+           
+              <router-link to="/product">
+                <h4>{{ i.prod_name}}</h4>
+                <div class="text">{{ i.prod_info }}</div>
+              </router-link>
+              <span>NT {{ i.prod_price }}</span>
+            </div>
+          </div>
+        </div> -->
+  
 
 
         <!-- 活動倒數 ------------------------------------------ -->
@@ -245,30 +268,30 @@ export default {
         { name: "團體票", price: "NT 350", object: "15人以上適用" },
       ],
       products: [
-        {
-          src: require("../assets/images/index_p1.png"),
-          alt: "index_image1",
-          nub: "01",
-          name: "海豚娃娃",
-          text: "由DIDADIDA深海區最有名的傑尼海龜為造型。",
-          price: "NT 500",
-        },
-        {
-          src: require("../assets/images/index_p2.png"),
-          alt: "index_image2",
-          nub: "02",
-          name: "海豚抱枕",
-          text: "由DIDADIDA深海區最有名的傑尼海龜為造型。",
-          price: "NT 300",
-        },
-        {
-          src: require("../assets/images/index_p3.png"),
-          alt: "index_image3",
-          nub: "03",
-          name: "人魚吊飾",
-          text: "由DIDADIDA深海區最有名的傑尼海龜為造型。",
-          price: "NT 200",
-        },
+        // {
+        //   src: require("../assets/images/index_p1.png"),
+        //   alt: "index_image1",
+        //   nub: "01",
+        //   name: "海豚娃娃",
+        //   text: "由DIDADIDA深海區最有名的傑尼海龜為造型。",
+        //   price: "NT 500",
+        // },
+        // {
+        //   src: require("../assets/images/index_p2.png"),
+        //   alt: "index_image2",
+        //   nub: "02",
+        //   name: "海豚抱枕",
+        //   text: "由DIDADIDA深海區最有名的傑尼海龜為造型。",
+        //   price: "NT 300",
+        // },
+        // {
+        //   src: require("../assets/images/index_p3.png"),
+        //   alt: "index_image3",
+        //   nub: "03",
+        //   name: "人魚吊飾",
+        //   text: "由DIDADIDA深海區最有名的傑尼海龜為造型。",
+        //   price: "NT 200",
+        // },
       ],
       car: [
         {
@@ -283,9 +306,15 @@ export default {
       ],
       bannerAll: [],
       visitorCount: 0,
+      prodHomeSlice: [
+        {prod_id:1}
+      ],
+      prodHome: [],
     };
   },
-  methods: {},
+  methods: {
+  
+  },
   components: {
     visual,
     LoadingBox: LoadingBox,
@@ -340,6 +369,22 @@ export default {
         console.log(myJson)
         this.bannerAll = myJson;
       });
+
+      fetch(`${this.$store.state.APIurl}prodHome.php`)
+  .then(function (response) {
+    return response.json();
+  })
+  .then((myJson) => {
+     // Log the entire response for debugging
+     console.log(myJson);
+    
+    // Extract SPECICFIC three items ( through indexes) from myJson
+    this.prodHomeSlice = myJson.slice(6, 9);
+  })
+  .catch((error) => {
+    console.error('Error:', error);
+  });
+        
   },
   watch: {
     lightChang(newlightChang) {
