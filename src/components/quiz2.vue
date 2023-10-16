@@ -87,7 +87,7 @@ export default {
         this.randomQuestions = shuffled.slice(0, 5);
       });
 
-    this.shuffleArray();
+    // this.shuffleArray();
   },
   components: {
     gameResult,
@@ -103,15 +103,18 @@ export default {
         }, 500);
         return;
       }
+
       for (let i = 0; i < this.finalAns.length; i++) {
+        // qa_no qa_ans (是,否) qa_bonus
+        console.log(this.finalAns[i][1] == this.finalAns[i][2]);
         if (this.finalAns[i][1] == this.finalAns[i][2]) {
           this.totalPoint += parseInt(this.finalAns[i][3]);
         } else {
-          this.quesAndAns[i].isWrong = true;
+          this.randomQuestions[i].isWrong = true;
         }
       }
       if (this.$store.state.userName) {
-        this.$store.state.quizScore += this.totalPoint;
+        this.$store.state.quizScore = this.totalPoint;
 
         const formData = new FormData();
         let mem_name = this.$store.state.userName;
@@ -158,8 +161,9 @@ export default {
           this.finalAns.splice(i, 1);
         }
       }
-
-      console.log(e);
+      // qa_no qa_ans (是,否) qa_bonus
+      console.log(this.finalAns);
+      this.totalPoint = 0;
       this.finalAns.push([index, ans, e, bonus]);
       if (this.finalAns.length >= 5) {
         this.notComplete = false;
