@@ -1,3 +1,4 @@
+<!-- 新增資料到資料庫 -->
 <?php
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: Content-Type");
@@ -15,13 +16,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $active_star = $_POST["active_star"];
     $active_end = $_POST["active_end"];
     $active_img = $_FILES["image"]["name"];
-    $fileName = uniqid();
-    $fileExt = pathinfo($active_img, PATHINFO_EXTENSION); //副檔名
+    $fileName = uniqid();  // 把檔案便亂碼
+    $fileExt = pathinfo($active_img, PATHINFO_EXTENSION); //副檔名(.jpg)
 
-    $targetDirectory = "../all_images/active/";
+    $targetDirectory = "../all_images/active/";  // 傳到的資料夾
     
-    if (!file_exists($targetDirectory)) {
-        mkdir($targetDirectory);
+    if (!file_exists($targetDirectory)) {  // 如果 !沒有 "$targetDirectory" 資料夾
+        mkdir($targetDirectory);           // mkdir:創建 "$targetDirectory" 資料夾
     }
 
     $targetFile = $fileName . "." . $fileExt;
@@ -38,8 +39,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         // echo json_encode($response);
     }
     
-    // 執行更新操作
-    $update_sql = "INSERT INTO activity (active_id, active_img, active_title, active_content, active_date, active_state, active_star, active_end) VALUES (:active_id, :active_img, :active_title, :active_content, :active_date,  :active_state, :active_star, :active_end)";
+    // 執行資料庫 : 新增資料
+    $update_sql = "INSERT INTO activity (active_id, active_img, active_title, active_content, active_date, active_state, active_star, active_end) VALUES (:active_id, :active_img, :active_title, :active_content, :active_date, :active_state, :active_star, :active_end)";
 
     $update_stmt = $pdo->prepare($update_sql);
     $update_stmt->bindValue(":active_id", $active_id, PDO::PARAM_INT);

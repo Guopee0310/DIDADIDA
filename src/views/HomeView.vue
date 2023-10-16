@@ -361,19 +361,20 @@ export default {
       .then((myJson) => {
 
         for (let i = 0; i < myJson.length; i++) {
-          myJson[i].active_img = `${this.$store.state.chooseImgSrc}/all_images/active/${myJson[i].active_img}`;
-          const today = new Date();
-          const targetDate = new Date(myJson[i].active_star);
+          myJson[i].active_img = `${this.$store.state.chooseImgSrc}/all_images/active/${myJson[i].active_img}`; // 改路徑
+          const today = new Date();  // 抓今天日期
+          const targetDate = new Date(myJson[i].active_star);  // 把純字串變成日期的屬性
 
           // 计算日期差异的毫秒数
-          const timeDiff = targetDate - today;
+          const timeDiff = targetDate - today; // 未來 - 今天 = 剩餘幾天
 
           // 计算剩余天数（将毫秒数转换为天数）
+          // key:countDown    = 無條件捨去(日期差異) / 毫秒  * 分 * 時 * 天)
           myJson[i].countDown = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
 
         }
         // console.log(myJson)
-        this.activeAll = myJson;
+        this.activeAll = myJson; //  myJson: 資料庫抓回來的資料
       });
   },
   watch: {
