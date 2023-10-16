@@ -87,6 +87,14 @@ const routes = [
             /* webpackChunkName: "activeMg" */ "../views/backEnd/activeMg.vue"
           ),
       },
+      {
+        path: "/backHome/authorityMg",
+        name: "authorityMg",
+        component: () =>
+          import(
+            /* webpackChunkName: "homePicMg" */ "../views/backEnd/authorityMg.vue"
+          ),
+      },
     ],
   },
   {
