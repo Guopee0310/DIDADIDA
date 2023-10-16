@@ -12,10 +12,19 @@
             <img :src="changePic" alt="" />
           </div>
           <form @submit.prevent="uploadImage">
-          <input type="file" @change="pushImg($event, index)" id="fileInput" ref="imageInput" accept="image/*"/>
-          <label for="fileInput" id="cameraIconLabel">
-            <img src="../../public/all_images/115759_camera_icon.png" alt="">
-          </label>
+            <input
+              type="file"
+              @change="pushImg($event, index)"
+              id="fileInput"
+              ref="imageInput"
+              accept="image/*"
+            />
+            <label for="fileInput" id="cameraIconLabel">
+              <img
+                src="../../public/all_images/115759_camera_icon.png"
+                alt=""
+              />
+            </label>
           </form>
         </div>
         <!-- <form action="../../public/php/memAvatar.php" method="post" enctype="multipart/form-data">
@@ -41,7 +50,14 @@
           <span>Google</span>
         </div>
         <label class="verification_label" for="verification_id">
-          已驗證<input class="verification_input" type="checkbox" value="" id="verification_id" style="zoom: 120%" checked />
+          已驗證<input
+            class="verification_input"
+            type="checkbox"
+            value=""
+            id="verification_id"
+            style="zoom: 120%"
+            checked
+          />
         </label>
       </div>
       <div class="btn_area">
@@ -59,34 +75,49 @@
         </button>
       </div>
       <div class="logOutBtn">
-        <button v-if="this.$store.state.userName" @click="logOutAPI()" :class="{ alreadyClick: logOutClick }">
+        <button
+          v-if="this.$store.state.userName"
+          @click="logOutAPI()"
+          :class="{ alreadyClick: logOutClick }"
+        >
           {{ $t("登出") }}
         </button>
       </div>
     </div>
 
-
     <!-- 右側區塊 -->
     <!-- 會員帳號設定 -->
-    <div v-if="this.$store.state.memberBtn === 'mem_account_settings'" class="mem_account_settings member_area">
+    <div
+      v-if="this.$store.state.memberBtn === 'mem_account_settings'"
+      class="mem_account_settings member_area"
+    >
       <h6>{{ $t("會員帳號設定") }}</h6>
       <memAccoutSettings></memAccoutSettings>
       <memAreaBG></memAreaBG>
     </div>
     <!-- 購物訂單查詢 -->
-    <div v-else-if="this.$store.state.memberBtn === 'prod_order_inquiry'" class="prod_order_inquiry member_area">
+    <div
+      v-else-if="this.$store.state.memberBtn === 'prod_order_inquiry'"
+      class="prod_order_inquiry member_area"
+    >
       <h6>{{ $t("購物訂單查詢") }}</h6>
       <prodOrderInquiry id="showProdOrder"></prodOrderInquiry>
       <memAreaBG></memAreaBG>
     </div>
     <!-- 購票訂單查詢 -->
-    <div v-else-if="this.$store.state.memberBtn === 'tick_order_inquiry'" class="tick_order_inquiry member_area">
+    <div
+      v-else-if="this.$store.state.memberBtn === 'tick_order_inquiry'"
+      class="tick_order_inquiry member_area"
+    >
       <h6 id="showtickOrder">{{ $t("購票訂單查詢") }}</h6>
       <tickOrderInquiry></tickOrderInquiry>
       <memAreaBG></memAreaBG>
     </div>
     <!-- 我的收藏清單 -->
-    <div v-else="this.$store.state.memberBtn === 'mem_bonuspoint'" class="favorites_list member_area">
+    <div
+      v-else="this.$store.state.memberBtn === 'mem_bonuspoint'"
+      class="favorites_list member_area"
+    >
       <h6>{{ $t("我的收藏清單") }}</h6>
       <favoritesList></favoritesList>
       <memAreaBG></memAreaBG>
@@ -221,18 +252,22 @@ export default {
     },
     pushImg(e, index) {
       let file = e.target.files[0];
+      console.log(file);
       if (file) {
         const formData = new FormData();
-        formData.append('image', file);
-        formData.append('mem_name', this.mem_name);
-        try {
-          const response = fetch(`${this.$store.state.APIurl}memAvatar.php`, {
-            method: 'POST',
-            body: formData,
+        formData.append("image", file);
+        formData.append("mem_name", this.mem_name);
+
+        fetch(`${this.$store.state.APIurl}memAvatar.php`, {
+          method: "POST",
+          body: formData,
+        })
+          .then(function (response) {
+            return response.json();
+          })
+          .then((data) => {
+            console.log(data);
           });
-        } catch (error) {
-          console.error('上傳失敗', error);
-        }
       }
 
       this.changePic = file;
@@ -248,7 +283,6 @@ export default {
         image.style.height = "100%";
         document.querySelectorAll(".imgBox")[0].innerHTML = "";
         document.querySelectorAll(".imgBox")[0].appendChild(image);
-
       });
     },
   },
@@ -299,7 +333,7 @@ export default {
           }
         }
 
-        input[type=file] {
+        input[type="file"] {
           display: none;
         }
 
