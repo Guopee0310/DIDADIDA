@@ -9,7 +9,7 @@
         </div>
         <div class="prod_content">
             <div class="content">
-                <ul v-if="displayedProducts.length == 0">沒有任何資料</ul>
+                <ul class="no_data" v-if="displayedProducts.length == 0">暫無符合資料</ul>
                 <ul v-for="(item, index) in displayedProducts" :key="index">
                     <li>{{ item.prod_id }}</li>
                     <li>
@@ -21,6 +21,8 @@
                             <div class="file_btn">
                                 <input type="file" @change="fileChange($event, item, index)" :ref="'fileInput' + index"
                                     :disabled="item.disabled" name="image" :title="item.prod_img">
+                                    <i class="fa-regular fa-trash-can" style="color: #ffffff;" @click="deleteImage(index)"
+                                    v-if="!item.disabled && item.prod_img"></i>
 
                             </div>
                         </div>
@@ -128,6 +130,18 @@ export default {
         this.updatePage(1);
     },
     methods: {
+        deleteImage(index) {
+            const item = this.displayedProducts[index];
+
+            if (confirm("確定刪除圖片嗎？")) {
+
+                document.querySelectorAll(".picBox img")[index].src = "";
+                item.prod_img = '';
+                alert("圖片已成功刪除");
+
+
+            }
+        },
         updateNewsState(index, state) {
             this.displayedProducts[index].prod_listed = state;
         },
@@ -447,6 +461,12 @@ export default {
 }
 </script>
 <style scoped lang="scss">
+.no_data{
+    display: flex;
+    justify-content: center;
+    padding: 2rem 0;
+    
+}
 .prod_all {
 
     .add {

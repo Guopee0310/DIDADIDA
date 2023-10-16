@@ -20,7 +20,8 @@
                 </ul>
             </div>
             <div class="content">
-                <ul v-for="(item, index) in displayednews" :key="index">
+                <ul class="no_data" v-if="this.displayednews.length==0">暫無符合資料</ul>
+                <ul v-else v-for="(item, index) in displayednews" :key="index">
                     <li>
                         <div class="news_id">
                             {{ item.news_id }}
@@ -427,6 +428,12 @@ export default {
 }
 </script>
 <style scoped lang="scss">
+.no_data{
+    display: flex;
+    justify-content: center;
+    padding: 2rem 0;
+    
+}
 .news_all {
     .select {
         .add {
