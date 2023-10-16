@@ -46,7 +46,7 @@
             <div class="wave water"></div>
             <div class="wave water"></div>
           </div>
-          <p>{{ visitorCount }}人</p>
+          <p>{{ visitorCount }}{{$t('人')}}</p>
           <div class="deco turtle">
             <img src="../../public/all_images/deco/deco_turtle.png" alt="" />
           </div>
@@ -79,14 +79,14 @@
           </iframe>
           <div class="text">
             <div class="address">
-              <span>地址</span>
-              <p>海洋市深海區珊瑚一街404號</p>
+              <span>{{ $t("地址") }}</span>
+              <p>{{ $t("海洋市深海區珊瑚一街404號") }}</p>
             </div>
             <div class="car">
-              <span>交通</span>
+              <span>{{ $t("交通") }}</span>
               <div class="way" v-for="car in car" :key="car">
-                <p>{{ car.name }}</p>
-                <p>{{ car.content }}</p>
+                <p>{{ $t(car.name) }}</p>
+                <p>{{ $t(car.content) }}</p>
               </div>
             </div>
           </div>
@@ -104,7 +104,7 @@
         <!-- 熱賣商品 ------------------------------------------ -->
         <h3Title>
           <template v-slot:h3>
-            <h3>熱賣商品</h3>
+            <h3>{{ $t("熱賣商品") }}</h3>
           </template>
         </h3Title>
         <div class="product">

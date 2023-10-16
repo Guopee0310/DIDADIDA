@@ -43,6 +43,7 @@ const i18n = createI18n({
       營業時間: 'Opening Hours',
       最後入場: 'Last Tours',
       今日入園人數: 'VISITORS OF THE DAY',
+      人:'ppl',
       // Ticket ------------------------------------
       票價資訊: 'TICKET INFORMATION',
       票種: 'Ticket Types',
@@ -92,6 +93,10 @@ const i18n = createI18n({
       交通指南:'TRAFFIC GUIDE',
       地址:'Address',
       海洋市深海區珊瑚一街404號:'404 Coral Street, Deep Sea District, Ocean City."',
+      交通:'Driving Directions',
+      自行開車:'Self-driving',
+      '請於國道10號，海洋交流道下，左轉直行珊瑚一街':'Take National Highway 10 and exit at the Marine Interchange. Turn left and continue on Coral Street.',
+
       
 
       // 購物車跳窗------------------------------------------------
