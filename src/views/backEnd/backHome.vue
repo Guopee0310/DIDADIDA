@@ -15,7 +15,6 @@
             type="text"
             placeholder="帳號"
             v-model="loginMail"
-            ref="loginMail"
           />
         </label>
         <label for="psw">
@@ -25,7 +24,6 @@
             type="password"
             placeholder="密碼"
             v-model="loginPassword"
-            ref="loginPassword"
         /></label>
 
         <div class="loginBtn" @click="checkLogin">登入</div>
@@ -35,11 +33,22 @@
 
   <div class="slotAll" v-else>
     <div class="userName">
-      <div>User:Super</div>
+      <div v-if="loginMail == 'group4'">User:Super</div>
+      <div v-else>User:{{ loginMail }}</div>
       <div class="logoutBtn" @click="logoutToHome">登出</div>
     </div>
     <div class="controlWidth">
       <div class="featureBox">
+        <button
+          @click="pushToActiveMg"
+          :class="['singleFeature']"
+          :disabled="loginMail !== 'group4' && loginPassword !== '123'"
+        >
+          權限管理
+          <!-- <router-link :to="'/backHome/activeMg'" :class="['singleFeature']"
+            >權限管理</router-link
+          > -->
+        </button>
         <router-link
           :to="i[1]"
           v-for="(i, index) in featureAll"
@@ -82,18 +91,65 @@ export default {
   },
 
   methods: {
+    pushToActiveMg() {
+      this.$router.push("/backHome/authorityMg");
+    },
     logoutToHome() {
       this.$router.push("/backHome");
       this.loginCheck = true;
     },
     checkLogin() {
-      if (
-        this.$refs.loginMail.value == this.loginMail &&
-        this.$refs.loginPassword.value == this.loginPassword
-      ) {
-        this.loginCheck = false;
-        this.$router.push({ name: "homePicMg" });
-      }
+      fetch(`${this.$store.state.APIurl}backHomeSelectAcc.php`)
+        .then(function (response) {
+          return response.json();
+        })
+        .then((data) => {
+          console.log(data);
+          let x = 0;
+          for (let i = 0; i < data.length; i++) {
+            console.log(
+              data[i].emp_account == "didaMgr1" && data[i].emp_psw == "123"
+            );
+            if (
+              data[i].emp_account == this.loginMail &&
+              data[i].emp_psw == this.loginPassword &&
+              data[i].emp_state == "0"
+            ) {
+              x = 1;
+              this.loginCheck = false;
+              this.$router.push({ name: "homePicMg" });
+              // continue;
+              break;
+            } else if (
+              data[i].emp_account == this.loginMail &&
+              data[i].emp_psw == this.loginPassword &&
+              data[i].emp_state == "1"
+            ) {
+              x = 1;
+              this.loginCheck = false;
+              this.$router.push({ name: "homePicMg" });
+              // break;
+            } else if (
+              data[i].emp_account == this.loginMail &&
+              data[i].emp_psw == this.loginPassword &&
+              data[i].emp_state == "2"
+            ) {
+              x = 1;
+              alert("已被停權");
+              break;
+            }
+          }
+          if (x == 0) {
+            alert("帳密錯誤");
+          }
+        });
+      // if (
+      //   this.$refs.loginMail.value == this.loginMail &&
+      //   this.$refs.loginPassword.value == this.loginPassword
+      // ) {
+      //   this.loginCheck = false;
+      //   this.$router.push({ name: "homePicMg" });
+      // }
     },
     toggleFeature(index) {
       if (this.activeIndex === index) {
