@@ -1,3 +1,4 @@
+<!-- 資料庫資料全撈 -->
 <?php
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json");
