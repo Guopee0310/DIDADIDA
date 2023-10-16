@@ -11,10 +11,12 @@
           <div class="imgBox">
             <img :src="changePic" alt="" />
           </div>
-          <input type="file" @change="pushImg($event, index)" id="fileInput" />
+          <form @submit.prevent="uploadImage">
+          <input type="file" @change="pushImg($event, index)" id="fileInput" ref="imageInput" accept="image/*"/>
           <label for="fileInput" id="cameraIconLabel">
             <img src="../../public/all_images/115759_camera_icon.png" alt="">
           </label>
+          </form>
         </div>
         <!-- <form action="../../public/php/memAvatar.php" method="post" enctype="multipart/form-data">
             <label for="image"><b>Upload file : </b></label>
@@ -118,6 +120,7 @@ export default {
       allBar: [],
       avatarAll: [],
       changePic: "",
+      mem_id: 'mem_id',
     };
   },
   created() {
@@ -216,48 +219,22 @@ export default {
       this.$store.state.ticketList = [];
       this.$store.state.totalScorePoint = 0;
     },
-    updatePic(index, e, i) {
-      console.log(this.changePic);
-      const formData = new FormData();
-      let mem_id = this.avatarAll[index].mem_id;
-
-      formData.append("mem_id", mem_id);
-      formData.append("image", this.changePic);
-      // 使用fetch或axios將數據發送到PHP後端
-
-      // 修改 ----------------------------
-      if (i.mem_id) {
-        let mem_id = i.mem_id;
-        let formData = new FormData();
-        formData.append("mem_id", mem_id);
-        formData.append("image", this.changePic);
-
-        fetch(`${this.$store.state.APIurl}memAvatar.php`, {
-          method: "post",
-          body: formData,
-        })
-          .then((res) => res.json())
-          .then((result) => {
-            alert("圖片更新OK");
-            console.log(result);
-          });
-        return;
-      } else {
-        fetch(`${this.$store.state.APIurl}memAvatarInsert.php`, {
-          method: "post",
-          body: formData,
-        })
-          .then((res) => res.json())
-          .then((result) => {
-            alert("圖片更新OK");
-            console.log(result);
-          });
-        return;
-      }
-
-    },
     pushImg(e, index) {
       let file = e.target.files[0];
+      if (file) {
+        const formData = new FormData();
+        formData.append('image', file);
+        formData.append('mem_id', this.mem_id);
+        try {
+          const response = fetch(`${this.$store.state.APIurl}memAvatar.php`, {
+            method: 'POST',
+            body: formData,
+          });
+        } catch (error) {
+          console.error('上傳失敗', error);
+        }
+      }
+
       this.changePic = file;
       console.log("file", file);
 
@@ -271,6 +248,7 @@ export default {
         image.style.height = "100%";
         document.querySelectorAll(".imgBox")[0].innerHTML = "";
         document.querySelectorAll(".imgBox")[0].appendChild(image);
+
       });
     },
   },
