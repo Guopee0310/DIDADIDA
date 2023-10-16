@@ -176,6 +176,20 @@ export default {
           this.mem_bonus = catchOrignBonus;
         });
     }
+    if (this.$store.state.userName) {
+      const formData = new FormData();
+      let mem_name = this.$store.state.userName;
+      formData.append("mem_name", mem_name);
+      fetch(`${this.$store.state.APIurl}memberSelectPhoto.php`, {
+        method: "post",
+        body: formData,
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          this.changePic = `${this.$store.state.chooseImgSrc}/all_images/memAvatar/${data[0].mem_pic}`;
+          console.log(this.changePic);
+        });
+    }
 
     if (this.$route.query.section === "showProdOrder") {
       this.prodOrderClick = true;
