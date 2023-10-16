@@ -7,7 +7,7 @@ require_once("connect.php");
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $uploadedFile = $_FILES["image"]["name"];
-    $mem_id = $_POST["mem_id"];
+    $mem_id = $_POST["mem_name"];
 
     // 檢查文件是否成功上傳
     // if ($_FILES["image"]["error"] !== UPLOAD_ERR_OK) {
@@ -46,9 +46,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         echo json_encode($_FILES["image"]["tmp_name"]);
     }
     // 文件上傳成功，接下來更新數據庫
-    $update_sql = "INSERT INTO member(mem_id, mem_pic) VALUES (:mem_id, :mem_pic)";
+    $update_sql = "UPDATE member SET mem_pic = :mem_pic WHERE mem_name = :mem_name";
     $update_stmt = $pdo->prepare($update_sql);
-    $update_stmt->bindValue(":mem_id", $mem_id, PDO::PARAM_INT);
+    $update_stmt->bindValue(":mem_name", $mem_name, PDO::PARAM_INT);
     $update_stmt->bindValue(":mem_pic", $targetFile);
 
     if ($update_stmt->execute()) {

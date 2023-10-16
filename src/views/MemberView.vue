@@ -120,7 +120,7 @@ export default {
       allBar: [],
       avatarAll: [],
       changePic: "",
-      mem_id: 'mem_id',
+      mem_name: this.$store.state.userName,
     };
   },
   created() {
@@ -224,7 +224,7 @@ export default {
       if (file) {
         const formData = new FormData();
         formData.append('image', file);
-        formData.append('mem_id', this.mem_id);
+        formData.append('mem_name', this.mem_name);
         try {
           const response = fetch(`${this.$store.state.APIurl}memAvatar.php`, {
             method: 'POST',
