@@ -15,4 +15,9 @@ module.exports = defineConfig({
   // : '/',
   // outputDir: 'DIDA'
 
+  //  publicPath: process.env.NODE_ENV === 'production'
+  // ? '/chd103/g4/'
+  // : '/',
+  // outputDir: 'DIDA'
+
 })
