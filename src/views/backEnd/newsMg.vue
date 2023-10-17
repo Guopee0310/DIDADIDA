@@ -20,7 +20,8 @@
                 </ul>
             </div>
             <div class="content">
-                <ul v-for="(item, index) in displayednews" :key="index">
+                <ul class="no_data" v-if="this.displayednews.length==0">暫無符合資料</ul>
+                <ul v-else v-for="(item, index) in displayednews" :key="index">
                     <li>
                         <div class="news_id">
                             {{ item.news_id }}
@@ -29,12 +30,12 @@
                     <li>
                         <div class="img">
                             <div class="picBox">
-                                <img :src="`${this.$store.state.chooseImgSrc}/all_images/news/${item.news_img}`"
+                                <img :src="item.news_img_url"
                                     :alt="item.news_img ? item.news_img : '圖片大小需小於2MB'">
                             </div>
 
                             <div class="file_btn">
-                                <input type="file" @change="fileChange($event, index)" :ref="'fileInput' + index"
+                                <input type="file" @change="fileChange($event,item, index)" :ref="'fileInput' + index"
                                     :disabled="item.disabled" name="image" :title="item.news_img">
                                 <i class="fa-regular fa-trash-can" style="color: #ffffff;" @click="deleteImage(index)"
                                     v-if="!item.disabled && item.news_img"></i>
@@ -121,6 +122,7 @@ export default {
                 for (let i = 0; i < myJson.length; i++) {
                     myJson[i].disabled = true;
                     myJson[i].exist = true;
+                    myJson[i].news_img_url = `${this.$store.state.chooseImgSrc}/all_images/news/${myJson[i].news_img}`;
                 }
                 this.allnews = myJson;
                 console.log(this.allnews);
@@ -159,29 +161,25 @@ export default {
 
             // 更新 filterednews 数组
             this.filterednews = filterednews;
-            this.$nextTick(() => {
+            setTimeout(() => {
                 this.updatePage(1);
-            });
+            }, 300);
         },
         filterCategory(data) {
-            this.updatePage(1);
             this.selectedCategory = data;
             this.applyFilters();
         },
 
         filterState(data) {
-            this.updatePage(1);
             this.selectedState = data;
             this.applyFilters();
         },
         searchClick(data) {
-            this.updatePage(1);
             this.searchInput = data;
             this.applyFilters();
         },
         updatePage(page) {
             this.currentPage = page
-            this.displayednews = this.filterednews
             const startIdx = (this.currentPage - 1) * this.pageSize
             const endIdx = startIdx + this.pageSize
             this.displayednews = this.filterednews.slice(startIdx, endIdx);
@@ -209,12 +207,8 @@ export default {
             }
         },
 
-        fileChange(e, index) {
-            this.changePic = "";
-            const file_name = document.querySelectorAll(".file_name")[index];
+        fileChange(e, item, index) {
             let file = e.target.files[0];
-
-            // 檢查檔案大小是否超過2MB
             if (file.size > 2 * 1024 * 1024) {
                 alert("請選擇一個小於2MB的圖片");
                 return;
@@ -226,21 +220,7 @@ export default {
             let readFile = new FileReader();
             readFile.readAsDataURL(file);
             readFile.addEventListener("load", () => {
-                let image = new Image();
-                image.src = readFile.result;
-                console.log(image.src);
-                image.style.width = "100%";
-                image.style.height = "100%";
-
-                // 在圖片容器中添加圖片
-                let picBox = document.querySelectorAll(".picBox")[index];
-                picBox.innerHTML = "";
-                picBox.appendChild(image);
-
-                // 顯示圖片名稱和檔案大小
-                file_name.innerText = `檔案: ${file.name} | 大小: ${this.formatFileSize(file.size)}`;
-                let fileInfo = document.createElement("p");
-                file_name.appendChild(fileInfo);
+                item.news_img_url = readFile.result;
             });
         },
         formatFileSize(bytes) {
@@ -340,6 +320,7 @@ export default {
             const day = currentDate.getDate().toString().padStart(2, '0');
             const formattedDateTime = `${year}-${month}-${day}`;
 
+            this.filterednews = this.allnews;
             this.updatePage(Math.ceil(this.filterednews.length / this.pageSize));
 
             this.displayednews.push({
@@ -397,15 +378,17 @@ export default {
                     .then((result) => {
                         alert("新增成功");
                         // 重新獲取資料
+                        this.changePic = "";
                         this.refreshNewsData();
+
                     })
                 return;
 
 
             }
         },
-        refreshNewsData() {
-            fetch(`${this.$store.state.APIurl}newsSelect.php`)
+        async refreshNewsData() {
+            await fetch(`${this.$store.state.APIurl}newsSelect.php`)
                 .then((response) => {
                     if (!response.ok) {
                         throw new Error('Network response was not ok');
@@ -416,10 +399,14 @@ export default {
                     for (let i = 0; i < myJson.length; i++) {
                         myJson[i].disabled = true;
                         myJson[i].exist = true;
+                        myJson[i].news_img_url = `${this.$store.state.chooseImgSrc}/all_images/news/${myJson[i].news_img}`;
                     }
-                    this.filterednews = myJson;
-                    this.updatePage(1);
-                    console.log(this.allnews);
+                    this.allnews = myJson;
+                    this.$nextTick(() => {
+                        this.applyFilters();
+                    });
+                    
+             
                 })
                 .catch((error) => {
                     console.error('Fetch error:', error);
@@ -441,6 +428,12 @@ export default {
 }
 </script>
 <style scoped lang="scss">
+.no_data{
+    display: flex;
+    justify-content: center;
+    padding: 2rem 0;
+    
+}
 .news_all {
     .select {
         .add {

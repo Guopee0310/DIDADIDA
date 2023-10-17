@@ -283,12 +283,16 @@ export default {
   background-size: cover;
 
   .controlWidth {
-    width: 90%;
-    margin: 1rem auto;
+    width: 80%;
+    margin-top: 1rem;
+    margin-left: auto;
     display: flex;
     justify-content: space-between;
 
     .featureBox {
+      position: fixed;
+      left: 2%;
+      top: 5%;
       width: 15%;
       border-radius: 1rem;
       background-color: rgb(255, 255, 255);
@@ -321,8 +325,8 @@ export default {
       padding: 2em;
       overflow: auto;
       background-color: #ffffffc6;
-      width: 80%;
-      height: 80vh;
+      width: 95%;
+      height: 82vh;
       border-radius: 0.3rem;
       box-shadow: 3px 3px 6px 0px #ccdbe8 inset,
         -3px -3px 6px 1px rgba(255, 255, 255, 0.5) inset;

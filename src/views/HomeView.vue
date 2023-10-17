@@ -46,7 +46,7 @@
             <div class="wave water"></div>
             <div class="wave water"></div>
           </div>
-          <p>{{ visitorCount }}人</p>
+          <p>{{ visitorCount }}{{$t('人')}}</p>
           <div class="deco turtle">
             <img src="../../public/all_images/deco/deco_turtle.png" alt="" />
           </div>
@@ -64,7 +64,7 @@
           </template>
         </h3Title>
         <ticketPrice></ticketPrice>
-        <router-link to="/ticket"><button>立即購票</button></router-link>
+        <router-link to="/ticket"><button>{{ $t("立即購票") }}</button></router-link>
 
         <!-- 交通指南 ------------------------------------------ -->
         <h3Title>
@@ -79,14 +79,14 @@
           </iframe>
           <div class="text">
             <div class="address">
-              <span>地址</span>
-              <p>海洋市深海區珊瑚一街404號</p>
+              <span>{{ $t("地址") }}</span>
+              <p>{{ $t("海洋市深海區珊瑚一街404號") }}</p>
             </div>
             <div class="car">
-              <span>交通</span>
+              <span>{{ $t("交通") }}</span>
               <div class="way" v-for="car in car" :key="car">
-                <p>{{ car.name }}</p>
-                <p>{{ car.content }}</p>
+                <p>{{ $t(car.name) }}</p>
+                <p>{{ $t(car.content) }}</p>
               </div>
             </div>
           </div>
@@ -104,27 +104,26 @@
         <!-- 熱賣商品 ------------------------------------------ -->
         <h3Title>
           <template v-slot:h3>
-            <h3>熱賣商品</h3>
+            <h3>{{ $t("熱賣商品") }}</h3>
           </template>
         </h3Title>
         <div class="product">
-          <div class="item" v-for="product in products" :key="product">
+          <div class="item" v-for="(i, index) in prodHomeSlice" :key="index">
             <div class="image">
-              <!-- <a href="#"><img :src="product.src" alt="product.alt" /></a> -->
-              <router-link to="/product"><img :src="product.src" alt="product.alt" /></router-link>
+              <router-link to="/product"> <img :src="`${this.$store.state.chooseImgSrc}/all_images/product/${i.prod_img}`"
+                  alt="" /></router-link>
             </div>
             <div class="content">
-              <div class="nub">{{ product.nub }}</div>
-              <!-- <a href="#">
-                <h4>{{ product.name }}</h4>
-                <div class="text">{{ product.text }}</div>
-              </a> -->
+              <div class="nub">{{ index + 1 }}</div>
+
               <router-link to="/product">
-                <h4>{{ product.name }}</h4>
-                <div class="text">{{ product.text }}</div>
+                <h4>{{ i.prod_name }}</h4>
+                <div class="text">{{ i.prod_info }}</div>
               </router-link>
-              <span>{{ product.price }}</span>
+              <span>NT {{ i.prod_price }}</span>
             </div>
+
+
             <div class="paopao">
               <paoPao_n></paoPao_n>
             </div>
@@ -137,7 +136,32 @@
             <img src="../../public/all_images/index/deco_index_whale.png" alt="" />
           </div>
         </div>
-        <router-link to="/product"><button>更多商品</button></router-link>
+        <router-link to="/product"><button>{{ $t("更多商品") }}</button></router-link>
+
+
+
+        <!-- <h3Title>
+          <template v-slot:h3>
+            <h3>熱賣商品</h3>
+          </template>
+        </h3Title>
+        <div class="product">
+            <div class="item" v-for="(i, index) in prodHomeSlice" :key="index">
+            <div class="image">
+              <router-link to="/product"> <img :src="`${this.$store.state.chooseImgSrc}/all_images/product/${i.prod_img}`" alt="" /></router-link>
+            </div>
+            <div class="content">
+              <div class="nub">{{ index + 1 }}</div>
+           
+              <router-link to="/product">
+                <h4>{{ i.prod_name}}</h4>
+                <div class="text">{{ i.prod_info }}</div>
+              </router-link>
+              <span>NT {{ i.prod_price }}</span>
+            </div>
+          </div>
+        </div> -->
+
 
 
         <!-- 活動倒數 ------------------------------------------ -->
@@ -147,37 +171,20 @@
           </template>
         </h3Title>
         <div class="active">
-          <div class="card">
+          <div class="card" v-for="(i, index) in activeAll">
             <div class="item">
               <div class="image">
-                <img src="../assets/images/openActive.jpg" alt="" />
+                <img :src="i.active_img" alt="" />
               </div>
               <div class="text">
-                <span class="date">活動時間 : 9月1日至9月28日</span>
-                <p class="title">DIDADIDA水族館開幕慶</p>
-                <p class="self">票價限時優惠<span> 10% </span>off</p>
+                <span class="date">活動時間 : {{ i.active_star }}至{{ i.active_end }}</span>
+                <p class="title">{{ i.active_title }}</p>
+                <p class="self">{{ i.active_content }}</p>
               </div>
             </div>
             <div class="day">
               <span>倒數</span>
-              <span>5</span>
-              <span>天</span>
-            </div>
-          </div>
-          <div class="card">
-            <div class="item">
-              <div class="image">
-                <img src="../assets/images/blueCloth.jpg" alt="" />
-              </div>
-              <div class="text">
-                <span class="date">活動時間 : 9月1日至9月28日</span>
-                <p class="title">海洋藍慶典</p>
-                <p class="self">入場穿藍色系服裝可享半價優惠</p>
-              </div>
-            </div>
-            <div class="day">
-              <span>倒數</span>
-              <span>5</span>
+              <span>{{ i.countDown }}</span>
               <span>天</span>
             </div>
           </div>
@@ -217,58 +224,37 @@ export default {
   name: "HomeView",
   data() {
     return {
+
       resetVisual: false,
       loading: true,
       animationDuration: 4200,
       value: 0,
       lightChang: 80,
-
-      priceTitle: [{ name: "票種" }, { name: "價格" }, { name: "適用對象" }],
-      ticket: [
-        { name: "一般票", price: "NT 500", object: "限18歲(含)以上成人使用" },
-        {
-          name: "學生票",
-          price: "NT 300",
-          object: "限12歲(含)以上持學生證之學生適用",
-        },
-        {
-          name: "孩童票",
-          price: "NT 200",
-          object: "限4歲(含)以上及未滿12歲兒童適用",
-        },
-        {
-          name: "愛心票",
-          price: "NT 200",
-          object:
-            "限持有身心障礙證明者、身心障礙者的1位陪同者、孕婦、滿65歲以上長者適用",
-        },
-        { name: "團體票", price: "NT 350", object: "15人以上適用" },
-      ],
       products: [
-        {
-          src: require("../assets/images/index_p1.png"),
-          alt: "index_image1",
-          nub: "01",
-          name: "海豚娃娃",
-          text: "由DIDADIDA深海區最有名的傑尼海龜為造型。",
-          price: "NT 500",
-        },
-        {
-          src: require("../assets/images/index_p2.png"),
-          alt: "index_image2",
-          nub: "02",
-          name: "海豚抱枕",
-          text: "由DIDADIDA深海區最有名的傑尼海龜為造型。",
-          price: "NT 300",
-        },
-        {
-          src: require("../assets/images/index_p3.png"),
-          alt: "index_image3",
-          nub: "03",
-          name: "人魚吊飾",
-          text: "由DIDADIDA深海區最有名的傑尼海龜為造型。",
-          price: "NT 200",
-        },
+        // {
+        //   src: require("../assets/images/index_p1.png"),
+        //   alt: "index_image1",
+        //   nub: "01",
+        //   name: "海豚娃娃",
+        //   text: "由DIDADIDA深海區最有名的傑尼海龜為造型。",
+        //   price: "NT 500",
+        // },
+        // {
+        //   src: require("../assets/images/index_p2.png"),
+        //   alt: "index_image2",
+        //   nub: "02",
+        //   name: "海豚抱枕",
+        //   text: "由DIDADIDA深海區最有名的傑尼海龜為造型。",
+        //   price: "NT 300",
+        // },
+        // {
+        //   src: require("../assets/images/index_p3.png"),
+        //   alt: "index_image3",
+        //   nub: "03",
+        //   name: "人魚吊飾",
+        //   text: "由DIDADIDA深海區最有名的傑尼海龜為造型。",
+        //   price: "NT 200",
+        // },
       ],
       car: [
         {
@@ -282,8 +268,16 @@ export default {
         },
       ],
       bannerAll: [],
+      activeAll: [],
       visitorCount: 0,
+      prodHomeSlice: [
+        { prod_id: 1 }
+      ],
+      prodHome: [],
     };
+  },
+  computed: {
+
   },
   methods: {},
   components: {
@@ -325,6 +319,7 @@ export default {
       this.resetVisual = true;
     }, this.animationDuration + 300);
 
+    // banner接後台
     fetch(`${this.$store.state.APIurl}homePicMg.php`)
       .then(function (response) {
         console.log(response)
@@ -339,6 +334,47 @@ export default {
         }
         console.log(myJson)
         this.bannerAll = myJson;
+      });
+
+    fetch(`${this.$store.state.APIurl}prodHome.php`)
+      .then(function (response) {
+        return response.json();
+      })
+      .then((myJson) => {
+        // Log the entire response for debugging
+        console.log(myJson);
+
+        // Extract SPECICFIC three items ( through indexes) from myJson
+        this.prodHomeSlice = myJson.slice(6, 9);
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+
+    // active接後台
+    fetch(`${this.$store.state.APIurl}activeSelectFront.php`)
+      .then(function (response) {
+        console.log(response)
+        return response.json();
+      })
+
+      .then((myJson) => {
+
+        for (let i = 0; i < myJson.length; i++) {
+          myJson[i].active_img = `${this.$store.state.chooseImgSrc}/all_images/active/${myJson[i].active_img}`; // 改路徑
+          const today = new Date();  // 抓今天日期
+          const targetDate = new Date(myJson[i].active_star);  // 把純字串變成日期的屬性
+
+          // 计算日期差异的毫秒数
+          const timeDiff = targetDate - today; // 未來 - 今天 = 剩餘幾天
+
+          // 计算剩余天数（将毫秒数转换为天数）
+          // key:countDown    = 無條件捨去(日期差異) / 毫秒  * 分 * 時 * 天)
+          myJson[i].countDown = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+
+        }
+        // console.log(myJson)
+        this.activeAll = myJson; //  myJson: 資料庫抓回來的資料
       });
   },
   watch: {

@@ -6,7 +6,7 @@
       </template>
     </h3Title>
     <div class="guide_map">
-      <button @click="toggleBook" class="flip-btn">點我翻頁</button>
+      <button @click="toggleBook" class="flip-btn"><span>點我翻頁</span></button>
       <div class="cover"><img :src="`${this.$store.state.chooseImgSrc}/all_images/guide/cover-left.jpg`" alt="">
       </div>
       <div id="book">
@@ -232,7 +232,7 @@ h3 {
 .guide_map {
   position: relative;
   max-width: 90vw;
-  margin: auto;
+  margin: 5rem auto;
 
   .flip-btn {
     outline: none;
@@ -244,10 +244,50 @@ h3 {
     border-radius: 12px 12px 0 0;
     font-size: 1em;
     top: -49px;
-    left: 3em;
+    left: 5%;
     z-index: 1;
     cursor: pointer;
+    animation: bounce 4s infinite;
+
   }
+
+  @keyframes bounce {
+
+    5%,
+    50% {
+      transform: scale(1);
+    }
+
+    10% {
+      transform: scale(0.9);
+    }
+
+    15% {
+      transform: scale(1.15);
+    }
+
+    20% {
+      transform: scale(1.15) rotate(-5deg);
+    }
+
+    25% {
+      transform: scale(1.15) rotate(5deg);
+    }
+
+    30% {
+      transform: scale(1.15) rotate(-3deg);
+    }
+
+    35% {
+      transform: scale(1.15) rotate(2deg);
+    }
+
+    40% {
+      transform: scale(1.15) rotate(0);
+    }
+  }
+
+
 
   .cover {
     width: 45vw;
@@ -473,7 +513,7 @@ h3 {
   }
 
   .content {
-    width: 100vw;
+    width: 100%;
     position: relative;
     background-size: cover;
 
@@ -553,8 +593,8 @@ h3 {
 
   .guide_map {
     .flip-btn {
-      font-size: 0.7em;
-      top: -28px;
+      font-size: 0.7rem;
+      top: -33px;
       padding: 0.7em 1em;
     }
   }
@@ -600,6 +640,7 @@ h3 {
 
         .about_content {
           padding: 1rem;
+          font-size: 1rem;
           width: 50%;
         }
 

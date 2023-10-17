@@ -9,18 +9,21 @@
         </div>
         <div class="prod_content">
             <div class="content">
+                <ul class="no_data" v-if="displayedProducts.length == 0">暫無符合資料</ul>
                 <ul v-for="(item, index) in displayedProducts" :key="index">
                     <li>{{ item.prod_id }}</li>
                     <li>
                         <div class="img">
                             <div class="picBox">
-                                <img :src="`${this.$store.state.chooseImgSrc}/all_images/product/${item.prod_img}`"
-                                    :alt="item.prod_img ? item.prod_img : '圖片需小於2MB'">
+                                <img :src="item.prod_img_url" :alt="item.prod_img ? item.prod_img : '圖片需小於2MB'">
                             </div>
 
                             <div class="file_btn">
-                                <input type="file" @change="fileChange($event, index)" :ref="'fileInput' + index"
+                                <input type="file" @change="fileChange($event, item, index)" :ref="'fileInput' + index"
                                     :disabled="item.disabled" name="image" :title="item.prod_img">
+                                    <i class="fa-regular fa-trash-can" style="color: #ffffff;" @click="deleteImage(index)"
+                                    v-if="!item.disabled && item.prod_img"></i>
+
                             </div>
                         </div>
                         <div>{{ item.prod_img }}</div>
@@ -88,7 +91,7 @@ export default {
             displayedProducts: [],
             selectedItem: "",
             selectedPrice: "價格",
-            selectedState: "狀態",
+            selectedState: "",
             searchInput: "",
             pageSize: 3,
             currentPage: 1,
@@ -111,6 +114,7 @@ export default {
                 for (let i = 0; i < myJson.length; i++) {
                     myJson[i].disabled = true;
                     myJson[i].exist = true;
+                    myJson[i].prod_img_url = `${this.$store.state.chooseImgSrc}/all_images/product/${myJson[i].prod_img}`;
                 }
                 this.allProduct = myJson;
                 console.log(this.allProduct);
@@ -126,6 +130,18 @@ export default {
         this.updatePage(1);
     },
     methods: {
+        deleteImage(index) {
+            const item = this.displayedProducts[index];
+
+            if (confirm("確定刪除圖片嗎？")) {
+
+                document.querySelectorAll(".picBox img")[index].src = "";
+                item.prod_img = '';
+                alert("圖片已成功刪除");
+
+
+            }
+        },
         updateNewsState(index, state) {
             this.displayedProducts[index].prod_listed = state;
         },
@@ -136,16 +152,22 @@ export default {
             }
         },
         news_content() {
+
+
             //上傳時間
             const currentDate = new Date();
             const year = currentDate.getFullYear();
             const month = (currentDate.getMonth() + 1).toString().padStart(2, '0');
             const day = currentDate.getDate().toString().padStart(2, '0');
             const formattedDateTime = `${year}-${month}-${day}`;
+
+            this.filteredProducts = this.allProduct;
+
             this.updatePage(Math.ceil(this.filteredProducts.length / this.pageSize));
 
+
             this.displayedProducts.push({
-                prod_id: this.filteredProducts.length + 1,
+                prod_id: this.allProduct.length + 1,
                 prod_name: "",
                 prod_price: "",
                 prod_info: "",
@@ -198,7 +220,6 @@ export default {
 
                 this.displayedProducts[index].disabled = true;
                 this.displayedProducts[index].exist = true;
-                this.applyFilters();
 
                 fetch(`${this.$store.state.APIurl}productInsert.php`, {
                     method: "POST",
@@ -208,16 +229,18 @@ export default {
                     .then((result) => {
                         alert("新增成功");
                         // 重新獲取資料
+                        this.changePic = "";
                         this.refreshNewsData();
-                        this.applyFilters();
+
+
                     })
                 return;
 
 
             }
         },
-        refreshNewsData() {
-            fetch(`${this.$store.state.APIurl}productSelect.php`)
+        async refreshNewsData() {
+            await fetch(`${this.$store.state.APIurl}productSelect.php`)
                 .then((response) => {
                     if (!response.ok) {
                         throw new Error('Network response was not ok');
@@ -225,26 +248,29 @@ export default {
                     return response.json();
                 })
                 .then((myJson) => {
+
+
                     for (let i = 0; i < myJson.length; i++) {
                         myJson[i].disabled = true;
                         myJson[i].exist = true;
+                        myJson[i].prod_img_url = `${this.$store.state.chooseImgSrc}/all_images/product/${myJson[i].prod_img}`;
                     }
-                    this.filteredProducts = myJson;
-                    // this.updatePage(1);
-                    this.applyFilters();
-                    console.log(this.allProduct);
+
+                    this.allProduct = myJson;
+                    this.$nextTick(() => {
+                        this.applyFilters(); // 在DOM更新后执行筛选操作
+                    });
+
+
+
                 })
                 .catch((error) => {
                     console.error('Fetch error:', error);
                     // 在这里可以添加适当的错误处理逻辑，例如显示错误消息给用户
                 });
         },
-        fileChange(e, index) {
-            this.changePic = "";
-            const file_name = document.querySelectorAll(".file_name")[index];
+        fileChange(e, item, index) {
             let file = e.target.files[0];
-
-            // 檢查檔案大小是否超過2MB
             if (file.size > 2 * 1024 * 1024) {
                 alert("請選擇一個小於2MB的圖片");
                 return;
@@ -256,21 +282,7 @@ export default {
             let readFile = new FileReader();
             readFile.readAsDataURL(file);
             readFile.addEventListener("load", () => {
-                let image = new Image();
-                image.src = readFile.result;
-                console.log(image.src);
-                image.style.width = "100%";
-                image.style.height = "100%";
-
-                // 在圖片容器中添加圖片
-                let picBox = document.querySelectorAll(".picBox")[index];
-                picBox.innerHTML = "";
-                picBox.appendChild(image);
-
-                // 顯示圖片名稱和檔案大小
-                file_name.innerText = `檔案: ${file.name} | 大小: ${this.formatFileSize(file.size)}`;
-                let fileInfo = document.createElement("p");
-                file_name.appendChild(fileInfo);
+                item.prod_img_url = readFile.result;
             });
         },
         formatFileSize(bytes) {
@@ -328,6 +340,7 @@ export default {
                             // 重新取資料
                             this.refreshNewsData();
                             this.applyFilters();
+                            this.updatePage(this.currentPage);
                             this.changePic = "";
                         });
                 } else {
@@ -364,6 +377,7 @@ export default {
                             // 重新取資料
                             this.refreshNewsData();
                             this.applyFilters();
+                            this.updatePage(this.currentPage);
                             this.changePic = "";
                         });
                 }
@@ -407,40 +421,36 @@ export default {
 
             // 更新 filteredProducts 数组
             this.filteredProducts = filteredProducts;
-            this.$nextTick(() => {
+            setTimeout(() => {
                 this.updatePage(1);
-            });
+            }, 300);
         },
 
         filterCategory(data) {
-            this.updatePage(1);
             this.selectedItem = data;
             this.applyFilters();
         },
 
         filterPrice(data) {
-            this.updatePage(1);
             this.selectedPrice = data;
             this.applyFilters();
         },
 
         filterState(data) {
-            this.updatePage(1);
             this.selectedState = data;
             this.applyFilters();
         },
         searchClick(data) {
-            this.updatePage(1);
             this.searchInput = data;
             this.applyFilters();
         },
         updatePage(page) {
-            this.currentPage = page
-            this.displayedProducts = this.filteredProducts
-            const startIdx = (this.currentPage - 1) * this.pageSize
-            const endIdx = startIdx + this.pageSize
+            this.currentPage = page;
+            const startIdx = (this.currentPage - 1) * this.pageSize;
+            const endIdx = startIdx + this.pageSize;
             this.displayedProducts = this.filteredProducts.slice(startIdx, endIdx);
         },
+
 
     },
     computed: {
@@ -451,6 +461,12 @@ export default {
 }
 </script>
 <style scoped lang="scss">
+.no_data{
+    display: flex;
+    justify-content: center;
+    padding: 2rem 0;
+    
+}
 .prod_all {
 
     .add {
@@ -547,7 +563,7 @@ export default {
 
                         img {
                             width: 100%;
-                            height: 100%;
+                            aspect-ratio: 1/1;
 
 
                             &::after {
