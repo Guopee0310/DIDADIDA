@@ -85,12 +85,6 @@
             >
               {{ this.$store.state.userName }}
             </div>
-            <span
-              v-if="this.$store.state.userName"
-              @click="logOutAPI()"
-              class="logOutBtn"
-              >登出</span
-            >
             <span v-if="this.$store.state.userName" @click="logOutAPI()" class="logOutBtn">{{$t('登出')}}</span>
           </span>
 
@@ -593,12 +587,12 @@ option:checked {
 
   .cart-count {
     position: absolute;
-    top: -10px;
-    right: -10px;
+    top: -5px;
+    right: -3px;
     background-color: red;
     color: #fff;
     border-radius: 50%;
-    padding: 5px 8px;
+    padding: 2px 7px;
     font-size: 12px;
   }
 }
