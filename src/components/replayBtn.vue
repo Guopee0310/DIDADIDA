@@ -4,7 +4,7 @@
       <span></span>
       <span></span>
       <span></span>
-      再玩一次
+      {{$t('再玩一次')}}
     </a>
   </template>
   

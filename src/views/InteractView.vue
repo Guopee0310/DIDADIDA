@@ -4,7 +4,7 @@
     <div class="titleAll">
       <interactBtn
         @click="showQuiz"
-        :quiz1="quizz"
+        :quiz1="$t(quizz)"
         class="titleChangeBtn"
         @mouseenter="onMouseEnter(1)"
         @mouseleave="onMouseLeave(1)"
@@ -12,7 +12,7 @@
       ></interactBtn>
       <interactBtn
         @click="showLaba"
-        :laba1="labaa"
+        :laba1="$t(labaa)"
         class="titleChangeBtn"
         @mouseenter="onMouseEnter(2)"
         @mouseleave="onMouseLeave(2)"

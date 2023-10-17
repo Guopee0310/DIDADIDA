@@ -4,7 +4,7 @@
     <span></span>
     <span></span>
     <span></span>
-    試手氣
+    {{$t('試手氣')}}
   </a>
 </template>
 

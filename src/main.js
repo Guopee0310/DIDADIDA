@@ -37,6 +37,7 @@ const i18n = createI18n({
       超深淵層海洋帶: 'Hadopelagic Zone',
       DIDA購物: 'Shopping',
       DIDA購票: 'Ticketing',
+      登出:'Log out',
       '本網站為緯育TibaMe_前端設計工程師班CHD103學員專題成果作品,本平台僅供學習、展示之用。若有抵觸有關著作權, 或有第三人主張侵害智慧財產權等情事, 均由學員負法律上責任, 緯育公司概不負責。若有侵權疑慮, 您可以私訊[緯育TibaMe], 後續會由專人協助處理。':'ok',
       // index -------------------------------------
       DIDADIDA海洋館: 'DIDADIDA AQUARIUM',
@@ -47,9 +48,9 @@ const i18n = createI18n({
       // Ticket ------------------------------------
       票價資訊: 'TICKET INFORMATION',
       票種: 'Ticket Types',
-      一般票: 'Regular Ticket',
+      成人票: 'Adult Ticket',
       學生票: 'Student Ticket',
-      孩童票: 'Children Ticket',
+      兒童票: 'Children Ticket',
       愛心票: 'Accessible Ticket',
       團體票: 'Group Ticket',
       "未滿4歲且有家長陪同的幼童可免費入場": "Children under 4 years old accompanied by parents can enter for free.",
@@ -90,17 +91,24 @@ const i18n = createI18n({
       ' 1. 學生票：本人有效學生證正本(若為應屆畢業生則提供當年度正式入學通知單或註冊單及攜帶身分證)。': '1. Student ticket: The original of my valid student ID card (if you are a fresh graduate, please provide the official admission notice or registration form of the current year and bring your ID card).',
       ' 2. 兒童票、長者票(博愛票)：身心障礙證明、孕婦健康手冊、國民身分證或政府核發附有照片、身分證字號及出生年、月、日等足以證明身分證件。': '2. Child tickets and elderly tickets (fraternity tickets): certificate of physical and mental disabilities, maternal health handbook, national identity card or government-issued document with photo, ID card number and year, month, and day of birth that are sufficient to prove identity.',
       // 購物車跳窗------------------------------------------------
+      //
       交通指南:'TRAFFIC GUIDE',
       地址:'Address',
       海洋市深海區珊瑚一街404號:'404 Coral Street, Deep Sea District, Ocean City."',
       交通:'Driving Directions',
       自行開車:'Self-driving',
       '請於國道10號，海洋交流道下，左轉直行珊瑚一街':'Take National Highway 10 and exit at the Marine Interchange. Turn left and continue on Coral Street.',
-
-      
+      搭乘公車:'Taking the Bus',
+      '請於海洋市區，搭乘海洋路線777公車':"Please take the Marine Route 777 bus in the Marine city area.",
+      搭乘捷運:'Taking the Metro',
+      '請搭乘海洋線，於滴答滴答站下車，2號出口':"Please take the Marine Line and get off at Tick-Tock Station, Exit 2.",
+      //
+      熱賣商品:'BESTSELLERS',
+      //
+      活動倒數:'EVENT COUNTDOWN',
 
       // 購物車跳窗------------------------------------------------
-      加入購物車: 'Your cart has got some goodies!',
+      已加入購物車: 'Your cart has got some goodies!',
       //頁面大標題-------------------------------------------------
       關於我們:'About DIDADIDA',
       與海洋世界的美好相遇:'Encountering the Beauty of the Marine World',
@@ -112,6 +120,65 @@ const i18n = createI18n({
       '本網站為緯育TibaMe_前端設計工程師班CHD103學員專題成果作品,本平台僅供學習、展示之用。若有抵觸有關著作權, 或有第三人主張侵害智慧財產權等情事, 均由學員負法律上責任, 緯育公司概不負責。若有侵權疑慮, 您可以私訊':"This website is the project work of CHD103 students in the Front-End Design Engineering program at TibaMe. This platform is intended for learning and showcasing purposes. If there are any copyright conflicts or claims of intellectual property infringement by third parties, the legal responsibility lies with the students, and TibaMe is not responsible for such matters. If you have any concerns regarding infringement, you can send a private message to ",
       '[緯育]':'[TibaMe]',
       ', 後續會由專人協助處理。':", and they will assist with the resolution.",
+
+      //FAQs頁面
+
+
+      //拉霸頁面
+      問卷:'QUIZ',
+      拉霸:'SLOT',
+      試手氣:'Try Your Luck',
+      再玩一次:"REPLAY",
+      完成問卷:"SUBMIT",
+      "恭喜完成問卷!":"Comgrats!You've complete the quiz!",
+
+      //園區
+      園區地圖:'PARK MAP',
+      點我翻頁:'Click to turn page',
+      // Gallery
+      淺層館:'Shallow',
+      中層館:'Intermediate',
+      深層館:'Deep',
+      "海洋表層區是指地球上的海洋中的最上層部分，通常指的是水面以下的相對較薄的水層，它包括了海洋中最頂部的數百米到一千米的水深範圍。這個區域在海洋學和生態學中非常重要，因為它直接受到陽光照射、風浪、潮汐和季節變化的影響，同時也是眾多海洋生物的居住地。":"The Ocean Surface Zone refers to the uppermost layer of the Earth's oceans, typically denoting the relatively thinner layer of water beneath the surface. It encompasses the top several hundred meters to around a thousand meters of water depth in the ocean. This zone is of great importance in oceanography and ecology because it is directly affected by sunlight, wind, waves, tides, and seasonal changes, and it serves as a habitat for numerous marine organisms.",
+      //生物
+      海星:'Seastar',
+
+      //探索
+      黃高鰭刺尾魚:'Yellow tang',
+      玳瑁:'Hawksbill Turtle',
+      擬刺尾鯛:'Palette surgeonfish',
+      小丑魚:'Clownfish',
+      河豚:'Pufferfish',
+      黃顱刺蓋魚:'Blue face angelfish',
+      黃高鰭刺尾魚:'Yellow tang',
+      黃高鰭刺尾魚:'Yellow tang',
+      黃高鰭刺尾魚:'Yellow tang',
+      黃高鰭刺尾魚:'Yellow tang',
+      黃高鰭刺尾魚:'Yellow tang',
+      黃高鰭刺尾魚:'Yellow tang',
+      黃高鰭刺尾魚:'Yellow tang',
+      黃高鰭刺尾魚:'Yellow tang',
+      黃高鰭刺尾魚:'Yellow tang',
+      黃高鰭刺尾魚:'Yellow tang',
+      黃高鰭刺尾魚:'Yellow tang',
+      黃高鰭刺尾魚:'Yellow tang',
+      黃高鰭刺尾魚:'Yellow tang',
+      黃高鰭刺尾魚:'Yellow tang',
+      黃高鰭刺尾魚:'Yellow tang',
+      黃高鰭刺尾魚:'Yellow tang',
+      黃高鰭刺尾魚:'Yellow tang',
+      黃高鰭刺尾魚:'Yellow tang',
+      黃高鰭刺尾魚:'Yellow tang',
+      黃高鰭刺尾魚:'Yellow tang',
+      黃高鰭刺尾魚:'Yellow tang',
+      黃高鰭刺尾魚:'Yellow tang',
+      黃高鰭刺尾魚:'Yellow tang',
+      黃高鰭刺尾魚:'Yellow tang',
+      黃高鰭刺尾魚:'Yellow tang',
+      黃高鰭刺尾魚:'Yellow tang',
+      黃高鰭刺尾魚:'Yellow tang',
+      黃高鰭刺尾魚:'Yellow tang',
+
     },
   },
 },

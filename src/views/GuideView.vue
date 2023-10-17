@@ -2,11 +2,11 @@
   <div class="guide">
     <h3Title>
       <template v-slot:h3>
-        <h3>園區地圖</h3>
+        <h3>{{$t('園區地圖')}}</h3>
       </template>
     </h3Title>
     <div class="guide_map">
-      <button @click="toggleBook" class="flip-btn"><span>點我翻頁</span></button>
+      <button @click="toggleBook" class="flip-btn"><span>{{$t('點我翻頁')}}</span></button>
       <div class="cover">
         <img :src="`${this.$store.state.chooseImgSrc}/all_images/guide/cover-left.jpg`" alt="">
       </div>
@@ -24,7 +24,7 @@
             <!-- 中層區 -->
             <g @click="scrollToSection(3)">
               <rect x="78" y="9" width="20" height="8" rx="1" ry="1" style="fill:#4B88FFa2;stroke-width:10;"></rect>
-              <text x="79" y="15" fill="#fff" filter="url(#drop-shadow-filter)">中層館</text>
+              <text x="79" y="15" fill="#fff" filter="url(#drop-shadow-filter)">{{$t('中層館')}}</text>
               <polyline points="0,0 85,0 85,9" style="fill:none; stroke:#786969; stroke-width:0.3" /> 
               <circle cx="90" cy="6" r="1" style="fill:none; stroke:#ffffff; stroke-width:0.2" />
               <circle cx="76" cy="10" r="2" style="fill:none; stroke:#ffffff; stroke-width:0.4" />
@@ -33,7 +33,7 @@
             <!-- 深層區 -->
             <g @click="scrollToSection(4)">
               <rect x="78" y="36" width="20" height="8" rx="1" ry="1" style="fill:#0016D8a2;stroke-width:10;"></rect>
-              <text x="79" y="42" fill="#fff" filter="url(#drop-shadow-filter)">深層館</text>
+              <text x="79" y="42" fill="#fff" filter="url(#drop-shadow-filter)">{{$t('深層館')}}</text>
               <polyline points="33,40 78,40" style="fill:none; stroke:#786969; stroke-width:0.3" />
               <circle cx="90" cy="49" r="1" style="fill:none; stroke:#ffffff; stroke-width:0.4" />
               <circle cx="95" cy="40" r="2" style="fill:none; stroke:#ffffff; stroke-width:0.2" />
@@ -66,7 +66,7 @@
             <!-- 表層區 -->
             <g @click="scrollToSection(2)" id="section1">
               <rect x="6" y="15" width="20" height="8" rx="1" ry="1" style="fill:#67daf4a2;stroke-width:10;"></rect>
-              <text x="7" y="21" fill="#fff" filter="url(#drop-shadow-filter)">淺層館</text>
+              <text x="7" y="21" fill="#fff" filter="url(#drop-shadow-filter)">{{$t('淺層館')}}</text>
               <polyline points="15,15 15,10 50,10" style="fill:none; stroke:#786969; stroke-width:0.3" />
               <circle cx="6" cy="20" r="1" style="fill:none; stroke:#ffffff; stroke-width:0.5" />
               <circle cx="22" cy="18" r="2" style="fill:none; stroke:#ffffff; stroke-width:0.35" />
@@ -80,13 +80,13 @@
   </div>
   <h3Title>
     <template v-slot:h3>
-      <h3>園區導覽</h3>
+      <h3>{{$t('園區導覽')}}</h3>
     </template>
   </h3Title>
 
 
   <div class="tabs">
-    <h4>淺層館</h4>
+    <h4>{{ $t('淺層館') }}</h4>
     <input type="radio" name="name" v-model="selectedTab" value="tab2" id="section2" />
 
     <div class="content">
@@ -94,7 +94,7 @@
         <div class="about_content">
 
           <p>
-            海洋表層區是指地球上的海洋中的最上層部分，通常指的是水面以下的相對較薄的水層，它包括了海洋中最頂部的數百米到一千米的水深範圍。這個區域在海洋學和生態學中非常重要，因為它直接受到陽光照射、風浪、潮汐和季節變化的影響，同時也是眾多海洋生物的居住地。
+            {{ $t('海洋表層區是指地球上的海洋中的最上層部分，通常指的是水面以下的相對較薄的水層，它包括了海洋中最頂部的數百米到一千米的水深範圍。這個區域在海洋學和生態學中非常重要，因為它直接受到陽光照射、風浪、潮汐和季節變化的影響，同時也是眾多海洋生物的居住地。') }}
           </p>
         </div>
         <div class="fish_wrap">
@@ -102,43 +102,43 @@
             <div class="num">{{ index + 1 }}</div>
             <div class="pic_shape" :style="{ backgroundImage: `url(${item.pic})` }">
             </div>
-            <div class="name">{{ item.name }}</div>
+            <div class="name">{{ $t(item.name) }}</div>
           </div>
         </div>
       </div>
     </div>
-    <h4>中層館</h4>
+    <h4>{{ $t('中層館') }}</h4>
     <input type="radio" name="name" v-model="selectedTab" value="tab3" id="section3" />
     <div class="content">
       <div class="wrap">
         <div class="about_content">
           <p>
-            海洋中層區的深度通常位於海平面以下約200米到1000米之間。隨著深度的增加，光線變得越來越有限，所以這個區域被稱為"光線不足層"。海洋中層區擁有豐富的生物多樣性，包括各種魚類、烏賊、燈籠魚等生物。這些生物通常會遷徙到這個區域，以覓食或避開掠食者。
+            {{ $t('海洋中層區的深度通常位於海平面以下約200米到1000米之間。隨著深度的增加，光線變得越來越有限，所以這個區域被稱為"光線不足層"。海洋中層區擁有豐富的生物多樣性，包括各種魚類、烏賊、燈籠魚等生物。這些生物通常會遷徙到這個區域，以覓食或避開掠食者。') }}
           </p>
         </div>
         <div class="fish_wrap">
           <div class="fish" v-for="(item, index) in middle_pic" :key="index">
             <div class="num">{{ index + 1 }}</div>
-            <div class="name">{{ item.name }}</div>
+            <div class="name">{{ $t(item.name) }}</div>
             <div class="pic_shape" :style="{ backgroundImage: `url(${item.pic})` }">
             </div>
           </div>
         </div>
       </div>
     </div>
-    <h4>深層館</h4>
+    <h4>{{ $t('深層館') }}</h4>
     <input type="radio" name="name" v-model="selectedTab" value="tab4" id="section4" />
     <div class="content">
       <div class="wrap">
         <div class="about_content">
-          <p>深海區，是地球上最神祕和未被完全探索的地方之一，隱藏着無數令人驚奇的祕密。這片深不可測的海域位於陸地架的邊緣，通常從水面下200米（656英尺）深處開始，一直延伸到世界各個海洋的深部。</p>
+          <p>{{ $t('深海區，是地球上最神祕和未被完全探索的地方之一，隱藏着無數令人驚奇的祕密。這片深不可測的海域位於陸地架的邊緣，通常從水面下200米（656英尺）深處開始，一直延伸到世界各個海洋的深部。') }}</p>
         </div>
         <div class="fish_wrap">
           <div class="fish" v-for="(item, index) in deep_pic" :key="index">
             <div class="num">{{ index + 1 }}</div>
             <div class="pic_shape" :style="{ backgroundImage: `url(${item.pic})` }">
             </div>
-            <div class="name">{{ item.name }}</div>
+            <div class="name">{{ $t(item.name) }}</div>
           </div>
         </div>
       </div>

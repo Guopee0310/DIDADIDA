@@ -1,7 +1,7 @@
 <template>
   <div class="cart-popup" v-if="showCartPopup">
     <div class="cart-content">
-      <p>已加入購物車</p>
+      <p>{{$t('已加入購物車')}}</p>
       <img src="\all_images\doctor dida.png" alt="">
     </div>
   </div>

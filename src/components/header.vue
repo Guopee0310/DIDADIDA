@@ -91,6 +91,7 @@
               class="logOutBtn"
               >登出</span
             >
+            <span v-if="this.$store.state.userName" @click="logOutAPI()" class="logOutBtn">{{$t('登出')}}</span>
           </span>
 
           <!-- 購物車 -->
