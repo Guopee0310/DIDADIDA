@@ -32,6 +32,7 @@ export default {
     return {
       imgSrcGet: "",
       imgSrcArr: [
+        
         "../../public/all_images/laba/bluewhale.jpg",
         "../../public/all_images/laba/bluewhale.jpg",
         "../../public/all_images/laba/jellyfish.jpg",

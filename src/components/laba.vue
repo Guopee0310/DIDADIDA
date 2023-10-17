@@ -3,8 +3,8 @@
     <div class="containerPic" v-if="this.$store.state.questionPic">
       <img
         class="questionMark"
-        :src="require('../../public/all_images/laba/question_mark.jpg')"
-        alt=""
+        :src="`${this.$store.state.chooseImgSrc}/all_images/laba/question_mark.jpg`" 
+        alt="" 
       />
     </div>
 
@@ -124,7 +124,8 @@ export default {
         // 1大白鯊 5藍鯨 2凡鮪魚 4海豚 6藍鯨 3水母
         if (randomNum == 1) {
           this.guessNum = 1;
-          this.imgSrc = require(`../../public/all_images/laba/${this.labaAPI[5].game_img}`);
+          // this.imgSrc = require(`../../public/all_images/laba/${this.labaAPI[5].game_img}`);
+          this.imgSrc = `${this.$store.state.chooseImgSrc}/all_images/laba/${this.labaAPI[5].game_img}`;
 
           this.title = this.labaAPI[5].game_title;
           this.post = this.labaAPI[5].game_text;
@@ -164,7 +165,8 @@ export default {
           }
         } else if (randomNum == 2) {
           this.guessNum = 2;
-          this.imgSrc = require(`../../public/all_images/laba/${this.labaAPI[4].game_img}`);
+          // this.imgSrc = require(`../../public/all_images/laba/${this.labaAPI[4].game_img}`);
+          this.imgSrc = `${this.$store.state.chooseImgSrc}/all_images/laba/${this.labaAPI[4].game_img}`;
 
           this.title = this.labaAPI[4].game_title;
           this.post = this.labaAPI[4].game_text;
@@ -204,7 +206,8 @@ export default {
           }
         } else if (randomNum == 3) {
           this.guessNum = 3;
-          this.imgSrc = require(`../../public/all_images/laba/${this.labaAPI[3].game_img}`);
+          // this.imgSrc = require(`../../public/all_images/laba/${this.labaAPI[3].game_img}`);
+          this.imgSrc = `${this.$store.state.chooseImgSrc}/all_images/laba/${this.labaAPI[3].game_img}`;
 
           this.title = this.labaAPI[3].game_title;
           this.post = this.labaAPI[3].game_text;
@@ -244,7 +247,8 @@ export default {
           }
         } else if (randomNum == 4) {
           this.guessNum = 4;
-          this.imgSrc = require(`../../public/all_images/laba/${this.labaAPI[2].game_img}`);
+          // this.imgSrc = require(`../../public/all_images/laba/${this.labaAPI[2].game_img}`);
+          this.imgSrc = `${this.$store.state.chooseImgSrc}/all_images/laba/${this.labaAPI[2].game_img}`;
 
           this.title = this.labaAPI[2].game_title;
           this.post = this.labaAPI[2].game_text;
@@ -284,7 +288,8 @@ export default {
           }
         } else if (randomNum == 5) {
           this.guessNum = 5;
-          this.imgSrc = require(`../../public/all_images/laba/${this.labaAPI[1].game_img}`);
+          // this.imgSrc = require(`../../public/all_images/laba/${this.labaAPI[1].game_img}`);
+          this.imgSrc = `${this.$store.state.chooseImgSrc}/all_images/laba/${this.labaAPI[1].game_img}`;
 
           this.title = this.labaAPI[1].game_title;
           this.post = this.labaAPI[1].game_text;
@@ -324,7 +329,8 @@ export default {
           }
         } else if (randomNum == 6) {
           this.guessNum = 6;
-          this.imgSrc = require(`../../public/all_images/laba/${this.labaAPI[1].game_img}`);
+          // this.imgSrc = require(`../../public/all_images/laba/${this.labaAPI[1].game_img}`);
+          this.imgSrc = `${this.$store.state.chooseImgSrc}/all_images/laba/${this.labaAPI[1].game_img}`;
 
           this.title = this.labaAPI[1].game_title;
           this.post = this.labaAPI[1].game_text;
@@ -384,7 +390,8 @@ export default {
         for (let i = 0; i < 3; i++) {
           this.labaPicALL = this.labaPicALL.concat(
             myJson.map((item) =>
-              require(`../../public/all_images/laba/${item.game_img}`)
+              // require(`../../public/all_images/laba/${item.game_img}`)
+              `${this.$store.state.chooseImgSrc}/all_images/laba/${item.game_img}`
             )
           );
         }
