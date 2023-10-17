@@ -244,6 +244,7 @@ export default {
           console.log(this.signInAPI);
 
           this.$store.state.storeShowLogin = false;
+          this.$store.state.isUserLoggedIn = true;
         });
       // fetch(
       //   `${this.$store.state.loginURL}/getConfirmMember.php`,

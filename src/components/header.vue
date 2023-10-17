@@ -11,8 +11,10 @@
 
       <!-- this.checkLogoPic = false; -->
       <div :class="{ logo: !checkLogoPic, logoChange: checkLogoPic }">
-        <router-link to="/" v-if="!checkLogoPic"><img :src="`${this.$store.state.chooseImgSrc}/all_images/logo_all.svg`" alt="" /></router-link>
-        <router-link to="/" v-if="checkLogoPic"><img :src="`${this.$store.state.chooseImgSrc}/all_images/logo_half.svg`" alt="" /></router-link>
+        <router-link to="/" v-if="!checkLogoPic"><img :src="`${this.$store.state.chooseImgSrc}/all_images/logo_all.svg`"
+            alt="" /></router-link>
+        <router-link to="/" v-if="checkLogoPic"><img :src="`${this.$store.state.chooseImgSrc}/all_images/logo_half.svg`"
+            alt="" /></router-link>
       </div>
 
       <nav class="main-nav" :style="{ 'color': markColor }">
@@ -67,8 +69,8 @@
           </span>
 
           <!-- 購物車 -->
-          <router-link to="/shoppingcart" class="cart"><i class="fa-solid fa-cart-shopping"
-              style="color: #eee"></i></router-link>
+          <router-link to="/shoppingcart" class="cart"><i class="fa-solid fa-cart-shopping" style="color: #eee"></i>
+            <span class="cart-count" v-if="this.$store.state.userName">{{ cartItemCount }}</span></router-link>
         </div>
         <!-- 語言切換 -->
         <div class="select">
@@ -233,6 +235,11 @@ export default {
   beforeDestroy() {
     window.removeEventListener("scroll", this.handleScroll);
   },
+  computed: {
+    cartItemCount() {
+      return this.$store.getters.cartItemCount;
+    },
+  },
   methods: {
     haederMark(name) {
       if (name == "最新消息") {
@@ -309,6 +316,7 @@ export default {
       this.$store.state.favoList = [];
       this.$store.state.ticketList = [];
       this.$store.state.totalScorePoint = 0;
+
       if (this.$route.path == "/member") {
         this.$router.push("/");
       }
@@ -527,6 +535,21 @@ option:checked {
   display: none;
 }
 
+.cart {
+  position: relative;
+
+  .cart-count {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background-color: red;
+    color: #fff;
+    border-radius: 50%;
+    padding: 5px 8px;
+    font-size: 12px;
+  }
+}
+
 @media screen and (max-width: 767px) {
   .wrap {
     .main-nav {
@@ -545,7 +568,8 @@ option:checked {
       .icons {
         font-size: map-get($fontSizes, "div");
         width: 20%;
-        i{
+
+        i {
           font-size: 1.4rem;
         }
       }
@@ -579,26 +603,30 @@ option:checked {
       align-items: start;
       justify-content: end;
 
-      .rwd_member{
+      .rwd_member {
         height: 100%;
         display: flex;
         align-items: center;
         margin-right: 1rem;
         cursor: pointer;
-        .name{
+
+        .name {
           margin: 0 1rem;
           border-bottom: 1px solid #fff;
         }
-        .logOutBtn{
+
+        .logOutBtn {
           color: #fdfdfd;
           margin-right: 0.5rem;
         }
-        i{
+
+        i {
           width: 100%;
           font-size: 1.3rem;
           margin-right: 1.3rem;
         }
       }
+
       .navigation {
         height: 100%;
         display: flex;
@@ -673,7 +701,7 @@ option:checked {
         .dropdown {
           position: absolute;
           width: 90%;
-          top:120%;
+          top: 120%;
           left: 5%;
           margin: auto;
           background-color: map-get($colors, "h2Blue");

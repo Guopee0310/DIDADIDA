@@ -33,7 +33,7 @@ export default createStore({
     mem_account: "charmy101@gmail.com",
     mem_psw: "charmy101",
     userName: "",
-    shoppingCart: [],
+    shoppingCart: [],  // 存儲購物車中的商品
     showCartPopup: false, // 控制购物车弹出窗口的显示状态
     chooseImgSrc: publicURL,
     favoList: [],
@@ -51,14 +51,15 @@ export default createStore({
     memberId: "",
   },
 
-  // 類似vue檔裡面的computed
+  // 類似vue檔裡面的computed(把 state 處理過後再丟出去)
   getters: {
     remainingTodos: (state) => {
       return (state.totalScorePoint =
         state.quizScore + state.labaScore + state.totalScorePoint);
     },
+    cartItemCount: (state) => state.shoppingCart.length,   // 返回購物車中的數量
   },
-  mutations: {
+  mutations: {   // 用來更改state中的數據的方法
     setUserName(state, userName) {
       state.userName = userName;
     },
@@ -80,6 +81,15 @@ export default createStore({
         this.toggleCartPopup();
       }, 500); // 500毫秒（1秒）后关闭
     },
+    addToCart(state, product) {   // state為目前狀態，product是要加入的商品
+      state.shoppingCart.push(product);
+    },
+  },
+  actions: {   // Actions 發出 commit 呼叫 Mutations
+    addProductToCart({ commit }, product) {
+      commit('addToCart', product);
+    },
   },
   modules: {},
 });
+// 在 Vuex 裡面，儲存狀態的為 State，組件需要更動狀態時，需要透過 Actions 發出一個 Commit 去呼叫 Mutations，再由 Mutations 去更改 State。整個 Vuex 的方法也稱為 store。
