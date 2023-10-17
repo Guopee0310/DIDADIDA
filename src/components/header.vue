@@ -11,8 +11,8 @@
 
       <!-- this.checkLogoPic = false; -->
       <div :class="{ logo: !checkLogoPic, logoChange: checkLogoPic }">
-        <router-link to="/" v-if="!checkLogoPic"><img src="/all_images/logo_all.svg" /></router-link>
-        <router-link to="/" v-if="checkLogoPic"><img src="/all_images/logo_half.svg" /></router-link>
+        <router-link to="/" v-if="!checkLogoPic"><img :src="`${this.$store.state.chooseImgSrc}/all_images/logo_all.svg`" alt="" /></router-link>
+        <router-link to="/" v-if="checkLogoPic"><img :src="`${this.$store.state.chooseImgSrc}/all_images/logo_half.svg`" alt="" /></router-link>
       </div>
 
       <nav class="main-nav" :style="{ 'color': markColor }">
