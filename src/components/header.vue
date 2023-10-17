@@ -1,21 +1,32 @@
 <template>
   <div class="header">
-    <div class="wrap" :style="{
-      'background-color': headerColor,
-      top: 0,
-      left: 0,
-      'z-index': 8,
-      width: '100%',
-    }">
+    <div
+      class="wrap"
+      :style="{
+        'background-color': headerColor,
+        top: 0,
+        left: 0,
+        'z-index': 8,
+        width: '100%',
+      }"
+    >
       <!-- logo -->
 
       <!-- this.checkLogoPic = false; -->
       <div :class="{ logo: !checkLogoPic, logoChange: checkLogoPic }">
-        <router-link to="/" v-if="!checkLogoPic"><img :src="`${this.$store.state.chooseImgSrc}/all_images/logo_all.svg`" alt="" /></router-link>
-        <router-link to="/" v-if="checkLogoPic"><img :src="`${this.$store.state.chooseImgSrc}/all_images/logo_half.svg`" alt="" /></router-link>
+        <router-link to="/" v-if="!checkLogoPic"
+          ><img
+            :src="`${this.$store.state.chooseImgSrc}/all_images/logo_all.svg`"
+            alt=""
+        /></router-link>
+        <router-link to="/" v-if="checkLogoPic"
+          ><img
+            :src="`${this.$store.state.chooseImgSrc}/all_images/logo_half.svg`"
+            alt=""
+        /></router-link>
       </div>
 
-      <nav class="main-nav" :style="{ 'color': markColor }">
+      <nav class="main-nav" :style="{ color: markColor }">
         <!-- 關於我們 -->
         <div class="main-menu">
           <router-link to="/about">{{ $t(menuTitle.about) }}</router-link>
@@ -37,9 +48,12 @@
         <div class="main-menu">
           <router-link to="/explore">{{ $t(menuTitle.animal) }}</router-link>
           <ul class="sub-menu">
-            <li v-for="  animalSub   in   animalSub  " key="animalSub">
-              <router-link :to="animalSub.link" @click="changePageMove(animalSub.name)">{{ $t(animalSub.name)
-              }}</router-link>
+            <li v-for="animalSub in animalSub" key="animalSub">
+              <router-link
+                :to="animalSub.link"
+                @click="changePageMove(animalSub.name)"
+                >{{ $t(animalSub.name) }}</router-link
+              >
             </li>
           </ul>
         </div>
@@ -48,7 +62,7 @@
         <div class="main-menu">
           <a>{{ $t(menuTitle.buy) }}</a>
           <ul class="sub-menu">
-            <li v-for="  buySub in buySub " key="buySub">
+            <li v-for="buySub in buySub" key="buySub">
               <router-link :to="buySub.link">{{ $t(buySub.name) }}</router-link>
             </li>
           </ul>
@@ -57,18 +71,34 @@
         <!-- 會員登入 -->
         <div class="icons">
           <span>
-            <i @click="this.$store.state.storeShowLogin = true" v-if="!this.$store.state.userName"
-              class="fa-solid fa-user" style="color: #eee"></i>
-            <div v-if="this.$store.state.userName" @click="this.$router.push('./member')" style="color: #eee"
-              class="name">
+            <i
+              @click="this.$store.state.storeShowLogin = true"
+              v-if="!this.$store.state.userName"
+              class="fa-solid fa-user"
+              style="color: #eee"
+            ></i>
+            <div
+              v-if="this.$store.state.userName"
+              @click="this.$router.push('./member')"
+              style="color: #eee"
+              class="name"
+            >
               {{ this.$store.state.userName }}
             </div>
-            <span v-if="this.$store.state.userName" @click="logOutAPI()" class="logOutBtn">登出</span>
+            <span
+              v-if="this.$store.state.userName"
+              @click="logOutAPI()"
+              class="logOutBtn"
+              >登出</span
+            >
           </span>
 
           <!-- 購物車 -->
-          <router-link to="/shoppingcart" class="cart"><i class="fa-solid fa-cart-shopping"
-              style="color: #eee"></i></router-link>
+
+          <router-link to="/shoppingcart" class="cart"
+            ><i class="fa-solid fa-cart-shopping" style="color: #eee"></i>
+            {{ this.$store.state.shoppingCart.length }}</router-link
+          >
         </div>
         <!-- 語言切換 -->
         <div class="select">
@@ -77,24 +107,43 @@
             <option value="en">English</option>
             <!-- 添加其他支持的語言選項 -->
           </select>
-          <span><i class="fa-solid fa-chevron-down" style="color: #eeeeee"></i></span>
+          <span
+            ><i class="fa-solid fa-chevron-down" style="color: #eeeeee"></i
+          ></span>
         </div>
       </nav>
       <!-- 手機menu -->
 
       <div class="rwd_menu">
         <span class="rwd_member">
-          <i @click="this.$store.state.storeShowLogin = true" v-if="!this.$store.state.userName" class="fa-solid fa-user"
-            style="color: #eee"></i>
-          <div v-if="this.$store.state.userName" @click="this.$router.push('./member')" style="color: #eee" class="name">
+          <i
+            @click="this.$store.state.storeShowLogin = true"
+            v-if="!this.$store.state.userName"
+            class="fa-solid fa-user"
+            style="color: #eee"
+          ></i>
+          <div
+            v-if="this.$store.state.userName"
+            @click="this.$router.push('./member')"
+            style="color: #eee"
+            class="name"
+          >
             {{ this.$store.state.userName }}
           </div>
-          <span v-if="this.$store.state.userName" @click="logOutAPI()" class="logOutBtn">登出</span>
+          <span
+            v-if="this.$store.state.userName"
+            @click="logOutAPI()"
+            class="logOutBtn"
+            >登出</span
+          >
         </span>
         <div class="navigation">
           <input type="checkbox" class="navigation__checkbox" id="nav-toggle" />
           <label for="nav-toggle" class="navigation__button">
-            <span class="navigation__icon" aria-label="toggle navigation menu"></span>
+            <span
+              class="navigation__icon"
+              aria-label="toggle navigation menu"
+            ></span>
           </label>
           <div class="navigation__background"></div>
 
@@ -102,10 +151,13 @@
             <ul class="navigation__list">
               <div class="btn_wrap">
                 <div class="icons">
-
                   <!-- 購物車 -->
-                  <router-link to="/shoppingcart" @click="closeMobileMenu"><i class="fa-solid fa-cart-shopping"
-                      style="color: #eee"></i></router-link>
+                  <router-link to="/shoppingcart" @click="closeMobileMenu"
+                    ><i
+                      class="fa-solid fa-cart-shopping"
+                      style="color: #eee"
+                    ></i
+                  ></router-link>
                 </div>
                 <div class="select">
                   <select v-model="selectedLanguage" @change="changeLanguage">
@@ -113,7 +165,12 @@
                     <option value="en">English</option>
                     <!-- 添加其他支持的語言選項 -->
                   </select>
-                  <span><i class="fa-solid fa-chevron-down" style="color: #eeeeee"></i></span>
+                  <span
+                    ><i
+                      class="fa-solid fa-chevron-down"
+                      style="color: #eeeeee"
+                    ></i
+                  ></span>
                 </div>
               </div>
               <!-- 關於DIDA -->
@@ -122,7 +179,7 @@
                   $t(menuTitle.about)
                 }}</a>
                 <ul class="dropdown" v-if="showAboutDropdown">
-                  <li v-for="  aboutSub   in   aboutSub  " key="aboutSub">
+                  <li v-for="aboutSub in aboutSub" key="aboutSub">
                     <router-link :to="aboutSub.link" @click="closeMobileMenu">{{
                       $t(aboutSub.name)
                     }}</router-link>
@@ -145,7 +202,7 @@
               <li class="navigation__item">
                 <a @click="toggleDropdown('buy')">{{ $t(menuTitle.buy) }}</a>
                 <ul class="dropdown" v-if="showBuyDropdown">
-                  <li v-for="  buySub   in   buySub  " key="buySub">
+                  <li v-for="buySub in buySub" key="buySub">
                     <router-link :to="buySub.link" @click="closeMobileMenu">{{
                       $t(buySub.name)
                     }}</router-link>
@@ -238,7 +295,7 @@ export default {
       if (name == "最新消息") {
         this.markColor = "#57a3f3";
       } else {
-        this.markColor = "#eee"
+        this.markColor = "#eee";
       }
     },
     changePageMove(name) {
@@ -418,7 +475,7 @@ export default {
   }
 
   .main-menu a.router-link-exact-active {
-    color: #B6E3D8;
+    color: #b6e3d8;
   }
 
   // 子選單樣式
@@ -545,7 +602,7 @@ option:checked {
       .icons {
         font-size: map-get($fontSizes, "div");
         width: 20%;
-        i{
+        i {
           font-size: 1.4rem;
         }
       }
@@ -579,21 +636,21 @@ option:checked {
       align-items: start;
       justify-content: end;
 
-      .rwd_member{
+      .rwd_member {
         height: 100%;
         display: flex;
         align-items: center;
         margin-right: 1rem;
         cursor: pointer;
-        .name{
+        .name {
           margin: 0 1rem;
           border-bottom: 1px solid #fff;
         }
-        .logOutBtn{
+        .logOutBtn {
           color: #fdfdfd;
           margin-right: 0.5rem;
         }
-        i{
+        i {
           width: 100%;
           font-size: 1.3rem;
           margin-right: 1.3rem;
@@ -673,7 +730,7 @@ option:checked {
         .dropdown {
           position: absolute;
           width: 90%;
-          top:120%;
+          top: 120%;
           left: 5%;
           margin: auto;
           background-color: map-get($colors, "h2Blue");
@@ -682,7 +739,7 @@ option:checked {
           transition: all 0.3s ease-in-out 0s, visibility 0s linear 0.3s;
           z-index: 2;
 
-          >li {
+          > li {
             margin: 1rem 0;
           }
 
@@ -708,12 +765,12 @@ option:checked {
 
       // menu字
 
-      .navigation__checkbox:checked~.navigation__background {
+      .navigation__checkbox:checked ~ .navigation__background {
         transform: scale(80);
         opacity: 1;
       }
 
-      .navigation__checkbox:checked~.navigation__nav {
+      .navigation__checkbox:checked ~ .navigation__nav {
         width: 100%;
         visibility: visible;
         opacity: 1;
@@ -750,17 +807,21 @@ option:checked {
       }
 
       //menu叉叉
-      .navigation__checkbox:checked+.navigation__button .navigation__icon {
+      .navigation__checkbox:checked + .navigation__button .navigation__icon {
         background-color: transparent;
         box-shadow: none;
       }
 
-      .navigation__checkbox:checked+.navigation__button .navigation__icon::before {
+      .navigation__checkbox:checked
+        + .navigation__button
+        .navigation__icon::before {
         top: 0;
         transform: rotate(135deg);
       }
 
-      .navigation__checkbox:checked+.navigation__button .navigation__icon::after {
+      .navigation__checkbox:checked
+        + .navigation__button
+        .navigation__icon::after {
         top: 0;
         transform: rotate(-135deg);
       }
