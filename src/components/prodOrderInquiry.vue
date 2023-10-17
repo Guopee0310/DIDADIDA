@@ -5,12 +5,7 @@
         <option value="請選擇">請選擇</option>
         <option :value="i" v-for="i in orderNumAll">訂單編號{{ i }}</option>
       </select>
-
-      <div
-        class="prod_order_group"
-        v-for="prod in filteredProdOrder"
-        :key="prod.prod_img"
-      >
+      <div class="prod_order_group" v-for="prod in filteredProdOrder" :key="prod.prod_img">
         <div class="prod_img">
           <img :src="'../all_images/product/' + prod.prod_img" alt="" />
         </div>
@@ -39,10 +34,6 @@
         <p>運費 : NT {{ filteredProdOrder[0].ord_ship }}</p>
         <p>總金額 : NT {{ filteredProdOrder[0].ord_pay }}</p>
       </div>
-
-      <!-- <div class="close_btn">
-        <button>關閉</button>
-      </div> -->
     </div>
   </div>
 </template>
@@ -84,13 +75,6 @@ export default {
     // this.prodOrder = this.$store.state.prodOrderArr;
   },
   computed: {
-    // filteredOrderNums() {
-    //   // 根据您的逻辑过滤并返回需要显示的订单编号列表
-    //   return this.orderNumAll.filter((i) => {
-    //     // 添加适当的条件，以确定是否包含在列表中
-    //     return i === this.selectOrder;
-    //   });
-    // },
     filteredProdOrder() {
       // 根据您的逻辑过滤并返回需要显示的订单信息列表
       return this.prodOrder.filter((prod) => {
@@ -107,7 +91,6 @@ export default {
   p {
     color: map-get($colors, "dark");
   }
-  
 
   .order_area {
     width: 500px;
@@ -122,16 +105,16 @@ export default {
     justify-content: flex-start;
     overflow-y: scroll;
 
-    select{
-    background-color: #1FB0CB;
-    border: 0;
-    border-radius: 5px;
-    padding: 3px;
-    color: #eee;
-    margin-left: auto;
-    margin-right: 10px;
-    margin-top: 10px;
-    outline: none;
+    select {
+      background-color: #1FB0CB;
+      border: 0;
+      border-radius: 5px;
+      padding: 3px;
+      color: #eee;
+      margin-left: auto;
+      margin-right: 10px;
+      margin-top: 10px;
+      outline: none;
     }
 
     &::-webkit-scrollbar {
@@ -232,8 +215,6 @@ export default {
         background-color: #73a8d7;
       }
     }
-
-    
   }
 }
 
@@ -242,10 +223,12 @@ export default {
     .order_area {
       width: 330px;
       height: 720px;
+
       .ord_info {
         width: 90%;
         margin: 20px 0;
       }
+
       .prod_order_group {
         width: 300px;
         flex-direction: column;
@@ -259,13 +242,14 @@ export default {
         width: 100%;
         margin: 0 auto;
       }
+
       .item_info {
         justify-content: center;
-        p:nth-child(2){
+
+        p:nth-child(2) {
           width: 150px;
         }
       }
-
     }
   }
 }

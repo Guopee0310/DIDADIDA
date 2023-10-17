@@ -1,11 +1,7 @@
 <template>
   <div class="favorites_list_main">
     <div class="favorites_list_area">
-      <div
-        class="favorites_list_group"
-        v-for="(favo, index) in favAPI"
-        :key="favo.prod_img"
-      >
+      <div class="favorites_list_group" v-for="(favo, index) in favAPI" :key="favo.prod_img">
         <span class="close" @click="delSingleItem(favo, index)">&times;</span>
         <div class="favorites_list_img">
           <img :src="'../all_images/product/' + favo.prod_img" alt="" />
@@ -167,6 +163,7 @@ export default {
   .favorites_list_area {
     width: 330px;
     height: 720px;
+
     p {
       width: 100%;
     }

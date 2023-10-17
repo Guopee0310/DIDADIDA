@@ -8,7 +8,6 @@
     <div class="member_nav">
       <div class="stickers">
         <div class="photo_stickers">
-
           <form @submit.prevent="uploadImage">
             <input type="file" @change="pushImg($event, index)" id="fileInput" ref="imageInput" accept="image/*" />
             <label for="fileInput" id="cameraIconLabel">
@@ -19,13 +18,6 @@
             </div>
           </form>
         </div>
-        <!-- <form action="../../public/php/memAvatar.php" method="post" enctype="multipart/form-data">
-            <label for="image"><b>Upload file : </b></label>
-            <input type="file" name="image" accept="image/*" id="image"><br>
-            <input type="submit" value="Upload">
-          </form> -->
-        <!-- <input type="file">
-          <img src="../assets/images/member_nini.jpg" alt="" /> -->
       </div>
 
       <div class="member_hello">
@@ -61,24 +53,23 @@
       </div>
 
       <div class="btn_area_mob">
-        <select name="" id="service">
+        <select name="" id="service" @change="handleSelectChange">
           <option value="">搜尋項目</option>
-          <option @click="memberSetting" :class="{ alreadyClick: memberClick }">
+          <option value="member" :class="{ alreadyClick: memberClick }">
             {{ $t("會員帳號設定") }}
           </option>
-          <option @click="prodOrder" :class="{ alreadyClick: prodOrderClick }">
+          <option value="order" :class="{ alreadyClick: prodOrderClick }">
             {{ $t("購物訂單查詢") }}
           </option>
-          <option @click="tickOrder" :class="{ alreadyClick: tickOrderClick }">
+          <option value="ticket" :class="{ alreadyClick: tickOrderClick }">
             {{ $t("購票訂單查詢") }}
           </option>
-          <option @click="favList" :class="{ alreadyClick: favListClick }">
+          <option value="favorite" :class="{ alreadyClick: favListClick }">
             {{ $t("我的收藏清單") }}
           </option>
         </select>
         <span><i class="fa-solid fa-chevron-down" style="color: #eeeeee"></i></span>
       </div>
-
 
       <div class="logOutBtn">
         <button v-if="this.$store.state.userName" @click="logOutAPI()" :class="{ alreadyClick: logOutClick }">
@@ -195,22 +186,26 @@ export default {
     },
     ...mapGetters(["remainingTodos"]),
   },
-  // mounted() {
-  //   fetch(`${this.$store.state.APIurl}memAvatar.php`)
-  //     .then(function (response) {
-  //       return response.json();
-  //     })
-
-  //     .then((myJson) => {
-  //       for (let i = 0; i < myJson.length; i++) {
-  //         myJson[
-  //           i
-  //         ].mem_pic = require(`../../public/all_images/memAvatar/${myJson[i].mem_pic}`);
-  //       }
-  //       this.avatarAll = myJson;
-  //     });
-  // },
   methods: {
+    handleSelectChange(event) {
+      const selectedValue = event.target.value;
+      switch (selectedValue) {
+        case 'member':
+          this.memberSetting();
+          break;
+        case 'order':
+          this.prodOrder();
+          break;
+        case 'ticket':
+          this.tickOrder();
+          break;
+        case 'favorite':
+          this.favList();
+          break;
+        default:
+          break;
+      }
+    },
     favList() {
       this.$store.state.memberBtn = "favorites_list";
       this.prodOrderClick = false;
@@ -621,7 +616,8 @@ export default {
 
   .mem_main {
     width: 100%;
-    .mem_account_settings{
+
+    .mem_account_settings {
       h6 {
         width: 100%;
       }
@@ -653,6 +649,7 @@ export default {
       border-radius: 0 0 5px 5px;
       background-color: map-get($colors, "bgc");
       color: map-get($colors, "dark");
+
       h6 {
         width: 100%;
       }
