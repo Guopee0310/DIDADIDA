@@ -122,7 +122,23 @@ const i18n = createI18n({
       ', 後續會由專人協助處理。':", and they will assist with the resolution.",
 
       //FAQs頁面
-
+      營業相關:"BUSINESS HOURS",
+      "營業時間為上午9:00至下午17:00，最後入場時間為下午16:00。國定假日及颱風天休館。":"Our openning hours are from 9:00 AM to 5:00 PM, with the last entry allowed until 4:00 PM. We are closed on national holidays and during typhoon conditions.",
+      購票資訊:"TICKETING DETAILS",
+      "Q:門票價錢?":"Q: Ticket Prices?",
+      "A:一般門票價格：":"A: Regular ticket prices:",
+      "成人：$500":"Adults: $500",
+      "兒童(4-11歲):$250":"Children (4-11 years old): $250",
+      "學生（需出示有效學生證):$400":"Students (with valid student ID): $400",
+      "長者(65歲以上):$250":"Seniors (65 and older): $250",
+      "Q:購票方式?":"Q: How to Purchase Tickets?",
+      "1.網上預訂： 在我們的官方網站上預訂門票，可享受5%的網上預訂折扣。":"1.Online Booking: Reserve your tickets on our official website and enjoy a 5% online booking discount.",
+      "2.現場購票： 您也可以在水族館入口處現場購買門票。":"2.On-Site Purchase: You can also buy tickets at the aquarium's entrance.",
+      "3.團體訪問：如果您是一個大型團體（例如學校、公司或旅行團），我們提供特別優惠和團體行程安排。請提前與我們的團體訪問部門聯繫，以獲取更多信息和價格。":"3.Group Visits: If you're part of a large group (such as a school, company, or tour group), we offer special discounts and group itinerary arrangements. Please contact our group visit department in advance for more information and pricing.",
+      "":"",
+      "":"",
+      "":"",
+      "":"",
 
       //拉霸頁面
       問卷:'QUIZ',
