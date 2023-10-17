@@ -7,7 +7,8 @@
     </h3Title>
     <div class="guide_map">
       <button @click="toggleBook" class="flip-btn"><span>點我翻頁</span></button>
-      <div class="cover"><img :src="`${this.$store.state.chooseImgSrc}/all_images/guide/cover-left.jpg`" alt="">
+      <div class="cover">
+        <img :src="`${this.$store.state.chooseImgSrc}/all_images/guide/cover-left.jpg`" alt="">
       </div>
       <div id="book">
         <div id="top">
@@ -24,13 +25,19 @@
             <g @click="scrollToSection(3)">
               <rect x="78" y="9" width="20" height="8" rx="1" ry="1" style="fill:#4B88FFa2;stroke-width:10;"></rect>
               <text x="79" y="15" fill="#fff" filter="url(#drop-shadow-filter)">中層館</text>
-              <polyline points="0,0 85,0 85,9" style="fill:none; stroke:#786969; stroke-width:0.3" />
+              <polyline points="0,0 85,0 85,9" style="fill:none; stroke:#786969; stroke-width:0.3" /> 
+              <circle cx="90" cy="6" r="1" style="fill:none; stroke:#ffffff; stroke-width:0.2" />
+              <circle cx="76" cy="10" r="2" style="fill:none; stroke:#ffffff; stroke-width:0.4" />
+              <circle cx="85" cy="18" r="1.5" style="fill:none; stroke:#ffffff; stroke-width:0.2" />
             </g>
             <!-- 深層區 -->
             <g @click="scrollToSection(4)">
               <rect x="78" y="36" width="20" height="8" rx="1" ry="1" style="fill:#0016D8a2;stroke-width:10;"></rect>
-              <text x="79" y="41.5" fill="#fff" filter="url(#drop-shadow-filter)">深層館</text>
+              <text x="79" y="42" fill="#fff" filter="url(#drop-shadow-filter)">深層館</text>
               <polyline points="33,40 78,40" style="fill:none; stroke:#786969; stroke-width:0.3" />
+              <circle cx="90" cy="49" r="1" style="fill:none; stroke:#ffffff; stroke-width:0.4" />
+              <circle cx="95" cy="40" r="2" style="fill:none; stroke:#ffffff; stroke-width:0.2" />
+              <circle cx="79" cy="38" r="1.5" style="fill:none; stroke:#ffffff; stroke-width:0.3" />
             </g>
           </svg>
         </div>
@@ -39,7 +46,12 @@
       <div :class="{ 'open': isOpen, 'closed': !isOpen }" id="flip">
         <div id="front">
           <img :src="`${this.$store.state.chooseImgSrc}/all_images/guide/cover-right.jpg`" alt="">
-
+          <div class="fishes">
+            <img :src="`${this.$store.state.chooseImgSrc}/all_images/deco/deco_fishes.png`" alt="">
+          </div>
+          <div class="turtle">
+            <img :src="`${this.$store.state.chooseImgSrc}/all_images/deco/deco_turtle_1.png`" alt="">
+          </div>
 
         </div>
         <div id="back">
@@ -53,9 +65,12 @@
             </defs>
             <!-- 表層區 -->
             <g @click="scrollToSection(2)" id="section1">
-              <rect x="6" y="16" width="20" height="8" rx="1" ry="1" style="fill:#67daf4a2;stroke-width:10;"></rect>
-              <text x="7" y="21.8" fill="#fff" filter="url(#drop-shadow-filter)">淺層館</text>
+              <rect x="6" y="15" width="20" height="8" rx="1" ry="1" style="fill:#67daf4a2;stroke-width:10;"></rect>
+              <text x="7" y="21" fill="#fff" filter="url(#drop-shadow-filter)">淺層館</text>
               <polyline points="15,15 15,10 50,10" style="fill:none; stroke:#786969; stroke-width:0.3" />
+              <circle cx="6" cy="20" r="1" style="fill:none; stroke:#ffffff; stroke-width:0.5" />
+              <circle cx="22" cy="18" r="2" style="fill:none; stroke:#ffffff; stroke-width:0.35" />
+              <circle cx="18" cy="28" r="1.5" style="fill:none; stroke:#ffffff; stroke-width:0.4" />
             </g>
           </svg>
         </div>
@@ -250,7 +265,7 @@ h3 {
     animation: bounce 4s infinite;
 
   }
-
+  
   @keyframes bounce {
 
     5%,
@@ -369,6 +384,7 @@ h3 {
     left: 0;
     transform: rotateY(-180deg);
 
+
     rect {
       cursor: pointer;
     }
@@ -377,18 +393,128 @@ h3 {
       font-size: 5px;
       pointer-events: none;
     }
+    circle{
+      pointer-events: none;
+      &:nth-of-type(1){
+        animation: bubble 3s linear infinite;
+      }
+      &:nth-of-type(2){
+        animation: bubble 3s linear infinite 1s;
+      }
+      &:nth-of-type(3){
+        animation: bubble 3s linear infinite 0.6s;
+      }
+    }
+  }
+}
+@keyframes bubble{
+  10%{
+    opacity: 1;
+    transform: translate( 0, -1px);
+  }
+  50%{
+    opacity: 0.6;
+    transform: translate( 5px, -5px);
+  }
+  100%{
+    opacity: 0;
+    transform: translate( 0px, -10px);
   }
 }
 
 
+
 #front {
   width: 45vw;
+  overflow: hidden;
 
   img {
     width: 100%;
     vertical-align: top;
   }
 }
+.fishes{
+    width: 12rem;
+    position: absolute;
+    right: 0;
+    top: 0;
+    animation: move 10s linear  infinite;
+    img{
+      width: 100%;
+    }
+  }
+  .turtle{
+    width: 6rem;
+    position: absolute;
+    left: -50px;
+    bottom: -30px;
+    rotate: 155deg;
+    animation: move-2 13s linear  infinite -1s;
+
+    img{
+      width: 100%;
+    }
+  }
+  @keyframes move {
+    0%{
+      transform: translate(5em, -6em);
+    }
+    10%{
+      transform: translate(-6em, 1em);
+    }
+    20%{
+      transform: translate(-14em, 6em);
+    }
+    30%{
+      transform: translate(-21em, 11em);
+    }
+    40%{
+      transform: translate(-28em, 16em);
+    }
+    50%{
+      transform: translate(-35em, 21em);
+    }
+    60%{
+      transform: translate(-42em, 26em);
+    }
+    70%{
+      transform: translate(-49em, 31em);
+    }
+    80%{
+      transform: translate(-56em, 36em);
+    }
+    90%{
+      transform: translate(-63em, 41em);
+    }
+    100%{
+      transform: translate(-70em, 46em);
+    }
+    
+  }
+  @keyframes move-2 {
+    0%{
+      transform: translate(-5em, 0);
+    }
+    20%{
+      transform: translate(-20em, 2em);
+    }
+    40%{
+      transform: translate(-35em, 4em);
+    }
+    60%{
+      transform: translate(-50em, 6em);
+    }
+    80%{
+      transform: translate(-65em, 8em);
+    }
+    100%{
+      transform: translate(-80em, 10em);
+    }
+   
+    
+    
+  }
+
 
 
 #book {
@@ -428,6 +554,18 @@ h3 {
     text {
       font-size: 5px;
       pointer-events: none;
+    }
+    circle{
+      pointer-events: none;
+      &:nth-of-type(1){
+        animation: bubble 3s linear infinite;
+      }
+      &:nth-of-type(2){
+        animation: bubble 3s linear infinite 1s;
+      }
+      &:nth-of-type(3){
+        animation: bubble 3s linear infinite 0.6s;
+      }
     }
   }
 }
@@ -598,6 +736,12 @@ h3 {
       padding: 0.7em 1em;
     }
   }
+  .fishes{
+    width: 2.5rem;
+  }
+  .turtle{
+    width: 4rem;
+  }
 
   .tabs {
 
@@ -637,26 +781,29 @@ h3 {
     .content {
 
       .wrap {
-
+        flex-direction: column;
         .about_content {
-          padding: 1rem;
+          padding: 2rem;
+          margin: 3rem 0;
           font-size: 1rem;
-          width: 50%;
+          width: 100%;
         }
 
         .fish_wrap {
-          width: 50%;
-          height: 100%;
+          width: 100%;
+          height: 480px;
 
           .fish {
-            margin: 3rem 0;
+            width: 50%;
+            margin: 3rem auto;
 
             .name {
               top: 15px;
+              left: -40px;
             }
 
             .num {
-              left: -10px;
+              left: -45px;
               top: -25px;
             }
 
