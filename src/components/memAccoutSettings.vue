@@ -254,11 +254,18 @@ export default {
 
 @media screen and (max-width: 414px) {
   .profile__main {
+    width: 100%;
     margin-top: 20px;
 
     .field__group {
-      margin: 5px 30px;
+      width: 90%;
       flex-direction: column;
+      .field_input {
+        width: 90%;
+      }
+      .field_input {
+        width: 100%;
+      }
     }
 
     .mem_email,
@@ -272,8 +279,8 @@ export default {
   }
 
   .field__action {
-    right: 25px;
-    bottom: 70px;
+    width: 100%;
+    margin-top: 30px;
   }
 }
 </style>

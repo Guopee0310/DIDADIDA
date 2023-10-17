@@ -1,43 +1,30 @@
 <template>
   <div class="tick_order_main">
     <div class="tick_area">
-      <div>
+      <div style="margin: 0 10px 0 auto;">
         <select v-model="selectOrder" v-if="!dateOrNum">
           <option value="請選擇">請選擇</option>
-          <option
-            :value="i.uniqid_num"
-            v-for="(i, index) in ticketOrderSlice"
-            class="orderNumTitle"
-          >
+          <option :value="i.uniqid_num" v-for="(i, index) in ticketOrderSlice" class="orderNumTitle">
             {{ i.tic_date }}
           </option>
         </select>
         <select v-model="selectOrder" v-if="dateOrNum">
           <option value="請選擇">請選擇</option>
-          <option
-            :value="i.uniqid_num"
-            v-for="(i, index) in ticketOrderSlice"
-            class="orderNumTitle"
-          >
+          <option :value="i.uniqid_num" v-for="(i, index) in ticketOrderSlice" class="orderNumTitle">
             {{ i.uniqid_num }}
           </option>
         </select>
         <button @click="dateOrNum = !dateOrNum">切換</button>
       </div>
 
-      <div
-        class="tick_order_group"
-        v-for="(tick, index) in filteredTickOrder"
-        :key="tick.tickImg"
-        :class="{
-          tick_order_group_used:
-            this.$store.state.activeIndexes.findIndex(
-              (v) => v.tickIdx === index
-            ) > -1 ||
-            tick.tic_late ||
-            tick.tic_state === '已使用',
-        }"
-      >
+      <div class="tick_order_group" v-for="(tick, index) in filteredTickOrder" :key="tick.tickImg" :class="{
+        tick_order_group_used:
+          this.$store.state.activeIndexes.findIndex(
+            (v) => v.tickIdx === index
+          ) > -1 ||
+          tick.tic_late ||
+          tick.tic_state === '已使用',
+      }">
         <div class="tick_img">
           <img :src="tick.tickImg" alt="" />
         </div>
@@ -62,15 +49,8 @@
             <p>NT {{ tick.tic_pay }}</p>
           </div>
           <div>
-            <QRCode
-              :tic_state="tick.tic_state"
-              :tic_id="tick.tic_id"
-              :tic_late="tick.tic_late"
-              :checkDate="tick.tic_date"
-              :ticketIndex="index"
-              @click="activateGrayBkc(index)"
-              @checkTicket="getCheck"
-            ></QRCode>
+            <QRCode :tic_state="tick.tic_state" :tic_id="tick.tic_id" :tic_late="tick.tic_late" :checkDate="tick.tic_date"
+              :ticketIndex="index" @click="activateGrayBkc(index)" @checkTicket="getCheck"></QRCode>
           </div>
         </div>
       </div>
@@ -244,12 +224,33 @@ export default {
     justify-content: flex-start;
     overflow-y: auto;
 
+    select {
+      background-color: #1FB0CB;
+      border: 0;
+      border-radius: 5px;
+      padding: 3px;
+      color: #eee;
+      margin-left: auto;
+      margin-top: 10px;
+      outline: none;
+    }
+
+    button {
+      background-color: #1FB0CB;
+      border: 0;
+      border-radius: 5px;
+      color: #eee;
+      padding: 3px;
+      margin-left: 5px;
+    }
+
     .orderNumBox {
       display: flex;
       justify-content: space-around;
       flex-direction: row;
       background-color: gold;
       width: 100%;
+
       .orderNumTitle {
         border: 1px black solid;
         cursor: pointer;
@@ -288,14 +289,17 @@ export default {
 
       // z-index: 2;
     }
+
     .tick_late {
       background-color: gray;
       color: rgb(147, 144, 144);
     }
+
     .tick_order_group_used {
       background-color: gray;
       color: rgb(147, 144, 144);
     }
+
     .tick_order_group:last-child {
       border-bottom: 0;
     }

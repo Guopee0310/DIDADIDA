@@ -8,23 +8,15 @@
     <div class="member_nav">
       <div class="stickers">
         <div class="photo_stickers">
-          <div class="imgBox">
-            <img :src="changePic" alt="" />
-          </div>
+
           <form @submit.prevent="uploadImage">
-            <input
-              type="file"
-              @change="pushImg($event, index)"
-              id="fileInput"
-              ref="imageInput"
-              accept="image/*"
-            />
+            <input type="file" @change="pushImg($event, index)" id="fileInput" ref="imageInput" accept="image/*" />
             <label for="fileInput" id="cameraIconLabel">
-              <img
-                src="../../public/all_images/115759_camera_icon.png"
-                alt=""
-              />
+              <img src="../../public/all_images/115759_camera_icon.png" alt="" />
             </label>
+            <div class="imgBox">
+              <img :src="changePic" alt="" />
+            </div>
           </form>
         </div>
         <!-- <form action="../../public/php/memAvatar.php" method="post" enctype="multipart/form-data">
@@ -50,14 +42,7 @@
           <span>Google</span>
         </div>
         <label class="verification_label" for="verification_id">
-          已驗證<input
-            class="verification_input"
-            type="checkbox"
-            value=""
-            id="verification_id"
-            style="zoom: 120%"
-            checked
-          />
+          已驗證<input class="verification_input" type="checkbox" value="" id="verification_id" style="zoom: 120%" checked />
         </label>
       </div>
       <div class="btn_area">
@@ -74,12 +59,29 @@
           {{ $t("我的收藏清單") }}
         </button>
       </div>
+
+      <div class="btn_area_mob">
+        <select name="" id="service">
+          <option value="">搜尋項目</option>
+          <option @click="memberSetting" :class="{ alreadyClick: memberClick }">
+            {{ $t("會員帳號設定") }}
+          </option>
+          <option @click="prodOrder" :class="{ alreadyClick: prodOrderClick }">
+            {{ $t("購物訂單查詢") }}
+          </option>
+          <option @click="tickOrder" :class="{ alreadyClick: tickOrderClick }">
+            {{ $t("購票訂單查詢") }}
+          </option>
+          <option @click="favList" :class="{ alreadyClick: favListClick }">
+            {{ $t("我的收藏清單") }}
+          </option>
+        </select>
+        <span><i class="fa-solid fa-chevron-down" style="color: #eeeeee"></i></span>
+      </div>
+
+
       <div class="logOutBtn">
-        <button
-          v-if="this.$store.state.userName"
-          @click="logOutAPI()"
-          :class="{ alreadyClick: logOutClick }"
-        >
+        <button v-if="this.$store.state.userName" @click="logOutAPI()" :class="{ alreadyClick: logOutClick }">
           {{ $t("登出") }}
         </button>
       </div>
@@ -87,37 +89,25 @@
 
     <!-- 右側區塊 -->
     <!-- 會員帳號設定 -->
-    <div
-      v-if="this.$store.state.memberBtn === 'mem_account_settings'"
-      class="mem_account_settings member_area"
-    >
+    <div v-if="this.$store.state.memberBtn === 'mem_account_settings'" class="mem_account_settings member_area">
       <h6>{{ $t("會員帳號設定") }}</h6>
       <memAccoutSettings></memAccoutSettings>
       <memAreaBG></memAreaBG>
     </div>
     <!-- 購物訂單查詢 -->
-    <div
-      v-else-if="this.$store.state.memberBtn === 'prod_order_inquiry'"
-      class="prod_order_inquiry member_area"
-    >
+    <div v-else-if="this.$store.state.memberBtn === 'prod_order_inquiry'" class="prod_order_inquiry member_area">
       <h6>{{ $t("購物訂單查詢") }}</h6>
       <prodOrderInquiry id="showProdOrder"></prodOrderInquiry>
       <memAreaBG></memAreaBG>
     </div>
     <!-- 購票訂單查詢 -->
-    <div
-      v-else-if="this.$store.state.memberBtn === 'tick_order_inquiry'"
-      class="tick_order_inquiry member_area"
-    >
+    <div v-else-if="this.$store.state.memberBtn === 'tick_order_inquiry'" class="tick_order_inquiry member_area">
       <h6 id="showtickOrder">{{ $t("購票訂單查詢") }}</h6>
       <tickOrderInquiry></tickOrderInquiry>
       <memAreaBG></memAreaBG>
     </div>
     <!-- 我的收藏清單 -->
-    <div
-      v-else="this.$store.state.memberBtn === 'mem_bonuspoint'"
-      class="favorites_list member_area"
-    >
+    <div v-else="this.$store.state.memberBtn === 'mem_bonuspoint'" class="favorites_list member_area">
       <h6>{{ $t("我的收藏清單") }}</h6>
       <favoritesList></favoritesList>
       <memAreaBG></memAreaBG>
@@ -322,6 +312,10 @@ export default {
     border-radius: 10px 0 0 10px;
     background-color: map-get($colors, "secondary");
     position: relative;
+
+    .btn_area_mob {
+      display: none;
+    }
 
     .stickers {
       height: 100px;
@@ -559,14 +553,59 @@ export default {
   .mem_main {
     .member_nav {
       .stickers {
-        height: 40px;
-
         .photo_stickers {
-          width: 230px;
-          height: 230px;
-          top: -180px;
-          left: 60px;
+
+
+          #cameraIconLabel {
+            padding: 100px;
+            border: 1px solid transparent;
+            border-radius: 50%;
+            top: -150px;
+            left: 65px;
+            z-index: 0;
+          }
+
+          .imgBox {
+            left: 0;
+            right: 0;
+            margin: auto;
+            pointer-events: none;
+          }
         }
+      }
+
+      .verification {
+        width: 85%;
+      }
+
+      .btn_area {
+        display: none;
+      }
+
+      .btn_area_mob {
+        display: flex;
+        position: relative;
+
+        select {
+          margin: auto;
+          border: none;
+          background-color: #1fb0cb;
+          padding: 10px;
+          width: 60%;
+          color: map-get($colors, 'light');
+          appearance: none;
+        }
+
+        span {
+          position: absolute;
+          top: 10px;
+          right: 90px;
+          font-size: 1rem;
+          pointer-events: none;
+        }
+
+
+
       }
     }
   }
@@ -582,8 +621,14 @@ export default {
 
   .mem_main {
     width: 100%;
+    .mem_account_settings{
+      h6 {
+        width: 100%;
+      }
+    }
 
     h6 {
+      width: 100%;
       padding: 20px 25px;
     }
 
@@ -592,10 +637,9 @@ export default {
     }
 
     .member_nav {
-      width: 350px;
-      height: 380px;
-      margin: 0 30px;
-      background-color: map-get($colors, "bgc");
+      width: 90%;
+      height: 400px;
+      border-radius: 5px 5px 0 0;
 
       button {
         width: 310px;
@@ -604,10 +648,14 @@ export default {
     }
 
     .member_area {
-      width: 350px;
-      height: 850px;
+      width: 90%;
+      height: 900px;
+      border-radius: 0 0 5px 5px;
       background-color: map-get($colors, "bgc");
       color: map-get($colors, "dark");
+      h6 {
+        width: 100%;
+      }
     }
 
     .mempic,

@@ -107,6 +107,7 @@ export default {
   p {
     color: map-get($colors, "dark");
   }
+  
 
   .order_area {
     width: 500px;
@@ -120,6 +121,18 @@ export default {
     align-items: center;
     justify-content: flex-start;
     overflow-y: scroll;
+
+    select{
+    background-color: #1FB0CB;
+    border: 0;
+    border-radius: 5px;
+    padding: 3px;
+    color: #eee;
+    margin-left: auto;
+    margin-right: 10px;
+    margin-top: 10px;
+    outline: none;
+    }
 
     &::-webkit-scrollbar {
       width: 10px;
@@ -219,6 +232,8 @@ export default {
         background-color: #73a8d7;
       }
     }
+
+    
   }
 }
 
@@ -227,7 +242,10 @@ export default {
     .order_area {
       width: 330px;
       height: 720px;
-
+      .ord_info {
+        width: 90%;
+        margin: 20px 0;
+      }
       .prod_order_group {
         width: 300px;
         flex-direction: column;
@@ -238,9 +256,16 @@ export default {
       }
 
       .prod_info {
-        width: 50%;
+        width: 100%;
         margin: 0 auto;
       }
+      .item_info {
+        justify-content: center;
+        p:nth-child(2){
+          width: 150px;
+        }
+      }
+
     }
   }
 }

@@ -167,6 +167,9 @@ export default {
   .favorites_list_area {
     width: 330px;
     height: 720px;
+    p {
+      width: 100%;
+    }
 
     .favorites_list_group {
       width: 300px;
