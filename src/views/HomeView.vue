@@ -120,7 +120,7 @@
                 <h4>{{ i.prod_name }}</h4>
                 <div class="text">{{ i.prod_info }}</div>
               </router-link>
-              <span>NT {{ i.prod_price }}</span>
+              <span>NT$ {{ i.prod_price }}</span>
             </div>
 
 

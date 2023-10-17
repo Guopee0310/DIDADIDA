@@ -33,7 +33,7 @@
             <div>{{ $t(i[1]) }}</div>
           </div>
           <div class="ticketSal">
-            <div>NT {{ $t(i[2]) }} / {{ $t("每人") }}</div>
+            <div>NT$ {{ $t(i[2]) }} / {{ $t("每人") }}</div>
             <div class="clickTicket">
               <input type="button" value="-" @click="ticketdown(index)" />
               <input type="text" :value="i[3]" />
@@ -44,7 +44,7 @@
         <div class="totalNum">
           <div>{{ $t("總金額") }}</div>
           <div>
-            NT <span>{{ totalPrice }}</span>
+            NT$ <span>{{ totalPrice }}</span>
           </div>
         </div>
         <div class="bookbtn">

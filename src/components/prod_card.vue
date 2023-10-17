@@ -17,7 +17,7 @@
     </div>
     <div class="info">
       <div class="cost">
-        <span>NT {{ i.prod_price }}</span>
+        <span>NT$ {{ i.prod_price }}</span>
       </div>
       <div class="prod_btn">
         <div class="num">
@@ -57,7 +57,7 @@
           <div class="prod-info">
             <div>
               <h5>{{ $t(selectedProduct.prod_name) }}</h5>
-              <p>NT {{ $t(selectedProduct.prod_price) }}</p>
+              <p>NT${{ $t(selectedProduct.prod_price) }}</p>
             </div>
             <p>{{ $t(selectedProduct.prod_info) }}</p>
           </div>

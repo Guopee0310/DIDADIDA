@@ -4,7 +4,7 @@
       <img :src="require('../../public/all_images/dr.dolphin.png')" alt="" />
     </div>
     <div class="finalAnsAll">
-      <div class="ansTitle">恭喜完成問卷!</div>
+      <div class="ansTitle">{{$t('恭喜完成問卷!')}}</div>
       <div class="getPoint" v-if="this.$store.state.userName">
         您共獲得{{ this.$store.state.quizScore }}點紅利點數!
       </div>

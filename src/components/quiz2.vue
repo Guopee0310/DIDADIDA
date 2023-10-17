@@ -41,7 +41,7 @@
         </div>
       </div>
 
-      <div @click="complete" class="cmpBtn" v-if="!showResult">完成問卷</div>
+      <div @click="complete" class="cmpBtn" v-if="!showResult">{{$t('完成問卷')}}</div>
       <div
         v-if="notComplete"
         class="notCmpBtn"

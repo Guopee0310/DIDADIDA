@@ -9,7 +9,7 @@
       <div v-for="(animal, index) in animals" :key="index" :ref="`parallaxScene${index}`" :id="`scene${index}`"
         data-relative-input="true" :class="animal.category">
         <img :src="animal.image" :alt="animal.name" :data-depth="animal.depth" @click="showCard(animal)" />
-        <h4 :data-depth="animal.depth">{{ animal.name }}</h4>
+        <h4 :data-depth="animal.depth">{{ $t(animal.name) }}</h4>
       </div>
 
       <!-- 中層海洋帶 -->
