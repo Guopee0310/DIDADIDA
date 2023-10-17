@@ -21,11 +21,11 @@
       </div>
 
       <div class="member_hello">
-        <p>{{ this.$store.state.userName }}，您好！</p>
+        <p>{{ this.$store.state.userName }}{{$t("，您好！")}}</p>
       </div>
       <div class="bonuspoints">
         <p>
-          尚有紅利點數 : <span>{{ mem_bonus }}</span> 點
+          {{$t("尚有紅利點數 :")}} <span>{{ mem_bonus }}</span>{{$t('點')}} 
         </p>
       </div>
       <div class="verification">
@@ -34,7 +34,7 @@
           <span>Google</span>
         </div>
         <label class="verification_label" for="verification_id">
-          已驗證<input class="verification_input" type="checkbox" value="" id="verification_id" style="zoom: 120%" checked />
+          {{$t('已驗證')}} <input class="verification_input" type="checkbox" value="" id="verification_id" style="zoom: 120%" checked />
         </label>
       </div>
       <div class="btn_area">
