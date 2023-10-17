@@ -1428,9 +1428,10 @@ export default {
   @media screen and (max-width: 415px) {
     .wapper {
 
+
       // 動物們 ------------------------------------------------------------
       .turtle {
-        translate: 20vw 10em;
+        translate: 20vw 5em;
         width: calc(400px/1.5);
 
         img {
@@ -1443,7 +1444,7 @@ export default {
       }
 
       .goldfish {
-        translate: 40vw 3em;
+        translate: 25vw 2em;
         width: 140px;
         cursor: pointer;
 
@@ -1458,7 +1459,7 @@ export default {
       }
 
       .dory {
-        translate: 45vw 17em;
+        translate: 60vw 10em;
         width: 80px;
 
 
@@ -1473,7 +1474,7 @@ export default {
       }
 
       .nimo {
-        translate: 47vw 22em;
+        translate: 45vw 10em;
         width: 100px;
 
         img {
@@ -1486,7 +1487,7 @@ export default {
       }
 
       .angryfish {
-        translate: 45vw 27em;
+        translate: 15vw 15em;
         width: 100px;
 
         img {
@@ -1503,7 +1504,7 @@ export default {
       }
 
       .whale {
-        translate: 10vw 30em;
+        translate: 10vw 20em;
         width: 1200px;
         // margin: -50px 10px 0 auto;
 
@@ -1517,10 +1518,8 @@ export default {
       }
 
       .star {
-        cursor: pointer;
-        translate: 40em 20em;
+        translate: 40vw 20em;
         width: 130px;
-        // margin: 30px 0 0 350px;
 
         img {
           visibility: top;
@@ -1528,12 +1527,11 @@ export default {
         }
 
         h4 {
-          margin-top: -10px;
+          margin-top: 100px;
         }
       }
 
       .leofish {
-        cursor: pointer;
         translate: 20vw 25em;
         width: 150px;
         // margin: 0 530px 0 auto;
@@ -1544,14 +1542,13 @@ export default {
         }
 
         h4 {
-          margin-top: -35px;
-          margin-left: 70px;
+          margin-top: 65px;
+          margin-left: -10px;
         }
       }
 
       .shark {
-        cursor: pointer;
-        translate: 10vw 30em;
+        translate: -30vw 75em;
         width: 450px;
 
         img {
@@ -1560,15 +1557,15 @@ export default {
         }
 
         h4 {
-          margin-top: 10px;
-          margin-left: 60px;
+          margin-top: 0px;
+          margin-left: auto;
         }
       }
 
       .white {
-        cursor: pointer;
         width: 500px;
-        margin-left: auto;
+        translate: 10vw 15em;
+        margin-left: 0;
 
         img {
           visibility: top;
@@ -1581,10 +1578,8 @@ export default {
       }
 
       .jokfish {
-        cursor: pointer;
-        translate: 65vw 3em;
+        translate: 65vw 13em;
         width: 130px;
-        // margin: 0 550px 80px auto;
 
         img {
           visibility: top;
@@ -1598,8 +1593,7 @@ export default {
       }
 
       .manatee {
-        cursor: pointer;
-        translate: 35vw 3em;
+        translate: 35vw 35em;
         width: 450px;
 
         img {
@@ -1608,14 +1602,13 @@ export default {
         }
 
         h4 {
-          margin-top: 150px;
-          margin-left: 30px;
+          margin-top: 320px;
+          margin-left: 80px;
         }
       }
 
       .harinose {
-        cursor: pointer;
-        translate: 27vw -85em;
+        translate: 10vw -90em;
         width: 250px;
 
         img {
@@ -1624,13 +1617,13 @@ export default {
         }
 
         h4 {
+          margin-top: 85px;
           margin-left: 50px;
         }
       }
 
       .nosefish {
-        cursor: pointer;
-        translate: 55vw 0;
+        translate: 55vw 15em;
         width: 350px;
 
         img {
@@ -1649,7 +1642,7 @@ export default {
       .jellyfish {
         cursor: pointer;
         width: 130px;
-        translate: 45vw -20em;
+        translate: 55vw -20em;
         // border: 1px solid red;
 
         img {
@@ -1658,14 +1651,13 @@ export default {
         }
 
         h4 {
-          margin-top: -35px;
-          margin-left: 70px;
+          margin-top: 85px;
+          margin-left: 40px;
         }
       }
 
       .cutefish {
-        cursor: pointer;
-        translate: 10vw -45em;
+        translate: 10vw -30em;
         width: 220px;
 
 
@@ -1675,46 +1667,41 @@ export default {
         }
 
         h4 {
-          margin-top: -35px;
+          margin-top: 130px;
           margin-left: 70px;
         }
       }
 
       .ETfish {
-        cursor: pointer;
-        translate: 75vw -60em;
+        translate: 5vw -10em;
         width: 200px;
 
         img {
-          visibility: top;
           width: 200px;
         }
 
         h4 {
-          margin-top: -35px;
-          margin-left: 70px;
+          margin-top: 100px;
         }
       }
 
       .longnose {
-        cursor: pointer;
-        translate: 55vw -74em;
+        translate: 55vw -40em;
         width: 150px;
 
         img {
-          visibility: top;
           width: 150px;
         }
 
         h4 {
+          margin-top: 100px;
           margin-left: 50px;
-          margin-top: -10px;
         }
       }
 
       .greatwhiteshark {
         cursor: pointer;
-        translate: 65vw -30em;
+        translate: 25vw 35em;
         width: 450px;
 
         img {
@@ -1731,20 +1718,17 @@ export default {
 
 
       .taco {
-        cursor: pointer;
-        translate: 40vw 70em;
+        translate: -90vw 115em;
         width: 750px;
-        // margin: 0 280px 0 auto;
 
         img {
           visibility: visible;
           width: 750px;
-          transform: rotate(90deg);
         }
 
         h4 {
-          margin-top: -35px;
-          margin-left: 70px;
+          margin-top: 80px;
+          margin-left: 600px;
         }
       }
 
@@ -1752,7 +1736,7 @@ export default {
 
       .smile {
         cursor: pointer;
-        translate: 2vw -38em;
+        translate: -40vw -20em;
         width: 500px;
 
         img {
@@ -1761,14 +1745,14 @@ export default {
         }
 
         h4 {
-          margin-left: 150px;
+          margin-left: 200px;
           margin-top: -30px;
         }
       }
 
       .moonfish {
         cursor: pointer;
-        translate: 27vw -25em;
+        translate: 15vw 20em;
         width: 220px;
 
         img {
@@ -1777,14 +1761,13 @@ export default {
         }
 
         h4 {
-          margin-left: 150px;
-          margin-top: -30px;
+          margin-left: 0px;
+          margin-top: 130px;
         }
       }
 
       .spermwhale {
-        cursor: pointer;
-        translate: 50vw -35em;
+        translate: 10vw 50em;
         width: 950px;
 
         img {
@@ -1794,13 +1777,13 @@ export default {
 
         h4 {
           margin-left: 150px;
-          margin-top: 40px;
+          margin-top: 300px;
         }
       }
 
       .stingray {
         cursor: pointer;
-        translate: 5vw -40em;
+        translate: 10vw -20em;
         width: 500px;
 
         img {
@@ -1809,14 +1792,14 @@ export default {
         }
 
         h4 {
-          margin-top: 305px;
+          margin-top: 350px;
           margin-left: 70px;
         }
       }
 
       .sunfish {
         cursor: pointer;
-        translate: 60vw -50em;
+        translate: 60vw 25em;
         width: 200px;
 
         img {
@@ -1832,7 +1815,7 @@ export default {
 
       .toad {
         cursor: pointer;
-        translate: 40vw -35em;
+        translate: 10vw 30em;
         width: 200px;
 
         img {
@@ -1841,14 +1824,14 @@ export default {
         }
 
         h4 {
-          margin-left: -30px;
-          margin-top: -20px;
+          margin-left: 30px;
+          margin-top: 150px;
         }
       }
 
       .monkfish {
         cursor: pointer;
-        translate: 34vw -2em;
+        translate: 10vw 60em;
         width: 200px;
 
         img {
@@ -1857,14 +1840,14 @@ export default {
         }
 
         h4 {
-          // margin-top: 10px;
+          margin-top: 200px;
           margin-left: 20px;
         }
       }
 
       .flyfish {
         cursor: pointer;
-        translate: 20vw -40em;
+        translate: 20vw 25em;
         width: 200px;
 
         img {
@@ -1879,7 +1862,7 @@ export default {
 
       .ohpsfish {
         cursor: pointer;
-        translate: 65vw -40em;
+        translate: 55vw 40em;
         width: 230px;
 
         img {
@@ -1889,15 +1872,15 @@ export default {
 
         h4 {
           margin-top: 95px;
-          margin-left: 70px;
+          margin-left: 10px;
         }
       }
 
       .blueWhale {
         cursor: pointer;
-        margin: 30px auto 60px 0;
+        margin: 0;
         width: 900px;
-        // translate: 10em 10em;
+        translate: -100vw 30em;
 
         img {
           visibility: top;
@@ -1911,7 +1894,7 @@ export default {
       }
 
       .ship {
-        translate: 0% -50%;
+        translate: 0% 270%;
         z-index: -2;
 
         img {
@@ -1920,6 +1903,12 @@ export default {
           z-index: -2;
         }
       }
+    }
+  }
+
+  .card {
+    .card_content {
+      width: 90%;
     }
   }
 
