@@ -1,29 +1,20 @@
 <template>
   <div class="header">
-    <div
-      class="wrap"
-      :style="{
-        'background-color': headerColor,
-        top: 0,
-        left: 0,
-        'z-index': 8,
-        width: '100%',
-      }"
-    >
+    <div class="wrap" :style="{
+      'background-color': headerColor,
+      top: 0,
+      left: 0,
+      'z-index': 8,
+      width: '100%',
+    }">
       <!-- logo -->
 
       <!-- this.checkLogoPic = false; -->
       <div :class="{ logo: !checkLogoPic, logoChange: checkLogoPic }">
-        <router-link to="/" v-if="!checkLogoPic"
-          ><img
-            :src="`${this.$store.state.chooseImgSrc}/all_images/logo_all.svg`"
-            alt=""
-        /></router-link>
-        <router-link to="/" v-if="checkLogoPic"
-          ><img
-            :src="`${this.$store.state.chooseImgSrc}/all_images/logo_half.svg`"
-            alt=""
-        /></router-link>
+        <router-link to="/" v-if="!checkLogoPic"><img :src="`${this.$store.state.chooseImgSrc}/all_images/logo_all.svg`"
+            alt="" /></router-link>
+        <router-link to="/" v-if="checkLogoPic"><img :src="`${this.$store.state.chooseImgSrc}/all_images/logo_half.svg`"
+            alt="" /></router-link>
       </div>
 
       <nav class="main-nav" :style="{ color: markColor }">
@@ -49,11 +40,8 @@
           <router-link to="/explore">{{ $t(menuTitle.animal) }}</router-link>
           <ul class="sub-menu">
             <li v-for="animalSub in animalSub" key="animalSub">
-              <router-link
-                :to="animalSub.link"
-                @click="changePageMove(animalSub.name)"
-                >{{ $t(animalSub.name) }}</router-link
-              >
+              <router-link :to="animalSub.link" @click="changePageMove(animalSub.name)">{{ $t(animalSub.name)
+              }}</router-link>
             </li>
           </ul>
         </div>
@@ -71,21 +59,13 @@
         <!-- 會員登入 -->
         <div class="icons">
           <span>
-            <i
-              @click="this.$store.state.storeShowLogin = true"
-              v-if="!this.$store.state.userName"
-              class="fa-solid fa-user"
-              style="color: #eee"
-            ></i>
-            <div
-              v-if="this.$store.state.userName"
-              @click="this.$router.push('./member')"
-              style="color: #eee"
-              class="name"
-            >
+            <i @click="this.$store.state.storeShowLogin = true" v-if="!this.$store.state.userName"
+              class="fa-solid fa-user" style="color: #eee"></i>
+            <div v-if="this.$store.state.userName" @click="this.$router.push('./member')" style="color: #eee"
+              class="name">
               {{ this.$store.state.userName }}
             </div>
-            <span v-if="this.$store.state.userName" @click="logOutAPI()" class="logOutBtn">{{$t('登出')}}</span>
+            <span v-if="this.$store.state.userName" @click="logOutAPI()" class="logOutBtn">{{ $t('登出') }}</span>
           </span>
 
           <!-- 購物車 -->
@@ -99,43 +79,24 @@
             <option value="en">English</option>
             <!-- 添加其他支持的語言選項 -->
           </select>
-          <span
-            ><i class="fa-solid fa-chevron-down" style="color: #eeeeee"></i
-          ></span>
+          <span><i class="fa-solid fa-chevron-down" style="color: #eeeeee"></i></span>
         </div>
       </nav>
       <!-- 手機menu -->
 
       <div class="rwd_menu">
         <span class="rwd_member">
-          <i
-            @click="this.$store.state.storeShowLogin = true"
-            v-if="!this.$store.state.userName"
-            class="fa-solid fa-user"
-            style="color: #eee"
-          ></i>
-          <div
-            v-if="this.$store.state.userName"
-            @click="this.$router.push('./member')"
-            style="color: #eee"
-            class="name"
-          >
+          <i @click="this.$store.state.storeShowLogin = true" v-if="!this.$store.state.userName" class="fa-solid fa-user"
+            style="color: #eee"></i>
+          <div v-if="this.$store.state.userName" @click="this.$router.push('./member')" style="color: #eee" class="name">
             {{ this.$store.state.userName }}
           </div>
-          <span
-            v-if="this.$store.state.userName"
-            @click="logOutAPI()"
-            class="logOutBtn"
-            >登出</span
-          >
+          <span v-if="this.$store.state.userName" @click="logOutAPI()" class="logOutBtn">登出</span>
         </span>
         <div class="navigation">
           <input type="checkbox" class="navigation__checkbox" id="nav-toggle" />
           <label for="nav-toggle" class="navigation__button">
-            <span
-              class="navigation__icon"
-              aria-label="toggle navigation menu"
-            ></span>
+            <span class="navigation__icon" aria-label="toggle navigation menu"></span>
           </label>
           <div class="navigation__background"></div>
 
@@ -144,12 +105,10 @@
               <div class="btn_wrap">
                 <div class="icons">
                   <!-- 購物車 -->
-                  <router-link to="/shoppingcart" @click="closeMobileMenu"
-                    ><i
-                      class="fa-solid fa-cart-shopping"
-                      style="color: #eee"
-                    ></i
-                  ></router-link>
+                  <router-link class="cart" to="/shoppingcart" @click="closeMobileMenu"><i class="fa-solid fa-cart-shopping"
+                      style="color: #eee"></i><span class="cart-count" v-if="this.$store.state.userName">{{ cartItemCount
+                      }}</span>
+                  </router-link>
                 </div>
                 <div class="select">
                   <select v-model="selectedLanguage" @change="changeLanguage">
@@ -157,12 +116,7 @@
                     <option value="en">English</option>
                     <!-- 添加其他支持的語言選項 -->
                   </select>
-                  <span
-                    ><i
-                      class="fa-solid fa-chevron-down"
-                      style="color: #eeeeee"
-                    ></i
-                  ></span>
+                  <span><i class="fa-solid fa-chevron-down" style="color: #eeeeee"></i></span>
                 </div>
               </div>
               <!-- 關於DIDA -->
@@ -615,6 +569,7 @@ option:checked {
       .icons {
         font-size: map-get($fontSizes, "div");
         width: 20%;
+
         i {
           font-size: 1.4rem;
         }
@@ -655,14 +610,17 @@ option:checked {
         align-items: center;
         margin-right: 1rem;
         cursor: pointer;
+
         .name {
           margin: 0 1rem;
           border-bottom: 1px solid #fff;
         }
+
         .logOutBtn {
           color: #fdfdfd;
           margin-right: 0.5rem;
         }
+
         i {
           width: 100%;
           font-size: 1.3rem;
@@ -753,7 +711,7 @@ option:checked {
           transition: all 0.3s ease-in-out 0s, visibility 0s linear 0.3s;
           z-index: 2;
 
-          > li {
+          >li {
             margin: 1rem 0;
           }
 
@@ -779,12 +737,12 @@ option:checked {
 
       // menu字
 
-      .navigation__checkbox:checked ~ .navigation__background {
+      .navigation__checkbox:checked~.navigation__background {
         transform: scale(80);
         opacity: 1;
       }
 
-      .navigation__checkbox:checked ~ .navigation__nav {
+      .navigation__checkbox:checked~.navigation__nav {
         width: 100%;
         visibility: visible;
         opacity: 1;
@@ -821,21 +779,17 @@ option:checked {
       }
 
       //menu叉叉
-      .navigation__checkbox:checked + .navigation__button .navigation__icon {
+      .navigation__checkbox:checked+.navigation__button .navigation__icon {
         background-color: transparent;
         box-shadow: none;
       }
 
-      .navigation__checkbox:checked
-        + .navigation__button
-        .navigation__icon::before {
+      .navigation__checkbox:checked+.navigation__button .navigation__icon::before {
         top: 0;
         transform: rotate(135deg);
       }
 
-      .navigation__checkbox:checked
-        + .navigation__button
-        .navigation__icon::after {
+      .navigation__checkbox:checked+.navigation__button .navigation__icon::after {
         top: 0;
         transform: rotate(-135deg);
       }
@@ -850,6 +804,13 @@ option:checked {
         width: 60%;
       }
     }
+  }
+}
+
+.cart {
+  .cart-count {
+    top: -15px;
+    right: -15px;
   }
 }
 </style>
