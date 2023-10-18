@@ -1894,7 +1894,7 @@ export default {
       }
 
       .ship {
-        translate: 0% 270%;
+        translate: 0% 290%;
         z-index: -2;
 
         img {
@@ -1909,8 +1909,40 @@ export default {
   .card {
     .card_content {
       width: 90%;
+      margin: auto;
+      background-color: rgba(40, 61, 84, 0.8);
+      backdrop-filter: blur(3px);
+      border-radius: 20px;
+      color: #eee;
+      position: fixed;
+      top: 12%;
+      left: 0;
+      right: 0;
+
+      .ani_img {
+        width: 200px;
+      }
+
+      .ani_name {
+        width: 90%;
+      }
+
+      .ani_info {
+        width: 90%;
+      }
+
+      .ani_features {
+        width: 90%;
+      }
+
+      .close {
+        left: 150px;
+      }
     }
   }
 
+  .navBar {
+    right: 5px;
+  }
 }
 </style>

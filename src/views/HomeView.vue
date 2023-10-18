@@ -46,7 +46,7 @@
             <div class="wave water"></div>
             <div class="wave water"></div>
           </div>
-          <p>{{ visitorCount }}{{$t('人')}}</p>
+          <p>{{ visitorCount }}{{ $t('人') }}</p>
           <div class="deco turtle">
             <img src="../../public/all_images/deco/deco_turtle.png" alt="" />
           </div>

@@ -43,9 +43,7 @@ export default {
 
       .then((myJson) => {
         for (let i = 0; i < myJson.length; i++) {
-          myJson[
-            i
-          ].banner_pic = require(`../../../public/all_images/banner/${myJson[i].banner_pic}`);
+          myJson[i].banner_pic = require(`${this.$store.state.chooseImgSrc}/all_images/banner/${myJson[i].banner_pic}`);
           myJson[i].isDis = true;
         }
         this.bannerAll = myJson;
