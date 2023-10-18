@@ -785,7 +785,7 @@ h3 {
         .about_content {
           padding: 2rem;
           margin: 3rem 0;
-          font-size: 1rem;
+          font-size: 0.7rem;
           width: 100%;
         }
 
