@@ -7,7 +7,7 @@
       </select>
       <div class="prod_order_group" v-for="prod in filteredProdOrder" :key="prod.prod_img">
         <div class="prod_img">
-          <img :src="'../all_images/product/' + prod.prod_img" alt="" />
+          <img :src="`${this.$store.state.chooseImgSrc}/all_images/product/` + prod.prod_img" alt="" />
         </div>
         <div class="prod_info">
           <div class="item_info prod_item">

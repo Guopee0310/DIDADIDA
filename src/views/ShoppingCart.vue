@@ -17,7 +17,7 @@
               <label class="check"
                 ><input type="checkbox" v-model="prod.select"
               /></label>
-              <img :src="'../all_images/product/' + prod.imgURL" alt="" />
+              <img :src="`${this.$store.state.chooseImgSrc}/all_images/product/` + prod.imgURL" alt="" />
 
               <span class="prodname">{{ prod.name }}</span>
             </div>
