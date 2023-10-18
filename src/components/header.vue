@@ -541,9 +541,9 @@ option:checked {
 
   .cart-count {
     position: absolute;
-    top: -5px;
-    right: -3px;
-    background-color: red;
+    top: -8px;
+    right: -8px;
+    background-color: rgb(231, 61, 61);
     color: #fff;
     border-radius: 50%;
     padding: 2px 7px;
@@ -809,8 +809,8 @@ option:checked {
 
 .cart {
   .cart-count {
-    top: -15px;
-    right: -15px;
+    // top: -15px;
+    // right: -15px;
   }
 }
 </style>
