@@ -105,8 +105,9 @@
               <div class="btn_wrap">
                 <div class="icons">
                   <!-- 購物車 -->
-                  <router-link class="cart" to="/shoppingcart" @click="closeMobileMenu"><i class="fa-solid fa-cart-shopping"
-                      style="color: #eee"></i><span class="cart-count" v-if="this.$store.state.userName">{{ cartItemCount
+                  <router-link class="cart" to="/shoppingcart" @click="closeMobileMenu"><i
+                      class="fa-solid fa-cart-shopping" style="color: #eee"></i><span class="cart-count"
+                      v-if="this.$store.state.userName">{{ cartItemCount
                       }}</span>
                   </router-link>
                 </div>
@@ -795,22 +796,22 @@ option:checked {
       }
     }
   }
-
-  @media screen and (max-width: 415px) {
-    .wrap .logo {
-      transition: 1s;
-
-      img {
-        width: 60%;
-      }
-    }
-  }
 }
 
-.cart {
-  .cart-count {
-    // top: -15px;
-    // right: -15px;
+@media screen and (max-width: 415px) {
+  .wrap .logo {
+    transition: 1s;
+
+    img {
+      width: 60%;
+    }
+  }
+
+  .cart {
+    .cart-count {
+      top: -15px;
+      right: -15px;
+    }
   }
 }
 </style>
