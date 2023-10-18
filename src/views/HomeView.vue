@@ -114,7 +114,7 @@
                   alt="" /></router-link>
             </div>
             <div class="content">
-              <div class="nub">{{ index + 1 }}</div>
+              <div class="nub">0{{ index + 1 }}</div>
 
               <router-link to="/product">
                 <h4>{{ i.prod_name }}</h4>
@@ -893,6 +893,8 @@ export default {
 
         .image {
           width: 100%;
+          background-color: #eee;
+          border-radius: 60% 65% 65% 55%;
 
           img {
             width: 100%;
@@ -903,6 +905,10 @@ export default {
           width: 80%;
           margin: 10px auto 35px;
           text-align: center;
+
+          .text {
+            text-align: justify;
+          }
 
           .nub {
             // margin: auto;

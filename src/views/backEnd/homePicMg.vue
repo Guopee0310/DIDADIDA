@@ -36,7 +36,7 @@ export default {
   },
   computed: {},
   mounted() {
-    fetch("http://localhost/dida_project/public/php/homeMgSelect.php")
+    fetch(`${this.$store.state.APIurl}homeMgSelect.php`)
       .then(function (response) {
         return response.json();
       })
