@@ -1,20 +1,20 @@
 <template>
   <div class="tick_order_main">
     <div class="tick_area">
-      <div style="margin: 0 10px 0 auto;">
-        <select v-model="selectOrder" v-if="!dateOrNum">
+      <div style="margin: 0 10px 0 auto;" >
+        <select v-model="selectOrder" v-if="!dateOrNum" class="sbtn">
           <option value="請選擇">請選擇</option>
           <option :value="i.uniqid_num" v-for="(i, index) in ticketOrderSlice" class="orderNumTitle">
             {{ i.tic_date }}
           </option>
         </select>
-        <select v-model="selectOrder" v-if="dateOrNum">
+        <select v-model="selectOrder" v-if="dateOrNum" class="sbtn">
           <option value="請選擇">請選擇</option>
           <option :value="i.uniqid_num" v-for="(i, index) in ticketOrderSlice" class="orderNumTitle">
             {{ i.uniqid_num }}
           </option>
         </select>
-        <button @click="dateOrNum = !dateOrNum">切換</button>
+        <button @click="dateOrNum = !dateOrNum" class="sbtn" >切換</button>
       </div>
 
       <div class="tick_order_group" v-for="(tick, index) in filteredTickOrder" :key="tick.tickImg" :class="{
@@ -46,7 +46,7 @@
           </div>
           <div class="item_info tick_price">
             <p>金額</p>
-            <p>NT {{ tick.tic_pay }}</p>
+            <p>NT$ {{ tick.tic_pay }}</p>
           </div>
           <div>
             <QRCode :tic_state="tick.tic_state" :tic_id="tick.tic_id" :tic_late="tick.tic_late" :checkDate="tick.tic_date"
@@ -344,6 +344,9 @@ export default {
       width: 70%;
       margin-left: 10px;
     }
+  }
+  .sbtn{
+    cursor: pointer;
   }
 }
 

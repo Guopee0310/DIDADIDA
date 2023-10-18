@@ -8,7 +8,131 @@
       id="container"
     >
       <!-- signup固定填單 -->
-      <div class="form-container sign-up-container">
+      <transition name="fade" mode="out-in">
+      <div class="form-container sign-up-container" >
+        <form>
+          <h1>創建帳號</h1>
+          <div class="social-container">
+            <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social"><i class="fa-brands fa-google"></i></a>
+            <a href="#" class="social"
+              ><i class="fa-brands fa-instagram fa-lg"></i
+            ></a>
+          </div>
+          <span>或使用電子郵件登入</span>
+          <input
+            type="text"
+            v-model="name"
+            placeholder="姓名"
+            @input="testNameSignUp"
+            :class="{ checkInput: !isValidName, correctInput: isValidName }"
+          />
+          <span v-if="!isValidName" class="caution">請輸入有效姓名</span>
+
+          <input
+            type="email"
+            v-model="email"
+            placeholder="電子信箱"
+            @input="testMailSignUp"
+            :class="{ checkInput: !isValidEmail, correctInput: isValidEmail }"
+          />
+          <span v-if="!isValidEmail" class="caution">請輸入有效的信箱</span>
+
+          <input
+            type="password"
+            v-model="password"
+            placeholder="密碼"
+            @input="testPassWordSignUp"
+            :class="{
+              checkInput: !isValidPassword,
+              correctInput: isValidPassword,
+            }"
+          />
+          <span v-if="!isValidPassword" class="caution"
+            >密碼長度需在8~12個字之間,至少含一個英文字母(不分大小寫)</span
+          >
+          <button @click.prevent="insertPerson">註冊</button>
+          <div style="color: red" v-if="APIEmailCheck">帳號已重複</div>
+        </form>
+      </div>
+    </transition>
+
+      <!-- signin固定填單 -->
+      <transition name="fade" mode="out-in">
+      <div class="form-container sign-in-container" >
+        <form @submit.prevent="submitSignInForm">
+          <h1>登入</h1>
+          <div class="social-container">
+            <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social"><i class="fa-brands fa-google"></i></a>
+            <a href="#" class="social"
+              ><i class="fa-brands fa-instagram fa-lg"></i
+            ></a>
+          </div>
+          <span>或使用您的帳號</span>
+          <input
+            type="email"
+            v-model="signInEmail"
+            placeholder="電子信箱"
+            :class="{
+              checkInput: !signInNotCorrect,
+              correctInput: signInNotCorrect,
+            }"
+          />
+          <span v-if="!signInNotCorrect" class="caution">信箱或密碼錯誤</span>
+          <input
+            type="password"
+            v-model="signInPassword"
+            placeholder="密碼"
+            :class="{
+              checkInput: !signInNotCorrect,
+              correctInput: signInNotCorrect,
+            }"
+          />
+          <span v-if="!signInNotCorrect" class="caution">信箱或密碼錯誤</span>
+          <a href="#">忘記密碼?</a>
+          <button @click="signInMem">登入</button> 
+        </form>
+      </div>
+    </transition>
+
+
+
+
+
+
+
+
+
+      <!-- 滑蓋區 -->
+      <div class="overlay-container">
+        <div class="overlay">
+          <!-- signin滑蓋 -->
+          <div class="overlay-panel overlay-left">
+            <h1>歡迎回來!</h1>
+            <p>登入與DIDADIDA一起探索海底世界吧!</p>
+            <button class="ghost" @click="toggleSignUp">登入</button>
+          </div>
+          <!-- signup滑蓋 -->
+          <div class="overlay-panel overlay-right">
+            <h1>你好!</h1>
+            <p>創建帳號加入DIDADIDA的海洋探索行列吧!</p>
+            <button class="ghost" @click="toggleSignUp">註冊</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- --------------------------------------------- -->
+  <div v-if="this.$store.state.storeShowLogin" class="rwdpart">
+    <div class="backplate" @click="hideLogin"></div>
+
+    <div
+      class="container"
+      id="container"
+    >
+    <!-- rwd signup填單 -->
+    <div class="form-container rwd-sign-up-container" v-if ="isSign">
         <form>
           <h1>創建帳號</h1>
           <div class="social-container">
@@ -53,11 +177,13 @@
 
           <button @click.prevent="insertPerson">註冊</button>
           <div style="color: red" v-if="APIEmailCheck">帳號已重複</div>
+          <button @click="toggleSwitch" class="rwdbtn" >或登入</button>
         </form>
       </div>
+<!-- ----- -->
 
-      <!-- signin固定填單 -->
-      <div class="form-container sign-in-container">
+<!-- rwd signin填單 -->
+<div class="form-container rwd-sign-in-container" v-if="!isSign">
         <form @submit.prevent="submitSignInForm">
           <h1>登入</h1>
           <div class="social-container">
@@ -89,27 +215,14 @@
           />
           <span v-if="!signInNotCorrect" class="caution">信箱或密碼錯誤</span>
           <a href="#">忘記密碼?</a>
-          <button @click="signInMem">登入</button>
+          <button @click="signInMem">登入</button> 
+          <button @click="toggleSwitch" class="rwdbtn"  >或註冊</button>
+          
+          
         </form>
       </div>
-      <!-- 滑蓋區 -->
-      <div class="overlay-container">
-        <div class="overlay">
-          <!-- signin滑蓋 -->
-          <div class="overlay-panel overlay-left">
-            <h1>歡迎回來!</h1>
-            <p>登入與DIDADIDA一起探索海底世界吧!</p>
-            <button class="ghost" @click="toggleSignUp">登入</button>
-          </div>
-          <!-- signup滑蓋 -->
-          <div class="overlay-panel overlay-right">
-            <h1>你好!</h1>
-            <p>創建帳號加入DIDADIDA的海洋探索行列吧!</p>
-            <button class="ghost" @click="toggleSignUp">註冊</button>
-          </div>
-        </div>
-      </div>
-    </div>
+<!-- ----------->
+   </div>
   </div>
 </template>
 
@@ -118,6 +231,7 @@ export default {
   data() {
     return {
       isSignUp: false,
+      isSign:false,
       memArr: [],
       name: "",
       email: "",
@@ -294,6 +408,21 @@ export default {
     },
     toggleSignUp() {
       this.isSignUp = !this.isSignUp;
+      if (!this.isSignUp) {
+        this.name = "";
+        this.email = "";
+        this.password = "";
+        this.isValidName = true;
+        this.isValidEmail = true;
+        this.isValidPassword = true;
+      } else {
+        this.signInEmail = "";
+        this.signInPassword = "";
+        this.signInNotCorrect = true;
+      }
+    },
+    toggleSwitch() {
+      this.isSign = !this.isSign; // Toggle the value of isSign
       if (!this.isSignUp) {
         this.name = "";
         this.email = "";
@@ -609,11 +738,77 @@ input:focus {
   height: 40px;
   width: 40px;
 }
+.rwd-sign-in-container {
+ display: none;
+}
+.rwd-sign-up-container {
+  display: none;
+}
+.rwdpart{
+  display: none;
+}
 
 @media screen and (max-width: 414px){
 
   .container{
-    width: 90%;
+    width: 80%;
+    transform: translateX(30%,-50%);
   }
+  .backplate {
+  width: 100%;
+  height: 150vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  z-index: 9;
+  top: 0;
+  left: 0;
 }
+.sign-in-container {
+  display: none;
+}
+.sign-up-container {
+  display: none;
+}
+
+.rwdpart{
+  display: block;
+}
+.rwd-sign-in-container {
+  display: block;
+  left: 0;
+  width: 100%;
+  z-index: 2;
+}
+.rwd-sign-up-container {
+  display: block;
+  left: 0;
+  width: 100%;
+  z-index: 2;
+}
+.overlay {
+  display:none;
+}
+.rwdbtn{
+  color: rgb(153, 178, 186);
+  background-color: transparent;
+  font-size: 12px;
+  width:fit-content;
+  display: block;
+  position: relative;
+  left: 100px;
+  bottom: -35px;
+  text-decoration: underline;
+}
+.fade-enter-active, .fade-leave-active {
+  transition: opacity 0.5s;
+}
+.fade-enter, .fade-leave-to {
+  opacity: 0;
+}
+
+.rwd-sign-up-container, .rwd-sign-in-container {
+  opacity: 1;
+}
+}
+
 </style>

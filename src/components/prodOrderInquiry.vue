@@ -1,7 +1,7 @@
 <template>
   <div class="prod_order_main">
     <div class="order_area">
-      <select v-model="selectOrder">
+      <select v-model="selectOrder" class="sbtn">
         <option value="請選擇">請選擇</option>
         <option :value="i" v-for="i in orderNumAll">訂單編號{{ i }}</option>
       </select>
@@ -30,9 +30,9 @@
       </div>
       <div v-if="selectOrder !== '請選擇'" class="ord_info">
         <p>收件人:{{ filteredProdOrder[0].ord_person }}</p>
-        <p>下單金額 :{{ filteredProdOrder[0].ord_sum }}</p>
+        <p>下單金額 :NT {{ filteredProdOrder[0].ord_sum }}元</p>
         <p>運費 : NT {{ filteredProdOrder[0].ord_ship }}</p>
-        <p>總金額 : NT {{ filteredProdOrder[0].ord_pay }}</p>
+        <p>總金額 : NT {{ filteredProdOrder[0].ord_pay }}元</p>
       </div>
     </div>
   </div>
@@ -199,7 +199,7 @@ export default {
     .ord_info {
       width: 460px;
       margin-top: 20px;
-      text-align: end;
+      text-align: start;
     }
 
     .close_btn {
@@ -214,6 +214,9 @@ export default {
         border-radius: 5px;
         background-color: #73a8d7;
       }
+    }
+    .sbtn{
+      cursor: pointer;
     }
   }
 }
