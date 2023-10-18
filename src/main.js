@@ -201,7 +201,7 @@ const i18n = createI18n({
       "尚有紅利點數 :":"Reward Bonus :",
       點:'points',
       已驗證:'verified',
-      會員帳號設定:'Member Account Settings',
+      會員帳號設定:'Account Settings',
 
     },
   },
