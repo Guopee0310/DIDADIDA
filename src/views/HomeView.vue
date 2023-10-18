@@ -138,32 +138,6 @@
         </div>
         <router-link to="/product"><button>{{ $t("更多商品") }}</button></router-link>
 
-
-
-        <!-- <h3Title>
-          <template v-slot:h3>
-            <h3>熱賣商品</h3>
-          </template>
-        </h3Title>
-        <div class="product">
-            <div class="item" v-for="(i, index) in prodHomeSlice" :key="index">
-            <div class="image">
-              <router-link to="/product"> <img :src="`${this.$store.state.chooseImgSrc}/all_images/product/${i.prod_img}`" alt="" /></router-link>
-            </div>
-            <div class="content">
-              <div class="nub">{{ index + 1 }}</div>
-           
-              <router-link to="/product">
-                <h4>{{ i.prod_name}}</h4>
-                <div class="text">{{ i.prod_info }}</div>
-              </router-link>
-              <span>NT {{ i.prod_price }}</span>
-            </div>
-          </div>
-        </div> -->
-
-
-
         <!-- 活動倒數 ------------------------------------------ -->
         <h3Title>
           <template v-slot:h3>
