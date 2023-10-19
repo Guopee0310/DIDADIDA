@@ -107,6 +107,7 @@ export default {
   border-bottom: 1px black solid;
   padding-bottom: 15px;
 
+
   :first-child {
     width: 5%;
     text-align: center;
@@ -126,6 +127,7 @@ export default {
     width: 10%;
     text-align: center;
   }
+
 }
 
 .singleRow {

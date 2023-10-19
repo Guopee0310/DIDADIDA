@@ -171,8 +171,10 @@
         </div>
 
         <div class="gameBar">
-          <input type="range" v-model="lightChang" min="0" max="100" class="slider">
-          <label for="range" id="display">\ 亮度調整{{ lightChang }}% /</label>
+          <div class="rangeCover">
+            <input type="range" v-model="lightChang" min="0" max="100" class="slider">
+            <label for="range" id="display">\ 亮度調整{{ lightChang }}% /</label>
+          </div>
         </div>
         <div class="gamePhone">
           <div class="square" :style="{ 'opacity': `${lightChang}%` }"></div>
@@ -983,8 +985,13 @@ export default {
 
     .gameBar {
       display: flex;
+      justify-content: center;
       margin: auto;
-      position: relative;
+      // position: relative;
+
+      .rangeCover {
+        position: relative;
+      }
 
       input {
         position: relative;
@@ -995,16 +1002,16 @@ export default {
         &::before {
           position: absolute;
           content: 'Light';
-          font-size: 5px;
-          top: -8px;
+          font-size: 10px;
+          top: -5px;
           left: -40px;
         }
 
         &::after {
           position: absolute;
           content: 'Dark';
-          font-size: 5px;
-          top: -8px;
+          font-size: 10px;
+          top: -5px;
           right: -40px;
         }
 
@@ -1034,6 +1041,9 @@ export default {
         border-radius: 5px;
         color: #68769a;
         background-color: map-get($colors , 'light');
+        width: max-content;
+        transform: translateX(-45%);
+        // white-space: nowrap;
 
         &::after {
           position: absolute;

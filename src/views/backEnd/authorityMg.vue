@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
   <div class="titleAll">
     <div v-for="i in titleAll">{{ i }}</div>
   </div>
@@ -12,25 +12,28 @@
       </switchBtn>
     </div>
   </div>
-</template>
+</template> -->
 
-<!-- <template>
+<template>
   <table>
     <tr>
       <th>編號</th>
       <th>帳號</th>
       <th>密碼</th>
+      <th>狀態</th>
     </tr>
     <tr v-for="(i, index) in allMgr" :key="index" class="singleMgr">
       <td>{{ i.emp_id }}</td>
       <td>{{ i.emp_account }}</td>
       <td>{{ i.emp_psw }}</td>
-      <switchBtn :onText="'正常'" :off-text="'停用'" :disabled="false"
-        :item="i.emp_state == '1' ? '1' : i.emp_state == '2' ? '0' : ''" class="switchBtn" @toggle="updateMgrState(i)">
-      </switchBtn>
+      <td>
+        <switchBtn :onText="'正常'" :off-text="'停用'" :disabled="false"
+          :item="i.emp_state == '1' ? '1' : i.emp_state == '2' ? '0' : ''" class="switchBtn" @toggle="updateMgrState(i)">
+        </switchBtn>
+      </td>
     </tr>
   </table>
-</template> -->
+</template>
 
 <script>
 import switchBtn from "../../components/backComponents/toggleBtn.vue";
@@ -85,6 +88,20 @@ export default {
 };
 </script>
 <style scoped lang="scss">
+table {
+  width: 100%;
+
+  th {
+    border-bottom: 1px solid #333;
+    padding: 10px;
+  }
+
+  td {
+    vertical-align: middle;
+    padding: 10px;
+  }
+}
+
 .titleAll {
   display: flex;
   padding-bottom: 10px;
@@ -93,11 +110,10 @@ export default {
 }
 
 .singleMgr {
-  display: flex;
-  justify-content: space-around;
+  text-align: center;
 
   .switchBtn {
-    margin: 0;
+    margin: auto;
   }
 }
 </style>

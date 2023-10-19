@@ -21,7 +21,7 @@
                             <div class="file_btn">
                                 <input type="file" @change="fileChange($event, item, index)" :ref="'fileInput' + index"
                                     :disabled="item.disabled" name="image" :title="item.prod_img">
-                                    <i class="fa-regular fa-trash-can" style="color: #ffffff;" @click="deleteImage(index)"
+                                <i class="fa-regular fa-trash-can" style="color: #ffffff;" @click="deleteImage(index)"
                                     v-if="!item.disabled && item.prod_img"></i>
 
                             </div>
@@ -461,12 +461,13 @@ export default {
 }
 </script>
 <style scoped lang="scss">
-.no_data{
+.no_data {
     display: flex;
     justify-content: center;
     padding: 2rem 0;
-    
+
 }
+
 .prod_all {
 
     .add {
