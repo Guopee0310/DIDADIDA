@@ -5,7 +5,7 @@
     ////////
 	$dbname = "dida";
 	$user = "root";
-	$password = "root";
+	$password = "";
 
 	$dsn = "mysql:host=localhost;port=3306;dbname=$dbname;charset=utf8";
 

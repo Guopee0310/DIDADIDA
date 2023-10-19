@@ -1,4 +1,4 @@
-<!-- <template>
+<template>
   <div class="titleAll">
     <div v-for="i in titleAll">{{ i }}</div>
   </div>
@@ -7,19 +7,14 @@
       <div>{{ i.emp_id }}</div>
       <div>{{ i.emp_account }}</div>
       <div>{{ i.emp_psw }}</div>
-      <switchBtn
-        :onText="'正常'"
-        :off-text="'停用'"
-        :disabled="false"
-        :item="i.emp_state == '1' ? '1' : i.emp_state == '2' ? '0' : ''"
-        class="switchBtn"
-        @toggle="updateMgrState(i)"
-      ></switchBtn>
+      <switchBtn :onText="'正常'" :off-text="'停用'" :disabled="false"
+        :item="i.emp_state == '1' ? '1' : i.emp_state == '2' ? '0' : ''" class="switchBtn" @toggle="updateMgrState(i)">
+      </switchBtn>
     </div>
   </div>
-</template> -->
+</template>
 
-<template>
+<!-- <template>
   <table>
     <tr>
       <th>編號</th>
@@ -27,10 +22,15 @@
       <th>密碼</th>
     </tr>
     <tr v-for="(i, index) in allMgr" :key="index" class="singleMgr">
-      <td></td>
+      <td>{{ i.emp_id }}</td>
+      <td>{{ i.emp_account }}</td>
+      <td>{{ i.emp_psw }}</td>
+      <switchBtn :onText="'正常'" :off-text="'停用'" :disabled="false"
+        :item="i.emp_state == '1' ? '1' : i.emp_state == '2' ? '0' : ''" class="switchBtn" @toggle="updateMgrState(i)">
+      </switchBtn>
     </tr>
   </table>
-</template>
+</template> -->
 
 <script>
 import switchBtn from "../../components/backComponents/toggleBtn.vue";
