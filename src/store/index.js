@@ -12,7 +12,7 @@ const publicURL =
 
 const publicpath =
   process.env.NODE_ENV === "development"
-    ? "http://localhost:8080/dida_project/public/php/"
+    ? "http://localhost/dida_project/public/php/"
     : "https://tibamef2e.com/chd103/g4/php/";
 
 // const imgpublicpath =
