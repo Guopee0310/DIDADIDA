@@ -898,8 +898,6 @@ export default {
 
         .image {
           width: 100%;
-          background-color: #eee;
-          border-radius: 60% 65% 65% 55%;
 
           img {
             width: 100%;
