@@ -21,23 +21,24 @@
       <div class="orderTableAll">
         <div class="tableTitleAll">
           <div>訂單編號</div>
-          <div>會員帳號</div>
-          <div>商品名稱</div>
-          <div>數量</div>
-          <div>時間</div>
+          <div >會員帳號</div>
+          <div class="to3">商品名稱</div>
+          <div class="to4">數量</div>
+          <div class="to5">時間</div>
 
-          <div>狀態</div>
+          <div class="to6">狀態</div>
         </div>
         <div v-for="(i, index) in prodOrderSlice" class="singleOrderTable">
-          <div>{{ i.ord_id }}</div>
-          <div>{{ i.mem_email }}</div>
-          <div>{{ i.prod_name }}</div>
-          <div>{{ i.ord_qty }}</div>
+          <div class="o1">{{ i.ord_id }}</div>
+          <div class="o2">{{ i.mem_email }}</div>
+          <div class="o3">{{ i.prod_name }}</div>
+          <div class="o4">{{ i.ord_qty }}</div>
 
-          <div>{{ i.prodCount }}</div>
-          <div>{{ i.ord_date }}</div>
+          <div class="o5">{{ i.prodCount }}</div>
+          <div class="o6">{{ i.ord_date }}</div>
           <!-- <div>{{ i.ord_state }}</div> -->
           <switchBtn
+          class="o7"
             :onText="'已出貨'"
             :off-text="'待出貨'"
             :disabled="false"
@@ -86,18 +87,18 @@
           class="singleTicketBar"
           :key="index"
         >
-          <div>{{ i.tic_id }}</div>
-          <div>{{ i.mem_email }}</div>
-          <div>
+          <div class="t1">{{ i.tic_id }}</div>
+          <div class="t2">{{ i.mem_email }}</div>
+          <div class="t3"> 
             <!-- <div v-for="j in i.ticketType">{{ j }}</div> -->
             {{ i.tic_name }}
           </div>
-          <div>
+          <div class="t4">
             <!-- <div v-for="j in i.ticketCount">{{ j }}</div> -->
             {{ i.tic_pay }}
           </div>
-          <div>{{ i.tic_date }}</div>
-          <div>{{ i.tic_state }}</div>
+          <div class="t5">{{ i.tic_date }}</div>
+          <div class="t6">{{ i.tic_state }}</div>
           <!-- <button>詳細資料</button> -->
           <!-- <button @click="toggleDetails(index, 'ticketOrder')">票券狀態</button>
          <div v-if="i.showDetails" class="details"> -->
@@ -387,10 +388,43 @@ export default {
       }
     }
   }
+  .ticketTableTitleAll >div {
+    &:nth-of-type(1) {
+            margin-left: 25px;
+            width: 16%;
+          }
+
+          &:nth-of-type(2) {
+            margin-left: 30px;
+            width: 25%;
+          }
+
+          &:nth-of-type(3) {
+            margin-left: 50px;
+            width: 16%;
+          }
+
+          &:nth-of-type(4) {
+            margin-left: 40px;
+            width: 16%;
+          }
+
+          &:nth-of-type(5) {
+            margin-left: 40px;
+            width: 16%;
+          }
+          &:nth-of-type(6) {
+            margin-left: 40px;
+            width: 16%;
+          }
+      
+
+  }
   .singleTicketBar {
     display: flex;
     border-bottom: 1px black solid;
-    padding-bottom: 10px;
+    padding-bottom: 5px;
+    padding-top: 5px;
     align-items: center;
     justify-content: space-around;
   }
@@ -400,7 +434,7 @@ export default {
     display: flex;
     justify-content: space-around;
     padding-bottom: 10px;
-    border-bottom: 1px black solid;
+    border-bottom: 1px rgb(97, 18, 18) solid;
     padding-top: 10px;
     div {
       flex-grow: 1;
@@ -411,10 +445,69 @@ export default {
   }
   .singleOrderTable {
     display: flex;
-    justify-content: space-around;
-    align-items: center;
-    padding: 10px 10px 10px 0px;
     border-bottom: 1px black solid;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    align-items: center;
+    justify-content: space-between;
   }
+//  .o1{
+//   margin-right: 10px;
+//   margin-left: 20px;
+//  }
+//  .accounttitle{
+//   margin-right: 150px;
+//  }
+//  .o2{
+//   margin-left: 50px;
+//  }
+//  .o3{
+//   margin-left: 70px;
+//   margin-right: 20px;
+//  }
+.to3{
+  margin-left: 70px;
+}
+.to4{
+  margin-left: 30px;
+}
+.to5{
+  margin-right: 40px;
+}
+.to5{
+  margin-left: 45px;
+}
+ .singleOrderTable >div {
+
+          &:nth-of-type(1) {
+            margin-left: 10px;
+            width: 10%;
+          }
+
+          &:nth-of-type(2) {
+            width: 25%;
+          }
+
+          &:nth-of-type(3) {
+            width: 15%;
+          }
+
+          &:nth-of-type(4) {
+            margin-left: 40px;
+            width: 1%;
+          }
+
+          &:nth-of-type(5) {
+            width: 10%;
+          }
+          &:nth-of-type(6) {
+            width: 10%;
+          }
+          &:nth-of-type(7) {
+            margin-top: 2px;
+            width: 10%;
+          }
+
+}
 }
 </style>
