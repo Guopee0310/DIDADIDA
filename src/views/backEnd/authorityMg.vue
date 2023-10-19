@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
   <div class="titleAll">
     <div v-for="i in titleAll">{{ i }}</div>
   </div>
@@ -17,6 +17,19 @@
       ></switchBtn>
     </div>
   </div>
+</template> -->
+
+<template>
+  <table>
+    <tr>
+      <th>編號</th>
+      <th>帳號</th>
+      <th>密碼</th>
+    </tr>
+    <tr v-for="(i, index) in allMgr" :key="index" class="singleMgr">
+      <td></td>
+    </tr>
+  </table>
 </template>
 
 <script>
@@ -78,9 +91,11 @@ export default {
   justify-content: space-around;
   border-bottom: 1px black solid;
 }
+
 .singleMgr {
   display: flex;
   justify-content: space-around;
+
   .switchBtn {
     margin: 0;
   }
