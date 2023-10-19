@@ -3,27 +3,23 @@
     <!-- <div @click="createNewOne">新增</div> -->
   </div>
   <div class="titleAll">
+    <div></div>
     <div>問題關鍵字</div>
     <div>回答內容</div>
+    <div></div>
   </div>
   <div class="singleRow" v-for="(i, index) in helperAll2" :key="index">
-    <div>
+    <div style="width: 5%; text-align: center;">
       <span>{{ i.smart_id }}</span>
+    </div>
+    <div style="width: 40%; text-align: center;">
       <input type="text" v-model="i.smart_que" :disabled="i.dis" />
     </div>
-
-    <div>
-      <textarea
-        name=""
-        id=""
-        cols="30"
-        rows="3"
-        v-model="i.smart_ans"
-        :disabled="i.dis"
-      ></textarea>
+    <div style="width: 40%; text-align: center;">
+      <textarea name="" id="" cols="30" rows="3" v-model="i.smart_ans" :disabled="i.dis"></textarea>
     </div>
-    <div class="updateBtnAll">
-      <div class="update" @click="updateQuestion(index, $event, i)">修改</div>
+    <div class="updateBtnAll" style="width: 10%; text-align: center;">
+      <div class="update" @click="updateQuestion(index, $event, i)" style="text-align: center;">修改</div>
       <!-- <div @click="delThisQuestion(index)">刪除</div> -->
     </div>
   </div>
@@ -98,24 +94,50 @@ export default {
 <style scoped lang="scss">
 .creatAndDel {
   display: flex;
+
   div {
     border: 1px black solid;
     cursor: pointer;
   }
 }
+
 .titleAll {
   display: flex;
   justify-content: space-around;
   border-bottom: 1px black solid;
   padding-bottom: 15px;
+
+  :first-child {
+    width: 5%;
+    text-align: center;
+  }
+
+  :nth-child(2) {
+    width: 40%;
+    text-align: center;
+  }
+
+  :nth-child(3) {
+    width: 40%;
+    text-align: center;
+  }
+
+  :last-child {
+    width: 10%;
+    text-align: center;
+  }
+
 }
+
 .singleRow {
   display: flex;
   justify-content: space-around;
   align-items: center;
+
   .updateBtnAll {
     display: flex;
     align-items: center;
+
     div {
       margin: 0 3px;
       border: 1px black solid;

@@ -7,21 +7,16 @@
           <option value="訂單編號">訂單編號</option>
           <option value="會員信箱">會員信箱</option>
         </select>
-        <input
-          type="text"
-          :placeholder="
-            chooseProductOption == '訂單編號'
-              ? '請輸入訂單編號'
-              : '請輸入會員信箱'
-          "
-          v-model="prodChooseOrder"
-        />
+        <input type="text" :placeholder="chooseProductOption == '訂單編號'
+          ? '請輸入訂單編號'
+          : '請輸入會員信箱'
+          " v-model="prodChooseOrder" />
         <div @click="prodChooseNameOrOrder">搜尋</div>
       </div>
       <div class="orderTableAll">
         <div class="tableTitleAll">
           <div>訂單編號</div>
-          <div >會員帳號</div>
+          <div>會員帳號</div>
           <div class="to3">商品名稱</div>
           <div class="to4">數量</div>
           <div class="to5">時間</div>
@@ -37,14 +32,8 @@
           <div class="o5">{{ i.prodCount }}</div>
           <div class="o6">{{ i.ord_date }}</div>
           <!-- <div>{{ i.ord_state }}</div> -->
-          <switchBtn
-          class="o7"
-            :onText="'已出貨'"
-            :off-text="'待出貨'"
-            :disabled="false"
-            :item="i.state"
-            @toggle="updateMemberState(i)"
-          ></switchBtn>
+          <switchBtn class="o7" :onText="'已出貨'" :off-text="'待出貨'" :disabled="false" :item="i.state"
+            @toggle="updateMemberState(i)"></switchBtn>
           <!-- <select>
             <option :value="i.ord_state">{{ i.ord_state }}</option>
           </select> -->
@@ -64,13 +53,8 @@
           <option value="訂單編號">訂單編號</option>
           <option value="會員信箱">會員信箱</option>
         </select>
-        <input
-          type="text"
-          :placeholder="
-            chooseName == '訂單編號' ? '請輸入訂單編號' : '請輸入會員信箱'
-          "
-          v-model="chooseOrder"
-        />
+        <input type="text" :placeholder="chooseName == '訂單編號' ? '請輸入訂單編號' : '請輸入會員信箱'
+          " v-model="chooseOrder" />
         <div @click="chooseNameOrOrder">搜尋</div>
       </div>
       <div class="ticketTableAll">
@@ -82,14 +66,10 @@
           <div>票卷日期</div>
           <div>票卷狀態</div>
         </div>
-        <div
-          v-for="(i, index) in ticketOrderSlice"
-          class="singleTicketBar"
-          :key="index"
-        >
+        <div v-for="(i, index) in ticketOrderSlice" class="singleTicketBar" :key="index">
           <div class="t1">{{ i.tic_id }}</div>
           <div class="t2">{{ i.mem_email }}</div>
-          <div class="t3"> 
+          <div class="t3">
             <!-- <div v-for="j in i.ticketType">{{ j }}</div> -->
             {{ i.tic_name }}
           </div>
@@ -362,12 +342,15 @@ export default {
 <style lang="scss" scoped>
 .titleAll {
   display: flex;
+
   select {
     margin-right: 15px;
   }
+
   input {
     margin-right: 15px;
   }
+
   div {
     border: 1px black solid;
     padding: 3px 10px;
@@ -375,51 +358,57 @@ export default {
     cursor: pointer;
   }
 }
+
 .ticketTableAll {
   .ticketTableTitleAll {
     padding: 10px 0px;
     border-bottom: 1px black solid;
     display: flex;
     justify-content: space-around;
+
     div {
       flex-grow: 1;
+
       &:last-child {
         flex-grow: 2;
       }
     }
   }
-  .ticketTableTitleAll >div {
+
+  .ticketTableTitleAll>div {
     &:nth-of-type(1) {
-            margin-left: 25px;
-            width: 16%;
-          }
+      margin-left: 25px;
+      width: 16%;
+    }
 
-          &:nth-of-type(2) {
-            margin-left: 30px;
-            width: 25%;
-          }
+    &:nth-of-type(2) {
+      margin-left: 30px;
+      width: 25%;
+    }
 
-          &:nth-of-type(3) {
-            margin-left: 50px;
-            width: 16%;
-          }
+    &:nth-of-type(3) {
+      margin-left: 50px;
+      width: 16%;
+    }
 
-          &:nth-of-type(4) {
-            margin-left: 40px;
-            width: 16%;
-          }
+    &:nth-of-type(4) {
+      margin-left: 40px;
+      width: 16%;
+    }
 
-          &:nth-of-type(5) {
-            margin-left: 40px;
-            width: 16%;
-          }
-          &:nth-of-type(6) {
-            margin-left: 40px;
-            width: 16%;
-          }
-      
+    &:nth-of-type(5) {
+      margin-left: 40px;
+      width: 16%;
+    }
+
+    &:nth-of-type(6) {
+      margin-left: 40px;
+      width: 16%;
+    }
+
 
   }
+
   .singleTicketBar {
     display: flex;
     border-bottom: 1px black solid;
@@ -429,6 +418,7 @@ export default {
     justify-content: space-around;
   }
 }
+
 .orderTableAll {
   .tableTitleAll {
     display: flex;
@@ -436,13 +426,17 @@ export default {
     padding-bottom: 10px;
     border-bottom: 1px rgb(97, 18, 18) solid;
     padding-top: 10px;
+    font-weight: 800;
+
     div {
       flex-grow: 1;
+
       &:last-child {
         flex-grow: 1.5;
       }
     }
   }
+
   .singleOrderTable {
     display: flex;
     border-bottom: 1px black solid;
@@ -451,63 +445,70 @@ export default {
     align-items: center;
     justify-content: space-between;
   }
-//  .o1{
-//   margin-right: 10px;
-//   margin-left: 20px;
-//  }
-//  .accounttitle{
-//   margin-right: 150px;
-//  }
-//  .o2{
-//   margin-left: 50px;
-//  }
-//  .o3{
-//   margin-left: 70px;
-//   margin-right: 20px;
-//  }
-.to3{
-  margin-left: 70px;
-}
-.to4{
-  margin-left: 30px;
-}
-.to5{
-  margin-right: 40px;
-}
-.to5{
-  margin-left: 45px;
-}
- .singleOrderTable >div {
 
-          &:nth-of-type(1) {
-            margin-left: 10px;
-            width: 10%;
-          }
+  //  .o1{
+  //   margin-right: 10px;
+  //   margin-left: 20px;
+  //  }
+  //  .accounttitle{
+  //   margin-right: 150px;
+  //  }
+  //  .o2{
+  //   margin-left: 50px;
+  //  }
+  //  .o3{
+  //   margin-left: 70px;
+  //   margin-right: 20px;
+  //  }
+  .to3 {
+    margin-left: 70px;
+  }
 
-          &:nth-of-type(2) {
-            width: 25%;
-          }
+  .to4 {
+    margin-left: 30px;
+  }
 
-          &:nth-of-type(3) {
-            width: 15%;
-          }
+  .to5 {
+    margin-right: 40px;
+  }
 
-          &:nth-of-type(4) {
-            margin-left: 40px;
-            width: 1%;
-          }
+  .to5 {
+    margin-left: 45px;
+  }
 
-          &:nth-of-type(5) {
-            width: 10%;
-          }
-          &:nth-of-type(6) {
-            width: 10%;
-          }
-          &:nth-of-type(7) {
-            margin-top: 2px;
-            width: 10%;
-          }
+  .singleOrderTable>div {
 
-}
+    &:nth-of-type(1) {
+      margin-left: 10px;
+      width: 10%;
+    }
+
+    &:nth-of-type(2) {
+      width: 25%;
+    }
+
+    &:nth-of-type(3) {
+      width: 15%;
+    }
+
+    &:nth-of-type(4) {
+      margin-left: 40px;
+      width: 1%;
+    }
+
+    &:nth-of-type(5) {
+      width: 10%;
+    }
+
+    &:nth-of-type(6) {
+      width: 10%;
+    }
+
+    &:nth-of-type(7) {
+      margin-top: 2px;
+      width: 10%;
+    }
+
+  }
 }
 </style>

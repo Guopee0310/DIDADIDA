@@ -2,7 +2,7 @@
   <div class="cart-popup" v-if="showCartPopup">
     <div class="cart-content">
       <p>{{$t('已加入購物車')}}</p>
-      <img src="\all_images\doctor dida.png" alt="">
+      <img :src= "`${this.$store.state.chooseImgSrc}/all_images/doctor dida.png`" alt="">
     </div>
   </div>
 </template>
