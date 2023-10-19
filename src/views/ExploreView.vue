@@ -437,7 +437,7 @@ export default {
           image: require("../../public/all_images/animal/moonfish.png"),
           depth: "0.1",
           category: "moonfish",
-          enName: "Sunfish",
+          enName: "Moonfish",
           p: "一種具有奇特生存策略的海洋魚類，以其能夠翻滾在海底行走的方式而著名。",
           features: [
             "— 外觀特徵 —",
