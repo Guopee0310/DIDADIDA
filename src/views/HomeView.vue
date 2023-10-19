@@ -114,7 +114,7 @@
                   alt="" /></router-link>
             </div>
             <div class="content">
-              <div class="nub">{{ index + 1 }}</div>
+              <div class="nub">0{{ index + 1 }}</div>
 
               <router-link to="/product">
                 <h4>{{ i.prod_name }}</h4>
@@ -229,7 +229,7 @@ export default {
       loading: true,
       animationDuration: 4200,
       value: 0,
-      lightChang: 80,
+      lightChang: 0,
       products: [
         // {
         //   src: require("../assets/images/index_p1.png"),
@@ -381,8 +381,10 @@ export default {
     lightChang(newlightChang) {
       let range = document.querySelector('input[type="range"]');
       let display = document.getElementById('display');
-      let rangeWidth = range.clientWidth;
-      let rangeValue = (newlightChang / 100) * rangeWidth;
+      let rangeWidth = range.offsetWidth; // 使用 offsetWidth 获取 input[type="range"] 元素的宽度
+      let min = parseInt(range.min);
+      let max = parseInt(range.max);
+      let rangeValue = (newlightChang - min) / (max - min) * rangeWidth; // 计算滑块的位置
       display.style.left = `${rangeValue}px`;
     }
   }
@@ -667,6 +669,9 @@ export default {
 
       .image {
         margin: 0 50px;
+        width: 100%;
+        background-color: #eee;
+        border-radius: 60% 65% 65% 55%;
       }
 
       .image img {
@@ -1047,7 +1052,6 @@ export default {
       label {
         position: absolute;
         top: -30px;
-        left: 193px;
         padding: 5px;
         border-radius: 5px;
         color: #68769a;
