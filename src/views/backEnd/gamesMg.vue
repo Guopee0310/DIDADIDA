@@ -185,7 +185,7 @@ export default {
       .then((myJson) => {
         // 修改API數據中的圖像路徑
         for (let i = 0; i < myJson.length; i++) {
-          myJson[i].game_img = `/all_images/laba/${myJson[i].game_img}`;
+          myJson[i].game_img = `${this.$store.state.chooseImgSrc}/all_images/laba/${myJson[i].game_img}`;
           myJson[i].isDis = true;
         }
         // 將修改後的數據賦值給Vue組件中的數據
@@ -196,7 +196,7 @@ export default {
   methods: {
     createLaba() {
       this.labaAPI.push({
-        game_img: "/all_images/laba/question_mark.jpg",
+        game_img: `${this.$store.state.chooseImgSrc}/all_images/all_images/laba/question_mark.jpg`,
         isDis: true,
         game_title: "預設標題",
         gmae_text: "預設內容",
