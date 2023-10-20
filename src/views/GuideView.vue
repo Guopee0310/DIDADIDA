@@ -55,7 +55,7 @@
 
         </div>
         <div id="back">
-          <img src="https://i.imgur.com/R7DBOwP.jpg" alt="" />
+          <img :src="`${this.$store.state.chooseImgSrc}/all_images/guide/left.jpg`" alt="">
           <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 100 100">
             <!-- 線性漸層 -->
             <defs>
@@ -732,7 +732,7 @@ h3 {
   .guide_map {
     .flip-btn {
       font-size: 0.7rem;
-      top: -33px;
+      top: -32px;
       padding: 0.7em 1em;
     }
   }
