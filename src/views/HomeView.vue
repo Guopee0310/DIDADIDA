@@ -886,6 +886,12 @@ export default {
       margin: 0px auto;
     }
 
+    .map {
+      .paopao {
+        display: none;
+      }
+    }
+
     .product {
       padding: 1px;
       margin: 0 auto;
