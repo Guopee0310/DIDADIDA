@@ -106,27 +106,6 @@ export default {
   justify-content: space-around;
   border-bottom: 1px black solid;
   padding-bottom: 15px;
-
-  :first-child {
-    width: 5%;
-    text-align: center;
-  }
-
-  :nth-child(2) {
-    width: 40%;
-    text-align: center;
-  }
-
-  :nth-child(3) {
-    width: 40%;
-    text-align: center;
-  }
-
-  :last-child {
-    width: 10%;
-    text-align: center;
-  }
-
 }
 
 .singleRow {
@@ -147,3 +126,4 @@ export default {
   }
 }
 </style>
+
