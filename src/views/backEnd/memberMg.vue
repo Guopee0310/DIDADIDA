@@ -6,11 +6,7 @@
           <option value="帳號">帳號</option>
           <option value="姓名">姓名</option>
         </select>
-        <input
-          type="searchbar"
-          v-model="search"
-          :placeholder="chooseAccOrName == '帳號' ? '請輸入帳號' : '請輸入姓名'"
-        />
+        <input type="searchbar" v-model="search" :placeholder="chooseAccOrName == '帳號' ? '請輸入帳號' : '請輸入姓名'" />
         <button @click="searchAccOrName">搜尋</button>
       </div>
     </div>
@@ -35,13 +31,8 @@
           <li>{{ i.mem_mob }}</li>
           <li>{{ i.mem_address }}</li>
           <li>
-            <switchBtn
-              :onText="'正常'"
-              :off-text="'黑名單'"
-              :disabled="false"
-              :item="i.mem_state == 0 ? '1' : '0'"
-              @toggle="updateMemberState(i)"
-            ></switchBtn>
+            <switchBtn :onText="'正常'" :off-text="'黑名單'" :disabled="false" :item="i.mem_state == 0 ? '1' : '0'"
+              @toggle="updateMemberState(i)"></switchBtn>
             <!-- <label>
               <input
                 type="radio"
@@ -319,6 +310,7 @@ export default {
       width: 100%;
       border-bottom: 1px solid #000;
       padding-bottom: 5px;
+      font-weight: 800;
 
       ul {
         width: 100%;

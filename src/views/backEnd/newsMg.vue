@@ -20,7 +20,7 @@
                 </ul>
             </div>
             <div class="content">
-                <ul class="no_data" v-if="this.displayednews.length==0">暫無符合資料</ul>
+                <ul class="no_data" v-if="this.displayednews.length == 0">暫無符合資料</ul>
                 <ul v-else v-for="(item, index) in displayednews" :key="index">
                     <li>
                         <div class="news_id">
@@ -30,12 +30,11 @@
                     <li>
                         <div class="img">
                             <div class="picBox">
-                                <img :src="item.news_img_url"
-                                    :alt="item.news_img ? item.news_img : '圖片大小需小於2MB'">
+                                <img :src="item.news_img_url" :alt="item.news_img ? item.news_img : '圖片大小需小於2MB'">
                             </div>
 
                             <div class="file_btn">
-                                <input type="file" @change="fileChange($event,item, index)" :ref="'fileInput' + index"
+                                <input type="file" @change="fileChange($event, item, index)" :ref="'fileInput' + index"
                                     :disabled="item.disabled" name="image" :title="item.news_img">
                                 <i class="fa-regular fa-trash-can" style="color: #ffffff;" @click="deleteImage(index)"
                                     v-if="!item.disabled && item.news_img"></i>
@@ -405,8 +404,8 @@ export default {
                     this.$nextTick(() => {
                         this.applyFilters();
                     });
-                    
-             
+
+
                 })
                 .catch((error) => {
                     console.error('Fetch error:', error);
@@ -428,12 +427,13 @@ export default {
 }
 </script>
 <style scoped lang="scss">
-.no_data{
+.no_data {
     display: flex;
     justify-content: center;
     padding: 2rem 0;
-    
+
 }
+
 .news_all {
     .select {
         .add {
@@ -448,6 +448,7 @@ export default {
             width: 100%;
             border-bottom: 1px solid #000;
             margin: 2rem 0;
+            font-weight: 800;
 
             ul {
                 width: 100%;

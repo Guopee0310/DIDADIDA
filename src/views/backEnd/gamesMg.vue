@@ -15,15 +15,7 @@
           :disabled="i[4]"
           @blur="getQuestion(index)"
         /> -->
-        <textarea
-          name=""
-          id=""
-          cols="20"
-          rows="2"
-          v-model="i.qa_que"
-          :disabled="i.isDis"
-          class="questionarea"
-        >
+        <textarea name="" id="" cols="20" rows="2" v-model="i.qa_que" :disabled="i.isDis" class="questionarea">
         </textarea>
 
         <select name="" id="" :disabled="i.isDis" v-model="i.qa_ans">
@@ -54,36 +46,14 @@
       <div class="singleRow" v-for="(i, index) in labaAPI" :key="index">
         <div>
           <div class="picBox">
-            <img
-              :src="i.game_img"
-              alt=""
-              :ref="'imagePreview' + index"
-              class="choosePic"
-            />
+            <img :src="i.game_img" alt="" :ref="'imagePreview' + index" class="choosePic" />
           </div>
-          <input
-            type="file"
-            @change="pushImg($event, index)"
-            :disabled="i.isDis"
-            :ref="'fileInput' + index"
-          />
+          <input type="file" @change="pushImg($event, index)" :disabled="i.isDis" :ref="'fileInput' + index" />
         </div>
         <div class="inputAll">
-          <input
-            type="text"
-            placeholder="標題"
-            :disabled="i.isDis"
-            v-model="i.game_title"
-          />
-          <textarea
-            name=""
-            id=""
-            cols="30"
-            rows="5"
-            placeholder="內容"
-            :disabled="i.isDis"
-            v-model="i.game_text"
-          ></textarea>
+          <input type="text" placeholder="標題" :disabled="i.isDis" v-model="i.game_title" />
+          <textarea name="" id="" cols="30" rows="5" placeholder="內容" :disabled="i.isDis"
+            v-model="i.game_text"></textarea>
         </div>
         <select name="" id="" :disabled="i.isDis" v-model="i.qa_bonus">
           <option value="5">5</option>
@@ -404,8 +374,21 @@ export default {
 .titleAll {
   display: flex;
   border-bottom: 1px black solid;
-  justify-content: space-around;
-  padding-bottom: 10px;
+  // justify-content: space-around;
+  padding: 10px 0;
+  font-weight: 800;
+
+  & div:first-child {
+    margin-left: 13%;
+  }
+
+  & div:nth-of-type(2) {
+    margin-left: 22%;
+  }
+
+  & div:last-child {
+    margin-left: 13%;
+  }
 }
 
 .createBtn {

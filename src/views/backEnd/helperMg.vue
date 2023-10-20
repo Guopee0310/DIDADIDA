@@ -126,6 +126,7 @@ export default {
     width: 10%;
     text-align: center;
   }
+
 }
 
 .singleRow {
@@ -146,3 +147,4 @@ export default {
   }
 }
 </style>
+

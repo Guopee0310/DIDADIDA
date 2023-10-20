@@ -160,15 +160,20 @@ export default {
   .bannerTitle {
     display: flex;
     border-bottom: 1px black solid;
-    padding-bottom: 10px;
+    padding: 20px 0 0;
+    font-weight: 800;
     // justify-content: space-around;
 
+    & div:first-child {
+      margin-left: 30px;
+    }
+
     & div:nth-of-type(2) {
-      margin-left: 20px;
+      margin-left: 65px;
     }
 
     & div:last-child {
-      margin-left: 29%;
+      margin-left: 28%;
     }
   }
 

@@ -11,35 +11,19 @@
       <ul v-for="(i, index) in helperAll2" :key="index">
         <li>
           <p class="tickettype">
-            <label for=""
-              ><input type="text" v-model="i.tic_name" :disabled="i.dis"
-            /></label>
+            <label for=""><input type="text" v-model="i.tic_name" :disabled="i.dis" /></label>
           </p>
           <p>
-            <label for=""
-              ><input type="text" v-model="i.tic_price" :disabled="i.dis"
-            /></label>
+            <label for=""><input type="text" v-model="i.tic_price" :disabled="i.dis" /></label>
           </p>
           <p>
-            <textarea
-              name=""
-              id=""
-              cols="30"
-              rows="5"
-              v-model="i.tic_info"
-              :disabled="i.dis"
-            ></textarea>
+            <textarea name="" id="" cols="30" rows="5" v-model="i.tic_info" :disabled="i.dis"></textarea>
           </p>
 
           <div class="updateBtnAll">
             <button @click="updateTicket(index, $event, i)">修改</button>
-            <switchBtn
-              :onText="'上架'"
-              :off-text="'下架'"
-              :disabled="i.dis"
-              :item="i.tick_state == '1' ? '1' : '0'"
-              @toggle="updateTickState(i)"
-            ></switchBtn>
+            <switchBtn :onText="'上架'" :off-text="'下架'" :disabled="i.dis" :item="i.tick_state == '1' ? '1' : '0'"
+              @toggle="updateTickState(i)"></switchBtn>
           </div>
         </li>
 
@@ -85,29 +69,15 @@
       <div class="dateTextAll">
         <div class="dateAll">
           <div class="calendar">
-            <VDatePicker
-              v-model="date"
-              borderless
-              expanded
-              :min-date="new Date()"
-              locale="tw"
-              mode="date"
-              :disabled="disableDateSelection"
-              :events="eventDates"
-            />
+            <VDatePicker v-model="date" borderless expanded :min-date="new Date()" locale="tw" mode="date"
+              :disabled="disableDateSelection" :events="eventDates" />
           </div>
         </div>
         <div class="select">
           <p>
-            <span :style="{ color: computedTextColor }"
-              >已選日期: {{ formattedDate }}</span
-            >
+            <span :style="{ color: computedTextColor }">已選日期: {{ formattedDate }}</span>
           </p>
-          <input
-            type="checkbox"
-            @change="changeDate"
-            v-model="checkDateBtn"
-          />確定不開放
+          <input type="checkbox" @change="changeDate" v-model="checkDateBtn" />確定不開放
           <div>
             目前狀態 :
             <span :style="{ color: computedTextColor }">{{ nowState }}</span>
@@ -207,15 +177,15 @@ export default {
         console.log(this.helperAll2);
       });
   },
-  beforeDestroy() {},
+  beforeDestroy() { },
   computed: {
     checkArr() {
       for (let i = 0; i < this.disabledDateRanges.length; i++) {
         if (
           this.disabledDateRanges[i].getDate() ===
-            new Date(this.date).getDate() &&
+          new Date(this.date).getDate() &&
           this.disabledDateRanges[i].getMonth() ===
-            new Date(this.date).getMonth()
+          new Date(this.date).getMonth()
         ) {
           return true;
         } else {
@@ -231,11 +201,11 @@ export default {
         // console.log(new Date(this.date));
         if (
           this.disabledDateRanges[i].getDate() ===
-            new Date(this.date).getDate() &&
+          new Date(this.date).getDate() &&
           this.disabledDateRanges[i].getMonth() ===
-            new Date(this.date).getMonth() &&
+          new Date(this.date).getMonth() &&
           this.disabledDateRanges[i].getFullYear() ===
-            new Date(this.date).getFullYear()
+          new Date(this.date).getFullYear()
         ) {
           isOpen = false;
           break;
@@ -265,9 +235,8 @@ export default {
       };
     },
     catchDate() {
-      return `${new Date(this.date).getFullYear()}.${
-        new Date(this.date).getMonth() + 1
-      }.${new Date(this.date).getDate()}`;
+      return `${new Date(this.date).getFullYear()}.${new Date(this.date).getMonth() + 1
+        }.${new Date(this.date).getDate()}`;
     },
 
     // 日期格式
@@ -337,11 +306,11 @@ export default {
         for (let i = 0; i < this.disabledDateRanges.length; i++) {
           if (
             this.disabledDateRanges[i].getDate() ===
-              new Date(this.date).getDate() &&
+            new Date(this.date).getDate() &&
             this.disabledDateRanges[i].getMonth() ===
-              new Date(this.date).getMonth() &&
+            new Date(this.date).getMonth() &&
             this.disabledDateRanges[i].getFullYear() ===
-              new Date(this.date).getFullYear()
+            new Date(this.date).getFullYear()
           ) {
             this.disabledDateRanges.splice(i, 1);
             this.checkDateBtn = false;
@@ -449,6 +418,7 @@ export default {
   background-color: var(--container-background-color);
   /* 添加其他样式规则，如果需要的话 */
 }
+
 .name2 p {
   margin-left: 30px;
   border: 2px black solid;
