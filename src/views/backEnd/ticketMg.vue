@@ -462,6 +462,9 @@ export default {
   align-items: center;
 }
 
+textarea{
+  padding: 0.2rem 0.5rem;
+}
 .dateAll {
   @include ticket;
 
@@ -546,28 +549,31 @@ li {
 
   p {
     &:first-child {
-      width: 30%;
+      width: 26%;
       margin: 20px 10px;
+      text-align: center;
     }
   }
 
   p {
     &:nth-child(2) {
-      width: 30%;
+      width: 20%;
       margin: 20px 10px;
+      text-align: center;
     }
   }
 
   p {
     &:nth-child(3) {
-      width: 40%;
+      width: 35%;
       margin: 20px 10px;
+      text-align: center;
     }
   }
 }
 
 .add {
-  margin-left: 130px;
+  margin-left: 200px;
   margin-top: 10px;
 }
 
