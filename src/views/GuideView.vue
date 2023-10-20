@@ -248,6 +248,7 @@ h3 {
   position: relative;
   max-width: 90vw;
   margin: 5rem auto;
+  transform: translateZ(-100px);
 
   .flip-btn {
     outline: none;
@@ -383,7 +384,7 @@ h3 {
     position: absolute;
     top: 0;
     left: 0;
-    transform: rotateY(-180deg);
+    transform: rotateY(-180deg) translateZ(10px);
 
 
     rect {

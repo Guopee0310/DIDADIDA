@@ -126,6 +126,7 @@
                   $t(menuTitle.about)
                 }}</a>
                 <ul class="dropdown" v-if="showAboutDropdown">
+                  <router-link to="/about" @click="closeMobileMenu">{{ $t('關於我們') }}</router-link>
                   <li v-for="aboutSub in aboutSub" key="aboutSub">
                     <router-link :to="aboutSub.link" @click="closeMobileMenu">{{
                       $t(aboutSub.name)
@@ -186,7 +187,7 @@ export default {
         buy: "DIDA商城",
       },
       aboutSub: [
-         { link: "/about", name: "關於我們" },
+        //  { link: "/about", name: "關於我們" },
         { link: "/faq", name: "常見問答" },
         { link: "/guide", name: "園區導覽" },
         { link: "/interact", name: "互動遊戲" },
