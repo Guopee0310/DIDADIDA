@@ -372,6 +372,7 @@ h3 {
   width: 45vw;
   transform: rotateY(.4deg);
   transform-origin: -100% 0;
+  z-index: 1;
 
   img {
     width: 100%;
@@ -535,7 +536,6 @@ h3 {
   position: relative;
   left: 0;
   top: 0;
-
 
   img {
     width: 100%;
