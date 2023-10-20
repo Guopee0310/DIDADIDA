@@ -880,6 +880,10 @@ export default {
       img {
         width: 300%;
       }
+
+      p {
+        font-size: 35px;
+      }
     }
 
     .entrance {
