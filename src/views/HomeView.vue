@@ -7,7 +7,13 @@
       <div class="index">
         <!-- banner + open time ------------------------------------------ -->
         <div class="banner">
-          <Carousel autoplay autoplay-speed="4800" dots="none" v-model="value" loop>
+          <Carousel
+            autoplay
+            autoplay-speed="4800"
+            dots="none"
+            v-model="value"
+            loop
+          >
             <CarouselItem v-for="i in bannerAll">
               <div class="demo-carousel">
                 <img :src="i.banner_pic" alt="" />
@@ -20,13 +26,20 @@
           <lightCircle>
             <template v-slot:circle>
               <div class="open">
-
                 <span>{{ $t("營業時間") }}</span>
                 <span id="dropdrop">09:00-17:00</span>
                 <!-- 這個id是為了換頁滑動 -->
-                <svg x="0px" y="0px" width="200px" height="15px" viewBox="0 0 399.6 15.9">
-                  <polyline class="op_line"
-                    points="0.1,5.5 58,15.4 118.4,5.5 189.2,5.5 258.7,10.4 368.3,0.5 399.5,7.9 " />
+                <svg
+                  x="0px"
+                  y="0px"
+                  width="200px"
+                  height="15px"
+                  viewBox="0 0 399.6 15.9"
+                >
+                  <polyline
+                    class="op_line"
+                    points="0.1,5.5 58,15.4 118.4,5.5 189.2,5.5 258.7,10.4 368.3,0.5 399.5,7.9 "
+                  />
                 </svg>
                 <span>{{ $t("最後入場") }}</span>
                 <span>16:00</span>
@@ -46,7 +59,7 @@
             <div class="wave water"></div>
             <div class="wave water"></div>
           </div>
-          <p>{{ visitorCount }}{{ $t('人') }}</p>
+          <p>{{ visitorCount }}{{ $t("人") }}</p>
           <div class="deco turtle">
             <img src="../../public/all_images/deco/deco_turtle.png" alt="" />
           </div>
@@ -64,7 +77,9 @@
           </template>
         </h3Title>
         <ticketPrice></ticketPrice>
-        <router-link to="/ticket"><button>{{ $t("立即購票") }}</button></router-link>
+        <router-link to="/ticket"
+          ><button>{{ $t("立即購票") }}</button></router-link
+        >
 
         <!-- 交通指南 ------------------------------------------ -->
         <h3Title>
@@ -75,7 +90,11 @@
         <div class="map">
           <iframe
             src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14468.996712784081!2d121.2250227!3d24.9576355!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x346823ea50c732a5%3A0x1b5e6ee66e9fec49!2z57ev6IKyVGliYU1l6ZmE6Kit5Lit5aOi6IG36KiT5Lit5b-D!5e0!3m2!1szh-TW!2stw!4v1690272123794!5m2!1szh-TW!2stw"
-            style="border: 0" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+            style="border: 0"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+          >
           </iframe>
           <div class="text">
             <div class="address">
@@ -110,8 +129,11 @@
         <div class="product">
           <div class="item" v-for="(i, index) in prodHomeSlice" :key="index">
             <div class="image">
-              <router-link to="/product"> <img :src="`${this.$store.state.chooseImgSrc}/all_images/product/${i.prod_img}`"
-                  alt="" /></router-link>
+              <router-link to="/product">
+                <img
+                  :src="`${this.$store.state.chooseImgSrc}/all_images/product/${i.prod_img}`"
+                  alt=""
+              /></router-link>
             </div>
             <div class="content">
               <div class="nub">0{{ index + 1 }}</div>
@@ -123,20 +145,27 @@
               <span>NT$ {{ i.prod_price }}</span>
             </div>
 
-
             <div class="paopao">
               <paoPao_n></paoPao_n>
             </div>
           </div>
 
           <div class="deco shark">
-            <img src="../../public/all_images/index/deco_index_shark.png" alt="" />
+            <img
+              src="../../public/all_images/index/deco_index_shark.png"
+              alt=""
+            />
           </div>
           <div class="deco whale">
-            <img src="../../public/all_images/index/deco_index_whale.png" alt="" />
+            <img
+              src="../../public/all_images/index/deco_index_whale.png"
+              alt=""
+            />
           </div>
         </div>
-        <router-link to="/product"><button>{{ $t("更多商品") }}</button></router-link>
+        <router-link to="/product"
+          ><button>{{ $t("更多商品") }}</button></router-link
+        >
 
         <!-- 活動倒數 ------------------------------------------ -->
         <h3Title>
@@ -151,7 +180,9 @@
                 <img :src="i.active_img" alt="" />
               </div>
               <div class="text">
-                <span class="date">活動時間 : {{ i.active_star }}至{{ i.active_end }}</span>
+                <span class="date"
+                  >活動時間 : {{ i.active_star }}至{{ i.active_end }}</span
+                >
                 <p class="title">{{ i.active_title }}</p>
                 <p class="self">{{ i.active_content }}</p>
               </div>
@@ -172,12 +203,20 @@
 
         <div class="gameBar">
           <div class="rangeCover">
-            <input type="range" v-model="lightChang" min="0" max="100" class="slider">
-            <label for="range" id="display">\ 亮度調整{{ lightChang }}% /</label>
+            <input
+              type="range"
+              v-model="lightChang"
+              min="0"
+              max="100"
+              class="slider"
+            />
+            <label for="range" id="display"
+              >\ 亮度調整{{ lightChang }}% /</label
+            >
           </div>
         </div>
         <div class="gamePhone">
-          <div class="square" :style="{ 'opacity': `${lightChang}%` }"></div>
+          <div class="square" :style="{ opacity: `${lightChang}%` }"></div>
         </div>
       </div>
     </div>
@@ -200,7 +239,6 @@ export default {
   name: "HomeView",
   data() {
     return {
-
       resetVisual: false,
       loading: true,
       animationDuration: 4200,
@@ -246,15 +284,11 @@ export default {
       bannerAll: [],
       activeAll: [],
       visitorCount: 0,
-      prodHomeSlice: [
-        { prod_id: 1 }
-      ],
+      prodHomeSlice: [{ prod_id: 1 }],
       prodHome: [],
     };
   },
-  computed: {
-
-  },
+  computed: {},
   methods: {},
   components: {
     visual,
@@ -298,17 +332,20 @@ export default {
     // banner接後台
     fetch(`${this.$store.state.APIurl}homePicMg.php`)
       .then(function (response) {
-        console.log(response)
+        console.log(response);
         return response.json();
       })
 
       .then((myJson) => {
-        console.log(myJson)
+        console.log(myJson);
         for (let i = 0; i < myJson.length; i++) {
-          myJson[i].banner_pic = require(`../../public/all_images/banner/${myJson[i].banner_pic}`);
+          myJson[
+            i
+          ].banner_pic = `${this.$store.state.chooseImgSrc}all_images/banner/${myJson[i].banner_pic}`;
+          // :src="`${this.$store.state.chooseImgSrc}/all_images/product/${selectedProduct.prod_img}`
           myJson[i].isDis = true;
         }
-        console.log(myJson)
+        console.log(myJson);
         this.bannerAll = myJson;
       });
 
@@ -324,22 +361,23 @@ export default {
         this.prodHomeSlice = myJson.slice(6, 9);
       })
       .catch((error) => {
-        console.error('Error:', error);
+        console.error("Error:", error);
       });
 
     // active接後台
     fetch(`${this.$store.state.APIurl}activeSelectFront.php`)
       .then(function (response) {
-        console.log(response)
+        console.log(response);
         return response.json();
       })
 
       .then((myJson) => {
-
         for (let i = 0; i < myJson.length; i++) {
-          myJson[i].active_img = `${this.$store.state.chooseImgSrc}/all_images/active/${myJson[i].active_img}`; // 改路徑
-          const today = new Date();  // 抓今天日期
-          const targetDate = new Date(myJson[i].active_star);  // 把純字串變成日期的屬性
+          myJson[
+            i
+          ].active_img = `${this.$store.state.chooseImgSrc}/all_images/active/${myJson[i].active_img}`; // 改路徑
+          const today = new Date(); // 抓今天日期
+          const targetDate = new Date(myJson[i].active_star); // 把純字串變成日期的屬性
 
           // 计算日期差异的毫秒数
           const timeDiff = targetDate - today; // 未來 - 今天 = 剩餘幾天
@@ -347,7 +385,6 @@ export default {
           // 计算剩余天数（将毫秒数转换为天数）
           // key:countDown    = 無條件捨去(日期差異) / 毫秒  * 分 * 時 * 天)
           myJson[i].countDown = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
-
         }
         // console.log(myJson)
         this.activeAll = myJson; //  myJson: 資料庫抓回來的資料
@@ -356,14 +393,14 @@ export default {
   watch: {
     lightChang(newlightChang) {
       let range = document.querySelector('input[type="range"]');
-      let display = document.getElementById('display');
+      let display = document.getElementById("display");
       let rangeWidth = range.offsetWidth; // 使用 offsetWidth 获取 input[type="range"] 元素的宽度
       let min = parseInt(range.min);
       let max = parseInt(range.max);
-      let rangeValue = (newlightChang - min) / (max - min) * rangeWidth; // 计算滑块的位置
+      let rangeValue = ((newlightChang - min) / (max - min)) * rangeWidth; // 计算滑块的位置
       display.style.left = `${rangeValue}px`;
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -616,7 +653,6 @@ export default {
         transform: scaleX(-1);
       }
     }
-
   }
 
   // 熱銷商品 ---------------------------------------------
@@ -809,11 +845,11 @@ export default {
       }
     }
 
-    .day>span:first-child {
+    .day > span:first-child {
       display: block;
     }
 
-    .day>span:nth-child(2) {
+    .day > span:nth-child(2) {
       font-size: 80px;
       font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
     }
@@ -860,14 +896,13 @@ export default {
         padding-right: 15px;
       }
 
-      .day>span:nth-child(2) {
+      .day > span:nth-child(2) {
         font-size: 60px;
       }
     }
   }
 
   @media screen and (max-width: 415px) {
-
     .deco,
     .all-circle {
       display: none;
@@ -1007,11 +1042,11 @@ export default {
         position: relative;
         display: flex;
         margin: 20px auto;
-        background-color: map-get($colors , "h2Blue");
+        background-color: map-get($colors, "h2Blue");
 
         &::before {
           position: absolute;
-          content: 'Light';
+          content: "Light";
           font-size: 10px;
           top: -5px;
           left: -40px;
@@ -1019,12 +1054,11 @@ export default {
 
         &::after {
           position: absolute;
-          content: 'Dark';
+          content: "Dark";
           font-size: 10px;
           top: -5px;
           right: -40px;
         }
-
       }
 
       input[type="range"]::-webkit-slider-thumb {
@@ -1032,16 +1066,16 @@ export default {
         width: 10px;
         height: 10px;
         border-radius: 50%;
-        background-color: map-get($colors , "mainColor");
-        box-shadow: map-get($colors , "hoverColor") 0 0 10px;
+        background-color: map-get($colors, "mainColor");
+        box-shadow: map-get($colors, "hoverColor") 0 0 10px;
       }
 
       .slider {
         appearance: none;
         width: 10rem;
-        height: .25rem;
+        height: 0.25rem;
         outline: none;
-        border-radius: .25rem;
+        border-radius: 0.25rem;
       }
 
       label {
@@ -1050,7 +1084,7 @@ export default {
         padding: 5px;
         border-radius: 5px;
         color: #68769a;
-        background-color: map-get($colors , 'light');
+        background-color: map-get($colors, "light");
         width: max-content;
         transform: translateX(-45%);
         // white-space: nowrap;
@@ -1059,7 +1093,7 @@ export default {
           position: absolute;
           bottom: -20px;
           left: 40%;
-          content: '';
+          content: "";
           border-top: 10px solid #eee;
           border-right: 10px solid transparent;
           border-bottom: 10px solid transparent;
