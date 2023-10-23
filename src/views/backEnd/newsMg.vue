@@ -280,6 +280,7 @@ export default {
                     const formData = new FormData();
                     this.displayednews[index].disabled = true;
                     e.target.innerText = "修改";
+                    this.changePic = "";
 
                     let news_id = item.news_id;
                     let news_title = item.news_title;
