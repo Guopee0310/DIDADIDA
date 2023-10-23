@@ -160,6 +160,7 @@ export default {
 
             // 更新 filterednews 数组
             this.filterednews = filterednews;
+            this.changePic = "";
             setTimeout(() => {
                 this.updatePage(1);
             }, 300);
@@ -191,6 +192,7 @@ export default {
         deleteNews(index) {
             if (confirm("取消此筆新增嗎?")) {
                 this.displayednews.splice(index, 1);
+                this.changePic = "";
             }
         },
         deleteImage(index) {
@@ -221,6 +223,7 @@ export default {
             readFile.addEventListener("load", () => {
                 item.news_img_url = readFile.result;
             });
+            
         },
         formatFileSize(bytes) {
             if (bytes === 0) return "0 Bytes";
@@ -269,8 +272,8 @@ export default {
                         .then((result) => {
                             alert("更新成功");
                             // 重新取資料
-                            this.refreshNewsData();
                             this.changePic = "";
+                            this.refreshNewsData();
                         });
                 } else {
                     // 如果没有选择新图片，只更新其他信息
@@ -300,8 +303,8 @@ export default {
                         .then((result) => {
                             alert("更新成功");
                             // 重新取資料
-                            this.refreshNewsData();
                             this.changePic = "";
+                            this.refreshNewsData();
                         });
                 }
             } else {
@@ -377,7 +380,6 @@ export default {
                     .then((result) => {
                         alert("新增成功");
                         // 重新獲取資料
-                        this.changePic = "";
                         this.refreshNewsData();
 
                     })
@@ -403,6 +405,7 @@ export default {
                     this.allnews = myJson;
                     this.$nextTick(() => {
                         this.applyFilters();
+                        this.changePic = "";
                     });
 
 

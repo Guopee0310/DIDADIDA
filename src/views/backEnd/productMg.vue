@@ -148,6 +148,7 @@ export default {
 
         deleteNews(index) {
             if (confirm("取消此筆新增嗎?")) {
+                this.changePic="";
                 this.displayedProducts.splice(index, 1);
             }
         },
@@ -258,7 +259,9 @@ export default {
 
                     this.allProduct = myJson;
                     this.$nextTick(() => {
-                        this.applyFilters(); // 在DOM更新后执行筛选操作
+                        this.applyFilters();
+                        this.changePic = ""; 
+                        
                     });
 
 
@@ -338,15 +341,17 @@ export default {
                         .then((result) => {
                             alert("更新成功");
                             // 重新取資料
+                            this.changePic="";
                             this.refreshNewsData();
                             this.applyFilters();
                             this.updatePage(this.currentPage);
-                            this.changePic = "";
+                            
                         });
                 } else {
                     // 如果没有选择新图片，只更新其他信息
                     this.displayedProducts[index].disabled = true;
                     e.target.innerText = "修改";
+                    this.changePic = "";
 
 
                     const formData = new FormData();
@@ -375,10 +380,11 @@ export default {
                         .then((result) => {
                             alert("更新成功");
                             // 重新取資料
+                            this.changePic = "";
                             this.refreshNewsData();
                             this.applyFilters();
                             this.updatePage(this.currentPage);
-                            this.changePic = "";
+                            
                         });
                 }
             } else {
@@ -421,6 +427,7 @@ export default {
 
             // 更新 filteredProducts 数组
             this.filteredProducts = filteredProducts;
+            this.changePic = "";
             setTimeout(() => {
                 this.updatePage(1);
             }, 300);
@@ -445,6 +452,7 @@ export default {
             this.applyFilters();
         },
         updatePage(page) {
+            this.changePic="";
             this.currentPage = page;
             const startIdx = (this.currentPage - 1) * this.pageSize;
             const endIdx = startIdx + this.pageSize;
