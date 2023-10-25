@@ -17,7 +17,7 @@
         <tr v-for="(item, index) in allactive" :key="index">
             <td>
                 <div class="picBox">
-                    <img :src="'../all_images/active/' + item.active_img" :alt="item.active_img ? item.active_img : '未選圖片'">
+                    <img :src="item.active_img_url" :alt="item.active_img ? item.active_img : '未選圖片'">
                 </div>
                 <input type="file" accept="image/*" @change="fileChange($event, index)" :ref="'fileInput' + index"
                     :disabled="item.disabled" name="image" :title="item.active_img">
@@ -66,6 +66,7 @@ export default {
                 for (let i = 0; i < myJson.length; i++) {
                     myJson[i].disabled = true;
                     myJson[i].exist = true;
+                    myJson[i].active_img_url = `${this.$store.state.chooseImgSrc}/all_images/active/${myJson[i].active_img}`;
                 }
                 this.allactive = myJson;
                 console.log(this.allactive);
