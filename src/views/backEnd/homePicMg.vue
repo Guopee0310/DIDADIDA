@@ -92,7 +92,7 @@ export default {
           formData.append("banner_id", banner_id);
           formData.append("image", this.changePic);
 
-          alert(banner_id);
+          alert("圖片修改成功");
 
           fetch(`${this.$store.state.APIurl}homePicMg.php`, {
             method: "post",

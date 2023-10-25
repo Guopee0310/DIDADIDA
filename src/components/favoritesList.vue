@@ -4,7 +4,7 @@
       <div class="favorites_list_group" v-for="(favo, index) in favAPI" :key="favo.prod_img">
         <span class="close" @click="delSingleItem(favo, index)">&times;</span>
         <div class="favorites_list_img">
-          <img :src="'../all_images/product/' + favo.prod_img" alt="" />
+          <img :src="favo.prod_img" alt="" />
         </div>
         <div class="favorites_list_info">
           <div>
@@ -47,7 +47,9 @@ export default {
           if (this.$store.state.memberId == data[i].mem_id) {
             this.favAPI.push(data[i]);
           }
+          data[i].prod_img = `${this.$store.state.chooseImgSrc}/all_images/product/${data[i].prod_img}`;
         }
+        this.favAPI = data;
         console.log(this.favAPI);
       });
   },
